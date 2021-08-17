@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.onelink.nrlp.android.features.register.viewmodel.VerifyRemitterFragmentViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:clickable="true"
+        android:focusable="true"
+        tools:context=".MainActivity">
+
+        <TextView
+            android:id="@+id/textViewReferenceNumber"
+            style="@style/TextViewMediumNoMarginsLite"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginEnd="@dimen/margin_large"
+            android:layout_marginTop="@dimen/unit_32dp"
+            android:text="@string/enter_remittance_transaction_num_msg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewReferenceNum"
+            style="@style/TextViewSubHeading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/unit_44dp"
+            android:text="@string/reference_number"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewReferenceNumber" />
+
+        <com.onelink.nrlp.android.widgets.OneLinkEditText
+            android:id="@+id/eTReferenceNumber"
+            style="@style/EditTextFixedDigits"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/reference_num_hint"
+            android:maxLength="25"
+            android:nextFocusDown="@id/etTransactionNumber"
+            android:nextFocusForward="@id/etTransactionNumber"
+            android:text="@={viewModel.referenceNumber}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewReferenceNum" />
+
+        <TextView
+            android:id="@+id/textViewTransactionNumber"
+            style="@style/TextViewSubHeading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/transaction_amount"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/eTReferenceNumber" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/lyPhoneNumber"
+            style="@style/EditTextFixedDigits"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            android:layoutDirection="ltr"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTransactionNumber">
+
+            <TextView
+                android:id="@+id/tvCountryCode"
+                style="@style/TextViewMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/unit_0dp"
+                android:text="@string/amount_prefix"
+                android:textColor="@color/grey"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.onelink.nrlp.android.widgets.OneLinkAmountEditText
+                android:id="@+id/etTransactionNumber"
+                style="@style/EditTextFixedDigits"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/unit_0dp"
+                android:background="@null"
+                android:enabled="true"
+                android:gravity="start"
+                android:hint="@string/amount_hint"
+                android:imeOptions="actionDone|flagForceAscii"
+                android:inputType="numberDecimal"
+                android:padding="@dimen/unit_0dp"
+                android:paddingStart="@dimen/unit_4dp"
+                android:paddingEnd="@dimen/unit_4dp"
+                android:text="@={viewModel.transactionAmount}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imageViewPhoneError"
+                app:layout_constraintStart_toEndOf="@+id/tvCountryCode"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageViewPhoneError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:src="@drawable/ic_edit_text_error"
+                android:textColor="@color/grey"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@null" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/btnNext"
+            style="@style/ButtonTheme"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:enabled="@{viewModel.validReferenceNumber &amp;&amp; viewModel.validTransactionAmount}"
+            android:text="@string/next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.onelink.nrlp.android.features.managePoints.viewmodel.ManagePointsFragmentViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/lyManagePoints"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/btnTransfer"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <include
+                android:id="@+id/lyLoyaltyPointsBalanceMP"
+                layout="@layout/ly_loyalty_points_balance"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/small_loyalty_card_height"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginTop="@dimen/unit_0dp"
+                android:layout_marginEnd="@dimen/margin_large"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/tvSelectedBeneficiary"
+                style="@style/TextViewSubHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/unit_32dp"
+                android:text="@string/select_bene"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lyLoyaltyPointsBalanceMP" />
+
+            <LinearLayout
+                android:id="@+id/spinnerLy"
+                style="@style/spinnerTheme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:layoutDirection="ltr"
+                android:orientation="horizontal"
+                android:textDirection="ltr"
+                android:weightSum="10"
+                app:layout_constraintTop_toBottomOf="@+id/tvSelectedBeneficiary">
+
+                <TextView
+                    android:id="@+id/tvSelectedBene"
+                    style="@style/TextViewMediumNoMargins"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="8.5"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:text="@string/generic_name_placeholder"
+                    android:textColor="@color/grey" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_spinner_dropdown" />
+
+            </LinearLayout>
+
+            <com.onelink.nrlp.android.utils.OneLinkSpinner
+                android:id="@+id/spinner_select_bene"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@android:color/transparent"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="start"
+                android:hint="@string/full_name"
+                android:spinnerMode="dropdown"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="@+id/spinnerLy"
+                app:layout_constraintStart_toStartOf="@+id/spinnerLy"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerLy" />
+
+            <TextView
+                android:id="@+id/tvEndPoints"
+                style="@style/TextViewSubHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/enter_points"
+                app:layout_constraintBottom_toTopOf="@id/til_points"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/spinner_select_bene" />
+
+            <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
+                android:id="@+id/til_points"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/unit_8dp"
+                app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvEndPoints">
+
+                <com.onelink.nrlp.android.widgets.OneLinkEditText
+                    android:id="@+id/etEndPoint"
+                    style="@style/EditTextFixedDigits"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:digits="0123456789"
+                    android:hint="@string/xxxx"
+                    android:imeOptions="actionDone|flagForceAscii"
+                    android:inputType="number"
+                    android:maxLength="17"
+                    android:maxLines="1"
+                    android:text="@={viewModel.points}" />
+            </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/lyNoBeneficiary"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/btnTransfer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_no_beneficiary_found"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.3"
+                android:contentDescription="@null" />
+
+            <TextView
+                android:id="@+id/textView"
+                style="@style/TextViewLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/unit_40dp"
+                android:text="@string/no_beneficiary_found"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+            <TextView
+                style="@style/TextViewMediumNoMarginsLite"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/unit_40dp"
+                android:layout_marginTop="@dimen/unit_14dp"
+                android:layout_marginEnd="@dimen/unit_40dp"
+                android:gravity="center"
+                android:text="@string/no_beneficiary_found_manage_points"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/btnTransfer"
+            style="@style/ButtonTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="@{viewModel.isBeneSelected() &amp;&amp; viewModel.isPointsEntered()}"
+            android:text="@string/transfer"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="1" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lyLoyaltyPointsBalance"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/ivLoyaltyCardTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_title_bronze"
+        android:contentDescription="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivBadge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/unit_8dp"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_badge"
+        app:layout_constraintBottom_toBottomOf="@id/ivLoyaltyCardTitle"
+        app:layout_constraintStart_toStartOf="@id/ivLoyaltyCardTitle"
+        app:layout_constraintTop_toTopOf="@+id/ivLoyaltyCardTitle" />
+
+    <TextView
+        android:id="@+id/tvLoyaltyLevel"
+        style="@style/TextViewMediumNoMargins"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/unit_8dp"
+        android:layout_marginEnd="@dimen/unit_8dp"
+        android:textColor="@color/white"
+        android:textSize="@dimen/unit_12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ivBadge"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="silver" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

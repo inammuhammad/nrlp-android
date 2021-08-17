@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="unit_0dp">0dp</dimen>
+    <dimen name="unit_2dp">2dp</dimen>
+    <dimen name="unit_4dp">4dp</dimen>
+    <dimen name="unit_8dp">8dp</dimen>
+    <dimen name="unit_12dp">12dp</dimen>
+    <dimen name="unit_14dp">14dp</dimen>
+    <dimen name="unit_16dp">16dp</dimen>
+    <dimen name="unit_17dp">17dp</dimen>
+    <dimen name="unit_18dp">18dp</dimen>
+    <dimen name="unit_20dp">20dp</dimen>
+    <dimen name="unit_22dp">22dp</dimen>
+    <dimen name="unit_24dp">24dp</dimen>
+    <dimen name="unit_28dp">28dp</dimen>
+    <dimen name="unit_32dp">32dp</dimen>
+    <dimen name="unit_36dp">36dp</dimen>
+    <dimen name="unit_40dp">40dp</dimen>
+    <dimen name="unit_44dp">44dp</dimen>
+    <dimen name="unit_56dp">56dp</dimen>
+    <dimen name="unit_144dp">144dp</dimen>
+    <dimen name="unit_164dp">164dp</dimen>
+
+    <!-- Text Sizes RATE = 1-->
+    <dimen name="unit_4sp">4sp</dimen>
+    <dimen name="unit_6sp">6sp</dimen>
+    <dimen name="unit_8sp">8sp</dimen>
+    <dimen name="unit_10sp">10sp</dimen>
+    <dimen name="unit_11sp">11sp</dimen>
+    <dimen name="unit_12sp">12sp</dimen>
+    <dimen name="unit_14sp">14sp</dimen>
+    <dimen name="unit_16sp">16sp</dimen>
+    <dimen name="unit_18sp">18sp</dimen>
+    <dimen name="unit_20sp">20sp</dimen>
+    <dimen name="unit_24sp">24sp</dimen>
+    <dimen name="unit_30sp">30sp</dimen>
+    <dimen name="unit_36sp">36sp</dimen>
+
+    <dimen name="margin_small">4dp</dimen>
+    <dimen name="margin_medium">8dp</dimen>
+    <dimen name="margin_large">16dp</dimen>
+    <dimen name="margin_extra_large">24dp</dimen>
+
+    <dimen name="text_size_small">12sp</dimen>
+    <dimen name="text_size_medium">14sp</dimen>
+    <dimen name="text_size_large">16sp</dimen>
+    <dimen name="text_size_extra_large">20sp</dimen>
+
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">24dp</dimen>
+
+    <dimen name="text_size_toolbar">16sp</dimen>
+
+    <dimen name="splash_title_top_margin">100dp</dimen>
+    <dimen name="small_loyalty_card_height">87dp</dimen>
+
+    <dimen name="dropdownListPreferredItemHeight">48dip</dimen>
+</resources>

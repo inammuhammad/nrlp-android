@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.onelink.nrlp.android.features.login.viewmodel.LoginFragmentViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/first_heading"
+                style="@style/TextViewHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="@dimen/margin_small"
+                android:text="@string/nlrp_title"
+                app:layout_constraintBottom_toTopOf="@id/sub_heading_cnic"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:contentDescription="@null"
+                android:src="@drawable/nrlp_logo"
+                app:layout_constraintBottom_toTopOf="@id/sub_heading_cnic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/first_heading"
+                app:layout_constraintVertical_bias="0" />
+
+            <TextView
+                android:id="@+id/sub_heading_cnic"
+                style="@style/TextViewSubHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/unit_40dp"
+                android:text="@string/cnic_nicop_number"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/first_heading" />
+
+            <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
+                android:id="@+id/til_cnic"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/unit_8dp"
+                app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
+                app:layout_constraintBottom_toTopOf="@id/sub_heading_pass"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sub_heading_cnic">
+
+                <com.onelink.nrlp.android.widgets.OneLinkEditText
+                    android:id="@+id/et_cnic"
+                    style="@style/EditTextFixedNumbers"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/cnic_nicop_hint"
+                    android:inputType="number"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:nextFocusDown="@id/et_pass"
+                    android:nextFocusForward="@id/et_pass"
+                    android:text="@={viewModel.cnicNicopNumber}"
+                    app:layout_constraintBottom_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="parent" />
+
+            </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
+
+
+            <TextView
+                android:id="@+id/sub_heading_pass"
+                style="@style/TextViewSubHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/password"
+                app:layout_constraintBottom_toTopOf="@id/til_pass"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/til_cnic" />
+
+
+            <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
+                android:id="@+id/til_pass"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/unit_8dp"
+                app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sub_heading_pass">
+
+                <com.onelink.nrlp.android.widgets.OneLinkEditText
+                    android:id="@+id/et_pass"
+                    style="@style/EditTextFixedDigits"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/password_hint"
+                    android:imeOptions="actionDone|flagForceAscii"
+                    android:inputType="textPassword"
+                    android:maxLength="25"
+                    android:maxLines="1"
+                    android:text="@={viewModel.password}" />
+            </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
+
+            <TextView
+                android:id="@+id/tvForgotPassword"
+                style="@style/TextViewSubHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/unit_0dp"
+                android:paddingStart="@dimen/margin_medium"
+                android:paddingTop="@dimen/margin_large"
+                android:paddingEnd="@dimen/unit_0dp"
+                android:text="@string/forgot_password"
+                app:layout_constraintEnd_toEndOf="@+id/til_pass"
+                app:layout_constraintTop_toBottomOf="@id/til_pass" />
+
+            <TextView
+                android:id="@+id/sub_heading_select_account_type"
+                style="@style/TextViewSubHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/unit_28dp"
+                android:text="@string/select_account_type"
+                app:layout_constraintBottom_toTopOf="@id/rg_select_account_type"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvForgotPassword" />
+
+
+            <RadioGroup
+                android:id="@+id/rg_select_account_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checkedButton="@={viewModel.accountType}"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sub_heading_select_account_type">
+
+                <RadioButton
+                    android:id="@+id/radio1"
+                    style="@style/radiobutton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@drawable/radio_btn_tint_selector"
+                    android:text="@string/remitter"
+                    android:textColor="@drawable/radio_btn_text_selector"
+                    android:theme="@style/RadioButtonStyle" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <RadioButton
+                    android:id="@+id/radio2"
+                    style="@style/radiobutton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@drawable/radio_btn_tint_selector"
+                    android:text="@string/beneficiary"
+                    android:textColor="@drawable/radio_btn_text_selector"
+                    android:theme="@style/RadioButtonStyle" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/btnLogin"
+                style="@style/ButtonTheme"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_extra_large"
+                android:enabled="@{viewModel.isValidNIC() &amp;&amp; viewModel.isPasswordValid() &amp;&amp; viewModel.isAccountTypeSelected()}"
+                android:text="@string/login"
+                app:layout_constraintBottom_toTopOf="@id/tv_sec_mesg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rg_select_account_type"
+                app:layout_constraintVertical_bias="1" />
+
+            <TextView
+                android:id="@+id/tv_sec_mesg"
+                style="@style/TextViewMediumNoMarginsLite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_large"
+                android:text="@string/dont_have_account"
+                app:layout_constraintBottom_toTopOf="@+id/tv_about_nrlp"
+                app:layout_constraintEnd_toStartOf="@id/tv_sec_reg"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_sec_reg"
+                style="@style/TextViewSubHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/unit_4dp"
+                android:text="@string/register"
+                android:textColor="@color/green"
+                android:textSize="@dimen/unit_14sp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_sec_mesg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toEndOf="@id/tv_sec_mesg" />
+
+            <com.onelink.nrlp.android.utils.TextViewNoUnderline
+                android:id="@+id/tv_about_nrlp"
+                style="@style/TextViewSubHeading"
+                android:layout_width="wrap_content"
+                android:textSize="@dimen/unit_14sp"
+                android:layout_height="wrap_content"
+                android:autoLink="web"
+                android:layout_marginBottom="@dimen/unit_20dp"
+                android:text="@string/about_nrlp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</layout>
+

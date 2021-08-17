@@ -1,0 +1,58 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion compileSdkVer
+    buildToolsVersion buildToolsVer
+
+    defaultConfig {
+        minSdkVersion minSdkVer
+        targetSdkVersion targetSdkVer
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        qa {
+            initWith buildTypes.debug
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+
+    try {
+        // If NDK Exists, compile our native binaries
+        logger.debug("Found NDK" + android.getNdkDirectory())
+
+        externalNativeBuild {
+            ndkBuild {
+                path 'src/main/jni/Android.mk'
+            }
+        }
+    }
+    catch (InvalidUserDataException e){
+        // Otherwise disable automatic ndk-build and use pre-compiled .so files
+        // logger.error(e.toString())
+        logger.debug("NDK Not Present")
+
+        sourceSets {
+            main {
+                jni.srcDirs = []
+            }
+        }
+    }
+
+    packagingOptions {
+        // In case there are both compiled .so files and provided .so files, pick the first (should be generated)
+        pickFirst('lib/*/libtool-checker.so')
+    }
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.13'
+    testImplementation 'org.mockito:mockito-core:3.1.0'
+}

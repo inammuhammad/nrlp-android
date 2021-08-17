@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/lyLoyaltyPointsBalance"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/small_loyalty_card_height"
+    android:layout_marginStart="@dimen/margin_large"
+    android:layout_marginTop="@dimen/unit_32dp"
+    android:layout_marginEnd="@dimen/margin_large"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintEnd_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <ImageView
+        android:id="@+id/ivHomeBgLoyaltyCard"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_loyalty_points_bronze"
+        android:contentDescription="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@null"
+        android:scaleType="matrix"
+        android:src="@drawable/ic_loyalty_card_globe"
+        app:layout_constraintBottom_toBottomOf="@id/ivHomeBgLoyaltyCard"
+        app:layout_constraintEnd_toEndOf="@id/ivHomeBgLoyaltyCard"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.35" />
+
+    <TextView
+        android:id="@+id/tvPoints"
+        style="@style/TextViewMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/unit_20dp"
+        android:text="@string/dummy_amount"
+        android:textColor="@color/white"
+        android:textDirection="ltr"
+        android:textSize="@dimen/unit_24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/ivHomeBgLoyaltyCard"
+        app:layout_constraintTop_toTopOf="@id/ivHomeBgLoyaltyCard" />
+
+    <TextView
+        android:id="@+id/tvLoyaltyPoints"
+        style="@style/TextViewSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/unit_0dp"
+        android:text="@string/current_point_balance"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="@id/ivHomeBgLoyaltyCard"
+        app:layout_constraintTop_toBottomOf="@id/tvPoints" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

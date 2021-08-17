@@ -1,0 +1,141 @@
+sonarqube {
+    properties {
+
+        def host = getSonarHost()
+        def projectKey = getSonarKey()
+        def projectName = getSonarName()
+        def organization = getSonarOrganization()
+        def login = getSonarLogin()
+        def password = getSonarPassword()
+        def flavor = "debug"
+
+
+        property "sonar.host.url", host
+        property "sonar.projectKey", projectKey
+        property "sonar.projectName", projectName
+        property "sonar.login", login
+        if (login == "admin") {
+            property "sonar.password", password
+        } else {
+            property "sonar.organization", organization
+        }
+
+        property 'sonar.sourceEncoding', "UTF-8"
+
+        property "sonar.binaries", "$buildDir/intermediates/javac/${flavor}/classes"
+        property "sonar.java.binaries", "$buildDir/intermediates/javac/${flavor}/classes"
+        property "sonar.java.test.binaries", "$buildDir/intermediates/javac/${flavor}/classes"
+
+        property 'sonar.java.source', JavaVersion.VERSION_1_8
+        property 'sonar.java.target', JavaVersion.VERSION_1_8
+
+
+        property 'sonar.sourceEncoding', 'UTF-8'
+        property "sonar.sources", "src/main"
+        property "sonar.exclusions", "**/*.html"
+
+        property 'sonar.c.file.suffixes', "-"
+        property 'sonar.cpp.file.suffixes', "-"
+        property 'sonar.objc.file.suffixes', "-"
+
+        // Analyze tests classes
+        if (project.plugins.hasPlugin('com.android.application')) {
+            property "sonar.tests", "src/test/java"
+        }
+
+        property "sonar.coverage.jacoco.xmlReportPaths", "$buildDir/jacoco/jacoco.xml"
+        property "sonar.java.coveragePlugin", "jacoco"
+        property "sonar.junit.reportPaths", "$buildDir/test-results/test${flavor.capitalize()}UnitTest"
+        property "sonar.androidLint.reportPaths", "$buildDir/reports/lint-results-${flavor}.xml"
+
+    }
+}
+
+def getSonarHost() {
+
+    Properties properties = new Properties()
+    if (project.rootProject.file('local.properties').exists()) {
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+        def code = properties['sonar.host'].toString()
+        return code
+    }
+
+    else {
+        return System.getenv()["SONAR_HOST"]
+    }
+}
+
+def getSonarOrganization() {
+
+    Properties properties = new Properties()
+    if (project.rootProject.file('local.properties').exists()) {
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+        def code = properties['sonar.organization'].toString()
+        return code
+    }
+
+    else {
+        return System.getenv()["SONAR_ORGANIZATION"]
+    }
+}
+
+def getSonarLogin() {
+
+    Properties properties = new Properties()
+    if (project.rootProject.file('local.properties').exists()) {
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+        def code = properties['sonar.login'].toString()
+        return code
+    }
+
+    else {
+        return System.getenv()["SONAR_LOGIN"]
+    }
+
+}
+
+def getSonarPassword() {
+
+    Properties properties = new Properties()
+    if (project.rootProject.file('local.properties').exists()) {
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+        def code = properties['sonar.password'].toString()
+        return code
+    }
+
+    else {
+        return System.getenv()["SONAR_PASSWORD"]
+    }
+
+}
+
+def getSonarKey() {
+
+    Properties properties = new Properties()
+    if (project.rootProject.file('local.properties').exists()) {
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+        def key = properties['sonar.key'].toString()
+        return key
+    }
+
+    else {
+        return System.getenv()["SONAR_PROJECT_KEY"]
+    }
+
+}
+
+
+def getSonarName() {
+
+    Properties properties = new Properties()
+    if (project.rootProject.file('local.properties').exists()) {
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+        def name = properties['sonar.name'].toString()
+        return name
+    }
+
+    else {
+        return System.getenv()["SONAR_PROJECT_NAME"]
+    }
+
+}

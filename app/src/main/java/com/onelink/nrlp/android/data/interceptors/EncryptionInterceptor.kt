@@ -1,0 +1,162 @@
+package com.onelink.nrlp.android.data.interceptors
+
+import android.content.Context
+import com.google.gson.Gson
+import com.onelink.nrlp.android.data.local.UserData
+import com.onelink.nrlp.android.utils.*
+import okhttp3.*
+import okio.Buffer
+import org.json.JSONObject
+
+
+class EncryptionInterceptor(val context: Context) : Interceptor {
+
+    companion object {
+        private const val PAYLOAD_HASH = "hash"
+        private const val ENCRYPTION_KEY = "encryption_key"
+    }
+
+    override fun intercept(chain: Interceptor.Chain): Response {
+        val request = chain.request()
+        val buffer = Buffer()
+        request.body()?.writeTo(buffer)
+        val oldPayload = buffer.readUtf8()
+        return chain.proceed(getEncryptedRequest(request, oldPayload))
+    }
+
+    private fun getEncryptedRequest(request: Request, oldPayload: String): Request {
+        var body = request.body()
+        var keyIV = Pair(UniqueDeviceID.getUniqueId()?.take(32), UserData.finalEncryptionIV)
+
+        if (oldPayload.isNotEmpty()) {
+
+            val jsonPayload = JSONObject(oldPayload)
+            keyIV = getKeyIVPair(jsonPayload)
+            val newPayload = getEncryptedPayload(jsonPayload, keyIV)
+            body = RequestBody.create(
+                MediaType.get(HeaderConstants.APPLICATION_JSON),
+                newPayload.toString()
+            )
+        }
+        return getRequestWithHeaders(request, body, keyIV)
+    }
+
+
+    private fun getRequestWithHeaders(
+        request: Request,
+        body: RequestBody?,
+        keyIV: Pair<String?, String?>
+    ): Request {
+
+        val headers = request.headers()
+        val encryptedRequest = request.newBuilder()
+
+        addOrRemoveHeader(
+            encryptedRequest,
+            HeaderConstants.DEVICE_ID,
+            UniqueDeviceID.getUniqueId() ?: "", headers, keyIV
+        )
+
+        addOrRemoveHeader(
+            encryptedRequest,
+            HeaderConstants.APPLICATION_VERSION,
+            UserData.appChecksum ?: "", headers, keyIV
+        )
+
+        return encryptedRequest
+            .method(request.method(), body)
+            .build()
+
+    }
+
+    private fun addOrRemoveHeader(
+        encryptedRequest: Request.Builder,
+        headerName: String,
+        headerValue: String,
+        headers: Headers,
+        keyIV: Pair<String?, String?>
+    ) {
+
+        if (headers.get(headerName) != null) {
+            if (headers.get(headerName)?.isEmpty()!!) {
+                encryptedRequest.removeHeader(headerName)
+            }
+        } else {
+            encryptedRequest.header(
+                headerName,
+                AESEncryptionHelper.encrypt(
+                    headerValue,
+                    keyIV.first ?: "",
+                    keyIV.second ?: ""
+                )
+            )
+        }
+    }
+
+
+    private fun getEncryptedPayload(
+        jsonPayload: JSONObject,
+        keyIV: Pair<String?, String?>
+    ): JSONObject {
+        val encryptedJsonPayload = getFieldsEncryptedPayload(jsonPayload, keyIV)
+        jsonPayload.put(
+            PAYLOAD_HASH, AESEncryptionHelper.encrypt(
+                AppUtils.hash256(encryptedJsonPayload.toString()),
+                keyIV.first ?: "", keyIV.second ?: ""
+            )
+        )
+        return jsonPayload
+    }
+
+    private fun getKeyIVPair(jsonPayload: JSONObject): Pair<String?, String?> {
+        var keyIV = Pair(UniqueDeviceID.getUniqueId()?.take(32), UserData.finalEncryptionIV)
+
+        if (jsonPayload.has(ENCRYPTION_KEY) && jsonPayload.getString(ENCRYPTION_KEY).isNotEmpty()) {
+            val secretKey = jsonPayload.getString(ENCRYPTION_KEY)
+            keyIV = Pair(secretKey.take(32), UserData.finalEncryptionIV)
+            jsonPayload.remove(ENCRYPTION_KEY)
+        }
+        return keyIV
+    }
+
+    private fun getFieldsEncryptedPayload(
+        jsonPayload: JSONObject,
+        keyIV: Pair<String?, String?>
+    ): JSONObject {
+        jsonPayload.keys().forEach { key ->
+            enumValues<EncryptionFields>().forEach {
+                if (it.value == key) {
+                    jsonPayload.put(
+                        key,
+                        AESEncryptionHelper.encrypt(
+                            jsonPayload.getString(key),
+                            keyIV.first ?: "",
+                            keyIV.second ?: ""
+                        )
+                    )
+                }
+            }
+        }
+        return jsonPayload
+    }
+
+
+    private fun getSortedPayload(jsonString: String): String {
+        var map: Map<String, Any> = HashMap()
+        map = (Gson().fromJson(jsonString, map.javaClass)).toSortedMap()
+        return JSONObject(map).toString()
+    }
+
+    enum class EncryptionFields(val value: String) {
+        OTP("otp"),
+        EMAIL("email"),
+        NIC("nic_nicop"),
+        PASSWORD("password"),
+        AGENT_CODE("agent_code"),
+        NEW_PASSWORD("new_password"),
+        OLD_PASSWORD("old_password"),
+        REFERENCE_NUMBER("reference_no"),
+        BENEFICIARY_NIC("beneficiary_nic_nicop"),
+        REGISTRATION_CODE("registration_code")
+    }
+}

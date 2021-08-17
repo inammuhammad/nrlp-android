@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="accountTypes">
+        <item>@string/remitter</item>
+        <item>@string/beneficiary</item>
+    </string-array>
+
+    <string-array name="dummyBene">
+        <item>@string/dummy_bene1</item>
+        <item>@string/dummy_bene2</item>
+        <item>@string/dummy_bene3</item>
+    </string-array>
+</resources>

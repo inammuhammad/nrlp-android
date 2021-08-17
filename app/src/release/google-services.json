@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "592349090728",
+    "firebase_url": "https://nrlp-onelink.firebaseio.com",
+    "project_id": "nrlp-onelink",
+    "storage_bucket": "nrlp-onelink.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:592349090728:android:9fdc3e3a1c460a6307439d",
+        "android_client_info": {
+          "package_name": "com.onelink.nrlp.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "592349090728-fo4136n0ll3kcltdsitmjckomtj7d0oo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-bFpfVcgbH83m1LSFrE4FCCnMCdqbynQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "592349090728-fo4136n0ll3kcltdsitmjckomtj7d0oo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

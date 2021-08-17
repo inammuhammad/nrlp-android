@@ -1,0 +1,52 @@
+image: openjdk:8
+
+clone:
+  depth: full              # SonarCloud scanner needs the full history to assign issues properly
+
+definitions:
+  caches:
+    sonar: ~/.sonar/cache  # Caching SonarCloud artifacts will speed up your build
+  steps:
+    - step: &build-test-sonarcloud
+        size: 2x
+        name: Build, test and analyze on SonarCloud
+        caches:
+          - gradle
+          - sonar
+        script:
+          - apt-get update && apt-get -y install file build-essential
+          # environment vars
+          - export SDK_URL="https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip"
+          - export ANDROID_HOME="/opt/android-sdk-linux"
+          - export ANDROID_NDK_HOME="$ANDROID_HOME/ndk-bundle"
+          - export PATH="$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_NDK_HOME:$PATH"
+          # download and unzip sdk
+          - wget -q $SDK_URL -O android-sdk.zip && unzip android-sdk.zip -d $ANDROID_HOME && rm -f android-sdk.zip
+          # accept all licences http://stackoverflow.com/questions/38096225/automatically-accept-all-sdk-licences
+          - mkdir -p "$ANDROID_HOME/licenses"
+          - echo -e "8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
+          - echo -e "84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
+          # download ndk
+          - yes | sdkmanager "ndk-bundle"
+          # Download packages.
+          - yes | sdkmanager "platform-tools"
+          - yes | sdkmanager "platforms;android-27"
+          - yes | sdkmanager "build-tools;27.0.3"
+          - yes | sdkmanager "extras;android;m2repository"
+          - yes | sdkmanager "extras;google;m2repository"
+          - yes | sdkmanager "extras;google;instantapps"
+          - yes | sdkmanager --licenses
+          - chmod +x gradlew
+          #- ./gradlew build sonarqube --stacktrace
+          - ./gradlew clean assembleDebug lintDebug testDebugUnitTest jacocoTestDebugUnitTestReport sonarqube --stacktrace
+
+        artifacts:
+          - build/libs/**
+
+pipelines:                 # More info here: https://confluence.atlassian.com/bitbucket/configure-bitbucket-pipelines-yml-792298910.html
+  branches:
+    develop:
+      - step: *build-test-sonarcloud
+  pull-requests:
+    '**':
+      - step: *build-test-sonarcloud

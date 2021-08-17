@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.onelink.nrlp.android">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:name=".OneLinkApplication"
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
+        tools:ignore="AllowBackup,UnusedAttribute">
+
+
+        <activity
+            android:name=".features.splash.view.SplashActivity"
+            android:configChanges="layoutDirection|uiMode|locale"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.onelink.nrlp.android.features.managePoints.view.ManagePointsActivity"
+            android:configChanges="layoutDirection|uiMode|locale"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.onelink.nrlp.android.features.managePoints.view.TransferPointsSuccessFulActivity"
+            android:configChanges="layoutDirection|uiMode|locale"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".features.register.view.RegisterActivity"
+            android:configChanges="layoutDirection|uiMode|locale"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name="com.onelink.nrlp.android.features.login.view.LoginActivity"
+            android:configChanges="layoutDirection|uiMode|locale"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".features.beneficiary.view.BeneficiaryActivity"
+            android:configChanges="layoutDirection|uiMode|locale"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".features.register.view.RegisterSuccessActivity"
+            android:configChanges="layoutDirection|uiMode|locale"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".features.home.view.HomeActivity"
+            android:configChanges="layoutDirection|uiMode|locale"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".features.viewStatement.view.ViewStatementActivity"
+            android:configChanges="layoutDirection|uiMode|locale"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".features.viewStatement.view.StatementGeneratedActivity"
+            android:configChanges="layoutDirection|uiMode|locale"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".features.profile.view.ProfileActivity"
+            android:configChanges="layoutDirection|uiMode|locale"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".features.profile.view.ProfileUpdateSuccessActivity"
+            android:configChanges="layoutDirection|uiMode|locale"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".features.changePassword.view.ChangePasswordActivity"
+            android:configChanges="layoutDirection|uiMode|locale"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".features.changePassword.view.ChangePassSuccessfulActivity"
+            android:configChanges="layoutDirection|uiMode|locale"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".features.forgotPassword.view.ForgotPasswordActivity"
+            android:configChanges="layoutDirection|uiMode|locale"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name=".features.forgotPassword.view.PasswordChangeSuccessActivity"
+            android:configChanges="layoutDirection|uiMode|locale"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".features.faqs.view.FAQsActivity"
+            android:configChanges="layoutDirection|uiMode|locale" />
+
+        <activity
+            android:name=".features.redeem.view.RedeemActivity"
+            android:configChanges="layoutDirection|uiMode|locale"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name=".features.redeem.view.RedeemSuccessActivity"
+            android:configChanges="layoutDirection|uiMode|locale"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".features.uuid.view.UUIDActivity"
+            android:configChanges="layoutDirection|uiMode|locale"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name=".features.language.view.LanguageActivity"
+            android:configChanges="layoutDirection|uiMode|locale"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name=".features.contactus.view.ContactUsActivity"
+            android:configChanges="layoutDirection|uiMode|locale"
+            android:screenOrientation="portrait"
+            android:exported="true"/>
+
+
+        <activity android:name=".features.nrlpBenefits.view.NrlpBenefitsActivity"
+            android:configChanges="layoutDirection|uiMode|locale"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+
+    </application>
+
+</manifest>
+

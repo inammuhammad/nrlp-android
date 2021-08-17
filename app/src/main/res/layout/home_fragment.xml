@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.onelink.nrlp.android.features.home.fragments.HomeFragmentViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/bgHome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_home_bg"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/first_heading"
+                style="@style/TextViewHeadingLite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/unit_24dp"
+                android:text="@string/welcome"
+                android:textSize="@dimen/unit_16sp"
+                app:layout_constraintBottom_toTopOf="@id/tvUserName"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/tvUserName"
+                style="@style/TextViewHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/unit_2dp"
+                android:lineSpacingExtra="@dimen/margin_small"
+                android:text="@string/dummy_name"
+                android:textSize="@dimen/unit_24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/first_heading" />
+
+
+            <ImageView
+                android:id="@+id/ivHomeBgLoyaltyCard"
+                android:layout_width="0dp"
+                android:layout_height="134dp"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginTop="@dimen/unit_24dp"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:background="@drawable/ic_loyalty_points_bronze"
+                android:contentDescription="@null"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvUserName" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/unit_12dp"
+                android:layout_marginTop="@dimen/unit_12dp"
+                android:contentDescription="@null"
+                android:scaleType="matrix"
+                android:src="@drawable/ic_loyalty_card_globe"
+                app:layout_constraintBottom_toBottomOf="@id/ivHomeBgLoyaltyCard"
+                app:layout_constraintEnd_toEndOf="@id/ivHomeBgLoyaltyCard"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintStart_toEndOf="@+id/ivRightArrow"
+                app:layout_constraintTop_toBottomOf="@+id/lyTitle"
+                app:layout_constraintWidth_percent="0.3" />
+
+            <TextView
+                android:id="@+id/tvPoints"
+                style="@style/TextViewMediumBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/unit_16dp"
+                android:text="@string/dummy_amount"
+                android:textColor="@color/white"
+                android:textDirection="ltr"
+                android:textSize="@dimen/unit_24sp"
+                app:layout_constraintStart_toStartOf="@id/ivHomeBgLoyaltyCard"
+                app:layout_constraintTop_toTopOf="@id/ivHomeBgLoyaltyCard" />
+
+            <include
+                android:id="@+id/lyTitle"
+                layout="@layout/ly_loyalty_level_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/unit_16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvPoints"
+                app:layout_constraintEnd_toEndOf="@+id/ivHomeBgLoyaltyCard"
+                app:layout_constraintTop_toTopOf="@+id/tvPoints" />
+
+            <TextView
+                android:id="@+id/tvLoyaltyPoints"
+                style="@style/TextViewSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/unit_0dp"
+                android:text="@string/current_point_balance"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="@id/ivHomeBgLoyaltyCard"
+                app:layout_constraintTop_toBottomOf="@id/tvPoints" />
+
+            <TextView
+                android:id="@+id/tvRedeemPoints"
+                style="@style/TextViewMediumNoMargins"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_large"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="@dimen/margin_small"
+                android:paddingTop="@dimen/margin_small"
+                android:paddingBottom="@dimen/margin_small"
+                android:layout_marginBottom="@dimen/unit_16dp"
+                android:text="@string/redeem_your_points"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@id/ivHomeBgLoyaltyCard"
+                app:layout_constraintStart_toStartOf="@id/ivHomeBgLoyaltyCard" />
+
+            <ImageView
+                android:id="@+id/ivRightArrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/unit_8dp"
+                android:contentDescription="@null"
+                android:paddingStart="@dimen/margin_small"
+                android:paddingTop="@dimen/margin_small"
+                android:paddingEnd="@dimen/margin_small"
+                android:paddingBottom="@dimen/margin_small"
+                android:src="@drawable/ic_right_arrow_white"
+                app:layout_constraintBottom_toBottomOf="@id/tvRedeemPoints"
+                app:layout_constraintStart_toEndOf="@id/tvRedeemPoints"
+                app:layout_constraintTop_toTopOf="@id/tvRedeemPoints" />
+
+            <com.onelink.nrlp.android.common.views.ExpandableHeightGridView
+                android:id="@+id/homeTilesGrid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/unit_20dp"
+                android:layout_marginBottom="@dimen/margin_large"
+                android:horizontalSpacing="@dimen/unit_12dp"
+                android:isScrollContainer="false"
+                android:numColumns="2"
+                android:paddingStart="@dimen/margin_large"
+                android:paddingEnd="@dimen/margin_large"
+                android:scrollbars="none"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="@dimen/unit_12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivHomeBgLoyaltyCard"
+                tools:listitem="@layout/home_tiles_item" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</layout>
+

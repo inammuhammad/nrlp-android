@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context=".features.splash.view.SplashActivity">
+
+        <View
+            android:id="@+id/lyGreyHeader"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/unit_40dp"
+            android:background="#4000"
+            android:visibility="gone" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvSideMenu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/tvPoweredBy"
+            android:layout_below="@id/lyGreyHeader"
+            android:scrollbars="none" />
+
+        <TextView
+            android:id="@+id/tvPoweredBy"
+            style="@style/TextViewMediumNoMargins"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/lytBottomLogo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/margin_medium"
+            android:text="@string/powered_by" />
+
+        <LinearLayout
+            android:id="@+id/lytBottomLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/tvVersion"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/margin_extra_large"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_medium"
+                android:contentDescription="@null"
+                android:src="@drawable/onelink_logo" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_medium"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_state_emblem_of_pakistan" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvVersion"
+            style="@style/TextViewSmallNoMarginsLite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/margin_large"
+            tools:text="@string/version" />
+
+    </RelativeLayout>
+</layout>

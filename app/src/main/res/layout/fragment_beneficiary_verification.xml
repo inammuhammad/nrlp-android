@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.onelink.nrlp.android.features.register.viewmodel.VerifyBeneficiaryFragmentViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:clickable="true"
+        android:focusable="true">
+
+
+        <TextView
+            android:id="@+id/textViewRegisterCodeMsg"
+            style="@style/TextViewMediumNoMarginsLite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginTop="@dimen/unit_32dp"
+            android:layout_marginEnd="@dimen/margin_large"
+            android:text="@string/enter_registration_code_msg"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/sub_heading_registration_code"
+            style="@style/TextViewSubHeading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/unit_44dp"
+            android:text="@string/registration_code"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewRegisterCodeMsg" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/margin_large"
+            android:layoutDirection="ltr"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sub_heading_registration_code">
+
+            <com.onelink.nrlp.android.widgets.OneLinkEditText
+                android:id="@+id/etOTP1"
+                style="@style/EditTextOTP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@{viewModel.validEditText1 ? @drawable/otp_enabled_background : @drawable/otp_disabled_background}"
+                android:gravity="center"
+                android:hint="@string/hint_x"
+                android:inputType="number"
+                android:maxLength="1"
+                android:nextFocusDown="@id/etOTP2"
+                android:nextFocusForward="@id/etOTP2"
+                android:text="@={viewModel.etOTP1}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/etOTP2"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.onelink.nrlp.android.widgets.OneLinkEditText
+                android:id="@+id/etOTP2"
+                style="@style/EditTextOTP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@{viewModel.validEditText2 ? @drawable/otp_enabled_background : @drawable/otp_disabled_background}"
+                android:gravity="center"
+                android:hint="@string/hint_x"
+                android:inputType="number"
+                android:maxLength="1"
+                android:nextFocusDown="@id/etOTP3"
+                android:nextFocusForward="@id/etOTP3"
+                android:text="@={viewModel.etOTP2}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/etOTP3"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/etOTP1"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.onelink.nrlp.android.widgets.OneLinkEditText
+                android:id="@+id/etOTP3"
+                style="@style/EditTextOTP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@{viewModel.validEditText3 ? @drawable/otp_enabled_background : @drawable/otp_disabled_background}"
+                android:gravity="center"
+                android:hint="@string/hint_x"
+                android:inputType="number"
+                android:maxLength="1"
+                android:nextFocusDown="@id/etOTP4"
+                android:nextFocusForward="@id/etOTP4"
+                android:text="@={viewModel.etOTP3}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/etOTP4"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/etOTP2"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.onelink.nrlp.android.widgets.OneLinkEditText
+                android:id="@+id/etOTP4"
+                style="@style/EditTextOTP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@{viewModel.validEditText4 ? @drawable/otp_enabled_background : @drawable/otp_disabled_background}"
+                android:gravity="center"
+                android:hint="@string/hint_x"
+                android:imeOptions="actionDone|flagForceAscii"
+                android:inputType="number"
+                android:maxLength="1"
+                android:text="@={viewModel.etOTP4}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/etOTP3"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <Button
+            android:id="@+id/btnNext"
+            style="@style/ButtonTheme"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:enabled="@{viewModel.validEditText1 &amp;&amp; viewModel.validEditText2 &amp;&amp; viewModel.validEditText3 &amp;&amp; viewModel.validEditText4}"
+            android:text="@string/next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

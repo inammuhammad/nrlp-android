@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.onelink.nrlp.android.features.redeem.viewmodels.RedeemAgentConfirmationViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:clickable="true"
+        android:focusable="true">
+
+        <TextView
+            android:id="@+id/textView10"
+            style="@style/TextViewMediumNoMarginsLite"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginTop="@dimen/unit_32dp"
+            android:layout_marginEnd="@dimen/margin_large"
+            android:text="@string/agent_confirmation_msg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/textViewEnterCode"
+            style="@style/TextViewSubHeading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/unit_32dp"
+            android:text="@string/enter_code"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+        <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
+            android:id="@+id/tilAgentCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/unit_8dp"
+            app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewEnterCode">
+
+            <com.onelink.nrlp.android.widgets.OneLinkEditText
+                android:id="@+id/eTAgentCode"
+                style="@style/EditTextFixedDigits"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/agent_code_hint"
+                android:imeOptions="actionDone|flagForceAscii"
+                android:inputType="text"
+                android:maxLength="6"
+                android:nextFocusDown="@id/etTransactionNumber"
+                android:nextFocusForward="@id/etTransactionNumber"
+                android:text="@={viewModel.agentConfirmationCode}" />
+        </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/unit_24dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilAgentCode">
+
+            <TextView
+                style="@style/TextViewMediumNoMarginsLite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/hp_simplified_rg"
+                android:text="@string/code_expire_msg" />
+
+            <TextView
+                android:id="@+id/textViewTimer"
+                style="@style/TextViewMediumNoMarginsLite"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/margin_medium"
+                android:enabled="true"
+                android:text="@string/otp_timer_place_holder"
+                android:textColor="@color/yellow"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnNext"
+            style="@style/ButtonTheme"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:enabled="@{viewModel.isValidAgentConfirmationCode()}"
+            android:text="@string/next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

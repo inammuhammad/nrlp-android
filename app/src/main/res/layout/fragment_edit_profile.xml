@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.onelink.nrlp.android.features.profile.viewmodel.EditProfileViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/btnCancel"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingBottom="@dimen/unit_40dp"
+                tools:context=".MainActivity">
+
+                <TextView
+                    android:id="@+id/textViewName"
+                    style="@style/TextViewSubHeading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/unit_32dp"
+                    android:text="@string/full_name"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
+                    android:id="@+id/tilFullName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/unit_8dp"
+                    app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewName">
+
+                    <com.onelink.nrlp.android.widgets.OneLinkEditText
+                        android:id="@+id/etFullName"
+                        style="@style/EditTextFixedDigits"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.5"
+                        android:enabled="false"
+                        android:hint="@string/full_name"
+                        android:inputType="textPersonName"
+                        android:maxLength="50"
+                        android:nextFocusDown="@id/etAlias"
+                        android:nextFocusForward="@id/etAlias"
+                        android:text="@={viewModel.alias}" />
+                </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
+
+                <TextView
+                    android:id="@+id/textViewCnicNicop"
+                    style="@style/TextViewSubHeading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cnic_nicop_number"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tilFullName" />
+
+                <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
+                    android:id="@+id/tilCnicNicop"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/unit_8dp"
+                    app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewCnicNicop">
+
+                    <com.onelink.nrlp.android.widgets.OneLinkEditText
+                        android:id="@+id/eTCnicNumber"
+                        style="@style/EditTextFixedNumbers"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:alpha="0.5"
+                        android:enabled="false"
+                        android:hint="@string/cnic_nicop_hint"
+                        android:inputType="number"
+                        android:maxLength="15"
+                        android:text="@={viewModel.cnicNumber}" />
+                </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
+
+                <TextView
+                    android:id="@+id/textViewEmail"
+                    style="@style/TextViewSubHeading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/email_address_optional"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tilCnicNicop" />
+
+                <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
+                    android:id="@+id/tilEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/unit_8dp"
+                    app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewEmail">
+
+                    <com.onelink.nrlp.android.widgets.OneLinkEditText
+                        android:id="@+id/etEmailAddress"
+                        style="@style/EditTextFixedDigits"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:hint="@string/email_hint"
+                        android:inputType="textEmailAddress"
+                        android:text="@={viewModel.email}" />
+                </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
+
+                <TextView
+                    android:id="@+id/textViewCountry"
+                    style="@style/TextViewSubHeading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/country"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tilEmail" />
+
+                <TextView
+                    android:id="@+id/tvCountry"
+                    style="@style/EditTextFixedDigits"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:focusable="false"
+                    android:hint="@string/select_country"
+                    android:singleLine="true"
+                    android:text="@={viewModel.country}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewCountry" />
+
+                <TextView
+                    android:id="@+id/textViewMobileNumber"
+                    style="@style/TextViewSubHeading"
+                    android:layout_width="110dp"
+                    android:layout_height="14dp"
+                    android:text="@string/mobile_number"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvCountry" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/lyPhoneNumber"
+                    style="@style/EditTextFixedDigits"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="visible"
+                    android:layoutDirection="ltr"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewMobileNumber">
+
+                    <TextView
+                        android:id="@+id/tvCountryCode"
+                        style="@style/TextViewMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/unit_0dp"
+                        android:text="@={viewModel.countryCode}"
+                        android:textColor="@color/grey"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/prefix_tv"
+                        style="@style/TextViewMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/unit_0dp"
+                        android:text="@string/dash"
+                        android:textColor="@color/grey"
+                        app:layout_constraintBottom_toBottomOf="@id/etMobileNumber"
+                        app:layout_constraintStart_toEndOf="@+id/tvCountryCode"
+                        app:layout_constraintTop_toTopOf="@id/etMobileNumber" />
+
+                    <com.onelink.nrlp.android.widgets.OneLinkEditText
+                        android:id="@+id/etMobileNumber"
+                        style="@style/EditTextFixedNumbers"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/unit_0dp"
+                        android:background="@null"
+                        android:enabled="true"
+                        android:gravity="start"
+                        android:hint="@string/mobile_num_hint"
+                        android:inputType="number"
+                        android:padding="@dimen/unit_0dp"
+                        android:paddingStart="@dimen/unit_4dp"
+                        android:paddingEnd="@dimen/unit_4dp"
+                        android:text="@={viewModel.mobileNumber}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/imageViewPhoneError"
+                        app:layout_constraintStart_toEndOf="@+id/prefix_tv"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/imageViewPhoneError"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/margin_large"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_edit_text_error"
+                        android:textColor="@color/grey"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/errorTextPhone"
+                    style="@style/TextViewMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/unit_4dp"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/unit_10sp"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/lyPhoneNumber" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+        <Button
+            android:id="@+id/btnCancel"
+            style="@style/ButtonTheme"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/unit_12dp"
+            android:background="@drawable/rounded_corners_green"
+            android:text="@string/cancel"
+            android:textColor="@color/green"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/btnSave"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/btnNext"
+            style="@style/ButtonTheme"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:enabled="@{viewModel.countryNotEmpty &amp;&amp; viewModel.mobileNumberNotEmpty}"
+            android:text="@string/edit"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/btnSave"
+            style="@style/ButtonTheme"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:enabled="@{viewModel.isDifferentMobileNumber() || viewModel.isDifferentEmailAddress()}"
+            android:text="@string/save"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

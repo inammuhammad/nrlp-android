@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#FFFFFF</color>
+    <color name="colorAccent">@color/green</color>
+
+    <color name="grey">#DADADA</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#181818</color>
+    <color name="pure_black">#000000</color>
+    <color name="outline">#DADADA</color>
+    <color name="error">#9E1F17</color>
+    <color name="green">#014D27</color>
+    <color name="yellow">#FDA400</color>
+    <color name="redeemed_points">#9E1F17</color>
+    <color name="red">#9E1F17</color>
+    <color name="lightGreen">#E6EDE9</color>
+    <color name="lightYellow">#FFF6E5</color>
+    <color name="disabled_tv">#50181818</color>
+    <color name="grey_cell">#F5F5F5</color>
+    <color name="password_hint_color">#8b8b8b</color>
+</resources>
