@@ -2,6 +2,7 @@ package com.onelink.nrlp.android.features.profile.repo
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.onelink.nrlp.android.core.BaseResponse
 import com.onelink.nrlp.android.data.NetworkHelper
@@ -12,6 +13,7 @@ import com.onelink.nrlp.android.features.profile.models.UpdateProfileRequestMode
 import com.onelink.nrlp.android.features.select.country.model.CountryCodeResponseModel
 import com.onelink.nrlp.android.models.GeneralMessageResponseModel
 import com.onelink.nrlp.android.utils.mocks.MockedAPIResponseModels
+import org.json.JSONObject
 import javax.inject.Inject
 
 /**
@@ -75,4 +77,8 @@ object UpdateProfileConstants {
     const val MOBILE_NO = "mobile_no"
     const val EMAIL = "email"
     const val OTP = "otp"
+    const val RESIDENT_ID = "resident_id"
+    const val PASSPORT_TYPE = "passport_type"
+    const val PASSPORT_ID = "passport_id"
 }
+

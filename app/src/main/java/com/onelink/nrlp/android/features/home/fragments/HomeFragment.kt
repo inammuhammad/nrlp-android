@@ -6,6 +6,7 @@ import com.onelink.nrlp.android.R
 import com.onelink.nrlp.android.core.BaseFragment
 import com.onelink.nrlp.android.core.Status
 import com.onelink.nrlp.android.data.local.UserData
+import androidx.lifecycle.Observer
 import com.onelink.nrlp.android.databinding.HomeFragmentBinding
 import com.onelink.nrlp.android.features.home.view.HomeActivity
 import com.onelink.nrlp.android.features.redeem.view.RedeemActivity
@@ -66,7 +67,7 @@ open class HomeFragment :
 
         showUserData()
 
-        viewModel.observeUserProfile().observe(this, { response ->
+        viewModel.observeUserProfile().observe(this, Observer { response ->
             if (response.status == Status.SUCCESS) showUserData()
         })
     }

@@ -13,6 +13,12 @@ class VerifyReferenceNumberRequest(
     val referenceNo: String,
     @SerializedName("nic_nicop")
     val nicNicop: String,
+    @SerializedName("resident_id")
+    val residentId: String?,
+    @SerializedName("passport_type")
+    val passportType: String?,
+    @SerializedName("passport_id")
+    val passportId: String?,
     @SerializedName("user_type")
     val userType: String,
     @SerializedName("mobile_no")

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.onelink.nrlp.android.features.selfAwardPoints.viewmodel.SelfAwardPointsFragmentViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/lySelfAwardPoints"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/btnNext"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tvRemitterRefNo"
+                style="@style/TextViewSubHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/unit_32dp"
+                android:text="@string/remitter_trans_ref_no"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
+                android:id="@+id/til_ref_no"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/unit_8dp"
+                app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvRemitterRefNo">
+
+                <com.onelink.nrlp.android.widgets.OneLinkEditText
+                    android:id="@+id/etRefNo"
+                    style="@style/EditTextFixedDigits"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:digits="0123456789"
+                    android:hint="@string/reference_num_hint"
+                    android:imeOptions="actionDone|flagForceAscii"
+                    android:inputType="number"
+                    android:maxLength="25"
+                    android:maxLines="1"
+                    android:text="@={viewModel.referenceNumber}" />
+            </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
+
+            <TextView
+                android:id="@+id/tvRemittanceAmount"
+                style="@style/TextViewSubHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/remittance_amount"
+                app:layout_constraintBottom_toTopOf="@id/til_remittance_amount"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/til_ref_no" />
+
+            <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
+                android:id="@+id/til_remittance_amount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/unit_8dp"
+                app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvRemittanceAmount">
+
+                <com.onelink.nrlp.android.widgets.OneLinkEditText
+                    android:id="@+id/etRemittanceAmount"
+                    style="@style/EditTextFixedDigits"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="true"
+                    android:gravity="start"
+                    android:hint="@string/amount_hint"
+                    android:imeOptions="actionDone|flagForceAscii"
+                    android:inputType="numberDecimal"
+                    android:text="@={viewModel.transactionAmount}" />
+            </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
+
+            <TextView
+                android:id="@+id/tvRemittanceDate"
+                style="@style/TextViewSubHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/remittance_date"
+                app:layout_constraintBottom_toTopOf="@id/lyRemittanceDate"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/til_remittance_amount" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/lyRemittanceDate"
+                style="@style/EditTextFixedDigits"
+                android:layout_width="match_parent"
+                android:layoutDirection="ltr"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvRemittanceDate">
+
+                <TextView
+                    android:id="@+id/tvSelectRemittanceDate"
+                    style="@style/EditTextFixedDigits"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/unit_0dp"
+                    android:background="@null"
+                    android:clickable="false"
+                    android:enabled="true"
+                    android:focusable="false"
+                    android:gravity="start"
+                    android:textDirection="ltr"
+                    android:hint="@string/select_date"
+                    android:padding="@dimen/unit_0dp"
+                    android:paddingStart="@dimen/unit_4dp"
+                    android:paddingEnd="@dimen/unit_4dp"
+                    android:singleLine="true"
+                    android:text="@={viewModel.remittanceDate}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/imageViewDropDownRemittanceDate"
+                    app:layout_constraintHorizontal_bias="0.666"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imageViewDropDownRemittanceDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/unit_20dp"
+                    android:src="@drawable/ic_spinner_dropdown"
+                    android:textColor="@color/grey"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/btnNext"
+            style="@style/ButtonTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="@{viewModel.validReferenceNumber &amp;&amp; viewModel.validTransactionAmount &amp;&amp; viewModel.remittanceDateNotEmpty}"
+            android:text="@string/next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="1" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

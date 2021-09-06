@@ -1,14 +1,14 @@
 package com.onelink.nrlp.android.features.home.fragments
 
 import android.os.Bundle
-import com.onelink.nrlp.android.R
 import com.onelink.nrlp.android.features.beneficiary.view.BeneficiaryActivity
 import com.onelink.nrlp.android.features.home.fragments.adapters.HomeTilesAdapter
 import com.onelink.nrlp.android.features.managePoints.view.ManagePointsActivity
 import com.onelink.nrlp.android.features.nrlpBenefits.view.NrlpBenefitsActivity
+import com.onelink.nrlp.android.features.selfAwardPoints.view.SelfAwardPointsActivity
+import com.onelink.nrlp.android.features.selfAwardPoints.view.SelfAwardPointsSuccessActivity
 import com.onelink.nrlp.android.features.viewStatement.view.ViewStatementActivity
-import com.onelink.nrlp.android.utils.dialogs.OneLinkAlertDialogsFragment
-import com.onelink.nrlp.android.utils.toSpanned
+import com.onelink.nrlp.android.utils.IntentConstants
 import com.onelink.nrlp.android.utils.view.HomeTileUtils
 import com.onelink.nrlp.android.utils.view.hometiles.HomeTileModel
 import dagger.android.support.AndroidSupportInjection
@@ -37,6 +37,7 @@ class RemitterHomeFragment : HomeFragment() {
             HomeTileUtils.MANAGE_POINTS -> launchManagePoints()
             HomeTileUtils.VIEW_STATEMENT_REMITTER -> launchViewStatement()
             HomeTileUtils.VIEW_NRLP_BENEFITS_REMITTER -> launchNrlpBenefits()
+            HomeTileUtils.SELF_AWARD_POINTS -> launchSelfAwardPoints()
             else -> return
         }
     }
@@ -57,6 +58,16 @@ class RemitterHomeFragment : HomeFragment() {
         activity?.let {
             it.startActivity(ManagePointsActivity.newManagePointsIntent(it))
         }
+    }
+
+    private fun launchSelfAwardPoints() {
+        activity?.let {
+            it.startActivity(SelfAwardPointsActivity.newSelfAwardPointsIntent(it))
+        //    it.startActivity(SelfAwardPointsSuccessActivity.newSelfAwardSuccessIntent(it))
+
+
+        }
+
     }
 
     private fun launchViewStatement() {

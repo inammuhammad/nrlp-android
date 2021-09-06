@@ -35,6 +35,62 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TextViewSubHeading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/account_type" />
+
+                    <LinearLayout
+                        android:id="@+id/spinnerLy"
+                        style="@style/spinnerTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:layoutDirection="ltr"
+                        android:orientation="horizontal"
+                        android:textDirection="ltr"
+                        android:weightSum="10">
+
+                        <TextView
+                            android:id="@+id/tvAccountType"
+                            style="@style/TextViewMediumNoMargins"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="8.5"
+                            android:text="@string/select_account_type"
+                            android:textColor="@color/grey" />
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:src="@drawable/ic_spinner_dropdown"
+                            android:contentDescription="@null" />
+                    </LinearLayout>
+
+                    <com.onelink.nrlp.android.utils.OneLinkSpinner
+                        android:id="@+id/spinner_select_account_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="@dimen/margin_large"
+                        android:layout_marginEnd="@dimen/margin_large"
+                        android:background="@android:color/transparent"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="start"
+                        android:hint="@string/full_name"
+                        android:layoutDirection="ltr"
+                        android:spinnerMode="dropdown"
+                        android:textDirection="ltr"
+                        android:visibility="invisible" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_large"
                     android:orientation="vertical">
 
@@ -178,8 +234,8 @@
                             android:hint="@string/mobile_num_hint"
                             android:inputType="number"
                             android:maxLength="10"
-                            android:nextFocusDown="@id/etEmailAddress"
-                            android:nextFocusForward="@id/etEmailAddress"
+                            android:nextFocusDown="@id/etResidentId"
+                            android:nextFocusForward="@id/etResidentId"
                             android:padding="@dimen/unit_0dp"
                             android:paddingStart="@dimen/unit_4dp"
                             android:paddingEnd="@dimen/unit_4dp"
@@ -217,6 +273,127 @@
                         android:textColor="@color/red"
                         android:textSize="@dimen/unit_10sp"
                         android:visibility="gone" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/residentIdLL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TextViewSubHeading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/resident_id" />
+
+                    <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
+                        android:id="@+id/tilResidentId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/unit_8dp"
+                        app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance">
+
+                        <com.onelink.nrlp.android.widgets.OneLinkEditText
+                            android:id="@+id/etResidentId"
+                            style="@style/EditTextFixedNumbers"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/select_resident_id"
+                            android:inputType="number"
+                            android:text="@={viewModel.residentId}" />
+                    </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/passportTypeLL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/textViewAlias"
+                        style="@style/TextViewSubHeading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/passport_type" />
+                    <LinearLayout
+                        android:id="@+id/spinnerPassport"
+                        style="@style/spinnerTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:gravity="center_vertical"
+                        android:layoutDirection="ltr"
+                        android:orientation="horizontal"
+                        android:textDirection="ltr"
+                        android:weightSum="10"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textViewAlias">
+
+                        <TextView
+                            android:id="@+id/tvPassportType"
+                            style="@style/TextViewMediumNoMargins"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="8.5"
+                            android:text="@string/select_passport_type"
+                            android:textColor="@color/grey" />
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:contentDescription="@null"
+                            android:src="@drawable/ic_spinner_dropdown" />
+                    </LinearLayout>
+                    <com.onelink.nrlp.android.utils.OneLinkSpinner
+                        android:id="@+id/spinner_select_passport_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="@dimen/margin_large"
+                        android:layout_marginEnd="@dimen/margin_large"
+                        android:background="@android:color/transparent"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="start"
+                        android:hint="@string/passport_type"
+                        android:spinnerMode="dropdown"
+                        android:visibility="invisible" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/passportNoLL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        style="@style/TextViewSubHeading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/passport_no" />
+
+                    <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
+                        android:id="@+id/tilPassportNo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/unit_8dp"
+                        app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance">
+
+                        <com.onelink.nrlp.android.widgets.OneLinkEditText
+                            android:id="@+id/etPassportNo"
+                            style="@style/EditTextFixedDigits"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/select_passport_no"
+                            android:inputType="text"
+                            android:text="@={viewModel.passportId}" />
+                    </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -328,69 +505,29 @@
                     </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
                 </LinearLayout>
 
-                <LinearLayout
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content">
 
-                    <TextView
-                        style="@style/TextViewSubHeading"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/account_type" />
-
-                    <LinearLayout
-                        android:id="@+id/spinnerLy"
-                        style="@style/spinnerTheme"
+                    <Button
+                        android:id="@+id/btnNext"
+                        style="@style/ButtonTheme"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:layoutDirection="ltr"
-                        android:orientation="horizontal"
-                        android:textDirection="ltr"
-                        android:weightSum="10">
+                        android:enabled="@{viewModel.cnicNotEmpty &amp;&amp; viewModel.fullNameNotEmpty &amp;&amp; viewModel.mobileNumberNotEmpty &amp;&amp; viewModel.passwordNotEmpty &amp;&amp; viewModel.rePasswordNotEmpty &amp;&amp; viewModel.isAccountTypeSelected() &amp;&amp; viewModel.isPassportTypeSelected() &amp;&amp; viewModel.residentIdNotEmpty &amp;&amp; viewModel.passportIdNotEmpty}"
+                        android:text="@string/next" />
 
-                        <TextView
-                            android:id="@+id/tvAccountType"
-                            style="@style/TextViewMediumNoMargins"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="8.5"
-                            android:text="@string/select_account_type"
-                            android:textColor="@color/grey" />
-
-                        <ImageView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1.5"
-                            android:src="@drawable/ic_spinner_dropdown"
-                            android:contentDescription="@null" />
-                    </LinearLayout>
-
-                    <com.onelink.nrlp.android.utils.OneLinkSpinner
-                        android:id="@+id/spinner_select_account_type"
+                    <Button
+                        android:id="@+id/btnNext1"
+                        style="@style/ButtonTheme"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginStart="@dimen/margin_large"
-                        android:layout_marginEnd="@dimen/margin_large"
-                        android:background="@android:color/transparent"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:gravity="start"
-                        android:hint="@string/full_name"
-                        android:layoutDirection="ltr"
-                        android:spinnerMode="dropdown"
-                        android:textDirection="ltr"
-                        android:visibility="invisible" />
-                </LinearLayout>
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:enabled="@{viewModel.cnicNotEmpty &amp;&amp; viewModel.fullNameNotEmpty &amp;&amp; viewModel.mobileNumberNotEmpty &amp;&amp; viewModel.passwordNotEmpty &amp;&amp; viewModel.rePasswordNotEmpty &amp;&amp; viewModel.isAccountTypeSelected()}"
+                        android:text="@string/next" />
 
-                <Button
-                    android:id="@+id/btnNext"
-                    style="@style/ButtonTheme"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:enabled="@{viewModel.cnicNotEmpty &amp;&amp; viewModel.fullNameNotEmpty &amp;&amp; viewModel.countryNotEmpty &amp;&amp; viewModel.mobileNumberNotEmpty &amp;&amp; viewModel.passwordNotEmpty &amp;&amp; viewModel.rePasswordNotEmpty &amp;&amp; viewModel.isAccountTypeSelected()}"
-                    android:text="@string/next" />
+                </FrameLayout>
+
             </LinearLayout>
         </ScrollView>
 

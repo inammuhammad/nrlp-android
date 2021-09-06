@@ -5,12 +5,22 @@
     <string name="full_name">پورا نام</string>
     <string name="cnic_nicop_number">شناختی کارڈ/ نیشنل آئیڈنٹٹی کارڈ فور اوورسیز پاکستانی</string>
     <string name="country">قیام کا ملک</string>
+    <string name="passport_no">Passport No.</string>
+    <string name="select_passport_no">Enter Passport No.</string>
+    <string name="passport_type">Passport Type</string>
+    <string name="select_passport_type">Select Passport Type</string>
+
+    <string name="resident_id">Resident ID</string>
     <string name="mobile_number">موبائل نمبر</string>
     <string name="email_address">ای میل ایڈریس</string>
     <string name="email_address_optional">ای میل ایڈریس (اختیاری)</string>
     <string name="password">پاس ورڈ</string>
     <string name="new_password">نیا پاس ورڈ</string>
     <string name="select_bene">وصول کنندہ منتخب کریں</string>
+    <string name="remitter_trans_ref_no">Remitter Transaction Refrerence No</string>
+    <string name="remittance_amount">Remittance Amount (In PKR)</string>
+    <string name="remittance_date">Date of Remittance</string>
+
     <string name="enter_points">پوائنٹس درج کریں</string>
     <string name="re_enter_password"> دوبارہ پاس ورڈ درج کریں</string>
     <string name="re_enter_new_password">نیا پاس ورڈ درج کریں </string>
@@ -20,6 +30,8 @@
     <string name="select_account_type">یوزر کی قسم منتخب کریں</string>
     <string name="login">لاگ ان کریں</string>
     <string name="remitter">بھیجنے والا</string>
+    <string name="international_passport">international passport</string>
+    <string name="pakistani_passport">pakistani passport</string>
     <string name="next">اگلے</string>
     <string name="transfer">منتقلی</string>
     <string name="loyalty_points">لوائلٹی پوائنٹس</string>
@@ -80,6 +92,7 @@
     <string name="resend_otp">کوڈ دوبارہ بھیجیں</string>
     <string name="cnic_nicop_hint">42501–8053290–1</string>
     <string name="select_country">ملک منتخب کریں</string>
+    <string name="select_resident_id">Enter Resident Id</string>
     <string name="dummy_country">Algeria</string>
     <string name="mobile_num_hint">xxx xxxx xxx</string>
     <string name="email_hint">abc@abc.com</string>
@@ -104,6 +117,7 @@
     <string name="delete_beneficiary">وصول کنندہ کو حذف کریں</string>
     <string name="beneficiary_created">وصول کنندہ کامیابی کے ساتھ اندراج ہو گیا</string>
     <string name="beneficiary_creation_success_msg">وصول کنندہ کامیابی کے ساتھ تشکیل دیا گیا ہے ، ہم نے وصول کنندہ کو ایک SMS بھیجا ہے۔</string>
+    <string name="self_award_points">Self Award Points</string>
     <string name="transfer_points">پوائنٹس کی منتقلی</string>
     <string name="sure_to_transfer">کیا آپ واقعی %1$d پوائنٹس %2$s کو منتقل کرنا چاہتے ہیں؟</string>
     <string name="redeem_your_points">پوائنٹس استعمال کریں</string>
@@ -204,6 +218,7 @@
     <string name="update_profile">پروفائل اپ ڈیٹ کریں</string>
     <string name="confirm_profile_update_msg">کیا آپ واقعی اپنی پروفائل اپ ڈیٹ کرنا چاہتے ہیں؟</string>
     <string name="profile_updated_success_msg">آپ نے کامیابی سے اپنی پروفائل اپ ڈیٹ کر دی ہے</string>
+    <string name="self_award_success_msg">Self Award Successful</string>
     <string name="enter_registered_cnic_msg">برائے مہربانی اپنا رجسڑڈ CNIC / NICOP درج کریں</string>
     <string name="redemption_partners">این آر ایل پی كے پارٹنر</string>
     <string name="cancel_registration">رجسٹریشن منسوخ کریں</string>

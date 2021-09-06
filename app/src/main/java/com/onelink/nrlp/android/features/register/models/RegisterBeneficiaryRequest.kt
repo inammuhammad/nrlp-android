@@ -24,5 +24,12 @@ class RegisterBeneficiaryRequest(
     @SerializedName("email")
     val email: String,
     @SerializedName("encryption_key")
-    val encryptionKey: String = LukaKeRakk.kcth()
+    val encryptionKey: String = LukaKeRakk.kcth(),
+
+    @SerializedName("resident_id")
+    val residentId: String?,
+    @SerializedName("passport_type")
+    val passportType: String?,
+    @SerializedName("passport_id")
+    val passportId: String?
 )

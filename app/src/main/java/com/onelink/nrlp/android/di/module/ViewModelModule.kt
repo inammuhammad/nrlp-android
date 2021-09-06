@@ -33,6 +33,10 @@ import com.onelink.nrlp.android.features.profile.viewmodel.ProfileViewModel
 import com.onelink.nrlp.android.features.redeem.viewmodels.*
 import com.onelink.nrlp.android.features.register.viewmodel.*
 import com.onelink.nrlp.android.features.select.country.viewmodel.SelectCountryFragmentViewModel
+import com.onelink.nrlp.android.features.selfAwardPoints.viewmodel.SelfAwardPointsFragmentViewModel
+import com.onelink.nrlp.android.features.selfAwardPoints.viewmodel.SelfAwardPointsOTPFragmentViewModel
+import com.onelink.nrlp.android.features.selfAwardPoints.viewmodel.SelfAwardPointsSuccessViewModel
+import com.onelink.nrlp.android.features.selfAwardPoints.viewmodel.SelfAwardPointsViewModel
 import com.onelink.nrlp.android.features.splash.viewmodel.SplashViewModel
 import com.onelink.nrlp.android.features.uuid.viewmodel.LoginOtpFragmentViewModel
 import com.onelink.nrlp.android.features.uuid.viewmodel.UUIDActivityViewModel
@@ -218,6 +222,26 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ManagePointsFragmentViewModel::class)
     internal abstract fun managePointsFragmentViewModel(managePointsFragmentViewMode: ManagePointsFragmentViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SelfAwardPointsViewModel::class)
+    internal abstract fun selfAwardPointsViewModel(selfAwardPointsViewModel: SelfAwardPointsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SelfAwardPointsSuccessViewModel::class)
+    internal abstract fun selfAwardPointsSuccessViewModel(selfAwardPointsSuccessViewModel: SelfAwardPointsSuccessViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SelfAwardPointsFragmentViewModel::class)
+    internal abstract fun selfAwardPointsFragmentViewModel(selfAwardPointsFragmentViewModel: SelfAwardPointsFragmentViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SelfAwardPointsOTPFragmentViewModel::class)
+    internal abstract fun selfAwardPointsOTPFragmentViewModel(selfAwardPointsOTPFragmentViewModel: SelfAwardPointsOTPFragmentViewModel): ViewModel
 
 
     @Binds

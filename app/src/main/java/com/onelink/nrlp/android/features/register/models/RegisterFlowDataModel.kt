@@ -16,6 +16,14 @@ data class RegisterFlowDataModel(
     var email: String,
     @SerializedName("country")
     var country: String,
+
+    @SerializedName("residentId")
+    var residentId: String?,
+    @SerializedName("passportType")
+    var passportType: String?,
+    @SerializedName("passportId")
+    var passportId: String?,
+
     @SerializedName("password")
     var password: String,
     @SerializedName("rePassword")

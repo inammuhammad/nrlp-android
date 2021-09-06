@@ -7,6 +7,10 @@ import android.text.InputFilter
 import android.text.Selection
 import android.text.TextWatcher
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.SpinnerAdapter
+import androidx.appcompat.widget.AppCompatSpinner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.onelink.nrlp.android.R
@@ -46,6 +50,8 @@ class EditProfileFragment :
     private lateinit var countriesList: List<CountryCodeModel>
     private var countryCode: String = ""
     private var isDisablingView: Boolean = false
+    private var listenerInitializedPT: Boolean = false
+    private var isEditEnable: Boolean = false
 
     override fun onInject() {
         AndroidSupportInjection.inject(this)
@@ -67,10 +73,54 @@ class EditProfileFragment :
         }
         viewModel.getCountryCodes()
 
+
+       // binding.spinnerSelectPassportType.forceEnabled(false)
+        binding.spinnerSelectPassportType.adapter = context?.let {
+            ArrayAdapter(
+                    it,
+                    R.layout.custom_spinner_item,
+                    resources.getStringArray(R.array.passportTypes)
+            )
+        } as SpinnerAdapter
+        binding.spinnerSelectPassportType.onItemSelectedListener =
+                object : AdapterView.OnItemSelectedListener {
+                    override fun onNothingSelected(parent: AdapterView<*>?) {
+                        // on nothing selected
+                    }
+
+                    override fun onItemSelected(
+                            parent: AdapterView<*>?,
+                            view: View?,
+                            position: Int,
+                            id: Long
+                    ) {
+                        if (listenerInitializedPT) {
+                            viewModel.passportType.postValue(resources.getStringArray(R.array.passportTypes)[position])
+                        } else {
+                            listenerInitializedPT = true
+                            binding.spinnerSelectPassportType.setSelection(-1)
+                        }
+                    }
+                }
         initTextWatchers()
         initObservers()
         initListeners()
         initOnFocusChangeListeners()
+    }
+
+    private fun AppCompatSpinner?.setFEnabled(enable:Boolean) {
+        if (this != null) {
+            isEnabled = enable
+            alpha = if (enable) 1.0f else 0.5f
+        }
+    }
+
+    fun AppCompatSpinner.forceEnabled(isEnabled : Boolean){
+        setEnabled(isEnabled)
+        getChildAt(0)?.let{ childView ->
+            childView.alpha = if (this.isEnabled) 1.0f else 0.33f
+        }
+        invalidate()
     }
 
     private fun initOnFocusChangeListeners() {
@@ -124,7 +174,15 @@ class EditProfileFragment :
             }
         }
 
+        binding.spinnerPassport.setOnClickListener {
+            binding.spinnerSelectPassportType.performClick()
+        }
+
         binding.btnNext.setOnSingleClickListener {
+            makeViewEditable()
+        }
+
+        binding.btnNext1.setOnSingleClickListener {
             makeViewEditable()
         }
     }
@@ -137,6 +195,19 @@ class EditProfileFragment :
                     response.data?.let {
                         countriesList = it.countryCodesList
                         UserData.getUser()?.let { userModel ->
+
+                            if(userModel.accountType == "beneficiary"){
+                                binding.remitterItemContainer.visibility = View.GONE
+
+                                binding.btnNext.visibility = View.GONE
+                                binding.btnNext1.visibility = View.VISIBLE
+                            }
+                            else{
+                                binding.remitterItemContainer.visibility = View.VISIBLE
+
+                                binding.btnNext.visibility = View.VISIBLE
+                                binding.btnNext1.visibility = View.GONE
+                            }
                             showData(userModel)
                         }
                     }
@@ -149,6 +220,18 @@ class EditProfileFragment :
                 }
                 Status.LOADING -> {
                     oneLinkProgressDialog.showProgressDialog(activity)
+                }
+            }
+        })
+
+        viewModel.passportType.observe(this, Observer {
+            if (it != Constants.SPINNER_PASSPORT_TYPE_HINT) {
+                if(!isEditEnable) {
+                    binding.tvPassportType.text = it
+                    binding.tvPassportType.colorToText(R.color.grey)
+                }else {
+                    binding.tvPassportType.text = it
+                    binding.tvPassportType.colorToText(R.color.pure_black)
                 }
             }
         })
@@ -241,6 +324,9 @@ class EditProfileFragment :
             binding.tvCountry.enabled(it)
             binding.etMobileNumber.enabled(it)
             binding.etEmailAddress.enabled(it)
+            binding.etPassportNo.enabled(it)
+            binding.etResidentId.enabled(it)
+            binding.spinnerPassport.enabled()
         }
 
         //setting mobileNumber without code for editing
@@ -251,8 +337,14 @@ class EditProfileFragment :
         binding.tvCountryCode.visibility = View.VISIBLE
         binding.prefixTv.visibility = View.VISIBLE
         binding.btnNext.visibility = View.GONE
+        binding.btnNext1.visibility = View.GONE
         binding.btnSave.visibility = View.VISIBLE
         binding.prefixTv.visibility = View.VISIBLE
+
+        binding.tvPassportType.colorToText(R.color.pure_black)
+
+        isEditEnable = true
+
     }
 
     private fun disableFields() {
@@ -261,17 +353,33 @@ class EditProfileFragment :
             binding.tvCountry.disabled(it)
             binding.etMobileNumber.disabled(it)
             binding.etEmailAddress.disabled(it)
+            binding.etPassportNo.disabled(it)
+            binding.etResidentId.disabled(it)
+            binding.spinnerPassport.disabled()
+
         }
         binding.btnCancel.visibility = View.GONE
-        binding.btnNext.visibility = View.VISIBLE
+        UserData.getUser()?.let { userModel ->
+            if(userModel.accountType == "beneficiary")
+                binding.btnNext1.visibility = View.VISIBLE
+            else
+                binding.btnNext.visibility = View.VISIBLE
+        }
         binding.btnSave.visibility = View.GONE
         binding.tvCountryCode.visibility = View.GONE
         binding.prefixTv.visibility = View.GONE
+
+        binding.tvPassportType.colorToText(R.color.grey)
+
+        isEditEnable = false
 
         //Setting old values for Email and Mobile Number
         viewModel.mobileNumFromApi.value?.length?.let { setEditTextLengthFilter(it) }
         viewModel.mobileNumber.value = viewModel.mobileNumFromApi.value
         viewModel.email.value = viewModel.oldEmail.value
+        viewModel.residentId.value = viewModel.oldResidentID.value
+        viewModel.passportType.value = viewModel.oldPassportType.value
+        viewModel.passportId.value = viewModel.oldPassportId.value
         viewModel.country.value = viewModel.countryFromApi.value
         viewModel.countryCode.value = viewModel.countryCodeFromApi.value
     }
@@ -290,10 +398,36 @@ class EditProfileFragment :
         val email = it.email
         viewModel.mobileNumber.value = mobileNo
         viewModel.mobileNumFromApi.value = mobileNo
+
+        val residentId = it.residentId
+        val passportType = it.passportType
+        val passportId = it.passportId
+
+//        viewModel.residentId.value = it.residentId
+//        viewModel.passportType.value = it.passportType
+//        viewModel.passportId.value = it.passportId
         if (email != "null" && !email.isNullOrEmpty()) {
             viewModel.email.value = email
             viewModel.oldEmail.value = email
         }
+
+        if (residentId != "null" && !residentId.isNullOrEmpty()) {
+            viewModel.residentId.value = residentId
+            viewModel.oldResidentID.value = residentId
+        }
+
+        if (passportId != "null" && !passportId.isNullOrEmpty()) {
+            viewModel.passportId.value = passportId
+            viewModel.oldPassportId.value = passportId
+        }
+
+
+        if (passportType != "null" && !passportType.isNullOrEmpty()) {
+            viewModel.passportType.value = passportType
+            viewModel.oldPassportType.value = passportType
+        }
+
+
         viewModel.mobileNumberNotEmpty.value = true
         viewModel.countryNotEmpty.value = true
         viewModel.validationPhoneNumberPassed.value = true

@@ -157,6 +157,8 @@ class EncryptionInterceptor(val context: Context) : Interceptor {
         OLD_PASSWORD("old_password"),
         REFERENCE_NUMBER("reference_no"),
         BENEFICIARY_NIC("beneficiary_nic_nicop"),
-        REGISTRATION_CODE("registration_code")
+        REGISTRATION_CODE("registration_code"),
+        RESIDENT_ID("resident_id"),
+        PASSPORT_ID("passport_id")
     }
 }

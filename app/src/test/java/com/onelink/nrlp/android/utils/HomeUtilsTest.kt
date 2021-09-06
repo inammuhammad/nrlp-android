@@ -41,6 +41,11 @@ class HomeUtilsTest {
                 HomeTileUtils.VIEW_NRLP_BENEFITS_REMITTER,
                 R.string.view_nrlp_benefits,
                 R.drawable.ic_nrlp_benefits_tile
+            ),
+            HomeTileModel(
+                HomeTileUtils.SELF_AWARD_POINTS,
+                R.string.self_award_points,
+                R.drawable.ic_self_award_points_tile
             )
         )
 

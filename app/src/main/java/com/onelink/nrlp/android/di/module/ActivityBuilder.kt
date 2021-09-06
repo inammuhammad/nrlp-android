@@ -20,6 +20,8 @@ import com.onelink.nrlp.android.features.redeem.view.RedeemActivity
 import com.onelink.nrlp.android.features.redeem.view.RedeemSuccessActivity
 import com.onelink.nrlp.android.features.register.view.RegisterActivity
 import com.onelink.nrlp.android.features.register.view.RegisterSuccessActivity
+import com.onelink.nrlp.android.features.selfAwardPoints.view.SelfAwardPointsActivity
+import com.onelink.nrlp.android.features.selfAwardPoints.view.SelfAwardPointsSuccessActivity
 import com.onelink.nrlp.android.features.splash.view.SplashActivity
 import com.onelink.nrlp.android.features.uuid.view.UUIDActivity
 import com.onelink.nrlp.android.features.viewStatement.view.StatementGeneratedActivity
@@ -54,6 +56,14 @@ abstract class ActivityBuilder {
     @ActivityScope
     @ContributesAndroidInjector(modules = [ManagePointsFragmentBuilder::class])
     internal abstract fun bindManagePointsActivity(): ManagePointsActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [SelfAwardPointsFragmentBuilder::class])
+    internal abstract fun bindSelfAwardPointsActivity(): SelfAwardPointsActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector
+    internal abstract fun bindSelfAwardPointsSuccessActivity(): SelfAwardPointsSuccessActivity
 
     @ActivityScope
     @ContributesAndroidInjector(modules = [BeneficiaryFragmentsBuilder::class])

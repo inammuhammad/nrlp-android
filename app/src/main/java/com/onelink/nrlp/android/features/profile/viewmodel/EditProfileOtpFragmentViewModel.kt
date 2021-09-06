@@ -19,9 +19,13 @@ class EditProfileOtpFragmentViewModel @Inject constructor(private val profileRep
     var updateProfileRequestModel: JsonObject = JsonObject()
 
     fun updateProfileVerifyOtp() {
-        updateProfileRequestModel.addProperty(UpdateProfileConstants.OTP, getOTPCode())
-        profileRepo.updateProfileVerifyOtp(updateProfileRequestModel)
+        val jsonObject1= JsonObject()
+        jsonObject1.addProperty(UpdateProfileConstants.OTP, getOTPCode())
+        //updateProfileRequestModel.addProperty(UpdateProfileConstants.OTP, getOTPCode())
+        profileRepo.updateProfileVerifyOtp(jsonObject1)
     }
+
+
 
     fun observeUpdateProfileOtp() = profileRepo.observeUpdateProfileOtp()
 

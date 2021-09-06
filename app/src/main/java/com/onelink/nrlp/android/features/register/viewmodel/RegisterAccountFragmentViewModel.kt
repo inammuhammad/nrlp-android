@@ -19,10 +19,13 @@ class RegisterAccountFragmentViewModel @Inject constructor(private val authRepo:
     val cnicNicopNumber = MutableLiveData<String>("")
     val fullName = MutableLiveData<String>("")
     val country = MutableLiveData<String>("")
+    val residentId = MutableLiveData<String>("")
+    val passportId = MutableLiveData<String>("")
     val mobileNumber = MutableLiveData<String>("")
     val password = MutableLiveData<String>("")
     val rePassword = MutableLiveData<String>("")
     val accountType = MutableLiveData<String>(Constants.SPINNER_ACCOUNT_TYPE_HINT)
+    val passportType = MutableLiveData<String>(Constants.SPINNER_PASSPORT_TYPE_HINT)
     val validationCnicPassed = MutableLiveData(true)
     val validationPasswordPassed = MutableLiveData(true)
     val validationPhoneNumberPassed = MutableLiveData(true)
@@ -35,6 +38,36 @@ class RegisterAccountFragmentViewModel @Inject constructor(private val authRepo:
     fun getAuthKey(accountType : String , nic : String) = authRepo.getAuthKey(accountType , nic)
 
     fun observeAuthKey() = authRepo.observeAuthKey()
+
+//    val isNextActive = MediatorLiveData<Boolean>().apply {
+//        if (accountType.value.toString() == "Remitter") {
+//                validateNonNull(cnicNicopNumber).toString().equals("true") &&
+//                validateNonNull(fullName).toString().equals("true") &&
+//                validateNonNull(mobileNumber).toString().equals("true") &&
+//                validateNonNull(password).toString().equals("true") &&
+//                validateNonNull(rePassword).toString().equals("true") &&
+//                validateNonNull(rePassword).toString().equals("true") &&
+//                validateNonNull(residentId).toString().equals("true") &&
+//                validateNonNull(passportId).toString().equals("true") &&
+//                accountType.value.toString() != Constants.SPINNER_ACCOUNT_TYPE_HINT &&
+//                passportType.value.toString() != Constants.SPINNER_PASSPORT_TYPE_HINT
+//        }
+//        else{
+//
+//        }
+//    }
+//
+//    fun isNextEnable(): Boolean {
+//        if (accountType.value.toString() == "Remitter") {
+//            if(cnicNotEmpty.value.toString().equals("true") && fullNameNotEmpty.value.toString().equals("true") && mobileNumberNotEmpty.value.toString().equals("true") && passwordNotEmpty.value.toString().equals("true") && rePasswordNotEmpty.value.toString().equals("true") && accountType.value.toString() != Constants.SPINNER_ACCOUNT_TYPE_HINT && passportType.value.toString() != Constants.SPINNER_PASSPORT_TYPE_HINT && residentIdNotEmpty.value.toString().equals("true") && passportIdNotEmpty.value.toString().equals("true"))
+//                return true
+//        }
+//        else{
+//            if(cnicNotEmpty.value.toString().equals("true") && fullNameNotEmpty.value.toString().equals("true") && mobileNumberNotEmpty.value.toString().equals("true") && passwordNotEmpty.value.toString().equals("true") && rePasswordNotEmpty.value.toString().equals("true") && accountType.value.toString() != Constants.SPINNER_ACCOUNT_TYPE_HINT)
+//                return true
+//        }
+//        return false
+//    }
 
     fun addNextFragment(
         resources: Resources,
@@ -63,6 +96,14 @@ class RegisterAccountFragmentViewModel @Inject constructor(private val authRepo:
         }
     }
 
+    fun getPassportType(resources: Resources): String {
+        return when {
+            passportType.value.toString() == resources.getString(R.string.international_passport) -> Constants.InternationalPassport
+            passportType.value.toString() == resources.getString(R.string.pakistani_passport) -> Constants.PakistaniPassport
+            else -> ""
+        }
+    }
+
 
     @Suppress("unused")
     val emailNotEmpty = MediatorLiveData<Boolean>().apply {
@@ -75,6 +116,14 @@ class RegisterAccountFragmentViewModel @Inject constructor(private val authRepo:
 
     val fullNameNotEmpty = MediatorLiveData<Boolean>().apply {
         validateNonNull(fullName)
+    }
+
+    val residentIdNotEmpty = MediatorLiveData<Boolean>().apply {
+        validateNonNull(residentId)
+    }
+
+    val passportIdNotEmpty = MediatorLiveData<Boolean>().apply {
+        validateNonNull(passportId)
     }
 
     val countryNotEmpty = MediatorLiveData<Boolean>().apply {
@@ -99,6 +148,18 @@ class RegisterAccountFragmentViewModel @Inject constructor(private val authRepo:
                 ValidationUtils.isSpinnerNotEmpty(
                     it1,
                     Constants.SPINNER_ACCOUNT_TYPE_HINT
+                )
+            }
+            value = valid
+        }
+    }
+
+    val isPassportTypeSelected = MediatorLiveData<Boolean>().apply {
+        addSource(passportType) {
+            val valid = passportType.value?.let { it1 ->
+                ValidationUtils.isSpinnerNotEmpty(
+                    it1,
+                    Constants.SPINNER_PASSPORT_TYPE_HINT
                 )
             }
             value = valid

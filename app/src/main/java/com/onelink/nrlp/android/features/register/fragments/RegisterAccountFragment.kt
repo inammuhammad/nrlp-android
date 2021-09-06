@@ -11,10 +11,13 @@ import android.view.inputmethod.EditorInfo
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.SpinnerAdapter
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import com.onelink.nrlp.android.R
 import com.onelink.nrlp.android.core.BaseFragment
 import com.onelink.nrlp.android.core.Status
+import com.onelink.nrlp.android.data.local.UserData
 import com.onelink.nrlp.android.databinding.FragmentRegisterAccountBinding
 import com.onelink.nrlp.android.features.redeem.view.RedeemSuccessActivity
 import com.onelink.nrlp.android.features.register.models.RegisterFlowDataModel
@@ -46,6 +49,7 @@ class RegisterAccountFragment :
     private var countryCodeLength: Int? = 10
     private var sharedViewModel: SharedViewModel? = null
     private var listenerInitialized: Boolean = false
+    private var listenerInitializedPT: Boolean = false
 
     override fun onInject() {
         AndroidSupportInjection.inject(this)
@@ -66,6 +70,7 @@ class RegisterAccountFragment :
             sharedViewModel = ViewModelProvider(it).get(SharedViewModel::class.java)
 
         }
+
         binding.spinnerSelectAccountType.adapter = context?.let {
             ArrayAdapter(
                 it,
@@ -94,6 +99,35 @@ class RegisterAccountFragment :
                     } else {
                         listenerInitialized = true
                         binding.spinnerSelectAccountType.setSelection(-1)
+                    }
+                }
+            }
+
+        binding.spinnerSelectPassportType.adapter = context?.let {
+            ArrayAdapter(
+                it,
+                R.layout.custom_spinner_item,
+                resources.getStringArray(R.array.passportTypes)
+            )
+        } as SpinnerAdapter
+        binding.spinnerSelectPassportType.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    // on nothing selected
+                }
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    if (listenerInitializedPT) {
+                        viewModel.passportType.postValue(resources.getStringArray(R.array.passportTypes)[position])
+                        binding.passportNoLL.visibility = View.VISIBLE
+                    } else {
+                        listenerInitializedPT = true
+                        binding.spinnerSelectPassportType.setSelection(-1)
                     }
                 }
             }
@@ -176,18 +210,42 @@ class RegisterAccountFragment :
             } else false
         }
 
-        viewModel.countryNotEmpty.observe(this, {
+        viewModel.countryNotEmpty.observe(this, Observer {
             binding.etPhoneNumber.isClickable = it
         })
 
-        viewModel.accountType.observe(this, {
+        viewModel.accountType.observe(this, Observer {
             if (it != Constants.SPINNER_ACCOUNT_TYPE_HINT) {
                 binding.tvAccountType.text = it
                 binding.tvAccountType.colorToText(R.color.pure_black)
             }
+
+            if(viewModel.accountType.value.toString() == resources.getString(R.string.beneficiary)){
+                binding.residentIdLL.visibility = View.GONE
+                binding.passportTypeLL.visibility = View.GONE
+                binding.passportNoLL.visibility = View.GONE
+
+                binding.btnNext.visibility = View.GONE
+                binding.btnNext1.visibility = View.VISIBLE
+            }
+            else{
+                binding.residentIdLL.visibility = View.VISIBLE
+                binding.passportTypeLL.visibility = View.VISIBLE
+                binding.passportNoLL.visibility = View.VISIBLE
+
+                binding.btnNext.visibility = View.VISIBLE
+                binding.btnNext1.visibility = View.GONE
+            }
         })
 
-        viewModel.isCnicValidationPassed.observe(this, { validationsPassed ->
+        viewModel.passportType.observe(this, Observer {
+            if (it != Constants.SPINNER_PASSPORT_TYPE_HINT) {
+                binding.tvPassportType.text = it
+                binding.tvPassportType.colorToText(R.color.pure_black)
+            }
+        })
+
+        viewModel.isCnicValidationPassed.observe(this, Observer { validationsPassed ->
             run {
                 if (!validationsPassed)
                     binding.tilCnicNicop.error = getString(R.string.error_cnic)
@@ -198,7 +256,7 @@ class RegisterAccountFragment :
             }
         })
 
-        viewModel.isPhoneNumberValidationPassed.observe(this, { validationsPassed ->
+        viewModel.isPhoneNumberValidationPassed.observe(this, Observer{ validationsPassed ->
             run {
                 if (!validationsPassed) {
                     binding.imageViewPhoneError.visibility = View.VISIBLE
@@ -213,7 +271,7 @@ class RegisterAccountFragment :
             }
         })
 
-        viewModel.isPasswordValidationPassed.observe(this, { validationsPassed ->
+        viewModel.isPasswordValidationPassed.observe(this, Observer{ validationsPassed ->
             run {
                 if (!validationsPassed) {
                     binding.tilPassword.error =
@@ -227,7 +285,7 @@ class RegisterAccountFragment :
             }
         })
 
-        viewModel.isRePasswordValidationPassed.observe(this, { validationsPassed ->
+        viewModel.isRePasswordValidationPassed.observe(this, Observer{ validationsPassed ->
             run {
                 if (!validationsPassed)
                     binding.tilRePassword.error =
@@ -239,7 +297,7 @@ class RegisterAccountFragment :
             }
         })
 
-        viewModel.isFullNameValidationPassed.observe(this, { validationsPassed ->
+        viewModel.isFullNameValidationPassed.observe(this, Observer{ validationsPassed ->
             run {
                 if (!validationsPassed)
                     binding.tilFullName.error = getString(R.string.error_not_valid_name)
@@ -250,7 +308,7 @@ class RegisterAccountFragment :
             }
         })
 
-        viewModel.isEmailValidationPassed.observe(this, { validationsPassed ->
+        viewModel.isEmailValidationPassed.observe(this, Observer{ validationsPassed ->
             run {
                 if (!validationsPassed)
                     binding.tilEmailAddress.error =
@@ -262,9 +320,8 @@ class RegisterAccountFragment :
             }
         })
 
-        viewModel.observeAuthKey().observe(this, { response ->
+        viewModel.observeAuthKey().observe(this, Observer{ response ->
             when (response.status) {
-
                 Status.SUCCESS -> {
                     oneLinkProgressDialog.hideProgressDialog()
                     response.data?.let {
@@ -288,6 +345,24 @@ class RegisterAccountFragment :
         binding.etFullName.setCapitalizeTextWatcher()
 
         binding.btnNext.setOnClickListener {
+            if (viewModel.validationsPassed(
+                    binding.etCnicNicop.text.toString(),
+                    binding.etFullName.text.toString(),
+                    binding.etPhoneNumber.text.toString(),
+                    countryCodeLength,
+                    binding.etEmailAddress.text.toString(),
+                    binding.etPassword.text.toString(),
+                    binding.etRePassword.text.toString()
+                )
+            ) {
+                viewModel.getAuthKey(
+                    viewModel.getAccountType(resources),
+                    binding.etCnicNicop.text.toString().replace("-", "")
+                )
+            }
+        }
+
+        binding.btnNext1.setOnClickListener {
             if (viewModel.validationsPassed(
                     binding.etCnicNicop.text.toString(),
                     binding.etFullName.text.toString(),
@@ -398,6 +473,10 @@ class RegisterAccountFragment :
             hideKeyboard()
         }
 
+        binding.spinnerPassport.setOnClickListener {
+            binding.spinnerSelectPassportType.performClick()
+        }
+
         binding.spinnerLy.setOnClickListener {
             binding.spinnerSelectAccountType.performClick()
         }
@@ -412,6 +491,10 @@ class RegisterAccountFragment :
                 cnicNicop = binding.etCnicNicop.text.toString().replace("-", ""),
                 phoneNumber = binding.tvCountryCode.text.toString() + binding.etPhoneNumber.text.toString(),
                 email = binding.etEmailAddress.text.toString(),
+                residentId = binding.etResidentId.text.toString(),
+                passportType = viewModel.getPassportType(resources)
+                        .toLowerCase(Locale.getDefault()),
+                passportId = binding.etPassportNo.text.toString(),
                 country = binding.tvCountry.text.toString(),
                 password = binding.etPassword.text.toString(),
                 rePassword = binding.etRePassword.text.toString(),
@@ -436,7 +519,7 @@ class RegisterAccountFragment :
     override fun onSelectCountryListener(countryCodeModel: CountryCodeModel) {
         countryCodeLength = countryCodeModel.length.toInt()
         viewModel.country.value = countryCodeModel.country
-        binding.tvCountry.colorToText(R.color.black)
+       // binding.tvCountry.colorToText(R.color.black)
         binding.tvCountryCode.text = countryCodeModel.code
         binding.etPhoneNumber.isEnabled = true
         binding.tvCountryCode.colorToText(R.color.black)

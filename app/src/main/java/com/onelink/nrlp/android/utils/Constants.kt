@@ -8,8 +8,13 @@ class Constants {
         val BASE_URL = LukaKeRakk.ure38()
         const val BENEFICIARY = "Beneficiary"
         const val REMITTER = "Remitter"
+
+        const val InternationalPassport = "International Passport"
+        const val PakistaniPassport = "Pakistani Passport"
+
         const val INTENT_KEY_ACCOUNT_TYPE = "account_type"
         const val SPINNER_ACCOUNT_TYPE_HINT = "Account Type"
+        const val SPINNER_PASSPORT_TYPE_HINT = "Passport Type"
         const val SOMETHING_WENT_WRONG = "Something unexpected happened. Please try again."
     }
 }
@@ -28,6 +33,7 @@ object IntentConstants {
     const val REDEEM_POINTS = "redeem_points"
     const val LOGIN_CREDENTIALS_PARCELABLE = "login_credentials_parcelable"
     const val IS_FROM_SPLASH = "is_from_splash"
+    const val SELF_AWARD_VERIFY_OTP_Message = "self_award_verify_otp_message"
 }
 
 object LoyaltyCardConstants {

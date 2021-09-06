@@ -5,6 +5,11 @@
         <item>@string/beneficiary</item>
     </string-array>
 
+    <string-array name="passportTypes">
+        <item>@string/international_passport</item>
+        <item>@string/pakistani_passport</item>
+    </string-array>
+
     <string-array name="dummyBene">
         <item>@string/dummy_bene1</item>
         <item>@string/dummy_bene2</item>

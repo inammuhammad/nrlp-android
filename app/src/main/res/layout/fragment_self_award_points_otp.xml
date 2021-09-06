@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.onelink.nrlp.android.features.selfAwardPoints.viewmodel.SelfAwardPointsOTPFragmentViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:clickable="true"
+        android:focusable="true">
+
+        <TextView
+            android:id="@+id/textView10"
+            style="@style/TextViewMediumNoMarginsLite"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginTop="@dimen/unit_32dp"
+            android:layout_marginEnd="@dimen/margin_large"
+            android:text="@string/otp_sent_generic_msg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/unit_56dp"
+            android:layoutDirection="ltr"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView10">
+
+            <com.onelink.nrlp.android.widgets.OneLinkEditText
+                android:id="@+id/etOTP1"
+                style="@style/EditTextOTP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@{viewModel.validEditText1 ? @drawable/otp_enabled_background : @drawable/otp_disabled_background}"
+                android:gravity="center"
+                android:hint="@string/hint_x"
+                android:inputType="number"
+                android:maxLength="1"
+                android:nextFocusDown="@id/etOTP2"
+                android:nextFocusForward="@id/etOTP2"
+                android:text="@={viewModel.etOTP1}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/etOTP2"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.onelink.nrlp.android.widgets.OneLinkEditText
+                android:id="@+id/etOTP2"
+                style="@style/EditTextOTP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@{viewModel.validEditText2 ? @drawable/otp_enabled_background : @drawable/otp_disabled_background}"
+                android:gravity="center"
+                android:hint="@string/hint_x"
+                android:inputType="number"
+                android:maxLength="1"
+                android:nextFocusDown="@id/etOTP3"
+                android:nextFocusForward="@id/etOTP3"
+                android:text="@={viewModel.etOTP2}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/etOTP3"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/etOTP1"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.onelink.nrlp.android.widgets.OneLinkEditText
+                android:id="@+id/etOTP3"
+                style="@style/EditTextOTP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@{viewModel.validEditText3 ? @drawable/otp_enabled_background : @drawable/otp_disabled_background}"
+                android:gravity="center"
+                android:hint="@string/hint_x"
+                android:inputType="number"
+                android:maxLength="1"
+                android:nextFocusDown="@id/etOTP4"
+                android:nextFocusForward="@id/etOTP4"
+                android:text="@={viewModel.etOTP3}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/etOTP4"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/etOTP2"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.onelink.nrlp.android.widgets.OneLinkEditText
+                android:id="@+id/etOTP4"
+                style="@style/EditTextOTP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@{viewModel.validEditText4 ? @drawable/otp_enabled_background : @drawable/otp_disabled_background}"
+                android:gravity="center"
+                android:hint="@string/hint_x"
+                android:imeOptions="actionDone|flagForceAscii"
+                android:inputType="number"
+                android:maxLength="1"
+                android:text="@={viewModel.etOTP4}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/etOTP3"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/unit_24dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+            <TextView
+                style="@style/TextViewMediumNoMarginsLite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/hp_simplified_rg"
+                android:text="@string/otp_code_expire_msg" />
+
+            <TextView
+                android:id="@+id/textViewTimer"
+                style="@style/TextViewMediumNoMarginsLite"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/margin_medium"
+                android:enabled="true"
+                android:text="@string/otp_timer_place_holder"
+                android:textColor="@color/yellow"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/unit_24dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout"
+            app:layout_constraintTop_toBottomOf="@+id/layoutTimer">
+
+            <TextView
+                style="@style/TextViewMediumNoMarginsLite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/hp_simplified_rg"
+                android:text="@string/otp_not_received" />
+
+            <TextView
+                android:id="@+id/textViewResendOTP"
+                style="@style/TextViewMediumNoMarginsLite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/unit_4dp"
+                android:enabled="false"
+                android:fontFamily="@font/hp_simplified_rg"
+                android:text="@string/resend_otp"
+                android:textColor="@drawable/otp_text_view_selector"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tvSentNewOtpMsg"
+            style="@style/TextViewMediumWithGreenBG"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_extra_large"
+            android:text="@string/sent_new_otp_msg"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+            tools:visibility="visible" />
+
+        <Button
+            android:id="@+id/btnNext"
+            style="@style/ButtonTheme"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:enabled="@{viewModel.validEditText1 &amp;&amp; viewModel.validEditText2 &amp;&amp; viewModel.validEditText3 &amp;&amp; viewModel.validEditText4}"
+            android:text="@string/next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

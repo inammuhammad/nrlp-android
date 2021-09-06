@@ -24,6 +24,9 @@ import com.onelink.nrlp.android.features.profile.models.UpdateProfileRequestMode
 import com.onelink.nrlp.android.features.redeem.model.*
 import com.onelink.nrlp.android.features.register.models.*
 import com.onelink.nrlp.android.features.select.country.model.CountryCodeResponseModel
+import com.onelink.nrlp.android.features.selfAwardPoints.model.SelfAwardPointsOTPRequestModel
+import com.onelink.nrlp.android.features.selfAwardPoints.model.SelfAwardPointsRequest
+import com.onelink.nrlp.android.features.selfAwardPoints.model.SelfAwardPointsResponseModel
 import com.onelink.nrlp.android.features.splash.model.AuthResponseModel
 import com.onelink.nrlp.android.features.uuid.model.UniqueIdentifierResendOTPRequest
 import com.onelink.nrlp.android.features.uuid.model.UniqueIdentifierUpdateRequest
@@ -69,6 +72,9 @@ interface ServiceGateway {
     @POST("verify-reference-no/")
     fun verifyReferenceNumber(@Body body: VerifyReferenceNumberRequest): Single<Response<GeneralMessageResponseModel>>
 
+    @POST("self-award-validate-transaction/")
+    fun verifySelfAwardPoints(@Body body: SelfAwardPointsRequest): Single<Response<SelfAwardPointsResponseModel>>
+
     @POST("verify-registration-code/")
     fun verifyRegistrationCode(@Body body: VerifyRegistrationCodeRequest): Single<Response<GeneralMessageResponseModel>>
 
@@ -107,6 +113,9 @@ interface ServiceGateway {
 
     @POST("verify-forgot-password-otp")
     fun forgotPasswordOTP(@Body body: ForgotPasswordOTPRequestModel): Single<Response<GeneralMessageResponseModel>>
+
+    @POST("self-award-verfiy-otp")
+    fun selfAwardPointsOTP(@Body body: SelfAwardPointsOTPRequestModel): Single<Response<GeneralMessageResponseModel>>
 
     @POST("resend-forget-password-otp")
     fun forgotPasswordResendOTP(@Body body: ForgotPasswordRequestModel): Single<Response<GeneralMessageResponseModel>>

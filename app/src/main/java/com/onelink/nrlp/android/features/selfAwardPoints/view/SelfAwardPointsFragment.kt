@@ -1,0 +1,144 @@
+package com.onelink.nrlp.android.features.selfAwardPoints.view
+
+import android.app.DatePickerDialog
+import android.os.Bundle
+import android.view.View
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.onelink.nrlp.android.R
+import com.onelink.nrlp.android.core.BaseFragment
+import com.onelink.nrlp.android.core.Status
+import com.onelink.nrlp.android.databinding.SelfAwardPointsFragmentBinding
+import com.onelink.nrlp.android.features.selfAwardPoints.model.SelfAwardPointsRequest
+import com.onelink.nrlp.android.features.selfAwardPoints.viewmodel.SelfAwardPointsFragmentViewModel
+import com.onelink.nrlp.android.features.selfAwardPoints.viewmodel.SelfAwardPointsSharedViewModel
+import com.onelink.nrlp.android.features.viewStatement.fragments.AdvancedLoyaltyStatementFragment
+import com.onelink.nrlp.android.utils.dialogs.OneLinkAlertDialogsFragment
+import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
+import com.onelink.nrlp.android.utils.setOnSingleClickListener
+import dagger.android.support.AndroidSupportInjection
+import java.util.*
+import javax.inject.Inject
+
+
+class SelfAwardPointsFragment :
+    BaseFragment<SelfAwardPointsFragmentViewModel, SelfAwardPointsFragmentBinding>(
+        SelfAwardPointsFragmentViewModel::class.java
+    ), OneLinkAlertDialogsFragment.OneLinkAlertDialogListeners {
+
+    @Inject
+    lateinit var oneLinkProgressDialog: OneLinkProgressDialog
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+//    private var listenerInitialized: Boolean = false
+//
+//    private var selectedBeneficiary = BeneficiaryDetailsModel(-1, BigInteger.ONE, "12312", 0, "")
+
+    private var selfAwardPointSharedViewModel: SelfAwardPointsSharedViewModel? = null
+
+
+    override fun getLayoutRes() = R.layout.self_award_points_fragment
+
+    override fun onInject() {
+        AndroidSupportInjection.inject(this)
+    }
+
+    override fun getTitle(): String {
+        return resources.getString(R.string.self_award_points)
+    }
+
+    override fun getViewM(): SelfAwardPointsFragmentViewModel =
+        ViewModelProvider(this, viewModelFactory).get(SelfAwardPointsFragmentViewModel::class.java)
+
+
+    override fun init(savedInstanceState: Bundle?) {
+        super.init(savedInstanceState)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+
+        activity?.let {
+            selfAwardPointSharedViewModel =
+                ViewModelProvider(it).get(SelfAwardPointsSharedViewModel::class.java)
+        }
+
+        initListeners()
+        initObservers()
+    }
+
+    private fun initListeners() {
+        binding.lyRemittanceDate.setOnClickListener {
+            hideKeyboard()
+            openDatePickerDialog()
+        }
+
+        binding.btnNext.setOnSingleClickListener {
+            val selfAwardPointsRequest = SelfAwardPointsRequest(
+                amount = binding.etRemittanceAmount.text.toString(),
+                reference_no = binding.etRefNo.text.toString(),
+                transaction_date = viewModel.getDateInApiFormat(viewModel.rawRemittanceDate.value.toString())
+            )
+
+            selfAwardPointSharedViewModel?.setSelfAwardPointsFlowDataModel(selfAwardPointsRequest)
+
+            viewModel.verifySafeAwardValidTransaction(selfAwardPointsRequest)
+        }
+    }
+    private fun initObservers() {
+        viewModel.observeSafeAwardValidTransaction().observe(this, Observer { response ->
+            when (response.status) {
+                Status.SUCCESS -> {
+                    oneLinkProgressDialog.hideProgressDialog()
+                    response.data?.let {
+                        fragmentHelper.addFragment(
+                                SelfAwardPointsOTPFragment.newInstance(),
+                                clearBackStack = false,
+                                addToBackStack = true
+                        )
+                    }
+                }
+                Status.ERROR -> {
+                    oneLinkProgressDialog.hideProgressDialog()
+                    response.error?.let {
+                        showGeneralErrorDialog(this, it)
+                    }
+                }
+                Status.LOADING -> {
+                    oneLinkProgressDialog.showProgressDialog(activity)
+                }
+            }
+        })
+
+    }
+    private fun openDatePickerDialog() {
+        val c = Calendar.getInstance()
+        val year = c.get(Calendar.YEAR)
+        val month = c.get(Calendar.MONTH)
+        val day = c.get(Calendar.DAY_OF_MONTH)
+        val datePickerDialog = activity?.let {
+            DatePickerDialog(
+                    it,
+                    { _, year, monthOfYear, dayOfMonth ->
+                        c.set(year, monthOfYear, dayOfMonth)
+                        viewModel.rawDate =
+                                dayOfMonth.toString() + "/" + (monthOfYear + 1) + "/" + year.toString()
+
+                        viewModel.rawRemittanceDate.value = viewModel.rawDate
+                        viewModel.remittanceDate.value = viewModel.getDateInStringFormat(c)
+
+
+                    }, year, month, day
+            )
+        }
+        datePickerDialog?.datePicker?.minDate = AdvancedLoyaltyStatementFragment.MILLIS_MINIMUM_DATE
+        datePickerDialog?.datePicker?.maxDate = System.currentTimeMillis()
+        datePickerDialog?.datePicker?.layoutDirection = View.LAYOUT_DIRECTION_LTR
+        datePickerDialog?.show()
+    }
+
+    companion object {
+        @JvmStatic
+        fun newInstance() = SelfAwardPointsFragment()
+    }
+}

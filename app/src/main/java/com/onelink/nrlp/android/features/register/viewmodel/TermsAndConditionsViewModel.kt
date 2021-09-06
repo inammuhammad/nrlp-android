@@ -27,7 +27,10 @@ class TermsAndConditionsViewModel @Inject constructor(private val registerRepo: 
                     userType = registerFlowDataModel.accountType,
                     referenceNo = registerFlowDataModel.referenceNumber,
                     amount = registerFlowDataModel.transactionAmount,
-                    email = registerFlowDataModel.email
+                    email = registerFlowDataModel.email,
+                    residentId = registerFlowDataModel.residentId,
+                    passportType = registerFlowDataModel.passportType,
+                    passportId = registerFlowDataModel.passportId
                 )
             )
         } else if (accountType == Constants.BENEFICIARY.toLowerCase(Locale.getDefault())) {
@@ -39,7 +42,10 @@ class TermsAndConditionsViewModel @Inject constructor(private val registerRepo: 
                     fullName = registerFlowDataModel.fullName,
                     userType = registerFlowDataModel.accountType,
                     email = registerFlowDataModel.email,
-                    registrationCode = registerFlowDataModel.registrationCode
+                    registrationCode = registerFlowDataModel.registrationCode,
+                    residentId = registerFlowDataModel.residentId,
+                    passportType = registerFlowDataModel.passportType,
+                    passportId = registerFlowDataModel.passportId
                 )
             )
         }

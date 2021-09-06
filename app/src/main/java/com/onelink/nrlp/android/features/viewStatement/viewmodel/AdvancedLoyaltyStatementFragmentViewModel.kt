@@ -20,6 +20,8 @@ class AdvancedLoyaltyStatementFragmentViewModel @Inject constructor(private val 
     val emailAddress = MutableLiveData<String>("")
     val validationEmailPassed = MutableLiveData(true)
 
+
+
     fun getDetailedStatements(detailedStatementRequestModel: DetailedStatementRequestModel) =
         viewStatementRepo.getDetailedStatements(detailedStatementRequestModel)
 

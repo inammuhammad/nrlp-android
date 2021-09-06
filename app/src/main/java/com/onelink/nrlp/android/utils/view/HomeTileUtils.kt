@@ -9,8 +9,9 @@ class HomeTileUtils {
         const val MANAGE_POINTS = 2
         const val VIEW_STATEMENT_REMITTER = 3
         const val VIEW_NRLP_BENEFITS_REMITTER = 4
-        const val VIEW_STATEMENT_BENEFICIARY = 5
-        const val VIEW_NRLP_BENEFITS_BENEFICIARY = 6
+        const val SELF_AWARD_POINTS = 5
+        const val VIEW_STATEMENT_BENEFICIARY = 6
+        const val VIEW_NRLP_BENEFITS_BENEFICIARY = 7
 
         fun getRemitterHomeTilesList() : MutableList<HomeTileModel> {
             val homeTilesList = mutableListOf<HomeTileModel>()
@@ -18,6 +19,7 @@ class HomeTileUtils {
             homeTilesList.add(HomeTileModel(MANAGE_POINTS, R.string.transfer_points, R.drawable.ic_loyalty_points_tile))
             homeTilesList.add(HomeTileModel(VIEW_STATEMENT_REMITTER, R.string.view_stmnt, R.drawable.ic_loyalty_statement_tile))
             homeTilesList.add(HomeTileModel(VIEW_NRLP_BENEFITS_REMITTER, R.string.view_nrlp_benefits, R.drawable.ic_nrlp_benefits_tile))
+            homeTilesList.add(HomeTileModel(SELF_AWARD_POINTS, R.string.self_award_points, R.drawable.ic_self_award_points_tile))
             return homeTilesList
         }
 

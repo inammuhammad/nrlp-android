@@ -1,6 +1,7 @@
 package com.onelink.nrlp.android.features.profile
 
 import android.content.Context
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.onelink.nrlp.android.R
@@ -19,3 +20,10 @@ fun TextView.enabled(context: Context) {
     this.setTextColor(ContextCompat.getColor(context, R.color.black))
 }
 
+fun LinearLayout.enabled() {
+    this.isEnabled = true
+}
+
+fun LinearLayout.disabled() {
+    this.isEnabled = false
+}

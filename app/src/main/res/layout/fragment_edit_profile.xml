@@ -244,8 +244,152 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/lyPhoneNumber" />
 
+                <LinearLayout
+                    android:id="@+id/remitterItemContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/lyPhoneNumber">
+
+                    <TextView
+                        android:id="@+id/textViewResidentId"
+                        style="@style/TextViewSubHeading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/resident_id"
+                        android:layout_marginTop="@dimen/unit_32dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/lyPhoneNumber"  />
+
+                    <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
+                        android:id="@+id/tilResidentId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/unit_8dp"
+                        app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textViewResidentId">
+
+                        <com.onelink.nrlp.android.widgets.OneLinkEditText
+                            android:id="@+id/etResidentId"
+                            style="@style/EditTextFixedDigits"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:enabled="false"
+                            android:hint="@string/resident_id"
+                            android:inputType="number"
+                            android:maxLength="50"
+                            android:text="@={viewModel.residentId}" />
+                    </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
+
+                    <LinearLayout
+                        android:id="@+id/spinnerPassportll"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintTop_toBottomOf="@+id/tilResidentId">
+
+                        <TextView
+                            android:id="@+id/textViewPassportHeading"
+                            style="@style/TextViewSubHeading"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/passport_type"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tilResidentId"/>
+                        <LinearLayout
+                            android:id="@+id/spinnerPassport"
+                            style="@style/spinnerTheme"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:gravity="center_vertical"
+                            android:layoutDirection="ltr"
+                            android:orientation="horizontal"
+                            android:textDirection="ltr"
+                            android:weightSum="10"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textViewPassportHeading">
+
+                            <TextView
+                                android:id="@+id/tvPassportType"
+                                style="@style/TextViewMediumNoMargins"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="8.5"
+                                android:text="@string/select_passport_type"
+                                android:textColor="@color/grey" />
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.5"
+                                android:contentDescription="@null"
+                                android:src="@drawable/ic_spinner_dropdown" />
+                        </LinearLayout>
+                        <com.onelink.nrlp.android.utils.OneLinkSpinner
+                            android:id="@+id/spinner_select_passport_type"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="@dimen/margin_large"
+                            android:layout_marginEnd="@dimen/margin_large"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:focusable="false"
+                            android:gravity="start"
+                            android:hint="@string/passport_type"
+                            android:spinnerMode="dropdown"
+                            android:visibility="invisible"
+                            app:layout_constraintTop_toBottomOf="@id/spinnerPassport"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/passportNoLL"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="@dimen/_40sdp"
+                        app:layout_constraintTop_toBottomOf="@id/spinnerPassportll"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:visibility="visible">
+
+                        <TextView
+                            style="@style/TextViewSubHeading"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/passport_no" />
+
+                        <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
+                            android:id="@+id/tilPassportNo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/unit_8dp"
+                            app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance">
+
+                            <com.onelink.nrlp.android.widgets.OneLinkEditText
+                                android:id="@+id/etPassportNo"
+                                style="@style/EditTextFixedDigits"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/select_passport_no"
+                                android:enabled="false"
+                                android:inputType="text"
+                                android:text="@={viewModel.passportId}" />
+                        </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
+
 
         <Button
             android:id="@+id/btnCancel"
@@ -256,7 +400,7 @@
             android:background="@drawable/rounded_corners_green"
             android:text="@string/cancel"
             android:textColor="@color/green"
-            android:visibility="gone"
+            android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@+id/btnSave"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -266,8 +410,19 @@
             style="@style/ButtonTheme"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:enabled="@{viewModel.countryNotEmpty &amp;&amp; viewModel.mobileNumberNotEmpty &amp;&amp; viewModel.residentIdNotEmpty &amp;&amp; viewModel.passportIdNotEmpty &amp;&amp; viewModel.isPassportTypeSelected()}"
+            android:text="@string/edit"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+        <Button
+            android:id="@+id/btnNext1"
+            style="@style/ButtonTheme"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:enabled="@{viewModel.countryNotEmpty &amp;&amp; viewModel.mobileNumberNotEmpty}"
             android:text="@string/edit"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -277,7 +432,7 @@
             style="@style/ButtonTheme"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:enabled="@{viewModel.isDifferentMobileNumber() || viewModel.isDifferentEmailAddress()}"
+            android:enabled="@{viewModel.isDifferentMobileNumber() || viewModel.isDifferentEmailAddress() || viewModel.isDifferentResidentId() || viewModel.isDifferentPassportType() || viewModel.isDifferentPassportId()}"
             android:text="@string/save"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
