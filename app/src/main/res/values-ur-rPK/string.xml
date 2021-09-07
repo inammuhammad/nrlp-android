@@ -2,36 +2,37 @@
 <resources>
     <string name="app_name">این آر ایل پی</string>
     <string name="register_an_account">رجسٹر کریں</string>
-    <string name="full_name">پورا نام</string>
-    <string name="cnic_nicop_number">شناختی کارڈ/ نیشنل آئیڈنٹٹی کارڈ فور اوورسیز پاکستانی</string>
-    <string name="country">قیام کا ملک</string>
-    <string name="passport_no">Passport No.</string>
+    <string name="full_name">پورا نام *</string>
+    <string name="cnic_nicop_number">شناختی کارڈ/ نیشنل آئیڈنٹٹی کارڈ فور اوورسیز پاکستانی *</string>
+    <string name="country">قیام کا ملک *</string>
+    <string name="passport_no">Passport No. *</string>
     <string name="select_passport_no">Enter Passport No.</string>
-    <string name="passport_type">Passport Type</string>
+    <string name="passport_type">Passport Type *</string>
     <string name="select_passport_type">Select Passport Type</string>
 
-    <string name="resident_id">Resident ID</string>
-    <string name="mobile_number">موبائل نمبر</string>
+    <string name="resident_id">Resident ID *</string>
+    <string name="mobile_number">موبائل نمبر *</string>
     <string name="email_address">ای میل ایڈریس</string>
     <string name="email_address_optional">ای میل ایڈریس (اختیاری)</string>
-    <string name="password">پاس ورڈ</string>
+    <string name="password">پاس ورڈ *</string>
     <string name="new_password">نیا پاس ورڈ</string>
     <string name="select_bene">وصول کنندہ منتخب کریں</string>
     <string name="remitter_trans_ref_no">Remitter Transaction Refrerence No</string>
     <string name="remittance_amount">Remittance Amount (In PKR)</string>
+    <string name="remittance_amount_help">Enter exact amount as per your transaction receipt</string>
     <string name="remittance_date">Date of Remittance</string>
 
     <string name="enter_points">پوائنٹس درج کریں</string>
-    <string name="re_enter_password"> دوبارہ پاس ورڈ درج کریں</string>
+    <string name="re_enter_password"> دوبارہ پاس ورڈ درج کریں *</string>
     <string name="re_enter_new_password">نیا پاس ورڈ درج کریں </string>
-    <string name="account_type">یوزر کی اقسام</string>
+    <string name="account_type">یوزر کی اقسام *</string>
     <string name="select_account">یوزر منتخب کریں</string>
     <string name="nlrp_title">نیشنل ریمی ٹینس\nلوائلٹی پروگرام</string>
     <string name="select_account_type">یوزر کی قسم منتخب کریں</string>
     <string name="login">لاگ ان کریں</string>
     <string name="remitter">بھیجنے والا</string>
-    <string name="international_passport">international passport</string>
-    <string name="pakistani_passport">pakistani passport</string>
+    <string name="international_passport">International Passport</string>
+    <string name="pakistani_passport">Pakistani Passport</string>
     <string name="next">اگلے</string>
     <string name="transfer">منتقلی</string>
     <string name="loyalty_points">لوائلٹی پوائنٹس</string>
@@ -68,6 +69,7 @@
     <string name="newPassword">نیا پاس ورڈ درج کریں</string>
     <string name="confirmPassword">نیا پاس ورڈ دوبارہ درج کریں</string>
     <string name="enter_remittance_transaction_num_msg">اپنا حالیہ ترسیلات زر کا حوالہ نمبر درج کریں (پچھلے 03 مہینوں میں)</string>
+    <string name="transaction_eligibity_for_self_award">Transaction eligibility for Self Award shoud be mentioned (1Year)</string>
     <string name="sent_otp_code_msg"> کوڈ اپ کے  موبائل نمبر پربھیجا گیا ہے</string>
     <string name="accept">قبول کریں</string>
     <string name="reject">مسترد کریں</string>

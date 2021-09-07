@@ -11,6 +11,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.SpinnerAdapter
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
@@ -519,7 +520,7 @@ class RegisterAccountFragment :
     override fun onSelectCountryListener(countryCodeModel: CountryCodeModel) {
         countryCodeLength = countryCodeModel.length.toInt()
         viewModel.country.value = countryCodeModel.country
-       // binding.tvCountry.colorToText(R.color.black)
+        binding.tvCountry.colorToText(R.color.black)
         binding.tvCountryCode.text = countryCodeModel.code
         binding.etPhoneNumber.isEnabled = true
         binding.tvCountryCode.colorToText(R.color.black)

@@ -75,7 +75,7 @@ class SelfAwardPointsFragment :
 
         binding.btnNext.setOnSingleClickListener {
             val selfAwardPointsRequest = SelfAwardPointsRequest(
-                amount = binding.etRemittanceAmount.text.toString(),
+                amount = binding.etRemittanceAmount.text.toString().replace(",", ""),
                 reference_no = binding.etRefNo.text.toString(),
                 transaction_date = viewModel.getDateInApiFormat(viewModel.rawRemittanceDate.value.toString())
             )

@@ -61,7 +61,6 @@
 
             <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
                 android:id="@+id/til_cnic"
-                app:passwordToggleEnabled="true"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/unit_8dp"

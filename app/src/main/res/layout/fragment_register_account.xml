@@ -440,6 +440,7 @@
 
                     <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
                         android:id="@+id/tilPassword"
+                        app:passwordToggleEnabled="true"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/unit_8dp"
@@ -487,6 +488,7 @@
 
                     <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
                         android:id="@+id/tilRePassword"
+                        app:passwordToggleEnabled="true"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/unit_8dp"

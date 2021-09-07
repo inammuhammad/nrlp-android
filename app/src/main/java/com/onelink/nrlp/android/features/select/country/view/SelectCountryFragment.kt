@@ -2,6 +2,7 @@ package com.onelink.nrlp.android.features.select.country.view
 
 import android.content.Context
 import android.os.Bundle
+import android.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.onelink.nrlp.android.R
@@ -26,6 +27,8 @@ class SelectCountryFragment :
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var listener: OnSelectCountryListener
+
+    lateinit var countryAdapter: CountryAdapter
 
     fun setOnClickListener(listener: OnSelectCountryListener) {
         this.listener = listener
@@ -57,6 +60,19 @@ class SelectCountryFragment :
         super.init(savedInstanceState)
 
         viewModel.getCountryCodes()
+        binding.countrySearch.setOnQueryTextListener(object: SearchView.OnQueryTextListener,
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                countryAdapter.filter.filter(query)
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                countryAdapter.filter.filter(newText)
+                return false
+            }
+
+        })
 
         viewModel.observerCountryCodes().observe(this, Observer { response ->
             when (response.status) {
@@ -67,6 +83,10 @@ class SelectCountryFragment :
                             it.countryCodesList.sortedWith(compareBy { listItem -> listItem.country })
                         binding.rvCountries.setHasFixedSize(true)
                         binding.rvCountries.adapter = CountryAdapter(
+                            countriesList,
+                            listener::onSelectCountryListener
+                        )
+                        countryAdapter = CountryAdapter(
                             countriesList,
                             listener::onSelectCountryListener
                         )

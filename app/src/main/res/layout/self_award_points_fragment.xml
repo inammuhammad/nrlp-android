@@ -23,6 +23,19 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
+                android:id="@+id/textViewTransactionEligibity"
+                style="@style/TextViewMediumNoMarginsLite"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:text="@string/transaction_eligibity_for_self_award"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
                 android:id="@+id/tvRemitterRefNo"
                 style="@style/TextViewSubHeading"
                 android:layout_width="wrap_content"
@@ -30,7 +43,7 @@
                 android:layout_marginTop="@dimen/unit_32dp"
                 android:text="@string/remitter_trans_ref_no"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewTransactionEligibity" />
 
             <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
                 android:id="@+id/til_ref_no"
@@ -46,10 +59,9 @@
                     style="@style/EditTextFixedDigits"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:digits="0123456789"
+                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
                     android:hint="@string/reference_num_hint"
                     android:imeOptions="actionDone|flagForceAscii"
-                    android:inputType="number"
                     android:maxLength="25"
                     android:maxLines="1"
                     android:text="@={viewModel.referenceNumber}" />
@@ -61,22 +73,33 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/remittance_amount"
-                app:layout_constraintBottom_toTopOf="@id/til_remittance_amount"
+                app:layout_constraintBottom_toTopOf="@id/tvRemittanceAmountHelp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/til_ref_no" />
+            <TextView
+                android:layout_width="wrap_content"
+                style="@style/TextViewSubHeading"
+                android:layout_marginTop="@dimen/unit_4dp"
+                android:id="@+id/tvRemittanceAmountHelp"
+                android:text="@string/remittance_amount_help"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintTop_toBottomOf="@+id/tvRemittanceAmount"
+                android:layout_height="wrap_content"/>
 
-            <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
+             <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
                 android:id="@+id/til_remittance_amount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/unit_8dp"
                 app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvRemittanceAmount">
+                app:layout_constraintTop_toBottomOf="@id/tvRemittanceAmountHelp">
 
-                <com.onelink.nrlp.android.widgets.OneLinkEditText
+                <com.onelink.nrlp.android.widgets.OneLinkAmountEditText
                     android:id="@+id/etRemittanceAmount"
                     style="@style/EditTextFixedDigits"
                     android:layout_width="match_parent"

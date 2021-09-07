@@ -2,19 +2,25 @@ package com.onelink.nrlp.android.features.select.country.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.onelink.nrlp.android.R
 import com.onelink.nrlp.android.databinding.CountryItemBinding
 import com.onelink.nrlp.android.features.select.country.model.CountryCodeModel
 import kotlinx.android.synthetic.main.country_item.view.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 class CountryAdapter(
     private val countries: List<CountryCodeModel>,
     private val listener: (CountryCodeModel) -> Unit
-) : RecyclerView.Adapter<CountryAdapter.CountryViewHolder>() {
+) : RecyclerView.Adapter<CountryAdapter.CountryViewHolder>() , Filterable {
 
     override fun getItemCount() = countries.size
+    private val mainList = ArrayList<CountryCodeModel>()
+    private val searchList = ArrayList<CountryCodeModel>(countries)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = CountryViewHolder(
         DataBindingUtil.inflate(
@@ -34,6 +40,36 @@ class CountryAdapter(
         }
         holder.countryItemBinding.root.textViewCountry.setOnClickListener {
             listener(countries[position])
+        }
+    }
+
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                val filteredList = ArrayList<CountryCodeModel>()
+                if(constraint != null) {
+                    if(constraint.isNotBlank() or constraint.isEmpty()) {
+                        filteredList.addAll(searchList)
+                    } else {
+                        val filterPattern = constraint.toString()
+                        searchList.forEach {
+                            if(it.country.contains(filterPattern)) {
+                                filteredList.add(it)
+                            }
+                        }
+                    }
+
+                }
+                val result = FilterResults()
+                result.values = filteredList
+                return result
+            }
+
+            override fun publishResults(p0: CharSequence?, results: FilterResults?) {
+                mainList.clear()
+                mainList.addAll(results!!.values as List<CountryCodeModel>)
+                notifyDataSetChanged()
+            }
         }
     }
 
