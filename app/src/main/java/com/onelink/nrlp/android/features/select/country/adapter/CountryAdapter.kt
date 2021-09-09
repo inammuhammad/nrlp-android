@@ -18,9 +18,8 @@ class CountryAdapter(
     private val listener: (CountryCodeModel) -> Unit
 ) : RecyclerView.Adapter<CountryAdapter.CountryViewHolder>() , Filterable {
 
-    override fun getItemCount() = countries.size
-    private val mainList = ArrayList<CountryCodeModel>()
-    private val searchList = ArrayList<CountryCodeModel>(countries)
+    private var searchCountires = ArrayList<CountryCodeModel>(countries)
+    override fun getItemCount(): Int = searchCountires.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = CountryViewHolder(
         DataBindingUtil.inflate(
@@ -34,31 +33,28 @@ class CountryAdapter(
         RecyclerView.ViewHolder(countryItemBinding.root)
 
     override fun onBindViewHolder(holder: CountryViewHolder, position: Int) {
-        holder.countryItemBinding.country = countries[position]
+        holder.countryItemBinding.country = searchCountires[position]
         holder.itemView.setOnClickListener {
-            listener(countries[position])
+            listener(searchCountires[position])
         }
         holder.countryItemBinding.root.textViewCountry.setOnClickListener {
-            listener(countries[position])
+            listener(searchCountires[position])
         }
     }
 
     override fun getFilter(): Filter {
         return object : Filter() {
-            override fun performFiltering(constraint: CharSequence?): FilterResults {
+            override fun performFiltering(constraint: CharSequence): FilterResults {
                 val filteredList = ArrayList<CountryCodeModel>()
-                if(constraint != null) {
-                    if(constraint.isNotBlank() or constraint.isEmpty()) {
-                        filteredList.addAll(searchList)
+                    if(constraint.isBlank() or constraint.isEmpty()) {
+                        filteredList.addAll(countries)
                     } else {
-                        val filterPattern = constraint.toString()
-                        searchList.forEach {
-                            if(it.country.contains(filterPattern)) {
+                        val filterPattern = constraint.toString().toLowerCase(Locale.ROOT).trim()
+                        countries.forEach {
+                            if(it.country.toLowerCase(Locale.ROOT).contains(filterPattern)) {
                                 filteredList.add(it)
                             }
                         }
-                    }
-
                 }
                 val result = FilterResults()
                 result.values = filteredList
@@ -66,8 +62,8 @@ class CountryAdapter(
             }
 
             override fun publishResults(p0: CharSequence?, results: FilterResults?) {
-                mainList.clear()
-                mainList.addAll(results!!.values as List<CountryCodeModel>)
+                searchCountires.clear()
+                searchCountires.addAll(results?.values as ArrayList<CountryCodeModel>)
                 notifyDataSetChanged()
             }
         }

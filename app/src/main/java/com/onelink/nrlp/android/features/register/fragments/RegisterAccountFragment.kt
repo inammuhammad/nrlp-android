@@ -520,7 +520,7 @@ class RegisterAccountFragment :
     override fun onSelectCountryListener(countryCodeModel: CountryCodeModel) {
         countryCodeLength = countryCodeModel.length.toInt()
         viewModel.country.value = countryCodeModel.country
-        binding.tvCountry.colorToText(R.color.black)
+      //  binding.tvCountry.colorToText(R.color.black)
         binding.tvCountryCode.text = countryCodeModel.code
         binding.etPhoneNumber.isEnabled = true
         binding.tvCountryCode.colorToText(R.color.black)
@@ -528,8 +528,8 @@ class RegisterAccountFragment :
         binding.etPhoneNumber.filters =
             arrayOf(InputFilter.LengthFilter(countryCodeModel.length.toInt()))
         fragmentHelper.onBack()
-        binding.etPhoneNumber.setText("")
-        binding.etPhoneNumber.requestFocus()
-        showKeyboard()
+       // binding.etPhoneNumber.setText("")
+        //binding.etPhoneNumber.requestFocus()
+        //showKeyboard()
     }
 }

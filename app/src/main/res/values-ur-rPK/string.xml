@@ -69,7 +69,7 @@
     <string name="newPassword">نیا پاس ورڈ درج کریں</string>
     <string name="confirmPassword">نیا پاس ورڈ دوبارہ درج کریں</string>
     <string name="enter_remittance_transaction_num_msg">اپنا حالیہ ترسیلات زر کا حوالہ نمبر درج کریں (پچھلے 03 مہینوں میں)</string>
-    <string name="transaction_eligibity_for_self_award">Transaction eligibility for Self Award shoud be mentioned (1Year)</string>
+    <string name="transaction_eligibity_for_self_award">Transaction within 1 year is eligible for self awarding</string>
     <string name="sent_otp_code_msg"> کوڈ اپ کے  موبائل نمبر پربھیجا گیا ہے</string>
     <string name="accept">قبول کریں</string>
     <string name="reject">مسترد کریں</string>

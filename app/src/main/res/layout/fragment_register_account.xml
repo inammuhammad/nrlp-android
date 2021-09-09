@@ -91,7 +91,30 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_large"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TextViewSubHeading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/country" />
+
+                    <TextView
+                        android:id="@+id/tvCountry"
+                        style="@style/EditTextTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/unit_8dp"
+                        android:focusable="false"
+                        android:hint="@string/select_country"
+                        android:text="@={viewModel.country}"
+                        android:textColor="@color/grey"
+                        android:textDirection="ltr" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                     <TextView
@@ -152,30 +175,6 @@
                             android:nextFocusForward="@id/tvCountry"
                             android:text="@={viewModel.cnicNicopNumber}" />
                     </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/TextViewSubHeading"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/country" />
-
-                    <TextView
-                        android:id="@+id/tvCountry"
-                        style="@style/EditTextTheme"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/unit_8dp"
-                        android:focusable="false"
-                        android:hint="@string/select_country"
-                        android:text="@={viewModel.country}"
-                        android:textColor="@color/grey"
-                        android:textDirection="ltr" />
                 </LinearLayout>
 
                 <LinearLayout
