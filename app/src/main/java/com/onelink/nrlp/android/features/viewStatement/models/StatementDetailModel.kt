@@ -11,7 +11,8 @@ data class StatementDetailModel(
     @SerializedName("status") val status: String,
     @SerializedName("type") val type: Type,
     @SerializedName("points") val points: BigDecimal,
-    @SerializedName("date") val date: String
+    @SerializedName("date") val date: String,
+    @SerializedName("transaction_id") val transactionId: String
 )
 
 enum class Type {

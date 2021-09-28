@@ -27,6 +27,12 @@ android {
     }
 
     signingConfigs {
+        debug {
+            storeFile file(DEBUG_STORE_FILE)
+            storePassword DEBUG_STORE_DATA
+            keyAlias DEBUG_STORE_DATA
+            keyPassword DEBUG_STORE_DATA
+        }
         release {
             storeFile file(RELEASE_STORE_FILE)
             storePassword RELEASE_STORE_PASSWORD
@@ -56,6 +62,7 @@ android {
             minifyEnabled false
         }
         debug {
+            signingConfig signingConfigs.debug
             testCoverageEnabled = true
             applicationIdSuffix ".dev"
             versionNameSuffix "-dev"

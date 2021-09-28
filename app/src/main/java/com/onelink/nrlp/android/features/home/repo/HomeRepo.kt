@@ -50,7 +50,10 @@ class HomeRepo @Inject constructor(
             loyaltyPoints = userProfileModel.loyaltyPoints,
             sessionKey = UserData.getUser()?.sessionKey ?: "",
             inActiveTime = UserData.getUser()?.inActiveTime ?: 1000,
-            expiresIn = UserData.getUser()?.expiresIn ?: 1000
+            expiresIn = UserData.getUser()?.expiresIn ?: 1000,
+            usdBalance = userProfileModel.usdBalance,
+            memberSince = userProfileModel.memberSince,
+            redeemable_pkr = userProfileModel.redeemablePkr
         )
     }
 

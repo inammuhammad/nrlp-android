@@ -108,6 +108,13 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
             }
         }
     }
+    protected fun showGeneralAlertDialog(fragment: Fragment, alert: String, msg: String) {
+        when(alert) {
+            "Register" -> showRegisterHelpDialog(fragment,msg)
+            "SelfAward" -> showSelfAwardHelpDialog(fragment,msg)
+            "USD" -> showUSDHelpDialog(fragment,msg)
+        }
+    }
 
     private fun showNoInternetConnectionDialog(fragment: Fragment){
         OneLinkAlertDialogsFragment.Builder()
@@ -116,6 +123,44 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
             .setDrawable(R.drawable.ic_internet)
             .setTitle(getString(R.string.error_no_internet_title))
             .setMessage(getString(R.string.error_no_internet_text).toSpanned())
+            .setNeutralButtonText(getString(R.string.okay))
+            .setNegativeButtonText("")
+            .setPositiveButtonText("")
+            .setCancelable(false)
+            .show(parentFragmentManager, ErrorDialogConstants.TAG_NO_INTERNET_CONNECTION_DIALOG)
+    }
+
+    private fun showRegisterHelpDialog(fragment: Fragment,msg: String){
+        OneLinkAlertDialogsFragment.Builder()
+            .setTargetFragment(fragment, ErrorDialogConstants.RC_NO_INTERNET_CONNECTION_DIALOG)
+            .setIsAlertOnly(true)
+            .setDrawable(R.drawable.ic_register)
+            .setMessage(msg.toSpanned())
+            .setNeutralButtonText(getString(R.string.okay))
+            .setNegativeButtonText("")
+            .setPositiveButtonText("")
+            .setCancelable(false)
+            .show(parentFragmentManager, ErrorDialogConstants.TAG_NO_INTERNET_CONNECTION_DIALOG)
+    }
+
+    private fun showSelfAwardHelpDialog(fragment: Fragment,msg: String){
+        OneLinkAlertDialogsFragment.Builder()
+            .setTargetFragment(fragment, ErrorDialogConstants.RC_NO_INTERNET_CONNECTION_DIALOG)
+            .setIsAlertOnly(true)
+            .setDrawable(R.drawable.ic_self_award_points_update)
+            .setMessage(msg.toSpanned())
+            .setNeutralButtonText(getString(R.string.okay))
+            .setNegativeButtonText("")
+            .setPositiveButtonText("")
+            .setCancelable(false)
+            .show(parentFragmentManager, ErrorDialogConstants.TAG_NO_INTERNET_CONNECTION_DIALOG)
+    }
+
+    private fun showUSDHelpDialog(fragment: Fragment,msg: String){
+        OneLinkAlertDialogsFragment.Builder()
+            .setTargetFragment(fragment, ErrorDialogConstants.RC_NO_INTERNET_CONNECTION_DIALOG)
+            .setIsAlertOnly(true)
+            .setTitle(msg)
             .setNeutralButtonText(getString(R.string.okay))
             .setNegativeButtonText("")
             .setPositiveButtonText("")

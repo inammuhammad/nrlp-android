@@ -37,7 +37,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
-            <TextView
+<!--            <TextView
                 android:id="@+id/first_heading"
                 style="@style/TextViewHeadingLite"
                 android:layout_width="wrap_content"
@@ -60,10 +60,164 @@
                 android:text="@string/dummy_name"
                 android:textSize="@dimen/unit_24sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/first_heading" />
+                app:layout_constraintTop_toBottomOf="@id/first_heading" />-->
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:id="@+id/ivHomeBgLoyaltyCard"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:background="@drawable/green_card"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginTop="@dimen/unit_24dp"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:layout_height="@dimen/_160sdp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    style="@style/TextViewSmall"
+                    android:id="@+id/lblLoyaltyPoints"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:text="@string/your_loyalty_points"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="@dimen/_50sdp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:id="@+id/tvPoints"
+                    android:gravity="start"
+                    app:layout_constraintTop_toBottomOf="@+id/lblLoyaltyPoints"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/hp_simplified"
+                    android:text="25,000"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    style="@style/TextViewSmall"
+                    android:id="@+id/lblMemberSince"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:text="@string/member_since"
+                    app:layout_constraintTop_toBottomOf="@+id/tvPoints"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    style="@style/TextViewMediumNoMargins"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:id="@+id/tvMemberSince"
+                    android:textColor="@color/white"
+                    android:text="11/2020"
+                    app:layout_constraintTop_toBottomOf="@+id/lblMemberSince"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:id="@+id/tvName"
+                    style="@style/TextViewLarge"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/tvMemberSince"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:textColor="@color/white"
+                    android:text="Fakhar Mazher"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    app:layout_constraintStart_toStartOf="@+id/lblLoyaltyPoints"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/tvPoints"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="@string/redeem_your_points"
+                        android:id="@+id/tvRedeemPoints"
+                        style="@style/TextViewSmall"
+                        android:textColor="@color/white"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_height="wrap_content"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:id="@+id/ivRightArrow"
+                        android:src="@drawable/ic_baseline_arrow_right_24"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="12dp"
+                        app:layout_constraintStart_toEndOf="@+id/tvRedeemPoints"
+                        android:layout_height="wrap_content"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.cardview.widget.CardView
+                    app:cardElevation="@dimen/_4sdp"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    app:cardBackgroundColor="@color/lightGreen"
+                    android:id="@+id/containerAnnualRemittance"
+                    android:layout_marginStart="@dimen/margin_large"
+                    android:layout_marginEnd="@dimen/margin_large"
+                    app:layout_constraintTop_toBottomOf="@+id/ivHomeBgLoyaltyCard"
+                    android:layout_height="@dimen/_35sdp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:fontFamily="@font/hp_simplified_rg"
+                            android:id="@+id/lblAnnualRemittance"
+                            android:padding="@dimen/_10sdp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:textColor="@color/pure_black"
+                            android:text="@string/annual_remittance"
+                            android:layout_marginEnd="@dimen/margin_large"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:fontFamily="@font/hp_simplified_rg"
+                            android:id="@+id/tvAnnualRemittance"
+                            android:padding="@dimen/_10sdp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:textColor="@color/pure_black"
+                            android:text="USD 25000"
+                            android:layout_marginEnd="@dimen/margin_large"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_height="wrap_content"/>
+
+                        <ImageView
+                            android:layout_width="@dimen/_15sdp"
+                            app:tint="#0000FF"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:id="@+id/icHelpUSD"
+                            android:src="@drawable/ic_baseline_info_24"
+                            android:layout_height="wrap_content"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-            <ImageView
+                </androidx.cardview.widget.CardView>
+
+
+           <!-- <ImageView
                 android:id="@+id/ivHomeBgLoyaltyCard"
                 android:layout_width="0dp"
                 android:layout_height="134dp"
@@ -154,8 +308,7 @@
                 android:src="@drawable/ic_right_arrow_white"
                 app:layout_constraintBottom_toBottomOf="@id/tvRedeemPoints"
                 app:layout_constraintStart_toEndOf="@id/tvRedeemPoints"
-                app:layout_constraintTop_toTopOf="@id/tvRedeemPoints" />
-
+                app:layout_constraintTop_toTopOf="@id/tvRedeemPoints" />-->
             <com.onelink.nrlp.android.common.views.ExpandableHeightGridView
                 android:id="@+id/homeTilesGrid"
                 android:layout_width="wrap_content"
@@ -172,7 +325,7 @@
                 android:verticalSpacing="@dimen/unit_12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ivHomeBgLoyaltyCard"
+                app:layout_constraintTop_toBottomOf="@id/containerAnnualRemittance"
                 tools:listitem="@layout/home_tiles_item" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

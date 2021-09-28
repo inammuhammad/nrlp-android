@@ -51,6 +51,9 @@ class RedemptionPartnerFragment : BaseFragment<RedemtionFragmentPartnerViewModel
         }
 
         viewModel.getRedeemPartner()
+        binding.fbrContainer.setOnClickListener {
+            viewModel.addNextFragment(fragmentHelper)
+        }
         initObservers()
     }
 
@@ -60,7 +63,7 @@ class RedemptionPartnerFragment : BaseFragment<RedemtionFragmentPartnerViewModel
                 Status.SUCCESS -> {
                     oneLinkProgressDialog.hideProgressDialog()
                     response.data?.let {
-                        val redeemPartnerList: List<RedeemPartnerModel> = it.data
+                        val redeemPartnerList: List<RedeemPartnerModel> = it.data.sortedBy { it.partnerName }
                         binding.redemPartner.setHasFixedSize(true)
                         binding.redemPartner.adapter = RedemPartnerAdapter(redeemPartnerList, this)
                     }
@@ -81,6 +84,33 @@ class RedemptionPartnerFragment : BaseFragment<RedemtionFragmentPartnerViewModel
     override fun onItemClicked(redeemPartnerModel: RedeemPartnerModel) {
         redeemSharedViewModel?.setRedeemPartnerModel(redeemPartnerModel)
         viewModel.addNextFragment(fragmentHelper)
+        hideKeyboard()
+    }
+
+    override fun onFBRClicked(redeemPartnerModel: RedeemPartnerModel) {
+        redeemSharedViewModel?.setRedeemPartnerModel(redeemPartnerModel)
+        viewModel.addFbrFragment(fragmentHelper)
+        hideKeyboard()
+    }
+
+    override fun onNadraClicked(redeemPartnerModel: RedeemPartnerModel) {
+        redeemSharedViewModel?.setRedeemPartnerModel(redeemPartnerModel)
+        viewModel.addNADRADescriptionFragment(fragmentHelper)
+        hideKeyboard()
+    }
+    override fun onPIAClicked(redeemPartnerModel: RedeemPartnerModel) {
+        redeemSharedViewModel?.setRedeemPartnerModel(redeemPartnerModel)
+        viewModel.addPIADescriptionFragment(fragmentHelper)
+        hideKeyboard()
+    }
+    override fun onOPFClicked(redeemPartnerModel: RedeemPartnerModel) {
+        redeemSharedViewModel?.setRedeemPartnerModel(redeemPartnerModel)
+        viewModel.addOPFVoucherFragment(fragmentHelper)
+        hideKeyboard()
+    }
+    override fun onUSCClicked(redeemPartnerModel: RedeemPartnerModel) {
+        redeemSharedViewModel?.setRedeemPartnerModel(redeemPartnerModel)
+        viewModel.addUSCDescriptionFragment(fragmentHelper)
         hideKeyboard()
     }
 }

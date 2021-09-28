@@ -41,9 +41,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/unit_32dp"
-                android:text="@string/remitter_trans_ref_no"
+                android:text="@string/reference_number"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewTransactionEligibity" />
+
+            <ImageView
+                android:layout_width="@dimen/_15sdp"
+                android:id="@+id/icHelpTransaction"
+                android:layout_marginStart="@dimen/_5sdp"
+                app:layout_constraintHorizontal_bias="0"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:src="@drawable/ic_baseline_info_24"
+                app:layout_constraintStart_toEndOf="@+id/tvRemitterRefNo"
+                app:layout_constraintTop_toBottomOf="@+id/textViewTransactionEligibity"
+                android:layout_height="wrap_content"/>
 
             <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
                 android:id="@+id/til_ref_no"
@@ -78,6 +89,16 @@
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/til_ref_no" />
+            <ImageView
+                android:layout_width="@dimen/_15sdp"
+                android:id="@+id/icHelpAmount"
+                android:layout_marginStart="@dimen/_5sdp"
+                app:layout_constraintHorizontal_bias="0"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:src="@drawable/ic_baseline_info_24"
+                app:layout_constraintStart_toEndOf="@+id/tvRemittanceAmount"
+                app:layout_constraintTop_toBottomOf="@+id/til_ref_no"
+                android:layout_height="wrap_content"/>
             <TextView
                 android:layout_width="wrap_content"
                 style="@style/TextViewSubHeading"
@@ -116,6 +137,7 @@
                 android:id="@+id/tvRemittanceDate"
                 style="@style/TextViewSubHeading"
                 android:layout_width="wrap_content"
+                android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:text="@string/remittance_date"
                 app:layout_constraintBottom_toTopOf="@id/lyRemittanceDate"
@@ -123,6 +145,17 @@
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/til_remittance_amount" />
+            <ImageView
+                android:layout_width="@dimen/_15sdp"
+                android:visibility="gone"
+                android:id="@+id/icHelpDate"
+                android:layout_marginStart="@dimen/_5sdp"
+                app:layout_constraintHorizontal_bias="0"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:src="@drawable/ic_baseline_info_24"
+                app:layout_constraintStart_toEndOf="@+id/tvRemittanceDate"
+                app:layout_constraintTop_toBottomOf="@+id/til_remittance_amount"
+                android:layout_height="wrap_content"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/lyRemittanceDate"
@@ -131,7 +164,7 @@
                 android:layoutDirection="ltr"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:visibility="visible"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvRemittanceDate">
@@ -183,7 +216,7 @@
             style="@style/ButtonTheme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:enabled="@{viewModel.validReferenceNumber &amp;&amp; viewModel.validTransactionAmount &amp;&amp; viewModel.remittanceDateNotEmpty}"
+            android:enabled="@{viewModel.validReferenceNumber &amp;&amp; viewModel.validTransactionAmount}"
             android:text="@string/next"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintVertical_bias="1" />

@@ -2,6 +2,7 @@ package com.onelink.nrlp.android.features.selfAwardPoints.view
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.text.Spanned
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -9,6 +10,8 @@ import com.onelink.nrlp.android.R
 import com.onelink.nrlp.android.core.BaseFragment
 import com.onelink.nrlp.android.core.Status
 import com.onelink.nrlp.android.databinding.SelfAwardPointsFragmentBinding
+import com.onelink.nrlp.android.features.redeem.fragments.REDEMPTION_CREATE_DIALOG
+import com.onelink.nrlp.android.features.redeem.fragments.TAG_REDEMPTION_CREATE_DIALOG_FBR
 import com.onelink.nrlp.android.features.selfAwardPoints.model.SelfAwardPointsRequest
 import com.onelink.nrlp.android.features.selfAwardPoints.viewmodel.SelfAwardPointsFragmentViewModel
 import com.onelink.nrlp.android.features.selfAwardPoints.viewmodel.SelfAwardPointsSharedViewModel
@@ -63,6 +66,9 @@ class SelfAwardPointsFragment :
                 ViewModelProvider(it).get(SelfAwardPointsSharedViewModel::class.java)
         }
 
+        //showWarningDialog(getString(R.string.self_award_warning))
+        showGeneralAlertDialog(this,"SelfAward",getString(R.string.self_award_warning))
+
         initListeners()
         initObservers()
     }
@@ -77,12 +83,24 @@ class SelfAwardPointsFragment :
             val selfAwardPointsRequest = SelfAwardPointsRequest(
                 amount = binding.etRemittanceAmount.text.toString().replace(",", ""),
                 reference_no = binding.etRefNo.text.toString(),
-                transaction_date = viewModel.getDateInApiFormat(viewModel.rawRemittanceDate.value.toString())
+                /*transaction_date = viewModel.getDateInApiFormat(viewModel.rawRemittanceDate.value.toString())*/
             )
 
             selfAwardPointSharedViewModel?.setSelfAwardPointsFlowDataModel(selfAwardPointsRequest)
 
             viewModel.verifySafeAwardValidTransaction(selfAwardPointsRequest)
+        }
+        binding.icHelpTransaction.setOnClickListener {
+            //showWarningDialog(getString(R.string.transaction_eligibity_for_self_award))
+            showGeneralAlertDialog(this,"SelfAward",getString(R.string.transaction_eligibity_for_self_award))
+        }
+        binding.icHelpAmount.setOnClickListener {
+            //showWarningDialog(getString(R.string.remittance_amount_help))
+            showGeneralAlertDialog(this,"SelfAward",getString(R.string.remittance_amount_help))
+        }
+        binding.icHelpDate.setOnClickListener {
+            //showWarningDialog(getString(R.string.remittance_date_help))
+            showGeneralAlertDialog(this,"SelfAward",getString(R.string.remittance_date_help))
         }
     }
     private fun initObservers() {

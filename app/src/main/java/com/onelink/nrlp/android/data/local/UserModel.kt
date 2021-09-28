@@ -19,5 +19,8 @@ data class UserModel(
     val loyaltyPoints: BigDecimal?,
     val sessionKey : String = "",
     val inActiveTime : Long = 0,
-    val expiresIn : Long = 0
+    val expiresIn : Long = 0,
+    val usdBalance : BigDecimal?,
+    val memberSince: String?,
+    val redeemable_pkr: String?
 )

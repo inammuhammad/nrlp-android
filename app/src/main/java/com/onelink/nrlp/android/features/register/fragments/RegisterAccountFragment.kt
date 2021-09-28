@@ -20,6 +20,8 @@ import com.onelink.nrlp.android.core.BaseFragment
 import com.onelink.nrlp.android.core.Status
 import com.onelink.nrlp.android.data.local.UserData
 import com.onelink.nrlp.android.databinding.FragmentRegisterAccountBinding
+import com.onelink.nrlp.android.features.redeem.fragments.REDEMPTION_CREATE_DIALOG
+import com.onelink.nrlp.android.features.redeem.fragments.TAG_REDEMPTION_CREATE_DIALOG_FBR
 import com.onelink.nrlp.android.features.redeem.view.RedeemSuccessActivity
 import com.onelink.nrlp.android.features.register.models.RegisterFlowDataModel
 import com.onelink.nrlp.android.features.register.viewmodel.RegisterAccountFragmentViewModel
@@ -27,6 +29,7 @@ import com.onelink.nrlp.android.features.register.viewmodel.SharedViewModel
 import com.onelink.nrlp.android.features.select.country.model.CountryCodeModel
 import com.onelink.nrlp.android.features.select.country.view.SelectCountryFragment
 import com.onelink.nrlp.android.utils.*
+import com.onelink.nrlp.android.utils.dialogs.OneLinkAlertDialogsFragment
 import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
 import dagger.android.support.AndroidSupportInjection
 import java.util.*
@@ -93,7 +96,9 @@ class RegisterAccountFragment :
                 ) {
                     if (listenerInitialized) {
                         when (position) {
-                            0 -> sharedViewModel?.maxProgress?.postValue(REMITTER_FLOW_SCREENS)
+                            0 ->{ sharedViewModel?.maxProgress?.postValue(REMITTER_FLOW_SCREENS)
+                                showGeneralAlertDialog(this@RegisterAccountFragment,"Register",getString(R.string.register_warning))
+                            }
                             1 -> sharedViewModel?.maxProgress?.postValue(BENEFICIARY_FLOW_SCREENS)
                         }
                         viewModel.accountType.postValue(resources.getStringArray(R.array.accountTypes)[position])
@@ -225,6 +230,7 @@ class RegisterAccountFragment :
                 binding.residentIdLL.visibility = View.GONE
                 binding.passportTypeLL.visibility = View.GONE
                 binding.passportNoLL.visibility = View.GONE
+                binding.lblMobileNo.text = getString(R.string.beneficiary_mobile_number)
 
                 binding.btnNext.visibility = View.GONE
                 binding.btnNext1.visibility = View.VISIBLE
@@ -233,6 +239,7 @@ class RegisterAccountFragment :
                 binding.residentIdLL.visibility = View.VISIBLE
                 binding.passportTypeLL.visibility = View.VISIBLE
                 binding.passportNoLL.visibility = View.VISIBLE
+                binding.lblMobileNo.text = getString(R.string.mobile_number)
 
                 binding.btnNext.visibility = View.VISIBLE
                 binding.btnNext1.visibility = View.GONE
@@ -344,6 +351,34 @@ class RegisterAccountFragment :
 
     private fun initListeners() {
         binding.etFullName.setCapitalizeTextWatcher()
+
+        binding.icHelpFullName.setOnClickListener {
+            showGeneralAlertDialog(this,"Register",getString(R.string.help_full_name))
+        }
+        binding.icHelpCountry.setOnClickListener {
+            showGeneralAlertDialog(this,"Register",getString(R.string.enter_residence_country))
+        }
+        binding.icHelpMobile.setOnClickListener {
+            showGeneralAlertDialog(this,"Register",getString(R.string.help_mobile_number))
+        }
+        binding.icHelpPassportNo.setOnClickListener {
+            showGeneralAlertDialog(this,"Register",getString(R.string.help_passport_no))
+        }
+        binding.icHelpPassportType.setOnClickListener {
+            showGeneralAlertDialog(this,"Register",getString(R.string.help_passport_type))
+        }
+        binding.icHelpUniqueId.setOnClickListener {
+            showGeneralAlertDialog(this,"Register",getString(R.string.help_unique_id))
+        }
+        binding.icHelpPassword.setOnClickListener {
+            showGeneralAlertDialog(this,"Register",getString(R.string.help_password))
+        }
+        binding.icHelpConfirmPassword.setOnClickListener {
+            showGeneralAlertDialog(this,"Register",getString(R.string.help_confirm_password))
+        }
+        binding.icHelpUsertype.setOnClickListener {
+            showGeneralAlertDialog(this,"Register",getString(R.string.help_user_type))
+        }
 
         binding.btnNext.setOnClickListener {
             if (viewModel.validationsPassed(
@@ -520,7 +555,7 @@ class RegisterAccountFragment :
     override fun onSelectCountryListener(countryCodeModel: CountryCodeModel) {
         countryCodeLength = countryCodeModel.length.toInt()
         viewModel.country.value = countryCodeModel.country
-      //  binding.tvCountry.colorToText(R.color.black)
+        binding.tvCountry.colorToText(R.color.black)
         binding.tvCountryCode.text = countryCodeModel.code
         binding.etPhoneNumber.isEnabled = true
         binding.tvCountryCode.colorToText(R.color.black)

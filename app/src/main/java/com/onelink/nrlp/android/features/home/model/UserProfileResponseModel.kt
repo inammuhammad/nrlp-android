@@ -17,5 +17,9 @@ data class UserProfileModel(
     @SerializedName("email") val email: String?,
     @SerializedName("user_type") val userType: String,
     @SerializedName("loyalty_level") val loyaltyLevel: String,
-    @SerializedName("loyalty_points") val loyaltyPoints: BigDecimal
+    @SerializedName("loyalty_points") val loyaltyPoints: BigDecimal,
+    @SerializedName("usd_balance") val usdBalance: BigDecimal,
+    @SerializedName("member_since") val memberSince: String,
+    @SerializedName("redeemable_pkr") val redeemablePkr: String
+
 )

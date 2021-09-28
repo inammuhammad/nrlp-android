@@ -13,5 +13,7 @@ class AddBeneficiaryRequestModel(
     @SerializedName("beneficiary_alias")
     val beneficiaryAlias: String,
     @SerializedName("beneficiary_mobile_no")
-    val beneficiaryMobileNo: String
+    val beneficiaryMobileNo: String,
+    @SerializedName("beneficiary_relationship")
+    val beneficiaryRelation: String
 )

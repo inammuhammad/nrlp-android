@@ -1,6 +1,10 @@
 package com.onelink.nrlp.android.features.home.fragments
 
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModelProvider
 import com.onelink.nrlp.android.R
 import com.onelink.nrlp.android.core.BaseFragment
@@ -15,6 +19,8 @@ import com.onelink.nrlp.android.utils.dialogs.OneLinkAlertDialogsFragment
 import com.onelink.nrlp.android.utils.view.hometiles.HomeTileModel
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.ly_loyalty_level_title.view.*
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.*
 import javax.inject.Inject
 
@@ -38,20 +44,19 @@ open class HomeFragment :
     override fun getViewM(): HomeFragmentViewModel =
         ViewModelProvider(this, viewModelFactory).get(HomeFragmentViewModel::class.java)
 
-
     override fun init(savedInstanceState: Bundle?) {
         super.init(savedInstanceState)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
         UserData.getUser()?.let {
             context?.let { context ->
-                binding.ivHomeBgLoyaltyCard.setLoyaltyCardBackground(context, it.loyaltyLevel)
-                binding.lyTitle.ivLoyaltyCardTitle.setLoyaltyTitleBackground(
+                binding.ivHomeBgLoyaltyCard.setLoyaltyCard(context, it.loyaltyLevel)
+               /* binding.lyTitle.ivLoyaltyCardTitle.setLoyaltyTitleBackground(
                     context,
                     it.loyaltyLevel
-                )
+                )*/
             }
-            binding.lyTitle.tvLoyaltyLevel.text = it.loyaltyLevel.capitalize(Locale.getDefault())
+          //  binding.lyTitle.tvLoyaltyLevel.text = it.loyaltyLevel.capitalize(Locale.getDefault())
         }
 
 
@@ -65,7 +70,7 @@ open class HomeFragment :
 //            showComingSoonDialog()
         }
 
-        showUserData()
+        //showUserData()
 
         viewModel.observeUserProfile().observe(this, Observer { response ->
             if (response.status == Status.SUCCESS) showUserData()
@@ -74,16 +79,27 @@ open class HomeFragment :
 
     private fun showUserData() {
         UserData.getUser()?.let {
-            binding.tvUserName.text = it.fullName
+            if(it.accountType == "beneficiary") {
+                binding.containerAnnualRemittance.invisible()
+            }
+            else {
+                binding.containerAnnualRemittance.visible()
+            }
+            binding.tvName.text = it.fullName
             binding.tvPoints.text = it.loyaltyPoints?.roundOff()?.toFormattedAmount()
+            binding.tvAnnualRemittance.text = "USD " + it.usdBalance?.roundOff()?.toFormattedAmount()
+            binding.tvMemberSince.text = it.memberSince
+            binding.icHelpUSD.setOnClickListener {
+                showGeneralAlertDialog(this,"USD",getString(R.string.help_usd))
+            }
             context?.let { context ->
-                binding.ivHomeBgLoyaltyCard.setLoyaltyCardBackground(context, it.loyaltyLevel)
-                binding.lyTitle.ivLoyaltyCardTitle.setLoyaltyTitleBackground(
+                binding.ivHomeBgLoyaltyCard.setLoyaltyCard(context, it.loyaltyLevel)
+               /* binding.lyTitle.ivLoyaltyCardTitle.setLoyaltyTitleBackground(
                     context,
                     it.loyaltyLevel
-                )
+                )*/
             }
-            binding.lyTitle.tvLoyaltyLevel.text = it.loyaltyLevel.capitalize(Locale.getDefault())
+           // binding.lyTitle.tvLoyaltyLevel.text = it.loyaltyLevel.capitalize(Locale.getDefault())
         }
     }
 

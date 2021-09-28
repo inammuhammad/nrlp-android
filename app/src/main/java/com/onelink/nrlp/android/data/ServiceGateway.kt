@@ -135,6 +135,33 @@ interface ServiceGateway {
     @POST("initialize-redemption-transaction")
     fun initializeRedemption(@Body body: InitializeRedeemRequestModel): Single<Response<RedeemInitializeResponseModel>>
 
+    @POST("initialize-redemption-transaction")
+    fun initializeRedemptionNADRA(@Body body: InitializeRedeemNadraRequestModel): Single<Response<RedeemInitializeFBRResponseModel>>
+
+    @POST("initialize-redemption-transaction")
+    fun initializeRedemptionPIA(@Body body: InitializeRedeemPIARequestModel): Single<Response<RedeemInitializeFBRResponseModel>>
+
+    @POST("initialize-redemption-transaction")
+    fun initializeRedemptionFBR(@Body body: InitializeRedeemFBRRequestModel): Single<Response<RedeemInitializeFBRResponseModel>>
+
+    @POST("initialize-redemption-transaction")
+    fun initializeRedemptionOPF(@Body body: InitializeRedeemOPFRequestModel): Single<Response<RedeemInitializeFBRResponseModel>>
+
+    @POST("initialize-redemption-transaction")
+    fun initializeRedemptionFBROTP(@Body body: InitializeRedeemFBROTPRequestModel): Single<Response<RedeemInitializeFBROTPResponseModel>>
+
+    @POST("initialize-redemption-transaction")
+    fun initializeRedemptionPIAOTP(@Body body: InitializeRedeemPIAOTPRequestModel): Single<Response<RedeemInitializeFBROTPResponseModel>>
+
+    @POST("initialize-redemption-transaction")
+    fun initializeRedemptionPassportOTP(@Body body: InitializeRedeemPassportOTPRequestModel): Single<Response<RedeemInitializeFBROTPResponseModel>>
+
+    @POST("initialize-redemption-transaction")
+    fun initializeRedemptionNadraOTP(@Body body: InitializeRedeemNadraOTPRequestModel): Single<Response<RedeemInitializeFBROTPResponseModel>>
+
+    @POST("initialize-redemption-transaction")
+    fun initializeRedemptionOPFOTP(@Body body: InitializeRedeemOPFOTPRequestModel): Single<Response<RedeemInitializeFBROTPResponseModel>>
+
     @POST("redeem-transaction-verify-otp")
     fun verifyRedeemOTP(@Body body: VerifyRedeemOTPRequestModel): Single<Response<GeneralMessageResponseModel>>
 
@@ -143,6 +170,9 @@ interface ServiceGateway {
 
     @POST("complete-redeem-transaction")
     fun completeRedemption(@Body body: RedeemCompletionRequestModel): Single<Response<RedeemSuccessResponseModel>>
+
+    @POST("complete-redeem-transaction")
+    fun completeRedemptionFBR(@Body body: RedeemCompletionFBRRequestModel): Single<Response<RedeemFBRSuccessResponseModel>>
 
     @GET("get-faqs")
     fun getFaqs(): Single<Response<FaqsResponseModel>>

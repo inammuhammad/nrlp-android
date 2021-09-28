@@ -18,7 +18,7 @@ class ContactUsUtils {
                     CALL_IMG
                 )
             )
-            contactDetailModel.add(
+            /*contactDetailModel.add(
                 ContactDetailModel(
                     R.drawable.ic_email,
                     R.string.email_us,
@@ -33,7 +33,7 @@ class ContactUsUtils {
                     R.string.web_address,
                     WEB_IMG
                 )
-            )
+            )*/
             return contactDetailModel
         }
     }

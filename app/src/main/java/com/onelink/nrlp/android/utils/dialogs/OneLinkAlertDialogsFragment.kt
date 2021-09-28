@@ -44,6 +44,29 @@ class OneLinkAlertDialogsFragment : DialogFragment() {
             return oneLinkAlertDialogsFragment
         }
 
+        fun newInstanceForFBR(
+            isAlertOnly: Boolean,
+            drawable: Int,
+            title: String,
+            message: String,
+            neutralButtonText: String = "",
+            positiveButtonText: String = "",
+            negativeButtonText: String = ""
+        ):
+                OneLinkAlertDialogsFragment {
+            val oneLinkAlertDialogsFragment = OneLinkAlertDialogsFragment()
+            val args = Bundle()
+            args.putBoolean(ARG_PARAM_IS_ALERT, isAlertOnly)
+            args.putInt(ARG_PARAM_DRAWABLE, drawable)
+            args.putString(ARG_PARAM_TITLE, title)
+            args.putCharSequence(ARG_PARAM_MESSAGE, message)
+            args.putString(ARG_PARAM_NEUTRAL_BUTTON_TEXT, neutralButtonText)
+            args.putString(ARG_PARAM_POSITIVE_BUTTON_TEXT, positiveButtonText)
+            args.putString(ARG_PARAM_NEGATIVE_BUTTON_TEXT, negativeButtonText)
+            oneLinkAlertDialogsFragment.arguments = args
+            return oneLinkAlertDialogsFragment
+        }
+
     }
 
 

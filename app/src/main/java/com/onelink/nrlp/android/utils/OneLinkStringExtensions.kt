@@ -90,6 +90,10 @@ fun String.base64ToBitmap(): Bitmap? {
     }
 }
 
+fun String.getParse() : String {
+   return this.substring(0,2) + "/" + this.substring(2,4) + "/20" + this.substring(4,this.length)
+}
+
 @Suppress("DEPRECATION")
 fun SpannableStringBuilder.toHtmlString(): String =
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {

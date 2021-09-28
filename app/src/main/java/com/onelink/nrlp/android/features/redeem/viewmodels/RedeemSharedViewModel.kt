@@ -10,6 +10,8 @@ class RedeemSharedViewModel @Inject constructor() : BaseViewModel() {
     var redeemPartnerModel = MutableLiveData<RedeemPartnerModel>()
     var redeemCategoryModel = MutableLiveData<RedeemCategoryModel>()
     var transactionId = MutableLiveData<String>()
+    var amount = MutableLiveData<String>()
+    var psid = MutableLiveData<String>()
 
     fun setRedeemPartnerModel(it: RedeemPartnerModel) {
         redeemPartnerModel.postValue(it)
@@ -21,5 +23,13 @@ class RedeemSharedViewModel @Inject constructor() : BaseViewModel() {
 
     fun setTransactionId(it: String) {
         transactionId.postValue(it)
+    }
+
+    fun setAmount(it: String) {
+        amount.postValue(it)
+    }
+
+    fun setPSID(it: String) {
+        psid.postValue(it)
     }
 }

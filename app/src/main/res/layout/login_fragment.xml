@@ -22,12 +22,13 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/first_heading"
+                android:visibility="gone"
                 style="@style/TextViewHeading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -39,11 +40,13 @@
 
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"
                 android:layout_marginEnd="@dimen/margin_large"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="@dimen/margin_large"
                 android:contentDescription="@null"
-                android:src="@drawable/nrlp_logo"
+                android:src="@drawable/ic_sohni_dharti"
                 app:layout_constraintBottom_toTopOf="@id/sub_heading_cnic"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/first_heading"
@@ -54,14 +57,14 @@
                 style="@style/TextViewSubHeading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/unit_40dp"
+                android:layout_marginTop="@dimen/_70sdp"
                 android:text="@string/cnic_nicop_number"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/first_heading" />
 
             <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
                 android:id="@+id/til_cnic"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/unit_8dp"
                 app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
@@ -103,7 +106,7 @@
             <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
                 android:id="@+id/til_pass"
                 app:passwordToggleEnabled="true"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/unit_8dp"
                 app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
@@ -193,7 +196,7 @@
             <Button
                 android:id="@+id/btnLogin"
                 style="@style/ButtonTheme"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_extra_large"
                 android:enabled="@{viewModel.isValidNIC() &amp;&amp; viewModel.isPasswordValid() &amp;&amp; viewModel.isAccountTypeSelected()}"

@@ -15,9 +15,13 @@ import com.onelink.nrlp.android.core.BaseFragment
 import com.onelink.nrlp.android.core.Status
 import com.onelink.nrlp.android.data.local.UserData
 import com.onelink.nrlp.android.databinding.FragmentRedeemOtpAuthenticationBinding
+import com.onelink.nrlp.android.features.redeem.model.RedeemCategoryModel
+import com.onelink.nrlp.android.features.redeem.model.RedeemPartnerModel
+import com.onelink.nrlp.android.features.redeem.view.RedeemSuccessActivity
 import com.onelink.nrlp.android.features.redeem.viewmodels.RedeemOtpFragmentViewModel
 import com.onelink.nrlp.android.features.redeem.viewmodels.RedeemSharedViewModel
 import com.onelink.nrlp.android.utils.CountDownTimerCanBePause
+import com.onelink.nrlp.android.utils.IntentConstants
 import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
 import com.onelink.nrlp.android.utils.formattedCountDownTimer
 import com.onelink.nrlp.android.utils.setOnSingleClickListener
@@ -44,6 +48,10 @@ class RedeemOtpAuthentication :
     var resentAttempts: Int = 0
 
     private var redeemSharedViewModel: RedeemSharedViewModel? = null
+
+    private lateinit var redeemPartnerModel: RedeemPartnerModel
+
+    private lateinit var redeemCategoryModel: RedeemCategoryModel
 
     private val timer = object : CountDownTimer(TIMER_MILLIS, TIMER_INTERVAL) {
         override fun onTick(millisUntilFinished: Long) {
@@ -160,16 +168,27 @@ class RedeemOtpAuthentication :
     }
 
     private fun initObservers() {
+        redeemSharedViewModel?.redeemPartnerModel?.observe(this,
+            Observer {
+                redeemPartnerModel = it
+            })
+
+        redeemSharedViewModel?.redeemCategoryModel?.observe(this, Observer {
+            redeemCategoryModel = it
+        })
+
         viewModel.observeRedeemOTP().observe(this, Observer { response ->
             when (response.status) {
                 Status.SUCCESS -> {
                     oneLinkProgressDialog.hideProgressDialog()
                     response.data?.let {
-                        fragmentHelper.addFragment(
+                       /* fragmentHelper.addFragment(
                             RedeemAgentConfirmationFragment.newInstance(),
                             clearBackStack = false,
                             addToBackStack = true
-                        )
+                        )*/
+                        viewModel.makeCompleteRedemptionCall()
+
                     }
                 }
                 Status.ERROR -> {
@@ -208,6 +227,66 @@ class RedeemOtpAuthentication :
 
         redeemSharedViewModel?.transactionId?.observe(this, Observer {
             viewModel.transactionId.value = it
+        })
+
+        viewModel.observeRedeemSuccess().observe(this, Observer { response ->
+            when (response.status) {
+                Status.SUCCESS -> {
+                    oneLinkProgressDialog.hideProgressDialog()
+                    response.data?.let {
+                        activity?.let {
+                           /* if (redeemPartnerModel.partnerName == "NADRA" ||
+                                redeemPartnerModel.partnerName == "Passport" ||
+                                redeemPartnerModel.partnerName == "OPF" ||
+                                redeemPartnerModel.partnerName == "SLIC" ||
+                                redeemPartnerModel.partnerName == "BEOE") {
+                                val intent = RedeemSuccessActivity.newRedeemSuccessIntent(it)
+                                intent.putExtra(
+                                    IntentConstants.TRANSACTION_ID, viewModel.transactionId.value
+                                )
+                                intent.putExtra(
+                                    IntentConstants.PARTNER_NAME, redeemPartnerModel.partnerName
+                                )
+                                intent.putExtra(
+                                    IntentConstants.REDEEM_POINTS,
+                                    redeemCategoryModel.points.toBigInteger()
+                                )
+                                intent.putExtra(
+                                    IntentConstants.PSID, (redeemSharedViewModel?.psid?.value)
+                                )
+                                startActivity(intent)
+                                it.finish()
+                            } else {*/
+                                val intent = RedeemSuccessActivity.newRedeemSuccessIntent(it)
+                                intent.putExtra(
+                                    IntentConstants.TRANSACTION_ID, viewModel.transactionId.value
+                                )
+                                intent.putExtra(
+                                    IntentConstants.PARTNER_NAME, redeemPartnerModel.partnerName
+                                )
+                                intent.putExtra(
+                                    IntentConstants.REDEEM_POINTS,
+                                    redeemSharedViewModel?.amount?.value?.toBigInteger()
+                                )
+                                intent.putExtra(
+                                    IntentConstants.PSID, (redeemSharedViewModel?.psid?.value)
+                                )
+                                startActivity(intent)
+                                it.finish()
+                            }
+                        }
+                    /*}*/
+                }
+                Status.ERROR -> {
+                    oneLinkProgressDialog.hideProgressDialog()
+                    response.error?.let {
+                        showGeneralErrorDialog(this, it)
+                    }
+                }
+                Status.LOADING -> {
+                    oneLinkProgressDialog.showProgressDialog(activity)
+                }
+            }
         })
 
         viewModel.validEditText1.observe(this, Observer {

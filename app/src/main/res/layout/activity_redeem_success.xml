@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/unit_40dp"
-                android:text="@string/redeemed_successfully"
+                android:text="Redemption Successful"
                 android:textSize="@dimen/unit_20sp" />
 
             <TextView
