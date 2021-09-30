@@ -106,11 +106,11 @@ object LukaKeRakk {
 
     fun appurva() = if (BuildConfig.IS_DEBUG) dap().dc() else pap().dc()
 
-    fun kcon() = if (BuildConfig.IS_DEBUG) onkd().dc() else onk().dc()
+    fun kcon() = /*if (BuildConfig.IS_DEBUG) */onkd().dc() /*else onk().dc()*/
 
-    fun kctw() = if (BuildConfig.IS_DEBUG) twkd().dc() else twk().dc()
+    fun kctw() = /*if (BuildConfig.IS_DEBUG) */twkd().dc()/* else twk().dc()*/
 
-    fun kcth() = if (BuildConfig.IS_DEBUG) thkd().dc() else thk().dc()
+    fun kcth() = /*if (BuildConfig.IS_DEBUG) */thkd().dc()/* else thk().dc()*/
 
 
 }

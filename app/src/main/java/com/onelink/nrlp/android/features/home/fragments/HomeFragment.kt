@@ -62,11 +62,11 @@ open class HomeFragment :
 
         binding.tvRedeemPoints.setOnSingleClickListener {
 //            showComingSoonDialog()
-            launchRedeemPoints()
+            //launchRedeemPoints()
         }
 
         binding.ivRightArrow.setOnSingleClickListener {
-            launchRedeemPoints()
+         //   launchRedeemPoints()
 //            showComingSoonDialog()
         }
 

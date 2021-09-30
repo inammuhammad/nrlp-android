@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Sohni Dharti Remittance Program</string>
+    <string name="app_name">Sohni Dharti</string>
     <string name="register_an_account">Register an Account</string>
     <string name="full_name">Full Name *</string>
     <string name="cnic_nicop_number">CNIC/NICOP *</string>
