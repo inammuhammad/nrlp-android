@@ -1,0 +1,48 @@
+# DexGuard's default settings are fine for this sample application.
+
+# We'll display some more statistics about the processed code.
+-verbose
+
+# You can try enabling or disabling these and re-building the sample:
+#-raspchecks emulator,certificatetamper,filetamper,hook,root,debug,virtualenvironment
+
+# To start with, let's just enable emulator detection
+-raspchecks emulator
+
+# If the RASP detector is included in -raspcontinueon list then the optional callback will be executed and
+# then the app will continue to execute as normal. Otherwise, the sample will crash when detecting a
+# threat (after it has executed your optional callback). See the RASP manual page for more details.
+# By default, the following option is applied: don't crash by default for Hook, Root or VirtualEnvironment,
+# as on rare occasions these checks could result in false positives due to the diverse nature of the Android platform.
+#-raspcontinueon hook,root,virtualenvironment
+
+# Optional callback method.
+# Note that the method signature must match but the method name can be any name you choose.
+-raspcallback class com.example.Library {
+    public static void myCallback(com.guardsquare.dexguard.rasp.callback.DetectionReport);
+}
+
+# If you need to adjust the target classes you can uncomment and change this filter.
+#-raspclassfilter class **
+
+# If you want to increase the amount of checks injected for a certain detector, for example increase Emulator checks:
+#-raspaggressiveness emulator high
+
+# If the filetamper check is enabled, you need to explictly specify those files which you want to check.
+#-raspfiletamperlist assets/file1.txt,assets/file2.txt
+
+# If the certificatetamper check is enabled, you need to provide the certificate hash of the signing key.
+# The certificate hash can be provided with or without the colons.
+#-raspcertificatehash "EB:B0:FE:DF:19:42:A0:99:B2:87:C3:DB:00:FF:73:21:62:15:24:81:AB:B2:B6:C7:CB:CD:B2:BA:58:94:A7:68"
+
+# The build/outputs/<variant>/mapping/injectmapping.txt file will contain a mapping of which RASP
+# checking code was injected into which method in your application.
+
+# Repackage all obfuscated classes to an internal package.
+#
+-repackageclasses com.example.internal
+
+# Explicitly specify the public API of our library.
+-keep,asapi public class com.example.Library {
+    public protected *;
+}

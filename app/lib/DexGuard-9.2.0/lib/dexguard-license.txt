@@ -1,0 +1,11 @@
+# License file for DexGuard samples.
+licensee              = DexGuard licensees, for samples
+contact               = Guardsquare NV
+contactEmail          = support@guardsquare.com
+package               = com.amazon.sample.buttonclicker,com.amazon.sample.iap.consumable,com.android.vending.expansion.downloader,com.android.vending.expansion.zipfile,com.badlogicgames.superjumper.android,com.example,com.example.android.keyczardemo,com.example.android.market.licensing,com.example.android.trivialdrivesample,com.example.dagger.simple,com.example.dungeons,com.example.expansion.downloader,com.example.library,com.google.android.gms,com.google.android.gms.samples.ads,com.google.android.gms.samples.wallet,com.google.android.vending.licensing,com.securepreferences.sample,info.guardianproject.iocipherexample,sample.netcipher,com.example.androidthings.button,com.example.androidthings.imageclassifier,com.example.android.testing.espresso
+certificate           = FA:F8:0A:CB:26:C9:08:DD:3F:E4:A4:76:1B:37:3E:C1
+expiryDate            = 2021-12-31
+maintenanceExpiryDate = 2021-11-30
+product               = DexGuard
+version               = 9.*
+key                   = 03450aa6fe43b40e01cc598001d09516a6982377d8c67e94cfa8cffd986c8e3b13ef6c8f50d171ac33a9a4b5fd1696006b23f376ceab0608e3247a33c62346a0

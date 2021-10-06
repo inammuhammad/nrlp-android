@@ -1,0 +1,74 @@
+// This build script creates aar library files that are processed with DexGuard.
+// It is useful if you want to distribute the library as an end-product.
+//
+// Note that you should rename this file to build.gradle before using it,
+// so the file settings.gradle can find it when resolving the dependencies.
+
+buildscript {
+    repositories {
+        flatDir { dirs '../../../../lib' } // For the DexGuard plugin.
+        google()                           // For the Android plugin.
+        mavenCentral()                          // For anything else.
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.0.0'
+        //noinspection GradleDynamicVersion
+        classpath 'com.guardsquare:dexguard-gradle-plugin:+'
+    }
+}
+
+apply plugin: 'com.android.library'
+apply plugin: 'dexguard'
+
+repositories {
+    google()  // For the Android support libraries.
+    mavenCentral() // For any other libraries.
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: '*.jar')
+    implementation 'com.android.support:support-v4:28.0.0'
+}
+
+android {
+    compileSdkVersion 28
+
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs         = ['src']
+            resources.srcDirs    = ['src']
+            aidl.srcDirs         = ['src']
+            renderscript.srcDirs = ['src']
+            res.srcDirs          = ['res']
+            assets.srcDirs       = ['assets']
+        }
+    }
+
+    defaultConfig {
+        minSdkVersion 9
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            shrinkResources false
+        }
+    }
+}
+
+dexguard {
+    path = '../../../..'
+    configurations {
+        debug {
+            defaultConfiguration 'dexguard-library-debug.pro'
+            configuration 'dexguard-project.txt'
+            configuration 'proguard-project.txt'
+        }
+        release {
+            defaultConfiguration 'dexguard-library-release-aggressive.pro'
+            configuration 'dexguard-project.txt'
+            configuration 'proguard-project.txt'
+        }
+    }
+}

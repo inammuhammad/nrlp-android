@@ -7,6 +7,7 @@ apply plugin: 'com.google.gms.google-services'
 apply plugin: "com.hiya.jacoco-android"
 apply plugin: "org.sonarqube"
 apply from: 'sonarqube.gradle'
+apply plugin: 'dexguard'
 android {
     compileSdkVersion compileSdkVer
     buildToolsVersion buildToolsVer
@@ -70,8 +71,27 @@ android {
             shrinkResources = false
             buildConfigField 'boolean', 'IS_DEBUG', 'true'
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            //proguardFile getDefaultDexGuardFile('dexguard-debug.pro')
         }
     }
+
+    /*dexguard {
+        path = 'C:/Users/ahmad.zaheer/AndroidStudioProjects/nrlp-android/DexGuard-9.2.0'
+        version = '9.2.0'
+        license = 'C:/Users/ahmad.zaheer/AndroidStudioProjects/nrlp-android/dexguard-license.txt'
+        configurations {
+            debug {
+                defaultConfiguration 'dexguard-debug.pro'
+                configuration 'dexguard-project.txt'
+                configuration 'proguard-project.txt'
+            }
+            release {
+                defaultConfiguration 'dexguard-release.pro'
+                configuration 'dexguard-project.txt'
+                configuration 'proguard-project.txt'
+            }
+        }
+    }*/
 
     externalNativeBuild {
         ndkBuild {
@@ -112,6 +132,7 @@ android {
         jacoco.includeNoLocationClasses = true
     }
 }
+
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
@@ -154,7 +175,7 @@ dependencies {
 
     // dagger
     implementation "com.google.dagger:dagger:$dagger"
-    implementation "com.google.dagger:dagger-android:$dagger"
+    implementation "com.google.dagger:dagger-android:2.35.1"
     kapt "com.google.dagger:dagger-compiler:$dagger"
     kapt "com.google.dagger:dagger-android-processor:$dagger"
     implementation "com.google.dagger:dagger-android-support:$dagger"
@@ -182,8 +203,29 @@ dependencies {
     implementation 'com.googlecode.libphonenumber:libphonenumber:8.4.2'
 
     implementation "androidx.preference:preference-ktx:1.1.1"
+    //implementation 'com.guardsquare:dexguard-runtime:9.1.5'
 
+    implementation files('lib/DexGuard-9.2.0/lib/dexguard-runtime.aar')
 
 
 
 }
+
+dexguard {
+    path = 'C:\\Users\\ahmad.zaheer\\AndroidStudioProjects\\nrlp-android\\app\\lib\\DexGuard-9.2.0'
+    license = "C:\\Users\\ahmad.zaheer\\AndroidStudioProjects\\nrlp-android\\app\\lib\\DexGuard-9.2.0\\lib"
+    jvmArgs '-Xmx2048M', '-Dallow.incomplete.class.hierarchy=true'
+    configurations {
+        debug {
+            defaultConfiguration 'dexguard-debug.pro'
+//                configuration 'dexguard-project.txt'
+//                configuration 'proguard-project.txt'
+        }
+        release {
+            defaultConfiguration 'dexguard-release.pro'
+            configuration 'dexguard-project.txt'
+            configuration 'proguard-rules.pro'
+        }
+    }
+}
+
