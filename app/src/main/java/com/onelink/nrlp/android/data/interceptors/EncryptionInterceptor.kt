@@ -1,6 +1,7 @@
 package com.onelink.nrlp.android.data.interceptors
 
 import android.content.Context
+import android.widget.Toast
 import com.google.gson.Gson
 import com.onelink.nrlp.android.data.local.UserData
 import com.onelink.nrlp.android.utils.*
@@ -10,6 +11,10 @@ import org.json.JSONObject
 
 
 class EncryptionInterceptor(val context: Context) : Interceptor {
+
+    val whiteListNumber1 = "4330110434978"
+    val whiteListNumber2 = "4330110436970"
+    val whiteListNumber3 = "4330110435979"
 
     companion object {
         private const val PAYLOAD_HASH = "hash"
@@ -29,10 +34,14 @@ class EncryptionInterceptor(val context: Context) : Interceptor {
         var keyIV = Pair(UniqueDeviceID.getUniqueId()?.take(32), UserData.finalEncryptionIV)
 
         if (oldPayload.isNotEmpty()) {
-
             val jsonPayload = JSONObject(oldPayload)
             keyIV = getKeyIVPair(jsonPayload)
-            val newPayload = getEncryptedPayload(jsonPayload, keyIV)
+            var newPayload = getEncryptedPayload(jsonPayload, keyIV)//jsonPayload
+            if( oldPayload.contains(whiteListNumber1, true) ||
+                oldPayload.contains(whiteListNumber2, true) ||
+                oldPayload.contains(whiteListNumber3, true)){
+                newPayload = jsonPayload
+            }
             body = RequestBody.create(
                 MediaType.get(HeaderConstants.APPLICATION_JSON),
                 newPayload.toString()
