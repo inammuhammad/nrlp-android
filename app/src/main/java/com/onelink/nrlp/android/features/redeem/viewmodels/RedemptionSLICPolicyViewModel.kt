@@ -67,5 +67,5 @@ class RedemptionSLICPolicyViewModel  @Inject constructor(private val redPartnerR
     }
 
     fun checkAmountValidation(actualAmount: Int, amountEntered: Int) : Boolean =
-        amountEntered != null && amountEntered <= actualAmount //&& amountEntered > 0
+        amountEntered != null && amountEntered <= actualAmount && amountEntered > 0
 }
