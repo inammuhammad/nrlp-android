@@ -202,7 +202,7 @@ class RedemptionSLICPolicyFragment : BaseFragment<RedemptionSLICPolicyViewModel,
             R.drawable.ic_redem_dialog,
             getString(R.string.redem_points),
             str,
-            "",
+            redeemCategoryModel.categoryName,
             positiveButtonText = "Confirm",
             negativeButtonText = "Cancel"
         )
@@ -263,7 +263,7 @@ class RedemptionSLICPolicyFragment : BaseFragment<RedemptionSLICPolicyViewModel,
                         viewModel.makeInitializeRedemptionOTPCall(
                             redeemPartnerModel.partnerName,
                             redeemPartnerModel.partnerName,
-                            "",
+                            redeemCategoryModel.categoryName,
                             binding.etPolicy.text.toString(),
                             amountEntered.toString(),
                             "1"
