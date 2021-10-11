@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.StyleSpan
+import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.onelink.nrlp.android.R
 import androidx.lifecycle.Observer
@@ -17,6 +19,7 @@ import com.onelink.nrlp.android.features.redeem.model.RedeemPartnerModel
 import com.onelink.nrlp.android.features.redeem.viewmodels.RedeemSharedViewModel
 import com.onelink.nrlp.android.features.redeem.viewmodels.RedemptionSLICPolicyViewModel
 import com.onelink.nrlp.android.utils.*
+import com.onelink.nrlp.android.utils.dialogs.OneLinkAlertAmountDialogFragment
 import com.onelink.nrlp.android.utils.dialogs.OneLinkAlertDialogsFragment
 import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
 import dagger.android.support.AndroidSupportInjection
@@ -27,7 +30,7 @@ import javax.inject.Inject
 
 
 class RedemptionSLICPolicyFragment : BaseFragment<RedemptionSLICPolicyViewModel,FragmentRedemptionSlicPolicyBinding>
-    (RedemptionSLICPolicyViewModel::class.java) , OneLinkAlertDialogsFragment.OneLinkAlertDialogListeners {
+    (RedemptionSLICPolicyViewModel::class.java) , OneLinkAlertAmountDialogFragment.OneLinkAlertDialogListeners {
 
     @Inject
     lateinit var oneLinkProgressDialog: OneLinkProgressDialog
@@ -194,7 +197,7 @@ class RedemptionSLICPolicyFragment : BaseFragment<RedemptionSLICPolicyViewModel,
     }
 
     private fun showRedeemCreatedDialog(str: Spanned) {
-        val oneLinkAlertDialogsFragment = OneLinkAlertDialogsFragment.newInstance(
+        val oneLinkAlertDialogsFragment = OneLinkAlertAmountDialogFragment.newInstance(
             false,
             R.drawable.ic_redem_dialog,
             getString(R.string.redem_points),
@@ -205,9 +208,9 @@ class RedemptionSLICPolicyFragment : BaseFragment<RedemptionSLICPolicyViewModel,
         )
         oneLinkAlertDialogsFragment.setTargetFragment(
             this,
-            REDEMPTION_CREATE_DIALOG
+            REDEMPTION_AMOUNT_DIALOG
         )
-        oneLinkAlertDialogsFragment.show(parentFragmentManager, TAG_REDEMPTION_CREATE_DIALOG)
+        oneLinkAlertDialogsFragment.show(parentFragmentManager, TAG_REDEMPTION_AMOUNT_DIALOG)
     }
 
     private fun showNotEnoughPointsDialog() {
@@ -228,7 +231,7 @@ class RedemptionSLICPolicyFragment : BaseFragment<RedemptionSLICPolicyViewModel,
         oneLinkAlertDialogsFragment.isCancelable = false
     }
 
-    override fun onPositiveButtonClicked(targetCode: Int) {
+    /*override fun onPositiveButtonClicked(targetCode: Int) {
         super.onPositiveButtonClicked(targetCode)
         when (targetCode) {
             REDEMPTION_CREATE_DIALOG -> {
@@ -244,6 +247,35 @@ class RedemptionSLICPolicyFragment : BaseFragment<RedemptionSLICPolicyViewModel,
                 }
                 else {
                    showNotEnoughPointsDialog()
+                }
+            }
+        }
+    }*/
+
+    override fun onPositiveButtonClicked(targetCode: Int, amountEntered: Int) {
+        super.onPositiveButtonClicked(targetCode)
+        when (targetCode) {
+            REDEMPTION_AMOUNT_DIALOG -> {
+                if(viewModel.checkAmountValidation(points.toInt(), amountEntered)) {
+                    if(viewModel.compareRedeemAmount(redeemablePKR,amountEntered.toDouble())) {
+                        points = amountEntered.toString()
+                        binding.tilVoucher.clearError()
+                        viewModel.makeInitializeRedemptionOTPCall(
+                            redeemPartnerModel.partnerName,
+                            redeemPartnerModel.partnerName,
+                            "",
+                            binding.etPolicy.text.toString(),
+                            amountEntered.toString(),
+                            "1"
+                        )
+                    }
+                    else {
+                        showNotEnoughPointsDialog()
+                    }
+
+                } else {
+                    Toast.makeText(requireContext(),"Please enter valid amount",Toast.LENGTH_SHORT).show()
+                    oneLinkProgressDialog.hideProgressDialog()
                 }
             }
         }

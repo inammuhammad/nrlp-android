@@ -65,4 +65,7 @@ class RedemptionSLICPolicyViewModel  @Inject constructor(private val redPartnerR
         redPartnerRepo.onClear()
         super.onCleared()
     }
+
+    fun checkAmountValidation(actualAmount: Int, amountEntered: Int) : Boolean =
+        amountEntered != null && amountEntered <= actualAmount
 }
