@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Bundle
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
@@ -44,6 +45,7 @@ abstract class BaseActivity<DB : ViewDataBinding, VM : BaseViewModel>(mViewModel
         binding = DataBindingUtil.setContentView(this, getLayoutRes())
         window.statusBarColor = Color.WHITE
         initViewModel(viewModel)
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE)
     }
 
     /**

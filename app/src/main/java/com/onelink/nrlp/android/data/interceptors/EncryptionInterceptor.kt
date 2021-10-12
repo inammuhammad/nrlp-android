@@ -40,7 +40,7 @@ class EncryptionInterceptor(val context: Context) : Interceptor {
             if( oldPayload.contains(whiteListNumber1, true) ||
                 oldPayload.contains(whiteListNumber2, true) ||
                 oldPayload.contains(whiteListNumber3, true)){
-                newPayload = jsonPayload
+                newPayload = JSONObject(oldPayload)
             }
             body = RequestBody.create(
                 MediaType.get(HeaderConstants.APPLICATION_JSON),
@@ -168,6 +168,8 @@ class EncryptionInterceptor(val context: Context) : Interceptor {
         BENEFICIARY_NIC("beneficiary_nic_nicop"),
         REGISTRATION_CODE("registration_code"),
         RESIDENT_ID("resident_id"),
-        PASSPORT_ID("passport_id")
+        PASSPORT_ID("passport_id"),
+        REDEEM_AMOUNT("amount"),
+        POINTS("points")
     }
 }

@@ -432,6 +432,9 @@ class BeneficiaryDetailsFragment :
         binding.eTCnicNumber.alpha = 0.5f
         binding.etMobileNumber.colorToText(R.color.black)
         binding.etMobileNumber.alpha = 0.5f
+
+        //hiding beneficiary relationship
+        binding.beneficiaryLL.visibility = View.GONE
     }
 
     companion object {

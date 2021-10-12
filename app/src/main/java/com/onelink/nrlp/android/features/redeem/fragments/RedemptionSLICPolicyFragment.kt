@@ -30,7 +30,7 @@ import javax.inject.Inject
 
 
 class RedemptionSLICPolicyFragment : BaseFragment<RedemptionSLICPolicyViewModel,FragmentRedemptionSlicPolicyBinding>
-    (RedemptionSLICPolicyViewModel::class.java) , OneLinkAlertAmountDialogFragment.OneLinkAlertDialogListeners {
+    (RedemptionSLICPolicyViewModel::class.java) , OneLinkAlertAmountDialogFragment.OneLinkAlertDialogListeners, OneLinkAlertDialogsFragment.OneLinkAlertDialogListeners{
 
     @Inject
     lateinit var oneLinkProgressDialog: OneLinkProgressDialog
@@ -148,7 +148,10 @@ class RedemptionSLICPolicyFragment : BaseFragment<RedemptionSLICPolicyViewModel,
                             s.indexOf(partner) + partner.length,
                             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
                         )
-                        showRedeemCreatedDialog(str.toHtmlString().parseHtml())
+                        if(redeemCategoryModel.categoryName.contains("loan", true))
+                            showRedeemAmountCreatedDialog(str.toHtmlString().parseHtml())
+                        else
+                            showRedeemCreatedDialog(str.toHtmlString().parseHtml())
                     }
 
                 }
@@ -196,8 +199,25 @@ class RedemptionSLICPolicyFragment : BaseFragment<RedemptionSLICPolicyViewModel,
 
     }
 
-    private fun showRedeemCreatedDialog(str: Spanned) {
+    private fun showRedeemAmountCreatedDialog(str: Spanned) {
         val oneLinkAlertDialogsFragment = OneLinkAlertAmountDialogFragment.newInstance(
+            false,
+            R.drawable.ic_redem_dialog,
+            getString(R.string.redem_points),
+            str,
+            redeemCategoryModel.categoryName,
+            positiveButtonText = "Confirm",
+            negativeButtonText = "Cancel"
+        )
+        oneLinkAlertDialogsFragment.setTargetFragment(
+            this,
+            REDEMPTION_CREATE_DIALOG
+        )
+        oneLinkAlertDialogsFragment.show(parentFragmentManager, TAG_REDEMPTION_CREATE_DIALOG)
+    }
+
+    private fun showRedeemCreatedDialog(str: Spanned) {
+        val oneLinkAlertDialogsFragment = OneLinkAlertDialogsFragment.newInstance(
             false,
             R.drawable.ic_redem_dialog,
             getString(R.string.redem_points),
@@ -231,7 +251,7 @@ class RedemptionSLICPolicyFragment : BaseFragment<RedemptionSLICPolicyViewModel,
         oneLinkAlertDialogsFragment.isCancelable = false
     }
 
-    /*override fun onPositiveButtonClicked(targetCode: Int) {
+    override fun onPositiveButtonClicked(targetCode: Int) {
         super.onPositiveButtonClicked(targetCode)
         when (targetCode) {
             REDEMPTION_CREATE_DIALOG -> {
@@ -250,7 +270,7 @@ class RedemptionSLICPolicyFragment : BaseFragment<RedemptionSLICPolicyViewModel,
                 }
             }
         }
-    }*/
+    }
 
     override fun onPositiveButtonClicked(targetCode: Int, amountEntered: Int) {
         super.onPositiveButtonClicked(targetCode)
