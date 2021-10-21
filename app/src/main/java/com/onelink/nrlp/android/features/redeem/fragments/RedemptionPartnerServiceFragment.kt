@@ -115,7 +115,10 @@ class RedemptionPartnerServiceFragment :
                 binding.tvRedeemPartner.text = string
                 binding.rvStatementsRedem.setHasFixedSize(true)
                 binding.rvStatementsRedem.adapter =
-                    RedemServiceAdapter(context, redeemCategoryModels, this)
+                    RedemServiceAdapter(
+                        context, redeemCategoryModels,
+                        this, redeemPartnerModel.partnerName
+                    )
             })
 
         viewModel.observeInitializeRedemption().observe(this, Observer { response ->

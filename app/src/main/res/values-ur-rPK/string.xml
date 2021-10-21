@@ -31,16 +31,16 @@
     <string name="policy_no">The amount against Policy No. %1$s is PKR %2$s.Confirm amount for Redeem Points at %3$s.</string>
     <string name="beoe_cnic_detail">آپ نے %2$s کے لئے %3$s پر %1$s پوائنٹس کو استعمال کرنا منتخب کیا ہے</string>
     <string name="redem_points_fbr_detail"> آپ نے %1$d پی ایس آئی ڈی کے عوض %3$s پر %2$s پوائنٹس بمورخہ %4$s استعمال کر لئے ہیں۔</string>    <string name="redem_points_nadra_detail">You have redeemed %1$d Points against Tracking\nID %2$s successfully at %3$s on %4$s</string>
-    <string name="redem_points_opf_detail">Your amount against Voucher No. %1$d for %2$s Points is redeemed successfully at %3$s on %4$s</string>
+    <string name="redem_points_opf_detail">آپ کی رقم واؤچر نمبر %1$d کے عوض %2$s پوائنٹس کو کامیابی کے ساتھ %3$s%4$ s پے حاصل کر لیا ہے</string>
     <string name="redem_points_slic_detail">آپ نے %3$s پی ایس آئی ڈی کے عوض %1$s پر %2$s پوائنٹس بمورخہ %4$s استعمال کر لئے ہیں۔</string>
-    <string name="redem_points_beoe_detail">You have redeemed %1$d Points against %2$s successfully at %3$s on %4$s</string>
+    <string name="redem_points_beoe_detail">آپ نے %1$s پوائنٹس کو کامیابی کے ساتھ %2$s کے عوض %3$s پر %4$s کو حاصل کر لیا ہے</string>
     <string name="new_password">نیا پاس ورڈ</string>
     <string name="select_bene">وصول کنندہ منتخب کریں</string>
     <string name="remitter_trans_ref_no">ترسیل کی ٹرانزیکشن کا ٹی ٹی نمبر</string>
     <string name="remittance_amount">ترسیل کی رقم (پاکستانی روپیے)</string>
     <string name="remittance_amount_help">رسید پر موجود رقم عین مطابق درج کریں</string>
-    <string name="remittance_date_help">Enter date on which transaction is made</string>
-    <string name="remittance_date">Date of Remittance</string>
+    <string name="remittance_date_help">وہ تاریخ درج کریں جس پر ٹرانزیکشن ہوئی</string>
+    <string name="remittance_date">ترسیل کی تاریخ</string>
 
     <string name="enter_points">پوائنٹس درج کریں</string>
     <string name="re_enter_password"> دوبارہ پاس ورڈ درج کریں *</string>
@@ -290,7 +290,7 @@
     <string name="benefits_for_nrlp_users">فوائد کی فہرست</string>
     <string name="fbr_description">پنے پوائنٹس کو ایف بی آر کی سروس کے لۓ استعمال کرنا ہو تو www.fbr.gov.pk پر جا کر اپنی منتخب شدہ سروس کی پی ایس آی ڈی حاصل کریں۔</string>
     <string name="pia_description">اپنے پوائنٹس کو پی آئ اے کی سروس کے لۓ استعمال کرنا ہو تو www.piac.com.pk پر جا کر اپنی منتخب شدہ سروس کی پی ایس آی ڈی حاصل کریں۔\n\nپی ایس آی ڈی پہلے سے موجود ہونے کی صورت میں آگے بڑھیں </string>
-    <string name="usc_description">To redeem your points for NRLP\nBenefits offered at Utility Stores,please\nvisit Utility Store outlet to get\nPayment Slip ID(PSID) for your\npurchases.\n\nIf you already have a PSID,please\ncontinue.</string>
+    <string name="usc_description">اپنے پوائنٹس کو یوٹیلیٹی سٹور کی سروس کے لۓ استعمال کرنا ہو تو براہ کرم یوٹیلیٹی سٹور کی دکان پر جائیں۔ منتخب شدہ سروس کی پی ایس آی ڈی حاصل کریں۔ پی ایس آی ڈی پہلے سے موجود ہونے کی صورت میں آگے بڑھیں</string>
     <string name="nadra_description">اپنے پوائنٹس کو NADRA کی سروس کے لۓ استعمال کرنا ہو تو www.nadra.gov.pk پر جا کر اپنی منتخب شدہ سروس کی ٹریکنگ نمبرحاصل کریں۔\n\n ٹریکنگ نمبر پہلے سے موجود ہونے کی صورت میں آگے بڑھیں</string>
     <string name="redeem_enter_tracking_id">ٹریکنگ آئی ڈی درج کریں</string>
     <string name="redeem_enter_cnic">CNIC نمبر درج کریں</string>A
@@ -298,8 +298,8 @@
     <string name="annual_remittance">مجموعی سالانہ ترسیل (امریکی ڈالر)</string>
     <string name="your_loyalty_points">آپ کے لوائلٹی پوائنٹس</string>
     <string name="member_since">رکنیت کا آغاز</string>
-    <string name="enter_voucher_no">Enter Voucher No. for Redemption</string>
-    <string name="enter_policy_no">Enter your State Life Policy No.</string>
+    <string name="enter_voucher_no">واؤچر نمبر درج کریں</string>
+    <string name="enter_policy_no">اپنی اسٹیٹ لائف پالیسی نمبر درج کریں</string>
     <string name="enter_your_cnic">CNIC نمبر درج کریں</string>
     <string name="enter_psid_redemption">پی ایس آئی ڈی نمبر درج کریں</string>
     <string name="enter_psid">پی ایس آئی ڈی درج کریں</string>
