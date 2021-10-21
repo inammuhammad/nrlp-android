@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".features.kbtest.KBActivity">
+
+    <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
+        android:id="@+id/til_cnic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/unit_8dp"
+        app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <com.onelink.nrlp.android.widgets.OneLinkEditText
+            android:id="@+id/editTextTextPersonName"
+            style="@style/EditTextFixedNumbers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/cnic_nicop_hint"
+            android:inputType="number"
+            android:maxLength="15"
+            android:maxLines="1"
+            android:nextFocusDown="@id/et_pass"
+            android:nextFocusForward="@id/et_pass"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -147,8 +147,12 @@ abstract class BaseFragmentActivity<DB : ViewDataBinding, VM : BaseViewModel>(vi
      */
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
         //if(ev?.action == MotionEvent.ACTION_DOWN)
-        if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q)
+        /*if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q && !Build.MANUFACTURER.contains("samsung", true))
             hideKeyboard()
+        else*/
+        if (!(Build.VERSION.SDK_INT > Build.VERSION_CODES.Q && Build.MANUFACTURER.contains("samsung", true))) {
+            hideKeyboard() //do nothong if android v > 10 and device is samsung
+        }
         return super.dispatchTouchEvent(ev)
     }
 
