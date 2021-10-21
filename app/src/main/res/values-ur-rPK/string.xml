@@ -293,7 +293,7 @@
     <string name="usc_description">اپنے پوائنٹس کو یوٹیلیٹی سٹور کی سروس کے لۓ استعمال کرنا ہو تو براہ کرم یوٹیلیٹی سٹور کی دکان پر جائیں۔ منتخب شدہ سروس کی پی ایس آی ڈی حاصل کریں۔ پی ایس آی ڈی پہلے سے موجود ہونے کی صورت میں آگے بڑھیں</string>
     <string name="nadra_description">اپنے پوائنٹس کو NADRA کی سروس کے لۓ استعمال کرنا ہو تو www.nadra.gov.pk پر جا کر اپنی منتخب شدہ سروس کی ٹریکنگ نمبرحاصل کریں۔\n\n ٹریکنگ نمبر پہلے سے موجود ہونے کی صورت میں آگے بڑھیں</string>
     <string name="redeem_enter_tracking_id">ٹریکنگ آئی ڈی درج کریں</string>
-    <string name="redeem_enter_cnic">CNIC نمبر درج کریں</string>A
+    <string name="redeem_enter_cnic">CNIC نمبر درج کریں</string>
     <string name="lbl_nadra">NADRA</string>
     <string name="annual_remittance">مجموعی سالانہ ترسیل (امریکی ڈالر)</string>
     <string name="your_loyalty_points">آپ کے لوائلٹی پوائنٹس</string>
