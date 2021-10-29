@@ -228,7 +228,7 @@ class EditProfileFragment :
             if (it != Constants.SPINNER_PASSPORT_TYPE_HINT) {
                 if(!isEditEnable) {
                     binding.tvPassportType.text = it
-                    binding.tvPassportType.colorToText(R.color.grey)
+                    binding.tvPassportType.colorToText(R.color.nonEditableText)
                 }else {
                     binding.tvPassportType.text = it
                     binding.tvPassportType.colorToText(R.color.pure_black)

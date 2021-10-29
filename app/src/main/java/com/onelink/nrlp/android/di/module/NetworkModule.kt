@@ -51,7 +51,7 @@ class NetworkModule {
     @Singleton
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
         val httpLoggingInterceptor = HttpLoggingInterceptor()
-        httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+        //httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
         return httpLoggingInterceptor
     }
 
@@ -103,7 +103,7 @@ class NetworkModule {
         client.addInterceptor(encryptionInterceptor)
         if (BuildConfig.IS_DEBUG) client.addInterceptor(loggingInterceptor)
         client.addInterceptor(networkConnectionInterceptor)
-        client.addInterceptor(chuckInterceptor)
+        //client.addInterceptor(chuckInterceptor)
         client.connectTimeout(10, TimeUnit.SECONDS)
         client.readTimeout(30, TimeUnit.SECONDS)
         return client.build()

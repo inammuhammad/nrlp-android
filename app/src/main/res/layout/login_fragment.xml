@@ -214,8 +214,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_large"
                 android:text="@string/dont_have_account"
+                android:layout_marginEnd="@dimen/_50sdp"
                 app:layout_constraintBottom_toTopOf="@+id/tv_about_nrlp"
-                app:layout_constraintEnd_toStartOf="@id/tv_sec_reg"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -229,7 +230,6 @@
                 android:textColor="@color/green"
                 android:textSize="@dimen/unit_14sp"
                 app:layout_constraintBottom_toBottomOf="@id/tv_sec_mesg"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toEndOf="@id/tv_sec_mesg" />
 

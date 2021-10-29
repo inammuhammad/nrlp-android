@@ -299,7 +299,7 @@
     <string name="benefits_for_nrlp_users">List of Benefits</string>
     <string name="fbr_description">To redeem your points for\nbenefits offered by FBR,please\nvisit www.fbr.gov.pk to generate\nPayment Slip ID(PSID) for your\nselected service.\n\nIf you already have a PSID,please\ncontinue.</string>
     <string name="pia_description">To redeem your points for\nbenefits offered by PIA,please\nvisit www.piac.com.pk to generate\nPayment Slip ID(PSID) for your\nselected service.\n\nIf you already have a PSID,please\ncontinue.</string>
-    <string name="usc_description">To redeem your points for NRLP\nBenefits offered at Utility Stores,please\nvisit Utility Store outlet to get\nPayment Slip ID(PSID) for your\npurchases.\n\nIf you already have a PSID,please\ncontinue.</string>
+    <string name="usc_description">To redeem your points for \nBenefits offered at Utility Stores,please\nvisit Utility Store outlet to get\nPayment Slip ID(PSID) for your\npurchases.\n\nIf you already have a PSID,please\ncontinue.</string>
     <string name="nadra_description">To redeem your points for\nbenefits offered by NADRA,\nplease visit www.nadra.gov.pk to\ngenerate Tracking Number for\nyour selected service.\n\nIf you already have a Tracking\nNumber,please continue.</string>
     <string name="redeem_enter_tracking_id">Enter Tracking ID for Redemption</string>
     <string name="redeem_enter_cnic">"Enter CNIC for Redemption</string>

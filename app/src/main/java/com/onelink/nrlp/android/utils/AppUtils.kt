@@ -4,7 +4,9 @@ import android.content.Context
 import android.os.Build
 import android.os.Debug
 import com.google.gson.Gson
+import com.guardsquare.dexguard.runtime.detection.RootDetector
 import com.onelink.nrlp.android.BuildConfig
+import com.onelink.nrlp.android.models.toBoolean
 import com.onelink.nrlp.android.utils.network.NetworkConnectivity
 import com.onelink.nrlp.android.utils.network.NetworkConnectivity.Companion.getLocalIpAddress
 import com.scottyab.rootbeer.RootBeer
@@ -70,7 +72,7 @@ object AppUtils {
                 || Build.PRODUCT.contains("simulator")
 
     private fun isRooted(context: Context?) = context?.let {
-        RootBeer(it).isRootedWithBusyBoxCheck
+        RootBeer(it).isRootedWithBusyBoxCheck || RootDetector.isDeviceRooted(context).toBoolean()
     } ?: false
 
     fun <T : Any> getSHA256JsonString(model: T): String = hash256(Gson().toJson(model))

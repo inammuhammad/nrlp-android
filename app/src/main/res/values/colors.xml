@@ -19,4 +19,5 @@
     <color name="disabled_tv">#50181818</color>
     <color name="grey_cell">#F5F5F5</color>
     <color name="password_hint_color">#8b8b8b</color>
+    <color name="nonEditableText">#bbbbbb</color>
 </resources>
