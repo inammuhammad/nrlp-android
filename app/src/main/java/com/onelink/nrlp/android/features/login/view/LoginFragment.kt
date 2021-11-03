@@ -1,12 +1,14 @@
 package com.onelink.nrlp.android.features.login.view
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.lifecycle.ViewModelProvider
+import com.guardsquare.dexguard.runtime.detection.RootDetector
 import com.onelink.nrlp.android.R
 import com.onelink.nrlp.android.core.BaseFragment
 import com.onelink.nrlp.android.core.Status
@@ -51,6 +53,7 @@ class LoginFragment :
         binding.lifecycleOwner = this
         viewModel.accountType.postValue(binding.radio1.id)
 
+        dexRootDetect(context)
         if (!AppUtils.isValidInstallation(context)) showInvalidInstallDialog()
 
         binding.btnLogin.setOnSingleClickListener {
@@ -275,5 +278,16 @@ class LoginFragment :
             REQUEST_CODE_INVALID_INSTALLATION -> activity?.finishAffinity()
         }
     }
+
+    private fun dexRootDetect(context: Context?){
+        RootDetector.checkDeviceRooted(context){ rootOK, returnedValue -> callback(rootOK, returnedValue) }
+    }
+
+    fun callback(okValue: Int, returnedValue: Int){
+        if (okValue != returnedValue)
+            showInvalidInstallDialog()
+    }
+
+
 
 }

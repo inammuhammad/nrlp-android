@@ -27,6 +27,7 @@ import kotlin.collections.ArrayList
  * Created by Qazi Abubakar on 20/07/2020.
  */
 object AppUtils {
+    val hookOK = 1
 
     /*
     * To authenticate app installation
@@ -83,6 +84,7 @@ object AppUtils {
     private fun isRooted(context: Context?) = context?.let {
         RootBeer(it).isRootedWithBusyBoxCheck || RootDetector.isDeviceRooted(context).toBoolean()
                 || checkAndInitializeTampering(context) || isDeviceRootedSupplementary(context)
+                || isHookDetected(context)
     } ?: false
 
     fun <T : Any> getSHA256JsonString(model: T): String = hash256(Gson().toJson(model))
@@ -235,4 +237,9 @@ object AppUtils {
         }
     }
 
+    private fun isHookDetected(context: Context?): Boolean {
+        if(HookDetector.isApplicationHooked(context, hookOK) != hookOK)
+            return true
+        return false
+    }
 }
