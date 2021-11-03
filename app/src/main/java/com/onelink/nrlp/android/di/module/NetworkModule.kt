@@ -51,7 +51,7 @@ class NetworkModule {
     @Singleton
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
         val httpLoggingInterceptor = HttpLoggingInterceptor()
-        //httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+        httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
         return httpLoggingInterceptor
     }
 

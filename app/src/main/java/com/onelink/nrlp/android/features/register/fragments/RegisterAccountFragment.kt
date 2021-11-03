@@ -223,6 +223,7 @@ class RegisterAccountFragment :
         viewModel.accountType.observe(this, Observer {
             if (it != Constants.SPINNER_ACCOUNT_TYPE_HINT) {
                 binding.tvAccountType.text = it
+                binding.tvCountry.text = null
                 binding.tvAccountType.colorToText(R.color.pure_black)
             }
 
