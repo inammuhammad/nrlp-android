@@ -32,6 +32,7 @@ import com.onelink.nrlp.android.utils.*
 import com.onelink.nrlp.android.utils.dialogs.OneLinkAlertDialogsFragment
 import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
 import dagger.android.support.AndroidSupportInjection
+import kotlinx.android.synthetic.main.fragment_forgot_password.*
 import java.util.*
 import java.util.regex.Pattern
 import javax.inject.Inject
@@ -224,6 +225,8 @@ class RegisterAccountFragment :
             if (it != Constants.SPINNER_ACCOUNT_TYPE_HINT) {
                 binding.tvAccountType.text = it
                 binding.tvCountry.text = null
+                binding.tvCountryCode.text = null
+                binding.etPhoneNumber.text = null
                 binding.tvAccountType.colorToText(R.color.pure_black)
             }
 
@@ -503,7 +506,7 @@ class RegisterAccountFragment :
 
         binding.tvCountry.setOnClickListener {
             fragmentHelper.addFragment(
-                SelectCountryFragment.newInstance(),
+                SelectCountryFragment.newInstance(getUserType()),
                 clearBackStack = false,
                 addToBackStack = true
             )
@@ -567,5 +570,14 @@ class RegisterAccountFragment :
        // binding.etPhoneNumber.setText("")
         //binding.etPhoneNumber.requestFocus()
         //showKeyboard()
+    }
+
+    private fun getUserType(): String {
+        val selectedType = binding.tvAccountType.text.toString()
+        if(selectedType.contains(resources.getString(R.string.select_account_type), true))
+        {
+            return "remitter"
+        }
+        return selectedType.toLowerCase()
     }
 }

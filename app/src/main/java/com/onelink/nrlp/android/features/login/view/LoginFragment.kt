@@ -3,6 +3,7 @@ package com.onelink.nrlp.android.features.login.view
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
@@ -99,11 +100,18 @@ class LoginFragment :
                 }
             }
         })
-
+        val sharedPref = activity?.getSharedPreferences("beneficiarySp", Context.MODE_PRIVATE)
+        val editor: SharedPreferences.Editor = sharedPref?.edit() ?: return
         viewModel.observeLogin().observe(this, { response ->
             when (response.status) {
                 Status.SUCCESS -> {
                     oneLinkProgressDialog.hideProgressDialog()
+                    response.data?.no_of_beneficiaries_allowed?.let {
+                        editor.putInt("no_of_beneficiaries_allowed",
+                            it
+                        )
+                    }
+                    editor.commit()
                     activity?.let {
                         it.startActivity(HomeActivity.newHomeIntent(it))
                         it.finish()

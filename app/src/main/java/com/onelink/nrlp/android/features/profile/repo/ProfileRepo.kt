@@ -10,6 +10,7 @@ import com.onelink.nrlp.android.data.ServiceGateway
 import com.onelink.nrlp.android.features.profile.models.ProfileResendOtpRequestModel
 import com.onelink.nrlp.android.features.profile.models.UpdateProfileOtpRequestModel
 import com.onelink.nrlp.android.features.profile.models.UpdateProfileRequestModel
+import com.onelink.nrlp.android.features.register.models.CountryCodesRequest
 import com.onelink.nrlp.android.features.select.country.model.CountryCodeResponseModel
 import com.onelink.nrlp.android.models.GeneralMessageResponseModel
 import com.onelink.nrlp.android.utils.mocks.MockedAPIResponseModels
@@ -28,8 +29,8 @@ open class ProfileRepo @Inject constructor(
     val updateProfileResponse = MutableLiveData<BaseResponse<GeneralMessageResponseModel>>()
     val updateProfileOtpResponse = MutableLiveData<BaseResponse<GeneralMessageResponseModel>>()
 
-    fun getCountryCodes() {
-        networkHelper.serviceCall(serviceGateway.getCountryCodes("", "")).observeForever {
+    fun getCountryCodes(type: String = "remitter") {
+        networkHelper.serviceCall(serviceGateway.getCountryCodes(CountryCodesRequest(type))).observeForever {
             countryCodesResponse.value = it
         }
     }

@@ -17,10 +17,12 @@ import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
-class SelectCountryFragment :
+class SelectCountryFragment(type: String = "remitter") :
     BaseFragment<SelectCountryFragmentViewModel, SelectCountryCodeFragmentBinding>(
         SelectCountryFragmentViewModel::class.java
     ) {
+
+    var userType = type
 
     @Inject
     lateinit var oneLinkProgressDialog: OneLinkProgressDialog
@@ -60,7 +62,7 @@ class SelectCountryFragment :
     override fun init(savedInstanceState: Bundle?) {
         super.init(savedInstanceState)
 
-        viewModel.getCountryCodes()
+        viewModel.getCountryCodes(userType)
         binding.countrySearch.setOnQueryTextListener(object: SearchView.OnQueryTextListener,
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -110,6 +112,6 @@ class SelectCountryFragment :
 
     companion object {
         @JvmStatic
-        fun newInstance() = SelectCountryFragment()
+        fun newInstance(type: String = "remitter") = SelectCountryFragment(type)
     }
 }

@@ -54,11 +54,8 @@ interface ServiceGateway {
         @Header(HeaderConstants.APPLICATION_VERSION) appVersion: String
     ): Single<Response<AuthResponseModel>>
 
-    @GET("country-codes/")
-    fun getCountryCodes(
-        @Header(HeaderConstants.DEVICE_ID) deviceId: String,
-        @Header(HeaderConstants.APPLICATION_VERSION) appVersion: String
-    ): Single<Response<CountryCodeResponseModel>>
+    @POST("country-codes/")
+    fun getCountryCodes(@Body request: CountryCodesRequest): Single<Response<CountryCodeResponseModel>>
 
     @POST("login/")
     fun login(@Body request: LoginRequest): Single<Response<LoginResponseModel>>

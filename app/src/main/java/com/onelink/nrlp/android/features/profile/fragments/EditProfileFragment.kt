@@ -29,6 +29,7 @@ import com.onelink.nrlp.android.utils.*
 import com.onelink.nrlp.android.utils.dialogs.OneLinkAlertDialogsFragment
 import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
 import dagger.android.support.AndroidSupportInjection
+import java.lang.Exception
 import java.util.regex.Pattern
 import javax.inject.Inject
 
@@ -71,7 +72,7 @@ class EditProfileFragment :
         activity?.let {
             profileSharedViewModel = ViewModelProvider(it).get(ProfileSharedViewModel::class.java)
         }
-        viewModel.getCountryCodes()
+        UserData.getUser()?.accountType?.let { viewModel.getCountryCodes(it) }
 
 
        // binding.spinnerSelectPassportType.forceEnabled(false)
@@ -434,10 +435,15 @@ class EditProfileFragment :
     }
 
     private fun setCountryDetails() {
+        var countryCodeModel = countriesList[0]
         countryCode =
             getString(R.string.country_code_prefix) + viewModel.mobileNumber.value?.getCountryCode()
         val countryIndex = getCountryIndex(countryCode.removePlusCharacter())
-        val countryCodeModel = countriesList[countryIndex]
+        try {
+            countryCodeModel = countriesList[countryIndex]
+        }catch(e: Exception){
+            countryCodeModel = countriesList[0]
+        }
         viewModel.countryFromApi.value = countryCodeModel.country
         viewModel.country.value = countryCodeModel.country
         viewModel.countryCode.value = countryCodeModel.code

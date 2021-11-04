@@ -10,7 +10,8 @@ data class LoginResponseModel(
     @SerializedName("user") val loginModel: LoginModel,
     @SerializedName("expires_in") val expiresIn: String,
     @SerializedName("in_activity_time") val inActivityTime: String,
-    @SerializedName("session_key") val sessionKey: String
+    @SerializedName("session_key") val sessionKey: String,
+    @SerializedName("no_of_beneficiaries_allowed") val no_of_beneficiaries_allowed: Int
 )
 
 data class LoginModel(
