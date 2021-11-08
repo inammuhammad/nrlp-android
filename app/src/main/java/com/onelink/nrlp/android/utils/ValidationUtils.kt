@@ -73,7 +73,7 @@ object ValidationUtils {
     }
 
     fun isOPFPSIDLengthValid(pass: String): Boolean {
-        return pass.length in 6..8
+        return pass.length in 1..24
     }
 
     fun isTrackingNoLengthValid(pass: String): Boolean {

@@ -17,7 +17,7 @@ import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
-class SelectCountryFragment(type: String = "remitter") :
+class SelectCountryFragment(type: String = "beneficiary") :
     BaseFragment<SelectCountryFragmentViewModel, SelectCountryCodeFragmentBinding>(
         SelectCountryFragmentViewModel::class.java
     ) {
@@ -112,6 +112,6 @@ class SelectCountryFragment(type: String = "remitter") :
 
     companion object {
         @JvmStatic
-        fun newInstance(type: String = "remitter") = SelectCountryFragment(type)
+        fun newInstance(type: String = "beneficiary") = SelectCountryFragment(type)
     }
 }

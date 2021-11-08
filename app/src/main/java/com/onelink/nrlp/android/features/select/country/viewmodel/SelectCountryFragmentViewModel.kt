@@ -7,7 +7,7 @@ import javax.inject.Inject
 class SelectCountryFragmentViewModel @Inject constructor(private val selectCountryRepo: SelectCountryRepo) :
     BaseViewModel() {
 
-    fun getCountryCodes(type: String = "remitter") = selectCountryRepo.getCountryCodes(type)
+    fun getCountryCodes(type: String = "beneficiary") = selectCountryRepo.getCountryCodes(type)
 
     fun observerCountryCodes() = selectCountryRepo.observeCountryCodes()
 

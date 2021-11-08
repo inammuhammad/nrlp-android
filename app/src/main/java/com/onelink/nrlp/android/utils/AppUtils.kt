@@ -34,8 +34,9 @@ object AppUtils {
      */
     fun isValidInstallation(context: Context?) =
         //(BuildConfig.IS_DEBUG) ||
-                (!isRooted(context)
-            && !isEmulator()
+                //(!isRooted(context)
+            //&&
+        (!isEmulator()
             && !Debug.isDebuggerConnected())
 
     //&& isFromPlayStore()

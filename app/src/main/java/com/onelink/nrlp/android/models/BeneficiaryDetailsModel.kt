@@ -12,7 +12,8 @@ data class BeneficiaryDetailsModel(
     @SerializedName("nic_nicop") val nicNicop: BigInteger,
     @SerializedName("mobile_no") val mobileNo: String,
     @SerializedName("is_active") val _isActive: Int,
-    @SerializedName("alias") val alias: String
+    @SerializedName("alias") val alias: String,
+    @SerializedName("relationship") val relationship: String
 ) {
     val isActive: Boolean
         get() = _isActive.toBoolean()

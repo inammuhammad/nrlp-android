@@ -74,10 +74,10 @@ object PlayStoreConstants {
 }
 
 object UriConstants {
-    const val Phone_NO = "+92 111 116 757"
+    const val Phone_NO = "+92 21 111 116 757"
     const val Email = "support@nrlp.com.pk"
     const val Web = "www.NRLP.com.pk"
-    const val ABOUT_NRLP_URL = "https://1link.net.pk/product-services/"
+    const val ABOUT_NRLP_URL = "https://1link.net.pk/sohni-dharti/#1633123604420-798e6f70-2ecf"
 }
 
 object Sp {

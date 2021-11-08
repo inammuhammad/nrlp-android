@@ -17,7 +17,7 @@ class SelectCountryRepo @Inject constructor(
 
     val countryCodesResponse = MutableLiveData<BaseResponse<CountryCodeResponseModel>>()
 
-    fun getCountryCodes(type: String = "remitter") {
+    fun getCountryCodes(type: String = "beneficiary") {
         networkHelper.serviceCall(serviceGateway.getCountryCodes(CountryCodesRequest(type)))
             .observeForever { response ->
                 countryCodesResponse.value = response

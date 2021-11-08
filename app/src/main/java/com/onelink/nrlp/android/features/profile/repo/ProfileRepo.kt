@@ -29,7 +29,7 @@ open class ProfileRepo @Inject constructor(
     val updateProfileResponse = MutableLiveData<BaseResponse<GeneralMessageResponseModel>>()
     val updateProfileOtpResponse = MutableLiveData<BaseResponse<GeneralMessageResponseModel>>()
 
-    fun getCountryCodes(type: String = "remitter") {
+    fun getCountryCodes(type: String = "beneficiary") {
         networkHelper.serviceCall(serviceGateway.getCountryCodes(CountryCodesRequest(type))).observeForever {
             countryCodesResponse.value = it
         }

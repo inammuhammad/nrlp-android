@@ -56,6 +56,7 @@ class ManageBeneficiaryFragment : BaseFragment<ManageBeneficiaryViewModel, Fragm
         val sharedPref = activity?.getSharedPreferences("beneficiarySp", Context.MODE_PRIVATE)
         val limit = sharedPref?.getInt("no_of_beneficiaries_allowed", 0)
         viewModel.observeAllBeneficiaries().observe(this, Observer { response ->
+            binding.btnNext.isEnabled = true
             when (response.status) {
                 Status.SUCCESS -> {
                     oneLinkProgressDialog.hideProgressDialog()

@@ -7,5 +7,5 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class CountryCodesRequest (
     @SerializedName("type")
-    var type: String = "remitter"
+    var type: String = "beneficiary"
 ): Parcelable

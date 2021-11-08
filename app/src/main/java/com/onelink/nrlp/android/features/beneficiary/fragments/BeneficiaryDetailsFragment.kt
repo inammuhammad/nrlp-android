@@ -413,12 +413,16 @@ class BeneficiaryDetailsFragment :
         binding.eTCnicNumber.isEnabled = false
         binding.etAlias.isEnabled = false
         binding.etMobileNumber.isEnabled = false
+        binding.beneficiaryLL.isEnabled = false
+        binding.spinnerRelationShip.isEnabled = false
+        binding.tvRelationShip.isEnabled = false
 
         //Setting Form Fields
         binding.viewModel = viewModel
         viewModel.alias.value = it.alias
         viewModel.cnicNumber.value = it.nicNicop.toString().formattedCnicNumberNoSpaces()
         viewModel.mobileNumber.value = it.mobileNo
+        binding.tvRelationShip.text = it.relationship
         viewModel.country.value = "null"
         viewModel.aliasNotEmpty.value = true
         viewModel.cnicNumberNotEmpty.value = true
@@ -432,9 +436,12 @@ class BeneficiaryDetailsFragment :
         binding.eTCnicNumber.alpha = 0.5f
         binding.etMobileNumber.colorToText(R.color.black)
         binding.etMobileNumber.alpha = 0.5f
+        binding.tvRelationShip.colorToText(R.color.black)
+        binding.tvRelationShip.alpha = 0.5f
 
         //hiding beneficiary relationship
-        binding.beneficiaryLL.visibility = View.GONE
+        //binding.beneficiaryLL.visibility = View.GONE
+        binding.ivDropDown.visibility = View.GONE
     }
 
     companion object {

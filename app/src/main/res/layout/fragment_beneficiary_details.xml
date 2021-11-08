@@ -239,6 +239,7 @@
                     android:textColor="@color/grey" />
 
                 <ImageView
+                    android:id="@+id/iv_drop_down"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.5"

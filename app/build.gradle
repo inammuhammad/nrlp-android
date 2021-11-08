@@ -225,6 +225,7 @@ dexguard {
             defaultConfiguration 'dexguard-release.pro'
             configuration 'dexguard-project.txt'
             configuration 'proguard-rules.pro'
+            defaultConfiguration 'dexguard-rasp.pro'
         }
     }
 }
