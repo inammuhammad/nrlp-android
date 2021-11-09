@@ -33,10 +33,9 @@ object AppUtils {
     * To authenticate app installation
      */
     fun isValidInstallation(context: Context?) =
-        //(BuildConfig.IS_DEBUG) ||
-                //(!isRooted(context)
-            //&&
-        (!isEmulator()
+        (BuildConfig.IS_DEBUG) ||
+                (!isRooted(context) &&
+        !isEmulator()
             && !Debug.isDebuggerConnected())
 
     //&& isFromPlayStore()
