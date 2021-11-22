@@ -75,7 +75,7 @@
     <string name="newPassword">Enter New Password</string>
     <string name="confirmPassword">Re-enter New Password</string>
     <string name="enter_remittance_transaction_num_msg">Enter your most recent Remittance Transaction Reference/TT Number (transactions from last one year are eligible, starting 1st Oct 2021)</string>
-    <string name="transaction_eligibity_for_self_award">Transaction within 1 year is eligible for self awarding</string>
+    <string name="transaction_eligibity_for_self_award">Enter Reference Number/TT Number as per your transaction receipt</string>
     <string name="sent_otp_code_msg">We have sent you a code on your registered phone number</string>
     <string name="lorem_ipsum_text_large" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\n
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.

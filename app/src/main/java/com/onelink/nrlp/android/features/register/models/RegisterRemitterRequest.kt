@@ -42,5 +42,7 @@ class RegisterRemitterRequest(
     @SerializedName("passport_type")
     val passportType: String?,
     @SerializedName("passport_id")
-    val passportId: String?
+    val passportId: String?,
+    @SerializedName("country")
+    val country: String?
 )

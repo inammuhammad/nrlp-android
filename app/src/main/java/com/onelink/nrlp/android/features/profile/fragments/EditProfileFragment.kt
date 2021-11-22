@@ -53,6 +53,7 @@ class EditProfileFragment :
     private var isDisablingView: Boolean = false
     private var listenerInitializedPT: Boolean = false
     private var isEditEnable: Boolean = false
+    private val accountType =  UserData.getUser()?.accountType
 
     override fun onInject() {
         AndroidSupportInjection.inject(this)
@@ -155,7 +156,7 @@ class EditProfileFragment :
 
         binding.tvCountry.setOnClickListener {
             fragmentHelper.addFragment(
-                SelectCountryFragment.newInstance(),
+                SelectCountryFragment.newInstance(accountType?:"beneficiary"),
                 clearBackStack = false,
                 addToBackStack = true
             )
@@ -442,10 +443,11 @@ class EditProfileFragment :
         try {
             countryCodeModel = countriesList[countryIndex]
         }catch(e: Exception){
-            countryCodeModel = countriesList[0]
+            countryCodeModel = CountryCodeModel(resources.getString(R.string.select_country), "+92", 10)
         }
         viewModel.countryFromApi.value = countryCodeModel.country
         viewModel.country.value = countryCodeModel.country
+        viewModel.oldCountry.value = countryCodeModel.country
         viewModel.countryCode.value = countryCodeModel.code
         viewModel.countryCodeFromApi.value = countryCodeModel.code
         viewModel.oldMobileNumber.value =

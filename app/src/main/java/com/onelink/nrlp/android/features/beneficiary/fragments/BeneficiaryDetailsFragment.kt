@@ -296,7 +296,8 @@ class BeneficiaryDetailsFragment :
                 beneficiaryNicNicop = binding.eTCnicNumber.text.toString().replace("-", ""),
                 beneficiaryAlias = binding.etAlias.text.toString(),
                 beneficiaryMobileNo = binding.tvCountryCode.text.toString() + binding.etMobileNumber.text.toString(),
-                beneficiaryRelation = relation
+                beneficiaryRelation = relation,
+                country = binding.etCountry.text.toString()
             )
         )
     }
@@ -404,8 +405,8 @@ class BeneficiaryDetailsFragment :
         //Managing views visibilities
         isDeleteBeneficiary = true
         binding.btnNext.text = getString(R.string.delete_beneficiary)
-        binding.textViewCountry.visibility = View.GONE
-        binding.etCountry.visibility = View.GONE
+        //binding.textViewCountry.visibility = View.GONE
+        //binding.etCountry.visibility = View.GONE
         binding.tvCountryCode.visibility = View.GONE
         binding.prefixTv.visibility = View.GONE
 
@@ -416,6 +417,7 @@ class BeneficiaryDetailsFragment :
         binding.beneficiaryLL.isEnabled = false
         binding.spinnerRelationShip.isEnabled = false
         binding.tvRelationShip.isEnabled = false
+        binding.etCountry.isEnabled = false
 
         //Setting Form Fields
         binding.viewModel = viewModel
@@ -423,7 +425,9 @@ class BeneficiaryDetailsFragment :
         viewModel.cnicNumber.value = it.nicNicop.toString().formattedCnicNumberNoSpaces()
         viewModel.mobileNumber.value = it.mobileNo
         binding.tvRelationShip.text = it.relationship
-        viewModel.country.value = "null"
+        binding.etCountry.text = it.country
+        if(it.country.isNullOrEmpty())
+            binding.etCountry.text = " "
         viewModel.aliasNotEmpty.value = true
         viewModel.cnicNumberNotEmpty.value = true
         viewModel.mobileNumberNotEmpty.value = true
@@ -438,6 +442,8 @@ class BeneficiaryDetailsFragment :
         binding.etMobileNumber.alpha = 0.5f
         binding.tvRelationShip.colorToText(R.color.black)
         binding.tvRelationShip.alpha = 0.5f
+        binding.etCountry.colorToText(R.color.black)
+        binding.etCountry.alpha = 0.5f
 
         //hiding beneficiary relationship
         //binding.beneficiaryLL.visibility = View.GONE

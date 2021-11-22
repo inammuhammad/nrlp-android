@@ -81,5 +81,6 @@ object UpdateProfileConstants {
     const val RESIDENT_ID = "resident_id"
     const val PASSPORT_TYPE = "passport_type"
     const val PASSPORT_ID = "passport_id"
+    const val COUNTRY = "country"
 }
 
