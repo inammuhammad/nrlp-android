@@ -53,7 +53,7 @@ class TermsAndConditionsViewModel @Inject constructor(private val registerRepo: 
         }
     }
 
-    fun getTermsAndConditions() = registerRepo.getTermsAndConditions()
+    fun getTermsAndConditions(lang: String = "en") = registerRepo.getTermsAndConditions(lang)
 
     fun observeTermsAndConditions() = registerRepo.observeTermsAndConditions()
 

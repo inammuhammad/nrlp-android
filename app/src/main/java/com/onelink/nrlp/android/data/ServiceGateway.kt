@@ -87,8 +87,8 @@ interface ServiceGateway {
     @POST("register/")
     fun registerBeneficiary(@Body body: RegisterBeneficiaryRequest): Single<Response<GeneralMessageResponseModel>>
 
-    @GET("terms-conditions/")
-    fun getTermsAndConditions(): Single<Response<TermsAndConditionsResponseModel>>
+    @POST("terms-conditions/")
+    fun getTermsAndConditions(@Body body: TermsAndConditionsRequest): Single<Response<TermsAndConditionsResponseModel>>
 
     @GET("list/")
     fun getBeneficiaries(): Single<Response<BeneficiariesResponseModel>>
