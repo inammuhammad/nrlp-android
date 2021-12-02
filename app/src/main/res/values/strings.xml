@@ -74,7 +74,8 @@
     <string name="curPassword">Enter Old Password</string>
     <string name="newPassword">Enter New Password</string>
     <string name="confirmPassword">Re-enter New Password</string>
-    <string name="enter_remittance_transaction_num_msg">Enter your most recent Remittance Transaction Reference/TT Number (transactions from last one year are eligible, starting 1st Oct 2021)</string>
+    <string name="enter_remittance_transaction_num_msg">Enter your remittance transaction reference number. Note: (Current year Transaction can only be used for registration, applicable from 1st Oct 2021)</string>
+    <string name="enter_remittance_transaction_num_msg_self_award">Enter your remittance transaction reference number. Note: (Current year Transaction can only be used for Self-Awarding, applicable from 1st Oct 2021)</string>
     <string name="transaction_eligibity_for_self_award">Enter Reference Number/TT Number as per your transaction receipt</string>
     <string name="sent_otp_code_msg">We have sent you a code on your registered phone number</string>
     <string name="lorem_ipsum_text_large" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\n
@@ -108,6 +109,7 @@
     <string name="beoe_cnic_detail">You have selected to redeem %1$s points for %2$s at %3$s</string>
     <string name="otp_not_received">Didn\'t receive the OTP?</string>
     <string name="dont_have_account">Don\'t have an account?</string>
+    <string name="view_remittance_benefits">View Sohni Dharti Remittance Program Benefits</string>
     <string name="resend_otp">Resend OTP</string>
     <string name="cnic_nicop_hint">xxxxx–xxxxxxx–x</string>
     <string name="select_country">Select Country</string>
@@ -255,6 +257,7 @@
     <string name="device_change">Device Change</string>
     <string name="points">%1$s Points</string>
     <string name="error_session_expired">Your session has been expired. Please login again.</string>
+    <string name="error_transaction_fetch">Please wait for at least 5 working days after your remittance has been processed to register for Sohni Dharti Remittance Program. If your transaction is older than 5 days, kindly contact Customer Support at +92-21-111-11-6757 or email us at sdrpsupport@1link.net.pk</string>
     <string name="verify_your_device">Verify your device</string>
     <string name="language">Language</string>
     <string name="language_desc">Select your language you are comfortable with</string>

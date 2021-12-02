@@ -45,7 +45,7 @@ abstract class BaseActivity<DB : ViewDataBinding, VM : BaseViewModel>(mViewModel
         binding = DataBindingUtil.setContentView(this, getLayoutRes())
         window.statusBarColor = Color.WHITE
         initViewModel(viewModel)
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE)
+        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE)
     }
 
     /**
@@ -85,6 +85,7 @@ abstract class BaseActivity<DB : ViewDataBinding, VM : BaseViewModel>(mViewModel
                 when (errorCode) {
                     ErrorCodesConstants.NO_INTERNET_CONNECTION -> showNoInternetConnectionDialog()
                     ErrorCodesConstants.SESSION_EXPIRED -> showSessionExpiredDialog()
+                    ErrorCodesConstants.UNSUCCESSFUL_TRANSACTION_FETCH -> showTransactionFetchUnsuccessfulDialog()
                     else -> showRemoteErrorDialog(it)
                 }
             }
@@ -115,6 +116,15 @@ abstract class BaseActivity<DB : ViewDataBinding, VM : BaseViewModel>(mViewModel
         OneLinkAlertDialogsFragment.Builder().setIsAlertOnly(true)
             .setDrawable(R.drawable.ic_oh_snap).setTitle(getString(R.string.oh_snap))
             .setMessage(getString(R.string.error_session_expired).toSpanned())
+            .setNeutralButtonText(getString(R.string.okay)).setNegativeButtonText("")
+            .setPositiveButtonText("").setCancelable(false)
+            .show(supportFragmentManager, ErrorDialogConstants.TAG_SESSION_EXPIRED)
+    }
+
+    private fun showTransactionFetchUnsuccessfulDialog() {
+        OneLinkAlertDialogsFragment.Builder().setIsAlertOnly(true)
+            .setDrawable(R.drawable.ic_oh_snap).setTitle(getString(R.string.oh_snap))
+            .setMessage(getString(R.string.error_transaction_fetch).toSpanned())
             .setNeutralButtonText(getString(R.string.okay)).setNegativeButtonText("")
             .setPositiveButtonText("").setCancelable(false)
             .show(supportFragmentManager, ErrorDialogConstants.TAG_SESSION_EXPIRED)

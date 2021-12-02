@@ -98,7 +98,8 @@
     <string name="curPassword">پرانا پاس ورڈ درج کریں</string>
     <string name="newPassword">نیا پاس ورڈ درج کریں</string>
     <string name="confirmPassword">نیا پاس ورڈ دوبارہ درج کریں</string>
-    <string name="enter_remittance_transaction_num_msg">اپنا حالیہ ترسیلات زر کا حوالہ نمبر درج کریں (1 اکتوبر 2021 کے بعد سے ایک سال پرانی ٹرانزیکشنز استعمال کی جا سکتی ہیں)</string>
+    <string name="enter_remittance_transaction_num_msg">اپنی ترسیلات کا حوالہ نمبر درج کریں نوٹ: صرف موجودہ سال کیی ٹرانزیکشن رجسٹریشن کے لیے استعمال کی جاسکتی ہے ، یکم اکتوبر 2021 سے نافذ العمل ہے</string>
+    <string name="enter_remittance_transaction_num_msg_self_award">اپنی ترسیلات کا حوالہ نمبر درج کریںنوٹ: خود پوائنٹس حاصل کرنے کے لیے صرف موجودہ سال کیی ٹرانزیکشن ہی استعمال کی جاسکتی ہے ، یکم اکتوبر 2021 سے نافذ العمل ہے</string>
     <string name="transaction_eligibity_for_self_award">براہ کرم ٹرانزیکشن رسید پر موجود ریفرنس نمبر/ ٹی ٹی نمبر درج کریں</string>
     <string name="sent_otp_code_msg"> کوڈ اپ کے  موبائل نمبر پربھیجا گیا ہے</string>
     <string name="accept">قبول کریں</string>
@@ -121,6 +122,7 @@
     <string name="amount_hint">10,000</string>
     <string name="otp_not_received">کیا آپ کو او ٹی پی نہیں ملا؟</string>
     <string name="dont_have_account">کیا آپ کا یوزر اکاؤنٹ نہیں ہے؟</string>
+    <string name="view_remittance_benefits">سوہنی دھرتی ریمیٹینس پروگرام کے فوائد دیکھیں</string>
     <string name="resend_otp">کوڈ دوبارہ بھیجیں</string>
     <string name="cnic_nicop_hint">42501–8053290–1</string>
     <string name="select_country">ملک منتخب کریں</string>
@@ -241,6 +243,7 @@
     <string name="forgot_password">پاس ورڈ یاد نہیں</string>
     <string name="error_agent_code_invalid">براہ کرم صحیح کوڈ درج کریں۔</string>
     <string name="error_session_expired">آپ کے سیشن کی میعاد ختم ہوگئی ہے۔ براہ کرم دوبارہ لاگ ان کریں</string>
+    <string name="error_transaction_fetch">اپنی تراسیل کو عمل درآمد ہونے کے لیے، براہ کرم ۵ کاروباری دن کا انتظار کریں۔ اگر اپکی تراسیل کو ۵ دن سے زیادہ ہوگئے ہیں، تو برائے مہربانی کسٹمر سپورٹ سے +92-21-111-11-6757 پر رابطہ کریں یا ہمیں sdrpsupport@1link.net.pk پر ای میل کریں</string>
     <string name="verify_your_device">اپنے ڈیوائس کی تصدیق کریں</string>
     <string name="points">%1$s پوائنٹس</string>
     <string name="language">زبان</string>

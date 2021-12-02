@@ -25,6 +25,7 @@ object ErrorCodesConstants {
     const val SERVER_ERROR = "SERVER-ERROR"
     const val SESSION_EXPIRED = "GEN-ERR-08"
     const val UNVERIFIED_DEVICE = "AUTH-LOG-02"
+    const val UNSUCCESSFUL_TRANSACTION_FETCH = "AUTH-VRN-06"
 }
 
 

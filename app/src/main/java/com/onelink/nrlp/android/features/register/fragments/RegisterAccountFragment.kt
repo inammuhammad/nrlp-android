@@ -98,7 +98,7 @@ class RegisterAccountFragment :
                     if (listenerInitialized) {
                         when (position) {
                             0 ->{ sharedViewModel?.maxProgress?.postValue(REMITTER_FLOW_SCREENS)
-                                showGeneralAlertDialog(this@RegisterAccountFragment,"Register",getString(R.string.register_warning))
+                                //showGeneralAlertDialog(this@RegisterAccountFragment,"Register",getString(R.string.register_warning))
                             }
                             1 -> sharedViewModel?.maxProgress?.postValue(BENEFICIARY_FLOW_SCREENS)
                         }

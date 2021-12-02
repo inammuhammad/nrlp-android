@@ -18,6 +18,7 @@ import com.onelink.nrlp.android.features.forgotPassword.view.ForgotPasswordActiv
 import com.onelink.nrlp.android.features.home.view.HomeActivity
 import com.onelink.nrlp.android.features.login.helper.CnicTextHelper
 import com.onelink.nrlp.android.features.login.viewmodel.LoginFragmentViewModel
+import com.onelink.nrlp.android.features.nrlpBenefits.view.NrlpBenefitsActivity
 import com.onelink.nrlp.android.features.register.view.RegisterActivity
 import com.onelink.nrlp.android.features.uuid.view.UUIDActivity
 import com.onelink.nrlp.android.models.LoginCredentials
@@ -219,6 +220,10 @@ class LoginFragment :
 
             }
         })
+
+        binding.tvBenefitsLink.setOnSingleClickListener {
+            startActivity(context?.let { NrlpBenefitsActivity.newViewStatementIntent(it) })
+        }
 
         binding.etCnic.addTextChangedListener(getCnicTextWatcher())
     }

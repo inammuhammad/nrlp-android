@@ -92,7 +92,7 @@ class SelfAwardPointsFragment :
         }
         binding.icHelpTransaction.setOnClickListener {
             //showWarningDialog(getString(R.string.transaction_eligibity_for_self_award))
-            showGeneralAlertDialog(this,"SelfAward",getString(R.string.transaction_eligibity_for_self_award))
+            showGeneralAlertDialog(this,"SelfAward",getString(R.string.enter_remittance_transaction_num_msg_self_award))
         }
         binding.icHelpAmount.setOnClickListener {
             //showWarningDialog(getString(R.string.remittance_amount_help))
