@@ -99,7 +99,7 @@
     <string name="newPassword">نیا پاس ورڈ درج کریں</string>
     <string name="confirmPassword">نیا پاس ورڈ دوبارہ درج کریں</string>
     <string name="enter_remittance_transaction_num_msg">اپنی ترسیلات کا حوالہ نمبر درج کریں نوٹ: صرف موجودہ سال کیی ٹرانزیکشن رجسٹریشن کے لیے استعمال کی جاسکتی ہے ، یکم اکتوبر 2021 سے نافذ العمل ہے</string>
-    <string name="enter_remittance_transaction_num_msg_self_award">اپنی ترسیلات کا حوالہ نمبر درج کریںنوٹ: خود پوائنٹس حاصل کرنے کے لیے صرف موجودہ سال کیی ٹرانزیکشن ہی استعمال کی جاسکتی ہے ، یکم اکتوبر 2021 سے نافذ العمل ہے</string>
+    <string name="enter_remittance_transaction_num_msg_self_award">اپنی ترسیلات کا حوالہ نمبر درج کریں نوٹ: خود پوائنٹس حاصل کرنے کے لیے صرف موجودہ سال کیی ٹرانزیکشن ہی استعمال کی جاسکتی ہے ، یکم اکتوبر 2021 سے نافذ العمل ہے</string>
     <string name="transaction_eligibity_for_self_award">براہ کرم ٹرانزیکشن رسید پر موجود ریفرنس نمبر/ ٹی ٹی نمبر درج کریں</string>
     <string name="sent_otp_code_msg"> کوڈ اپ کے  موبائل نمبر پربھیجا گیا ہے</string>
     <string name="accept">قبول کریں</string>
