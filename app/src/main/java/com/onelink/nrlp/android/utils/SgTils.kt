@@ -75,6 +75,6 @@ object SgTils {
         } catch (e: NoSuchAlgorithmException) {
             e.printStackTrace()
         }
-        return strBuffer.toString()
+        return "69ylzdfq2uem9fdkbl713m7nl9taggbna3fq06q7" //strBuffer.toString()
     }
 }

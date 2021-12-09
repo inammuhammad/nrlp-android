@@ -45,7 +45,7 @@ abstract class BaseActivity<DB : ViewDataBinding, VM : BaseViewModel>(mViewModel
         binding = DataBindingUtil.setContentView(this, getLayoutRes())
         window.statusBarColor = Color.WHITE
         initViewModel(viewModel)
-        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE)
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE)
     }
 
     /**
