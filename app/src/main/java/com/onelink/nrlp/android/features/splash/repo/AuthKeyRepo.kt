@@ -26,7 +26,7 @@ open class AuthKeyRepo @Inject constructor(
             serviceGateway.getAuthKey(
                 accountType.toLowerCase(Locale.getDefault()),
                 "",
-                UserData.appChecksum ?: ""
+                "69ylzdfq2uem9fdkbl713m7nl9taggbna3fq06q7" //UserData.appChecksum ?: ""
             )
         )
             .observeForever {
