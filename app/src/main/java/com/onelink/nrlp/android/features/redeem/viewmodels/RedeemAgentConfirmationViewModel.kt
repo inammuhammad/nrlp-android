@@ -33,7 +33,7 @@ class RedeemAgentConfirmationViewModel @Inject constructor(private val redPartne
     val isValidAgentConfirmationCode = MediatorLiveData<Boolean>().apply {
         addSource(agentConfirmationCode) {
             val valid = ValidationUtils.isValidAgentCodeLength(it)
-            Log.d(it, valid.toString())
+            //Log.d(it, valid.toString())
             value = valid
         }
     }

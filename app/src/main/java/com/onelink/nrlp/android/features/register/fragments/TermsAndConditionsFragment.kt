@@ -12,6 +12,7 @@ import com.onelink.nrlp.android.features.login.view.LoginActivity
 import com.onelink.nrlp.android.features.register.models.RegisterFlowDataModel
 import com.onelink.nrlp.android.features.register.viewmodel.SharedViewModel
 import com.onelink.nrlp.android.features.register.viewmodel.TermsAndConditionsViewModel
+import com.onelink.nrlp.android.utils.LocaleManager
 import com.onelink.nrlp.android.utils.dialogs.OneLinkAlertDialogsFragment
 import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
 import com.onelink.nrlp.android.utils.parseHtml
@@ -147,7 +148,11 @@ class TermsAndConditionsFragment :
     }
 
     private fun makeGetTermsAndConditionCall() {
-        viewModel.getTermsAndConditions()
+        viewModel.getTermsAndConditions(getLanguage())
+    }
+
+    private fun getLanguage(): String{
+        return LocaleManager.getLanguagePref(requireContext()).toString()
     }
 
     override fun onPositiveButtonClicked(targetCode: Int) {

@@ -111,9 +111,9 @@
         <TextView
             android:id="@+id/textViewMobileNumber"
             style="@style/TextViewSubHeading"
-            android:layout_width="110dp"
+            android:layout_width="wrap_content"
             android:layout_height="14dp"
-            android:text="@string/mobile_number"
+            android:text="@string/beneficiary_mobile_number"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etCountry" />
 
@@ -201,6 +201,76 @@
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lyPhoneNumber" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:id="@+id/beneficiaryLL"
+            app:layout_constraintTop_toBottomOf="@+id/lyPhoneNumber"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/TextViewSubHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/beneficiary_relationship" />
+
+
+            <LinearLayout
+                android:id="@+id/spinnerRelationShip"
+                style="@style/spinnerTheme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layoutDirection="ltr"
+                android:orientation="horizontal"
+                android:textDirection="ltr"
+                android:weightSum="10">
+
+                <TextView
+                    android:id="@+id/tvRelationShip"
+                    style="@style/TextViewMediumNoMargins"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="8.5"
+                    android:text="@string/select_beneficiary_relationship"
+                    android:textColor="@color/grey" />
+
+                <ImageView
+                    android:id="@+id/iv_drop_down"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:src="@drawable/ic_spinner_dropdown"
+                    android:contentDescription="@null" />
+            </LinearLayout>
+
+            <com.onelink.nrlp.android.utils.OneLinkSpinner
+                android:id="@+id/spinner_select_relationship"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:background="@android:color/transparent"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="start"
+                android:hint="@string/full_name"
+                android:layoutDirection="ltr"
+                android:spinnerMode="dropdown"
+                android:textDirection="ltr"
+                android:visibility="invisible" />
+            <EditText
+                android:layout_width="match_parent"
+                android:id="@+id/txtOther"
+                android:visibility="gone"
+                android:textSize="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:layout_height="wrap_content"></EditText>
+        </LinearLayout>
 
         <Button
             android:id="@+id/btnNext"

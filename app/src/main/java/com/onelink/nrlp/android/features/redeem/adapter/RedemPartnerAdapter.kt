@@ -26,16 +26,47 @@ class RedemPartnerAdapter(
         RecyclerView.ViewHolder(redeemPartnerCellBinding.root)
 
     interface OnItemClickListener {
+        fun onFBRClicked(redeemPartnerModel: RedeemPartnerModel)
         fun onItemClicked(redeemPartnerModel: RedeemPartnerModel)
+        fun onNadraClicked(redeemPartnerModel: RedeemPartnerModel)
+        fun onPIAClicked(redeemPartnerModel: RedeemPartnerModel)
+        fun onOPFClicked(redeemPartnerModel: RedeemPartnerModel)
+        fun onUSCClicked(redeemPartnerModel: RedeemPartnerModel)
     }
 
     override fun onBindViewHolder(holder: RedeemPartnerViewHolder, position: Int) {
         holder.redeemPartnerCellBinding.redeem = redemPartner[position]
         holder.redeemPartnerCellBinding.root.setOnClickListener {
-            listener.onItemClicked(redemPartner[position])
+            when(redemPartner[position].partnerName) {
+                "Passport" -> {
+                    listener.onItemClicked(redemPartner[position])
+                }
+                "FBR" -> {
+                    listener.onFBRClicked(redemPartner[position])
+                }
+                "PIA" -> {
+                    listener.onPIAClicked(redemPartner[position])
+                }
+                "USC" -> {
+                    listener.onUSCClicked(redemPartner[position])
+                }
+                "NADRA" -> {
+                    listener.onNadraClicked(redemPartner[position])
+                }
+                "OPF" -> {
+                    listener.onOPFClicked(redemPartner[position])
+                }
+                "SLIC" -> {
+                    listener.onItemClicked(redemPartner[position])
+                }
+                "BEOE" -> {
+                    listener.onItemClicked(redemPartner[position])
+                }
+            }
+            //listener.onItemClicked(redemPartner[position])
         }
         holder.redeemPartnerCellBinding.titlePartner.setOnClickListener {
-            listener.onItemClicked(redemPartner[position])
+            //listener.onItemClicked(redemPartner[position])
 
         }
     }

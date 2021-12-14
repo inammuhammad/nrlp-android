@@ -1,0 +1,10 @@
+# DexGuard license file
+licensee              = 1LINK
+contact               =  
+contactEmail          = azimullah.khan@1link.net.pk
+product               = DexGuard
+version               = 7.*,8.*,9.*
+package               = com.onelink.sohnidharti.app,com.onelink.sohnidharti.app.dev
+expiryDate            = 2022-10-03
+maintenanceExpiryDate = 2022-10-03
+key                   = 0c3f85e1bd6da3b1e160a06ecfc41bb1d5312e2ad16b9c1ce1a9ecf58b37c2e13169d3333088545f9eecc6a6449eed6a08c2edbba253a03d2f067c87eb044feb

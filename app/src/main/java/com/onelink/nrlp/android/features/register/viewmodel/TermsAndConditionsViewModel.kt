@@ -30,7 +30,8 @@ class TermsAndConditionsViewModel @Inject constructor(private val registerRepo: 
                     email = registerFlowDataModel.email,
                     residentId = registerFlowDataModel.residentId,
                     passportType = registerFlowDataModel.passportType,
-                    passportId = registerFlowDataModel.passportId
+                    passportId = registerFlowDataModel.passportId,
+                    country = registerFlowDataModel.country
                 )
             )
         } else if (accountType == Constants.BENEFICIARY.toLowerCase(Locale.getDefault())) {
@@ -45,13 +46,14 @@ class TermsAndConditionsViewModel @Inject constructor(private val registerRepo: 
                     registrationCode = registerFlowDataModel.registrationCode,
                     residentId = registerFlowDataModel.residentId,
                     passportType = registerFlowDataModel.passportType,
-                    passportId = registerFlowDataModel.passportId
+                    passportId = registerFlowDataModel.passportId,
+                    country = registerFlowDataModel.country
                 )
             )
         }
     }
 
-    fun getTermsAndConditions() = registerRepo.getTermsAndConditions()
+    fun getTermsAndConditions(lang: String = "en") = registerRepo.getTermsAndConditions(lang)
 
     fun observeTermsAndConditions() = registerRepo.observeTermsAndConditions()
 

@@ -25,7 +25,7 @@
                 android:id="@+id/lyLoyaltyPointsBalanceMP"
                 layout="@layout/ly_loyalty_points_balance"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/small_loyalty_card_height"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_large"
                 android:layout_marginTop="@dimen/unit_0dp"
                 android:layout_marginEnd="@dimen/margin_large"

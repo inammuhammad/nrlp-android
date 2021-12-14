@@ -73,8 +73,8 @@ open class RegisterRepo @Inject constructor(
     fun observeResendOTP() =
         resendOTPResponse as LiveData<BaseResponse<GeneralMessageResponseModel>>
 
-    fun getTermsAndConditions() {
-        networkHelper.serviceCall(serviceGateway.getTermsAndConditions()).observeForever {
+    fun getTermsAndConditions(lang: String = "en") {
+        networkHelper.serviceCall(serviceGateway.getTermsAndConditions(TermsAndConditionsRequest(lang))).observeForever {
             termsAndConditionsResponse.value = it
         }
     }

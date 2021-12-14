@@ -103,9 +103,17 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
                 when(errorCode){
                     ErrorCodesConstants.NO_INTERNET_CONNECTION -> showNoInternetConnectionDialog(fragment)
                     ErrorCodesConstants.SESSION_EXPIRED -> showSessionExpiredDialog(fragment)
+                    ErrorCodesConstants.UNSUCCESSFUL_TRANSACTION_FETCH -> showTransactionFetchUnsuccessfulDialog(fragment)
                     else -> showRemoteErrorDialog(fragment, it)
                 }
             }
+        }
+    }
+    protected fun showGeneralAlertDialog(fragment: Fragment, alert: String, msg: String) {
+        when(alert) {
+            "Register" -> showRegisterHelpDialog(fragment,msg)
+            "SelfAward" -> showSelfAwardHelpDialog(fragment,msg)
+            "USD" -> showUSDHelpDialog(fragment,msg)
         }
     }
 
@@ -116,6 +124,44 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
             .setDrawable(R.drawable.ic_internet)
             .setTitle(getString(R.string.error_no_internet_title))
             .setMessage(getString(R.string.error_no_internet_text).toSpanned())
+            .setNeutralButtonText(getString(R.string.okay))
+            .setNegativeButtonText("")
+            .setPositiveButtonText("")
+            .setCancelable(false)
+            .show(parentFragmentManager, ErrorDialogConstants.TAG_NO_INTERNET_CONNECTION_DIALOG)
+    }
+
+    private fun showRegisterHelpDialog(fragment: Fragment,msg: String){
+        OneLinkAlertDialogsFragment.Builder()
+            .setTargetFragment(fragment, ErrorDialogConstants.RC_NO_INTERNET_CONNECTION_DIALOG)
+            .setIsAlertOnly(true)
+            .setDrawable(R.drawable.ic_register)
+            .setMessage(msg.toSpanned())
+            .setNeutralButtonText(getString(R.string.okay))
+            .setNegativeButtonText("")
+            .setPositiveButtonText("")
+            .setCancelable(false)
+            .show(parentFragmentManager, ErrorDialogConstants.TAG_NO_INTERNET_CONNECTION_DIALOG)
+    }
+
+    private fun showSelfAwardHelpDialog(fragment: Fragment,msg: String){
+        OneLinkAlertDialogsFragment.Builder()
+            .setTargetFragment(fragment, ErrorDialogConstants.RC_NO_INTERNET_CONNECTION_DIALOG)
+            .setIsAlertOnly(true)
+            .setDrawable(R.drawable.ic_self_award_points_update)
+            .setMessage(msg.toSpanned())
+            .setNeutralButtonText(getString(R.string.okay))
+            .setNegativeButtonText("")
+            .setPositiveButtonText("")
+            .setCancelable(false)
+            .show(parentFragmentManager, ErrorDialogConstants.TAG_NO_INTERNET_CONNECTION_DIALOG)
+    }
+
+    private fun showUSDHelpDialog(fragment: Fragment,msg: String){
+        OneLinkAlertDialogsFragment.Builder()
+            .setTargetFragment(fragment, ErrorDialogConstants.RC_NO_INTERNET_CONNECTION_DIALOG)
+            .setIsAlertOnly(true)
+            .setTitle(msg)
             .setNeutralButtonText(getString(R.string.okay))
             .setNegativeButtonText("")
             .setPositiveButtonText("")
@@ -144,6 +190,20 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
             .setDrawable(R.drawable.ic_oh_snap)
             .setTitle(getString(R.string.oh_snap))
             .setMessage(getString(R.string.error_session_expired).toSpanned())
+            .setNeutralButtonText(getString(R.string.okay))
+            .setNegativeButtonText("")
+            .setPositiveButtonText("")
+            .setCancelable(false)
+            .show(parentFragmentManager, ErrorDialogConstants.TAG_SESSION_EXPIRED)
+    }
+
+    private fun showTransactionFetchUnsuccessfulDialog(fragment: Fragment) {
+        OneLinkAlertDialogsFragment.Builder()
+            //.setTargetFragment(fragment, ErrorDialogConstants.RC_SESSION_EXPIRED)
+            .setIsAlertOnly(true)
+            .setDrawable(R.drawable.ic_oh_snap)
+            .setTitle(getString(R.string.oh_snap))
+            .setMessage(getString(R.string.error_transaction_fetch).toSpanned())
             .setNeutralButtonText(getString(R.string.okay))
             .setNegativeButtonText("")
             .setPositiveButtonText("")

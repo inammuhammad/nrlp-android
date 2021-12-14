@@ -29,6 +29,7 @@ import com.onelink.nrlp.android.utils.*
 import com.onelink.nrlp.android.utils.dialogs.OneLinkAlertDialogsFragment
 import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
 import dagger.android.support.AndroidSupportInjection
+import java.lang.Exception
 import java.util.regex.Pattern
 import javax.inject.Inject
 
@@ -52,6 +53,7 @@ class EditProfileFragment :
     private var isDisablingView: Boolean = false
     private var listenerInitializedPT: Boolean = false
     private var isEditEnable: Boolean = false
+    private val accountType =  UserData.getUser()?.accountType
 
     override fun onInject() {
         AndroidSupportInjection.inject(this)
@@ -71,7 +73,7 @@ class EditProfileFragment :
         activity?.let {
             profileSharedViewModel = ViewModelProvider(it).get(ProfileSharedViewModel::class.java)
         }
-        viewModel.getCountryCodes()
+        UserData.getUser()?.accountType?.let { viewModel.getCountryCodes(it) }
 
 
        // binding.spinnerSelectPassportType.forceEnabled(false)
@@ -154,7 +156,7 @@ class EditProfileFragment :
 
         binding.tvCountry.setOnClickListener {
             fragmentHelper.addFragment(
-                SelectCountryFragment.newInstance(),
+                SelectCountryFragment.newInstance(accountType?:"beneficiary"),
                 clearBackStack = false,
                 addToBackStack = true
             )
@@ -228,7 +230,7 @@ class EditProfileFragment :
             if (it != Constants.SPINNER_PASSPORT_TYPE_HINT) {
                 if(!isEditEnable) {
                     binding.tvPassportType.text = it
-                    binding.tvPassportType.colorToText(R.color.grey)
+                    binding.tvPassportType.colorToText(R.color.nonEditableText)
                 }else {
                     binding.tvPassportType.text = it
                     binding.tvPassportType.colorToText(R.color.pure_black)
@@ -434,12 +436,18 @@ class EditProfileFragment :
     }
 
     private fun setCountryDetails() {
+        var countryCodeModel = countriesList[0]
         countryCode =
             getString(R.string.country_code_prefix) + viewModel.mobileNumber.value?.getCountryCode()
         val countryIndex = getCountryIndex(countryCode.removePlusCharacter())
-        val countryCodeModel = countriesList[countryIndex]
+        try {
+            countryCodeModel = countriesList[countryIndex]
+        }catch(e: Exception){
+            countryCodeModel = CountryCodeModel(resources.getString(R.string.select_country), "+92", 10)
+        }
         viewModel.countryFromApi.value = countryCodeModel.country
         viewModel.country.value = countryCodeModel.country
+        viewModel.oldCountry.value = countryCodeModel.country
         viewModel.countryCode.value = countryCodeModel.code
         viewModel.countryCodeFromApi.value = countryCodeModel.code
         viewModel.oldMobileNumber.value =

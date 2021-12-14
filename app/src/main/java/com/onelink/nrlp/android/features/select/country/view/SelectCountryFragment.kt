@@ -2,8 +2,10 @@ package com.onelink.nrlp.android.features.select.country.view
 
 import android.content.Context
 import android.os.Bundle
+import android.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.onelink.nrlp.android.R
 import com.onelink.nrlp.android.core.BaseFragment
 import com.onelink.nrlp.android.core.Status
@@ -15,10 +17,12 @@ import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
-class SelectCountryFragment :
+class SelectCountryFragment(type: String = "beneficiary") :
     BaseFragment<SelectCountryFragmentViewModel, SelectCountryCodeFragmentBinding>(
         SelectCountryFragmentViewModel::class.java
     ) {
+
+    var userType = type
 
     @Inject
     lateinit var oneLinkProgressDialog: OneLinkProgressDialog
@@ -26,6 +30,8 @@ class SelectCountryFragment :
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var listener: OnSelectCountryListener
+
+    lateinit var countryAdapter: CountryAdapter
 
     fun setOnClickListener(listener: OnSelectCountryListener) {
         this.listener = listener
@@ -56,7 +62,19 @@ class SelectCountryFragment :
     override fun init(savedInstanceState: Bundle?) {
         super.init(savedInstanceState)
 
-        viewModel.getCountryCodes()
+        viewModel.getCountryCodes(userType)
+        binding.countrySearch.setOnQueryTextListener(object: SearchView.OnQueryTextListener,
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                countryAdapter.filter.filter(newText)
+                return false
+            }
+
+        })
 
         viewModel.observerCountryCodes().observe(this, Observer { response ->
             when (response.status) {
@@ -66,10 +84,12 @@ class SelectCountryFragment :
                         val countriesList: List<CountryCodeModel> =
                             it.countryCodesList.sortedWith(compareBy { listItem -> listItem.country })
                         binding.rvCountries.setHasFixedSize(true)
-                        binding.rvCountries.adapter = CountryAdapter(
+                        countryAdapter = CountryAdapter(
                             countriesList,
                             listener::onSelectCountryListener
                         )
+                        binding.rvCountries.layoutManager = LinearLayoutManager(requireContext())
+                        binding.rvCountries.adapter = countryAdapter
                     }
                 }
                 Status.ERROR -> {
@@ -92,6 +112,6 @@ class SelectCountryFragment :
 
     companion object {
         @JvmStatic
-        fun newInstance() = SelectCountryFragment()
+        fun newInstance(type: String = "beneficiary") = SelectCountryFragment(type)
     }
 }

@@ -134,7 +134,7 @@ class LoginFragmentViewModel @Inject constructor(
         string.isEmpty() || ValidationUtils.isCNICValid(string)
 
     fun checkPassValidation(string: String) =
-        string.isEmpty() || ValidationUtils.isPasswordLengthValid(string)
+        string.isEmpty() || ValidationUtils.isPasswordValid(string)
 
     fun validationsPassed(id: Int, cnic: String, pass: String): Boolean {
         val isCnicValid: Boolean = checkCnicValidation(cnic)

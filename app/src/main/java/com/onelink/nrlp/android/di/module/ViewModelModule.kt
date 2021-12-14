@@ -286,6 +286,61 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
+    @ViewModelKey(RedemptionFBRDescriptionViewModel::class)
+    internal abstract fun redemFBRDescriptionViewModel(viewModelAdvanced: RedemptionFBRDescriptionViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(RedemptionFBRPSIDViewModel::class)
+    internal abstract fun redemFBRPSIDViewModel(viewModelAdvanced: RedemptionFBRPSIDViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(RedemptionPIADescriptionViewModel::class)
+    internal abstract fun redemPIADescriptionViewModel(viewModelAdvanced: RedemptionPIADescriptionViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(RedemptionPIAPSIDViewModel::class)
+    internal abstract fun redemPIAPSIDViewModel(viewModelAdvanced: RedemptionPIAPSIDViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(RedemptionNadraDescriptionViewModel::class)
+    internal abstract fun redemNadraDescriptionViewModel(viewModelAdvanced: RedemptionNadraDescriptionViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(RedemptionNadraTrackingIDViewModel::class)
+    internal abstract fun redemNadraTrackingIDViewModel(viewModelAdvanced: RedemptionNadraTrackingIDViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(RedemptionUSCDescriptionViewModel::class)
+    internal abstract fun redemUSCDescriptionViewModel(viewModelAdvanced: RedemptionUSCDescriptionViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(RedemptionUSCPSIDViewModel::class)
+    internal abstract fun redemUSCPSIDViewModel(viewModelAdvanced: RedemptionUSCPSIDViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(RedemptionOPFVoucherViewModel::class)
+    internal abstract fun redemOPFVoucherViewModel(viewModelAdvanced: RedemptionOPFVoucherViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(RedemptionSLICPolicyViewModel::class)
+    internal abstract fun redemSLICPolicyViewModel(viewModelAdvanced: RedemptionSLICPolicyViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(RedemptionBEOECNICViewModel::class)
+    internal abstract fun redemBEOECNICViewModel(viewModelAdvanced: RedemptionBEOECNICViewModel): ViewModel
+
+    @Binds
+    @IntoMap
     @ViewModelKey(RedeemOtpFragmentViewModel::class)
     internal abstract fun redeemOtpFragmentViewModel(viewModelAdvanced: RedeemOtpFragmentViewModel): ViewModel
 

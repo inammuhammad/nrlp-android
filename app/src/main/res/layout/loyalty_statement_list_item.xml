@@ -50,6 +50,21 @@
             app:layout_constraintTop_toBottomOf="@+id/tvStatus" />
 
         <TextView
+            android:id="@+id/tvId"
+            style="@style/TextViewMediumNoMarginsLite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginTop="@dimen/unit_8dp"
+            android:layout_marginEnd="@dimen/margin_large"
+            android:clickable="false"
+            android:focusable="false"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_small"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDate" />
+
+        <TextView
             android:id="@+id/activeTextView"
             style="@style/TextViewStatusActive"
             android:layout_width="wrap_content"
@@ -110,7 +125,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvDate"
+            app:layout_constraintTop_toBottomOf="@id/tvId"
             app:layout_constraintVertical_bias="0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

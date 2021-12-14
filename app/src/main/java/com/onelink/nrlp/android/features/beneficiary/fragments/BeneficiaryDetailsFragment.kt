@@ -8,6 +8,10 @@ import android.text.Selection
 import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.SpinnerAdapter
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.onelink.nrlp.android.R
 import com.onelink.nrlp.android.core.BaseFragment
@@ -53,6 +57,10 @@ class BeneficiaryDetailsFragment :
 
     private lateinit var beneficiaryDetailsModel: BeneficiaryDetailsModel
 
+    private lateinit var relation: String
+
+    private var listenerInitializedBR: Boolean = false
+
     override fun onInject() {
         AndroidSupportInjection.inject(this)
     }
@@ -77,6 +85,35 @@ class BeneficiaryDetailsFragment :
                 BeneficiarySharedViewModel::class.java
             )
         }
+
+        binding.spinnerSelectRelationship.adapter = context?.let {
+            ArrayAdapter(
+                it,
+                R.layout.custom_spinner_item,
+                resources.getStringArray(R.array.benificiaryRelationTypes)
+            )
+        } as SpinnerAdapter
+        binding.spinnerSelectRelationship.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    // on nothing selected
+                }
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    if (listenerInitializedBR) {
+                        viewModel.beneficiaryRelation.postValue(resources.getStringArray(R.array.benificiaryRelationTypes)[position])
+                    } else {
+                        listenerInitializedBR = true
+                        binding.spinnerSelectRelationship.setSelection(-1)
+                    }
+                }
+            }
+
         initTextWatchers()
         initObservers()
         initListeners()
@@ -243,14 +280,24 @@ class BeneficiaryDetailsFragment :
                 }
             }
         }
+        binding.spinnerRelationShip.setOnClickListener {
+            binding.spinnerSelectRelationship.performClick()
+        }
     }
 
     private fun makeBeneficiaryAddCall() {
+        if(viewModel.beneficiaryRelation.value.toString() == "Other") {
+            relation = binding.txtOther.text.toString()
+        } else {
+            relation = viewModel.beneficiaryRelation.value.toString()
+        }
         viewModel.addBeneficiary(
             AddBeneficiaryRequestModel(
                 beneficiaryNicNicop = binding.eTCnicNumber.text.toString().replace("-", ""),
                 beneficiaryAlias = binding.etAlias.text.toString(),
-                beneficiaryMobileNo = binding.tvCountryCode.text.toString() + binding.etMobileNumber.text.toString()
+                beneficiaryMobileNo = binding.tvCountryCode.text.toString() + binding.etMobileNumber.text.toString(),
+                beneficiaryRelation = relation,
+                country = binding.etCountry.text.toString()
             )
         )
     }
@@ -339,14 +386,27 @@ class BeneficiaryDetailsFragment :
                 }
             }
         })
+
+        viewModel.beneficiaryRelation.observe(this, Observer {
+            if(it != Constants.SPINNER_BENEFICIARY_HINT) {
+                binding.tvRelationShip.text = it
+                binding.tvRelationShip.colorToText(R.color.pure_black)
+            }
+
+            if(viewModel.beneficiaryRelation.value.toString() == resources.getString(R.string.other)) {
+                binding.txtOther.visibility = View.VISIBLE
+            } else {
+                binding.txtOther.visibility = View.GONE
+            }
+        })
     }
 
     private fun makeDeleteBeneficiaryView(it: BeneficiaryDetailsModel) {
         //Managing views visibilities
         isDeleteBeneficiary = true
         binding.btnNext.text = getString(R.string.delete_beneficiary)
-        binding.textViewCountry.visibility = View.GONE
-        binding.etCountry.visibility = View.GONE
+        //binding.textViewCountry.visibility = View.GONE
+        //binding.etCountry.visibility = View.GONE
         binding.tvCountryCode.visibility = View.GONE
         binding.prefixTv.visibility = View.GONE
 
@@ -354,13 +414,20 @@ class BeneficiaryDetailsFragment :
         binding.eTCnicNumber.isEnabled = false
         binding.etAlias.isEnabled = false
         binding.etMobileNumber.isEnabled = false
+        binding.beneficiaryLL.isEnabled = false
+        binding.spinnerRelationShip.isEnabled = false
+        binding.tvRelationShip.isEnabled = false
+        binding.etCountry.isEnabled = false
 
         //Setting Form Fields
         binding.viewModel = viewModel
         viewModel.alias.value = it.alias
         viewModel.cnicNumber.value = it.nicNicop.toString().formattedCnicNumberNoSpaces()
         viewModel.mobileNumber.value = it.mobileNo
-        viewModel.country.value = "null"
+        binding.tvRelationShip.text = it.relationship
+        binding.etCountry.text = it.country
+        if(it.country.isNullOrEmpty())
+            binding.etCountry.text = " "
         viewModel.aliasNotEmpty.value = true
         viewModel.cnicNumberNotEmpty.value = true
         viewModel.mobileNumberNotEmpty.value = true
@@ -373,6 +440,14 @@ class BeneficiaryDetailsFragment :
         binding.eTCnicNumber.alpha = 0.5f
         binding.etMobileNumber.colorToText(R.color.black)
         binding.etMobileNumber.alpha = 0.5f
+        binding.tvRelationShip.colorToText(R.color.black)
+        binding.tvRelationShip.alpha = 0.5f
+        binding.etCountry.colorToText(R.color.black)
+        binding.etCountry.alpha = 0.5f
+
+        //hiding beneficiary relationship
+        //binding.beneficiaryLL.visibility = View.GONE
+        binding.ivDropDown.visibility = View.GONE
     }
 
     companion object {

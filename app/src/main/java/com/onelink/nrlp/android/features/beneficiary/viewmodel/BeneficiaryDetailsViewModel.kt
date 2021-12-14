@@ -6,6 +6,7 @@ import com.onelink.nrlp.android.core.BaseViewModel
 import com.onelink.nrlp.android.features.beneficiary.models.AddBeneficiaryRequestModel
 import com.onelink.nrlp.android.features.beneficiary.models.DeleteBeneficiaryRequestModel
 import com.onelink.nrlp.android.features.beneficiary.repo.BeneficiaryRepo
+import com.onelink.nrlp.android.utils.Constants
 import com.onelink.nrlp.android.utils.ValidationUtils
 import javax.inject.Inject
 
@@ -19,6 +20,7 @@ open class BeneficiaryDetailsViewModel @Inject constructor(private val beneficia
     val validationCnicPassed = MutableLiveData(true)
     val validationAliasPassed = MutableLiveData(true)
     val validationPhoneNumberPassed = MutableLiveData(true)
+    val beneficiaryRelation = MutableLiveData<String>(Constants.SPINNER_BENEFICIARY_HINT)
 
     fun deleteBeneficiary(deleteBeneficiaryRequestModel: DeleteBeneficiaryRequestModel) =
         beneficiaryRepo.deleteBeneficiary(deleteBeneficiaryRequestModel)

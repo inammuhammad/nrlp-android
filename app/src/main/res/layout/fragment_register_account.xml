@@ -37,11 +37,26 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_height="wrap_content">
+
                     <TextView
                         style="@style/TextViewSubHeading"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/account_type" />
+
+                        <ImageView
+                            android:layout_width="@dimen/_15sdp"
+                            android:id="@+id/icHelpUsertype"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:src="@drawable/ic_baseline_info_24"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
 
                     <LinearLayout
                         android:id="@+id/spinnerLy"
@@ -91,14 +106,65 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_large"
                     android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_height="wrap_content">
 
                     <TextView
                         style="@style/TextViewSubHeading"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/full_name" />
+                        android:text="@string/country" />
+
+                        <ImageView
+                            android:layout_width="@dimen/_15sdp"
+                            android:id="@+id/icHelpCountry"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:src="@drawable/ic_baseline_info_24"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvCountry"
+                        style="@style/EditTextTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/unit_8dp"
+                        android:focusable="false"
+                        android:hint="@string/select_country"
+                        android:text="@={viewModel.country}"
+                        android:textColor="@color/grey"
+                        android:textDirection="ltr" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            style="@style/TextViewSubHeading"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/full_name" />
+
+                        <ImageView
+                            android:layout_width="@dimen/_15sdp"
+                            android:id="@+id/icHelpFullName"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:src="@drawable/ic_baseline_info_24"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
 
                     <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
                         android:id="@+id/tilFullName"
@@ -127,67 +193,27 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <TextView
-                        style="@style/TextViewSubHeading"
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/cnic_nicop_number" />
+                        android:orientation="horizontal"
+                        android:layout_height="wrap_content">
 
-                    <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
-                        android:id="@+id/tilCnicNicop"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/unit_8dp"
-                        app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance">
-
-                        <com.onelink.nrlp.android.widgets.OneLinkEditText
-                            android:id="@+id/etCnicNicop"
-                            style="@style/EditTextFixedNumbers"
-                            android:layout_width="match_parent"
+                        <TextView
+                            style="@style/TextViewSubHeading"
+                            android:id="@+id/lblMobileNo"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:hint="@string/cnic_nicop_hint"
-                            android:inputType="number"
-                            android:maxLength="15"
-                            android:nextFocusDown="@id/tvCountry"
-                            android:nextFocusForward="@id/tvCountry"
-                            android:text="@={viewModel.cnicNicopNumber}" />
-                    </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
-                </LinearLayout>
+                            android:text="@string/mobile_number" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                        <ImageView
+                            android:layout_width="@dimen/_15sdp"
+                            android:id="@+id/icHelpMobile"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:src="@drawable/ic_baseline_info_24"
+                            android:layout_height="wrap_content"/>
 
-                    <TextView
-                        style="@style/TextViewSubHeading"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/country" />
+                    </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/tvCountry"
-                        style="@style/EditTextTheme"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/unit_8dp"
-                        android:focusable="false"
-                        android:hint="@string/select_country"
-                        android:text="@={viewModel.country}"
-                        android:textColor="@color/grey"
-                        android:textDirection="ltr" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/TextViewSubHeading"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/mobile_number" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/lyPhoneNumber"
@@ -276,7 +302,6 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/residentIdLL"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -285,23 +310,26 @@
                         style="@style/TextViewSubHeading"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/resident_id" />
+                        android:text="@string/cnic_nicop_number" />
 
                     <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
-                        android:id="@+id/tilResidentId"
+                        android:id="@+id/tilCnicNicop"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/unit_8dp"
                         app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance">
 
                         <com.onelink.nrlp.android.widgets.OneLinkEditText
-                            android:id="@+id/etResidentId"
+                            android:id="@+id/etCnicNicop"
                             style="@style/EditTextFixedNumbers"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/select_resident_id"
+                            android:hint="@string/cnic_nicop_hint"
                             android:inputType="number"
-                            android:text="@={viewModel.residentId}" />
+                            android:maxLength="15"
+                            android:nextFocusDown="@id/tvCountry"
+                            android:nextFocusForward="@id/tvCountry"
+                            android:text="@={viewModel.cnicNicopNumber}" />
                     </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
                 </LinearLayout>
 
@@ -310,12 +338,27 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/textViewAlias"
-                        style="@style/TextViewSubHeading"
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/passport_type" />
+                        android:orientation="horizontal"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/textViewAlias"
+                            style="@style/TextViewSubHeading"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/passport_type" />
+
+                        <ImageView
+                            android:layout_width="@dimen/_15sdp"
+                            android:id="@+id/icHelpPassportType"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:src="@drawable/ic_baseline_info_24"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
                     <LinearLayout
                         android:id="@+id/spinnerPassport"
                         style="@style/spinnerTheme"
@@ -372,11 +415,25 @@
                     android:orientation="vertical"
                     android:visibility="gone">
 
-                    <TextView
-                        style="@style/TextViewSubHeading"
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/passport_no" />
+                        android:orientation="horizontal"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            style="@style/TextViewSubHeading"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/passport_no" />
+
+                        <ImageView
+                            android:layout_width="@dimen/_15sdp"
+                            android:id="@+id/icHelpPassportNo"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:src="@drawable/ic_baseline_info_24"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
 
                     <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
                         android:id="@+id/tilPassportNo"
@@ -393,6 +450,50 @@
                             android:hint="@string/select_passport_no"
                             android:inputType="text"
                             android:text="@={viewModel.passportId}" />
+                    </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/residentIdLL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            style="@style/TextViewSubHeading"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/resident_id" />
+
+                        <ImageView
+                            android:layout_width="@dimen/_15sdp"
+                            android:id="@+id/icHelpUniqueId"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:src="@drawable/ic_baseline_info_24"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+                    <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
+                        android:id="@+id/tilResidentId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/unit_8dp"
+                        app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance">
+
+                        <com.onelink.nrlp.android.widgets.OneLinkEditText
+                            android:id="@+id/etResidentId"
+                            style="@style/EditTextFixedNumbers"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/select_resident_id"
+                            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+                            android:text="@={viewModel.residentId}" />
                     </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
                 </LinearLayout>
 
@@ -432,14 +533,29 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_height="wrap_content">
+
                     <TextView
                         style="@style/TextViewSubHeading"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/password" />
 
+                        <ImageView
+                            android:layout_width="@dimen/_15sdp"
+                            android:id="@+id/icHelpPassword"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:src="@drawable/ic_baseline_info_24"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
                     <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
                         android:id="@+id/tilPassword"
+                        app:passwordToggleEnabled="true"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/unit_8dp"
@@ -479,14 +595,29 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_height="wrap_content">
+
                     <TextView
                         style="@style/TextViewSubHeading"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/re_enter_password" />
 
+                        <ImageView
+                            android:layout_width="@dimen/_15sdp"
+                            android:id="@+id/icHelpConfirmPassword"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:src="@drawable/ic_baseline_info_24"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
                     <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
                         android:id="@+id/tilRePassword"
+                        app:passwordToggleEnabled="true"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/unit_8dp"

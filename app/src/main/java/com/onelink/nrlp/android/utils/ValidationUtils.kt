@@ -68,6 +68,18 @@ object ValidationUtils {
         return pass.length >= 8
     }
 
+    fun isPSIDLengthValid(pass: String): Boolean {
+        return pass.length in 8..24
+    }
+
+    fun isOPFPSIDLengthValid(pass: String): Boolean {
+        return pass.length in 1..24
+    }
+
+    fun isTrackingNoLengthValid(pass: String): Boolean {
+        return pass.length == 12
+    }
+
     fun isNameValid(name: String): Boolean {
         return Pattern.matches(STRING_FULL_NAME_VALIDATOR_REGEX, name)
     }

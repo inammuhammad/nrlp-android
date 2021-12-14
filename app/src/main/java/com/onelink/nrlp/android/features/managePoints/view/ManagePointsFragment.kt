@@ -54,7 +54,7 @@ class ManagePointsFragment :
 
     private var listenerInitialized: Boolean = false
 
-    private var selectedBeneficiary = BeneficiaryDetailsModel(-1, BigInteger.ONE, "12312", 0, "")
+    private var selectedBeneficiary = BeneficiaryDetailsModel(-1, BigInteger.ONE, "12312", 0, "", "", "")
 
     override fun getLayoutRes() = R.layout.manage_points_fragment
 
@@ -90,7 +90,9 @@ class ManagePointsFragment :
         val mContext = context ?: return
         binding.lyLoyaltyPointsBalanceMP.tvPoints.text =
             userModel.loyaltyPoints?.roundOff()?.toFormattedAmount()
-        binding.lyLoyaltyPointsBalanceMP.ivHomeBgLoyaltyCard.setLoyaltyCardBackground(
+        binding.lyLoyaltyPointsBalanceMP.tvName.text = userModel.fullName
+        binding.lyLoyaltyPointsBalanceMP.tvMemberSince.text = userModel.memberSince
+        binding.lyLoyaltyPointsBalanceMP.ivHomeBgLoyaltyCard.setLoyaltyCard(
             mContext,
             userModel.loyaltyLevel
         )

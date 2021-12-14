@@ -30,6 +30,7 @@ class EditProfileViewModel @Inject constructor(private val profileRepo: ProfileR
     val mobileNumUpdated = MutableLiveData<String>("")
     val email = MutableLiveData<String>("")
     val oldEmail = MutableLiveData<String>("")
+    val oldCountry = MutableLiveData<String>("")
     val oldResidentID = MutableLiveData<String>("")
     val oldPassportType = MutableLiveData<String>("")
     val oldPassportId = MutableLiveData<String>("")
@@ -37,7 +38,7 @@ class EditProfileViewModel @Inject constructor(private val profileRepo: ProfileR
     val validationPhoneNumberPassed = MutableLiveData(true)
     val mobileNumberLength = MutableLiveData<Int>()
 
-    fun getCountryCodes() = profileRepo.getCountryCodes()
+    fun getCountryCodes(type: String = "beneficiary") = profileRepo.getCountryCodes(type)
 
     fun observerCountryCodes() = profileRepo.observeCountryCodes()
 
@@ -49,6 +50,8 @@ class EditProfileViewModel @Inject constructor(private val profileRepo: ProfileR
 
     fun getUpdateProfileRequestObject(): JsonObject {
         val jsonObject = JsonObject()
+        if(country.value != oldCountry.value)
+            jsonObject.addProperty(UpdateProfileConstants.COUNTRY, country.value)
         if (email.value != oldEmail.value)
             jsonObject.addProperty(UpdateProfileConstants.EMAIL, email.value)
         if (countryCode.value + mobileNumber.value != mobileNumFromApi.value)
@@ -118,6 +121,13 @@ class EditProfileViewModel @Inject constructor(private val profileRepo: ProfileR
     val isDifferentPassportId = MediatorLiveData<Boolean>().apply {
         addSource(passportId) {
             val valid = it != oldPassportId.value
+            value = valid
+        }
+    }
+
+    val isDifferentCountry = MediatorLiveData<Boolean>().apply {
+        addSource(country) {
+            val valid = it != oldCountry.value
             value = valid
         }
     }

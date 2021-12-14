@@ -1,12 +1,15 @@
 package com.onelink.nrlp.android.features.register.models
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import com.onelink.nrlp.android.utils.LukaKeRakk
+import kotlinx.android.parcel.Parcelize
 
 /**
  * Created by Qazi Abubakar on 09/07/2020.
  */
 
+@Parcelize
 class RegisterRemitterRequest(
 
     @SerializedName("nic_nicop")
@@ -42,5 +45,7 @@ class RegisterRemitterRequest(
     @SerializedName("passport_type")
     val passportType: String?,
     @SerializedName("passport_id")
-    val passportId: String?
-)
+    val passportId: String?,
+    @SerializedName("country")
+    val country: String?
+): Parcelable

@@ -34,6 +34,7 @@ class StatementsAdapter(
         val statementDetailModel = statementDetailModels[position]
         holder.loyaltyStatementListItemBinding.statement = statementDetailModel
         holder.loyaltyStatementListItemBinding.root.tvDate.text = statementDetailModel.date.toFormattedDate()
+        holder.loyaltyStatementListItemBinding.root.tvId.text = statementDetailModel.transactionId
         val points = context?.getString(R.string.points)?.let {
             String.format(it, statementDetailModel.points.roundOff().toFormattedAmount())
         }

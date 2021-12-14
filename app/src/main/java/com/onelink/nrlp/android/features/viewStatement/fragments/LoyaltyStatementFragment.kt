@@ -15,6 +15,7 @@ import com.onelink.nrlp.android.features.viewStatement.models.StatementDetailMod
 import com.onelink.nrlp.android.features.viewStatement.viewmodel.LoyaltyStatementFragmentViewModel
 import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
 import com.onelink.nrlp.android.utils.roundOff
+import com.onelink.nrlp.android.utils.setLoyaltyCard
 import com.onelink.nrlp.android.utils.setLoyaltyCardBackground
 import com.onelink.nrlp.android.utils.toFormattedAmount
 import dagger.android.support.AndroidSupportInjection
@@ -62,8 +63,10 @@ class LoyaltyStatementFragment :
         UserData.getUser()?.let {
             binding.lyLoyaltyPointsBalance.tvPoints.text =
                 it.loyaltyPoints?.roundOff()?.toFormattedAmount()
+            binding.lyLoyaltyPointsBalance.tvName.text = it.fullName
+            binding.lyLoyaltyPointsBalance.tvMemberSince.text = it.memberSince
             context?.let { context ->
-                binding.lyLoyaltyPointsBalance.ivHomeBgLoyaltyCard.setLoyaltyCardBackground(
+                binding.lyLoyaltyPointsBalance.ivHomeBgLoyaltyCard.setLoyaltyCard(
                     context, it.loyaltyLevel
                 )
             }

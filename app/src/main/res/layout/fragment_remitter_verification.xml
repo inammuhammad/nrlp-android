@@ -83,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/unit_0dp"
                 android:text="@string/amount_prefix"
-                android:textColor="@color/grey"
+                android:textColor="@color/pure_black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

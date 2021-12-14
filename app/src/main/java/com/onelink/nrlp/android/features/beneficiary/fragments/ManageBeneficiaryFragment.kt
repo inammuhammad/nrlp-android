@@ -1,12 +1,16 @@
 package com.onelink.nrlp.android.features.beneficiary.fragments
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.onelink.nrlp.android.R
 import com.onelink.nrlp.android.core.BaseFragment
 import com.onelink.nrlp.android.core.Status
+import com.onelink.nrlp.android.data.local.UserData
 import com.onelink.nrlp.android.databinding.FragmentManageBeneficiaryBinding
 import com.onelink.nrlp.android.features.beneficiary.adapter.BeneficiariesAdapter
 import com.onelink.nrlp.android.models.BeneficiaryDetailsModel
@@ -49,7 +53,10 @@ class ManageBeneficiaryFragment : BaseFragment<ManageBeneficiaryViewModel, Fragm
     }
 
     private fun initObservers() {
+        val sharedPref = activity?.getSharedPreferences("beneficiarySp", Context.MODE_PRIVATE)
+        val limit = sharedPref?.getInt("no_of_beneficiaries_allowed", 0)
         viewModel.observeAllBeneficiaries().observe(this, Observer { response ->
+            binding.btnNext.isEnabled = true
             when (response.status) {
                 Status.SUCCESS -> {
                     oneLinkProgressDialog.hideProgressDialog()
@@ -61,7 +68,8 @@ class ManageBeneficiaryFragment : BaseFragment<ManageBeneficiaryViewModel, Fragm
                             binding.rvBeneficiaries.setHasFixedSize(true)
                             binding.rvBeneficiaries.adapter =
                                 BeneficiariesAdapter(context, beneficiariesList)
-                            binding.btnNext.isEnabled = beneficiariesList.size < 3
+                            binding.btnNext.isEnabled = beneficiariesList.size < limit!!
+                            //Toast.makeText(context, limit.toString(), Toast.LENGTH_LONG).show()
                         } else {
                             binding.lyNoBeneficiary.visibility = View.VISIBLE
                             binding.lyBeneficiariesList.visibility = View.GONE

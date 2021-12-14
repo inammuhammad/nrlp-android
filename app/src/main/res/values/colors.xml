@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#FFFFFF</color>
     <color name="colorAccent">@color/green</color>
 
-    <color name="grey">#DADADA</color>
+    <color name="grey">#F4EFEF</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#181818</color>
     <color name="pure_black">#000000</color>
@@ -19,4 +19,5 @@
     <color name="disabled_tv">#50181818</color>
     <color name="grey_cell">#F5F5F5</color>
     <color name="password_hint_color">#8b8b8b</color>
+    <color name="nonEditableText">#bbbbbb</color>
 </resources>

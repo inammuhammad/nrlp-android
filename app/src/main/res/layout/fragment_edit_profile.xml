@@ -279,7 +279,7 @@
                             android:layout_height="wrap_content"
                             android:enabled="false"
                             android:hint="@string/resident_id"
-                            android:inputType="number"
+                            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
                             android:maxLength="50"
                             android:text="@={viewModel.residentId}" />
                     </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
@@ -432,7 +432,7 @@
             style="@style/ButtonTheme"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:enabled="@{viewModel.isDifferentMobileNumber() || viewModel.isDifferentEmailAddress() || viewModel.isDifferentResidentId() || viewModel.isDifferentPassportType() || viewModel.isDifferentPassportId()}"
+            android:enabled="@{viewModel.isDifferentMobileNumber() || viewModel.isDifferentEmailAddress() || viewModel.isDifferentResidentId() || viewModel.isDifferentPassportType() || viewModel.isDifferentPassportId() || viewModel.isDifferentCountry() }"
             android:text="@string/save"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"

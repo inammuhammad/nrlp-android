@@ -2,8 +2,10 @@
 
 package com.onelink.nrlp.android.core
 
+import android.os.Build
 import android.view.KeyEvent
 import android.view.MotionEvent
+import android.widget.Toast
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.onelink.nrlp.android.R
@@ -144,7 +146,13 @@ abstract class BaseFragmentActivity<DB : ViewDataBinding, VM : BaseViewModel>(vi
      *Hides keyboard when clicked anywhere outside EditText
      */
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
-        hideKeyboard()
+        //if(ev?.action == MotionEvent.ACTION_DOWN)
+        /*if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q && !Build.MANUFACTURER.contains("samsung", true))
+            hideKeyboard()
+        else*/
+        if (!(Build.VERSION.SDK_INT > Build.VERSION_CODES.Q && Build.MANUFACTURER.contains("samsung", true))) {
+            hideKeyboard() //do nothong if android v > 10 and device is samsung
+        }
         return super.dispatchTouchEvent(ev)
     }
 

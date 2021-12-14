@@ -45,7 +45,7 @@ class HomeUtilsTest {
             HomeTileModel(
                 HomeTileUtils.SELF_AWARD_POINTS,
                 R.string.self_award_points,
-                R.drawable.ic_self_award_points_tile
+                R.drawable.ic_self_award_points_update
             )
         )
 

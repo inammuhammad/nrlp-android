@@ -10,7 +10,8 @@ data class LoginResponseModel(
     @SerializedName("user") val loginModel: LoginModel,
     @SerializedName("expires_in") val expiresIn: String,
     @SerializedName("in_activity_time") val inActivityTime: String,
-    @SerializedName("session_key") val sessionKey: String
+    @SerializedName("session_key") val sessionKey: String,
+    @SerializedName("no_of_beneficiaries_allowed") val no_of_beneficiaries_allowed: Int
 )
 
 data class LoginModel(
@@ -24,7 +25,11 @@ data class LoginModel(
     @SerializedName("email") val email: String?,
     @SerializedName("user_type") val userType: String,
     @SerializedName("loyalty_level") val loyaltyLevel: String,
-    @SerializedName("loyalty_points") val loyaltyPoints: BigDecimal
+    @SerializedName("loyalty_points") val loyaltyPoints: BigDecimal,
+    @SerializedName("usd_balance") val usdBalance: BigDecimal,
+    @SerializedName("member_since") val memberSince: String?,
+    @SerializedName("redeemable_pkr") val redeemablePkr: String?
+
 ) {
     companion object {
         fun emptyObj() = LoginModel(
@@ -38,7 +43,10 @@ data class LoginModel(
             "",
             "",
             "Bronze",
-            "0".toBigDecimal()
+            "0".toBigDecimal(),
+            "0".toBigDecimal(),
+            "",
+            ""
         )
     }
 }

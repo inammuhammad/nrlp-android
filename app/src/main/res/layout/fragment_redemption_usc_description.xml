@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.onelink.nrlp.android.features.redeem.viewmodels.RedemptionUSCDescriptionViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:clickable="true"
+            android:visibility="visible"
+            android:focusable="true">
+
+            <include
+                android:id="@+id/lyLoyaltyPointsBalance"
+                layout="@layout/ly_loyalty_points_balance"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:id="@+id/title_pia"
+                android:textSize="@dimen/_15sdp"
+                style="@style/TextViewMediumBold"
+                app:layout_constraintTop_toBottomOf="@+id/lyLoyaltyPointsBalance"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="@dimen/_14sdp"
+                android:text="Utility Stores"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:id="@+id/descp_pia"
+                style="@style/TextViewMedium"
+                android:textSize="@dimen/_15sdp"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@+id/title_pia"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="@dimen/_24sdp"
+                android:text="@string/usc_description"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:id="@+id/lytPosNegButtons"
+                app:layout_constraintTop_toBottomOf="@+id/descp_pia"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <Button
+                    android:id="@+id/btnPositive"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    style="@style/DialogPositiveButtonTheme"
+                    android:enabled="true"
+                    android:text="@string/next" />
+
+                <Button
+                    android:id="@+id/btnNegative"
+                    style="@style/DialogNegativeButtonTheme"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:enabled="true"
+                    android:text="@string/cancel" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

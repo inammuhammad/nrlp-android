@@ -2,6 +2,7 @@ package com.onelink.nrlp.android.features.redeem.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -13,7 +14,8 @@ import com.onelink.nrlp.android.utils.toFormattedAmount
 class RedemServiceAdapter(
     private val context: Context?,
     private val redeemModels: List<RedeemCategoryModel>,
-    private val listener: OnItemClickListener
+    private val listener: OnItemClickListener,
+    private val partner: String = ""
 ) : RecyclerView.Adapter<RedemServiceAdapter.BeneficiaryViewHolder>() {
     override fun getItemCount() = redeemModels.size
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = BeneficiaryViewHolder(
@@ -35,6 +37,8 @@ class RedemServiceAdapter(
         holder.redemPartnerCellBinding.root.setOnClickListener {
             listener.onItemClicked(redeemModel)
         }
+        if (partner.contains("SLIC", true))
+            holder.redemPartnerCellBinding.pendingTextView.visibility = View.GONE
     }
 
     interface OnItemClickListener {

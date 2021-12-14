@@ -56,7 +56,10 @@ open class LoginRepo @Inject constructor(
             loyaltyPoints = loginResponseModel.loginModel.loyaltyPoints,
             sessionKey =  loginResponseModel.sessionKey,
             inActiveTime = loginResponseModel.inActivityTime.toLong(),
-            expiresIn = loginResponseModel.expiresIn.toLong()
+            expiresIn = loginResponseModel.expiresIn.toLong(),
+            usdBalance = loginResponseModel.loginModel.usdBalance,
+            memberSince = loginResponseModel.loginModel.memberSince,
+            redeemable_pkr = loginResponseModel.loginModel.redeemablePkr
         )
     }
 

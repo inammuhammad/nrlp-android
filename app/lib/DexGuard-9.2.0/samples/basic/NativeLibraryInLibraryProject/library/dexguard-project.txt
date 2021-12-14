@@ -1,0 +1,18 @@
+# Display some more statistics about the processed code.
+-verbose
+
+# Encrypt the native libraries.
+# By including the native loader library DexGuard will use the
+# native loader to load these encrypted native libraries.
+-encryptnativelibraries jni/**/libsecret.so
+
+# We can also encrypt the JNI class.
+-encryptclasses com.example.jni.NativeSecret
+
+# Repackage all obfuscated classes to an internal package.
+-repackageclasses com.example.internal
+
+# Explicitly specify the public API of our library.
+-keep,asapi public class com.example.Library {
+    public protected *;
+}

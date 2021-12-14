@@ -22,46 +22,77 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/first_heading"
+                android:visibility="gone"
                 style="@style/TextViewHeading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="@dimen/margin_small"
                 android:text="@string/nlrp_title"
-                app:layout_constraintBottom_toTopOf="@id/sub_heading_cnic"
+                app:layout_constraintBottom_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/iv_app_logo"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"
                 android:layout_marginEnd="@dimen/margin_large"
+                app:layout_constraintStart_toStartOf="parent"
                 android:contentDescription="@null"
-                android:src="@drawable/nrlp_logo"
-                app:layout_constraintBottom_toTopOf="@id/sub_heading_cnic"
+                android:src="@drawable/ic_sohni_dharti"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layout_constraintBottom_toTopOf="@id/tv_sec_mesg"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/first_heading"
                 app:layout_constraintVertical_bias="0" />
+
+            <TextView
+                android:id="@+id/tv_sec_mesg"
+                style="@style/TextViewMediumNoMarginsLite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_large"
+                android:text="@string/dont_have_account"
+                android:layout_marginEnd="@dimen/_50sdp"
+                android:layout_marginTop="@dimen/_40sdp"
+                app:layout_constraintTop_toBottomOf="@id/iv_app_logo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_sec_reg"
+                style="@style/TextViewSubHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/unit_4dp"
+                android:text="@string/register"
+                android:textColor="@color/green"
+                android:textSize="@dimen/unit_14sp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_sec_mesg"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toEndOf="@id/tv_sec_mesg" />
 
             <TextView
                 android:id="@+id/sub_heading_cnic"
                 style="@style/TextViewSubHeading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/unit_40dp"
+                android:layout_marginTop="@dimen/_30sdp"
                 android:text="@string/cnic_nicop_number"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/first_heading" />
+                app:layout_constraintTop_toBottomOf="@id/tv_sec_mesg" />
 
             <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
                 android:id="@+id/til_cnic"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/unit_8dp"
                 app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
@@ -102,7 +133,8 @@
 
             <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
                 android:id="@+id/til_pass"
-                android:layout_width="0dp"
+                app:passwordToggleEnabled="true"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/unit_8dp"
                 app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
@@ -192,42 +224,30 @@
             <Button
                 android:id="@+id/btnLogin"
                 style="@style/ButtonTheme"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_extra_large"
                 android:enabled="@{viewModel.isValidNIC() &amp;&amp; viewModel.isPasswordValid() &amp;&amp; viewModel.isAccountTypeSelected()}"
                 android:text="@string/login"
-                app:layout_constraintBottom_toTopOf="@id/tv_sec_mesg"
+                app:layout_constraintBottom_toTopOf="@id/tv_benefits_link"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/rg_select_account_type"
                 app:layout_constraintVertical_bias="1" />
 
-            <TextView
-                android:id="@+id/tv_sec_mesg"
-                style="@style/TextViewMediumNoMarginsLite"
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_benefits_link"
+                style="@style/TextViewSubHeading"
+                android:textSize="@dimen/unit_14sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_large"
-                android:text="@string/dont_have_account"
+                android:text="@string/view_remittance_benefits"
+                android:textColor="@color/black"
                 app:layout_constraintBottom_toTopOf="@+id/tv_about_nrlp"
-                app:layout_constraintEnd_toStartOf="@id/tv_sec_reg"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent" />
-
-            <TextView
-                android:id="@+id/tv_sec_reg"
-                style="@style/TextViewSubHeading"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/unit_4dp"
-                android:text="@string/register"
-                android:textColor="@color/green"
-                android:textSize="@dimen/unit_14sp"
-                app:layout_constraintBottom_toBottomOf="@id/tv_sec_mesg"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0"
-                app:layout_constraintStart_toEndOf="@id/tv_sec_mesg" />
 
             <com.onelink.nrlp.android.utils.TextViewNoUnderline
                 android:id="@+id/tv_about_nrlp"

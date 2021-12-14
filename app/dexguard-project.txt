@@ -1,0 +1,340 @@
+# Add project specific ProGuard rules here.
+# By default, the flags in this file are appended to flags specified
+# in /Applications/Android Studio.app/sdk/tools/proguard/proguard-android.txt
+# You can edit the include path and order by changing the ProGuard
+# include property in project.properties.
+#
+# For more details, see
+#   http://developer.android.com/guide/developing/tools/proguard.html
+
+# Add any project specific keep options here:
+
+# If your project uses WebView with JS, uncomment the following
+# and specify the fully qualified class conversation_id to the JavaScript interface
+
+
+-repackageclasses
+
+#Data Class in Local Directory
+-keep class com.onelink.nrlp.android.data.local**{
+    public ** component1();
+    <fields>;
+}
+-keep class com.onelink.nrlp.android.features.select.country.model**{
+    public ** component1();
+    <fields>;
+}
+-keep class com.onelink.nrlp.android.features.login.model**{
+    public ** component1();
+    <fields>;
+}
+
+-keep class com.onelink.nrlp.android.features.viewStatement.models**{
+    public ** component1();
+    <fields>;
+}
+
+-keep class com.onelink.nrlp.android.core**{
+    public ** component1();
+    <fields>;
+}
+
+-keep class com.onelink.nrlp.android.features.beneficiary.models**{
+    public ** component1();
+    <fields>;
+}
+
+-keep class com.onelink.nrlp.android.features.changePassword.models**{
+    public ** component1();
+    <fields>;
+}
+
+-keep class com.onelink.nrlp.android.features.faqs.model**{
+    public ** component1();
+    <fields>;
+}
+
+-keep class com.onelink.nrlp.android.features.forgotPassword.models**{
+    public ** component1();
+    <fields>;
+}
+
+-keep class com.onelink.nrlp.android.features.home.sidemenu**{
+    public ** component1();
+    <fields>;
+}
+
+-keep class com.onelink.nrlp.android.features.profile.models**{
+    public ** component1();
+    <fields>;
+}
+
+-keep class com.onelink.nrlp.android.features.redeem.model**{
+    public ** component1();
+    <fields>;
+}
+
+-keep class com.onelink.nrlp.android.features.register.models**{
+    public ** component1();
+    <fields>;
+}
+
+-keep class com.onelink.nrlp.android.features.select.country.model**{
+    public ** component1();
+    <fields>;
+}
+
+-keep class com.onelink.nrlp.android.features.viewStatement.models**{
+    public ** component1();
+    <fields>;
+}
+
+-keep class com.onelink.nrlp.android.models**{
+    public ** component1();
+    <fields>;
+}
+
+-keep class com.onelink.nrlp.android.utils.view.hometiles**{
+    public ** component1();
+    <fields>;
+}
+
+-keep class com.onelink.nrlp.android.features.managePoints.model**{
+    public ** component1();
+    <fields>;
+}
+
+-keep class com.onelink.nrlp.android.features.home.model**{
+    public ** component1();
+    <fields>;
+}
+
+-keep class com.onelink.nrlp.android.features.uuid.model**{
+    public ** component1();
+    <fields>;
+}
+
+-keep class com.onelink.nrlp.android.features.nrlpBenefits.model**{
+    public ** component1();
+    <fields>;
+}
+
+#Custom Views
+
+-keep class com.onelink.nrlp.android.common.views**{
+    <fields>;
+    <methods>;
+    <init>();
+}
+
+
+-assumenosideeffects class android.util.Log {
+    public static *** e(...);
+    public static *** d(...);
+    public static *** i(...);
+    public static *** v(...);
+    public static *** w(...);
+    public static *** wtf(...);
+}
+
+-keep public class * extends android.app.Activity
+-keep public class * extends androidx.appcompat.app.AppCompatActivity
+-keep public class * extends android.app.Fragment
+-keep public class * extends androidx.fragment.app.Fragment
+-keep public class * extends android.app.Application
+-keep public class * extends android.app.Service
+-keep public class * extends android.content.BroadcastReceiver
+-keep public class * extends android.content.ContentProvider
+-keep public class * extends android.preference.Preference
+
+-keep public class * extends android.view.View {
+ public <init>(android.content.Context);
+ public <init>(android.content.Context, android.util.AttributeSet);
+ public <init>(android.content.Context, android.util.AttributeSet, int);
+ public void set*(...);
+}
+
+-keepclasseswithmembers class * {
+ public <init>(android.content.Context, android.util.AttributeSet);
+}
+
+-keepclasseswithmembers class * {
+ public <init>(android.content.Context, android.util.AttributeSet, int);
+}
+-keepclassmembers enum * {
+ public static **[] values();
+ public static ** valueOf(java.lang.String);
+}
+
+-keepclassmembers class **.R$* {
+ public static <fields>;
+}
+
+#Debugging & Stack Traces
+-keepattributes *Annotation*
+-keepattributes SourceFile,LineNumberTable
+-keep public class * extends java.lang.Exception
+
+
+
+# Retrofit does reflection on generic parameters. InnerClasses is required to use Signature and
+# EnclosingMethod is required to use InnerClasses.
+-keepattributes Signature, InnerClasses, EnclosingMethod
+
+# Retrofit does reflection on method and parameter annotations.
+-keepattributes RuntimeVisibleAnnotations, RuntimeVisibleParameterAnnotations
+
+# Retain service method parameters when optimizing.
+-keepclassmembers,allowshrinking,allowobfuscation interface * {
+    @retrofit2.http.* <methods>;
+}
+
+# Ignore annotation used for build tooling.
+-dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
+
+# Ignore JSR 305 annotations for embedding nullability information.
+-dontwarn javax.annotation.**
+
+# Guarded by a NoClassDefFoundError try/catch and only used when on the classpath.
+-dontwarn kotlin.Unit
+
+# Top-level functions that can only be used by Kotlin.
+-dontwarn retrofit2.KotlinExtensions
+-dontwarn retrofit2.KotlinExtensions*
+
+# With R8 full mode, it sees no subtypes of Retrofit interfaces since they are created with a Proxy
+# and replaces all potential values with null. Explicitly keeping the interfaces prevents this.
+-if interface * { @retrofit2.http.* <methods>; }
+-keep,allowobfuscation interface <1>
+
+# OKHTTP
+
+# JSR 305 annotations are for embedding nullability information.
+-dontwarn javax.annotation.**
+
+# A resource is loaded with a relative path so the package of this class must be preserved.
+-keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
+
+# Animal Sniffer compileOnly dependency to ensure APIs are compatible with older versions of Java.
+-dontwarn org.codehaus.mojo.animal_sniffer.*
+
+# OkHttp platform used only on JVM and when Conscrypt dependency is available.
+-dontwarn okhttp3.internal.platform.ConscryptPlatform
+
+#OKIO
+
+# Animal Sniffer compileOnly dependency to ensure APIs are compatible with older versions of Java.
+-dontwarn org.codehaus.mojo.animal_sniffer.*
+
+-printmapping build/out.map
+-keepattributes SourceFile,LineNumberTable        # Keep file names and line numbers.
+-keep public class * extends java.lang.Exception  # Optional: Keep custom exceptions.
+-dontwarn java.lang.invoke.*
+-dontnote com.newrelic.agent.android.NewRelic
+-dontnote com.newrelic.agent.android.harvest.crash.Crash
+## LIBRARY: Retrofit
+-keep class org.apache.http.** { *; }
+-keep class org.apache.james.mime4j.** { *; }
+-keep class javax.inject.** { *; }
+-keep class retrofit.** { *; }
+-keepclasseswithmembers class * {
+    @retrofit.http.* <methods>;
+}
+-dontwarn rx.**
+-dontwarn retrofit.**
+-dontwarn com.google.appengine.**
+
+## LIBRARY: GSON
+-keep class com.google.gson.** { *; }
+-keep class com.google.inject.** { *; }
+-dontwarn com.google.gson.**
+
+# Gson uses generic type information stored in a class file when working with
+# fields. Proguard removes such information by default, so configure it to keep
+# all of it. Facebook SDK Also requires this.
+-keepattributes Signature
+
+-keepclassmembers enum * {
+     public static **[] values();
+     public static ** valueOf(java.lang.String);
+}
+
+# For using GSON @Expose annotation
+-keepattributes *Annotation*
+
+# Gson specific classes
+-keep class sun.misc.Unsafe { *; }
+## LIBRARY: OkHttp
+-keep class com.squareup.okhttp.** { *; }
+-keep interface com.squareup.okhttp.** { *; }
+-dontwarn com.squareup.okhttp.**
+-dontwarn okio.**
+## Crashlytics
+-keep class com.crashlytics.** { *; }
+
+-keepclasseswithmembernames class * {
+    native <methods>;
+}
+
+# Keep all public constructors of all public classes, but still obfuscate+optimize their content.
+# This is necessary because optimization removes constructors which are called through XML.
+-keepclasseswithmembers class * {
+    public <init>(android.content.Context, android.util.AttributeSet, int);
+    public <init>(android.content.Context, android.util.AttributeSet);
+    public <init>(android.content.Context);
+}
+-keepclassmembers class * extends android.app.Activity {
+    public void *(android.view.View);
+}
+-keepclassmembers class **.R$* {
+    public static <fields>;
+}
+
+# Keep serializable objects
+-keepclassmembers class * implements java.io.Serializable {
+    private static final java.io.ObjectStreamField[] serialPersistentFields;
+    private void writeObject(java.io.ObjectOutputStream);
+    private void readObject(java.io.ObjectInputStream);
+    java.lang.Object writeReplace();
+    java.lang.Object readResolve();
+}
+
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+
+-keep class * implements android.os.Parcelable {
+    public static final android.os.Parcelable$Creator *;
+}
+
+-keep class * extends java.util.ListResourceBundle {
+    protected Object[][] getContents();
+}
+##########################
+## SECURITY             ##
+##########################
+
+# Remove VERBOSE and DEBUG level log statements
+-assumenosideeffects class android.util.Log {
+    public static *** d(...);
+    public static *** v(...);
+}
+
+
+-keep class com.google.firebase.** { *; }
+-keep class kotlinx.coroutines.experimental.android.AndroidExceptionPreHandler { *; }
+-keep class com.onelink.nrlp.android.utils.AESEncryptionHelper** { *; }
+-keep class com.onelink.nrlp.android.data.interceptors.EncryptionInterceptor** { *; }
+-keep class com.onelink.nrlp.android.features.login.** {
+    public ** component1();
+    <fields>;
+}
+-keep class com.onelink.nrlp.android.utils.** {
+    public ** component1();
+    <fields>;
+}
+-keep class com.onelink.nrlp.android.features** {
+    public ** component1();
+    <fields>;
+}

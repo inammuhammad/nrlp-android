@@ -5,6 +5,16 @@
         <item>@string/beneficiary</item>
     </string-array>
 
+    <string-array name="benificiaryRelationTypes">
+        <item>@string/mother</item>
+        <item>@string/father</item>
+        <item>@string/brother</item>
+        <item>@string/sister</item>
+        <item>@string/child</item>
+        <item>@string/spouse</item>
+        <item>@string/other</item>
+    </string-array>
+
     <string-array name="passportTypes">
         <item>@string/international_passport</item>
         <item>@string/pakistani_passport</item>

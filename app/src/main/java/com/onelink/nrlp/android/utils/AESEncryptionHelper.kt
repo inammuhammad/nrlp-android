@@ -1,6 +1,7 @@
 package com.onelink.nrlp.android.utils
 
 import android.util.Base64
+import java.lang.Exception
 import javax.crypto.Cipher
 import javax.crypto.spec.IvParameterSpec
 import javax.crypto.spec.SecretKeySpec
@@ -30,7 +31,14 @@ object AESEncryptionHelper {
         }
         val byteStr =
             Base64.decode(str.toByteArray(Charsets.UTF_8), Base64.DEFAULT)
-        return String(cipher(Cipher.DECRYPT_MODE, secretKey, initializationVector).doFinal(byteStr))
+        try {
+            return String(
+                cipher(Cipher.DECRYPT_MODE, secretKey, initializationVector).doFinal(
+                    byteStr
+                )
+            )
+        }catch (e: Exception){}
+        return str
     }
 
     private fun cipher(opMode: Int, secretKey: String, initializationVector: String): Cipher {

@@ -14,6 +14,7 @@ class Constants {
 
         const val INTENT_KEY_ACCOUNT_TYPE = "account_type"
         const val SPINNER_ACCOUNT_TYPE_HINT = "Account Type"
+        const val SPINNER_BENEFICIARY_HINT = "Beneficiary Relation"
         const val SPINNER_PASSPORT_TYPE_HINT = "Passport Type"
         const val SOMETHING_WENT_WRONG = "Something unexpected happened. Please try again."
     }
@@ -24,6 +25,7 @@ object ErrorCodesConstants {
     const val SERVER_ERROR = "SERVER-ERROR"
     const val SESSION_EXPIRED = "GEN-ERR-08"
     const val UNVERIFIED_DEVICE = "AUTH-LOG-02"
+    const val UNSUCCESSFUL_TRANSACTION_FETCH = "AUTH-VRN-06"
 }
 
 
@@ -31,6 +33,7 @@ object IntentConstants {
     const val TRANSACTION_ID = "transaction_id"
     const val PARTNER_NAME = "partner_name"
     const val REDEEM_POINTS = "redeem_points"
+    const val PSID = "psid"
     const val LOGIN_CREDENTIALS_PARCELABLE = "login_credentials_parcelable"
     const val IS_FROM_SPLASH = "is_from_splash"
     const val SELF_AWARD_VERIFY_OTP_Message = "self_award_verify_otp_message"
@@ -72,10 +75,10 @@ object PlayStoreConstants {
 }
 
 object UriConstants {
-    const val Phone_NO = "+92 111 116 757"
+    const val Phone_NO = "+92 21 111 116 757"
     const val Email = "support@nrlp.com.pk"
     const val Web = "www.NRLP.com.pk"
-    const val ABOUT_NRLP_URL = "https://1link.net.pk/product-services/"
+    const val ABOUT_NRLP_URL = "https://1link.net.pk/sohni-dharti/#1633123604420-798e6f70-2ecf"
 }
 
 object Sp {

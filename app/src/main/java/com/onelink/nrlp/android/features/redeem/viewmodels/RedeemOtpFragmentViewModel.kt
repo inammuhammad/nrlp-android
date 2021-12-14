@@ -3,6 +3,8 @@ package com.onelink.nrlp.android.features.redeem.viewmodels
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import com.onelink.nrlp.android.core.BaseViewModel
+import com.onelink.nrlp.android.features.redeem.model.RedeemCompletionFBRRequestModel
+import com.onelink.nrlp.android.features.redeem.model.RedeemCompletionRequestModel
 import com.onelink.nrlp.android.features.redeem.model.RedeemResendOTPRequestModel
 import com.onelink.nrlp.android.features.redeem.model.VerifyRedeemOTPRequestModel
 import com.onelink.nrlp.android.features.redeem.repo.RedemptionRepo
@@ -20,6 +22,15 @@ class RedeemOtpFragmentViewModel @Inject constructor(private val redPartnerRepo:
         redPartnerRepo.verifyRedeemOTP(verifyRedeemOTPRequestModel)
 
     fun observeRedeemOTP() = redPartnerRepo.observeRedeemOTP()
+
+    fun observeRedeemSuccess() = redPartnerRepo.observeRedeemFBRSuccess()
+
+    private fun completeRedemption(redeemCompletionRequestModel: RedeemCompletionRequestModel) =
+        redPartnerRepo.completeRedemption(redeemCompletionRequestModel)
+
+    private fun completeRedemptionFBR(redeemCompletionFBRRequestModel: RedeemCompletionFBRRequestModel) =
+        redPartnerRepo.completeRedemptionFBR(redeemCompletionFBRRequestModel)
+
 
     fun verifyRedeemResendOTP() = redPartnerRepo.verifyRedeemResendOTP(
         RedeemResendOTPRequestModel(
@@ -64,5 +75,13 @@ class RedeemOtpFragmentViewModel @Inject constructor(private val redPartnerRepo:
 
     fun getOTPCode(): String {
         return etOTP1.value + etOTP2.value + etOTP3.value + etOTP4.value
+    }
+
+    fun makeCompleteRedemptionCall() {
+        completeRedemptionFBR(
+            RedeemCompletionFBRRequestModel(
+                transactionId = transactionId.value
+            )
+        )
     }
 }
