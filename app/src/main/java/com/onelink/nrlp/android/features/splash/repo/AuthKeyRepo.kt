@@ -8,6 +8,7 @@ import com.onelink.nrlp.android.data.ServiceGateway
 import com.onelink.nrlp.android.utils.AESEncryptionHelper
 import com.onelink.nrlp.android.data.local.UserData
 import com.onelink.nrlp.android.features.splash.model.AuthResponseModel
+import com.onelink.nrlp.android.utils.Constants
 import com.onelink.nrlp.android.utils.IdentityKeyUtils
 import com.onelink.nrlp.android.utils.LukaKeRakk
 import java.util.*
@@ -26,7 +27,7 @@ open class AuthKeyRepo @Inject constructor(
             serviceGateway.getAuthKey(
                 accountType.toLowerCase(Locale.getDefault()),
                 "",
-                "69ylzdfq2uem9fdkbl713m7nl9taggbna3fq06q7" //UserData.appChecksum ?: ""
+                Constants.checkSum //UserData.appChecksum ?: ""
             )
         )
             .observeForever {

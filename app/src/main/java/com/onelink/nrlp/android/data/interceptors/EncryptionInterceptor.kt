@@ -69,7 +69,7 @@ class EncryptionInterceptor(val context: Context) : Interceptor {
         addOrRemoveHeader(
             encryptedRequest,
             HeaderConstants.APPLICATION_VERSION,
-            UserData.appChecksum ?: "", headers, keyIV
+            Constants.checkSum , headers, keyIV
         )
 
         return encryptedRequest

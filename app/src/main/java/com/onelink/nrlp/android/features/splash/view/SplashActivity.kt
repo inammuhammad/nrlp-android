@@ -12,10 +12,7 @@ import com.onelink.nrlp.android.databinding.SplashActivityBinding
 import com.onelink.nrlp.android.features.language.view.LanguageActivity
 import com.onelink.nrlp.android.features.login.view.LoginActivity
 import com.onelink.nrlp.android.features.splash.viewmodel.SplashViewModel
-import com.onelink.nrlp.android.utils.IdentityKeyUtils
-import com.onelink.nrlp.android.utils.LocaleManager
-import com.onelink.nrlp.android.utils.LukaKeRakk
-import com.onelink.nrlp.android.utils.SgTils
+import com.onelink.nrlp.android.utils.*
 import javax.inject.Inject
 
 /**
@@ -42,7 +39,7 @@ class SplashActivity : BaseFragmentActivity<SplashActivityBinding, SplashViewMod
 
     override fun initViewModel(viewModel: SplashViewModel) {
         viewModel.clearUserData()
-        viewModel.updateCheckSum(SgTils.getSingInfo(this))
+        viewModel.updateCheckSum(Constants.checkSum)    //(SgTils.getSingInfo(this))
         println("checksum value is " + SgTils.getSingInfo(this))
         //viewModel.updateCheckSum("446fd81a1ac6cccb861025481b448c345d0084d1")
         Handler(Looper.getMainLooper()).postDelayed({
