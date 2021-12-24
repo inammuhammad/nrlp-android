@@ -771,8 +771,8 @@ class RegisterAccountFragment :
         binding.etPhoneNumber.isEnabled = true
         binding.tvCountryCode.colorToText(R.color.black)
         binding.etPhoneNumber.hint = viewModel.phoneNumberHint(countryCodeModel.length.toInt())
-        binding.etPhoneNumber.filters =
-            arrayOf(InputFilter.LengthFilter(countryCodeModel.length.toInt()))
+        /*binding.etPhoneNumber.filters =
+            arrayOf(InputFilter.LengthFilter(countryCodeModel.length.toInt()))*/
         fragmentHelper.onBack()
        // binding.etPhoneNumber.setText("")
         //binding.etPhoneNumber.requestFocus()

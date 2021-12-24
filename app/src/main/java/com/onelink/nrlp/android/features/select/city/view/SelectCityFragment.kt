@@ -57,7 +57,7 @@ class SelectCityFragment(type: String = "beneficiary") :
         }
     }
 
-    override fun getTitle(): String = resources.getString(R.string.select_country_title)
+    override fun getTitle(): String = resources.getString(R.string.select_place_of_birth_title)
 
     override fun onInject() {
         AndroidSupportInjection.inject(this)

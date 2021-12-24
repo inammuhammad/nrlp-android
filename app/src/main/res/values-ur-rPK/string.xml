@@ -71,6 +71,7 @@
     <string name="transfer">منتقلی</string>
     <string name="loyalty_points">لوائلٹی پوائنٹس</string>
     <string name="generic_name_placeholder">Muhammad Ali</string>
+    <string name="generic_date_placeholder">14-Aug-47</string>
     <string name="current_point_balance">موجودہ پوائنٹ بیلنس</string>
     <string name="view_statements">اسٹیٹمنٹ دیکھیں</string>
     <string name="hint_x">x</string>
@@ -131,6 +132,7 @@
     <string name="resend_otp">کوڈ دوبارہ بھیجیں</string>
     <string name="cnic_nicop_hint">42501–8053290–1</string>
     <string name="select_country">ملک منتخب کریں</string>
+    <string name="select_place_of_birth">Select Place Of Birth</string>
     <string name="select_resident_id">منفرد آئی ڈی</string>
     <string name="dummy_country">Algeria</string>
     <string name="mobile_num_hint">xxx xxxx xxx</string>
@@ -194,6 +196,7 @@
     <string name="home_title">مرکزی صفحہ</string>
     <string name="register_account_title">رجسٹر کریں</string>
     <string name="select_country_title">ملک منتخب کریں</string>
+    <string name="select_place_of_birth_title">Select Place Of Birth</string>
     <string name="faqs_title">مقرر پوچھے گئے سوالات</string>
     <string name="remitter_verification_title">بھیجنےوالے کی تصدیق</string>
     <string name="otp_verification_title">او ٹی پی کی تصدیق</string>

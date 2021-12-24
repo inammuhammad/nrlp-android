@@ -517,8 +517,8 @@ class BeneficiaryDetailsFragment :
         binding.etMobileNumber.isEnabled = true
         binding.etMobileNumber.hint = viewModel.phoneNumberHint(countryCodeModel.length.toInt())
         binding.etCountry.colorToText(R.color.pure_black)
-        binding.etMobileNumber.filters =
-            arrayOf(InputFilter.LengthFilter(countryCodeModel.length.toInt()))
+        /*binding.etMobileNumber.filters =
+            arrayOf(InputFilter.LengthFilter(countryCodeModel.length.toInt()))*/
         fragmentHelper.onBack()
         binding.etMobileNumber.setText("")
         binding.etMobileNumber.requestFocus()

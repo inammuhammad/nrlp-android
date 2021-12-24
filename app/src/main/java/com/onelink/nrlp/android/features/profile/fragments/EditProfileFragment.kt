@@ -502,8 +502,8 @@ class EditProfileFragment :
     }
 
     private fun setEditTextLengthFilter(length: Int) {
-        binding.etMobileNumber.filters =
-            arrayOf(InputFilter.LengthFilter(length))
+        /*binding.etMobileNumber.filters =
+            arrayOf(InputFilter.LengthFilter(length))*/
     }
 
     private fun getCountryIndex(countryCode: String?): Int {

@@ -98,7 +98,7 @@ class RegisterActivity :
         }
         else if (fragment is RegisterBeneficiaryFragment){
             listener = fragment
-            //listenerCity = fragment
+            listenerCity = fragment
         }
     }
 

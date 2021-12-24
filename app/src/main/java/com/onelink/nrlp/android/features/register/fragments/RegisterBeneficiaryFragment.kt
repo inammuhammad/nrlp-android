@@ -27,6 +27,7 @@ import com.onelink.nrlp.android.features.register.models.RegisterFlowDataModel
 import com.onelink.nrlp.android.features.register.view.RegisterActivity
 import com.onelink.nrlp.android.features.register.viewmodel.RegisterAccountFragmentViewModel
 import com.onelink.nrlp.android.features.register.viewmodel.SharedViewModel
+import com.onelink.nrlp.android.features.select.city.view.SelectCityFragment
 import com.onelink.nrlp.android.features.select.country.model.CountryCodeModel
 import com.onelink.nrlp.android.features.select.country.view.SelectCountryFragment
 import com.onelink.nrlp.android.utils.Constants
@@ -41,7 +42,7 @@ import javax.inject.Inject
 
 class RegisterBeneficiaryFragment : BaseFragment<RegisterAccountFragmentViewModel, FragmentRegisterBeneficiaryBinding>(
     RegisterAccountFragmentViewModel::class.java
-), SelectCountryFragment.OnSelectCountryListener {
+), SelectCountryFragment.OnSelectCountryListener, SelectCityFragment.OnSelectCityListener {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -331,8 +332,8 @@ class RegisterBeneficiaryFragment : BaseFragment<RegisterAccountFragmentViewMode
             binding.etPhoneNumber.isEnabled = true
             binding.tvCountryCode.colorToText(R.color.black)
             binding.etPhoneNumber.hint = viewModel.phoneNumberHint(countryCodeModel.length.toInt())
-            binding.etPhoneNumber.filters =
-                arrayOf(InputFilter.LengthFilter(countryCodeModel.length.toInt()))
+            /*binding.etPhoneNumber.filters =
+                arrayOf(InputFilter.LengthFilter(countryCodeModel.length.toInt()))*/
         })
     }
 
@@ -483,7 +484,7 @@ class RegisterBeneficiaryFragment : BaseFragment<RegisterAccountFragmentViewMode
         binding.tvPlaceOfBirth.setOnClickListener {
             tvCountryClicked = false
             fragmentHelper.addFragment(
-                SelectCountryFragment.newInstance(getUserType()),
+                SelectCityFragment.newInstance(getUserType()),
                 clearBackStack = false,
                 addToBackStack = true
             )
@@ -585,15 +586,9 @@ class RegisterBeneficiaryFragment : BaseFragment<RegisterAccountFragmentViewMode
 
     override fun onSelectCountryListener(countryCodeModel: CountryCodeModel) {
         countryCodeLength = countryCodeModel.length.toInt()
-        if(tvCountryClicked) {
-            viewModel.country.value = countryCodeModel.country
-            binding.tvCountry.colorToText(R.color.black)
-            binding.tvCountryCode.text = countryCodeModel.code
-        }
-        else {
-            viewModel.placeOfBirth.value = countryCodeModel.country
-            binding.tvPlaceOfBirth.colorToText(R.color.black)
-        }
+        viewModel.country.value = countryCodeModel.country
+        binding.tvCountry.colorToText(R.color.black)
+        binding.tvCountryCode.text = countryCodeModel.code
         binding.etPhoneNumber.isEnabled = true
         binding.tvCountryCode.colorToText(R.color.black)
         binding.etPhoneNumber.hint = viewModel.phoneNumberHint(countryCodeModel.length.toInt())
@@ -604,6 +599,13 @@ class RegisterBeneficiaryFragment : BaseFragment<RegisterAccountFragmentViewMode
         //binding.etPhoneNumber.requestFocus()
         //showKeyboard()
     }
+
+    override fun onSelectCityListener(countryCodeModel: CountryCodeModel) {
+        viewModel.placeOfBirth.value = countryCodeModel.country
+        binding.tvPlaceOfBirth.colorToText(R.color.black)
+        fragmentHelper.onBack()
+    }
+
 
     private fun getUserType(): String {
         val selectedType = binding.tvAccountType.text.toString()

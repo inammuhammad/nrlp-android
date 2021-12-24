@@ -41,7 +41,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/_14sdp"
-            android:text="Federal Bureau of Revenue"
+            android:text="Federal Board of Revenue"
             android:layout_height="wrap_content"/>
 
         <TextView
