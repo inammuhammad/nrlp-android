@@ -2,7 +2,10 @@
     <string name="app_name">Sohni Dharti</string>
     <string name="register_an_account">Register an Account</string>
     <string name="full_name">Full Name *</string>
+    <string name="mother_maiden_name">Mother Maiden Name *</string>
+    <string name="place_of_birth">Place of Birth *</string>
     <string name="cnic_nicop_number">CNIC/NICOP *</string>
+    <string name="cnic_nicop_issuance_date">CNIC/NICOP Issuance Date *</string>
     <string name="country">Country of Residence *</string>
     <string name="passport_no">Passport No. *</string>
     <string name="select_passport_no">Enter Passport No.</string>
@@ -31,6 +34,7 @@
     <string name="remittance_amount">Remittance Amount (In PKR)</string>
     <string name="remittance_amount_help">Enter exact amount as per your transaction receipt</string>
     <string name="remittance_date_help">Enter date on which transaction is made</string>
+    <string name="remittance_account_cnic_number_help">Enter Beneficiary Account Number or CNIC on which remittance is sent</string>
     <string name="remittance_date">Date of Remittance</string>
 
     <string name="enter_points">Enter Points</string>
@@ -70,6 +74,7 @@
     <string name="remitter_verification">Remitter Verification</string>
     <string name="beneficiary_verification_title">Beneficiary Verification</string>
     <string name="reference_number">Reference Number/TT Number</string>
+    <string name="beneficiary_account_number_cnic">Beneficiary Account Number/CNIC</string>
     <string name="transaction_amount">Transaction Amount</string>
     <string name="curPassword">Enter Old Password</string>
     <string name="newPassword">Enter New Password</string>
@@ -91,9 +96,9 @@
     <string name="dashboard">Dashboard</string>
     <string name="update_successful_message">You have successfully updated your password.</string>
     <string name="points_transfer_successful">Points Transferred Successfully</string>
-    <string name="register_success_msg_remitter">Thank you for registering. You can now earn Loyalty Points on your next remittance to Pakistan!</string>
+    <string name="register_success_msg_remitter">Thank you for registering. Your account will be activated within 5 working days upon successful verification of your provided details</string>
     <string name="you_have_successfully_transfered">You have successfully transferred %1$d points to %2$s.</string>
-    <string name="register_success_msg_beneficiary">Thank you for registering. You can now enjoy exciting benefits and rewards!</string>
+    <string name="register_success_msg_beneficiary">Thank you for registering. Your account will be activated within 5 working days upon successful verification of your provided details</string>
     <string name="done">Done</string>
     <string name="register">Register</string>
     <string name="reference_num_hint">xxxxxxxxxxxxxxxxx</string>
@@ -121,7 +126,7 @@
     <string name="email_hint">abc@abc.com</string>
     <string name="password_hint">Password@123</string>
     <string name="enter_registration_code_msg">Please enter registration code received on SMS</string>
-    <string name="registration_code">Registration Code</string>
+    <string name="registration_code">Registration Code *</string>
     <string name="terms_and_conditions">Terms &amp; Conditions</string>
     <string name="code_prefix">xx</string>
     <string name="cancel">Cancel</string>

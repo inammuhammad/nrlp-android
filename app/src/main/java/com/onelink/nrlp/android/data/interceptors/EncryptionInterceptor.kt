@@ -170,6 +170,9 @@ class EncryptionInterceptor(val context: Context) : Interceptor {
         RESIDENT_ID("resident_id"),
         PASSPORT_ID("passport_id"),
         REDEEM_AMOUNT("amount"),
-        POINTS("points")
+        POINTS("points"),
+        MOTHER_MAIDEN_NAME("mother_maiden_name"),
+        PLACE_OF_BIRTH("place_of_birth"),
+        CNIC_NICOP_ISSUANCE_DATE("cnic_nicop_issuance_date")
     }
 }

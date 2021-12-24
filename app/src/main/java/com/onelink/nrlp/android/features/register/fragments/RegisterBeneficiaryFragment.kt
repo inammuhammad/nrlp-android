@@ -8,67 +8,58 @@ import android.text.InputFilter
 import android.text.Selection
 import android.text.TextWatcher
 import android.view.KeyEvent
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.SpinnerAdapter
-import androidx.core.content.ContextCompat
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.observe
 import com.onelink.nrlp.android.R
 import com.onelink.nrlp.android.core.BaseFragment
 import com.onelink.nrlp.android.core.Status
-import com.onelink.nrlp.android.data.local.UserData
 import com.onelink.nrlp.android.databinding.FragmentRegisterAccountBinding
-import com.onelink.nrlp.android.features.redeem.fragments.REDEMPTION_CREATE_DIALOG
-import com.onelink.nrlp.android.features.redeem.fragments.TAG_REDEMPTION_CREATE_DIALOG_FBR
-import com.onelink.nrlp.android.features.redeem.view.RedeemSuccessActivity
+import com.onelink.nrlp.android.databinding.FragmentRegisterBeneficiaryBinding
 import com.onelink.nrlp.android.features.register.models.RegisterFlowDataModel
 import com.onelink.nrlp.android.features.register.view.RegisterActivity
 import com.onelink.nrlp.android.features.register.viewmodel.RegisterAccountFragmentViewModel
 import com.onelink.nrlp.android.features.register.viewmodel.SharedViewModel
-import com.onelink.nrlp.android.features.select.city.view.SelectCityFragment
 import com.onelink.nrlp.android.features.select.country.model.CountryCodeModel
 import com.onelink.nrlp.android.features.select.country.view.SelectCountryFragment
-import com.onelink.nrlp.android.features.viewStatement.fragments.AdvancedLoyaltyStatementFragment
-import com.onelink.nrlp.android.features.viewStatement.fragments.FROM_DATE
-import com.onelink.nrlp.android.features.viewStatement.fragments.TO_DATE
-import com.onelink.nrlp.android.utils.*
-import com.onelink.nrlp.android.utils.dialogs.OneLinkAlertDialogsFragment
+import com.onelink.nrlp.android.utils.Constants
+import com.onelink.nrlp.android.utils.colorToText
 import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
+import com.onelink.nrlp.android.utils.setBackgroundDrawable
+import com.onelink.nrlp.android.utils.setCapitalizeTextWatcher
 import dagger.android.support.AndroidSupportInjection
-import kotlinx.android.synthetic.main.fragment_forgot_password.*
 import java.util.*
 import java.util.regex.Pattern
 import javax.inject.Inject
 
-
-const val REMITTER_FLOW_SCREENS = 4
-const val BENEFICIARY_FLOW_SCREENS = 3
-
-class RegisterAccountFragment :
-    BaseFragment<RegisterAccountFragmentViewModel, FragmentRegisterAccountBinding>(
-        RegisterAccountFragmentViewModel::class.java
-    ), SelectCountryFragment.OnSelectCountryListener, SelectCityFragment.OnSelectCityListener {
+class RegisterBeneficiaryFragment : BaseFragment<RegisterAccountFragmentViewModel, FragmentRegisterBeneficiaryBinding>(
+    RegisterAccountFragmentViewModel::class.java
+), SelectCountryFragment.OnSelectCountryListener {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     @Inject
     lateinit var oneLinkProgressDialog: OneLinkProgressDialog
-    
+
     private var countryCodeLength: Int? = 10
     private var sharedViewModel: SharedViewModel? = null
     private var listenerInitialized: Boolean = false
     private var listenerInitializedPT: Boolean = false
+    private var tvCountryClicked: Boolean = false
+    private lateinit var registerFlowDataModel: RegisterFlowDataModel
 
     override fun onInject() {
         AndroidSupportInjection.inject(this)
     }
 
-    override fun getLayoutRes() = R.layout.fragment_register_account
+    override fun getLayoutRes() = R.layout.fragment_register_beneficiary
 
     override fun getTitle(): String = getString(R.string.register_account_title)
 
@@ -83,7 +74,7 @@ class RegisterAccountFragment :
             sharedViewModel = ViewModelProvider(it).get(SharedViewModel::class.java)
 
         }
-
+        viewModel.accountType.postValue(resources.getString(R.string.beneficiary))
         initEditTextListeners()
 
         binding.spinnerSelectAccountType.adapter = context?.let {
@@ -239,6 +230,11 @@ class RegisterAccountFragment :
     }
 
     private fun initObservers() {
+        sharedViewModel?.registerFlowDataModel?.observe(this,
+            androidx.lifecycle.Observer {
+                registerFlowDataModel = it
+            })
+
         binding.etCnicNicop.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_NEXT) {
                 hideKeyboard()
@@ -247,70 +243,11 @@ class RegisterAccountFragment :
             } else false
         }
 
-        viewModel.countryNotEmpty.observe(this, Observer {
+        viewModel.countryNotEmpty.observe(this, androidx.lifecycle.Observer {
             binding.etPhoneNumber.isClickable = it
         })
 
-        viewModel.accountType.observe(this, Observer {
-            if (it != Constants.SPINNER_ACCOUNT_TYPE_HINT) {
-                binding.tvAccountType.text = it
-                binding.tvCountry.text = null
-                binding.tvCountryCode.text = null
-                binding.etPhoneNumber.text = null
-                binding.tvAccountType.colorToText(R.color.pure_black)
-            }
-
-            if(viewModel.accountType.value.toString() == resources.getString(R.string.beneficiary)){
-                binding.residentIdLL.visibility = View.GONE
-                binding.passportTypeLL.visibility = View.GONE
-                binding.passportNoLL.visibility = View.GONE
-                binding.lblMobileNo.text = getString(R.string.beneficiary_mobile_number)
-                binding.btnNext.visibility = View.GONE
-                binding.fullNameLL.visibility = View.GONE
-                binding.motherMaidenNameLL.visibility = View.GONE
-                binding.placeOfBirthLL.visibility = View.GONE
-                binding.countryLL.visibility = View.GONE
-                binding.placeOfBirthLL.visibility = View.GONE
-                binding.cnicIssuanceLL.visibility = View.GONE
-                binding.mobileNoLL.visibility = View.GONE
-                binding.emailAddressLL.visibility = View.GONE
-                binding.passwordLL.visibility = View.GONE
-                binding.rePasswordLL.visibility = View.GONE
-
-
-                binding.btnNext1.visibility = View.VISIBLE
-                binding.registrationCodeLL.visibility = View.VISIBLE
-            }
-            else{
-                binding.residentIdLL.visibility = View.VISIBLE
-                binding.passportTypeLL.visibility = View.VISIBLE
-                binding.passportNoLL.visibility = View.VISIBLE
-                binding.lblMobileNo.text = getString(R.string.mobile_number)
-                binding.btnNext.visibility = View.VISIBLE
-                binding.fullNameLL.visibility = View.VISIBLE
-                binding.motherMaidenNameLL.visibility = View.VISIBLE
-                binding.placeOfBirthLL.visibility = View.VISIBLE
-                binding.countryLL.visibility = View.VISIBLE
-                binding.placeOfBirthLL.visibility = View.VISIBLE
-                binding.cnicIssuanceLL.visibility = View.VISIBLE
-                binding.mobileNoLL.visibility = View.VISIBLE
-                binding.emailAddressLL.visibility = View.VISIBLE
-                binding.passwordLL.visibility = View.VISIBLE
-                binding.rePasswordLL.visibility = View.VISIBLE
-
-                binding.btnNext1.visibility = View.GONE
-                binding.registrationCodeLL.visibility = View.GONE
-            }
-        })
-
-        viewModel.passportType.observe(this, Observer {
-            if (it != Constants.SPINNER_PASSPORT_TYPE_HINT) {
-                binding.tvPassportType.text = it
-                binding.tvPassportType.colorToText(R.color.pure_black)
-            }
-        })
-
-        viewModel.isCnicValidationPassed.observe(this, Observer { validationsPassed ->
+        viewModel.isCnicValidationPassed.observe(this, androidx.lifecycle.Observer { validationsPassed ->
             run {
                 if (!validationsPassed)
                     binding.tilCnicNicop.error = getString(R.string.error_cnic)
@@ -321,29 +258,7 @@ class RegisterAccountFragment :
             }
         })
 
-        viewModel.isMotherMaidenNameValidationPassed.observe(this, Observer { validationsPassed ->
-            run {
-                if (!validationsPassed)
-                    binding.tilMotherMaidenName.error = getString(R.string.error_not_valid_name)
-                else {
-                    binding.tilMotherMaidenName.clearError()
-                    binding.tilMotherMaidenName.isErrorEnabled = false
-                }
-            }
-        })
-
-        /*viewModel.isCnicNicopIssuanceDateValidationPassed.observe(this, Observer { validationsPassed ->
-            run {
-                if (!validationsPassed)
-                    binding.tilCnicNicopIssuanceDate.error = getString(R.string.error_cnic)
-                else {
-                    binding.tilCnicNicopIssuanceDate.clearError()
-                    binding.tilCnicNicopIssuanceDate.isErrorEnabled = false
-                }
-            }
-        })*/
-
-        viewModel.isPhoneNumberValidationPassed.observe(this, Observer{ validationsPassed ->
+        viewModel.isPhoneNumberValidationPassed.observe(this, androidx.lifecycle.Observer{ validationsPassed ->
             run {
                 if (!validationsPassed) {
                     binding.imageViewPhoneError.visibility = View.VISIBLE
@@ -358,7 +273,7 @@ class RegisterAccountFragment :
             }
         })
 
-        viewModel.isPasswordValidationPassed.observe(this, Observer{ validationsPassed ->
+        viewModel.isPasswordValidationPassed.observe(this, androidx.lifecycle.Observer{ validationsPassed ->
             run {
                 if (!validationsPassed) {
                     binding.tilPassword.error =
@@ -372,7 +287,7 @@ class RegisterAccountFragment :
             }
         })
 
-        viewModel.isRePasswordValidationPassed.observe(this, Observer{ validationsPassed ->
+        viewModel.isRePasswordValidationPassed.observe(this, androidx.lifecycle.Observer{ validationsPassed ->
             run {
                 if (!validationsPassed)
                     binding.tilRePassword.error =
@@ -384,7 +299,7 @@ class RegisterAccountFragment :
             }
         })
 
-        viewModel.isFullNameValidationPassed.observe(this, Observer{ validationsPassed ->
+        viewModel.isFullNameValidationPassed.observe(this, androidx.lifecycle.Observer{ validationsPassed ->
             run {
                 if (!validationsPassed)
                     binding.tilFullName.error = getString(R.string.error_not_valid_name)
@@ -395,7 +310,7 @@ class RegisterAccountFragment :
             }
         })
 
-        viewModel.isEmailValidationPassed.observe(this, Observer{ validationsPassed ->
+        viewModel.isEmailValidationPassed.observe(this, androidx.lifecycle.Observer{ validationsPassed ->
             run {
                 if (!validationsPassed)
                     binding.tilEmailAddress.error =
@@ -407,56 +322,17 @@ class RegisterAccountFragment :
             }
         })
 
-        viewModel.observeAuthKey().observe(this, Observer{ response ->
-            when (response.status) {
-                Status.SUCCESS -> {
-                    oneLinkProgressDialog.hideProgressDialog()
-                    response.data?.let {
-                        //moveToNextFragment()
-                        viewModel.makeRegisterCall(getRegisterFlowModel())
-                    }
-                }
-                Status.ERROR -> {
-                    oneLinkProgressDialog.hideProgressDialog()
-                    response.error?.let {
-                        showGeneralErrorDialog(this, it)
-                    }
-                }
-                Status.LOADING -> {
-                    oneLinkProgressDialog.showProgressDialog(activity)
-                }
-            }
-        })
-
-        viewModel.observeRegisterUser().observe(this, Observer { response ->
-            when (response.status) {
-                Status.SUCCESS -> {
-                    oneLinkProgressDialog.hideProgressDialog()
-                    moveToNextFragment()
-                }
-                Status.ERROR -> {
-                    response.error?.let {
-                        showGeneralErrorDialog(this, it)
-                    }
-                    oneLinkProgressDialog.hideProgressDialog()
-                }
-                Status.LOADING -> {
-                    oneLinkProgressDialog.showProgressDialog(activity)
-                }
-            }
-        })
-
-        viewModel.validEditText1.observe(this, Observer {
-            if (it) binding.etOTP2.requestFocus()
-        })
-        viewModel.validEditText2.observe(this, Observer {
-            if (it) binding.etOTP3.requestFocus()
-        })
-        viewModel.validEditText3.observe(this, Observer {
-            if (it) binding.etOTP4.requestFocus()
-        })
-        viewModel.validEditText4.observe(this, Observer {
-            if (it) hideKeyboard()
+        (activity as RegisterActivity).selectedCountry.observe(this, androidx.lifecycle.Observer { countryCodeModel ->
+            viewModel.country.value = countryCodeModel.country
+            viewModel.placeOfBirth.value = countryCodeModel.country
+            binding.tvCountry.colorToText(R.color.black)
+            binding.tvCountryCode.text = countryCodeModel.code
+            binding.tvPlaceOfBirth.text = countryCodeModel.country
+            binding.etPhoneNumber.isEnabled = true
+            binding.tvCountryCode.colorToText(R.color.black)
+            binding.etPhoneNumber.hint = viewModel.phoneNumberHint(countryCodeModel.length.toInt())
+            binding.etPhoneNumber.filters =
+                arrayOf(InputFilter.LengthFilter(countryCodeModel.length.toInt()))
         })
     }
 
@@ -495,26 +371,6 @@ class RegisterAccountFragment :
             hideKeyboard()
         }
 
-        binding.btnNext.setOnClickListener {
-            if (viewModel.validationsPassed(
-                    binding.etCnicNicop.text.toString(),
-                    binding.etFullName.text.toString(),
-                    binding.etPhoneNumber.text.toString(),
-                    countryCodeLength,
-                    binding.etEmailAddress.text.toString(),
-                    binding.etPassword.text.toString(),
-                    binding.etRePassword.text.toString(),
-                    binding.etMotherMaidenName.text.toString(),
-                    binding.etCnicNicopIssuanceDate.text.toString()
-                )
-            ) {
-                viewModel.getAuthKey(
-                    viewModel.getAccountType(resources),
-                    binding.etCnicNicop.text.toString().replace("-", "")
-                )
-            }
-        }
-
         binding.btnNext1.setOnClickListener {
             if (viewModel.validationsPassed(
                     binding.etCnicNicop.text.toString(),
@@ -526,11 +382,7 @@ class RegisterAccountFragment :
                     binding.etRePassword.text.toString()
                 )
             ) {
-                //moveToNextFragment()
-                viewModel.getAuthKey(
-                    viewModel.getAccountType(resources),
-                    binding.etCnicNicop.text.toString().replace("-", "")
-                )
+                moveToNextFragment()
             }
         }
 
@@ -619,6 +471,7 @@ class RegisterAccountFragment :
         })
 
         binding.tvCountry.setOnClickListener {
+            tvCountryClicked = true
             fragmentHelper.addFragment(
                 SelectCountryFragment.newInstance(getUserType()),
                 clearBackStack = false,
@@ -628,8 +481,9 @@ class RegisterAccountFragment :
         }
 
         binding.tvPlaceOfBirth.setOnClickListener {
+            tvCountryClicked = false
             fragmentHelper.addFragment(
-                SelectCityFragment.newInstance(getUserType()),
+                SelectCountryFragment.newInstance(getUserType()),
                 clearBackStack = false,
                 addToBackStack = true
             )
@@ -651,12 +505,12 @@ class RegisterAccountFragment :
         sharedViewModel?.setRegisterFlowDataModel(
             RegisterFlowDataModel(
                 fullName = binding.etFullName.text.toString(),
-                cnicNicop = binding.etCnicNicop.text.toString().replace("-", ""),
+                cnicNicop = registerFlowDataModel.cnicNicop,
                 phoneNumber = binding.tvCountryCode.text.toString() + binding.etPhoneNumber.text.toString(),
                 email = binding.etEmailAddress.text.toString(),
                 residentId = binding.etResidentId.text.toString(),
                 passportType = viewModel.getPassportType(resources)
-                        .toLowerCase(Locale.getDefault()),
+                    .toLowerCase(Locale.getDefault()),
                 passportId = binding.etPassportNo.text.toString(),
                 country = binding.tvCountry.text.toString(),
                 password = binding.etPassword.text.toString(),
@@ -665,49 +519,15 @@ class RegisterAccountFragment :
                     .toLowerCase(Locale.getDefault()),
                 referenceNumber = "",
                 transactionAmount = "",
-                registrationCode = getRegistrationCode(),
+                registrationCode = registerFlowDataModel.registrationCode,
                 otpCode = "",
                 motherMaidenName = binding.etMotherMaidenName.text.toString(),
                 placeOfBirth =  binding.tvPlaceOfBirth.text.toString(),
                 cnicNicopIssueDate = binding.etCnicNicopIssuanceDate.text.toString()
             )
         )
-        /*if(getUserType() == resources.getString(R.string.beneficiary).toLowerCase(Locale.ROOT))
-            viewModel.addRegisterBeneficiaryFragment(resources, fragmentHelper)
-        else
-            viewModel.addNextFragment(resources, fragmentHelper)*/
-        viewModel.addNextFragment(resources, fragmentHelper)
+        viewModel.addBeneficiaryTermsFragment(resources, fragmentHelper)
         hideKeyboard()
-    }
-
-    private fun getRegisterFlowModel(): RegisterFlowDataModel{
-        return RegisterFlowDataModel(
-            fullName = binding.etFullName.text.toString(),
-            cnicNicop = binding.etCnicNicop.text.toString().replace("-", ""),
-            phoneNumber = binding.tvCountryCode.text.toString() + binding.etPhoneNumber.text.toString(),
-            email = binding.etEmailAddress.text.toString(),
-            residentId = binding.etResidentId.text.toString(),
-            passportType = viewModel.getPassportType(resources)
-                .toLowerCase(Locale.getDefault()),
-            passportId = binding.etPassportNo.text.toString(),
-            country = binding.tvCountry.text.toString(),
-            password = binding.etPassword.text.toString(),
-            rePassword = binding.etRePassword.text.toString(),
-            accountType = viewModel.getAccountType(resources)
-                .toLowerCase(Locale.getDefault()),
-            referenceNumber = "",
-            transactionAmount = "",
-            registrationCode = getRegistrationCode(),
-            otpCode = "",
-            motherMaidenName = binding.etMotherMaidenName.text.toString(),
-            placeOfBirth =  binding.tvPlaceOfBirth.text.toString(),
-            cnicNicopIssueDate = binding.etCnicNicopIssuanceDate.text.toString()
-        )
-    }
-
-    private fun getRegistrationCode(): String{
-        return binding.etOTP1.text.toString() + binding.etOTP2.text.toString() +
-                binding.etOTP3.text.toString() + binding.etOTP4.text.toString()
     }
 
     private fun openDatePickerDialog() {
@@ -734,6 +554,7 @@ class RegisterAccountFragment :
         datePickerDialog?.show()
     }
 
+
     private fun initEditTextListeners() {
         binding.etOTP1.setOnKeyListener(onKeyListenerOTP(binding.etOTP1, binding.etOTP1))
         binding.etOTP2.setOnKeyListener(onKeyListenerOTP(binding.etOTP2, binding.etOTP1))
@@ -759,37 +580,36 @@ class RegisterAccountFragment :
 
     companion object {
         @JvmStatic
-        fun newInstance() =
-            RegisterAccountFragment()
+        fun newInstance() = RegisterBeneficiaryFragment()
     }
 
     override fun onSelectCountryListener(countryCodeModel: CountryCodeModel) {
         countryCodeLength = countryCodeModel.length.toInt()
-        viewModel.country.value = countryCodeModel.country
-        binding.tvCountry.colorToText(R.color.black)
-        binding.tvCountryCode.text = countryCodeModel.code
+        if(tvCountryClicked) {
+            viewModel.country.value = countryCodeModel.country
+            binding.tvCountry.colorToText(R.color.black)
+            binding.tvCountryCode.text = countryCodeModel.code
+        }
+        else {
+            viewModel.placeOfBirth.value = countryCodeModel.country
+            binding.tvPlaceOfBirth.colorToText(R.color.black)
+        }
         binding.etPhoneNumber.isEnabled = true
         binding.tvCountryCode.colorToText(R.color.black)
         binding.etPhoneNumber.hint = viewModel.phoneNumberHint(countryCodeModel.length.toInt())
         binding.etPhoneNumber.filters =
             arrayOf(InputFilter.LengthFilter(countryCodeModel.length.toInt()))
         fragmentHelper.onBack()
-       // binding.etPhoneNumber.setText("")
+        // binding.etPhoneNumber.setText("")
         //binding.etPhoneNumber.requestFocus()
         //showKeyboard()
-    }
-
-    override fun onSelectCityListener(countryCodeModel: CountryCodeModel) {
-        viewModel.placeOfBirth.value = countryCodeModel.country
-        binding.tvPlaceOfBirth.colorToText(R.color.black)
-        fragmentHelper.onBack()
     }
 
     private fun getUserType(): String {
         val selectedType = binding.tvAccountType.text.toString()
         if(selectedType.contains(resources.getString(R.string.select_account_type), true))
         {
-            return "remitter"
+            return "beneficiary"
         }
         return selectedType.toLowerCase()
     }

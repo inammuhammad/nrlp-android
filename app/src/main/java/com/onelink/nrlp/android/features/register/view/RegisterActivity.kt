@@ -7,6 +7,7 @@ import android.view.KeyEvent
 import android.view.View
 import android.view.WindowManager
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.onelink.nrlp.android.R
@@ -16,6 +17,7 @@ import com.onelink.nrlp.android.databinding.ActivityRegisterContainerBinding
 import com.onelink.nrlp.android.features.register.fragments.*
 import com.onelink.nrlp.android.features.register.viewmodel.RegisterViewModel
 import com.onelink.nrlp.android.features.register.viewmodel.SharedViewModel
+import com.onelink.nrlp.android.features.select.city.view.SelectCityFragment
 import com.onelink.nrlp.android.features.select.country.model.CountryCodeModel
 import com.onelink.nrlp.android.features.select.country.view.SelectCountryFragment
 import com.onelink.nrlp.android.utils.Constants
@@ -33,12 +35,15 @@ const val TERMS_AND_CONDITIONS_FLOW_NUMBER = 4
 
 class RegisterActivity :
     BaseFragmentActivity<ActivityRegisterContainerBinding, RegisterViewModel>(RegisterViewModel::class.java),
-    SelectCountryFragment.OnSelectCountryListener {
+    SelectCountryFragment.OnSelectCountryListener, SelectCityFragment.OnSelectCityListener {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var sharedViewModel: SharedViewModel
     lateinit var listener: SelectCountryFragment.OnSelectCountryListener
+    lateinit var listenerCity: SelectCityFragment.OnSelectCityListener
+
+    val selectedCountry = MutableLiveData<CountryCodeModel>()
 
     override fun getLayoutRes() = R.layout.activity_register_container
 
@@ -89,6 +94,11 @@ class RegisterActivity :
             fragment.setOnClickListener(this)
         } else if (fragment is RegisterAccountFragment) {
             listener = fragment
+            listenerCity = fragment
+        }
+        else if (fragment is RegisterBeneficiaryFragment){
+            listener = fragment
+            //listenerCity = fragment
         }
     }
 
@@ -129,7 +139,12 @@ class RegisterActivity :
     }
 
     override fun onSelectCountryListener(countryCodeModel: CountryCodeModel) {
+        //selectedCountry.postValue(countryCodeModel)
         listener.onSelectCountryListener(countryCodeModel)
+    }
+
+    override fun onSelectCityListener(countryCodeModel: CountryCodeModel) {
+        listenerCity.onSelectCityListener(countryCodeModel)
     }
 
     @Suppress("DEPRECATION")

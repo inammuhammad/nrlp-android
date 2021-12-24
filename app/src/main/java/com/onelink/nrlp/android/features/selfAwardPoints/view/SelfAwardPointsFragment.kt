@@ -83,6 +83,7 @@ class SelfAwardPointsFragment :
             val selfAwardPointsRequest = SelfAwardPointsRequest(
                 amount = binding.etRemittanceAmount.text.toString().replace(",", ""),
                 reference_no = binding.etRefNo.text.toString(),
+                beneficiary_nic_nicop = binding.etCnicAccountNumber.text.toString()
                 /*transaction_date = viewModel.getDateInApiFormat(viewModel.rawRemittanceDate.value.toString())*/
             )
 
@@ -101,6 +102,10 @@ class SelfAwardPointsFragment :
         binding.icHelpDate.setOnClickListener {
             //showWarningDialog(getString(R.string.remittance_date_help))
             showGeneralAlertDialog(this,"SelfAward",getString(R.string.remittance_date_help))
+        }
+        binding.icHelpCnicAccountNumber.setOnClickListener {
+            //showWarningDialog(getString(R.string.remittance_date_help))
+            showGeneralAlertDialog(this,"SelfAward",getString(R.string.remittance_account_cnic_number_help))
         }
     }
     private fun initObservers() {

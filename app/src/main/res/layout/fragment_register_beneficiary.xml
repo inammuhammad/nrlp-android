@@ -35,18 +35,19 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:orientation="horizontal"
                         android:layout_height="wrap_content">
 
-                    <TextView
-                        style="@style/TextViewSubHeading"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/account_type" />
+                        <TextView
+                            style="@style/TextViewSubHeading"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/account_type" />
 
                         <ImageView
                             android:layout_width="@dimen/_15sdp"
@@ -155,7 +156,8 @@
                     android:id="@+id/motherMaidenNameLL"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -257,8 +259,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/unit_8dp"
                         android:focusable="false"
-                        android:hint="@string/select_country"
                         android:text="@={viewModel.country}"
+                        android:hint="@string/select_country"
                         android:textColor="@color/grey"
                         android:textDirection="ltr" />
                 </LinearLayout>
@@ -266,7 +268,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
                     <TextView
                         style="@style/TextViewSubHeading"
@@ -408,7 +411,7 @@
 
                     </LinearLayout>
 
-                   <androidx.appcompat.widget.AppCompatTextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/etCnicNicopIssuanceDate"
                         style="@style/EditTextTheme"
                         android:layout_width="match_parent"
@@ -426,7 +429,8 @@
                     android:id="@+id/passportTypeLL"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -546,7 +550,8 @@
                     android:id="@+id/residentIdLL"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -743,11 +748,11 @@
                         android:orientation="horizontal"
                         android:layout_height="wrap_content">
 
-                    <TextView
-                        style="@style/TextViewSubHeading"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/password" />
+                        <TextView
+                            style="@style/TextViewSubHeading"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/password" />
 
                         <ImageView
                             android:layout_width="@dimen/_15sdp"
@@ -806,11 +811,11 @@
                         android:orientation="horizontal"
                         android:layout_height="wrap_content">
 
-                    <TextView
-                        style="@style/TextViewSubHeading"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/re_enter_password" />
+                        <TextView
+                            style="@style/TextViewSubHeading"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/re_enter_password" />
 
                         <ImageView
                             android:layout_width="@dimen/_15sdp"
@@ -851,6 +856,7 @@
                         style="@style/ButtonTheme"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         android:enabled="@{viewModel.cnicNotEmpty &amp;&amp; viewModel.fullNameNotEmpty &amp;&amp; viewModel.mobileNumberNotEmpty &amp;&amp; viewModel.passwordNotEmpty &amp;&amp; viewModel.rePasswordNotEmpty &amp;&amp; viewModel.isAccountTypeSelected() &amp;&amp; viewModel.isPassportTypeSelected() &amp;&amp; viewModel.residentIdNotEmpty &amp;&amp; viewModel.passportIdNotEmpty &amp;&amp; viewModel.cnicNicopDateOfIssuanceNotEmpty &amp;&amp; viewModel.placeOfBirthNotEmpty &amp;&amp; viewModel.mothersMaidenNameNotEmpty}"
                         android:text="@string/next" />
 
@@ -864,10 +870,10 @@
             style="@style/ButtonTheme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:enabled="@{viewModel.cnicNotEmpty &amp;&amp; viewModel.isAccountTypeSelected() &amp;&amp; viewModel.validEditText1 &amp;&amp; viewModel.validEditText2 &amp;&amp; viewModel.validEditText3 &amp;&amp; viewModel.validEditText4}"
+            android:enabled="@{viewModel.fullNameNotEmpty &amp;&amp; viewModel.placeOfBirthNotEmpty &amp;&amp; viewModel.countryNotEmpty &amp;&amp; viewModel.cnicNicopDateOfIssuanceNotEmpty &amp;&amp; viewModel.mobileNumberNotEmpty &amp;&amp; viewModel.passwordNotEmpty &amp;&amp; viewModel.rePasswordNotEmpty}"
             android:text="@string/next" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

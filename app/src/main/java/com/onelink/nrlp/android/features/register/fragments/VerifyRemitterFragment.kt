@@ -105,7 +105,10 @@ class VerifyRemitterFragment :
                     transactionAmount = binding.etTransactionNumber.text.toString()
                         .replace(",", ""),
                     registrationCode = "",
-                    otpCode = ""
+                    otpCode = "",
+                    motherMaidenName = registerFlowDataModel.motherMaidenName,
+                    placeOfBirth =  registerFlowDataModel.placeOfBirth,
+                    cnicNicopIssueDate = registerFlowDataModel.cnicNicopIssueDate
                 )
             )
             viewModel.verifyReferenceNumber(

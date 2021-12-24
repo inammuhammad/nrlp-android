@@ -31,7 +31,11 @@ class TermsAndConditionsViewModel @Inject constructor(private val registerRepo: 
                     residentId = registerFlowDataModel.residentId,
                     passportType = registerFlowDataModel.passportType,
                     passportId = registerFlowDataModel.passportId,
-                    country = registerFlowDataModel.country
+                    country = registerFlowDataModel.country,
+                    motherMaidenName = registerFlowDataModel.motherMaidenName,
+                    placeOfBirth = registerFlowDataModel.placeOfBirth,
+                    cnicNicopIssueDate = registerFlowDataModel.cnicNicopIssueDate,
+                    sotp = "2"
                 )
             )
         } else if (accountType == Constants.BENEFICIARY.toLowerCase(Locale.getDefault())) {
@@ -47,7 +51,10 @@ class TermsAndConditionsViewModel @Inject constructor(private val registerRepo: 
                     residentId = registerFlowDataModel.residentId,
                     passportType = registerFlowDataModel.passportType,
                     passportId = registerFlowDataModel.passportId,
-                    country = registerFlowDataModel.country
+                    country = registerFlowDataModel.country,
+                    placeOfBirth = registerFlowDataModel.placeOfBirth,
+                    cnicNicopIssueDate = registerFlowDataModel.cnicNicopIssueDate,
+                    sotp = "2"
                 )
             )
         }

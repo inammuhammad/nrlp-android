@@ -32,6 +32,7 @@ import com.onelink.nrlp.android.features.profile.viewmodel.ProfileUpdateSuccessV
 import com.onelink.nrlp.android.features.profile.viewmodel.ProfileViewModel
 import com.onelink.nrlp.android.features.redeem.viewmodels.*
 import com.onelink.nrlp.android.features.register.viewmodel.*
+import com.onelink.nrlp.android.features.select.city.viewmodel.SelectCityFragmentViewModel
 import com.onelink.nrlp.android.features.select.country.viewmodel.SelectCountryFragmentViewModel
 import com.onelink.nrlp.android.features.selfAwardPoints.viewmodel.SelfAwardPointsFragmentViewModel
 import com.onelink.nrlp.android.features.selfAwardPoints.viewmodel.SelfAwardPointsOTPFragmentViewModel
@@ -102,6 +103,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(SelectCountryFragmentViewModel::class)
     internal abstract fun selectCountryFragmentViewModel(viewModel: SelectCountryFragmentViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SelectCityFragmentViewModel::class)
+    internal abstract fun selectCityFragmentViewModel(viewModel: SelectCityFragmentViewModel): ViewModel
 
 
     @Binds

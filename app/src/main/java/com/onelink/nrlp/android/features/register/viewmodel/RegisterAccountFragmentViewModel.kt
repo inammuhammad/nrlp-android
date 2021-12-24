@@ -6,18 +6,28 @@ import androidx.lifecycle.MutableLiveData
 import com.onelink.nrlp.android.R
 import com.onelink.nrlp.android.core.BaseFragment
 import com.onelink.nrlp.android.core.BaseViewModel
-import com.onelink.nrlp.android.features.register.fragments.VerifyBeneficiaryFragment
-import com.onelink.nrlp.android.features.register.fragments.VerifyRemitterFragment
+import com.onelink.nrlp.android.features.register.fragments.*
+import com.onelink.nrlp.android.features.register.models.RegisterBeneficiaryRequest
+import com.onelink.nrlp.android.features.register.models.RegisterFlowDataModel
+import com.onelink.nrlp.android.features.register.models.RegisterRemitterRequest
+import com.onelink.nrlp.android.features.register.registerRepo.RegisterRepo
 import com.onelink.nrlp.android.features.splash.repo.AuthKeyRepo
 import com.onelink.nrlp.android.utils.Constants
 import com.onelink.nrlp.android.utils.IdentityKeyUtils
 import com.onelink.nrlp.android.utils.ValidationUtils
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
-class RegisterAccountFragmentViewModel @Inject constructor(private val authRepo: AuthKeyRepo) : BaseViewModel() {
+class RegisterAccountFragmentViewModel @Inject constructor(
+    private val authRepo: AuthKeyRepo, private val registerRepo: RegisterRepo
+) : BaseViewModel() {
     val emailAddress = MutableLiveData<String>("")
     val cnicNicopNumber = MutableLiveData<String>("")
+    val cnicNicopDateOfIssuance = MutableLiveData<String>("")
     val fullName = MutableLiveData<String>("")
+    val mothersMaidenName = MutableLiveData<String>("")
+    val placeOfBirth = MutableLiveData<String>("")
     val country = MutableLiveData<String>("")
     val residentId = MutableLiveData<String>("")
     val passportId = MutableLiveData<String>("")
@@ -32,7 +42,44 @@ class RegisterAccountFragmentViewModel @Inject constructor(private val authRepo:
     val validationEmailPassed = MutableLiveData(true)
     val validationFullNamePassed = MutableLiveData(true)
     val validationRePasswordPassed = MutableLiveData(true)
+    val validationMotherMaidenNamePassed = MutableLiveData(true)
+    val validationPlaceOfBirthPassed = MutableLiveData(true)
+    val validationCnicNicopIssuanceDatePassed = MutableLiveData(true)
 
+    val etOTP1 = MutableLiveData<String>("")
+    val etOTP2 = MutableLiveData<String>("")
+    val etOTP3 = MutableLiveData<String>("")
+    val etOTP4 = MutableLiveData<String>("")
+
+    var rawDate: String = ""
+    val rawFromDate = MutableLiveData<String>("")
+    val rawToDate = MutableLiveData<String>("")
+    //val fromDate = MutableLiveData<String>("")
+    val toDate = MutableLiveData<String>("")
+
+    val validEditText1 = MediatorLiveData<Boolean>().apply {
+        addSource(etOTP1) {
+            value = it.isNotEmpty()
+        }
+    }
+
+    val validEditText2 = MediatorLiveData<Boolean>().apply {
+        addSource(etOTP2) {
+            value = it.isNotEmpty()
+        }
+    }
+
+    val validEditText3 = MediatorLiveData<Boolean>().apply {
+        addSource(etOTP3) {
+            value = it.isNotEmpty()
+        }
+    }
+
+    val validEditText4 = MediatorLiveData<Boolean>().apply {
+        addSource(etOTP4) {
+            value = it.isNotEmpty()
+        }
+    }
 
 
     fun getAuthKey(accountType : String , nic : String) = authRepo.getAuthKey(accountType , nic)
@@ -75,17 +122,28 @@ class RegisterAccountFragmentViewModel @Inject constructor(private val authRepo:
     ) {
         if (accountType.value.toString() == resources.getString(R.string.remitter)) {
             fragmentHelper.addFragment(
-                VerifyRemitterFragment.newInstance(),
+                OtpAuthenticationFragment.newInstance(),
                 clearBackStack = false,
                 addToBackStack = true
             )
         } else if (accountType.value.toString() == resources.getString(R.string.beneficiary)) {
             fragmentHelper.addFragment(
-                VerifyBeneficiaryFragment.newInstance(),
+                RegisterBeneficiaryFragment.newInstance(),
                 clearBackStack = false,
                 addToBackStack = true
             )
         }
+    }
+
+    fun addBeneficiaryTermsFragment(
+        resources: Resources,
+        fragmentHelper: BaseFragment.FragmentNavigationHelper
+    ){
+        fragmentHelper.addFragment(
+            TermsAndConditionsFragment.newInstance(),
+            clearBackStack = false,
+            addToBackStack = true
+        )
     }
 
     fun getAccountType(resources: Resources): String {
@@ -104,6 +162,72 @@ class RegisterAccountFragmentViewModel @Inject constructor(private val authRepo:
         }
     }
 
+    fun makeRegisterCall(registerFlowDataModel: RegisterFlowDataModel) {
+        val accountType = registerFlowDataModel.accountType
+        if (accountType == Constants.REMITTER.toLowerCase(Locale.getDefault())) {
+            registerRemitter(
+                RegisterRemitterRequest(
+                    nicNicop = registerFlowDataModel.cnicNicop,
+                    mobileNo = registerFlowDataModel.phoneNumber,
+                    password = registerFlowDataModel.password,
+                    fullName = registerFlowDataModel.fullName,
+                    userType = registerFlowDataModel.accountType,
+                    referenceNo = registerFlowDataModel.referenceNumber,
+                    amount = registerFlowDataModel.transactionAmount,
+                    email = registerFlowDataModel.email,
+                    residentId = registerFlowDataModel.residentId,
+                    passportType = registerFlowDataModel.passportType,
+                    passportId = registerFlowDataModel.passportId,
+                    country = registerFlowDataModel.country,
+                    motherMaidenName = registerFlowDataModel.motherMaidenName,
+                    placeOfBirth = registerFlowDataModel.placeOfBirth,
+                    cnicNicopIssueDate = registerFlowDataModel.cnicNicopIssueDate,
+                    sotp = "1"
+                )
+            )
+        }
+        else
+        {
+            registerBeneficiary(
+                RegisterBeneficiaryRequest(
+                    nicNicop = registerFlowDataModel.cnicNicop,
+                    mobileNo = "-", //registerFlowDataModel.phoneNumber,
+                    password = "-", //registerFlowDataModel.password,
+                    fullName = "-", //registerFlowDataModel.fullName,
+                    userType = registerFlowDataModel.accountType,
+                    email = "-", //registerFlowDataModel.email,
+                    registrationCode = registerFlowDataModel.registrationCode,
+                    residentId = "-", //registerFlowDataModel.residentId,
+                    passportType = "-", //registerFlowDataModel.passportType,
+                    passportId = "-", //registerFlowDataModel.passportId,
+                    country = "-", //registerFlowDataModel.country,
+                    placeOfBirth = "-", //registerFlowDataModel.placeOfBirth,
+                    cnicNicopIssueDate = "-", //registerFlowDataModel.cnicNicopIssueDate,
+                    sotp = "1"
+            ))
+        }
+    }
+
+    private fun registerRemitter(registerRemitterRequest: RegisterRemitterRequest) =
+        registerRepo.registerRemitter(registerRemitterRequest)
+
+    private fun registerBeneficiary(registerBeneficiaryRequest: RegisterBeneficiaryRequest) =
+        registerRepo.registerBeneficiary(registerBeneficiaryRequest)
+
+    fun observeRegisterUser() = registerRepo.observeRegisterUser()
+
+    fun getDateInStringFormat(calendar: Calendar?): String? {
+        val dateString =
+            SimpleDateFormat("dd/M/yyyy", Locale.US).parse(rawDate ?: "") ?: return ""
+        val day = calendar?.get(Calendar.DATE)
+        return SimpleDateFormat("dd-MMM-yy", Locale.US).format(dateString)
+        /*return if (day !in 11..18) when (day?.rem(10)) {
+            1 -> SimpleDateFormat("d'st' MMMM yyyy", Locale.US).format(dateString)
+            2 -> SimpleDateFormat("d'nd' MMMM yyyy", Locale.US).format(dateString)
+            3 -> SimpleDateFormat("d'rd' MMMM yyyy", Locale.US).format(dateString)
+            else -> SimpleDateFormat("d'th' MMMM yyyy", Locale.US).format(dateString)
+        } else SimpleDateFormat("d'th' MMMM yyyy", Locale.US).format(dateString)*/
+    }
 
     @Suppress("unused")
     val emailNotEmpty = MediatorLiveData<Boolean>().apply {
@@ -116,6 +240,18 @@ class RegisterAccountFragmentViewModel @Inject constructor(private val authRepo:
 
     val fullNameNotEmpty = MediatorLiveData<Boolean>().apply {
         validateNonNull(fullName)
+    }
+
+    val mothersMaidenNameNotEmpty = MediatorLiveData<Boolean>().apply {
+        validateNonNull(mothersMaidenName)
+    }
+
+    val placeOfBirthNotEmpty = MediatorLiveData<Boolean>().apply {
+        validateNonNull(placeOfBirth)
+    }
+
+    val cnicNicopDateOfIssuanceNotEmpty = MediatorLiveData<Boolean>().apply {
+        validateNonNull(cnicNicopDateOfIssuance)
     }
 
     val residentIdNotEmpty = MediatorLiveData<Boolean>().apply {
@@ -222,6 +358,20 @@ class RegisterAccountFragmentViewModel @Inject constructor(private val authRepo:
         }
     }
 
+    val isMotherMaidenNameValidationPassed = MediatorLiveData<Boolean>().apply {
+        addSource(validationMotherMaidenNamePassed) {
+            value = it
+
+        }
+    }
+
+    val isCnicNicopIssuanceDateValidationPassed = MediatorLiveData<Boolean>().apply {
+        addSource(validationCnicNicopIssuanceDatePassed) {
+            value = it
+
+        }
+    }
+
     fun checkCnicValidation(string: String) =
         string.isEmpty() || ValidationUtils.isCNICValid(string)
 
@@ -237,11 +387,18 @@ class RegisterAccountFragmentViewModel @Inject constructor(private val authRepo:
     fun checkEmailValidation(string: String) =
         string.isEmpty() || ValidationUtils.isEmailValid(string)
 
+    fun checkMotherNameValidation(string: String) =
+        string.isEmpty() || ValidationUtils.isNameValid(string)
+
+    fun checkCnicDateIssueValid(string: String) =
+        string.isEmpty() || ValidationUtils.isDateValid(string)
+
     fun checkRePassValidation(pass: String, rePass: String) = pass == rePass
 
     fun validationsPassed(
         cnic: String, fullName: String, phoneNumber: String, phoneNumberLength: Int?,
-        email: String, pass: String, repass: String
+        email: String, pass: String, repass: String, motherName: String = "",
+        cnicIssueDate: String = ""
     ): Boolean {
         val isCnicValid: Boolean = checkCnicValidation(cnic)
         val isPhoneNumberValid: Boolean = checkPhoneNumberValidation(phoneNumber, phoneNumberLength)
@@ -249,12 +406,16 @@ class RegisterAccountFragmentViewModel @Inject constructor(private val authRepo:
         val isFullNameValid: Boolean = checkFullNameValidation(fullName)
         val isEmailValid: Boolean = checkEmailValidation(email)
         val isRePassValid: Boolean = checkRePassValidation(pass, repass)
+        val isMotherNameValid: Boolean = checkMotherNameValidation(motherName)
+        val isDateOfIssueValid: Boolean = checkCnicDateIssueValid(cnicIssueDate)
         validationCnicPassed.value = isCnicValid
         validationPhoneNumberPassed.value = isPhoneNumberValid
         validationFullNamePassed.value = isFullNameValid
         validationEmailPassed.value = isEmailValid
         validationRePasswordPassed.value = isRePassValid
         validationPasswordPassed.value = isPasswordValid
+        validationCnicNicopIssuanceDatePassed.value = isDateOfIssueValid
+        validationMotherMaidenNamePassed.value = isMotherNameValid
         return isCnicValid && isPasswordValid && isRePassValid &&
                 isEmailValid && isFullNameValid && isPhoneNumberValid
     }

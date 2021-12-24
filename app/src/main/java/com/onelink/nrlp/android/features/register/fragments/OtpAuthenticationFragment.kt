@@ -132,7 +132,10 @@ class OtpAuthenticationFragment :
                     referenceNumber = registerFlowDataModel.referenceNumber,
                     transactionAmount = registerFlowDataModel.transactionAmount,
                     registrationCode = "",
-                    otpCode = viewModel.getOTPCode()
+                    otpCode = viewModel.getOTPCode(),
+                    motherMaidenName = registerFlowDataModel.motherMaidenName,
+                    placeOfBirth =  registerFlowDataModel.placeOfBirth,
+                    cnicNicopIssueDate = registerFlowDataModel.cnicNicopIssueDate
                 )
             )
 

@@ -131,7 +131,10 @@ class VerifyBeneficiaryFragment :
                     referenceNumber = "",
                     transactionAmount = "",
                     registrationCode = viewModel.getRegistrationCode(),
-                    otpCode = ""
+                    otpCode = "",
+                    motherMaidenName = registerFlowDataModel.motherMaidenName,
+                    placeOfBirth =  registerFlowDataModel.placeOfBirth,
+                    cnicNicopIssueDate = registerFlowDataModel.cnicNicopIssueDate
                 )
             )
 

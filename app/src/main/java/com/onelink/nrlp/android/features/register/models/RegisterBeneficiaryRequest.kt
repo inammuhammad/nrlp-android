@@ -36,5 +36,12 @@ class RegisterBeneficiaryRequest(
     @SerializedName("passport_id")
     val passportId: String?,
     @SerializedName("country")
-    val country: String?
+    val country: String?,
+
+    @SerializedName("place_of_birth")
+    var placeOfBirth: String?,
+    @SerializedName("cnic_nicop_issuance_date")
+    var cnicNicopIssueDate: String?,
+    @SerializedName("sotp")
+    var sotp: String?
 ): Parcelable

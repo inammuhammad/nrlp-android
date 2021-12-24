@@ -125,7 +125,8 @@ class SelfAwardPointsOTPFragment :
                 SelfAwardPointsOTPRequestModel(
 //                    nicNicop = forgotPasswordFlowDataModel.cnicNicop,
 //                    userType = forgotPasswordFlowDataModel.accountType,
-                    otp = viewModel.getOTPCode()
+                    otp = viewModel.getOTPCode(),
+                    beneficiary_nic_nicop = selfAwardPointsSharedViewModel?.selfAwardPointsRequestModel?.value?.beneficiary_nic_nicop
                 )
             )
         }

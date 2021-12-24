@@ -2,6 +2,7 @@ package com.onelink.nrlp.android.di.module
 
 import com.onelink.nrlp.android.di.annotations.FragmentScope
 import com.onelink.nrlp.android.features.register.fragments.*
+import com.onelink.nrlp.android.features.select.city.view.SelectCityFragment
 import com.onelink.nrlp.android.features.select.country.view.SelectCountryFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -16,6 +17,10 @@ abstract class RegisterFragmentsBuilder {
     @FragmentScope
     @ContributesAndroidInjector
     abstract fun provideRegisterAccountFragment(): RegisterAccountFragment
+
+    @FragmentScope
+    @ContributesAndroidInjector
+    abstract fun provideRegisterBeneficiaryFragment(): RegisterBeneficiaryFragment
 
     @FragmentScope
     @ContributesAndroidInjector
@@ -36,5 +41,9 @@ abstract class RegisterFragmentsBuilder {
     @FragmentScope
     @ContributesAndroidInjector
     abstract fun provideCountryFragment(): SelectCountryFragment
+
+    @FragmentScope
+    @ContributesAndroidInjector
+    abstract fun provideCityFragment(): SelectCityFragment
 
 }

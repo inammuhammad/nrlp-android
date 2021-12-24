@@ -42,10 +42,25 @@ class RegisterRemitterRequest(
 
     @SerializedName("resident_id")
     val residentId: String?,
+
     @SerializedName("passport_type")
     val passportType: String?,
+
     @SerializedName("passport_id")
     val passportId: String?,
+
     @SerializedName("country")
-    val country: String?
+    val country: String?,
+
+    @SerializedName("mother_maiden_name")
+    var motherMaidenName: String?,
+
+    @SerializedName("place_of_birth")
+    var placeOfBirth: String?,
+
+    @SerializedName("cnic_nicop_issuance_date")
+    var cnicNicopIssueDate: String?,
+
+    @SerializedName("sotp")
+    var sotp: String?
 ): Parcelable

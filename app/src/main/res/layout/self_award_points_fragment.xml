@@ -206,8 +206,50 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="ContentDescription" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/tvCnicAccountNumber"
+                style="@style/TextViewSubHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/unit_32dp"
+                android:text="@string/beneficiary_account_number_cnic"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/til_remittance_amount" />
+
+            <ImageView
+                android:layout_width="@dimen/_15sdp"
+                android:id="@+id/icHelpCnicAccountNumber"
+                android:layout_marginStart="@dimen/_5sdp"
+                app:layout_constraintHorizontal_bias="0"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:src="@drawable/ic_baseline_info_24"
+                app:layout_constraintStart_toEndOf="@+id/tvCnicAccountNumber"
+                app:layout_constraintTop_toBottomOf="@+id/til_remittance_amount"
+                android:layout_height="wrap_content"/>
+
+            <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
+                android:id="@+id/til_cnic_account_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/unit_8dp"
+                app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvCnicAccountNumber">
+
+                <com.onelink.nrlp.android.widgets.OneLinkEditText
+                    android:id="@+id/etCnicAccountNumber"
+                    style="@style/EditTextFixedDigits"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/cnic_nicop_hint"
+                    android:inputType="number"
+                    android:imeOptions="actionDone|flagForceAscii"
+                    android:maxLength="25"
+                    android:maxLines="1"
+                    android:text="@={viewModel.cnicAccountNumber}" />
+            </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -216,7 +258,7 @@
             style="@style/ButtonTheme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:enabled="@{viewModel.validReferenceNumber &amp;&amp; viewModel.validTransactionAmount}"
+            android:enabled="@{viewModel.validReferenceNumber &amp;&amp; viewModel.validTransactionAmount &amp;&amp; viewModel.validCnicAccountNumber}"
             android:text="@string/next"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintVertical_bias="1" />
