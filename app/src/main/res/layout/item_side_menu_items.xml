@@ -19,7 +19,7 @@
             android:layout_marginTop="@dimen/unit_18dp"
             android:layout_marginBottom="@dimen/margin_large"
             android:contentDescription="@null"
-            android:src="@drawable/ic_side_menu_change_psw"
+            android:src="@drawable/ic_side_menu_complaints"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

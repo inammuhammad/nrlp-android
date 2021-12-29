@@ -30,6 +30,7 @@ import com.onelink.nrlp.android.features.register.models.RegisterFlowDataModel
 import com.onelink.nrlp.android.features.register.view.RegisterActivity
 import com.onelink.nrlp.android.features.register.viewmodel.RegisterAccountFragmentViewModel
 import com.onelink.nrlp.android.features.register.viewmodel.SharedViewModel
+import com.onelink.nrlp.android.features.select.city.model.CitiesModel
 import com.onelink.nrlp.android.features.select.city.view.SelectCityFragment
 import com.onelink.nrlp.android.features.select.country.model.CountryCodeModel
 import com.onelink.nrlp.android.features.select.country.view.SelectCountryFragment
@@ -779,8 +780,8 @@ class RegisterAccountFragment :
         //showKeyboard()
     }
 
-    override fun onSelectCityListener(countryCodeModel: CountryCodeModel) {
-        viewModel.placeOfBirth.value = countryCodeModel.country
+    override fun onSelectCityListener(citiesModel: CitiesModel) {
+        viewModel.placeOfBirth.value = citiesModel.city
         binding.tvPlaceOfBirth.colorToText(R.color.black)
         fragmentHelper.onBack()
     }

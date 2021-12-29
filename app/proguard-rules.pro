@@ -31,6 +31,12 @@
     public ** component1();
     <fields>;
 }
+
+-keep class com.onelink.nrlp.android.features.select.city.model**{
+    public ** component1();
+    <fields>;
+}
+
 -keep class com.onelink.nrlp.android.features.login.model**{
     public ** component1();
     <fields>;

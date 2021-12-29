@@ -3,6 +3,7 @@ package com.onelink.nrlp.android.features.home.view
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Handler
 import android.os.Looper
 import android.view.View
@@ -147,6 +148,7 @@ class HomeActivity :
                 SIDE_MENU_KEY_PROFILE -> launchProfileActivity()
                 SIDE_MENU_KEY_CHANGE_PASSWORD -> launchChangePassword()
                 SIDE_MENU_KEY_FAQS -> launchFAQs()
+                SIDE_MENU_KEY_GUIDE -> goToYouTube()
                 SIDE_MENU_KEY_CONTACT_US -> launchContactUs()
                 SIDE_MENU_KEY_CHANGE_LANGAUGE -> startLanguageActivity()
                 SIDE_MENU_KEY_LOGOUT -> showLogoutConfirmationDialog()
@@ -178,6 +180,13 @@ class HomeActivity :
 
     private fun launchFAQs() {
         startActivity(FAQsActivity.newFaqIntent(this))
+    }
+
+    private fun goToYouTube(){
+        val url = "https://www.youtube.com/playlist?list=PLFB-5JvOR9rAvAGK6YzQmxXvFiUWn48vY"
+        val i = Intent(Intent.ACTION_VIEW)
+        i.data = Uri.parse(url)
+        startActivity(i)
     }
 
     private fun showLogoutConfirmationDialog() {

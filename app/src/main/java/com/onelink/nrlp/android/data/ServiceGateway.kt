@@ -23,6 +23,8 @@ import com.onelink.nrlp.android.features.profile.models.UpdateProfileOtpRequestM
 import com.onelink.nrlp.android.features.profile.models.UpdateProfileRequestModel
 import com.onelink.nrlp.android.features.redeem.model.*
 import com.onelink.nrlp.android.features.register.models.*
+import com.onelink.nrlp.android.features.select.city.model.CitiesRequest
+import com.onelink.nrlp.android.features.select.city.model.CitiesResponseModel
 import com.onelink.nrlp.android.features.select.country.model.CountryCodeResponseModel
 import com.onelink.nrlp.android.features.selfAwardPoints.model.SelfAwardPointsOTPRequestModel
 import com.onelink.nrlp.android.features.selfAwardPoints.model.SelfAwardPointsRequest
@@ -56,6 +58,9 @@ interface ServiceGateway {
 
     @POST("country-codes/")
     fun getCountryCodes(@Body request: CountryCodesRequest): Single<Response<CountryCodeResponseModel>>
+
+    @POST("cities/")
+    fun getCities(@Body request: CitiesRequest): Single<Response<CitiesResponseModel>>
 
     @POST("login/")
     fun login(@Body request: LoginRequest): Single<Response<LoginResponseModel>>

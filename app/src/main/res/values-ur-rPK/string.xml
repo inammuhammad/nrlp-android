@@ -215,8 +215,10 @@
     <string name="profile">پروفائل</string>
     <string name="change_password">پاس ورڈ تبدیل کریں</string>
     <string name="faqs">مقرر پوچھے گئے سوالات</string>
+    <string name="guide">رہنمائی کے لئے</string>
     <string name="logout">لاگ آوٹ</string>
     <string name="contact_us">رابطہ کریں</string>
+    <string name="complaint_management">Complaint Management</string>
     <string name="version">%s ورژن</string>
     <string name="nav_open">Open navigation drawer</string>
     <string name="nav_close">Close navigation drawer</string>
@@ -279,7 +281,7 @@
     <string name="web_url">ویب سائٹ پر جائیں</string>
     <string name="web_address">www.NRLP.com.pk</string>
     <string name="email_us">ای میل بھیجیں</string>
-    <string name="email_add">support@nrlp.com.pk</string>
+    <string name="email_add">sdrpsupport@1link.net.pk</string>
     <string name="country_code_prefix">+</string>
     <string name="uuid_change_success_message">آپ کے موبائل کی تصدیق ہوگئی ہے ، براہ کرم آگے بڑھنے کے لئے دوبارہ لاگ ان ہوں۔</string>
     <string name="not_enough_points_transfer_msg">آپ کے پوائنٹس منتقلی کے لئے ناکافی ہیں</string>
@@ -315,4 +317,5 @@
     <string name="enter_psid_redemption">پی ایس آئی ڈی نمبر درج کریں</string>
     <string name="enter_psid">پی ایس آئی ڈی درج کریں</string>
     <string name="search_country">Search Country</string>
+    <string name="search_city">Search City</string>
 </resources>

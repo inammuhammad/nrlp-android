@@ -161,6 +161,10 @@ class LoginFragment :
             val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(UriConstants.ABOUT_NRLP_URL))
             startActivity(browserIntent)
         }
+        binding.cvAboutNrlp.setOnSingleClickListener {
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(UriConstants.ABOUT_NRLP_URL))
+            startActivity(browserIntent)
+        }
 
         binding.tvSecReg.setOnSingleClickListener {
             activity?.let {
@@ -222,6 +226,9 @@ class LoginFragment :
         })
 
         binding.tvBenefitsLink.setOnSingleClickListener {
+            startActivity(context?.let { NrlpBenefitsActivity.newViewStatementIntent(it) })
+        }
+        binding.cvBenefitsNrlp.setOnSingleClickListener {
             startActivity(context?.let { NrlpBenefitsActivity.newViewStatementIntent(it) })
         }
 

@@ -6,6 +6,8 @@ import com.onelink.nrlp.android.core.BaseResponse
 import com.onelink.nrlp.android.data.NetworkHelper
 import com.onelink.nrlp.android.data.ServiceGateway
 import com.onelink.nrlp.android.features.register.models.CountryCodesRequest
+import com.onelink.nrlp.android.features.select.city.model.CitiesRequest
+import com.onelink.nrlp.android.features.select.city.model.CitiesResponseModel
 import com.onelink.nrlp.android.features.select.country.model.CountryCodeResponseModel
 import javax.inject.Inject
 
@@ -16,6 +18,7 @@ class SelectCountryRepo @Inject constructor(
 
 
     val countryCodesResponse = MutableLiveData<BaseResponse<CountryCodeResponseModel>>()
+    val citiesResponse = MutableLiveData<BaseResponse<CitiesResponseModel>>()
 
     fun getCountryCodes(type: String = "beneficiary") {
         networkHelper.serviceCall(serviceGateway.getCountryCodes(CountryCodesRequest(type)))
@@ -31,4 +34,15 @@ class SelectCountryRepo @Inject constructor(
         networkHelper.dispose()
         networkHelper.disposable = null
     }
+
+    fun getCities(searchText: String = "", pageNumber: Int = 0) {
+        networkHelper.serviceCall((serviceGateway.getCities(CitiesRequest(searchText, pageNumber))))
+            .observeForever { response ->
+                citiesResponse.value = response
+            }
+    }
+
+    fun observeCities() =
+        citiesResponse as LiveData<BaseResponse<CitiesResponseModel>>
+
 }

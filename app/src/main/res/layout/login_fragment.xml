@@ -229,39 +229,116 @@
                 android:layout_marginBottom="@dimen/margin_extra_large"
                 android:enabled="@{viewModel.isValidNIC() &amp;&amp; viewModel.isPasswordValid() &amp;&amp; viewModel.isAccountTypeSelected()}"
                 android:text="@string/login"
-                app:layout_constraintBottom_toTopOf="@id/tv_benefits_link"
+                app:layout_constraintBottom_toTopOf="@id/cv_about_nrlp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/rg_select_account_type"
                 app:layout_constraintVertical_bias="1" />
 
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_benefits_nrlp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/cv_about_nrlp"
+                app:layout_constraintEnd_toStartOf="@id/cv_complaint_nrlp"
+                app:layout_constraintTop_toTopOf="@id/cv_about_nrlp"
+                android:elevation="@dimen/_60sdp"
+                app:cardCornerRadius="@dimen/_4sdp"
+                android:padding="@dimen/_6sdp"
+                android:layout_marginBottom="@dimen/_2sdp"
+                android:background="@color/white"
+                >
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:src="@drawable/ic_nrlp_benefits_tile"
+                    />
+
+            </androidx.cardview.widget.CardView>
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_benefits_link"
                 style="@style/TextViewSubHeading"
-                android:textSize="@dimen/unit_14sp"
+                android:textSize="@dimen/unit_12sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_large"
-                android:text="@string/view_remittance_benefits"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:text="Benefits"
                 android:textColor="@color/black"
-                app:layout_constraintBottom_toTopOf="@+id/tv_about_nrlp"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/cv_benefits_nrlp"
                 app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="@id/cv_benefits_nrlp" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_about_nrlp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/tv_about_nrlp"
+                android:elevation="@dimen/_60sdp"
+                app:cardCornerRadius="@dimen/_4sdp"
+                android:padding="@dimen/_6sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:background="@color/white"
+                >
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:src="@drawable/ic_loyalty_statement_tile"
+                    />
+
+            </androidx.cardview.widget.CardView>
 
             <com.onelink.nrlp.android.utils.TextViewNoUnderline
                 android:id="@+id/tv_about_nrlp"
                 style="@style/TextViewSubHeading"
                 android:layout_width="wrap_content"
-                android:textSize="@dimen/unit_14sp"
+                android:textSize="@dimen/unit_12sp"
                 android:layout_height="wrap_content"
                 android:autoLink="web"
-                android:layout_marginBottom="@dimen/unit_20dp"
-                android:text="@string/about_nrlp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:text="About"
+                android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="@id/cv_about_nrlp" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_complaint_nrlp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/cv_about_nrlp"
+                android:elevation="@dimen/_60sdp"
+                app:cardCornerRadius="@dimen/_4sdp"
+                android:padding="@dimen/_6sdp"
+                android:layout_marginBottom="@dimen/_2sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:background="@color/white"
+                >
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:src="@drawable/ic_login_complaint"
+                    />
+
+            </androidx.cardview.widget.CardView>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_complaint"
+                style="@style/TextViewSubHeading"
+                android:textSize="@dimen/unit_12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:text="Complaint"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/cv_complaint_nrlp"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="@id/cv_complaint_nrlp" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 

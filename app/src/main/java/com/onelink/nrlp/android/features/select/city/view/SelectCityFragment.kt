@@ -2,6 +2,7 @@ package com.onelink.nrlp.android.features.select.city.view
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,8 @@ import com.onelink.nrlp.android.R
 import com.onelink.nrlp.android.core.BaseFragment
 import com.onelink.nrlp.android.core.Status
 import com.onelink.nrlp.android.databinding.SelectCountryCodeFragmentBinding
+import com.onelink.nrlp.android.features.select.city.adapter.CitiesAdapter
+import com.onelink.nrlp.android.features.select.city.model.CitiesModel
 import com.onelink.nrlp.android.features.select.city.viewmodel.SelectCityFragmentViewModel
 import com.onelink.nrlp.android.features.select.country.adapter.CountryAdapter
 import com.onelink.nrlp.android.features.select.country.model.CountryCodeModel
@@ -30,6 +33,7 @@ class SelectCityFragment(type: String = "beneficiary") :
     ) {
 
     var userType = type
+    var pageNum = 0
 
     @Inject
     lateinit var oneLinkProgressDialog: OneLinkProgressDialog
@@ -38,7 +42,7 @@ class SelectCityFragment(type: String = "beneficiary") :
     lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var listener: OnSelectCityListener
 
-    lateinit var countryAdapter: CountryAdapter
+    lateinit var cityAdapter: CitiesAdapter
 
     fun setOnClickListener(listener: OnSelectCityListener) {
         this.listener = listener
@@ -70,20 +74,34 @@ class SelectCityFragment(type: String = "beneficiary") :
         super.init(savedInstanceState)
 
         viewModel.getCountryCodes(userType)
+        viewModel.getCities()
+
+        binding.btnLoadMore.visibility = View.VISIBLE
+        binding.countrySearch.queryHint = resources.getString(R.string.search_city)
+        binding.btnLoadMore.setOnClickListener {
+            pageNum += 1
+            viewModel.getCities(binding.countrySearch.query.toString(), pageNum)
+        }
         binding.countrySearch.setOnQueryTextListener(object: SearchView.OnQueryTextListener,
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
+                pageNum = 0
+                viewModel.getCities(query.toString(), pageNum)
                 return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                countryAdapter.filter.filter(newText)
+                //cityAdapter.filter.filter(newText)
+                if(newText == "") {
+                    pageNum = 0
+                    viewModel.getCities(newText.toString(), pageNum)
+                }
                 return false
             }
 
         })
 
-        viewModel.observerCountryCodes().observe(this, Observer { response ->
+        /*viewModel.observerCountryCodes().observe(this, Observer { response ->
             when (response.status) {
                 Status.SUCCESS -> {
                     oneLinkProgressDialog.hideProgressDialog()
@@ -91,12 +109,51 @@ class SelectCityFragment(type: String = "beneficiary") :
                         val countriesList: List<CountryCodeModel> =
                             it.countryCodesList.sortedWith(compareBy { listItem -> listItem.country })
                         binding.rvCountries.setHasFixedSize(true)
-                        countryAdapter = CountryAdapter(
+                        cityAdapter = CountryAdapter(
                             countriesList,
                             listener::onSelectCityListener
                         )
                         binding.rvCountries.layoutManager = LinearLayoutManager(requireContext())
-                        binding.rvCountries.adapter = countryAdapter
+                        binding.rvCountries.adapter = cityAdapter
+                    }
+                }
+                Status.ERROR -> {
+                    oneLinkProgressDialog.hideProgressDialog()
+                    response.error?.let {
+                        showGeneralErrorDialog(this, it)
+                    }
+                }
+                Status.LOADING -> {
+                    oneLinkProgressDialog.showProgressDialog(activity)
+                }
+            }
+        })*/
+
+        viewModel.observeCities().observe(this, Observer { response ->
+            when (response.status) {
+                Status.SUCCESS -> {
+                    oneLinkProgressDialog.hideProgressDialog()
+                    response.data?.let {
+                        val citiesList: ArrayList<CitiesModel> = it.citiesList
+                        if(citiesList.size < 10)
+                            binding.btnLoadMore.visibility = View.GONE
+                        else
+                            binding.btnLoadMore.visibility = View.VISIBLE
+                            //it.citiesList.sortedWith(compareBy { listItem -> listItem.city })
+                        binding.rvCountries.setHasFixedSize(true)
+                        if(pageNum<1) {
+                            cityAdapter = CitiesAdapter(
+                                citiesList,
+                                listener::onSelectCityListener
+                            )
+                            binding.rvCountries.layoutManager =
+                                LinearLayoutManager(requireContext())
+                            binding.rvCountries.adapter = cityAdapter
+                        }
+                        else {
+                            cityAdapter.addItems(citiesList)
+                            //cityAdapter.notifyDataSetChanged()
+                        }
                     }
                 }
                 Status.ERROR -> {
@@ -113,7 +170,7 @@ class SelectCityFragment(type: String = "beneficiary") :
     }
 
     interface OnSelectCityListener {
-        fun onSelectCityListener(countryCodeModel: CountryCodeModel)
+        fun onSelectCityListener(citiesModel: CitiesModel)
     }
 
 

@@ -17,6 +17,7 @@ import com.onelink.nrlp.android.databinding.ActivityRegisterContainerBinding
 import com.onelink.nrlp.android.features.register.fragments.*
 import com.onelink.nrlp.android.features.register.viewmodel.RegisterViewModel
 import com.onelink.nrlp.android.features.register.viewmodel.SharedViewModel
+import com.onelink.nrlp.android.features.select.city.model.CitiesModel
 import com.onelink.nrlp.android.features.select.city.view.SelectCityFragment
 import com.onelink.nrlp.android.features.select.country.model.CountryCodeModel
 import com.onelink.nrlp.android.features.select.country.view.SelectCountryFragment
@@ -143,8 +144,8 @@ class RegisterActivity :
         listener.onSelectCountryListener(countryCodeModel)
     }
 
-    override fun onSelectCityListener(countryCodeModel: CountryCodeModel) {
-        listenerCity.onSelectCityListener(countryCodeModel)
+    override fun onSelectCityListener(citiesModel: CitiesModel) {
+        listenerCity.onSelectCityListener(citiesModel)
     }
 
     @Suppress("DEPRECATION")
