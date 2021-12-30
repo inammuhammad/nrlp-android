@@ -414,7 +414,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:focusable="true"
-                        android:hint="@string/generic_name_placeholder"
+                        android:hint="@string/generic_date_placeholder"
                         android:maxLength="50"
                         android:nextFocusDown="@id/etCnicNicop"
                         android:nextFocusForward="@id/etCnicNicop"

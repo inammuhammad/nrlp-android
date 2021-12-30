@@ -55,10 +55,7 @@ object ValidationUtils {
     }
 
     fun isPhoneNumberValid(phoneNumber: String, length: Int?): Boolean {
-        return phoneNumber.length == length && Pattern.matches(
-            PHONE_NUMBER_VALIDATOR_REGEX,
-            phoneNumber
-        )
+        return phoneNumber.isNotEmpty()
     }
 
     fun isPasswordValid(pass: String): Boolean {
