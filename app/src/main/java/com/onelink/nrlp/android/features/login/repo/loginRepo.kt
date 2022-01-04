@@ -59,7 +59,10 @@ open class LoginRepo @Inject constructor(
             expiresIn = loginResponseModel.expiresIn.toLong(),
             usdBalance = loginResponseModel.loginModel.usdBalance,
             memberSince = loginResponseModel.loginModel.memberSince,
-            redeemable_pkr = loginResponseModel.loginModel.redeemablePkr
+            redeemable_pkr = loginResponseModel.loginModel.redeemablePkr,
+            motherMaidenName = loginResponseModel.loginModel.motherMaidenName,
+            placeOfBirth = loginResponseModel.loginModel.placeOfBirth,
+            cnicNicopIssuanceDate = loginResponseModel.loginModel.cnicNicopIssuanceDate
         )
     }
 

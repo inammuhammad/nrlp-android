@@ -165,6 +165,12 @@ class LoginFragment :
             val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(UriConstants.ABOUT_NRLP_URL))
             startActivity(browserIntent)
         }
+        binding.tvComplaint.setOnSingleClickListener {
+            showComingSoonDialog()
+        }
+        binding.cvComplaintNrlp.setOnSingleClickListener {
+            showComingSoonDialog()
+        }
 
         binding.tvSecReg.setOnSingleClickListener {
             activity?.let {
@@ -280,6 +286,15 @@ class LoginFragment :
             .setIsAlertOnly(true).setDrawable(R.drawable.ic_oh_snap)
             .setTitle(getString(R.string.oh_snap))
             .setMessage(getString(R.string.msg_invalid_installation).toSpanned())
+            .setNeutralButtonText(getString(R.string.okay)).setNegativeButtonText("")
+            .setPositiveButtonText("").setCancelable(false).show(parentFragmentManager, TAG)
+    }
+
+    private fun showComingSoonDialog() {
+        OneLinkAlertDialogsFragment.Builder()
+            .setIsAlertOnly(true).setDrawable(R.drawable.ic_coming_soon_alert)
+            .setTitle(getString(R.string.coming_soon))
+            .setMessage((getString(R.string.coming_soon_msg)).toSpanned())
             .setNeutralButtonText(getString(R.string.okay)).setNegativeButtonText("")
             .setPositiveButtonText("").setCancelable(false).show(parentFragmentManager, TAG)
     }

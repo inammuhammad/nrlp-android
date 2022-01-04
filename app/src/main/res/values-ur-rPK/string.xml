@@ -77,8 +77,8 @@
     <string name="hint_x">x</string>
     <string name="terms_and_conditions">شرائط و ضوابط</string>
     <string name="beneficiary_added">وصول کنندہ شامل ہوا</string>
-    <string name="otp_sent_generic_msg">ہم نے رجسٹرڈ فون نمبر پر آپ کو ایک کوڈ بھیجا ہے۔ براہ کرم نیچے کوڈ درج کریں</string>
-    <string name="otp_sent_phone_number_msg">>ہم نے آپ کو آپ کے فون نمبر %1$s+ پر ایک کوڈ بھیجا ہے۔ براہ کرم نیچے کوڈ درج کریں.</string>
+    <string name="otp_sent_generic_msg">ہم نے رجسٹرڈ فون نمبر پر آپ کو او ٹی پی بھیجا ہے۔ براہ کرم نیچے او ٹی پی درج کریں</string>
+    <string name="otp_sent_phone_number_msg">ہم نے رجسٹرڈ فون نمبر پر آپ کو او ٹی پی بھیجا ہے۔ براہ کرم نیچے او ٹی پی درج کریں</string>
     <string name="old_password_error">پرانے پاس ورڈ میں کم از کم ۸ حروف ہونے چاہیے</string>
     <string name="manage_beneficiaries">وصول کنندہ کی منتظمی</string>
     <string name="redeemed_successfully">پوائنٹس کامیابی سے استعمال ہو گئے ہیں</string>
@@ -107,7 +107,7 @@
     <string name="enter_remittance_transaction_num_msg">اپنی ترسیلات کا حوالہ نمبر درج کریں نوٹ: صرف موجودہ سال کیی ٹرانزیکشن رجسٹریشن کے لیے استعمال کی جاسکتی ہے ، یکم اکتوبر 2021 سے نافذ العمل ہے</string>
     <string name="enter_remittance_transaction_num_msg_self_award">اپنی ترسیلات کا حوالہ نمبر درج کریں نوٹ: خود پوائنٹس حاصل کرنے کے لیے صرف موجودہ سال کیی ٹرانزیکشن ہی استعمال کی جاسکتی ہے ، یکم اکتوبر 2021 سے نافذ العمل ہے</string>
     <string name="transaction_eligibity_for_self_award">براہ کرم ٹرانزیکشن رسید پر موجود ریفرنس نمبر/ ٹی ٹی نمبر درج کریں</string>
-    <string name="sent_otp_code_msg"> کوڈ اپ کے  موبائل نمبر پربھیجا گیا ہے</string>
+    <string name="sent_otp_code_msg">ہم نے رجسٹرڈ فون نمبر پر آپ کو او ٹی پی بھیجا ہے۔ براہ کرم نیچے او ٹی پی درج کریں</string>
     <string name="accept">قبول کریں</string>
     <string name="reject">مسترد کریں</string>
     <string name="registration_successful">اندراج کامیاب ہوا</string>
@@ -129,7 +129,7 @@
     <string name="otp_not_received">کیا آپ کو او ٹی پی نہیں ملا؟</string>
     <string name="dont_have_account">کیا آپ کا یوزر اکاؤنٹ نہیں ہے؟</string>
     <string name="view_remittance_benefits">سوہنی دھرتی ریمیٹینس پروگرام کے فوائد دیکھیں</string>
-    <string name="resend_otp">کوڈ دوبارہ بھیجیں</string>
+    <string name="resend_otp">او ٹی پی دوبارہ بھیجیں</string>
     <string name="cnic_nicop_hint">42501–8053290–1</string>
     <string name="select_country">ملک منتخب کریں</string>
     <string name="select_place_of_birth">Select Place Of Birth</string>

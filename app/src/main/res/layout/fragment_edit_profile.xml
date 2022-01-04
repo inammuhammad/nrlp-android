@@ -66,13 +66,79 @@
                 </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
 
                 <TextView
+                    android:id="@+id/tvMotherMaidenName"
+                    style="@style/TextViewSubHeading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mother_maiden_name"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tilFullName" />
+
+                <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
+                    android:id="@+id/tilMotherMaidenName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/unit_8dp"
+                    app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvMotherMaidenName">
+
+                    <com.onelink.nrlp.android.widgets.OneLinkEditText
+                        android:id="@+id/etMotherMaidenName"
+                        style="@style/EditTextFixedNumbers"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:alpha="0.5"
+                        android:enabled="false"
+                        android:hint="@string/dash"
+                        android:inputType="number"
+                        android:maxLength="15"
+                        android:text="@={viewModel.motherMaidenName}" />
+                </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
+
+                <TextView
+                    android:id="@+id/tvPlaceOfBirth"
+                    style="@style/TextViewSubHeading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/place_of_birth"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tilMotherMaidenName" />
+
+                <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
+                    android:id="@+id/tilPlaceOfBirth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/unit_8dp"
+                    app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvPlaceOfBirth">
+
+                    <com.onelink.nrlp.android.widgets.OneLinkEditText
+                        android:id="@+id/etPlaceOfBirth"
+                        style="@style/EditTextFixedNumbers"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:alpha="0.5"
+                        android:enabled="false"
+                        android:hint="@string/dash"
+                        android:inputType="number"
+                        android:maxLength="15"
+                        android:text="@={viewModel.placeOfBirth}" />
+                </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
+
+                <TextView
                     android:id="@+id/textViewCnicNicop"
                     style="@style/TextViewSubHeading"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/cnic_nicop_number"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tilFullName" />
+                    app:layout_constraintTop_toBottomOf="@+id/tilPlaceOfBirth" />
 
                 <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
                     android:id="@+id/tilCnicNicop"
@@ -99,13 +165,46 @@
                 </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
 
                 <TextView
+                    android:id="@+id/tvNicopNicIssuance"
+                    style="@style/TextViewSubHeading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cnic_nicop_issuance_date"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tilCnicNicop" />
+
+                <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
+                    android:id="@+id/tilNicopNicIssuance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/unit_8dp"
+                    app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvNicopNicIssuance">
+
+                    <com.onelink.nrlp.android.widgets.OneLinkEditText
+                        android:id="@+id/etNicopNicIssuance"
+                        style="@style/EditTextFixedNumbers"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:alpha="0.5"
+                        android:enabled="false"
+                        android:hint="@string/dash"
+                        android:inputType="number"
+                        android:maxLength="15"
+                        android:text="@={viewModel.cnicIssuanceDate}" />
+                </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
+
+                <TextView
                     android:id="@+id/textViewEmail"
                     style="@style/TextViewSubHeading"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/email_address_optional"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tilCnicNicop" />
+                    app:layout_constraintTop_toBottomOf="@+id/tilNicopNicIssuance" />
 
                 <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
                     android:id="@+id/tilEmail"

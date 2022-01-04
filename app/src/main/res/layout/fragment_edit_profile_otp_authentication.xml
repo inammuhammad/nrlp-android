@@ -25,7 +25,7 @@
             android:layout_marginStart="@dimen/margin_large"
             android:layout_marginTop="@dimen/unit_32dp"
             android:layout_marginEnd="@dimen/margin_large"
-            android:text="@string/otp_sent_phone_number_msg"
+            android:text="@string/otp_sent_generic_msg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"

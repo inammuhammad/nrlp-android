@@ -53,7 +53,10 @@ class HomeRepo @Inject constructor(
             expiresIn = UserData.getUser()?.expiresIn ?: 1000,
             usdBalance = userProfileModel.usdBalance,
             memberSince = userProfileModel.memberSince,
-            redeemable_pkr = userProfileModel.redeemablePkr
+            redeemable_pkr = userProfileModel.redeemablePkr,
+            motherMaidenName = userProfileModel.motherMaidenName,
+            placeOfBirth = userProfileModel.placeOfBirth,
+            cnicNicopIssuanceDate = userProfileModel.cnicNicopIssuanceDate
         )
     }
 

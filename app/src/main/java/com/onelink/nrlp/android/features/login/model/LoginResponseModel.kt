@@ -28,7 +28,10 @@ data class LoginModel(
     @SerializedName("loyalty_points") val loyaltyPoints: BigDecimal,
     @SerializedName("usd_balance") val usdBalance: BigDecimal,
     @SerializedName("member_since") val memberSince: String?,
-    @SerializedName("redeemable_pkr") val redeemablePkr: String?
+    @SerializedName("redeemable_pkr") val redeemablePkr: String?,
+    @SerializedName("mother_maiden_name") val motherMaidenName: String,
+    @SerializedName("place_of_birth") val placeOfBirth: String,
+    @SerializedName("cnic_nicop_issuance_date") val cnicNicopIssuanceDate: String
 
 ) {
     companion object {
@@ -45,6 +48,9 @@ data class LoginModel(
             "Bronze",
             "0".toBigDecimal(),
             "0".toBigDecimal(),
+            "",
+            "",
+            "",
             "",
             ""
         )

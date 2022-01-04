@@ -22,5 +22,8 @@ data class UserModel(
     val expiresIn : Long = 0,
     val usdBalance : BigDecimal?,
     val memberSince: String?,
-    val redeemable_pkr: String?
+    val redeemable_pkr: String?,
+    val motherMaidenName: String?,
+    val placeOfBirth: String?,
+    val cnicNicopIssuanceDate: String?
 )

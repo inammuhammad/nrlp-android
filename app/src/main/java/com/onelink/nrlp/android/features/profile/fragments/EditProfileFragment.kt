@@ -6,6 +6,7 @@ import android.text.Editable
 import android.text.InputFilter
 import android.text.Selection
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -30,6 +31,8 @@ import com.onelink.nrlp.android.utils.dialogs.OneLinkAlertDialogsFragment
 import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
 import dagger.android.support.AndroidSupportInjection
 import java.lang.Exception
+import java.text.SimpleDateFormat
+import java.util.*
 import java.util.regex.Pattern
 import javax.inject.Inject
 
@@ -200,9 +203,10 @@ class EditProfileFragment :
 
                             if(userModel.accountType == "beneficiary"){
                                 binding.remitterItemContainer.visibility = View.GONE
-
                                 binding.btnNext.visibility = View.GONE
                                 binding.btnNext1.visibility = View.VISIBLE
+                                binding.tvMotherMaidenName.visibility = View.GONE
+                                binding.tilMotherMaidenName.visibility = View.GONE
                             }
                             else{
                                 binding.remitterItemContainer.visibility = View.VISIBLE
@@ -400,6 +404,14 @@ class EditProfileFragment :
         val email = it.email
         viewModel.mobileNumber.value = mobileNo
         viewModel.mobileNumFromApi.value = mobileNo
+        try {
+            viewModel.motherMaidenName.value = it.motherMaidenName
+            viewModel.placeOfBirth.value = it.placeOfBirth
+            val dateString =
+                SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(it.cnicNicopIssuanceDate)
+            viewModel.cnicIssuanceDate.value =
+                SimpleDateFormat("dd-MMM-yy", Locale.US).format(dateString)
+        }catch(e: Exception){}
 
         val residentId = it.residentId
         val passportType = it.passportType

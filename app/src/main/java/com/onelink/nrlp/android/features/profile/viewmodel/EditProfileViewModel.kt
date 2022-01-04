@@ -37,6 +37,9 @@ class EditProfileViewModel @Inject constructor(private val profileRepo: ProfileR
     val validationEmailPassed = MutableLiveData(true)
     val validationPhoneNumberPassed = MutableLiveData(true)
     val mobileNumberLength = MutableLiveData<Int>()
+    val motherMaidenName = MutableLiveData("")
+    val placeOfBirth = MutableLiveData("")
+    val cnicIssuanceDate = MutableLiveData("")
 
     fun getCountryCodes(type: String = "beneficiary") = profileRepo.getCountryCodes(type)
 

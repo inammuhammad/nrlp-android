@@ -84,7 +84,7 @@
     <string name="enter_remittance_transaction_num_msg">Enter your remittance transaction reference number. Note: (Current year Transaction can only be used for registration, applicable from 1st Oct 2021)</string>
     <string name="enter_remittance_transaction_num_msg_self_award">Enter your remittance transaction reference number. Note: (Current year Transaction can only be used for Self-Awarding, applicable from 1st Oct 2021)</string>
     <string name="transaction_eligibity_for_self_award">Enter Reference Number/TT Number as per your transaction receipt</string>
-    <string name="sent_otp_code_msg">We have sent you a code on your registered phone number</string>
+    <string name="sent_otp_code_msg">We have sent you OTP on your registered mobile number, please enter the OTP below;</string>
     <string name="lorem_ipsum_text_large" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\n
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\n
@@ -169,7 +169,7 @@
     <string name="statement_generated_success_activity">Your request for Statement has been generated. The statement will be emailed to you on the email address provided in 3 to 5 working days.</string>
     <string name="send_code">Send Code</string>
     <string name="forgot_pass_otp_sent_msg">A verification code has been sent to your registered mobile number.</string>
-    <string name="otp_sent_generic_msg">We have sent you OTP on your registered mobile number, please enter the OTP below</string>
+    <string name="otp_sent_generic_msg">We have sent you OTP on your registered mobile number, please enter the OTP below;</string>
     <string name="set_new_password_msg">Your password must contain at least 8 characters, including 1 small letter, 1 capital letter, 1 number and 1 special character.</string>
     <string name="enter_registered_cnic_msg">Please enter your registered CNIC/NICOP</string>
     <string name="verify">Verify</string>
@@ -181,7 +181,7 @@
     <string name="dummy_bene2">Humza Ai</string>
     <string name="dummy_bene3">Naveed Ai</string>
     <string name="edit">Edit</string>
-    <string name="otp_sent_phone_number_msg">We have sent you a code on your Mobile number +%1$s. Please enter the code below.</string>
+    <string name="otp_sent_phone_number_msg">We have sent you OTP on your registered mobile number, please enter the OTP below;</string>
     <string name="profile_updated_success_msg">You have successfully updated your profile.</string>
     <string name="self_award_success_msg">Self Award Successful</string>
     <string name="no_beneficiary_found_manage_points">Your beneficiaries have not activated their accounts yet. Once they are active you will be able to transfer the points.</string>
