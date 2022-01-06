@@ -7,7 +7,7 @@ import java.math.BigInteger
 data class UserModel(
     val token: String,
     val id: Int,
-    val fullName: String,
+    var fullName: String,
     val residentId: String?,
     val passportType: String?,
     val passportId: String?,
@@ -25,5 +25,7 @@ data class UserModel(
     val redeemable_pkr: String?,
     val motherMaidenName: String?,
     val placeOfBirth: String?,
-    val cnicNicopIssuanceDate: String?
+    val cnicNicopIssuanceDate: String?,
+    val nadraVerified: String?,
+    val requireNadraVerification: Boolean?
 )

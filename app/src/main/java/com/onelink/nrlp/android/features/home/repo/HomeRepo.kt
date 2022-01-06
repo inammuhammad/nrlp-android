@@ -7,6 +7,7 @@ import com.onelink.nrlp.android.data.NetworkHelper
 import com.onelink.nrlp.android.data.ServiceGateway
 import com.onelink.nrlp.android.data.local.UserData
 import com.onelink.nrlp.android.data.local.UserModel
+import com.onelink.nrlp.android.features.home.model.NadraDetailsRequestModel
 import com.onelink.nrlp.android.features.home.model.UserProfileModel
 import com.onelink.nrlp.android.features.home.model.UserProfileResponseModel
 import com.onelink.nrlp.android.models.GeneralMessageResponseModel
@@ -18,6 +19,7 @@ class HomeRepo @Inject constructor(
 
     val profileResponse = MutableLiveData<BaseResponse<UserProfileResponseModel>>()
     val logoutResponse = MutableLiveData<BaseResponse<GeneralMessageResponseModel>>()
+    val updateNadraDataResponse = MutableLiveData<BaseResponse<GeneralMessageResponseModel>>()
 
     fun getUserProfile() {
         networkHelper.serviceCall(serviceGateway.getUserProfile()).observeForever {
@@ -28,11 +30,20 @@ class HomeRepo @Inject constructor(
         }
     }
 
+    fun updateNadraDetails(updateNadraDetailsRequest: NadraDetailsRequestModel){
+        networkHelper.serviceCall(serviceGateway.updateNadraDetails(updateNadraDetailsRequest))
+            .observeForever { response ->
+                updateNadraDataResponse.value = response
+            }
+    }
+
     private fun persistUser(userProfileModel: UserProfileModel) {
         UserData.setUser(getUserModelFromLoginResponse(userProfileModel))
     }
 
     fun observeUserProfile() = profileResponse as LiveData<BaseResponse<UserProfileResponseModel>>
+
+    fun observeUpdateNadra() = updateNadraDataResponse as LiveData<BaseResponse<GeneralMessageResponseModel>>
 
     private fun getUserModelFromLoginResponse(userProfileModel: UserProfileModel): UserModel {
         return UserModel(
@@ -56,7 +67,9 @@ class HomeRepo @Inject constructor(
             redeemable_pkr = userProfileModel.redeemablePkr,
             motherMaidenName = userProfileModel.motherMaidenName,
             placeOfBirth = userProfileModel.placeOfBirth,
-            cnicNicopIssuanceDate = userProfileModel.cnicNicopIssuanceDate
+            cnicNicopIssuanceDate = userProfileModel.cnicNicopIssuanceDate,
+            nadraVerified = userProfileModel.nadraVerified,
+            requireNadraVerification = userProfileModel.requireNadraVerification
         )
     }
 

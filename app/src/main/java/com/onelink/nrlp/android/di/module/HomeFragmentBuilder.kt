@@ -1,9 +1,8 @@
 package com.onelink.nrlp.android.di.module
 
 import com.onelink.nrlp.android.di.annotations.FragmentScope
-import com.onelink.nrlp.android.features.home.fragments.BeneficiaryHomeFragment
-import com.onelink.nrlp.android.features.home.fragments.HomeFragment
-import com.onelink.nrlp.android.features.home.fragments.RemitterHomeFragment
+import com.onelink.nrlp.android.features.home.fragments.*
+import com.onelink.nrlp.android.features.select.city.view.SelectCityFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -22,4 +21,16 @@ abstract class HomeFragmentBuilder {
     @FragmentScope
     @ContributesAndroidInjector
     abstract fun provideBeneficiaryHomeFragment(): BeneficiaryHomeFragment
+
+    @FragmentScope
+    @ContributesAndroidInjector
+    abstract fun provideNadraVerificationRequiredFragment(): NadraVerificationRequiredFragment
+
+    @FragmentScope
+    @ContributesAndroidInjector
+    abstract fun provideNadraVerificationDetailsFragment(): NadraVerificationDetailsFragment
+
+    @FragmentScope
+    @ContributesAndroidInjector
+    abstract fun selectCityFragment(): SelectCityFragment
 }

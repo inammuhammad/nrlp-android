@@ -83,6 +83,10 @@
             android:configChanges="layoutDirection|uiMode|locale"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".features.home.view.NadraVerificationsSuccessActivity"
+            android:configChanges="layoutDirection|uiMode|locale"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".features.changePassword.view.ChangePasswordActivity"
             android:configChanges="layoutDirection|uiMode|locale"
             android:screenOrientation="portrait" />

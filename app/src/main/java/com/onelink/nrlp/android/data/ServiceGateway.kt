@@ -10,6 +10,7 @@ import com.onelink.nrlp.android.features.faqs.model.FaqsResponseModel
 import com.onelink.nrlp.android.features.forgotPassword.models.ForgotPasswordOTPRequestModel
 import com.onelink.nrlp.android.features.forgotPassword.models.ForgotPasswordRequestModel
 import com.onelink.nrlp.android.features.forgotPassword.models.UpdatePasswordRequestModel
+import com.onelink.nrlp.android.features.home.model.NadraDetailsRequestModel
 import com.onelink.nrlp.android.features.home.model.UserProfileResponseModel
 import com.onelink.nrlp.android.features.login.model.LoginRequest
 import com.onelink.nrlp.android.features.login.model.LoginResponseModel
@@ -202,4 +203,7 @@ interface ServiceGateway {
 
     @GET("nrlp-benefit/")
     fun getNrlpPartnerBenefits(@Query("partner_id") partnerId: Int): Single<Response<NrlpBenefitsResponseModel>>
+
+    @POST("verify-at-nadra/")
+    fun updateNadraDetails(@Body body: NadraDetailsRequestModel): Single<Response<GeneralMessageResponseModel>>
 }

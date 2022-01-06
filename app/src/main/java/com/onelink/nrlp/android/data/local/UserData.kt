@@ -12,6 +12,10 @@ object UserData {
 
     fun getUser() = loggedInUser
 
+    fun setUpdatedName(name: String){
+        loggedInUser?.fullName = name
+    }
+
     fun emptyUserData(){
         identityKey = null
         loggedInUser = null

@@ -62,7 +62,9 @@ open class LoginRepo @Inject constructor(
             redeemable_pkr = loginResponseModel.loginModel.redeemablePkr,
             motherMaidenName = loginResponseModel.loginModel.motherMaidenName,
             placeOfBirth = loginResponseModel.loginModel.placeOfBirth,
-            cnicNicopIssuanceDate = loginResponseModel.loginModel.cnicNicopIssuanceDate
+            cnicNicopIssuanceDate = loginResponseModel.loginModel.cnicNicopIssuanceDate,
+            nadraVerified = loginResponseModel.loginModel.nadraVerified,
+            requireNadraVerification = loginResponseModel.loginModel.requireNadraVerification
         )
     }
 

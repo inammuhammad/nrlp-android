@@ -6,10 +6,13 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Handler
 import android.os.Looper
+import android.view.KeyEvent
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.onelink.nrlp.android.BuildConfig
@@ -24,12 +27,20 @@ import com.onelink.nrlp.android.features.changePassword.view.ChangePasswordActiv
 import com.onelink.nrlp.android.features.contactus.view.ContactUsActivity
 import com.onelink.nrlp.android.features.faqs.view.FAQsActivity
 import com.onelink.nrlp.android.features.home.fragments.BeneficiaryHomeFragment
+import com.onelink.nrlp.android.features.home.fragments.NadraVerificationDetailsFragment
+import com.onelink.nrlp.android.features.home.fragments.NadraVerificationRequiredFragment
 import com.onelink.nrlp.android.features.home.fragments.RemitterHomeFragment
 import com.onelink.nrlp.android.features.home.sidemenu.*
 import com.onelink.nrlp.android.features.home.viewmodel.HomeActivityViewModel
 import com.onelink.nrlp.android.features.language.view.LanguageActivity
 import com.onelink.nrlp.android.features.login.view.LoginActivity
 import com.onelink.nrlp.android.features.profile.view.ProfileActivity
+import com.onelink.nrlp.android.features.register.fragments.RegisterAccountFragment
+import com.onelink.nrlp.android.features.register.fragments.RegisterBeneficiaryFragment
+import com.onelink.nrlp.android.features.register.fragments.TermsAndConditionsFragment
+import com.onelink.nrlp.android.features.select.city.model.CitiesModel
+import com.onelink.nrlp.android.features.select.city.view.SelectCityFragment
+import com.onelink.nrlp.android.features.select.country.view.SelectCountryFragment
 import com.onelink.nrlp.android.utils.Constants
 import com.onelink.nrlp.android.utils.dialogs.OneLinkAlertDialogsFragment
 import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
@@ -45,13 +56,15 @@ const val TAG_CONFIRM_LOGOUT_DIALOG = "confirm_logout_dialog"
 
 class HomeActivity :
     BaseFragmentActivity<ActivityHomeBinding, HomeActivityViewModel>(HomeActivityViewModel::class.java),
-    OneLinkAlertDialogsFragment.OneLinkAlertDialogListeners {
+    OneLinkAlertDialogsFragment.OneLinkAlertDialogListeners, SelectCityFragment.OnSelectCityListener {
 
     @Inject
     lateinit var oneLinkProgressDialog: OneLinkProgressDialog
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    lateinit var listenerCity: SelectCityFragment.OnSelectCityListener
 
     override fun getLayoutRes() = R.layout.activity_home
 
@@ -69,8 +82,9 @@ class HomeActivity :
         supportFragmentManager.addOnBackStackChangedListener {
             val fragment = getCurrentFragment() as BaseFragment<*, *>?
             fragment?.let {
-
                 binding.toolbar.setTitle(it.getTitle())
+                if(it is NadraVerificationRequiredFragment)
+                    binding.toolbar.setLeftButtonVisible(false)
             }
         }
 
@@ -242,6 +256,34 @@ class HomeActivity :
     override fun onPositiveButtonClicked(targetCode: Int) {
         super.onPositiveButtonClicked(targetCode)
         viewModel.performLogout()
+    }
+
+    fun logoutUser(){
+        viewModel.performLogout()
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            val fragment = getCurrentFragment() as BaseFragment<*, *>?
+            fragment?.let {
+                if (it !is NadraVerificationRequiredFragment) {
+                    onBack()
+                }
+            }
+            return true
+        }
+        return super.onKeyDown(keyCode, event)
+    }
+
+    override fun onSelectCityListener(citiesModel: CitiesModel) {
+        listenerCity.onSelectCityListener(citiesModel)
+    }
+
+    override fun onAttachFragment(fragment: Fragment) {
+        super.onAttachFragment(fragment)
+        if (fragment is NadraVerificationDetailsFragment){
+            listenerCity = fragment
+        }
     }
 
 }

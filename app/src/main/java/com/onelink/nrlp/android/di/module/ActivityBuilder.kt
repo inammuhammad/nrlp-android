@@ -9,6 +9,7 @@ import com.onelink.nrlp.android.features.faqs.view.FAQsActivity
 import com.onelink.nrlp.android.features.forgotPassword.view.ForgotPasswordActivity
 import com.onelink.nrlp.android.features.forgotPassword.view.PasswordChangeSuccessActivity
 import com.onelink.nrlp.android.features.home.view.HomeActivity
+import com.onelink.nrlp.android.features.home.view.NadraVerificationsSuccessActivity
 import com.onelink.nrlp.android.features.language.view.LanguageActivity
 import com.onelink.nrlp.android.features.login.view.LoginActivity
 import com.onelink.nrlp.android.features.managePoints.view.ManagePointsActivity
@@ -76,6 +77,10 @@ abstract class ActivityBuilder {
     @ActivityScope
     @ContributesAndroidInjector
     internal abstract fun bindRegisterSuccessActivity(): RegisterSuccessActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector
+    internal abstract fun bindNadraVerificationSuccessActivity(): NadraVerificationsSuccessActivity
 
     @ActivityScope
     @ContributesAndroidInjector

@@ -23,6 +23,8 @@ data class UserProfileModel(
     @SerializedName("redeemable_pkr") val redeemablePkr: String,
     @SerializedName("mother_maiden_name") val motherMaidenName: String,
     @SerializedName("place_of_birth") val placeOfBirth: String,
-    @SerializedName("cnic_nicop_issuance_date") val cnicNicopIssuanceDate: String
+    @SerializedName("cnic_nicop_issuance_date") val cnicNicopIssuanceDate: String,
+    @SerializedName("nadra_verified") val nadraVerified: String?,
+    @SerializedName("require_nadra_verification") val requireNadraVerification: Boolean?
 
 )

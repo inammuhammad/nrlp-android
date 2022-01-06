@@ -203,6 +203,9 @@
     <string name="faqs_title">FAQs</string>
     <string name="redeem">Redeem</string>
     <string name="otp_verification_title">OTP Verification</string>
+    <string name="nadra_verification_title">Nadra Verification</string>
+    <string name="nadra_verification_required">Dear Customer, \nYour NADRA Verification is required to proceed further. Please click accept for verification</string>
+    <string name="nadra_details_provided">Thank you for providing information, you will be notified with the verification status via SMS within 5 working days</string>
     <string name="otp_authentication_title">OTP Authentication</string>
     <string name="manage_beneficiary_title">Manage Beneficiary</string>
     <string name="manage_beneficiaries">Manage Beneficiaries</string>
@@ -282,6 +285,7 @@
     <string name="loyalty_statements">Loyalty Statements</string>
     <string name="timer_default">00:00</string>
     <string name="logout_confirmation_msg">Are you sure you want to Logout?</string>
+    <string name="nadra_confirmation_msg">Without providing verification, you will not be able to login. Are you sure, you want to exit the Application?</string>
     <string name="uuid_change_success_title">Device Verification Successful</string>
     <string name="cancel_registration">Cancel Registration</string>
     <string name="cancel_registration_confirm_msg">Are you sure you want to cancel the registration process?</string>

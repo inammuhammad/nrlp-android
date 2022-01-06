@@ -1,19 +1,17 @@
 {
-  "version": 1,
+  "version": 2,
   "artifactType": {
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.onelink.nrlp.android.dev",
-  "variantName": "debug",
+  "applicationId": "com.onelink.sohnidharti.app.dev",
+  "variantName": "processDebugResources",
   "elements": [
     {
       "type": "SINGLE",
       "filters": [],
-      "properties": [],
-      "versionCode": 2,
-      "versionName": "1.0-dev",
-      "enabled": true,
+      "versionCode": 8,
+      "versionName": "1.4-dev",
       "outputFile": "app-debug.apk"
     }
   ]

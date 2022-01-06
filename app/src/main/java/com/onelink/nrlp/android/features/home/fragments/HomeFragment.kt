@@ -11,14 +11,17 @@ import com.onelink.nrlp.android.core.BaseFragment
 import com.onelink.nrlp.android.core.Status
 import com.onelink.nrlp.android.data.local.UserData
 import androidx.lifecycle.Observer
+import com.onelink.nrlp.android.data.local.UserModel
 import com.onelink.nrlp.android.databinding.HomeFragmentBinding
 import com.onelink.nrlp.android.features.home.view.HomeActivity
 import com.onelink.nrlp.android.features.redeem.view.RedeemActivity
 import com.onelink.nrlp.android.utils.*
 import com.onelink.nrlp.android.utils.dialogs.OneLinkAlertDialogsFragment
+import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
 import com.onelink.nrlp.android.utils.view.hometiles.HomeTileModel
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.ly_loyalty_level_title.view.*
+import java.lang.Exception
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -30,6 +33,9 @@ open class HomeFragment :
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    @Inject
+    lateinit var oneLinkProgressDialog: OneLinkProgressDialog
 
     override fun getLayoutRes() = R.layout.home_fragment
 
@@ -46,6 +52,7 @@ open class HomeFragment :
 
     override fun init(savedInstanceState: Bundle?) {
         super.init(savedInstanceState)
+        oneLinkProgressDialog.showProgressDialog(activity)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
         UserData.getUser()?.let {
@@ -63,6 +70,7 @@ open class HomeFragment :
         binding.tvRedeemPoints.setOnSingleClickListener {
 //            showComingSoonDialog()
             launchRedeemPoints()
+            //viewModel.navigateNadraVerification(fragmentHelper)
         }
 
         binding.ivRightArrow.setOnSingleClickListener {
@@ -73,12 +81,16 @@ open class HomeFragment :
         //showUserData()
 
         viewModel.observeUserProfile().observe(this, Observer { response ->
-            if (response.status == Status.SUCCESS) showUserData()
+            if (response.status == Status.SUCCESS) {
+                oneLinkProgressDialog.hideProgressDialog()
+                showUserData()
+            }
         })
     }
 
     private fun showUserData() {
         UserData.getUser()?.let {
+            checkNadraVerification(it)
             if(it.accountType == "beneficiary") {
                 binding.containerAnnualRemittance.invisible()
             }
@@ -107,6 +119,13 @@ open class HomeFragment :
         activity?.let {
             it.startActivity(RedeemActivity.newRedeemIntent(it))
         }
+    }
+
+    private fun checkNadraVerification(userModel: UserModel){
+        try {
+            if (userModel.requireNadraVerification!!)
+                viewModel.navigateNadraVerification(fragmentHelper)
+        }catch(e: Exception){}
     }
 
     override fun refresh() {
