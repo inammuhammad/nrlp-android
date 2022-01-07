@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.view.KeyEvent
+import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.onelink.nrlp.android.R
 import com.onelink.nrlp.android.core.BaseActivity
@@ -28,7 +29,7 @@ class NadraVerificationsSuccessActivity: BaseActivity<ActivityRegisterContainerB
     override fun getVMFactory(): ViewModelProvider.Factory = viewModelFactory
 
     override fun initViewModel(viewModel: RegisterViewModel) {
-        textViewRegistrationSuccessful.text = getString(R.string.update_successful)
+        textViewRegistrationSuccessful.visibility = View.GONE
         textViewRegisterSuccessMsg.text = getString(R.string.nadra_details_provided)
         buttonDone.setOnClickListener {
             launchHomeActivity()

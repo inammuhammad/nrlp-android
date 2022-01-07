@@ -2,11 +2,10 @@ package com.onelink.nrlp.android.features.register.fragments
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
+import android.graphics.Typeface
 import android.os.Bundle
-import android.text.Editable
-import android.text.InputFilter
-import android.text.Selection
-import android.text.TextWatcher
+import android.text.*
+import android.text.style.StyleSpan
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -24,6 +23,7 @@ import com.onelink.nrlp.android.core.Status
 import com.onelink.nrlp.android.data.local.UserData
 import com.onelink.nrlp.android.databinding.FragmentRegisterAccountBinding
 import com.onelink.nrlp.android.features.redeem.fragments.REDEMPTION_CREATE_DIALOG
+import com.onelink.nrlp.android.features.redeem.fragments.TAG_REDEMPTION_CREATE_DIALOG
 import com.onelink.nrlp.android.features.redeem.fragments.TAG_REDEMPTION_CREATE_DIALOG_FBR
 import com.onelink.nrlp.android.features.redeem.view.RedeemSuccessActivity
 import com.onelink.nrlp.android.features.register.models.RegisterFlowDataModel
@@ -38,6 +38,7 @@ import com.onelink.nrlp.android.features.viewStatement.fragments.AdvancedLoyalty
 import com.onelink.nrlp.android.features.viewStatement.fragments.FROM_DATE
 import com.onelink.nrlp.android.features.viewStatement.fragments.TO_DATE
 import com.onelink.nrlp.android.utils.*
+import com.onelink.nrlp.android.utils.dialogs.OneLinkAlertCityDialogFragment
 import com.onelink.nrlp.android.utils.dialogs.OneLinkAlertDialogsFragment
 import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
 import dagger.android.support.AndroidSupportInjection
@@ -53,7 +54,8 @@ const val BENEFICIARY_FLOW_SCREENS = 3
 class RegisterAccountFragment :
     BaseFragment<RegisterAccountFragmentViewModel, FragmentRegisterAccountBinding>(
         RegisterAccountFragmentViewModel::class.java
-    ), SelectCountryFragment.OnSelectCountryListener, SelectCityFragment.OnSelectCityListener {
+    ), SelectCountryFragment.OnSelectCountryListener, SelectCityFragment.OnSelectCityListener,
+    OneLinkAlertCityDialogFragment.OneLinkAlertDialogListeners {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -758,6 +760,22 @@ class RegisterAccountFragment :
         }
     }
 
+    private fun showEnterCityDialog(str: Spanned) {
+        val oneLinkAlertDialogsFragment = OneLinkAlertCityDialogFragment.newInstance(
+            false,
+            R.drawable.ic_redem_dialog,
+            getString(R.string.place_of_birth),
+            str,
+            positiveButtonText =  getString(R.string.confirm),
+            negativeButtonText = getString(R.string.cancel)
+        )
+        oneLinkAlertDialogsFragment.setTargetFragment(
+            this,
+            REDEMPTION_CREATE_DIALOG
+        )
+        oneLinkAlertDialogsFragment.show(parentFragmentManager, TAG_REDEMPTION_CREATE_DIALOG)
+    }
+
     companion object {
         @JvmStatic
         fun newInstance() =
@@ -781,9 +799,24 @@ class RegisterAccountFragment :
     }
 
     override fun onSelectCityListener(citiesModel: CitiesModel) {
-        viewModel.placeOfBirth.value = citiesModel.city
-        binding.tvPlaceOfBirth.colorToText(R.color.black)
-        fragmentHelper.onBack()
+        val s = String.format(
+            getString(R.string.enter_code)
+        )
+        val str = SpannableStringBuilder(s)
+        str.setSpan(
+            StyleSpan(Typeface.BOLD),
+            s.indexOf(s),
+            s.indexOf(s) + s.length,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        if(citiesModel.city == "Other") {
+            showEnterCityDialog(str)
+        }
+        else {
+            viewModel.placeOfBirth.value = citiesModel.city
+            binding.tvPlaceOfBirth.colorToText(R.color.black)
+            fragmentHelper.onBack()
+        }
     }
 
     private fun getUserType(): String {
@@ -793,6 +826,12 @@ class RegisterAccountFragment :
             return "remitter"
         }
         return selectedType.toLowerCase()
+    }
+
+    override fun onPositiveButtonClicked(targetCode: Int, city: String) {
+        viewModel.placeOfBirth.value = city
+        binding.tvPlaceOfBirth.colorToText(R.color.black)
+        fragmentHelper.onBack()
     }
 
 }

@@ -71,6 +71,9 @@ object HeaderConstants {
     const val APPLICATION_VERSION = "application_version"
     const val RANDOM_KEY = "random_key"
     const val SESSION_KEY = "session_key"
+    const val DEVICE_NAME = "device_name"
+    const val OS_VERSION = "os_version"
+    const val DEVICE_TYPE = "device_type"
 }
 
 object PlayStoreConstants {

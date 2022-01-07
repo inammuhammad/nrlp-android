@@ -61,7 +61,7 @@ class SelectCityFragment(type: String = "beneficiary") :
         }
     }
 
-    override fun getTitle(): String = resources.getString(R.string.select_place_of_birth_title)
+    override fun getTitle(): String = resources.getString(R.string.title_place_of_birth)
 
     override fun onInject() {
         AndroidSupportInjection.inject(this)
@@ -76,7 +76,7 @@ class SelectCityFragment(type: String = "beneficiary") :
         viewModel.getCountryCodes(userType)
         viewModel.getCities()
 
-        binding.btnLoadMore.visibility = View.VISIBLE
+        //binding.btnLoadMore.visibility = View.VISIBLE
         binding.countrySearch.queryHint = resources.getString(R.string.search_city)
         binding.btnLoadMore.setOnClickListener {
             pageNum += 1
@@ -85,63 +85,39 @@ class SelectCityFragment(type: String = "beneficiary") :
         binding.countrySearch.setOnQueryTextListener(object: SearchView.OnQueryTextListener,
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                pageNum = 0
-                viewModel.getCities(query.toString(), pageNum)
+                /*pageNum = 0
+                viewModel.getCities(query.toString(), pageNum)*/
                 return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                //cityAdapter.filter.filter(newText)
-                if(newText == "") {
+                cityAdapter.filter.filter(newText)
+                /*if(newText == "") {
                     pageNum = 0
                     viewModel.getCities(newText.toString(), pageNum)
-                }
+                }*/
                 return false
             }
 
         })
-
-        /*viewModel.observerCountryCodes().observe(this, Observer { response ->
-            when (response.status) {
-                Status.SUCCESS -> {
-                    oneLinkProgressDialog.hideProgressDialog()
-                    response.data?.let {
-                        val countriesList: List<CountryCodeModel> =
-                            it.countryCodesList.sortedWith(compareBy { listItem -> listItem.country })
-                        binding.rvCountries.setHasFixedSize(true)
-                        cityAdapter = CountryAdapter(
-                            countriesList,
-                            listener::onSelectCityListener
-                        )
-                        binding.rvCountries.layoutManager = LinearLayoutManager(requireContext())
-                        binding.rvCountries.adapter = cityAdapter
-                    }
-                }
-                Status.ERROR -> {
-                    oneLinkProgressDialog.hideProgressDialog()
-                    response.error?.let {
-                        showGeneralErrorDialog(this, it)
-                    }
-                }
-                Status.LOADING -> {
-                    oneLinkProgressDialog.showProgressDialog(activity)
-                }
-            }
-        })*/
 
         viewModel.observeCities().observe(this, Observer { response ->
             when (response.status) {
                 Status.SUCCESS -> {
                     oneLinkProgressDialog.hideProgressDialog()
                     response.data?.let {
-                        val citiesList: ArrayList<CitiesModel> = it.citiesList
-                        if(citiesList.size < 10)
-                            binding.btnLoadMore.visibility = View.GONE
-                        else
-                            binding.btnLoadMore.visibility = View.VISIBLE
-                            //it.citiesList.sortedWith(compareBy { listItem -> listItem.city })
+                        var citiesList: ArrayList<CitiesModel> = it.citiesList
+                        citiesList.add(CitiesModel("0", "Other"))
+                        //it.citiesList.sortedWith(compareBy { listItem -> listItem.city })
                         binding.rvCountries.setHasFixedSize(true)
-                        if(pageNum<1) {
+                        cityAdapter = CitiesAdapter(
+                            citiesList,
+                            listener::onSelectCityListener
+                        )
+                        binding.rvCountries.layoutManager =
+                            LinearLayoutManager(requireContext())
+                        binding.rvCountries.adapter = cityAdapter
+                        /*if(pageNum<1) {
                             cityAdapter = CitiesAdapter(
                                 citiesList,
                                 listener::onSelectCityListener
@@ -153,7 +129,7 @@ class SelectCityFragment(type: String = "beneficiary") :
                         else {
                             cityAdapter.addItems(citiesList)
                             //cityAdapter.notifyDataSetChanged()
-                        }
+                        }*/
                     }
                 }
                 Status.ERROR -> {

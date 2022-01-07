@@ -2,8 +2,10 @@
     <string name="app_name">Sohni Dharti</string>
     <string name="register_an_account">Register an Account</string>
     <string name="full_name">Full Name *</string>
+    <string name="full_name_as_per_cnic">Full Name as per CNIC / NICOP *</string>
     <string name="mother_maiden_name">Mother Maiden Name *</string>
     <string name="place_of_birth">Place of Birth *</string>
+    <string name="title_place_of_birth">Place of Birth</string>
     <string name="cnic_nicop_number">CNIC/NICOP *</string>
     <string name="cnic_nicop_issuance_date">CNIC/NICOP Issuance Date *</string>
     <string name="country">Country of Residence *</string>
@@ -98,9 +100,9 @@
     <string name="dashboard">Dashboard</string>
     <string name="update_successful_message">You have successfully updated your password.</string>
     <string name="points_transfer_successful">Points Transferred Successfully</string>
-    <string name="register_success_msg_remitter">Thank you for registering. Your account will be activated within 5 working days upon successful verification of your provided details</string>
+    <string name="register_success_msg_remitter">Thank you for registering as a Beneficiary for Sohni Dharti Remittance Program.</string>
     <string name="you_have_successfully_transfered">You have successfully transferred %1$d points to %2$s.</string>
-    <string name="register_success_msg_beneficiary">Thank you for registering. Your account will be activated within 5 working days upon successful verification of your provided details</string>
+    <string name="register_success_msg_beneficiary">Thank you for registering as a Remitter for Sohni Dharti Remittance Program.</string>
     <string name="done">Done</string>
     <string name="register">Register</string>
     <string name="reference_num_hint">xxxxxxxxxxxxxxxxx</string>
@@ -203,9 +205,10 @@
     <string name="faqs_title">FAQs</string>
     <string name="redeem">Redeem</string>
     <string name="otp_verification_title">OTP Verification</string>
-    <string name="nadra_verification_title">Nadra Verification</string>
+    <string name="nadra_verification_title">NADRA Verification</string>
     <string name="nadra_verification_required">Dear Customer, \nYour NADRA Verification is required to proceed further. Please click accept for verification</string>
-    <string name="nadra_details_provided">Thank you for providing information, you will be notified with the verification status via SMS within 5 working days</string>
+    <string name="nadra_details_provided">Thank you for providing information, you will be notified soon with the verification status via SMS</string>
+    <string name="hint_enter_city">Enter City</string>
     <string name="otp_authentication_title">OTP Authentication</string>
     <string name="manage_beneficiary_title">Manage Beneficiary</string>
     <string name="manage_beneficiaries">Manage Beneficiaries</string>
@@ -312,7 +315,10 @@
     <string name="beneficiary_delete_msg">"Are you sure you want to delete %s?"</string>
     <string name="xxxx">xxxx</string>
     <string name="about_nrlp">About Sohni Dharti Remittance Program</string>
+    <string name="about">About</string>
     <string name="nrlp_benfits">Loyalty Benefits</string>
+    <string name="benefits">Benefits</string>
+    <string name="complaint">Complaint</string>
     <string name="view_more_transactions">View More Transactions</string>
     <string name="nrlp_partners">Sohni Dharti Redemption Partners</string>
     <string name="benefits_for_nrlp_users">List of Benefits</string>

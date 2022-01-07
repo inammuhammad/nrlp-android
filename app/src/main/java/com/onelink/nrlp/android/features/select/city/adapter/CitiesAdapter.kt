@@ -18,7 +18,7 @@ class CitiesAdapter(
     private val listener: (CitiesModel) -> Unit
 ): RecyclerView.Adapter<CitiesAdapter.CitiesViewHolder>() , Filterable {
     private var searchCities = ArrayList<CitiesModel>(cities)
-    override fun getItemCount(): Int = cities.size
+    override fun getItemCount(): Int = searchCities.size
 
     fun addItems(newList: ArrayList<CitiesModel>){
         cities.addAll(newList)
@@ -64,12 +64,12 @@ class CitiesAdapter(
     }
 
     override fun onBindViewHolder(holder: CitiesAdapter.CitiesViewHolder, position: Int) {
-        holder.cityItemBinding.city = cities[position]
+        holder.cityItemBinding.city = searchCities[position]
         holder.itemView.setOnClickListener {
-            listener(cities[position])
+            listener(searchCities[position])
         }
         holder.cityItemBinding.root.textViewCity.setOnClickListener {
-            listener(cities[position])
+            listener(searchCities[position])
         }
     }
 }

@@ -1,9 +1,13 @@
 package com.onelink.nrlp.android.features.home.fragments
 
 import android.app.DatePickerDialog
+import android.graphics.Typeface
 import android.os.Bundle
 import android.text.Editable
+import android.text.SpannableStringBuilder
+import android.text.Spanned
 import android.text.TextWatcher
+import android.text.style.StyleSpan
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -19,12 +23,15 @@ import com.onelink.nrlp.android.databinding.FragmentNadraVerificationRequiredBin
 import com.onelink.nrlp.android.features.home.view.HomeActivity
 import com.onelink.nrlp.android.features.home.view.NadraVerificationsSuccessActivity
 import com.onelink.nrlp.android.features.login.view.LoginFragment
+import com.onelink.nrlp.android.features.redeem.fragments.REDEMPTION_CREATE_DIALOG
+import com.onelink.nrlp.android.features.redeem.fragments.TAG_REDEMPTION_CREATE_DIALOG
 import com.onelink.nrlp.android.features.register.view.RegisterSuccessActivity
 import com.onelink.nrlp.android.features.register.viewmodel.SharedViewModel
 import com.onelink.nrlp.android.features.select.city.model.CitiesModel
 import com.onelink.nrlp.android.features.select.city.view.SelectCityFragment
 import com.onelink.nrlp.android.utils.ValidationUtils
 import com.onelink.nrlp.android.utils.colorToText
+import com.onelink.nrlp.android.utils.dialogs.OneLinkAlertCityDialogFragment
 import com.onelink.nrlp.android.utils.dialogs.OneLinkAlertDialogsFragment
 import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
 import com.onelink.nrlp.android.utils.toSpanned
@@ -36,7 +43,8 @@ const val NADRA_VERIFICATION_DETAILS_SCREEN = 4
 
 class NadraVerificationDetailsFragment :
     BaseFragment<HomeFragmentViewModel, FragmentNadraVerificationDetailsBinding>
-    (HomeFragmentViewModel::class.java), SelectCityFragment.OnSelectCityListener{
+    (HomeFragmentViewModel::class.java), SelectCityFragment.OnSelectCityListener,
+    OneLinkAlertCityDialogFragment.OneLinkAlertDialogListeners{
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -89,6 +97,10 @@ class NadraVerificationDetailsFragment :
                 addToBackStack = true
             )
             hideKeyboard()
+        }
+
+        binding.icHelpFullName.setOnClickListener {
+            showGeneralAlertDialog(this,"Register",getString(R.string.help_full_name))
         }
     }
 
@@ -177,18 +189,54 @@ class NadraVerificationDetailsFragment :
         }
     }
 
+    private fun showEnterCityDialog(str: Spanned) {
+        val oneLinkAlertDialogsFragment = OneLinkAlertCityDialogFragment.newInstance(
+            false,
+            R.drawable.ic_redem_dialog,
+            getString(R.string.place_of_birth),
+            str,
+            positiveButtonText =  getString(R.string.confirm),
+            negativeButtonText = getString(R.string.cancel)
+        )
+        oneLinkAlertDialogsFragment.setTargetFragment(
+            this,
+            REDEMPTION_CREATE_DIALOG
+        )
+        oneLinkAlertDialogsFragment.show(parentFragmentManager, TAG_REDEMPTION_CREATE_DIALOG)
+    }
+
+    override fun onSelectCityListener(citiesModel: CitiesModel) {
+        val s = String.format(
+            getString(R.string.enter_code)
+        )
+        val str = SpannableStringBuilder(s)
+        str.setSpan(
+            StyleSpan(Typeface.BOLD),
+            s.indexOf(s),
+            s.indexOf(s) + s.length,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        if(citiesModel.city == "Other") {
+            showEnterCityDialog(str)
+        }
+        else {
+            viewModel.placeOfBirth.value = citiesModel.city
+            binding.tvPlaceOfBirth.text = citiesModel.city
+            binding.tvPlaceOfBirth.colorToText(R.color.black)
+            fragmentHelper.onBack()
+        }
+    }
+
+    override fun onPositiveButtonClicked(targetCode: Int, city: String) {
+        viewModel.placeOfBirth.value = city
+        binding.tvPlaceOfBirth.text = city
+        binding.tvPlaceOfBirth.colorToText(R.color.black)
+        fragmentHelper.onBack()
+    }
+
     companion object {
         private const val TAG = "nadraVerificationDetails.fragment"
         @JvmStatic
         fun newInstance() = NadraVerificationDetailsFragment()
     }
-
-    override fun onSelectCityListener(citiesModel: CitiesModel) {
-        viewModel.placeOfBirth.value = citiesModel.city
-        binding.tvPlaceOfBirth.text = citiesModel.city
-        validateFields()
-        binding.tvPlaceOfBirth.colorToText(R.color.black)
-        fragmentHelper.onBack()
-    }
-
 }

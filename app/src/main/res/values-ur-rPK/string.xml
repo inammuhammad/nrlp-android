@@ -3,10 +3,12 @@
     <string name="app_name">Sohni Dharti-Dev</string>
     <string name="register_an_account">رجسٹر کریں</string>
     <string name="full_name">مکمل نام*</string>
+    <string name="full_name_as_per_cnic">*CNIC/NICOP کے مطابق پورا نام</string>
     <string name="mother_maiden_name">ماں کا نام *</string>
     <string name="place_of_birth">جائے پیدائش *</string>
+    <string name="title_place_of_birth">جائے پیدائش</string>
     <string name="cnic_nicop_number">شناختی کارڈ/ نیشنل آئیڈنٹٹی کارڈ فور اوورسیز پاکستانی*</string>
-    <string name="cnic_nicop_issuance_date">CNIC/NICOP اجراء کی تاریخ*</string>
+    <string name="cnic_nicop_issuance_date">*CNIC/NICOP کے اجراء کی تاریخ</string>
     <string name="country">قیام کا ملک*</string>
     <string name="passport_no">پاسپورٹ نمبر*</string>
     <string name="select_passport_no">پاسپورٹ نمبر درج کریں</string>
@@ -200,6 +202,10 @@
     <string name="faqs_title">مقرر پوچھے گئے سوالات</string>
     <string name="remitter_verification_title">بھیجنےوالے کی تصدیق</string>
     <string name="otp_verification_title">او ٹی پی کی تصدیق</string>
+    <string name="nadra_verification_required">مزید آگے بڑھنے کے لئے آپ کی تصدیق NADRA درکار ہے۔\n تصدیق کے لیے قبول کریں</string>
+    <string name="nadra_confirmation_msg">تصدیق فراہم کیے بغیر، آپ لاگ ان نہیں کر سکیں گے\n کیا آپ کو یقین ہے، آپ باہر نکلنا چاہتے ہیں</string>
+    <string name="nadra_details_provided">معزز صارف\n معلومات فراہم کرنے کے لئے آپ کا شکریہ، آپ کو جلد ایس ایم ایس کے ذریع تصدیق کے متعلق آگاہ کر دیا جائے گا</string>
+    <string name="nadra_verification_title">NADRA تصدیق</string>
     <string name="otp_authentication_title">او ٹی پی کی توثیق</string>
     <string name="manage_beneficiary_title">وصول کنندہ کی منتظمی</string>
     <string name="beneficiary_details_title">وصول کنندہ کی تفصیلات</string>
@@ -286,8 +292,8 @@
     <string name="uuid_change_success_message">آپ کے موبائل کی تصدیق ہوگئی ہے ، براہ کرم آگے بڑھنے کے لئے دوبارہ لاگ ان ہوں۔</string>
     <string name="not_enough_points_transfer_msg">آپ کے پوائنٹس منتقلی کے لئے ناکافی ہیں</string>
     <string name="device_change">ڈیوائس میں تبدیلی</string>
-    <string name="yes">ہاں</string>
-    <string name="no">نہیں</string>
+    <string name="yes">جی ہاں</string>
+    <string name="no">جی نہیں</string>
     <string name="language_selection">زبان کا انتخاب</string>
     <string name="coming_soon">جلد آرہا ہے</string>
     <string name="coming_soon_msg">یہ خصوصیت جلد دستیاب ہوگی</string>
@@ -297,7 +303,10 @@
     <string name="beneficiary_delete_msg">"کیا آپ واقعی %s کو حذف کرنا چاہتے ہیں؟"</string>
     <string name="xxxx">xxxx</string>
     <string name="about_nrlp">سوہنی دھرتی پروگرام کے بارے میں جانیں</string>
+    <string name="about">معلومات</string>
     <string name="nrlp_benfits">سوہنی دھرتی پروگرام کے فوائد</string>
+    <string name="benefits">فوائد</string>
+    <string name="complaint">شکایت</string>
     <string name="view_more_transactions">مزید ٹرانزیکشنز ملاحظہ کریں</string>
     <string name="nrlp_partners">سوہنی دھرتی پروگرام کے پارٹنرز</string>
     <string name="benefits_for_nrlp_users">فوائد کی فہرست</string>

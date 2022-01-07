@@ -78,7 +78,13 @@
                             style="@style/TextViewSubHeading"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/full_name" />
+                            android:text="@string/full_name_as_per_cnic" />
+                        <ImageView
+                            android:layout_width="@dimen/_15sdp"
+                            android:id="@+id/icHelpFullName"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:src="@drawable/ic_baseline_info_24"
+                            android:layout_height="wrap_content"/>
 
                     </LinearLayout>
 

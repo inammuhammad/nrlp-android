@@ -1,6 +1,7 @@
 package com.onelink.nrlp.android.data.interceptors
 
 import android.content.Context
+import android.os.Build
 import android.widget.Toast
 import com.google.gson.Gson
 import com.onelink.nrlp.android.data.local.UserData
@@ -70,6 +71,24 @@ class EncryptionInterceptor(val context: Context) : Interceptor {
             encryptedRequest,
             HeaderConstants.APPLICATION_VERSION,
             Constants.checkSum , headers, keyIV
+        )
+
+        addOrRemoveHeader(
+            encryptedRequest,
+            HeaderConstants.OS_VERSION,
+            android.os.Build.VERSION.RELEASE, headers, keyIV
+        )
+
+        addOrRemoveHeader(
+            encryptedRequest,
+            HeaderConstants.DEVICE_TYPE,
+            "Android", headers, keyIV
+        )
+
+        addOrRemoveHeader(
+            encryptedRequest,
+            HeaderConstants.DEVICE_NAME,
+            android.os.Build.MANUFACTURER + " " + android.os.Build.MODEL, headers, keyIV
         )
 
         return encryptedRequest
