@@ -208,7 +208,6 @@
     <string name="nadra_verification_title">NADRA Verification</string>
     <string name="nadra_verification_required">Dear Customer, \nYour NADRA Verification is required to proceed further. Please click accept for verification</string>
     <string name="nadra_details_provided">Thank you for providing information, you will be notified soon with the verification status via SMS</string>
-    <string name="hint_enter_city">Enter City</string>
     <string name="otp_authentication_title">OTP Authentication</string>
     <string name="manage_beneficiary_title">Manage Beneficiary</string>
     <string name="manage_beneficiaries">Manage Beneficiaries</string>
