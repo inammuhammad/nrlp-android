@@ -100,9 +100,9 @@
     <string name="dashboard">Dashboard</string>
     <string name="update_successful_message">You have successfully updated your password.</string>
     <string name="points_transfer_successful">Points Transferred Successfully</string>
-    <string name="register_success_msg_remitter">Thank you for registering as a Beneficiary for Sohni Dharti Remittance Program.</string>
+    <string name="register_success_msg_remitter">Thank you for registering as a Remitter for Sohni Dharti Remittance Program.</string>
     <string name="you_have_successfully_transfered">You have successfully transferred %1$d points to %2$s.</string>
-    <string name="register_success_msg_beneficiary">Thank you for registering as a Remitter for Sohni Dharti Remittance Program.</string>
+    <string name="register_success_msg_beneficiary">Thank you for registering as a Beneficiary for Sohni Dharti Remittance Program.</string>
     <string name="done">Done</string>
     <string name="register">Register</string>
     <string name="reference_num_hint">xxxxxxxxxxxxxxxxx</string>

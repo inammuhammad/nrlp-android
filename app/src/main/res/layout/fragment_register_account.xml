@@ -321,13 +321,11 @@
                             android:gravity="center"
                             android:hint="@string/hint_x"
                             android:inputType="number"
-                            android:layoutDirection="ltr"
                             android:maxLength="1"
                             android:text="@={viewModel.etOTP1}"
                             android:nextFocusDown="@id/etOTP2"
                             android:nextFocusForward="@id/etOTP2"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/etOTP2"
                             app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -345,11 +343,9 @@
                             android:text="@={viewModel.etOTP2}"
                             android:nextFocusDown="@id/etOTP3"
                             android:nextFocusForward="@id/etOTP3"
-                            android:layout_marginStart="@dimen/_1sdp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/etOTP3"
-                            app:layout_constraintStart_toEndOf="@+id/etOTP1"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintStart_toEndOf="@id/etOTP1"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
 
                         <com.onelink.nrlp.android.widgets.OneLinkEditText
                             android:id="@+id/etOTP3"
@@ -363,9 +359,7 @@
                             android:text="@={viewModel.etOTP3}"
                             android:nextFocusDown="@id/etOTP4"
                             android:nextFocusForward="@id/etOTP4"
-                            android:layout_marginStart="@dimen/_1sdp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/etOTP4"
                             app:layout_constraintStart_toEndOf="@+id/etOTP2"
                             app:layout_constraintTop_toTopOf="parent" />
 

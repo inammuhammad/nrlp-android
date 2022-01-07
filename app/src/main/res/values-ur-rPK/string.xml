@@ -118,9 +118,9 @@
     <string name="dashboard">ڈیش بورڈ</string>
     <string name="update_successful_message">آپ نے کامیابی کے ساتھ اپنا پاس ورڈ اپ ڈیٹ کر لیا ہے</string>
     <string name="points_transfer_successful">آپ کے پوائنٹس کامیابی سے منتقل ہو چکے ہیں</string>
-    <string name="register_success_msg_remitter">رجسٹر کرنے کے لیے آپ کا شکریہ، آپ کی فراہم کردہ تفصیلات کی کامیاب تصدیق کے بعد آپ کا اکاؤنٹ 5 کاروباری دنوں کے اندر فعال ہو جائے گا۔</string>
+    <string name="register_success_msg_remitter">سوہنی دھرتی ریمیٹنس پروگرام رجسٹر کرنے کا شکریہ۔</string>
     <string name="you_have_successfully_transfered">آپ نے کامیابی کے ساتھ %1$d پوائنٹس %2$s کو منتقل کر دیے ھیں</string>
-    <string name="register_success_msg_beneficiary">آپ کی رجسٹریشن کا  شکریہ۔ اب آپ بہترین فوائد حاصل کر سکتے ہیں</string>
+    <string name="register_success_msg_beneficiary">سوہنی دھرتی ریمیٹنس پروگرام رجسٹر کرنے کا شکریہ۔</string>
     <string name="done">مکمل</string>
     <string name="register">رجسٹر کریں</string>
     <string name="reference_num_hint">xxxxxxxxxxxxxxxxx</string>

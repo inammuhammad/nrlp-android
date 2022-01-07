@@ -16,8 +16,8 @@ android {
         applicationId "com.onelink.sohnidharti.app"
         minSdkVersion minSdkVer
         targetSdkVersion targetSdkVer
-        versionCode 8
-        versionName "1.4"
+        versionCode 9
+        versionName "1.5"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
