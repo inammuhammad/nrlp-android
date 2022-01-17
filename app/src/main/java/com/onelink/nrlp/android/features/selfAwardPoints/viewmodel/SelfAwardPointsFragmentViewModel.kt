@@ -69,16 +69,17 @@ class SelfAwardPointsFragmentViewModel @Inject constructor(private val selfAward
         val dateString =
                 SimpleDateFormat("dd/M/yyyy", Locale.US).parse(rawDate ?: "") ?: return ""
         val day = calendar?.get(Calendar.DATE)
-        return if (day !in 11..18) when (day?.rem(10)) {
+        return SimpleDateFormat("dd-MMM-yy", Locale.US).format(dateString)
+        /*return if (day !in 11..18) when (day?.rem(10)) {
             1 -> SimpleDateFormat("d'st' MMMM yyyy", Locale.US).format(dateString)
             2 -> SimpleDateFormat("d'nd' MMMM yyyy", Locale.US).format(dateString)
             3 -> SimpleDateFormat("d'rd' MMMM yyyy", Locale.US).format(dateString)
             else -> SimpleDateFormat("d'th' MMMM yyyy", Locale.US).format(dateString)
-        } else SimpleDateFormat("d'th' MMMM yyyy", Locale.US).format(dateString)
+        } else SimpleDateFormat("d'th' MMMM yyyy", Locale.US).format(dateString)*/
     }
 
     fun getDateInApiFormat(string: String): String? {
         val dateString = SimpleDateFormat("dd/M/yyyy", Locale.US).parse(string) ?: return ""
-        return SimpleDateFormat("yyyyMMdd", Locale.US).format(dateString)
+        return SimpleDateFormat("dd-MMM-yy", Locale.US).format(dateString)
     }
 }

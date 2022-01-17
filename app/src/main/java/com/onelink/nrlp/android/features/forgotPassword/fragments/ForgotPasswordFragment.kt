@@ -12,6 +12,7 @@ import android.widget.SpinnerAdapter
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.onelink.nrlp.android.R
+import com.onelink.nrlp.android.core.BaseError
 import com.onelink.nrlp.android.core.BaseFragment
 import com.onelink.nrlp.android.core.Status
 import com.onelink.nrlp.android.databinding.FragmentForgotPasswordBinding
@@ -180,14 +181,17 @@ class ForgotPasswordFragment :
                 Status.SUCCESS -> {
                     oneLinkProgressDialog.hideProgressDialog()
                     response.data?.let {
-
-                        viewModel.forgotPassword(
-                            ForgotPasswordRequestModel(
-                                nicNicop = binding.etCnicNicop.text.toString().cleanNicNumber(),
-                                userType = viewModel.getAccountType(resources)
-                                    .toLowerCase(Locale.getDefault())
+                        if(it.data.key == "" || it.data.key.isEmpty())
+                            showGeneralErrorDialog(this, BaseError("", resources.getString(R.string.something_went_wrong)))
+                        else {
+                            viewModel.forgotPassword(
+                                ForgotPasswordRequestModel(
+                                    nicNicop = binding.etCnicNicop.text.toString().cleanNicNumber(),
+                                    userType = viewModel.getAccountType(resources)
+                                        .toLowerCase(Locale.getDefault())
+                                )
                             )
-                        )
+                        }
                     }
                 }
                 Status.ERROR -> {

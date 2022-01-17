@@ -11,6 +11,7 @@ import android.text.TextWatcher
 import androidx.lifecycle.ViewModelProvider
 import com.guardsquare.dexguard.runtime.detection.RootDetector
 import com.onelink.nrlp.android.R
+import com.onelink.nrlp.android.core.BaseError
 import com.onelink.nrlp.android.core.BaseFragment
 import com.onelink.nrlp.android.core.Status
 import com.onelink.nrlp.android.databinding.LoginFragmentBinding
@@ -79,15 +80,18 @@ class LoginFragment :
 
                 Status.SUCCESS -> {
                     response.data?.let {
-
-                        this.viewModel.loginCall(
-                            binding.rgSelectAccountType.checkedRadioButtonId,
-                            binding.etCnic.text.toString(),
-                            binding.etPass.text.toString(),
-                            Constants.REMITTER,
-                            Constants.BENEFICIARY,
-                            UniqueDeviceID.getUniqueId() ?: ""
-                        )
+                        if(it.data.key == "" || it.data.key.isEmpty())
+                            showGeneralErrorDialog(this, BaseError("", resources.getString(R.string.something_went_wrong)))
+                        else {
+                            this.viewModel.loginCall(
+                                binding.rgSelectAccountType.checkedRadioButtonId,
+                                binding.etCnic.text.toString(),
+                                binding.etPass.text.toString(),
+                                Constants.REMITTER,
+                                Constants.BENEFICIARY,
+                                UniqueDeviceID.getUniqueId() ?: ""
+                            )
+                        }
                     }
                 }
                 Status.ERROR -> {

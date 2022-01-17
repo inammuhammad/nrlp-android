@@ -18,6 +18,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import com.onelink.nrlp.android.R
+import com.onelink.nrlp.android.core.BaseError
 import com.onelink.nrlp.android.core.BaseFragment
 import com.onelink.nrlp.android.core.Status
 import com.onelink.nrlp.android.data.local.UserData
@@ -415,8 +416,11 @@ class RegisterAccountFragment :
                 Status.SUCCESS -> {
                     oneLinkProgressDialog.hideProgressDialog()
                     response.data?.let {
-                        //moveToNextFragment()
-                        viewModel.makeRegisterCall(getRegisterFlowModel())
+                        if(it.data.key == "" || it.data.key.isEmpty())
+                            showGeneralErrorDialog(this, BaseError("", resources.getString(R.string.something_went_wrong)))
+                        else {
+                            viewModel.makeRegisterCall(getRegisterFlowModel())
+                        }
                     }
                 }
                 Status.ERROR -> {

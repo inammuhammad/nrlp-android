@@ -12,7 +12,7 @@ class Constants {
         // Comment date checksum replaced(DD-MM-YY) + checksum replaced
         // 29-12-21 69ylzdfq2uem9fdkbl713m7nl9taggbna3fq06q7
         // 07-01-22 w73v34zmazcrlz1li8v3iplfdoawrjz7ggsutsin
-        const val checkSum = "jfpuj1u2iobyryn554w6iig81b5spnnrtl1txy0c"
+        const val checkSum = "w73v34zmazcrlz1li8v3iplfdoawrjz7ggsutsin" //"jfpuj1u2iobyryn554w6iig81b5spnnrtl1txy0c"
 
         const val InternationalPassport = "International Passport"
         const val PakistaniPassport = "Pakistani Passport"
