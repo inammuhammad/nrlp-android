@@ -67,7 +67,7 @@ class SelfAwardPointsFragment :
         }
 
         //showWarningDialog(getString(R.string.self_award_warning))
-        showGeneralAlertDialog(this,"SelfAward",getString(R.string.self_award_warning))
+        //showGeneralAlertDialog(this,"SelfAward",getString(R.string.self_award_warning))
 
         initListeners()
         initObservers()
@@ -84,7 +84,7 @@ class SelfAwardPointsFragment :
                 amount = binding.etRemittanceAmount.text.toString().replace(",", ""),
                 reference_no = binding.etRefNo.text.toString(),
                 beneficiary_nic_nicop = binding.etCnicAccountNumber.text.toString(),
-                transaction_date = viewModel.getDateInApiFormat(viewModel.rawRemittanceDate.value.toString())
+                //transaction_date = viewModel.getDateInApiFormat(viewModel.rawRemittanceDate.value.toString())
             )
 
             selfAwardPointSharedViewModel?.setSelfAwardPointsFlowDataModel(selfAwardPointsRequest)

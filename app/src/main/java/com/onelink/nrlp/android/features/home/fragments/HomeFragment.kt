@@ -133,6 +133,11 @@ open class HomeFragment :
         super.refresh()
     }
 
+    override fun onResume() {
+        super.onResume()
+        oneLinkProgressDialog.showProgressDialog(context)
+    }
+
      protected fun showComingSoonDialog() {
         OneLinkAlertDialogsFragment.Builder()
             .setIsAlertOnly(true).setDrawable(R.drawable.ic_coming_soon_alert)

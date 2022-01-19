@@ -10,6 +10,8 @@ import okhttp3.*
 import okio.Buffer
 import org.json.JSONObject
 
+var key1 = ""
+var key2 = ""
 
 class EncryptionInterceptor(val context: Context) : Interceptor {
 
@@ -33,6 +35,10 @@ class EncryptionInterceptor(val context: Context) : Interceptor {
     private fun getEncryptedRequest(request: Request, oldPayload: String): Request {
         var body = request.body()
         var keyIV = Pair(UniqueDeviceID.getUniqueId()?.take(32), UserData.finalEncryptionIV)
+        try {
+            key1 = UniqueDeviceID.getUniqueId()?.take(32).toString()
+            key2 = UserData.finalEncryptionIV.toString()
+        }catch (e: Exception){}
 
         if (oldPayload.isNotEmpty()) {
             val jsonPayload = JSONObject(oldPayload)
@@ -130,7 +136,8 @@ class EncryptionInterceptor(val context: Context) : Interceptor {
         jsonPayload.put(
             PAYLOAD_HASH, AESEncryptionHelper.encrypt(
                 AppUtils.hash256(encryptedJsonPayload.toString()),
-                keyIV.first ?: "", keyIV.second ?: ""
+                key1, key2
+                //keyIV.first ?: "", keyIV.second ?: ""
             )
         )
         return jsonPayload
