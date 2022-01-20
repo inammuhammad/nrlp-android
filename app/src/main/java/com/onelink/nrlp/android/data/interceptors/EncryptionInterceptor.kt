@@ -38,6 +38,8 @@ class EncryptionInterceptor(val context: Context) : Interceptor {
         try {
             key1 = UniqueDeviceID.getUniqueId()?.take(32).toString()
             key2 = UserData.finalEncryptionIV.toString()
+            if(key2 == "null")
+                key2 = ""
         }catch (e: Exception){}
 
         if (oldPayload.isNotEmpty()) {
