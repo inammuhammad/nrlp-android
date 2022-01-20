@@ -688,8 +688,8 @@ class RegisterAccountFragment :
     }
 
     private fun getRegisterFlowModel(): RegisterFlowDataModel{
-        var emailString = ""
-        if(binding.etEmailAddress.text.toString() == "")
+        var emailString = binding.etEmailAddress.text.toString()
+        if(emailString == "")
             emailString = "-"
         return RegisterFlowDataModel(
             fullName = binding.etFullName.text.toString(),
