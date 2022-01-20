@@ -688,11 +688,14 @@ class RegisterAccountFragment :
     }
 
     private fun getRegisterFlowModel(): RegisterFlowDataModel{
+        var emailString = ""
+        if(binding.etEmailAddress.text.toString() == "")
+            emailString = "-"
         return RegisterFlowDataModel(
             fullName = binding.etFullName.text.toString(),
             cnicNicop = binding.etCnicNicop.text.toString().replace("-", ""),
             phoneNumber = binding.tvCountryCode.text.toString() + binding.etPhoneNumber.text.toString(),
-            email = binding.etEmailAddress.text.toString(),
+            email = emailString, //binding.etEmailAddress.text.toString(),
             residentId = binding.etResidentId.text.toString(),
             passportType = viewModel.getPassportType(resources)
                 .toLowerCase(Locale.getDefault()),

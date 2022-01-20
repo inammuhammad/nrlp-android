@@ -27,16 +27,16 @@ class RegisterRemitterRequest(
     @SerializedName("user_type")
     val userType: String,
 
-    @Suppress("unused")
+    /*@Suppress("unused")
     @SerializedName("reference_no")
-    val referenceNo: String,
+    val referenceNo: String,*/
 
-    @Suppress("unused")
+    /*@Suppress("unused")
     @SerializedName("amount")
-    val amount: String,
+    val amount: String,*/
 
     @SerializedName("email")
-    val email: String,
+    val email: String = "-",
     @SerializedName("encryption_key")
     val encryptionKey: String = LukaKeRakk.kcth(),
 

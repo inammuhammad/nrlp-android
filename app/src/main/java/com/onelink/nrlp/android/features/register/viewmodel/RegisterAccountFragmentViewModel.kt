@@ -172,8 +172,8 @@ class RegisterAccountFragmentViewModel @Inject constructor(
                     password = registerFlowDataModel.password,
                     fullName = registerFlowDataModel.fullName,
                     userType = registerFlowDataModel.accountType,
-                    referenceNo = registerFlowDataModel.referenceNumber,
-                    amount = registerFlowDataModel.transactionAmount,
+                    /*referenceNo = registerFlowDataModel.referenceNumber,
+                    amount = registerFlowDataModel.transactionAmount,*/
                     email = registerFlowDataModel.email,
                     residentId = registerFlowDataModel.residentId,
                     passportType = registerFlowDataModel.passportType,

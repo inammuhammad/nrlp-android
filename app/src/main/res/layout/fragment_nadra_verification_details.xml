@@ -103,6 +103,7 @@
                             android:hint="@string/generic_name_placeholder"
                             android:inputType="textCapWords|textCapSentences"
                             android:maxLength="50"
+                            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
                             android:nextFocusDown="@id/etCnicNicop"
                             android:nextFocusForward="@id/etCnicNicop"
                             android:text="@={viewModel.fullName}" />
@@ -210,6 +211,7 @@
                             android:hint="@string/mother_maiden_name_placeholder"
                             android:inputType="textCapWords|textCapSentences"
                             android:maxLength="50"
+                            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
                             android:nextFocusDown="@id/etCnicNicop"
                             android:nextFocusForward="@id/etCnicNicop"
                             android:text="@={viewModel.mothersMaidenName}" />
