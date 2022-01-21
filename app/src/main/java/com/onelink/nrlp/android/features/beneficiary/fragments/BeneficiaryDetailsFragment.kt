@@ -283,6 +283,12 @@ class BeneficiaryDetailsFragment :
         binding.spinnerRelationShip.setOnClickListener {
             binding.spinnerSelectRelationship.performClick()
         }
+        binding.btnEdit.setOnSingleClickListener {
+            enableEdit(beneficiaryDetailsModel)
+        }
+        binding.btnCancel.setOnClickListener {
+            makeDeleteBeneficiaryView(beneficiaryDetailsModel)
+        }
     }
 
     private fun makeBeneficiaryAddCall() {
@@ -409,6 +415,7 @@ class BeneficiaryDetailsFragment :
         //binding.etCountry.visibility = View.GONE
         binding.tvCountryCode.visibility = View.GONE
         binding.prefixTv.visibility = View.GONE
+        binding.lytUpdateCancel.visibility = View.GONE
 
         //Disabling EditTexts
         binding.eTCnicNumber.isEnabled = false
@@ -448,6 +455,48 @@ class BeneficiaryDetailsFragment :
         //hiding beneficiary relationship
         //binding.beneficiaryLL.visibility = View.GONE
         binding.ivDropDown.visibility = View.GONE
+
+        if(!it.isActive)
+            binding.lytPosNegButtons.visibility = View.VISIBLE
+    }
+
+    private fun enableEdit(it: BeneficiaryDetailsModel){
+        binding.lytPosNegButtons.visibility = View.GONE
+        binding.lytUpdateCancel.visibility = View.VISIBLE
+        binding.btnNext.text = getString(R.string.delete_beneficiary)
+        //binding.textViewCountry.visibility = View.GONE
+        //binding.etCountry.visibility = View.GONE
+        binding.tvCountryCode.visibility = View.GONE
+        binding.prefixTv.visibility = View.GONE
+
+        //Disabling EditTexts
+        binding.eTCnicNumber.isEnabled = true
+        binding.etAlias.isEnabled = true
+        binding.etMobileNumber.isEnabled = true
+        binding.beneficiaryLL.isEnabled = true
+        binding.spinnerRelationShip.isEnabled = true
+        binding.tvRelationShip.isEnabled = true
+        binding.etCountry.isEnabled = true
+
+        //Setting Form Fields
+        viewModel.alias.value = it.alias
+        viewModel.cnicNumber.value = it.nicNicop.toString().formattedCnicNumberNoSpaces()
+        viewModel.mobileNumber.value = it.mobileNo
+        binding.tvRelationShip.text = it.relationship
+        binding.etCountry.text = it.country
+        if(it.country.isNullOrEmpty())
+            binding.etCountry.text = " "
+        viewModel.aliasNotEmpty.value = true
+        viewModel.cnicNumberNotEmpty.value = true
+        viewModel.mobileNumberNotEmpty.value = true
+        viewModel.ccountryNotEmpty.value = true
+
+        //TextColor
+        binding.etAlias.colorToText(R.color.black)
+        binding.eTCnicNumber.colorToText(R.color.black)
+        binding.etMobileNumber.colorToText(R.color.black)
+        binding.tvRelationShip.colorToText(R.color.black)
+        binding.etCountry.colorToText(R.color.black)
     }
 
     companion object {
