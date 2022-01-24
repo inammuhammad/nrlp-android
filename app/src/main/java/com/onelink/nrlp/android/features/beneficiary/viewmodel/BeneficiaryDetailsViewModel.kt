@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import com.onelink.nrlp.android.core.BaseViewModel
 import com.onelink.nrlp.android.features.beneficiary.models.AddBeneficiaryRequestModel
 import com.onelink.nrlp.android.features.beneficiary.models.DeleteBeneficiaryRequestModel
+import com.onelink.nrlp.android.features.beneficiary.models.ResendBeneficiaryOtpRequestModel
+import com.onelink.nrlp.android.features.beneficiary.models.UpdateBeneficiaryRequestModel
 import com.onelink.nrlp.android.features.beneficiary.repo.BeneficiaryRepo
 import com.onelink.nrlp.android.utils.Constants
 import com.onelink.nrlp.android.utils.ValidationUtils
@@ -22,10 +24,21 @@ open class BeneficiaryDetailsViewModel @Inject constructor(private val beneficia
     val validationPhoneNumberPassed = MutableLiveData(true)
     val beneficiaryRelation = MutableLiveData<String>(Constants.SPINNER_BENEFICIARY_HINT)
 
+
     fun deleteBeneficiary(deleteBeneficiaryRequestModel: DeleteBeneficiaryRequestModel) =
         beneficiaryRepo.deleteBeneficiary(deleteBeneficiaryRequestModel)
 
+    fun addBeneficiaryResendOtp(request:ResendBeneficiaryOtpRequestModel)=
+        beneficiaryRepo.addBeneficiaryResendOtp(request)
+
+    fun updateBeneficiary(request: UpdateBeneficiaryRequestModel)=
+        beneficiaryRepo.updateBeneficiary(request)
+
+    fun observeBeneficiaryResendOtp() =beneficiaryRepo.observeBeneficiaryResendOtpResponse()
+
     fun observeBeneficiaryDeleteResponse() = beneficiaryRepo.observeBeneficiaryDeleteResponse()
+
+    fun observeBeneficiaryUpdateResponse() =beneficiaryRepo.observerBeneficiaryUpdateResponse()
 
     fun addBeneficiary(addBeneficiaryRequestModel: AddBeneficiaryRequestModel) =
         beneficiaryRepo.addBeneficiary(addBeneficiaryRequestModel)

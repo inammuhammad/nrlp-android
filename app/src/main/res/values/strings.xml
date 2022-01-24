@@ -336,4 +336,6 @@
     <string name="enter_your_cnic">Enter your CNIC No.</string>
     <string name="enter_psid_redemption">Enter PSID for Redemption</string>
     <string name="enter_psid">Enter PSID</string>
+    <string name="beneficiary_updated">Beneficiary details have been updated successfully</string>
+    <string name="otp_resent">Registration code has been resent</string>
 </resources>

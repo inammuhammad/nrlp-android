@@ -6,6 +6,7 @@ import android.text.Editable
 import android.text.InputFilter
 import android.text.Selection
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.AdapterView
@@ -19,10 +20,13 @@ import com.onelink.nrlp.android.core.Status
 import com.onelink.nrlp.android.databinding.FragmentBeneficiaryDetailsBinding
 import com.onelink.nrlp.android.features.beneficiary.models.AddBeneficiaryRequestModel
 import com.onelink.nrlp.android.features.beneficiary.models.DeleteBeneficiaryRequestModel
+import com.onelink.nrlp.android.features.beneficiary.models.ResendBeneficiaryOtpRequestModel
+import com.onelink.nrlp.android.features.beneficiary.models.UpdateBeneficiaryRequestModel
 import com.onelink.nrlp.android.features.beneficiary.viewmodel.BeneficiaryDetailsViewModel
 import com.onelink.nrlp.android.features.beneficiary.viewmodel.BeneficiarySharedViewModel
 import com.onelink.nrlp.android.features.select.country.model.CountryCodeModel
 import com.onelink.nrlp.android.features.select.country.view.SelectCountryFragment
+import com.onelink.nrlp.android.features.uuid.view.UUIDOtpAuthentication
 import com.onelink.nrlp.android.models.BeneficiaryDetailsModel
 import com.onelink.nrlp.android.utils.*
 import com.onelink.nrlp.android.utils.dialogs.OneLinkAlertDialogsFragment
@@ -33,8 +37,12 @@ import javax.inject.Inject
 
 const val BENEFICIARY_CREATION_DIALOG = 3000
 const val BENEFICIARY_DELETION_DIALOG = 3001
+const val BENEFICIARY_UPDATION_DIALOG=3002
+const val BENEFICIARY_RESEND_OTP_DIALOG=3003
 const val TAG_BENEFICIARY_DELETION = "beneficiary_deletion_dialog"
 const val TAG_BENEFICIARY_CREATION = "beneficiary_creation_dialog"
+const val TAG_BENEFICIARY_UPDATION = "beneficiary_updation_dialog"
+const val TAG_BENEFICIARY_RESEND_OTP = "beneficiary_otp_resent_dialog"
 
 class BeneficiaryDetailsFragment :
     BaseFragment<BeneficiaryDetailsViewModel, FragmentBeneficiaryDetailsBinding>(
@@ -286,8 +294,14 @@ class BeneficiaryDetailsFragment :
         binding.btnEdit.setOnSingleClickListener {
             enableEdit(beneficiaryDetailsModel)
         }
-        binding.btnCancel.setOnClickListener {
+        binding.btnCancel.setOnSingleClickListener {
             makeDeleteBeneficiaryView(beneficiaryDetailsModel)
+        }
+        binding.btnResendOtp.setOnSingleClickListener {
+            makeResendOtp()
+        }
+        binding.btnUpdate.setOnSingleClickListener {
+            updateBeneficiary()
         }
     }
 
@@ -341,6 +355,42 @@ class BeneficiaryDetailsFragment :
                     response.data?.let {
                         fragmentHelper.onBack()
                     }
+                }
+                Status.ERROR -> {
+                    oneLinkProgressDialog.hideProgressDialog()
+                    response.error?.let {
+                        showGeneralErrorDialog(this, it)
+                    }
+                }
+                Status.LOADING -> {
+                    oneLinkProgressDialog.showProgressDialog(activity)
+                }
+            }
+        })
+
+        viewModel.observeBeneficiaryResendOtp().observe(this, { response ->
+            when (response.status) {
+                Status.SUCCESS -> {
+                    oneLinkProgressDialog.hideProgressDialog()
+                    resentBeneficiaryOTPSuccessDialog()
+                }
+                Status.ERROR -> {
+                    oneLinkProgressDialog.hideProgressDialog()
+                    response.error?.let {
+                        showGeneralErrorDialog(this, it)
+                    }
+                }
+                Status.LOADING -> {
+                    oneLinkProgressDialog.showProgressDialog(activity)
+                }
+            }
+        })
+
+        viewModel.observeBeneficiaryUpdateResponse().observe(this, { response ->
+            when (response.status) {
+                Status.SUCCESS -> {
+                    oneLinkProgressDialog.hideProgressDialog()
+                    updatedBeneficiarySuccessDialog()
                 }
                 Status.ERROR -> {
                     oneLinkProgressDialog.hideProgressDialog()
@@ -411,6 +461,7 @@ class BeneficiaryDetailsFragment :
         //Managing views visibilities
         isDeleteBeneficiary = true
         binding.btnNext.text = getString(R.string.delete_beneficiary)
+        binding.btnNext.visibility=View.VISIBLE
         //binding.textViewCountry.visibility = View.GONE
         //binding.etCountry.visibility = View.GONE
         binding.tvCountryCode.visibility = View.GONE
@@ -464,10 +515,12 @@ class BeneficiaryDetailsFragment :
         binding.lytPosNegButtons.visibility = View.GONE
         binding.lytUpdateCancel.visibility = View.VISIBLE
         binding.btnNext.text = getString(R.string.delete_beneficiary)
+        binding.btnNext.visibility=View.GONE
         //binding.textViewCountry.visibility = View.GONE
         //binding.etCountry.visibility = View.GONE
         binding.tvCountryCode.visibility = View.GONE
         binding.prefixTv.visibility = View.GONE
+        binding.ivDropDown.visibility = View.VISIBLE
 
         //Disabling EditTexts
         binding.eTCnicNumber.isEnabled = true
@@ -480,7 +533,7 @@ class BeneficiaryDetailsFragment :
 
         //Setting Form Fields
         viewModel.alias.value = it.alias
-        viewModel.cnicNumber.value = it.nicNicop.toString().formattedCnicNumberNoSpaces()
+        viewModel.cnicNumber.value =it.nicNicop.toString().formattedCnicNumberNoSpaces()
         viewModel.mobileNumber.value = it.mobileNo
         binding.tvRelationShip.text = it.relationship
         binding.etCountry.text = it.country
@@ -544,6 +597,8 @@ class BeneficiaryDetailsFragment :
         super.onNeutralButtonClicked(targetCode)
         when (targetCode) {
             BENEFICIARY_CREATION_DIALOG -> fragmentHelper.onBack()
+            BENEFICIARY_UPDATION_DIALOG -> fragmentHelper.onBack() //makeDeleteBeneficiaryView(beneficiaryDetailsModel)
+            BENEFICIARY_RESEND_OTP_DIALOG -> fragmentHelper.onBack()
         }
     }
 
@@ -556,6 +611,27 @@ class BeneficiaryDetailsFragment :
 
     private fun makeDeleteBeneficiaryCall() {
         viewModel.deleteBeneficiary(DeleteBeneficiaryRequestModel(beneficiaryDetailsModel.id))
+    }
+
+    private fun makeResendOtp(){
+        viewModel.addBeneficiaryResendOtp(ResendBeneficiaryOtpRequestModel(beneficiaryDetailsModel.id.toString()))
+    }
+
+    private fun updateBeneficiary(){
+        var relation:String
+        if(viewModel.beneficiaryRelation.value.toString() == "Other") {
+            relation = binding.txtOther.text.toString()
+        } else {
+            relation = binding.tvRelationShip.text.toString()
+        }
+        viewModel.updateBeneficiary(UpdateBeneficiaryRequestModel(
+            beneficiaryDetailsModel.id.toString(),
+            viewModel.cnicNumber.value.toString().removeDashes(),
+            viewModel.alias.value.toString(),
+            viewModel.mobileNumber.value.toString(),
+            beneficiaryRelation=relation,
+            viewModel.country.value
+        ))
     }
 
     override fun onSelectCountryListener(countryCodeModel: CountryCodeModel) {
@@ -572,5 +648,27 @@ class BeneficiaryDetailsFragment :
         binding.etMobileNumber.setText("")
         binding.etMobileNumber.requestFocus()
         showKeyboard()
+    }
+
+
+    private fun updatedBeneficiarySuccessDialog() {
+        OneLinkAlertDialogsFragment.Builder()
+            .setTargetFragment(this, BENEFICIARY_UPDATION_DIALOG)
+            .setIsAlertOnly(true).setDrawable(R.drawable.ic_uuid_success_dialog)
+            .setTitle(getString(R.string.beneficiary_updated))
+            .setNeutralButtonText(getString(R.string.okay)).setNegativeButtonText("")
+            .setPositiveButtonText("").setCancelable(false).show(parentFragmentManager,
+                TAG_BENEFICIARY_UPDATION
+            )
+    }
+    private fun resentBeneficiaryOTPSuccessDialog() {
+        OneLinkAlertDialogsFragment.Builder()
+            .setTargetFragment(this, BENEFICIARY_RESEND_OTP_DIALOG)
+            .setIsAlertOnly(true).setDrawable(R.drawable.ic_uuid_success_dialog)
+            .setTitle(getString(R.string.otp_resent))
+            .setNeutralButtonText(getString(R.string.okay)).setNegativeButtonText("")
+            .setPositiveButtonText("").setCancelable(false).show(parentFragmentManager,
+                TAG_BENEFICIARY_RESEND_OTP
+            )
     }
 }

@@ -25,7 +25,7 @@ buildscript {
             //url = uri('C:/Users/ahmad.zaheer/AndroidStudioProjects/nrlp-android/DexGuard-9.2.0/lib')
         }
         maven {
-            url 'C:\\Users\\ahmad.zaheer\\AndroidStudioProjects\\nrlp-android\\app\\lib\\DexGuard-9.2.0\\lib'
+            url 'C:\\Users\\hamza.mehboob\\AndroidStudioProjects\\nrlp-android\\app\\lib\\DexGuard-9.2.0\\lib'
         }
         /*maven{
             credentials  {

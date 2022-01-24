@@ -328,4 +328,6 @@
     <string name="enter_psid">پی ایس آئی ڈی درج کریں</string>
     <string name="search_country">Search Country</string>
     <string name="search_city">Search City</string>
+    <string name="beneficiary_updated">Beneficiary details have been updated successfully</string>
+    <string name="otp_resent">Registration code has been resent</string>
 </resources>

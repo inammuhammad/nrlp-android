@@ -5,6 +5,8 @@ package com.onelink.nrlp.android.data
 import com.google.gson.JsonObject
 import com.onelink.nrlp.android.features.beneficiary.models.AddBeneficiaryRequestModel
 import com.onelink.nrlp.android.features.beneficiary.models.DeleteBeneficiaryRequestModel
+import com.onelink.nrlp.android.features.beneficiary.models.ResendBeneficiaryOtpRequestModel
+import com.onelink.nrlp.android.features.beneficiary.models.UpdateBeneficiaryRequestModel
 import com.onelink.nrlp.android.features.changePassword.models.ChangePasswordRequest
 import com.onelink.nrlp.android.features.faqs.model.FaqsResponseModel
 import com.onelink.nrlp.android.features.forgotPassword.models.ForgotPasswordOTPRequestModel
@@ -59,6 +61,12 @@ interface ServiceGateway {
 
     @POST("country-codes/")
     fun getCountryCodes(@Body request: CountryCodesRequest): Single<Response<CountryCodeResponseModel>>
+
+    @PATCH("add-beneficiary-resend-code/")
+    fun addBeneficiaryResendCode(@Body request: ResendBeneficiaryOtpRequestModel): Single<Response<GeneralMessageResponseModel>>
+
+    @PATCH("update-beneficiary/")
+    fun updateBeneficiary(@Body request:UpdateBeneficiaryRequestModel):Single<Response<GeneralMessageResponseModel>>
 
     @POST("cities/")
     fun getCities(@Body request: CitiesRequest): Single<Response<CitiesResponseModel>>

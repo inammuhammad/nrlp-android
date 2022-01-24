@@ -212,8 +212,8 @@ dependencies {
 }
 
 dexguard {
-    path = 'C:\\Users\\ahmad.zaheer\\AndroidStudioProjects\\nrlp-android\\app\\lib\\DexGuard-9.2.0'
-    license = "C:\\Users\\ahmad.zaheer\\AndroidStudioProjects\\nrlp-android\\app\\lib\\DexGuard-9.2.0\\lib"
+    path = 'C:\\Users\\hamza.mehboob\\AndroidStudioProjects\\nrlp-android\\app\\lib\\DexGuard-9.2.0'
+    license = "C:\\Users\\hamza.mehboob\\AndroidStudioProjects\\nrlp-android\\app\\lib\\DexGuard-9.2.0\\lib"
     jvmArgs '-Xmx2048M', '-Dallow.incomplete.class.hierarchy=true'
     configurations {
         debug {

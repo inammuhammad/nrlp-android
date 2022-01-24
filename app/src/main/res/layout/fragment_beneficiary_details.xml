@@ -326,7 +326,7 @@
 
             <Button
                 android:id="@+id/btnCancel"
-                style="@style/DialogPositiveButtonTheme"
+                style="@style/DialogNegativeButtonTheme"
                 android:layout_weight="1"
                 android:enabled="true"
                 android:text="@string/cancel" />
