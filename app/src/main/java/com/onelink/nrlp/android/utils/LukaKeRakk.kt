@@ -73,7 +73,7 @@ object LukaKeRakk {
 
     private external fun twkd(): String
 
-    private external fun thkd(): String
+    private external fun thkd(): String //secret 3
 
 
     fun isRooted() = isDetectedDevKeys()

@@ -9,7 +9,7 @@ import javax.crypto.spec.SecretKeySpec
 object AESEncryptionHelper {
 
     private const val ALGORITHM = "AES"
-    private const val TRANSFORMATION = "AES/CBC/PKCS7Padding"
+    private const val TRANSFORMATION = "AES/CBC/PKCS5Padding"
     private const val LENGTH_ERROR = "SecretKey length is not 32 chars"
 
     fun encrypt(str: String, secretKey: String, initializationVector: String): String {
@@ -18,9 +18,7 @@ object AESEncryptionHelper {
         }
         val encrypted =
             cipher(Cipher.ENCRYPT_MODE, secretKey, initializationVector).doFinal(
-                str.toByteArray(
-                    Charsets.UTF_8
-                )
+                str.toByteArray(Charsets.UTF_8)
             )
         return Base64.encodeToString(encrypted, Base64.NO_WRAP or Base64.URL_SAFE)
     }

@@ -151,6 +151,8 @@ class EncryptionInterceptor(val context: Context) : Interceptor {
         if (jsonPayload.has(ENCRYPTION_KEY) && jsonPayload.getString(ENCRYPTION_KEY).isNotEmpty()) {
             val secretKey = jsonPayload.getString(ENCRYPTION_KEY)
             keyIV = Pair(secretKey.take(32), UserData.finalEncryptionIV)
+            key1 = secretKey.take(32)
+            key2 = UserData.finalEncryptionIV.toString()
             jsonPayload.remove(ENCRYPTION_KEY)
         }
         return keyIV
