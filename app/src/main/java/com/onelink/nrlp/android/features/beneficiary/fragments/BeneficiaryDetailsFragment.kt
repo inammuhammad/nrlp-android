@@ -24,6 +24,8 @@ import com.onelink.nrlp.android.features.beneficiary.models.ResendBeneficiaryOtp
 import com.onelink.nrlp.android.features.beneficiary.models.UpdateBeneficiaryRequestModel
 import com.onelink.nrlp.android.features.beneficiary.viewmodel.BeneficiaryDetailsViewModel
 import com.onelink.nrlp.android.features.beneficiary.viewmodel.BeneficiarySharedViewModel
+import com.onelink.nrlp.android.features.profile.disabled
+import com.onelink.nrlp.android.features.profile.enabled
 import com.onelink.nrlp.android.features.select.country.model.CountryCodeModel
 import com.onelink.nrlp.android.features.select.country.view.SelectCountryFragment
 import com.onelink.nrlp.android.features.uuid.view.UUIDOtpAuthentication
@@ -469,13 +471,15 @@ class BeneficiaryDetailsFragment :
         binding.lytUpdateCancel.visibility = View.GONE
 
         //Disabling EditTexts
-        binding.eTCnicNumber.isEnabled = false
-        binding.etAlias.isEnabled = false
-        binding.etMobileNumber.isEnabled = false
-        binding.beneficiaryLL.isEnabled = false
-        binding.spinnerRelationShip.isEnabled = false
-        binding.tvRelationShip.isEnabled = false
-        binding.etCountry.isEnabled = false
+        context?.let {
+            binding.eTCnicNumber.disabled(it)
+            binding.etAlias.disabled(it)
+            binding.etMobileNumber.disabled(it)
+            binding.beneficiaryLL.disabled()
+            binding.spinnerRelationShip.disabled()
+            binding.tvRelationShip.disabled(it)
+            binding.etCountry.disabled(it)
+        }
 
         //Setting Form Fields
         binding.viewModel = viewModel
@@ -523,13 +527,15 @@ class BeneficiaryDetailsFragment :
         binding.ivDropDown.visibility = View.VISIBLE
 
         //Disabling EditTexts
-        binding.eTCnicNumber.isEnabled = true
-        binding.etAlias.isEnabled = true
-        binding.etMobileNumber.isEnabled = true
-        binding.beneficiaryLL.isEnabled = true
-        binding.spinnerRelationShip.isEnabled = true
-        binding.tvRelationShip.isEnabled = true
-        binding.etCountry.isEnabled = true
+        context?.let {
+            binding.eTCnicNumber.enabled(it)
+            binding.etAlias.enabled(it)
+            binding.etMobileNumber.enabled(it)
+            binding.beneficiaryLL.enabled()
+            binding.spinnerRelationShip.enabled()
+            binding.tvRelationShip.enabled(it)
+            binding.etCountry.enabled(it)
+        }
 
         //Setting Form Fields
         viewModel.alias.value = it.alias
@@ -545,11 +551,58 @@ class BeneficiaryDetailsFragment :
         viewModel.ccountryNotEmpty.value = true
 
         //TextColor
+        //TextColor
         binding.etAlias.colorToText(R.color.black)
+        binding.etAlias.alpha = 1f
         binding.eTCnicNumber.colorToText(R.color.black)
+        binding.eTCnicNumber.alpha = 1f
         binding.etMobileNumber.colorToText(R.color.black)
+        binding.etMobileNumber.alpha = 1f
         binding.tvRelationShip.colorToText(R.color.black)
+        binding.tvRelationShip.alpha = 1f
         binding.etCountry.colorToText(R.color.black)
+        binding.etCountry.alpha = 1f
+
+        binding.lytPosNegButtons.visibility = View.VISIBLE
+    }
+
+    private fun updatedBeneficiaryView(){
+        //Managing views visibilities
+        binding.btnNext.text = getString(R.string.delete_beneficiary)
+        binding.btnNext.visibility=View.VISIBLE
+        //binding.textViewCountry.visibility = View.GONE
+        //binding.etCountry.visibility = View.GONE
+        binding.tvCountryCode.visibility = View.GONE
+        binding.prefixTv.visibility = View.GONE
+        binding.lytUpdateCancel.visibility = View.GONE
+
+        //Disabling EditTexts
+        context?.let {
+            binding.eTCnicNumber.disabled(it)
+            binding.etAlias.disabled(it)
+            binding.etMobileNumber.disabled(it)
+            binding.beneficiaryLL.disabled()
+            binding.spinnerRelationShip.disabled()
+            binding.tvRelationShip.disabled(it)
+            binding.etCountry.disabled(it)
+        }
+
+        //TextColor
+        binding.etAlias.colorToText(R.color.black)
+        binding.etAlias.alpha = 0.5f
+        binding.eTCnicNumber.colorToText(R.color.black)
+        binding.eTCnicNumber.alpha = 0.5f
+        binding.etMobileNumber.colorToText(R.color.black)
+        binding.etMobileNumber.alpha = 0.5f
+        binding.tvRelationShip.colorToText(R.color.black)
+        binding.tvRelationShip.alpha = 0.5f
+        binding.etCountry.colorToText(R.color.black)
+        binding.etCountry.alpha = 0.5f
+
+        //hiding beneficiary relationship
+        //binding.beneficiaryLL.visibility = View.GONE
+        binding.ivDropDown.visibility = View.GONE
+
     }
 
     companion object {
@@ -597,8 +650,8 @@ class BeneficiaryDetailsFragment :
         super.onNeutralButtonClicked(targetCode)
         when (targetCode) {
             BENEFICIARY_CREATION_DIALOG -> fragmentHelper.onBack()
-            BENEFICIARY_UPDATION_DIALOG -> fragmentHelper.onBack() //makeDeleteBeneficiaryView(beneficiaryDetailsModel)
-            BENEFICIARY_RESEND_OTP_DIALOG -> fragmentHelper.onBack()
+            BENEFICIARY_UPDATION_DIALOG -> updatedBeneficiaryView()
+            BENEFICIARY_RESEND_OTP_DIALOG -> updatedBeneficiaryView()
         }
     }
 
