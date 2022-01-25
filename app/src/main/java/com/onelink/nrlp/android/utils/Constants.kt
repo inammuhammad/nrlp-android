@@ -89,6 +89,14 @@ object UriConstants {
     const val ABOUT_NRLP_URL = "https://1link.net.pk/sohni-dharti/#1633123604420-798e6f70-2ecf"
 }
 
+object SelfAwardRequestConstants{
+    const val Amount="amount"
+    const val Reference_NO="reference_no"
+    const val Beneficiary_NIC_NICOP="beneficiary_nic_nicop"
+    const val Self_Award_Row_ID="sp_response_row_id"
+    const val Transaction_Date="transaction_date"
+}
+
 object Sp {
     init {
         System.loadLibrary("see")

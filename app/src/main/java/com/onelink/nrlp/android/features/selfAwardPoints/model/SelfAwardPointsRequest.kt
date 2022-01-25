@@ -9,5 +9,6 @@ data class SelfAwardPointsRequest(
     @SerializedName("amount") var amount: String,
     @SerializedName("reference_no") var reference_no: String,
     @SerializedName("beneficiary_nic_nicop") var beneficiary_nic_nicop: String,
-    //@SerializedName("transaction_date") var transaction_date: String?
+    @SerializedName("sp_response_row_id") var self_award_row_id:String,
+    @SerializedName("transaction_date") var transaction_date: String?
 ): Parcelable

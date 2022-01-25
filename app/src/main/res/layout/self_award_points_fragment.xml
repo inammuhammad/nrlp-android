@@ -20,7 +20,9 @@
             android:layout_height="0dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="@+id/btnNext"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            tools:layout_editor_absoluteX="97dp">
 
             <TextView
                 android:id="@+id/textViewTransactionEligibity"
@@ -46,15 +48,15 @@
                 app:layout_constraintTop_toBottomOf="@+id/textViewTransactionEligibity" />
 
             <ImageView
-                android:layout_width="@dimen/_15sdp"
                 android:id="@+id/icHelpTransaction"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
-                app:layout_constraintHorizontal_bias="0"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:src="@drawable/ic_baseline_info_24"
+                app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toEndOf="@+id/tvRemitterRefNo"
-                app:layout_constraintTop_toBottomOf="@+id/textViewTransactionEligibity"
-                android:layout_height="wrap_content"/>
+                app:layout_constraintTop_toBottomOf="@+id/textViewTransactionEligibity" />
 
             <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
                 android:id="@+id/til_ref_no"
@@ -89,29 +91,31 @@
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/til_ref_no" />
+
             <ImageView
-                android:layout_width="@dimen/_15sdp"
                 android:id="@+id/icHelpAmount"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
-                app:layout_constraintHorizontal_bias="0"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:src="@drawable/ic_baseline_info_24"
+                app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toEndOf="@+id/tvRemittanceAmount"
-                app:layout_constraintTop_toBottomOf="@+id/til_ref_no"
-                android:layout_height="wrap_content"/>
+                app:layout_constraintTop_toBottomOf="@+id/til_ref_no" />
+
             <TextView
-                android:layout_width="wrap_content"
-                style="@style/TextViewSubHeading"
-                android:layout_marginTop="@dimen/unit_4dp"
                 android:id="@+id/tvRemittanceAmountHelp"
+                style="@style/TextViewSubHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/unit_4dp"
                 android:text="@string/remittance_amount_help"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintHorizontal_bias="0"
-                app:layout_constraintTop_toBottomOf="@+id/tvRemittanceAmount"
-                android:layout_height="wrap_content"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvRemittanceAmount" />
 
-             <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
+            <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
                 android:id="@+id/til_remittance_amount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -137,7 +141,6 @@
                 android:id="@+id/tvRemittanceDate"
                 style="@style/TextViewSubHeading"
                 android:layout_width="wrap_content"
-                android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:text="@string/remittance_date"
                 app:layout_constraintBottom_toTopOf="@id/lyRemittanceDate"
@@ -145,26 +148,25 @@
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/til_remittance_amount" />
+
             <ImageView
-                android:layout_width="@dimen/_15sdp"
-                android:visibility="gone"
                 android:id="@+id/icHelpDate"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
-                app:layout_constraintHorizontal_bias="0"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:src="@drawable/ic_baseline_info_24"
+                app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toEndOf="@+id/tvRemittanceDate"
-                app:layout_constraintTop_toBottomOf="@+id/til_remittance_amount"
-                android:layout_height="wrap_content"/>
+                app:layout_constraintTop_toBottomOf="@+id/til_remittance_amount" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/lyRemittanceDate"
                 style="@style/EditTextFixedDigits"
                 android:layout_width="match_parent"
-                android:layoutDirection="ltr"
                 android:layout_height="wrap_content"
+                android:layoutDirection="ltr"
                 android:orientation="horizontal"
-                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvRemittanceDate">
@@ -180,13 +182,13 @@
                     android:enabled="true"
                     android:focusable="false"
                     android:gravity="start"
-                    android:textDirection="ltr"
                     android:hint="@string/select_date"
                     android:padding="@dimen/unit_0dp"
                     android:paddingStart="@dimen/unit_4dp"
                     android:paddingEnd="@dimen/unit_4dp"
                     android:singleLine="true"
                     android:text="@={viewModel.remittanceDate}"
+                    android:textDirection="ltr"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/imageViewDropDownRemittanceDate"
@@ -219,15 +221,15 @@
                 app:layout_constraintTop_toBottomOf="@+id/lyRemittanceDate" />
 
             <ImageView
-                android:layout_width="@dimen/_15sdp"
                 android:id="@+id/icHelpCnicAccountNumber"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
-                app:layout_constraintHorizontal_bias="0"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:src="@drawable/ic_baseline_info_24"
+                app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toEndOf="@+id/tvCnicAccountNumber"
-                app:layout_constraintTop_toBottomOf="@+id/lyRemittanceDate"
-                android:layout_height="wrap_content"/>
+                app:layout_constraintTop_toBottomOf="@+id/lyRemittanceDate" />
 
             <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
                 android:id="@+id/til_cnic_account_number"

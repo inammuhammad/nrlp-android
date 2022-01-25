@@ -203,6 +203,7 @@ class EncryptionInterceptor(val context: Context) : Interceptor {
         POINTS("points"),
         MOTHER_MAIDEN_NAME("mother_maiden_name"),
         PLACE_OF_BIRTH("place_of_birth"),
-        CNIC_NICOP_ISSUANCE_DATE("cnic_nicop_issuance_date")
+        CNIC_NICOP_ISSUANCE_DATE("cnic_nicop_issuance_date"),
+        SELF_AWARD_RESPONSE_ROW_ID("sp_response_row_id")
     }
 }

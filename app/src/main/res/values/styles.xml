@@ -222,7 +222,7 @@
 
     <style name="EditTextRegistrationCode" parent="EditTextTheme">
         <item name="android:background">@drawable/otp_disabled_background</item>
-        <item name="android:textSize">@dimen/unit_12sp</item>
+        <item name="android:textSize">@dimen/unit_16sp</item>
         <item name="android:paddingEnd">@dimen/margin_large</item>
     </style>
 

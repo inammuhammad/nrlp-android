@@ -2,6 +2,7 @@ package com.onelink.nrlp.android.features.selfAwardPoints.repo
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.gson.JsonObject
 import com.onelink.nrlp.android.core.BaseResponse
 import com.onelink.nrlp.android.data.NetworkHelper
 import com.onelink.nrlp.android.data.ServiceGateway
@@ -21,7 +22,7 @@ open class SelfAwardPointsFragmentRepo @Inject constructor(
     fun observeSelfAwardValidTransaction() =
             verifyReferenceNumResponse as LiveData<BaseResponse<SelfAwardPointsResponseModel>>
 
-    fun verifySelfAwardValidTransaction(selfAwardPointsRequest: SelfAwardPointsRequest) {
+    fun verifySelfAwardValidTransaction(selfAwardPointsRequest: JsonObject) {
         networkHelper.serviceCall(serviceGateway.verifySelfAwardPoints(selfAwardPointsRequest))
                 .observeForever {
             verifyReferenceNumResponse.value = it
@@ -46,7 +47,7 @@ open class SelfAwardPointsFragmentRepo @Inject constructor(
     fun observeSelfAwardPointsResendOTPResponse() =
         selfAwardPointsResendOTPResponse as LiveData<BaseResponse<SelfAwardPointsResponseModel>>
 
-    fun selfAwardPointsResendOTP(selfAwardPointsRequest: SelfAwardPointsRequest) {
+    fun selfAwardPointsResendOTP(selfAwardPointsRequest: JsonObject) {
         networkHelper.serviceCall(serviceGateway.verifySelfAwardPoints(selfAwardPointsRequest))
             .observeForever {
                 selfAwardPointsResendOTPResponse.value = it

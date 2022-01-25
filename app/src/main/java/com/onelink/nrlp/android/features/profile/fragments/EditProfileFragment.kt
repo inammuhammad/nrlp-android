@@ -108,9 +108,17 @@ class EditProfileFragment :
                     }
                 }
         initTextWatchers()
+        hideViews()
         initObservers()
         initListeners()
         initOnFocusChangeListeners()
+    }
+
+    private fun hideViews(){
+        binding.tvMotherMaidenName.visibility=View.GONE
+        binding.tilMotherMaidenName.visibility=View.GONE
+        binding.tvNicopNicIssuance.visibility=View.GONE
+        binding.tilNicopNicIssuance.visibility=View.GONE
     }
 
     private fun AppCompatSpinner?.setFEnabled(enable:Boolean) {

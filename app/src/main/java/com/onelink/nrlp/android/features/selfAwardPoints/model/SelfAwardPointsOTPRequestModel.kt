@@ -6,6 +6,6 @@ import com.google.gson.annotations.SerializedName
 class SelfAwardPointsOTPRequestModel(
     @SerializedName("otp")
     val otp: String,
-    @SerializedName("beneficiary_nic_nicop")
-    var beneficiary_nic_nicop: String?
+    @SerializedName("sp_response_row_id")
+    var response_row_id: String?
 )

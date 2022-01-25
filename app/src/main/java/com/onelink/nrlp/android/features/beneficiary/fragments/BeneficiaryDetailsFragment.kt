@@ -453,6 +453,9 @@ class BeneficiaryDetailsFragment :
 
             if(viewModel.beneficiaryRelation.value.toString() == resources.getString(R.string.other)) {
                 binding.txtOther.visibility = View.VISIBLE
+                context?.let {
+                    binding.txtOther.enabled(it)
+                }
             } else {
                 binding.txtOther.visibility = View.GONE
             }
@@ -585,6 +588,7 @@ class BeneficiaryDetailsFragment :
             binding.spinnerRelationShip.disabled()
             binding.tvRelationShip.disabled(it)
             binding.etCountry.disabled(it)
+            binding.txtOther.disabled(it)
         }
 
         //TextColor
@@ -598,6 +602,7 @@ class BeneficiaryDetailsFragment :
         binding.tvRelationShip.alpha = 0.5f
         binding.etCountry.colorToText(R.color.black)
         binding.etCountry.alpha = 0.5f
+        binding.textViewAlias.colorToText(R.color.black)
 
         //hiding beneficiary relationship
         //binding.beneficiaryLL.visibility = View.GONE

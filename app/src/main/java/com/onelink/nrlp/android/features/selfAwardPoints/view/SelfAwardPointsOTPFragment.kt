@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.EditText
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.gson.JsonObject
 import com.onelink.nrlp.android.R
 import com.onelink.nrlp.android.core.BaseFragment
 import com.onelink.nrlp.android.core.Status
@@ -19,11 +20,8 @@ import com.onelink.nrlp.android.features.selfAwardPoints.model.SelfAwardPointsOT
 import com.onelink.nrlp.android.features.selfAwardPoints.model.SelfAwardPointsRequest
 import com.onelink.nrlp.android.features.selfAwardPoints.viewmodel.SelfAwardPointsOTPFragmentViewModel
 import com.onelink.nrlp.android.features.selfAwardPoints.viewmodel.SelfAwardPointsSharedViewModel
-import com.onelink.nrlp.android.utils.CountDownTimerCanBePause
-import com.onelink.nrlp.android.utils.IntentConstants
+import com.onelink.nrlp.android.utils.*
 import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
-import com.onelink.nrlp.android.utils.formattedCountDownTimer
-import com.onelink.nrlp.android.utils.setOnSingleClickListener
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
@@ -50,7 +48,7 @@ class SelfAwardPointsOTPFragment :
 
     private var selfAwardPointsSharedViewModel: SelfAwardPointsSharedViewModel? = null
 
-    private lateinit var selfAwardPointsRequest: SelfAwardPointsRequest
+    private lateinit var selfAwardPointsRequest: JsonObject
 
     var resentAttempts: Int = 0
 
@@ -126,8 +124,8 @@ class SelfAwardPointsOTPFragment :
 //                    nicNicop = forgotPasswordFlowDataModel.cnicNicop,
 //                    userType = forgotPasswordFlowDataModel.accountType,
                     otp = viewModel.getOTPCode(),
-                    beneficiary_nic_nicop = selfAwardPointsSharedViewModel?.selfAwardPointsRequestModel?.value?.beneficiary_nic_nicop
-                )
+                    response_row_id = selfAwardPointsSharedViewModel?.selfAwardRowId?.value,
+                    )
             )
         }
 

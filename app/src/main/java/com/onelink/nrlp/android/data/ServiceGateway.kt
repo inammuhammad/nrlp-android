@@ -84,7 +84,7 @@ interface ServiceGateway {
     fun verifyReferenceNumber(@Body body: VerifyReferenceNumberRequest): Single<Response<GeneralMessageResponseModel>>
 
     @POST("self-award-validate-transaction/")
-    fun verifySelfAwardPoints(@Body body: SelfAwardPointsRequest): Single<Response<SelfAwardPointsResponseModel>>
+    fun verifySelfAwardPoints(@Body body: JsonObject): Single<Response<SelfAwardPointsResponseModel>>
 
     @POST("verify-registration-code/")
     fun verifyRegistrationCode(@Body body: VerifyRegistrationCodeRequest): Single<Response<GeneralMessageResponseModel>>

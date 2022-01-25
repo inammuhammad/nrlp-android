@@ -2,6 +2,7 @@ package com.onelink.nrlp.android.features.selfAwardPoints.viewmodel
 
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.gson.JsonObject
 import com.onelink.nrlp.android.core.BaseViewModel
 import com.onelink.nrlp.android.features.selfAwardPoints.model.SelfAwardPointsOTPRequestModel
 import com.onelink.nrlp.android.features.selfAwardPoints.model.SelfAwardPointsRequest
@@ -48,7 +49,7 @@ class SelfAwardPointsOTPFragmentViewModel @Inject constructor(private val selfAw
 
     fun observeSelfAwardPointsOTPResponse() = selfAwardPointsFragmentRepo.observeSelfAwardPointsOTPResponse()
 
-    fun getSelfAwardPointsResendOTP(selfAwardPointsRequest: SelfAwardPointsRequest) =
+    fun getSelfAwardPointsResendOTP(selfAwardPointsRequest: JsonObject) =
         selfAwardPointsFragmentRepo.selfAwardPointsResendOTP(selfAwardPointsRequest)
 
     fun observeSelfAwardPointsResendOTP() = selfAwardPointsFragmentRepo.observeSelfAwardPointsResendOTPResponse()

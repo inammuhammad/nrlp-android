@@ -2,6 +2,7 @@ package com.onelink.nrlp.android.features.selfAwardPoints.viewmodel
 
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.gson.JsonObject
 import com.onelink.nrlp.android.core.BaseViewModel
 import com.onelink.nrlp.android.features.managePoints.model.TransferPointsRequest
 import com.onelink.nrlp.android.features.managePoints.repo.ManagePointsFragmentRepo
@@ -25,7 +26,7 @@ class SelfAwardPointsFragmentViewModel @Inject constructor(private val selfAward
     val cnicAccountNumber = MutableLiveData<String>("")
     val transactionAmount = MutableLiveData<String>("")
 
-    fun verifySafeAwardValidTransaction(selfAwardPointsRequest: SelfAwardPointsRequest) =
+    fun verifySafeAwardValidTransaction(selfAwardPointsRequest: JsonObject) =
             selfAwardPointsFragmentRepo.verifySelfAwardValidTransaction(selfAwardPointsRequest)
 
     fun observeSafeAwardValidTransaction() = selfAwardPointsFragmentRepo.observeSelfAwardValidTransaction()

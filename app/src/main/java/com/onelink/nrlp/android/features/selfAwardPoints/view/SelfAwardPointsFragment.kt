@@ -6,6 +6,7 @@ import android.text.Spanned
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.gson.JsonObject
 import com.onelink.nrlp.android.R
 import com.onelink.nrlp.android.core.BaseFragment
 import com.onelink.nrlp.android.core.Status
@@ -16,6 +17,7 @@ import com.onelink.nrlp.android.features.selfAwardPoints.model.SelfAwardPointsRe
 import com.onelink.nrlp.android.features.selfAwardPoints.viewmodel.SelfAwardPointsFragmentViewModel
 import com.onelink.nrlp.android.features.selfAwardPoints.viewmodel.SelfAwardPointsSharedViewModel
 import com.onelink.nrlp.android.features.viewStatement.fragments.AdvancedLoyaltyStatementFragment
+import com.onelink.nrlp.android.utils.SelfAwardRequestConstants
 import com.onelink.nrlp.android.utils.dialogs.OneLinkAlertDialogsFragment
 import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
 import com.onelink.nrlp.android.utils.setOnSingleClickListener
@@ -80,15 +82,26 @@ class SelfAwardPointsFragment :
         }
 
         binding.btnNext.setOnSingleClickListener {
-            val selfAwardPointsRequest = SelfAwardPointsRequest(
-                amount = binding.etRemittanceAmount.text.toString().replace(",", ""),
-                reference_no = binding.etRefNo.text.toString(),
-                beneficiary_nic_nicop = binding.etCnicAccountNumber.text.toString(),
-                //transaction_date = viewModel.getDateInApiFormat(viewModel.rawRemittanceDate.value.toString())
+            val selfAwardPointsRequest=JsonObject()
+
+            selfAwardPointsRequest.addProperty(
+                SelfAwardRequestConstants.Amount,
+                binding.etRemittanceAmount.text.toString().replace(",", ""),
+            )
+            selfAwardPointsRequest.addProperty(
+                SelfAwardRequestConstants.Reference_NO,
+                binding.etRefNo.text.toString(),
+            )
+            selfAwardPointsRequest.addProperty(
+                SelfAwardRequestConstants.Beneficiary_NIC_NICOP,
+                binding.etCnicAccountNumber.text.toString(),
+            )
+            selfAwardPointsRequest.addProperty(
+                    SelfAwardRequestConstants.Transaction_Date,
+            viewModel.remittanceDate.value,
             )
 
             selfAwardPointSharedViewModel?.setSelfAwardPointsFlowDataModel(selfAwardPointsRequest)
-
             viewModel.verifySafeAwardValidTransaction(selfAwardPointsRequest)
         }
         binding.icHelpTransaction.setOnClickListener {
@@ -114,6 +127,7 @@ class SelfAwardPointsFragment :
                 Status.SUCCESS -> {
                     oneLinkProgressDialog.hideProgressDialog()
                     response.data?.let {
+                        selfAwardPointSharedViewModel?.setSelfAwardRowIdModel(it.rowID)
                         fragmentHelper.addFragment(
                                 SelfAwardPointsOTPFragment.newInstance(),
                                 clearBackStack = false,
