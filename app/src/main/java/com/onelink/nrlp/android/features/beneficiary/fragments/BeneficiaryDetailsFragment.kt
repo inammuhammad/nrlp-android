@@ -514,8 +514,8 @@ class BeneficiaryDetailsFragment :
         //binding.beneficiaryLL.visibility = View.GONE
         binding.ivDropDown.visibility = View.GONE
 
-        if(!it.isActive)
-            binding.lytPosNegButtons.visibility = View.VISIBLE
+        /*if(!it.isActive)
+            binding.lytPosNegButtons.visibility = View.VISIBLE*/
     }
 
     private fun enableEdit(it: BeneficiaryDetailsModel){

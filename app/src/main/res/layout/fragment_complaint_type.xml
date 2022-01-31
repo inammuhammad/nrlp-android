@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.onelink.nrlp.android.features.complaint.viewmodel.ComplaintSharedViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/white"
+            app:layout_constraintTop_toTopOf="parent">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingBottom="@dimen/unit_40dp">
+
+                <TextView
+                    android:id="@+id/tvComplaintManagement"
+                    style="@style/TextViewMainHeading"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/complaint_management"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/unit_30sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/lyComplaintType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    android:layout_marginTop="@dimen/unit_32dp"
+                    app:layout_constraintTop_toBottomOf="@id/tvComplaintManagement"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    >
+                    <TextView
+                        style="@style/TextViewMainHeading"
+                        android:id="@+id/tvComplaintType"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_extra_large"
+                        android:gravity="center"
+                        android:text="@string/complaint_type"
+                        android:textSize="@dimen/unit_24sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:id="@+id/radio"
+                        android:layout_height="wrap_content"
+                        android:checkedButton="@={viewModel.accountType}"
+                        app:layout_constraintTop_toBottomOf="@id/tvComplaintType"
+                        android:layout_marginTop="@dimen/margin_extra_large"
+                        android:orientation="vertical">
+                        <RadioButton
+                            android:id="@+id/unableToRegister"
+                            style="@style/radiobutton"
+                            android:layout_width="match_parent"
+                            android:paddingStart="@dimen/margin_large"
+                            android:layout_height="wrap_content"
+                            android:buttonTint="@drawable/radio_btn_tint_selector"
+                            android:text="@string/unable_to_register"
+                            android:textColor="@drawable/radio_btn_text_selector"
+                            android:textSize="@dimen/unit_18sp"
+                            android:theme="@style/RadioButtonStyle"/>
+                        <RadioButton
+                            android:id="@+id/unableToRegistrationCode"
+                            style="@style/radiobutton"
+                            android:layout_width="match_parent"
+                            android:paddingStart="@dimen/margin_large"
+                            android:layout_height="wrap_content"
+                            android:buttonTint="@drawable/radio_btn_tint_selector"
+                            android:text="@string/unable_to_registration_code"
+                            android:textColor="@drawable/radio_btn_text_selector"
+                            android:textSize="@dimen/unit_18sp"
+                            android:theme="@style/RadioButtonStyle"/>
+                        <RadioButton
+                            android:id="@+id/unableToOtp"
+                            style="@style/radiobutton"
+                            android:layout_width="match_parent"
+                            android:paddingStart="@dimen/margin_large"
+                            android:layout_height="wrap_content"
+                            android:buttonTint="@drawable/radio_btn_tint_selector"
+                            android:text="@string/unable_to_otp"
+                            android:textColor="@drawable/radio_btn_text_selector"
+                            android:textSize="@dimen/unit_18sp"
+                            android:theme="@style/RadioButtonStyle"/>
+                        <RadioButton
+                            android:id="@+id/others"
+                            style="@style/radiobutton"
+                            android:layout_width="match_parent"
+                            android:paddingStart="@dimen/margin_large"
+                            android:layout_height="wrap_content"
+                            android:buttonTint="@drawable/radio_btn_tint_selector"
+                            android:text="@string/others"
+                            android:textColor="@drawable/radio_btn_text_selector"
+                            android:textSize="@dimen/unit_18sp"
+                            android:theme="@style/RadioButtonStyle"/>
+                    </RadioGroup>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+        <Button
+            android:id="@+id/btnNext"
+            style="@style/ButtonTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_extra_large"
+            android:text="@string/next"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

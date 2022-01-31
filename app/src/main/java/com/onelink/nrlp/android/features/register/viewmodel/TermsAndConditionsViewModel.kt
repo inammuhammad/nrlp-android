@@ -54,7 +54,8 @@ class TermsAndConditionsViewModel @Inject constructor(private val registerRepo: 
                     country = registerFlowDataModel.country,
                     placeOfBirth = registerFlowDataModel.placeOfBirth,
                     cnicNicopIssueDate = registerFlowDataModel.cnicNicopIssueDate,
-                    sotp = "2"
+                    sotp = "2",
+                    motherMaidenName = registerFlowDataModel.motherMaidenName
                 )
             )
         }

@@ -8,6 +8,8 @@ import com.onelink.nrlp.android.features.beneficiary.models.DeleteBeneficiaryReq
 import com.onelink.nrlp.android.features.beneficiary.models.ResendBeneficiaryOtpRequestModel
 import com.onelink.nrlp.android.features.beneficiary.models.UpdateBeneficiaryRequestModel
 import com.onelink.nrlp.android.features.changePassword.models.ChangePasswordRequest
+import com.onelink.nrlp.android.features.complaint.models.AddComplaintRequestModel
+import com.onelink.nrlp.android.features.complaint.models.AddComplaintResponseModel
 import com.onelink.nrlp.android.features.faqs.model.FaqsResponseModel
 import com.onelink.nrlp.android.features.forgotPassword.models.ForgotPasswordOTPRequestModel
 import com.onelink.nrlp.android.features.forgotPassword.models.ForgotPasswordRequestModel
@@ -42,6 +44,7 @@ import com.onelink.nrlp.android.models.BeneficiariesResponseModel
 import com.onelink.nrlp.android.models.GeneralMessageResponseModel
 import com.onelink.nrlp.android.utils.HeaderConstants
 import io.reactivex.Single
+import org.json.JSONObject
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -214,4 +217,7 @@ interface ServiceGateway {
 
     @POST("verify-at-nadra/")
     fun updateNadraDetails(@Body body: NadraDetailsRequestModel): Single<Response<GeneralMessageResponseModel>>
+
+    @POST("add-complaint/")
+    fun addComplaint(@Body body:JsonObject):Single<Response<AddComplaintResponseModel>>
 }

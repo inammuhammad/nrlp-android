@@ -10,6 +10,8 @@ import com.onelink.nrlp.android.features.beneficiary.viewmodel.ManageBeneficiary
 import com.onelink.nrlp.android.features.changePassword.viewmodel.ChangePasswordFragmentViewModel
 import com.onelink.nrlp.android.features.changePassword.viewmodel.ChangePasswordSuccessViewModel
 import com.onelink.nrlp.android.features.changePassword.viewmodel.ChangePasswordViewModel
+import com.onelink.nrlp.android.features.complaint.viewmodel.ComplaintSharedViewModel
+import com.onelink.nrlp.android.features.complaint.viewmodel.ComplaintViewModel
 import com.onelink.nrlp.android.features.contactus.viewmodel.ContactUsActivityViewModel
 import com.onelink.nrlp.android.features.faqs.viewmodel.FAQsFragmentViewModel
 import com.onelink.nrlp.android.features.faqs.viewmodel.FaqsViewModel
@@ -399,5 +401,15 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(NrlpBenefitsFragmentViewModel::class)
     internal abstract fun nrlpBenefitsFragmentViewModel(viewModel: NrlpBenefitsFragmentViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ComplaintViewModel::class)
+    internal abstract fun complaintViewModel(viewModel:ComplaintViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ComplaintSharedViewModel::class)
+    internal abstract fun complaintSharedViewModel(viewModel:ComplaintSharedViewModel): ViewModel
 }
 

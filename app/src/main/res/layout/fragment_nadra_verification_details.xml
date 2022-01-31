@@ -103,7 +103,6 @@
                             android:hint="@string/generic_name_placeholder"
                             android:inputType="textCapWords|textCapSentences"
                             android:maxLength="50"
-                            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
                             android:nextFocusDown="@id/etCnicNicop"
                             android:nextFocusForward="@id/etCnicNicop"
                             android:text="@={viewModel.fullName}" />
@@ -211,7 +210,6 @@
                             android:hint="@string/mother_maiden_name_placeholder"
                             android:inputType="textCapWords|textCapSentences"
                             android:maxLength="50"
-                            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
                             android:nextFocusDown="@id/etCnicNicop"
                             android:nextFocusForward="@id/etCnicNicop"
                             android:text="@={viewModel.mothersMaidenName}" />
@@ -229,7 +227,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="visible"
-            android:enabled="false"
+            android:enabled="@{viewModel.fullNameNotEmpty &amp;&amp; viewModel.placeOfBirthNotEmpty &amp;&amp; viewModel.mothersMaidenNameNotEmpty &amp;&amp; viewModel.cnicNicopDateOfIssuanceNotEmpty}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:text="@string/confirm" />

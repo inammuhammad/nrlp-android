@@ -4,6 +4,7 @@ import com.onelink.nrlp.android.di.annotations.ActivityScope
 import com.onelink.nrlp.android.features.beneficiary.view.BeneficiaryActivity
 import com.onelink.nrlp.android.features.changePassword.view.ChangePassSuccessfulActivity
 import com.onelink.nrlp.android.features.changePassword.view.ChangePasswordActivity
+import com.onelink.nrlp.android.features.complaint.view.ComplaintActivity
 import com.onelink.nrlp.android.features.contactus.view.ContactUsActivity
 import com.onelink.nrlp.android.features.faqs.view.FAQsActivity
 import com.onelink.nrlp.android.features.forgotPassword.view.ForgotPasswordActivity
@@ -73,6 +74,10 @@ abstract class ActivityBuilder {
     @ActivityScope
     @ContributesAndroidInjector(modules = [RegisterFragmentsBuilder::class])
     internal abstract fun bindRegisterActivity(): RegisterActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [ComplaintFragmentsBuilder::class])
+    internal abstract fun bindComplaintActivity() :ComplaintActivity
 
     @ActivityScope
     @ContributesAndroidInjector

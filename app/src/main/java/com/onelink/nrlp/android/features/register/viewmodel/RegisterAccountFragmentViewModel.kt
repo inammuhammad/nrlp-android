@@ -197,6 +197,7 @@ class RegisterAccountFragmentViewModel @Inject constructor(
                     userType = registerFlowDataModel.accountType,
                     email = "-", //registerFlowDataModel.email,
                     registrationCode = registerFlowDataModel.registrationCode,
+                    motherMaidenName = registerFlowDataModel.motherMaidenName,
                     residentId = "-", //registerFlowDataModel.residentId,
                     passportType = "-", //registerFlowDataModel.passportType,
                     passportId = "-", //registerFlowDataModel.passportId,
@@ -388,7 +389,7 @@ class RegisterAccountFragmentViewModel @Inject constructor(
         string.isEmpty() || ValidationUtils.isEmailValid(string)
 
     fun checkMotherNameValidation(string: String) =
-        string.isEmpty() || ValidationUtils.isNameValid(string)
+        string.isEmpty() || ValidationUtils.isMotherNameValid(string)
 
     fun checkCnicDateIssueValid(string: String) =
         string.isEmpty() || ValidationUtils.isDateValid(string)
@@ -417,7 +418,7 @@ class RegisterAccountFragmentViewModel @Inject constructor(
         validationCnicNicopIssuanceDatePassed.value = isDateOfIssueValid
         validationMotherMaidenNamePassed.value = isMotherNameValid
         return isCnicValid && isPasswordValid && isRePassValid &&
-                isEmailValid && isFullNameValid && isPhoneNumberValid
+                isEmailValid && isFullNameValid && isPhoneNumberValid && isMotherNameValid
     }
 
     override fun onCleared() {

@@ -328,7 +328,7 @@ class RegisterAccountFragment :
         viewModel.isMotherMaidenNameValidationPassed.observe(this, Observer { validationsPassed ->
             run {
                 if (!validationsPassed)
-                    binding.tilMotherMaidenName.error = getString(R.string.error_not_valid_name)
+                    binding.tilMotherMaidenName.error = getString(R.string.error_not_valid_mother_name)
                 else {
                     binding.tilMotherMaidenName.clearError()
                     binding.tilMotherMaidenName.isErrorEnabled = false
@@ -530,7 +530,8 @@ class RegisterAccountFragment :
                     countryCodeLength,
                     binding.etEmailAddress.text.toString(),
                     binding.etPassword.text.toString(),
-                    binding.etRePassword.text.toString()
+                    binding.etRePassword.text.toString(),
+                    binding.etMotherMaidenName.text.toString(),
                 )
             ) {
                 //moveToNextFragment()

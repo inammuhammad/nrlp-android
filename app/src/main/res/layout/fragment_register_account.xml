@@ -144,8 +144,8 @@
                             android:hint="@string/generic_name_placeholder"
                             android:inputType="textCapWords|textCapSentences"
                             android:maxLength="50"
-                            android:nextFocusDown="@id/etCnicNicop"
-                            android:nextFocusForward="@id/etCnicNicop"
+                            android:nextFocusDown="@id/etMotherMaidenName"
+                            android:nextFocusForward="@id/etMotherMaidenName"
                             android:text="@={viewModel.fullName}" />
                     </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
 

@@ -21,6 +21,8 @@ class RegisterBeneficiaryRequest(
     val fullName: String,
     @SerializedName("user_type")
     val userType: String,
+    @SerializedName("mother_maiden_name")
+    val motherMaidenName:String,
     @Suppress("unused")
     @SerializedName("registration_code")
     val registrationCode: String,

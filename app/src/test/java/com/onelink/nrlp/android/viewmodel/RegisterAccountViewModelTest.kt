@@ -48,6 +48,8 @@ class RegisterAccountViewModelTest : BaseViewModelTest() {
 
         assertTrue(viewModel.validationRePasswordPassed.value != false)
 
+        assertTrue(viewModel.validationMotherMaidenNamePassed.value != false)
+
 
 
         viewModel.validationCnicPassed.value = false
@@ -62,6 +64,8 @@ class RegisterAccountViewModelTest : BaseViewModelTest() {
 
         viewModel.validationRePasswordPassed.value = false
 
+        viewModel.validationMotherMaidenNamePassed.value = false
+
         val isPassed = viewModel.validationsPassed(
             CNIC,
             FULL_NAME,
@@ -69,7 +73,8 @@ class RegisterAccountViewModelTest : BaseViewModelTest() {
             MOBILE_NUMBER.length,
             EMAIL,
             PASSWORD,
-            RE_PASSWORD
+            RE_PASSWORD,
+            MOTHER_NAME
         )
 
         assertTrue(isPassed)
@@ -99,6 +104,10 @@ class RegisterAccountViewModelTest : BaseViewModelTest() {
 
         assertTrue(viewModel.validationRePasswordPassed.value!!)
 
+        assertNotNull(viewModel.validationMotherMaidenNamePassed.value)
+
+        assertTrue(viewModel.validationMotherMaidenNamePassed.value!!)
+
         assertTrue(
             viewModel.validationCnicPassed.value!!
                     && viewModel.validationPasswordPassed.value!!
@@ -106,8 +115,32 @@ class RegisterAccountViewModelTest : BaseViewModelTest() {
                     && viewModel.validationEmailPassed.value!!
                     && viewModel.validationFullNamePassed.value!!
                     && viewModel.validationRePasswordPassed.value!!
+                    && viewModel.validationMotherMaidenNamePassed.value!!
         )
 
+    }
+
+    @Test
+    fun validationMotherNameFailed(){
+        assertTrue(viewModel.validationMotherMaidenNamePassed.value!=false)
+        viewModel.validationMotherMaidenNamePassed.value=false
+
+        assertFalse(
+            viewModel.validationsPassed(
+                CNIC,
+                FULL_NAME,
+                MOBILE_NUMBER,
+                MOBILE_NUMBER.length,
+                EMAIL,
+                PASSWORD,
+                RE_PASSWORD,
+                MOTHER_NAME_INVALID
+            )
+        )
+
+        assertNotNull(viewModel.validationCnicPassed.value)
+
+        assertFalse(viewModel.validationCnicPassed.value!!)
     }
 
     @Test
@@ -290,6 +323,10 @@ class RegisterAccountViewModelTest : BaseViewModelTest() {
         private const val CNIC_INVALID = "341015417688"
 
         private const val FULL_NAME = "alias"
+
+        private const val MOTHER_NAME="Kaneez"
+
+        private const val MOTHER_NAME_INVALID=" K12"
 
         private const val EMAIL = "test@gmail.com"
 

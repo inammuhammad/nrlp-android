@@ -8,10 +8,10 @@ import android.os.Handler
 import android.os.Looper
 import android.view.KeyEvent
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -35,18 +35,15 @@ import com.onelink.nrlp.android.features.home.viewmodel.HomeActivityViewModel
 import com.onelink.nrlp.android.features.language.view.LanguageActivity
 import com.onelink.nrlp.android.features.login.view.LoginActivity
 import com.onelink.nrlp.android.features.profile.view.ProfileActivity
-import com.onelink.nrlp.android.features.register.fragments.RegisterAccountFragment
-import com.onelink.nrlp.android.features.register.fragments.RegisterBeneficiaryFragment
-import com.onelink.nrlp.android.features.register.fragments.TermsAndConditionsFragment
 import com.onelink.nrlp.android.features.select.city.model.CitiesModel
 import com.onelink.nrlp.android.features.select.city.view.SelectCityFragment
-import com.onelink.nrlp.android.features.select.country.view.SelectCountryFragment
 import com.onelink.nrlp.android.utils.Constants
 import com.onelink.nrlp.android.utils.dialogs.OneLinkAlertDialogsFragment
 import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
 import com.onelink.nrlp.android.utils.toSpanned
 import java.util.*
 import javax.inject.Inject
+
 
 /**
  * Created by Umar Javed.
@@ -135,7 +132,6 @@ class HomeActivity :
         )
         binding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
-
         binding.sideMenu.tvVersion.text =
             String.format(resources.getString(R.string.version, BuildConfig.VERSION_NAME))
 

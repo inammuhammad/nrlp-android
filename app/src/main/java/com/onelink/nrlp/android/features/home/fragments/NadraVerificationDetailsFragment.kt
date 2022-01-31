@@ -8,36 +8,27 @@ import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.TextWatcher
 import android.text.style.StyleSpan
-import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.onelink.nrlp.android.R
 import com.onelink.nrlp.android.core.BaseFragment
 import com.onelink.nrlp.android.core.Status
 import com.onelink.nrlp.android.data.local.UserData
 import com.onelink.nrlp.android.databinding.FragmentNadraVerificationDetailsBinding
-import com.onelink.nrlp.android.databinding.FragmentNadraVerificationRequiredBinding
 import com.onelink.nrlp.android.features.home.view.HomeActivity
 import com.onelink.nrlp.android.features.home.view.NadraVerificationsSuccessActivity
-import com.onelink.nrlp.android.features.login.view.LoginFragment
 import com.onelink.nrlp.android.features.redeem.fragments.REDEMPTION_CREATE_DIALOG
 import com.onelink.nrlp.android.features.redeem.fragments.TAG_REDEMPTION_CREATE_DIALOG
-import com.onelink.nrlp.android.features.register.view.RegisterSuccessActivity
 import com.onelink.nrlp.android.features.register.viewmodel.SharedViewModel
 import com.onelink.nrlp.android.features.select.city.model.CitiesModel
 import com.onelink.nrlp.android.features.select.city.view.SelectCityFragment
-import com.onelink.nrlp.android.utils.ValidationUtils
 import com.onelink.nrlp.android.utils.colorToText
 import com.onelink.nrlp.android.utils.dialogs.OneLinkAlertCityDialogFragment
-import com.onelink.nrlp.android.utils.dialogs.OneLinkAlertDialogsFragment
 import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
-import com.onelink.nrlp.android.utils.toSpanned
 import dagger.android.support.AndroidSupportInjection
 import java.util.*
 import javax.inject.Inject
+
 
 const val NADRA_VERIFICATION_DETAILS_SCREEN = 4
 
@@ -72,19 +63,26 @@ class NadraVerificationDetailsFragment :
         initListeners()
         initTextWatchers()
         initObservers()
+        initOnFocusChangeListeners()
         sharedViewModel?.maxProgress?.postValue(NADRA_VERIFICATION_DETAILS_SCREEN)
     }
 
     private fun initListeners() {
         binding.btnConfirm.setOnClickListener {
             //showLogoutConfirmationDialog()
-            oneLinkProgressDialog.showProgressDialog(context)
-            viewModel.updateNadraDetails(
-                binding.etMotherMaidenName.text.toString(),
-                binding.tvPlaceOfBirth.text.toString(),
-                binding.etCnicNicopIssuanceDate.text.toString(),
-                binding.etFullName.text.toString()
-            )
+            if(viewModel.validationsPassed(
+                    binding.etFullName.text.toString(),
+                    binding.etMotherMaidenName.text.toString(),
+                    binding.etCnicNicopIssuanceDate.text.toString())
+            ) {
+                oneLinkProgressDialog.showProgressDialog(context)
+                viewModel.updateNadraDetails(
+                    binding.etMotherMaidenName.text.toString(),
+                    binding.tvPlaceOfBirth.text.toString(),
+                    binding.etCnicNicopIssuanceDate.text.toString(),
+                    binding.etFullName.text.toString()
+                )
+            }
         }
         binding.etCnicNicopIssuanceDate.setOnClickListener {
             openDatePickerDialog()
@@ -97,10 +95,44 @@ class NadraVerificationDetailsFragment :
                 addToBackStack = true
             )
             hideKeyboard()
+            validateFields()
         }
 
         binding.icHelpFullName.setOnClickListener {
             showGeneralAlertDialog(this,"Register",getString(R.string.help_full_name))
+        }
+    }
+
+    private fun initOnFocusChangeListeners() {
+
+        binding.etFullName.setOnFocusChangeListener { _, b ->
+            when (b) {
+                false -> viewModel.isFullNameValidationPassed.postValue(
+                    viewModel.checkFullNameValidation(
+                        binding.etFullName.text.toString()
+                    )
+                )
+            }
+        }
+
+        binding.etMotherMaidenName.setOnFocusChangeListener { _, b ->
+            when (b) {
+                false -> viewModel.isMotherMaidenNameValidationPassed.postValue(
+                    viewModel.checkMotherNameValidation(
+                        binding.etMotherMaidenName.text.toString()
+                    )
+                )
+            }
+        }
+
+        binding.etCnicNicopIssuanceDate.setOnFocusChangeListener { _, b ->
+            when (b) {
+                false -> viewModel.isCnicNicopIssuanceDateValidationPassed.postValue(
+                    viewModel.checkCnicDateIssueValid(
+                        binding.etCnicNicopIssuanceDate.text.toString()
+                    )
+                )
+            }
         }
     }
 
@@ -129,9 +161,45 @@ class NadraVerificationDetailsFragment :
                 validateFields()
             }
         })
+
+        binding.tvPlaceOfBirth.addTextChangedListener(object : TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                validateFields()
+            }
+
+        })
     }
 
     fun initObservers(){
+
+        viewModel.isFullNameValidationPassed.observe(this, androidx.lifecycle.Observer{ validationsPassed ->
+            run {
+                if (!validationsPassed)
+                    binding.tilFullName.error = getString(R.string.error_not_valid_name)
+                else {
+                    binding.tilFullName.clearError()
+                    binding.tilFullName.isErrorEnabled = false
+                }
+            }
+        })
+
+        viewModel.isMotherMaidenNameValidationPassed.observe(this, androidx.lifecycle.Observer{ validationsPassed ->
+            run {
+                if (!validationsPassed)
+                    binding.tilMotherMaidenName.error = getString(R.string.error_not_valid_mother_name)
+                else {
+                    binding.tilMotherMaidenName.clearError()
+                    binding.tilMotherMaidenName.isErrorEnabled = false
+                }
+            }
+        })
+
         viewModel.observeUpdateNadraDetails().observe(
             this,
             androidx.lifecycle.Observer { response ->
@@ -185,7 +253,8 @@ class NadraVerificationDetailsFragment :
             if(etFullName.text.isNullOrEmpty() || etMotherMaidenName.text.isNullOrEmpty() ||
                    etCnicNicopIssuanceDate.text.isNullOrEmpty() || tvPlaceOfBirth.text.isNullOrEmpty() )
                 isValid = false
-            binding.btnConfirm.isEnabled = isValid
+            binding.btnConfirm.isEnabled=isValid
+
         }
     }
 

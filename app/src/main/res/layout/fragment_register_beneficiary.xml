@@ -145,8 +145,8 @@
                             android:hint="@string/generic_name_placeholder"
                             android:inputType="textCapWords|textCapSentences"
                             android:maxLength="50"
-                            android:nextFocusDown="@id/etCnicNicop"
-                            android:nextFocusForward="@id/etCnicNicop"
+                            android:nextFocusDown="@id/etMotherMaidenName"
+                            android:nextFocusForward="@id/etMotherMaidenName"
                             android:text="@={viewModel.fullName}" />
                     </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
 
@@ -156,8 +156,7 @@
                     android:id="@+id/motherMaidenNameLL"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:visibility="gone">
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -184,7 +183,7 @@
                             style="@style/EditTextFixedDigits"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/generic_name_placeholder"
+                            android:hint="@string/mother_maiden_name_placeholder"
                             android:inputType="textCapWords|textCapSentences"
                             android:maxLength="50"
                             android:nextFocusDown="@id/etCnicNicop"

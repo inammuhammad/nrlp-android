@@ -45,7 +45,7 @@
     <string name="remittance_amount">ترسیل کی رقم (پاکستانی روپیے)</string>
     <string name="remittance_amount_help">رسید پر موجود رقم عین مطابق درج کریں</string>
     <string name="remittance_date_help">وہ تاریخ درج کریں جس پر ٹرانزیکشن ہوئی</string>
-    <string name="remittance_account_cnic_number_help">وصول کنندہ کا اکاؤنٹ نمبر/قومی شناختی کارڈ نمبر درج کریں جس پر ترسیلات بھیجی گئی ہیں۔</string>
+    <string name="remittance_account_cnic_number_help">صول کنندہ کا اکاونٹ نمر/ بین الاقوامی بینک اکاؤنٹ نمبر/قومی شناختی کارڈ نمر درج کریں جس پر ترسیلات بھیجی گئ ہیں۔</string>
     <string name="remittance_date">ترسیل کی تاریخ</string>
 
     <string name="enter_points">پوائنٹس درج کریں</string>
@@ -102,7 +102,7 @@
     <string name="remitter_verification">ترسیلات زربھیجنے والے کی تصدیق</string>
     <string name="beneficiary_verification_title">وصول کنندہ کی تصدیق</string>
     <string name="reference_number">حوالہ نمبر</string>
-    <string name="beneficiary_account_number_cnic">وصول کنندہ کا اکاؤنٹ نمبر/قومی شناختی کارڈ نمبر</string>
+    <string name="beneficiary_account_number_cnic">صول کنندہ کا اکاونٹ نمر/ بین الاقوامی بینک اکاؤنٹ نمبر/قومی شناختی کارڈ نمر</string>
     <string name="transaction_amount">ترسیل کی رقم</string>
     <string name="curPassword">پرانا پاس ورڈ درج کریں</string>
     <string name="newPassword">نیا پاس ورڈ درج کریں</string>
@@ -190,6 +190,7 @@
     <string name="device_rooted_alert_msg">آپ کی ڈیوائس rooted ہے، اس پہ ایپلیکشن نہیں استعمال کی جاسکتی</string>
     <string name="error_cnic">براہ کرم درست CNIC/NICOP درج کریں</string>
     <string name="error_not_valid_name">براہ کرم ایک درست پورا نام درج کریں</string>
+    <string name="error_not_valid_mother_name">براہ کرم ایک درست نام درج کریں</string>
     <string name="error_mobile_num_not_valid">براہ کرم درست موبائل نمبر درج کریں</string>
     <string name="error_email_not_valid">برائے مہربانی درست ای میل فارمیٹ کا اندراج کریں</string>
     <string name="error_password_not_match">دونوں پاس ورڈ مماثل نہیں ہیں</string>
@@ -225,7 +226,7 @@
     <string name="guide">رہنمائی کے لئے</string>
     <string name="logout">لاگ آوٹ</string>
     <string name="contact_us">رابطہ کریں</string>
-    <string name="complaint_management">Complaint Management</string>
+    <string name="complaint_management">شکایت کی منتظمی</string>
     <string name="version">%s ورژن</string>
     <string name="nav_open">Open navigation drawer</string>
     <string name="nav_close">Close navigation drawer</string>
@@ -330,4 +331,16 @@
     <string name="search_city">Search City</string>
     <string name="beneficiary_updated">Beneficiary details have been updated successfully</string>
     <string name="otp_resent">Registration code has been resent</string>
+    <string name="select_user_type">Select User Type</string>
+    <string name="complaint_type">شکایت کی قسم *</string>
+    <string name="others">دیگر</string>
+    <string name="unable_to_otp">او ٹی پی وصول نہیں ہوا</string>
+    <string name="unable_to_register">رجسٹر نہیں کر سکا</string>
+    <string name="specify_details">تفصیلات بتائیں *</string>
+    <string name="dear_customer">معزز صارف,</string>
+    <string name="complaint1">اپ کی شکائت درج کرلی گئ ہے,\n براہ کرم ٹریکنگ نمبر نوٹ کریں۔</string>
+    <string name="complaint2">مسئلہ 3 کاروباری دنوں میں \n حل ہو جائے گا، اگر شکایت \n حل نہیں ہوئی تو آپ \n یا 757-116-111 پر\n رابطہ کرسکتے ہیں</string>
+    <string name="unable_to_registration_code">Unable to receive registration code</string>
+    <string name="mobile_operator_name">موبائل آپریٹر کا نام *</string>
+    <string name="dummy_mobile_op">Zong</string>
 </resources>

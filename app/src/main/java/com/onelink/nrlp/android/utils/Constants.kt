@@ -12,6 +12,7 @@ class Constants {
         // Comment date checksum replaced(DD-MM-YY) + checksum replaced
         // 29-12-21 69ylzdfq2uem9fdkbl713m7nl9taggbna3fq06q7
         // 07-01-22 w73v34zmazcrlz1li8v3iplfdoawrjz7ggsutsin
+        // 31-01-22 pe2y9n0dzggqbes52gc52l6s0b1hbe04foozn1ch
         const val checkSum = "w73v34zmazcrlz1li8v3iplfdoawrjz7ggsutsin" //"jfpuj1u2iobyryn554w6iig81b5spnnrtl1txy0c"
 
         const val InternationalPassport = "International Passport"
@@ -89,12 +90,77 @@ object UriConstants {
     const val ABOUT_NRLP_URL = "https://1link.net.pk/sohni-dharti/#1633123604420-798e6f70-2ecf"
 }
 
+object UserTypeValue{
+    const val Remitter=0
+    const val Beneficiary=1
+}
+
 object SelfAwardRequestConstants{
     const val Amount="amount"
     const val Reference_NO="reference_no"
     const val Beneficiary_NIC_NICOP="beneficiary_nic_nicop"
     const val Self_Award_Row_ID="sp_respone_row_id"
     const val Transaction_Date="transaction_date"
+}
+
+object ComplaintRequestModelConstants{
+    const val Registered="c_registered"
+    const val User_type="c_user_type"
+    const val Complaint_type_id="c_complaint_type_id"
+    const val Nic_nicop="c_nic_nicop"
+    const val Name="c_name"
+    const val Mobile_no="c_mobile_no"
+    const val Email="c_email"
+    const val Country_of_residence="c_country_of_residence"
+    const val Comments="c_comments"
+    const val Mobile_Operator="c_mobile_operator_name"
+}
+
+object UnregisteredComplaintTypes{
+    const val UNABLE_TO_REGISTER="unable to register"
+    const val UNABLE_TO_RECEIVE_REGISTRATION_CODE="unable to receive registration code"
+    const val UNABLE_TO_RECEIVE_OTP="unable to receive otp"
+    const val OTHERS="others"
+
+}
+
+object RegisteredRemitterComplaintTypeConstants{
+    val complaintType= arrayOf(
+        "Unable to receive OTP",
+        "Unable to add beneficiary",
+        "Unable to transfer points to beneficiary",
+        "Unable to self award points",
+        "Redemption Issues",
+        "Others",
+    )
+}
+
+object RegisteredBeneficiaryComplaintTypeConstants{
+    val complaintType= arrayOf(
+        "Unable to receive OTP",
+        "Redemption Issues",
+        "Others"
+    )
+}
+
+object COMPLAINT_TYPE {
+
+    const val UNABLE_TO_REGISTER = 1
+
+    const val UNABLE_TO_RECEIVE_REGISTRATION_CODE = 2
+
+    const val UNABLE_TO_RECEIVE_OTP = 3
+
+    const val UNABLE_TO_ADD_BENEFICIARY = 4
+
+    const val UNABLE_TO_TRANSFER_POINTS_TO_BENEFICIARY = 5
+
+    const val UNABLE_TO_SELF_AWARDS_POINTS = 6
+
+    const val REDEMPTION_ISSUES = 7
+
+    const val OTHERS = 8
+
 }
 
 object Sp {

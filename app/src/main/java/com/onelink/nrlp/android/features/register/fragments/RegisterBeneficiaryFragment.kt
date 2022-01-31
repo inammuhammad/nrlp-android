@@ -316,6 +316,17 @@ class RegisterBeneficiaryFragment : BaseFragment<RegisterAccountFragmentViewMode
             }
         })
 
+        viewModel.isMotherMaidenNameValidationPassed.observe(this, androidx.lifecycle.Observer{ validationsPassed ->
+            run {
+                if (!validationsPassed)
+                    binding.tilMotherMaidenName.error = getString(R.string.error_not_valid_mother_name)
+                else {
+                    binding.tilMotherMaidenName.clearError()
+                    binding.tilMotherMaidenName.isErrorEnabled = false
+                }
+            }
+        })
+
         viewModel.isEmailValidationPassed.observe(this, androidx.lifecycle.Observer{ validationsPassed ->
             run {
                 if (!validationsPassed)

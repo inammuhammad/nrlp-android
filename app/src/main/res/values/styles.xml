@@ -67,6 +67,17 @@
         <item name="android:focusable">true</item>
     </style>
 
+    <style name="TextViewBody" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/unit_18sp</item>
+        <item name="android:textColor">@color/pure_black</item>
+        <item name="android:fontFamily">@font/gramound_bd</item>
+        <item name="android:layout_marginStart">@dimen/margin_large</item>
+        <item name="android:layout_marginLeft">@dimen/margin_large</item>
+        <item name="android:layout_marginRight">@dimen/margin_large</item>
+    </style>
+
     <style name="TextViewHeadingLite" parent="TextViewHeading">
         <item name="android:fontFamily">@font/gramound</item>
     </style>
@@ -134,6 +145,12 @@
         <item name="android:textColorSecondary">@color/grey</item>
     </style>
 
+    <style name="TextViewMainHeading" parent="TextViewHeading">
+        <item name="android:textSize">@dimen/unit_24sp</item>
+        <item name="android:fontFamily">@font/hp_simplified_rg</item>
+        <item name="android:layout_marginTop">@dimen/unit_20dp</item>
+    </style>
+
     <style name="TextViewSubHeading" parent="TextViewHeading">
         <item name="android:textSize">@dimen/unit_12sp</item>
         <item name="android:fontFamily">@font/hp_simplified_rg</item>
@@ -144,6 +161,14 @@
     <style name="TextViewMedium" parent="TextViewHeading">
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">@dimen/unit_14sp</item>
+        <item name="android:layout_marginEnd">@dimen/margin_large</item>
+        <item name="android:layout_marginRight">@dimen/margin_large</item>
+        <item name="android:fontFamily">@font/hp_simplified_rg</item>
+        <item name="android:lineSpacingExtra">@dimen/margin_small</item>
+    </style>
+    <style name="TextViewComplaint" parent="TextViewBody">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/unit_18sp</item>
         <item name="android:layout_marginEnd">@dimen/margin_large</item>
         <item name="android:layout_marginRight">@dimen/margin_large</item>
         <item name="android:fontFamily">@font/hp_simplified_rg</item>
