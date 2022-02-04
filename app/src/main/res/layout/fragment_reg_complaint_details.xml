@@ -1,0 +1,805 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.onelink.nrlp.android.features.complaint.viewmodel.RegComplaintSharedViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/margin_large"
+            android:background="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/btnNext"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            tools:layout_editor_absoluteX="0dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
+                    android:id="@+id/tvComplaintManagement"
+                    style="@style/TextViewMainHeading"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/complaint_management"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/unit_30sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvComplaintType"
+                    style="@style/TextViewMainHeading"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/unit_40dp"
+                    android:gravity="center"
+                    android:text="@string/complaint_type"
+                    android:textSize="@dimen/unit_24sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvComplaintManagement" />
+
+                <RadioButton
+                    android:id="@+id/radioTxt"
+                    style="@style/radiobutton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@drawable/radio_btn_tint_selector"
+                    android:checked="true"
+                    android:paddingStart="@dimen/margin_large"
+                    android:text="@{viewModel.complaintText}"
+                    android:textColor="@drawable/radio_btn_text_selector"
+                    android:textSize="@dimen/unit_18sp"
+                    android:textStyle="bold"
+                    android:theme="@style/RadioButtonStyle"
+                    app:layout_constraintTop_toBottomOf="@id/tvComplaintType" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/lyUnableToOtp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/margin_extra_large"
+                    android:layout_marginEnd="@dimen/margin_extra_large"
+                    android:paddingStart="@dimen/margin_large"
+                    android:paddingEnd="@dimen/margin_large"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@id/radioTxt">
+
+                    <TextView
+                        android:id="@+id/tvMobileOperator"
+                        style="@style/TextViewSubHeading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/mobile_operator_name"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/unit_16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
+                        android:id="@+id/til_mobileOperator"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/unit_8dp"
+                        app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvMobileOperator">
+
+                        <com.onelink.nrlp.android.widgets.OneLinkEditText
+                            android:id="@+id/et_mobileOperator"
+                            style="@style/EditTextFixedDigits"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/dummy_mobile_op"
+                            android:inputType="textPersonName"
+                            android:maxLength="50"
+                            android:maxLines="1"
+                            android:text="@={viewModel.mobileOperator}"
+                            app:layout_constraintBottom_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="parent" />
+
+                    </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
+
+                    <TextView
+                        android:id="@+id/tvTransactionType"
+                        style="@style/TextViewSubHeading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/transaction_type"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/unit_16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/til_mobileOperator" />
+
+                    <LinearLayout
+                        android:id="@+id/spinnerTransaction"
+                        style="@style/spinnerTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:layoutDirection="ltr"
+                        android:orientation="horizontal"
+                        android:textDirection="ltr"
+                        android:weightSum="10"
+                        app:layout_constraintTop_toBottomOf="@id/tvTransactionType">
+
+                        <TextView
+                            android:id="@+id/tvTransaction"
+                            style="@style/TextViewMediumNoMargins"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="8.5"
+                            android:text="@={viewModel.transactionType}" />
+
+                        <ImageView
+                            android:id="@+id/iv_drop_down"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:contentDescription="@null"
+                            android:src="@drawable/ic_spinner_dropdown" />
+                    </LinearLayout>
+
+                    <com.onelink.nrlp.android.utils.OneLinkSpinner
+                        android:id="@+id/spinner_select_transaction"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="@dimen/margin_large"
+                        android:layout_marginEnd="@dimen/margin_large"
+                        android:background="@android:color/transparent"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="start"
+                        android:hint="@string/redemption"
+                        android:layoutDirection="ltr"
+                        android:spinnerMode="dropdown"
+                        android:textDirection="ltr"
+                        android:visibility="invisible"
+                        app:layout_constraintTop_toBottomOf="@id/spinnerTransaction" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/lyUnableToAddBeneficiary"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/margin_extra_large"
+                    android:layout_marginEnd="@dimen/margin_extra_large"
+                    android:paddingStart="@dimen/margin_large"
+                    android:paddingEnd="@dimen/margin_large"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@id/radioTxt">
+
+                    <TextView
+                        android:id="@+id/tvAddBeneficiaryCnicNicp"
+                        style="@style/TextViewSubHeading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/beneficiary_cnic_nicop"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/unit_16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
+                        android:id="@+id/til_Addbeneficiary_cnic_nicp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/unit_8dp"
+                        app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvAddBeneficiaryCnicNicp">
+
+                        <com.onelink.nrlp.android.widgets.OneLinkEditText
+                            android:id="@+id/et_Addbeneficiary_cnicnicop"
+                            style="@style/EditTextFixedDigits"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:hint="@string/cnic_nicop_hint"
+                            android:maxLength="15"
+                            android:maxLines="1"
+                            android:text="@={viewModel.cnicNumber}"
+                            app:layout_constraintBottom_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="parent" />
+
+                    </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
+
+                    <TextView
+                        android:id="@+id/tvBeneficiaryCountry"
+                        style="@style/TextViewSubHeading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/beneficiary_country_of_residence"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/unit_16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/til_Addbeneficiary_cnic_nicp" />
+
+                    <TextView
+                        android:id="@+id/BeneficaryCountry"
+                        style="@style/EditTextTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:hint="@string/dummy_country"
+                        android:text="@={viewModel.country}"
+                        android:layout_marginTop="@dimen/unit_8dp"
+                        app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvBeneficiaryCountry"/>
+
+
+                    <TextView
+                        android:id="@+id/tvBeneficiaryMobile"
+                        style="@style/TextViewSubHeading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/beneficiary_mobile_number"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/unit_16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/BeneficaryCountry" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/lyPhoneNumber"
+                        style="@style/EditTextFixedDigits"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layoutDirection="ltr"
+                        android:orientation="horizontal"
+                        app:layout_constraintTop_toBottomOf="@id/tvBeneficiaryMobile"
+                        android:visibility="visible">
+
+                        <TextView
+                            android:id="@+id/tvCountryCode"
+                            style="@style/TextViewMedium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/unit_0dp"
+                            android:text="@string/code_prefix"
+                            android:textColor="@color/grey"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/prefix_tv"
+                            style="@style/TextViewMedium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/unit_0dp"
+                            android:text="@string/dash"
+                            android:textColor="@color/grey"
+                            app:layout_constraintBottom_toBottomOf="@id/etPhoneNumber"
+                            app:layout_constraintStart_toEndOf="@+id/tvCountryCode"
+                            app:layout_constraintTop_toTopOf="@id/etPhoneNumber" />
+
+                        <com.onelink.nrlp.android.widgets.OneLinkEditText
+                            android:id="@+id/etPhoneNumber"
+                            style="@style/EditTextFixedNumbers"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/unit_0dp"
+                            android:background="@null"
+                            android:enabled="false"
+                            android:gravity="start"
+                            android:hint="@string/mobile_num_hint"
+                            android:inputType="number"
+                            android:nextFocusDown="@id/etResidentId"
+                            android:nextFocusForward="@id/etResidentId"
+                            android:padding="@dimen/unit_0dp"
+                            android:paddingStart="@dimen/unit_4dp"
+                            android:paddingEnd="@dimen/unit_4dp"
+                            android:text="@={viewModel.mobileNumber}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/imageViewPhoneError"
+                            app:layout_constraintStart_toEndOf="@+id/prefix_tv"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:ignore="TextFields" />
+
+                        <ImageView
+                            android:id="@+id/imageViewPhoneError"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/margin_large"
+                            android:src="@drawable/ic_edit_text_error"
+                            android:textColor="@color/grey"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:contentDescription="@null" />
+                        <TextView
+                            android:id="@+id/errorTextPhone"
+                            style="@style/TextViewMedium"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_large"
+                            android:layout_marginTop="@dimen/unit_0dp"
+                            android:text="@string/sent_otp_code_msg"
+                            android:textColor="@color/red"
+                            app:layout_constraintTop_toBottomOf="@id/etPhoneNumber"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:textSize="@dimen/unit_10sp"
+                            android:visibility="gone"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <TextView
+                        android:id="@+id/tvBeneficiaryMobileOperator"
+                        style="@style/TextViewSubHeading"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/unit_16sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/beneficiary_mobile_operator_name"
+                        app:layout_constraintTop_toBottomOf="@id/lyPhoneNumber"
+                        app:layout_constraintStart_toStartOf="parent"
+                        />
+                    <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
+                        android:id="@+id/til_beneficiary_mobileOperator"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/unit_8dp"
+                        app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvBeneficiaryMobileOperator">
+
+                        <com.onelink.nrlp.android.widgets.OneLinkEditText
+                            android:id="@+id/et_beneficiary_mobileOperator"
+                            style="@style/EditTextFixedDigits"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/dummy_mobile_op"
+                            android:inputType="textPersonName"
+                            android:maxLength="50"
+                            android:maxLines="1"
+                            android:text="@={viewModel.mobileOperator}"
+                            app:layout_constraintBottom_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="parent" />
+
+                    </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/lyTransferPoints"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/margin_extra_large"
+                    android:layout_marginEnd="@dimen/margin_extra_large"
+                    android:paddingStart="@dimen/margin_large"
+                    android:paddingEnd="@dimen/margin_large"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@id/radioTxt">
+
+                    <TextView
+                        android:id="@+id/tvTransferPoints"
+                        style="@style/TextViewSubHeading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/beneficiary_cnic_nicop"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/unit_16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
+                        android:id="@+id/til_Pointsbeneficiary_cnic"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/unit_8dp"
+                        app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvTransferPoints">
+
+                        <com.onelink.nrlp.android.widgets.OneLinkEditText
+                            android:id="@+id/et_Pointsbeneficiary_cnic_nicp"
+                            style="@style/EditTextFixedDigits"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/cnic_nicop_hint"
+                            android:inputType="number"
+                            android:maxLength="15"
+                            android:maxLines="1"
+                            android:text="@={viewModel.cnicNumber}"
+                            app:layout_constraintBottom_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="parent" />
+                    </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/lyUnableToSelfAward"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/margin_extra_large"
+                    android:layout_marginEnd="@dimen/margin_extra_large"
+                    android:paddingStart="@dimen/margin_large"
+                    android:visibility="gone"
+                    android:paddingEnd="@dimen/margin_large"
+                    app:layout_constraintTop_toBottomOf="@id/radioTxt">
+
+                    <TextView
+                        android:id="@+id/tvBeneficiaryaccount"
+                        style="@style/TextViewSubHeading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/beneficiary_account_number_cnic"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/unit_16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
+                        android:id="@+id/til_beneficiary_account"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/unit_8dp"
+                        app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvBeneficiaryaccount">
+
+                        <com.onelink.nrlp.android.widgets.OneLinkEditText
+                            android:id="@+id/et_beneficiary_account"
+                            style="@style/EditTextFixedDigits"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPersonName"
+                            android:maxLength="50"
+                            android:hint="@string/cnic_nicop_hint"
+                            android:maxLines="1"
+                            android:text="@={viewModel.cnicAccountNumber}"
+                            app:layout_constraintBottom_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="parent" />
+
+                    </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
+
+                    <TextView
+                        android:id="@+id/tvRemitting"
+                        style="@style/TextViewSubHeading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/remitting_entity"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/unit_16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/til_beneficiary_account" />
+
+                    <ImageView
+                        android:id="@+id/icHelpTransaction"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginTop="@dimen/margin_large"
+                        android:src="@drawable/ic_baseline_info_24"
+                        app:layout_constraintHorizontal_bias="0"
+                        app:layout_constraintStart_toEndOf="@+id/tvRemitting"
+                        app:layout_constraintTop_toBottomOf="@id/til_beneficiary_account" />
+
+                    <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
+                        android:id="@+id/til_remitting"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/unit_8dp"
+                        app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvRemitting">
+
+                        <com.onelink.nrlp.android.widgets.OneLinkEditText
+                            android:id="@+id/et_remitting"
+                            style="@style/EditTextFixedDigits"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPersonName"
+                            android:maxLength="50"
+                            android:maxLines="1"
+                            android:text="@={viewModel.remittingEntity}"
+                            app:layout_constraintBottom_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="parent" />
+
+                    </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
+
+                    <TextView
+                        android:id="@+id/lyTransaction"
+                        style="@style/TextViewSubHeading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/transaction_id"
+                        android:textColor="@color/black"
+                        android:inputType="none"
+                        android:textSize="@dimen/unit_16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/til_remitting" />
+
+                    <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
+                        android:id="@+id/til_transactionid"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/unit_8dp"
+                        app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/lyTransaction">
+
+                        <com.onelink.nrlp.android.widgets.OneLinkEditText
+                            android:id="@+id/et_transactionid"
+                            style="@style/EditTextFixedDigits"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPersonName"
+                            android:maxLength="50"
+                            android:maxLines="1"
+                            android:text="@={viewModel.transactionId}"
+                            app:layout_constraintBottom_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="parent" />
+
+                    </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
+
+                    <TextView
+                        android:id="@+id/lyTransactionDate"
+                        style="@style/TextViewSubHeading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/transaction_date"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/unit_16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/til_transactionid" />
+
+                    <TextView
+                        android:focusable="false"
+                        android:id="@+id/et_transactionDate"
+                        style="@style/EditTextTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/generic_date_placeholder"
+                        android:text="@={viewModel.transactionDate}"
+                        app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/lyTransactionDate"/>
+
+
+                    <TextView
+                        android:id="@+id/lyTransactionAmount"
+                        style="@style/TextViewSubHeading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/transaction_amount"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/unit_16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/et_transactionDate" />
+
+                    <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
+                        android:id="@+id/til_transactionamount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/unit_8dp"
+                        app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/lyTransactionAmount">
+
+                        <com.onelink.nrlp.android.widgets.OneLinkEditText
+                            android:id="@+id/et_transactionamount"
+                            style="@style/EditTextFixedDigits"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:maxLength="50"
+                            android:maxLines="1"
+                            android:text="@={viewModel.transactionAmount}"
+                            app:layout_constraintBottom_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="parent" />
+
+                    </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/lyRedemptionIssues"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/margin_extra_large"
+                    android:layout_marginEnd="@dimen/margin_extra_large"
+                    android:paddingStart="@dimen/margin_large"
+                    android:paddingEnd="@dimen/margin_large"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@id/radioTxt">
+
+                    <TextView
+                        android:id="@+id/tvRedemptionPartners"
+                        style="@style/TextViewSubHeading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/transaction_type"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/unit_16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <LinearLayout
+                        android:id="@+id/spinnerRedemption"
+                        style="@style/spinnerTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:layoutDirection="ltr"
+                        android:orientation="horizontal"
+                        android:textDirection="ltr"
+                        android:weightSum="10"
+                        app:layout_constraintTop_toBottomOf="@id/tvRedemptionPartners">
+
+                        <TextView
+                            android:id="@+id/tvRedemption"
+                            style="@style/TextViewMediumNoMargins"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="8.5"
+                            android:text="@={viewModel.redemptionPartners}" />
+
+                        <ImageView
+                            android:id="@+id/iv_drop_down2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:contentDescription="@null"
+                            android:src="@drawable/ic_spinner_dropdown" />
+                    </LinearLayout>
+
+                    <com.onelink.nrlp.android.utils.OneLinkSpinner
+                        android:id="@+id/spinner_select_partner"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="@dimen/margin_large"
+                        android:layout_marginEnd="@dimen/margin_large"
+                        android:background="@android:color/transparent"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="start"
+                        android:hint="@string/redemption"
+                        android:layoutDirection="ltr"
+                        android:spinnerMode="dropdown"
+                        android:textDirection="ltr"
+                        android:visibility="invisible"
+                        app:layout_constraintTop_toBottomOf="@id/spinnerRedemption" />
+
+                    <TextView
+                        android:id="@+id/tvDetails"
+                        style="@style/TextViewSubHeading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/specify_details"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/unit_16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/spinner_select_partner" />
+
+                    <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
+                        android:id="@+id/til_details"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/unit_8dp"
+                        app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvDetails">
+
+                        <com.onelink.nrlp.android.widgets.OneLinkEditText
+                            android:id="@+id/et_details"
+                            style="@style/EditTextFixedDigits"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/redemption_issues"
+                            android:inputType="textPersonName"
+                            android:maxLength="50"
+                            android:maxLines="1"
+                            android:text="@={viewModel.details}"
+                            app:layout_constraintBottom_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="parent" />
+
+                    </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/lyOthers"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/margin_extra_large"
+                    android:layout_marginEnd="@dimen/margin_extra_large"
+                    android:paddingStart="@dimen/margin_large"
+                    android:paddingEnd="@dimen/margin_large"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@id/radioTxt">
+
+                    <TextView
+                        android:id="@+id/tvOthers"
+                        style="@style/TextViewSubHeading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/specify_details"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/unit_16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
+                        android:id="@+id/til_details2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/unit_8dp"
+                        app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvOthers">
+
+                        <com.onelink.nrlp.android.widgets.OneLinkEditText
+                            android:id="@+id/et_details2"
+                            style="@style/EditTextFixedDigits"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/redemption_issues"
+                            android:inputType="textPersonName"
+                            android:maxLength="50"
+                            android:maxLines="1"
+                            android:text="@={viewModel.otherDetails}"
+                            app:layout_constraintBottom_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="parent" />
+                    </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+        <Button
+            android:id="@+id/btnNext"
+            style="@style/ButtonTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_extra_large"
+            android:text="@string/next"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
