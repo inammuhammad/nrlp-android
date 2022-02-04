@@ -120,6 +120,7 @@
     <string name="dont_have_account">Don\'t have an account?</string>
     <string name="view_remittance_benefits">View Sohni Dharti Remittance Program Benefits</string>
     <string name="resend_otp">Resend OTP</string>
+    <string name="resend">Resend</string>
     <string name="cnic_nicop_hint">xxxxx–xxxxxxx–x</string>
     <string name="select_country">Select Country</string>
     <string name="select_place_of_birth">Select Place Of Birth</string>
@@ -341,15 +342,38 @@
     <string name="otp_resent">Registration code has been resent</string>
     <string name="select_user_type">Select User Type</string>
 
-    <string name="complaint_type">ComplaintType</string>
+    <string name="complaint_type">Complaint Type</string>
     <string name="others">Others</string>
     <string name="unable_to_otp">Unable to receive OTP</string>
     <string name="unable_to_register">Unable to register</string>
     <string name="specify_details">Specify Details *</string>
     <string name="dear_customer">Dear Customer,</string>
     <string name="complaint1">Your complaint has been logged,\n please note the Tracking Number</string>
-    <string name="complaint2">issue will be resolved within 3 \n working days,incase complaint \n remains unresolved, you may\n contact at\n sdrpsupport@1link.net.pk\n 111-116-757</string>
+    <string name="complaint2">issue will be resolved within 3 \n working days,incase complaint \n remains unresolved, you may\n contact at\n sdrpsupport@1link.net.pk or \n 111-116-757</string>
     <string name="unable_to_registration_code">Unable to receive registration code</string>
     <string name="mobile_operator_name">Mobile Operator Name *</string>
     <string name="dummy_mobile_op">Zong</string>
+    <string name="redemption_issues">Redemption Issues</string>
+    <string name="unable_to_self_award_points">Unable to Self Award Points</string>
+    <string name="unable_to_transfer_points">Unable to Transfer Points to Beneficiary</string>
+    <string name="unable_to_add_beneficiary">Unable to Add Beneficiary</string>
+    <string name="transaction_type">Transaction Type</string>
+    <string name="profile_change">Profile Change</string>
+    <string name="self_awarding">Self Awarding</string>
+    <string name="redemption">Redemption</string>
+    <string name="beneficiary_cnic_nicop">Beneficiary CNIC/NICOP</string>
+    <string name="remitting_entity">Remitting Entity</string>
+    <string name="transaction_id">Transaction ID</string>
+    <string name="transaction_date">Transaction Date</string>
+    <string name="beneficiary_country_of_residence">Beneficiary Country of residence</string>
+    <string name="beneficiary_mobile_operator_name">Beneficiary Mobile Operator Name</string>
+    <string name="specify_bank_exchange_from_where_remittance">Please specify Bank/Exchange Company from where remittance is sent</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
 </resources>

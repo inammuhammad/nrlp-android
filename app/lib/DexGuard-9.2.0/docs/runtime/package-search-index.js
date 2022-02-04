@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"com.guardsquare.dexguard.runtime.detection"},{"l":"com.guardsquare.dexguard.runtime.encryption"},{"l":"com.guardsquare.dexguard.runtime.net"},{"l":"com.guardsquare.dexguard.runtime.report"}]

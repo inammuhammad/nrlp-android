@@ -1,2 +1,0 @@
-# We'll just display some more statistics about the processed code.
--verbose

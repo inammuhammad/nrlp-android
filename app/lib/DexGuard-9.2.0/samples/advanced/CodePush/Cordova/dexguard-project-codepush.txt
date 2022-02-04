@@ -1,8 +1,0 @@
--injars  platforms/android/app/src/main/assets/www/
--outjars www-protected/
-
--verbose
-
--dontwarn
-
--include dexguard-project-javascript.txt

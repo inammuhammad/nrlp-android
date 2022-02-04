@@ -1,6 +1,0 @@
--verbose
-
--encryptstrings class com.example.companionapp.CompanionActivity {
-    java.lang.String SEND_MESSAGE;
-    java.lang.String MESSAGE;
-}

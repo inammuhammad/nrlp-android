@@ -14,7 +14,8 @@ data class BeneficiaryDetailsModel(
     @SerializedName("is_active") val _isActive: Int,
     @SerializedName("alias") val alias: String,
     @SerializedName("relationship") val relationship: String,
-    @SerializedName("country") val country: String
+    @SerializedName("country") val country: String,
+    @SerializedName("updated_at") val updatedAt:String
 ) {
     val isActive: Boolean
         get() = _isActive.toBoolean()

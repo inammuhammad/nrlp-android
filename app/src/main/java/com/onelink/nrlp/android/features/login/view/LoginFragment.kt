@@ -15,6 +15,7 @@ import com.onelink.nrlp.android.core.BaseError
 import com.onelink.nrlp.android.core.BaseFragment
 import com.onelink.nrlp.android.core.Status
 import com.onelink.nrlp.android.databinding.LoginFragmentBinding
+import com.onelink.nrlp.android.features.complaint.view.UnregComplaintActivity
 import com.onelink.nrlp.android.features.forgotPassword.view.ForgotPasswordActivity
 import com.onelink.nrlp.android.features.home.view.HomeActivity
 import com.onelink.nrlp.android.features.login.helper.CnicTextHelper
@@ -173,7 +174,10 @@ class LoginFragment :
             showComingSoonDialog()
         }
         binding.cvComplaintNrlp.setOnSingleClickListener {
-            showComingSoonDialog()
+            activity?.let {
+                it.startActivity(UnregComplaintActivity.newUnRegisteredComplaintIntent(it))
+            }
+           // showComingSoonDialog()
         }
 
         binding.tvSecReg.setOnSingleClickListener {

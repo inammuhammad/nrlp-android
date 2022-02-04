@@ -2,11 +2,10 @@ package com.onelink.nrlp.android.features.beneficiary.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.text.Editable
-import android.text.InputFilter
 import android.text.Selection
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.AdapterView
@@ -28,12 +27,15 @@ import com.onelink.nrlp.android.features.profile.disabled
 import com.onelink.nrlp.android.features.profile.enabled
 import com.onelink.nrlp.android.features.select.country.model.CountryCodeModel
 import com.onelink.nrlp.android.features.select.country.view.SelectCountryFragment
-import com.onelink.nrlp.android.features.uuid.view.UUIDOtpAuthentication
 import com.onelink.nrlp.android.models.BeneficiaryDetailsModel
 import com.onelink.nrlp.android.utils.*
 import com.onelink.nrlp.android.utils.dialogs.OneLinkAlertDialogsFragment
 import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
 import dagger.android.support.AndroidSupportInjection
+import java.lang.Math.abs
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 import java.util.regex.Pattern
 import javax.inject.Inject
 
@@ -41,6 +43,11 @@ const val BENEFICIARY_CREATION_DIALOG = 3000
 const val BENEFICIARY_DELETION_DIALOG = 3001
 const val BENEFICIARY_UPDATION_DIALOG=3002
 const val BENEFICIARY_RESEND_OTP_DIALOG=3003
+const val FIVE_MINUTE_TIMER_MILLIS = 5 * 60 * 1000L
+const val TIMER_MILLIS = 5* 60000L
+const val TIMER_INTERVAL = 1000L
+const val SERVER_TIME_PATTERN="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+const val LOCAL_TIME_PATTERN="MMM d, yyyy h:m:s a"
 const val TAG_BENEFICIARY_DELETION = "beneficiary_deletion_dialog"
 const val TAG_BENEFICIARY_CREATION = "beneficiary_creation_dialog"
 const val TAG_BENEFICIARY_UPDATION = "beneficiary_updation_dialog"
@@ -71,6 +78,8 @@ class BeneficiaryDetailsFragment :
 
     private var listenerInitializedBR: Boolean = false
 
+    private var timeRemaining:Long =FIVE_MINUTE_TIMER_MILLIS
+
     override fun onInject() {
         AndroidSupportInjection.inject(this)
     }
@@ -95,7 +104,6 @@ class BeneficiaryDetailsFragment :
                 BeneficiarySharedViewModel::class.java
             )
         }
-
         binding.spinnerSelectRelationship.adapter = context?.let {
             ArrayAdapter(
                 it,
@@ -103,6 +111,7 @@ class BeneficiaryDetailsFragment :
                 resources.getStringArray(R.array.benificiaryRelationTypes)
             )
         } as SpinnerAdapter
+
         binding.spinnerSelectRelationship.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -124,11 +133,83 @@ class BeneficiaryDetailsFragment :
                 }
             }
 
+
         initTextWatchers()
         initObservers()
         initListeners()
         initOnFocusChangeListeners()
+        initViews()
     }
+
+    override fun onResume() {
+        super.onResume()
+        fiveMinuteTimer.start()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        fiveMinuteTimer.pause()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        timer.cancel()
+        fiveMinuteTimer.cancel()
+    }
+
+
+    private fun initViews(){
+        if(beneficiarySharedViewModel?.beneficiaryDetails?.value?.let { !it.isActive } == true){
+            binding.lytPosNegButtons.visibility=View.VISIBLE
+            isTimePassed()
+
+            //val result=gmtTime-timeUpdated
+        }
+    }
+    fun String.toDate(dateFormat: String = LOCAL_TIME_PATTERN, timeZone: TimeZone = TimeZone.getTimeZone("UTC")): Date {
+        val parser = SimpleDateFormat(dateFormat, Locale.ENGLISH)
+        parser.timeZone = timeZone
+        return parser.parse(this)
+    }
+
+    fun Date.formatTo(dateFormat: String, timeZone: TimeZone = TimeZone.getDefault()): String {
+        val formatter = SimpleDateFormat(dateFormat, Locale.ENGLISH)
+        formatter.timeZone = timeZone
+        return formatter.format(this)
+    }
+    fun getCurrentTime() :String {
+        val dateFormat = SimpleDateFormat(LOCAL_TIME_PATTERN, Locale.ENGLISH)
+        return dateFormat.format(Calendar.getInstance().getTime())
+
+    }
+
+    private fun isTimePassed(){
+        val df = DateFormat.getDateTimeInstance()
+        df.timeZone = TimeZone.getTimeZone("gmt")
+        val gmtTime = df.format(Date())
+        val timeUpdated=beneficiarySharedViewModel?.beneficiaryDetails?.value!!.updatedAt
+        val parser =  SimpleDateFormat(SERVER_TIME_PATTERN)
+        val date1=timeUpdated.toDate(dateFormat = SERVER_TIME_PATTERN)
+       // val parser2 =  SimpleDateFormat(LOCAL_TIME_PATTERN,Locale.ENGLISH)
+        val date2=getCurrentTime().toDate(timeZone = TimeZone.getDefault())
+        val diff: Long = abs(date1.time - date2.time)
+        val differenceInMilis= diff
+
+        if(differenceInMilis>= FIVE_MINUTE_TIMER_MILLIS)
+        {
+            binding.btnResendOtp.visibility=View.VISIBLE
+            binding.textViewTimer.visibility=View.GONE
+        }
+        else
+        {
+            binding.btnResendOtp.visibility=View.GONE
+            binding.textViewTimer.visibility=View.VISIBLE
+            timeRemaining=FIVE_MINUTE_TIMER_MILLIS-differenceInMilis
+            fiveMinuteTimer.setRemainingTimeinMillis(timeRemaining)
+            fiveMinuteTimer.reset()
+        }
+    }
+
 
     private fun initOnFocusChangeListeners() {
         binding.etAlias.setOnEditorActionListener { _, actionId, _ ->
@@ -374,6 +455,7 @@ class BeneficiaryDetailsFragment :
             when (response.status) {
                 Status.SUCCESS -> {
                     oneLinkProgressDialog.hideProgressDialog()
+                    showTimer()
                     resentBeneficiaryOTPSuccessDialog()
                 }
                 Status.ERROR -> {
@@ -719,6 +801,7 @@ class BeneficiaryDetailsFragment :
                 TAG_BENEFICIARY_UPDATION
             )
     }
+
     private fun resentBeneficiaryOTPSuccessDialog() {
         OneLinkAlertDialogsFragment.Builder()
             .setTargetFragment(this, BENEFICIARY_RESEND_OTP_DIALOG)
@@ -729,4 +812,51 @@ class BeneficiaryDetailsFragment :
                 TAG_BENEFICIARY_RESEND_OTP
             )
     }
+
+    private val timer = object : CountDownTimer(
+        TIMER_MILLIS,
+        TIMER_INTERVAL
+    ) {
+        override fun onTick(millisUntilFinished: Long) {
+           // binding.textViewResendOTP.isEnabled = false
+            binding.btnResendOtp.visibility=View.GONE
+        }
+
+        override fun onFinish() {
+            //if (otpAttempts < RETRIES_COUNT) {
+            //binding.textViewResendOTP.isEnabled = true
+            binding.btnResendOtp.visibility=View.VISIBLE
+            binding.textViewTimer.visibility=View.GONE
+            //otpAttempts++
+            //}
+        }
+    }
+
+    private val fiveMinuteTimer =
+        object : CountDownTimerCanBePause(
+            timeRemaining,
+            TIMER_INTERVAL
+        ) {
+            @SuppressLint("DefaultLocale")
+            override fun onTick(millisUntilFinished: Long) {
+                val value=resources.getString(R.string.resend) + "(" +formattedCountDownTimer(millisUntilFinished) + ")"
+                binding.textViewTimer.text = value
+            }
+
+            override fun onFinish() {
+                binding.textViewTimer.text = getString(R.string.timer_default)
+                binding.btnResendOtp.visibility=View.VISIBLE
+                binding.textViewTimer.visibility=View.GONE
+            }
+        }
+
+    private fun showTimer()
+    {
+        binding.textViewTimer.visibility=View.VISIBLE
+        fiveMinuteTimer.setRemainingTimeinMillis(FIVE_MINUTE_TIMER_MILLIS)
+        fiveMinuteTimer.start()
+        timer.start()
+
+    }
+
 }

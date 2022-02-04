@@ -1,1 +1,0 @@
-typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"com.guardsquare.dexguard.rasp.callback","l":"DetectionReport"}]

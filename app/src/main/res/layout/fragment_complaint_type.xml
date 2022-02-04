@@ -3,13 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
-    <data>
-        <variable
-            name="viewModel"
-            type="com.onelink.nrlp.android.features.complaint.viewmodel.ComplaintSharedViewModel" />
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -40,10 +33,10 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/lyComplaintType"
+                    android:id="@+id/lyUnregComplaintType"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     android:layout_marginTop="@dimen/unit_32dp"
                     app:layout_constraintTop_toBottomOf="@id/tvComplaintManagement"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -52,7 +45,7 @@
                     >
                     <TextView
                         style="@style/TextViewMainHeading"
-                        android:id="@+id/tvComplaintType"
+                        android:id="@+id/tvUnregComplaintType"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_extra_large"
@@ -65,13 +58,13 @@
                         android:layout_width="match_parent"
                         android:id="@+id/radio"
                         android:layout_height="wrap_content"
-                        android:checkedButton="@={viewModel.accountType}"
-                        app:layout_constraintTop_toBottomOf="@id/tvComplaintType"
+                        app:layout_constraintTop_toBottomOf="@id/tvUnregComplaintType"
                         android:layout_marginTop="@dimen/margin_extra_large"
                         android:orientation="vertical">
                         <RadioButton
                             android:id="@+id/unableToRegister"
                             style="@style/radiobutton"
+                            android:checked="true"
                             android:layout_width="match_parent"
                             android:paddingStart="@dimen/margin_large"
                             android:layout_height="wrap_content"
@@ -104,6 +97,105 @@
                             android:theme="@style/RadioButtonStyle"/>
                         <RadioButton
                             android:id="@+id/others"
+                            style="@style/radiobutton"
+                            android:layout_width="match_parent"
+                            android:paddingStart="@dimen/margin_large"
+                            android:layout_height="wrap_content"
+                            android:buttonTint="@drawable/radio_btn_tint_selector"
+                            android:text="@string/others"
+                            android:textColor="@drawable/radio_btn_text_selector"
+                            android:textSize="@dimen/unit_18sp"
+                            android:theme="@style/RadioButtonStyle"/>
+                    </RadioGroup>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/lyRegComplaintType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/unit_32dp"
+                    app:layout_constraintTop_toBottomOf="@id/tvComplaintManagement"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    >
+                    <TextView
+                        style="@style/TextViewMainHeading"
+                        android:id="@+id/tvComplaintType2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_extra_large"
+                        android:gravity="center"
+                        android:text="@string/complaint_type"
+                        android:textSize="@dimen/unit_24sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:id="@+id/radio2"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/tvComplaintType2"
+                        android:layout_marginTop="@dimen/margin_extra_large"
+                        android:orientation="vertical">
+                        <RadioButton
+                            android:id="@+id/unableToOtpReg"
+                            style="@style/radiobutton"
+                            android:layout_width="match_parent"
+                            android:checked="true"
+                            android:paddingStart="@dimen/margin_large"
+                            android:layout_height="wrap_content"
+                            android:buttonTint="@drawable/radio_btn_tint_selector"
+                            android:text="@string/unable_to_otp"
+                            android:textColor="@drawable/radio_btn_text_selector"
+                            android:textSize="@dimen/unit_18sp"
+                            android:theme="@style/RadioButtonStyle"/>
+                        <RadioButton
+                            android:id="@+id/unableToAddBeneficiary"
+                            style="@style/radiobutton"
+                            android:layout_width="match_parent"
+                            android:paddingStart="@dimen/margin_large"
+                            android:layout_height="wrap_content"
+                            android:buttonTint="@drawable/radio_btn_tint_selector"
+                            android:text="@string/unable_to_add_beneficiary"
+                            android:textColor="@drawable/radio_btn_text_selector"
+                            android:textSize="@dimen/unit_18sp"
+                            android:theme="@style/RadioButtonStyle"/>
+                        <RadioButton
+                            android:id="@+id/unableToTransferPoints"
+                            style="@style/radiobutton"
+                            android:layout_width="match_parent"
+                            android:paddingStart="@dimen/margin_large"
+                            android:layout_height="wrap_content"
+                            android:buttonTint="@drawable/radio_btn_tint_selector"
+                            android:text="@string/unable_to_transfer_points"
+                            android:textColor="@drawable/radio_btn_text_selector"
+                            android:textSize="@dimen/unit_18sp"
+                            android:theme="@style/RadioButtonStyle"/>
+                        <RadioButton
+                            android:id="@+id/unableToSelfAward"
+                            style="@style/radiobutton"
+                            android:layout_width="match_parent"
+                            android:paddingStart="@dimen/margin_large"
+                            android:layout_height="wrap_content"
+                            android:buttonTint="@drawable/radio_btn_tint_selector"
+                            android:text="@string/unable_to_self_award_points"
+                            android:textColor="@drawable/radio_btn_text_selector"
+                            android:textSize="@dimen/unit_18sp"
+                            android:theme="@style/RadioButtonStyle"/>
+                        <RadioButton
+                            android:id="@+id/unableToRedemption"
+                            style="@style/radiobutton"
+                            android:layout_width="match_parent"
+                            android:paddingStart="@dimen/margin_large"
+                            android:layout_height="wrap_content"
+                            android:buttonTint="@drawable/radio_btn_tint_selector"
+                            android:text="@string/redemption_issues"
+                            android:textColor="@drawable/radio_btn_text_selector"
+                            android:textSize="@dimen/unit_18sp"
+                            android:theme="@style/RadioButtonStyle"/>
+                        <RadioButton
+                            android:id="@+id/others2"
                             style="@style/radiobutton"
                             android:layout_width="match_parent"
                             android:paddingStart="@dimen/margin_large"

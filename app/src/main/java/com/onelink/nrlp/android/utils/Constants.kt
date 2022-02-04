@@ -1,6 +1,7 @@
 package com.onelink.nrlp.android.utils
 
 import com.onelink.nrlp.android.BuildConfig
+import com.onelink.nrlp.android.R
 
 class Constants {
     companion object {
@@ -108,20 +109,44 @@ object ComplaintRequestModelConstants{
     const val User_type="c_user_type"
     const val Complaint_type_id="c_complaint_type_id"
     const val Nic_nicop="c_nic_nicop"
+    const val Beneficiary_Nic_nicop="c_beneficiary_nic_nicop"
+    const val Beneficiary_Nic_Account="c_beneficiary_nic_nicop"
     const val Name="c_name"
     const val Mobile_no="c_mobile_no"
     const val Email="c_email"
     const val Country_of_residence="c_country_of_residence"
+    const val Beneficiary_Country_of_residence="c_beneficiary_country_of_residence"
     const val Comments="c_comments"
     const val Mobile_Operator="c_mobile_operator_name"
+    const val Beneficiary_Mobile_Operator="c_beneficiary_mobile_operator_name"
+    const val Beneficiary_Mobile_Number="c_beneficiary_mobile_no"
+    const val Transaction_type="c_transaction_type"
+    const val Transaction_id="c_transaction_id"
+    const val Transaction_amount="c_transaction_amount"
+    const val Transaction_date="c_transaction_date"
+    const val Remitting_entity="c_remitting_entity"
+    const val Redemption_Partner="c_redemption_partners"
 }
 
 object UnregisteredComplaintTypes{
-    const val UNABLE_TO_REGISTER="unable to register"
-    const val UNABLE_TO_RECEIVE_REGISTRATION_CODE="unable to receive registration code"
-    const val UNABLE_TO_RECEIVE_OTP="unable to receive otp"
-    const val OTHERS="others"
+    const val UNABLE_TO_REGISTER= R.string.unable_to_register
+    const val UNABLE_TO_RECEIVE_REGISTRATION_CODE=R.string.unable_to_registration_code
+    const val UNABLE_TO_RECEIVE_OTP=R.string.unable_to_otp
+    const val OTHERS=R.string.others
 
+}
+
+object RegisteredComplaintTypes{
+    const val UNABLE_TO_RECEIVE_OTP=R.string.unable_to_otp
+    const val UNABLE_TO_ADD_BENEFICIARY=R.string.unable_to_add_beneficiary
+
+    const val UNABLE_TO_TRANSFER_POINTS_TO_BENEFICIARY = R.string.unable_to_transfer_points
+
+    const val UNABLE_TO_SELF_AWARDS_POINTS = R.string.unable_to_self_award_points
+
+    const val REDEMPTION_ISSUES = R.string.redemption_issues
+
+    const val OTHERS = R.string.others
 }
 
 object RegisteredRemitterComplaintTypeConstants{

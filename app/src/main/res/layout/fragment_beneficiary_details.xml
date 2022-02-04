@@ -300,6 +300,13 @@
                 android:layout_weight="1"
                 android:enabled="true"
                 android:text="@string/resend_otp" />
+            <TextView
+                style="@style/DialogNegativeButtonTheme"
+                android:layout_weight="1"
+                android:visibility="gone"
+                android:enabled="true"
+                android:id="@+id/textViewTimer"
+                />
         </LinearLayout>
 
         <LinearLayout

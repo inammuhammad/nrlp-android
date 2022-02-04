@@ -142,7 +142,6 @@
                 style="@style/TextViewSubHeading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
                 android:text="@string/remittance_date"
                 app:layout_constraintBottom_toTopOf="@id/lyRemittanceDate"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -157,7 +156,6 @@
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:src="@drawable/ic_baseline_info_24"
-                android:visibility="gone"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toEndOf="@+id/tvRemittanceDate"
                 app:layout_constraintTop_toBottomOf="@+id/til_remittance_amount" />
@@ -168,7 +166,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layoutDirection="ltr"
-                android:visibility="gone"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -262,7 +259,7 @@
             style="@style/ButtonTheme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:enabled="@{viewModel.validReferenceNumber &amp;&amp; viewModel.validTransactionAmount &amp;&amp; viewModel.validCnicAccountNumber}"
+            android:enabled="@{viewModel.validReferenceNumber &amp;&amp; viewModel.validTransactionAmount &amp;&amp; viewModel.validCnicAccountNumber &amp;&amp; viewModel.remittanceDateNotEmpty}"
             android:text="@string/next"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintVertical_bias="1" />

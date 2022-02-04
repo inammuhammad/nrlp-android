@@ -8,6 +8,7 @@ import com.onelink.nrlp.android.data.NetworkHelper
 import com.onelink.nrlp.android.data.ServiceGateway
 import com.onelink.nrlp.android.features.complaint.models.AddComplaintRequestModel
 import com.onelink.nrlp.android.features.complaint.models.AddComplaintResponseModel
+import com.onelink.nrlp.android.features.redeem.model.RedeemPartnerResponseModel
 import com.onelink.nrlp.android.models.GeneralMessageResponseModel
 import org.json.JSONObject
 import javax.inject.Inject
@@ -18,6 +19,7 @@ private val serviceGateway: ServiceGateway
 ) {
     private val complainAddResponse=
         MutableLiveData<BaseResponse<AddComplaintResponseModel>>()
+    private val redeemPartnersResponse = MutableLiveData<BaseResponse<RedeemPartnerResponseModel>>()
 
     fun addComplainRequest(addComplaintRequestModel: JsonObject){
         networkHelper.serviceCall(serviceGateway.addComplaint(addComplaintRequestModel))
@@ -28,5 +30,16 @@ private val serviceGateway: ServiceGateway
 
     fun observeAddComplainResponse()=
         complainAddResponse as LiveData<BaseResponse<AddComplaintResponseModel>>
+
+
+    fun getRedeemPartner() {
+        networkHelper.serviceCall(serviceGateway.getRedemptionPartners()).observeForever {
+            redeemPartnersResponse.value = it
+        }
+    }
+
+    fun observeRedeemPartner() =
+        redeemPartnersResponse as LiveData<BaseResponse<RedeemPartnerResponseModel>>
+
 
 }

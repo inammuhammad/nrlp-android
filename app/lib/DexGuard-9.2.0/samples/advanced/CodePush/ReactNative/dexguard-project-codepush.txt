@@ -1,6 +1,0 @@
--injar   CodePush/
--outjars CodePush-protected/
-
--dontwarn
-
--include android/app/dexguard-project-javascript.txt

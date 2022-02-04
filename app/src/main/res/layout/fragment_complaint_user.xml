@@ -7,7 +7,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.onelink.nrlp.android.features.complaint.viewmodel.ComplaintSharedViewModel" />
+            type="com.onelink.nrlp.android.features.complaint.viewmodel.UnRegComplaintSharedViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -65,7 +65,7 @@
                         android:layout_width="match_parent"
                         android:id="@+id/radio"
                         android:layout_height="wrap_content"
-                        android:checkedButton="@={viewModel.accountType}"
+
                         app:layout_constraintTop_toBottomOf="@id/tvSelectUserType"
                         android:layout_marginTop="@dimen/margin_extra_large"
                         android:orientation="vertical">
@@ -74,6 +74,7 @@
                             style="@style/radiobutton"
                             android:layout_width="match_parent"
                             android:paddingStart="@dimen/margin_large"
+                            android:checked="true"
                             android:layout_height="wrap_content"
                             android:buttonTint="@drawable/radio_btn_tint_selector"
                             android:text="@string/remitter"

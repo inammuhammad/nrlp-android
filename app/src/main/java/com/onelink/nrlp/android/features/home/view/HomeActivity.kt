@@ -24,6 +24,7 @@ import com.onelink.nrlp.android.core.Status
 import com.onelink.nrlp.android.data.local.UserData
 import com.onelink.nrlp.android.databinding.ActivityHomeBinding
 import com.onelink.nrlp.android.features.changePassword.view.ChangePasswordActivity
+import com.onelink.nrlp.android.features.complaint.view.RegComplaintActivity
 import com.onelink.nrlp.android.features.contactus.view.ContactUsActivity
 import com.onelink.nrlp.android.features.faqs.view.FAQsActivity
 import com.onelink.nrlp.android.features.home.fragments.BeneficiaryHomeFragment
@@ -161,6 +162,7 @@ class HomeActivity :
                 SIDE_MENU_KEY_GUIDE -> goToYouTube()
                 SIDE_MENU_KEY_CONTACT_US -> launchContactUs()
                 SIDE_MENU_KEY_CHANGE_LANGAUGE -> startLanguageActivity()
+                SIDE_MENU_KEY_COMPLAINTS -> launchRegComplaintsActivity()
                 SIDE_MENU_KEY_LOGOUT -> showLogoutConfirmationDialog()
             }
         }, SIDE_MENU_ITEM_DELAY)
@@ -183,6 +185,10 @@ class HomeActivity :
 
     private fun launchContactUs() {
         startActivity(ContactUsActivity.newIntent(this))
+    }
+
+    private fun launchRegComplaintsActivity(){
+        startActivity(RegComplaintActivity.newRegisteredComplaintIntent(this))
     }
 
     private fun startLanguageActivity() = LanguageActivity.start(this)

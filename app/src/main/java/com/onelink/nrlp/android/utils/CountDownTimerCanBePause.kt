@@ -90,6 +90,10 @@ abstract class CountDownTimerCanBePause(
         }
     }
 
+    fun setRemainingTimeinMillis(timeinMillis:Long){
+        millisInFuture=timeinMillis
+    }
+
     init {
         this.millisInFuture = millisInFuture
         this.countDownInterval = countDownInterval

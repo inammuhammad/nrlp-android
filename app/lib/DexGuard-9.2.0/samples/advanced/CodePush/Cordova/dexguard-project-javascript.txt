@@ -1,3 +1,0 @@
-# Obfuscate the JavaScript files in the application
--obfuscatejavascript **.js,**.html
--javascriptconfiguration javascript.yml

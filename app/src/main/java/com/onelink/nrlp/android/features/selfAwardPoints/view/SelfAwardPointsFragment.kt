@@ -96,10 +96,10 @@ class SelfAwardPointsFragment :
                 SelfAwardRequestConstants.Beneficiary_NIC_NICOP,
                 binding.etCnicAccountNumber.text.toString(),
             )
-            /*selfAwardPointsRequest.addProperty(
+            selfAwardPointsRequest.addProperty(
                     SelfAwardRequestConstants.Transaction_Date,
             viewModel.remittanceDate.value,
-            )*/
+            )
 
             selfAwardPointSharedViewModel?.setSelfAwardPointsFlowDataModel(selfAwardPointsRequest)
             viewModel.verifySafeAwardValidTransaction(selfAwardPointsRequest)

@@ -14,6 +14,13 @@
         <item>@string/spouse</item>
         <item>@string/other</item>
     </string-array>
+    
+    <string-array name="transactionType">
+        <item>@string/profile_change</item>
+        <item>@string/self_awarding</item>
+        <item>@string/redemption</item>
+        <item>@string/others</item>
+    </string-array>
 
     <string-array name="passportTypes">
         <item>@string/international_passport</item>

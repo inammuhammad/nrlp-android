@@ -1,5 +1,0 @@
--verbose
-
--encryptstrings class com.example.wearapp.WearActivity {
-    java.lang.String MESSAGE;
-}

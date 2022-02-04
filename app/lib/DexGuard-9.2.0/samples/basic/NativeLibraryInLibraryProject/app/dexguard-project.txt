@@ -1,5 +1,0 @@
-# Display some more statistics about the processed code.
--verbose
-
-# Keep the library's internal native libraries.
--keepresourcefiles lib/**.so
