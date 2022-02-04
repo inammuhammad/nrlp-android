@@ -126,43 +126,6 @@ constructor(private val complainRepo: ComplainRepo)
         return isSelectValid
     }
 
-    fun detailsValidationPassed():Boolean{
-        when(complaintType.value){
-            COMPLAINT_TYPE.UNABLE_TO_RECEIVE_OTP ->{
-                return mobileOperatorNotEmpty.value!! &&
-                        transactionTypeNotEmpty.value!!
-            }
-            COMPLAINT_TYPE.UNABLE_TO_ADD_BENEFICIARY ->{
-                return cnicNumberNotEmpty.value!! &&
-                        ccountryNotEmpty.value!! &&
-                        mobileNumberNotEmpty.value!! &&
-                        checkPhoneNumberValidation(mobileNumber.value!!) &&
-                        mobileOperatorNotEmpty.value!!
-
-            }
-            COMPLAINT_TYPE.UNABLE_TO_TRANSFER_POINTS_TO_BENEFICIARY ->{
-                return checkCnicValidation(cnicNumber.value!!)
-
-            }
-            COMPLAINT_TYPE.UNABLE_TO_SELF_AWARDS_POINTS ->{
-                return  transactionDateNotEmpty.value!! &&
-                        transactionAmountNotEmpty.value!! &&
-                        transactionIdNotEmpty.value!! &&
-                        remittingEntityNotEmpty.value!! &&
-                        validCnicAccountNumber.value!!
-
-            }
-            COMPLAINT_TYPE.REDEMPTION_ISSUES ->{
-                return detailsNotEmpty.value!! &&  redemptionPartnerNotEmpty.value!!
-
-            }
-            COMPLAINT_TYPE.OTHERS ->{
-                return otherDetailsNotEmpty.value!!
-            }
-            else -> return false
-        }
-    }
-
     fun gotoComplaintDetailsFragment(
         resources: Resources,
         fragmentHelper: BaseFragment.FragmentNavigationHelper,
@@ -200,6 +163,7 @@ constructor(private val complainRepo: ComplainRepo)
             }
         }
         emptyComplaintDetails()
+        clearValidations()
         fragmentHelper.addFragment(
             RegComplaintDetailsFragment.newInstance(),
             clearBackStack = false,
@@ -222,6 +186,14 @@ constructor(private val complainRepo: ComplainRepo)
             clearBackStack = true,
             addToBackStack = false
         )
+    }
+
+    fun clearValidations(){
+        validationAliasPassed.postValue(true)
+        validationCnicPassed.postValue(true)
+        validationEmailPassed.postValue(true)
+        validationPhoneNumberPassed.postValue(true)
+        validationMobileOperatorPassed.postValue(true)
     }
 
     private fun emptyComplaintDetails(){

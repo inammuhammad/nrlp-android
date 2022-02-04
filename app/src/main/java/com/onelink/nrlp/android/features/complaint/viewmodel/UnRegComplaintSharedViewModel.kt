@@ -83,13 +83,13 @@ class UnRegComplaintSharedViewModel
         string.isNotEmpty()
 
     fun checkCnicValidation(string: String) =
-        string.isEmpty() || ValidationUtils.isCNICValid(string)
+        string.isNotEmpty() || ValidationUtils.isCNICValid(string)
 
     fun checkAliasValidation(string: String) =
-        string.isEmpty() || ValidationUtils.isNameValid(string)
+        string.isNotEmpty() || ValidationUtils.isNameValid(string)
 
     fun checkPhoneNumberValidation(string: String, int: Int?) =
-        string.isEmpty() || ValidationUtils.isPhoneNumberValid(string, int)
+        string.isNotEmpty() || ValidationUtils.isPhoneNumberValid(string, int)
 
     fun checkEmailValidation(string:String)=
         string.isEmpty() || ValidationUtils.isEmailValid(string)
@@ -213,6 +213,7 @@ class UnRegComplaintSharedViewModel
             }
         }
         emptyComplaintDetails()
+        clearValidations()
         fragmentHelper.addFragment(
             UnregComplaintDetailsFragment.newInstance(),
             clearBackStack = false,
@@ -233,6 +234,14 @@ class UnRegComplaintSharedViewModel
             clearBackStack = true,
             addToBackStack = false
         )
+    }
+
+    fun clearValidations(){
+        validationAliasPassed.postValue(true)
+        validationCnicPassed.postValue(true)
+        validationEmailPassed.postValue(true)
+        validationPhoneNumberPassed.postValue(true)
+        validationMobileOperatorPassed.postValue(true)
     }
 
     fun emptyComplaintDetails(){

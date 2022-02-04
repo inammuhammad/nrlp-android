@@ -491,32 +491,31 @@ class RegComplaintDetailsFragment:
             COMPLAINT_TYPE.UNABLE_TO_RECEIVE_OTP ->{
                 jsonObject.addProperty(
                     ComplaintRequestModelConstants.Mobile_Operator,
-                    viewModel.mobileOperator.value
+                    binding.etMobileOperator.text.toString()
                 )
                 jsonObject.addProperty(
                     ComplaintRequestModelConstants.Transaction_type,
-                    viewModel.transactionType.value
+                    binding.tvTransaction.text.toString()
                 )
-
             }
 
             COMPLAINT_TYPE.UNABLE_TO_ADD_BENEFICIARY ->{
 
                 jsonObject.addProperty(
                     ComplaintRequestModelConstants.Beneficiary_Nic_nicop,
-                    viewModel.cnicNumber.value
+                    binding.etAddbeneficiaryCnicnicop.text.toString().removeDashes()
                 )
                 jsonObject.addProperty(
                     ComplaintRequestModelConstants.Beneficiary_Country_of_residence,
-                    viewModel.country.value
+                    binding.BeneficaryCountry.text.toString()
                 )
                 jsonObject.addProperty(
                     ComplaintRequestModelConstants.Beneficiary_Mobile_Number,
-                    viewModel.mobileNumber.value
+                    binding.tvCountryCode.text.toString()+binding.etPhoneNumber.text.toString()
                 )
                 jsonObject.addProperty(
                     ComplaintRequestModelConstants.Beneficiary_Mobile_Operator,
-                    viewModel.mobileOperator.value
+                    binding.etBeneficiaryMobileOperator.text.toString()
                 )
 
             }
@@ -524,41 +523,41 @@ class RegComplaintDetailsFragment:
             COMPLAINT_TYPE.UNABLE_TO_TRANSFER_POINTS_TO_BENEFICIARY -> {
                 jsonObject.addProperty(
                     ComplaintRequestModelConstants.Beneficiary_Nic_nicop,
-                    viewModel.cnicNumber.value
+                    binding.etPointsbeneficiaryCnicNicp.text.toString()
                 )
             }
 
             COMPLAINT_TYPE.UNABLE_TO_SELF_AWARDS_POINTS -> {
                 jsonObject.addProperty(
                     ComplaintRequestModelConstants.Transaction_amount,
-                    viewModel.transactionAmount.value
+                    binding.etTransactionamount.text.toString()
                 )
                 jsonObject.addProperty(
                     ComplaintRequestModelConstants.Transaction_date,
-                    viewModel.transactionDate.value
+                    binding.etTransactionDate.text.toString()
                 )
                 jsonObject.addProperty(
                     ComplaintRequestModelConstants.Transaction_id,
-                    viewModel.transactionId.value
+                    binding.etTransactionid.text.toString()
                 )
                 jsonObject.addProperty(
                     ComplaintRequestModelConstants.Remitting_entity,
-                    viewModel.remittingEntity.value
+                    binding.etRemitting.text.toString()
                 )
                 jsonObject.addProperty(
                     ComplaintRequestModelConstants.Beneficiary_Nic_Account,
-                    viewModel.cnicAccountNumber.value
+                    binding.etBeneficiaryAccount.text.toString().removeDashes()
                 )
             }
 
             COMPLAINT_TYPE.REDEMPTION_ISSUES ->{
                 jsonObject.addProperty(
                     ComplaintRequestModelConstants.Comments,
-                    viewModel.details.value
+                    binding.etDetails.text.toString()
                 )
                 jsonObject.addProperty(
                     ComplaintRequestModelConstants.Redemption_Partner,
-                    viewModel.redemptionPartners.value
+                    binding.tvRedemption.text.toString()
                 )
 
             }
@@ -566,7 +565,7 @@ class RegComplaintDetailsFragment:
             COMPLAINT_TYPE.OTHERS ->{
                 jsonObject.addProperty(
                     ComplaintRequestModelConstants.Comments,
-                    viewModel.otherDetails.value
+                    binding.etDetails2.text.toString()
                 )
             }
         }
