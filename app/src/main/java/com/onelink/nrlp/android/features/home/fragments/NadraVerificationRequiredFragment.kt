@@ -39,6 +39,7 @@ class NadraVerificationRequiredFragment : BaseFragment<HomeFragmentViewModel, Fr
     override fun init(savedInstanceState: Bundle?) {
         super.init(savedInstanceState)
         binding.lifecycleOwner = this
+        (activity as HomeActivity).enableSideMenuDrawer(false)
         initListeners()
         sharedViewModel?.maxProgress?.postValue(NADRA_VERIFICATION_REQUIRED_SCREEN)
     }

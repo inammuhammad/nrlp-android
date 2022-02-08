@@ -303,6 +303,11 @@ class NadraVerificationDetailsFragment :
         fragmentHelper.onBack()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        (activity as HomeActivity).enableSideMenuDrawer(true)
+    }
+
     companion object {
         private const val TAG = "nadraVerificationDetails.fragment"
         @JvmStatic

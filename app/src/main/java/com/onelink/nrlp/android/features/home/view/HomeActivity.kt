@@ -152,6 +152,15 @@ class HomeActivity :
         binding.sideMenu.rvSideMenu.adapter = sideMenuOptionsAdapter
     }
 
+    fun enableSideMenuDrawer(enabled:Boolean){
+        if(enabled){
+            binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+        }else{
+            binding.drawerLayout.closeDrawers()
+            binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+        }
+    }
+
     private fun onSideMenuItemClicked(sideMenuOptionsItemModel: SideMenuOptionsItemModel) {
         toggleMenu()
         Handler(Looper.getMainLooper()).postDelayed({
