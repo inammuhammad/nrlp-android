@@ -9,5 +9,6 @@ import com.onelink.nrlp.android.features.profile.models.UpdateProfileRequestMode
  * Created by Qazi Abubakar
  */
 class ProfileSharedViewModel : BaseViewModel() {
+    val validationSuccessful = MutableLiveData<Boolean> (false)
     val updateProfileRequestModel = MutableLiveData<JsonObject>()
 }

@@ -22,6 +22,7 @@ import com.onelink.nrlp.android.data.local.UserModel
 import com.onelink.nrlp.android.databinding.FragmentEditProfileBinding
 import com.onelink.nrlp.android.features.profile.disabled
 import com.onelink.nrlp.android.features.profile.enabled
+import com.onelink.nrlp.android.features.profile.view.ProfileUpdateSuccessActivity
 import com.onelink.nrlp.android.features.profile.viewmodel.EditProfileViewModel
 import com.onelink.nrlp.android.features.profile.viewmodel.ProfileSharedViewModel
 import com.onelink.nrlp.android.features.select.country.model.CountryCodeModel
@@ -39,7 +40,7 @@ import javax.inject.Inject
 const val MOBILE_UPDATE_DIALOG = 4002
 const val TAG_MOBILE_UPDATE_DIALOG = "mobile_update_dialog"
 
-class EditProfileFragment :
+class EditProfileFragment() :
     BaseFragment<EditProfileViewModel, FragmentEditProfileBinding>(
         EditProfileViewModel::class.java
     ), OneLinkAlertDialogsFragment.OneLinkAlertDialogListeners,
@@ -112,6 +113,12 @@ class EditProfileFragment :
         initObservers()
         initListeners()
         initOnFocusChangeListeners()
+        if(isEditEnable){
+            makeViewEditable()
+        }
+        else{
+            makeViewNonEditable()
+        }
     }
 
     private fun hideViews(){
@@ -192,6 +199,11 @@ class EditProfileFragment :
         }
 
         binding.btnNext.setOnSingleClickListener {
+            fragmentHelper.addFragment(
+                EditProfileVerificationFragment.newInstance(),
+                clearBackStack = false,
+                addToBackStack = true
+            )
             makeViewEditable()
         }
 
@@ -238,6 +250,12 @@ class EditProfileFragment :
             }
         })
 
+        profileSharedViewModel.validationSuccessful.observe(this,{ validationSuccessful->
+            if(validationSuccessful){
+                makeViewEditable()
+            }
+        })
+
         viewModel.passportType.observe(this, Observer {
             if (it != Constants.SPINNER_PASSPORT_TYPE_HINT) {
                 if(!isEditEnable) {
@@ -250,7 +268,7 @@ class EditProfileFragment :
             }
         })
 
-        viewModel.observeUpdateProfile().observe(this, Observer { response ->
+        viewModel.observeUpdateProfileMobile().observe(this, Observer { response ->
             when (response.status) {
                 Status.SUCCESS -> {
                     oneLinkProgressDialog.hideProgressDialog()
@@ -259,6 +277,34 @@ class EditProfileFragment :
                         EditProfileOtpAuthentication.newInstance(),
                         clearBackStack = false, addToBackStack = true
                     )
+                }
+                Status.ERROR -> {
+                    oneLinkProgressDialog.hideProgressDialog()
+                    response.error?.let {
+                        showGeneralErrorDialog(this, it)
+                    }
+                }
+                Status.LOADING -> {
+                    oneLinkProgressDialog.showProgressDialog(activity)
+                }
+            }
+        })
+
+        viewModel.observeUpdateProfile().observe(this, Observer { response ->
+            when (response.status) {
+                Status.SUCCESS -> {
+                    oneLinkProgressDialog.hideProgressDialog()
+                    response.data?.let {
+                        activity?.let {
+                            startActivity(
+                                ProfileUpdateSuccessActivity.newProfileUpdateSuccessIntent(
+                                    it
+                                )
+                            )
+                            it.finish()
+                        }
+                        hideKeyboard()
+                    }
                 }
                 Status.ERROR -> {
                     oneLinkProgressDialog.hideProgressDialog()
@@ -503,7 +549,14 @@ class EditProfileFragment :
                 ) {
                     viewModel.mobileNumUpdated.value =
                         viewModel.countryCode.value + viewModel.mobileNumber.value
-                    viewModel.updateProfile()
+
+                    if(viewModel.isMobileNumberChanged())
+                    {
+                        viewModel.updateProfileMobile()
+                    }
+                    else{
+                        viewModel.updateProfile()
+                    }
                 }
             }
         }

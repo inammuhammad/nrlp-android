@@ -79,7 +79,7 @@
     <string name="beneficiary_verification_title">Beneficiary Verification</string>
     <string name="reference_number">Reference Number/TT Number</string>
     <string name="beneficiary_account_number_cnic">Beneficiary Account Number/IBAN/CNIC</string>
-    <string name="transaction_amount">Transaction Amount</string>
+    <string name="transaction_amount">Transaction Amount(PKR)</string>
     <string name="curPassword">Enter Old Password</string>
     <string name="newPassword">Enter New Password</string>
     <string name="confirmPassword">Re-enter New Password</string>
@@ -176,6 +176,7 @@
     <string name="set_new_password_msg">Your password must contain at least 8 characters, including 1 small letter, 1 capital letter, 1 number and 1 special character.</string>
     <string name="enter_registered_cnic_msg">Please enter your registered CNIC/NICOP</string>
     <string name="verify">Verify</string>
+    <string name="verification">Verification</string>
     <string name="confirm">Confirm</string>
     <string name="change_password_successful">Change Password Successful</string>
     <string name="new_password_registered_msg">You have registered a New Password. Please go to the login screen and log in with your new password.</string>
@@ -368,6 +369,7 @@
     <string name="beneficiary_country_of_residence">Beneficiary Country of residence</string>
     <string name="beneficiary_mobile_operator_name">Beneficiary Mobile Operator Name</string>
     <string name="specify_bank_exchange_from_where_remittance">Please specify Bank/Exchange Company from where remittance is sent</string>
+    <string name="provide_necessary_information">Please provide requested information to proceed further</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>

@@ -83,13 +83,13 @@ class UnRegComplaintSharedViewModel
         string.isNotEmpty()
 
     fun checkCnicValidation(string: String) =
-        string.isNotEmpty() || ValidationUtils.isCNICValid(string)
+        string.isNotEmpty() && ValidationUtils.isCNICValid(string)
 
     fun checkAliasValidation(string: String) =
-        string.isNotEmpty() || ValidationUtils.isNameValid(string)
+        string.isNotEmpty() && ValidationUtils.isNameValid(string)
 
     fun checkPhoneNumberValidation(string: String, int: Int?) =
-        string.isNotEmpty() || ValidationUtils.isPhoneNumberValid(string, int)
+        string.isNotEmpty() && ValidationUtils.isPhoneNumberValid(string, int)
 
     fun checkEmailValidation(string:String)=
         string.isEmpty() || ValidationUtils.isEmailValid(string)

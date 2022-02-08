@@ -8,7 +8,6 @@ import com.onelink.nrlp.android.features.beneficiary.models.DeleteBeneficiaryReq
 import com.onelink.nrlp.android.features.beneficiary.models.ResendBeneficiaryOtpRequestModel
 import com.onelink.nrlp.android.features.beneficiary.models.UpdateBeneficiaryRequestModel
 import com.onelink.nrlp.android.features.changePassword.models.ChangePasswordRequest
-import com.onelink.nrlp.android.features.complaint.models.AddComplaintRequestModel
 import com.onelink.nrlp.android.features.complaint.models.AddComplaintResponseModel
 import com.onelink.nrlp.android.features.faqs.model.FaqsResponseModel
 import com.onelink.nrlp.android.features.forgotPassword.models.ForgotPasswordOTPRequestModel
@@ -22,17 +21,13 @@ import com.onelink.nrlp.android.features.managePoints.model.TransferPointsReques
 import com.onelink.nrlp.android.features.managePoints.model.TransferPointsResponseModel
 import com.onelink.nrlp.android.features.nrlpBenefits.model.NrlpBenefitsResponseModel
 import com.onelink.nrlp.android.features.nrlpBenefits.model.NrlpPartnerResponseModel
-import com.onelink.nrlp.android.features.profile.models.ProfileResendOtpRequestModel
 import com.onelink.nrlp.android.features.profile.models.ProfileResponseModel
-import com.onelink.nrlp.android.features.profile.models.UpdateProfileOtpRequestModel
-import com.onelink.nrlp.android.features.profile.models.UpdateProfileRequestModel
 import com.onelink.nrlp.android.features.redeem.model.*
 import com.onelink.nrlp.android.features.register.models.*
 import com.onelink.nrlp.android.features.select.city.model.CitiesRequest
 import com.onelink.nrlp.android.features.select.city.model.CitiesResponseModel
 import com.onelink.nrlp.android.features.select.country.model.CountryCodeResponseModel
 import com.onelink.nrlp.android.features.selfAwardPoints.model.SelfAwardPointsOTPRequestModel
-import com.onelink.nrlp.android.features.selfAwardPoints.model.SelfAwardPointsRequest
 import com.onelink.nrlp.android.features.selfAwardPoints.model.SelfAwardPointsResponseModel
 import com.onelink.nrlp.android.features.splash.model.AuthResponseModel
 import com.onelink.nrlp.android.features.uuid.model.UniqueIdentifierResendOTPRequest
@@ -44,7 +39,6 @@ import com.onelink.nrlp.android.models.BeneficiariesResponseModel
 import com.onelink.nrlp.android.models.GeneralMessageResponseModel
 import com.onelink.nrlp.android.utils.HeaderConstants
 import io.reactivex.Single
-import org.json.JSONObject
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -200,8 +194,14 @@ interface ServiceGateway {
     @GET("logout/")
     fun performLogout(): Single<Response<GeneralMessageResponseModel>>
 
+    @POST("update-profile-validate/")
+    fun validateProfileUpdate(@Body jsonObject: JsonObject) : Single<Response<GeneralMessageResponseModel>>
+
+    @POST("update-profile/")
+    fun updateProfile(@Body jsonObject: JsonObject) : Single<Response<GeneralMessageResponseModel>>
+
     @POST("update-profile-send-otp")
-    fun updateProfile(@Body jsonObject: JsonObject): Single<Response<GeneralMessageResponseModel>>
+    fun updateProfileMobile(@Body jsonObject: JsonObject): Single<Response<GeneralMessageResponseModel>>
 
     @POST("update-profile-verify-otp")
     fun updateProfileVerifyOtp(@Body body: JsonObject): Single<Response<GeneralMessageResponseModel>>

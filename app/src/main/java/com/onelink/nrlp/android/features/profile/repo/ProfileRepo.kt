@@ -27,7 +27,9 @@ open class ProfileRepo @Inject constructor(
     val verifyResendOTPResponse = MutableLiveData<BaseResponse<GeneralMessageResponseModel>>()
     val countryCodesResponse = MutableLiveData<BaseResponse<CountryCodeResponseModel>>()
     val updateProfileResponse = MutableLiveData<BaseResponse<GeneralMessageResponseModel>>()
+    val updateProfileMobileResponse = MutableLiveData<BaseResponse<GeneralMessageResponseModel>>()
     val updateProfileOtpResponse = MutableLiveData<BaseResponse<GeneralMessageResponseModel>>()
+    val editProfileValidateResponse = MutableLiveData<BaseResponse<GeneralMessageResponseModel>>()
 
     fun getCountryCodes(type: String = "beneficiary") {
         networkHelper.serviceCall(serviceGateway.getCountryCodes(CountryCodesRequest(type))).observeForever {
@@ -45,8 +47,18 @@ open class ProfileRepo @Inject constructor(
             }
     }
 
+    fun updateProfileMobile(jsonObject: JsonObject) {
+        networkHelper.serviceCall(serviceGateway.updateProfileMobile(jsonObject))
+            .observeForever {
+                updateProfileMobileResponse.value = it
+            }
+    }
+
     fun observeUpdateProfile() =
         updateProfileResponse as LiveData<BaseResponse<GeneralMessageResponseModel>>
+
+    fun observeUpdateProfileMobile() =
+        updateProfileMobileResponse as LiveData<BaseResponse<GeneralMessageResponseModel>>
 
     fun updateProfileVerifyOtp(jsonObject: JsonObject) {
         networkHelper.serviceCall(serviceGateway.updateProfileVerifyOtp(jsonObject))
@@ -54,6 +66,16 @@ open class ProfileRepo @Inject constructor(
                 updateProfileOtpResponse.value = it
             }
     }
+
+    fun verifyUpdateProfileValidate(jsonObject: JsonObject){
+        networkHelper.serviceCall(serviceGateway.validateProfileUpdate(jsonObject))
+            .observeForever {
+                editProfileValidateResponse.value = it
+            }
+    }
+
+    fun observeEditProfileValidate() =
+        editProfileValidateResponse as LiveData<BaseResponse<GeneralMessageResponseModel>>
 
     fun observeUpdateProfileOtp() =
         updateProfileOtpResponse as LiveData<BaseResponse<GeneralMessageResponseModel>>

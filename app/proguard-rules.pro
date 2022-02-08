@@ -132,6 +132,11 @@
     <fields>;
 }
 
+-keep class com.onelink.nrlp.android.features.complaint.models**{
+    public ** component1();
+    <fields>;
+}
+
 #Custom Views
 
 -keep class com.onelink.nrlp.android.common.views**{

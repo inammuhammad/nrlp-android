@@ -103,7 +103,7 @@
     <string name="beneficiary_verification_title">وصول کنندہ کی تصدیق</string>
     <string name="reference_number">حوالہ نمبر</string>
     <string name="beneficiary_account_number_cnic">صول کنندہ کا اکاونٹ نمر/ بین الاقوامی بینک اکاؤنٹ نمبر/قومی شناختی کارڈ نمر</string>
-    <string name="transaction_amount">ترسیل کی رقم</string>
+    <string name="transaction_amount">ٹرانزیکشن  کی رقم( پاکستانی روپے)</string>
     <string name="curPassword">پرانا پاس ورڈ درج کریں</string>
     <string name="newPassword">نیا پاس ورڈ درج کریں</string>
     <string name="confirmPassword">نیا پاس ورڈ دوبارہ درج کریں</string>
@@ -178,6 +178,7 @@
     <string name="forgot_pass_otp_sent_msg">ایک تصدیقی SMS آپ کے رجسڑڈ موبائل نمبر پر بھیج دیا گیا ہے</string>
     <string name="set_new_password_msg">اب آپ نئے پاس ورڈ کا انتخاب کر سکتے ہیں۔ آپ کا نیا پاس ورڈ 8 انگریزی حروف پہ مشتمل ہو گا۔ جس میں کم از کم ایک حرف بڑے خط میں ہوگا ایک حرف چھوٹےخط میں ہوگا ایک حرف عددی ہوگا ایک حرف اسپیشل خط میں ہوگا</string>
     <string name="verify">تصدیق کریں</string>
+    <string name="verification">تصدیق</string>
     <string name="confirm">تصدیق کریں</string>
     <string name="change_password_successful">پاس ورڈ کامیابی سے تبدیل کر دیا گیا ہے</string>
     <string name="new_password_registered_msg">آپ نے نئے پاس ورڈ کا انتخاب کیا ہے۔برائے مہربانی لاگ ان اسکرین پہ جا کے اپنے نئے پاس ورڈ کے ساتھ لاگ ان کریں</string>
@@ -348,15 +349,15 @@
     <string name="unable_to_transfer_points">پوانٹس منتقل کرنے سے قاصر</string>
     <string name="unable_to_add_beneficiary">وصول کنندہ کو شامل کرنے سے قاصر</string>
     <string name="redemption_issues">پوائنٹ استمال کرنے سے قاصر</string>
-    <string name="transaction_type">Transaction Type</string>
-    <string name="profile_change">Profile Change</string>
-    <string name="self_awarding">Self Awarding</string>
-    <string name="redemption">Redemption</string>
-    <string name="beneficiary_cnic_nicop">وصول کنندہ کا قومی شناختی کارڈ نمر</string>
-    <string name="remitting_entity">Remitting Entity</string>
-    <string name="transaction_id">Transaction ID</string>
-    <string name="transaction_date">ترسیلات زر کی تاریخ</string>
-    <string name="beneficiary_country_of_residence">Beneficiary Country of residence</string>
-    <string name="beneficiary_mobile_operator_name">Beneficiary Mobile Operator Name</string>
+    <string name="transaction_type">ٹرانزیکشن  کی قسم</string>
+    <string name="profile_change">پروفائل  کی  تبدیلی</string>
+    <string name="self_awarding">سیلف ایوارڈ</string>
+    <string name="redemption">ریڈیمشن</string>
+    <string name="beneficiary_cnic_nicop">وصول کنندہ کا CNIC/NICOP</string>
+    <string name="remitting_entity">ترسیلات زر کا ادارہ</string>
+    <string name="transaction_id">ٹرانزیکشن آئی ڈی</string>
+    <string name="transaction_date">ٹرانزیکشن کی تاریخ</string>
+    <string name="beneficiary_country_of_residence">وصول کنندہ کے  قیام  کا ملک</string>
+    <string name="beneficiary_mobile_operator_name">وصول کنندہ کے  موبائل آپریٹر کا نام</string>
     <string name="specify_bank_exchange_from_where_remittance">Please specify Bank/Exchange Company from where remittance is sent</string>
 </resources>

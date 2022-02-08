@@ -29,10 +29,7 @@ import com.onelink.nrlp.android.features.managePoints.viewmodel.TransferPointsSu
 import com.onelink.nrlp.android.features.nrlpBenefits.viewmodel.NrlpBenefitsFragmentViewModel
 import com.onelink.nrlp.android.features.nrlpBenefits.viewmodel.NrlpBenefitsViewModel
 import com.onelink.nrlp.android.features.nrlpBenefits.viewmodel.NrlpPartnersFragmentViewModel
-import com.onelink.nrlp.android.features.profile.viewmodel.EditProfileOtpFragmentViewModel
-import com.onelink.nrlp.android.features.profile.viewmodel.EditProfileViewModel
-import com.onelink.nrlp.android.features.profile.viewmodel.ProfileUpdateSuccessViewModel
-import com.onelink.nrlp.android.features.profile.viewmodel.ProfileViewModel
+import com.onelink.nrlp.android.features.profile.viewmodel.*
 import com.onelink.nrlp.android.features.redeem.viewmodels.*
 import com.onelink.nrlp.android.features.register.viewmodel.*
 import com.onelink.nrlp.android.features.select.city.viewmodel.SelectCityFragmentViewModel
@@ -267,6 +264,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(EditProfileViewModel::class)
     internal abstract fun editProfileViewModel(viewModelAdvanced: EditProfileViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(EditProfileVerificationViewModel::class)
+    internal abstract fun editProfileVerificationViewModel(viewModel:EditProfileVerificationViewModel): ViewModel
 
     @Binds
     @IntoMap

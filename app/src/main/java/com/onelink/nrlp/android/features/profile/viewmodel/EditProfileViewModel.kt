@@ -49,7 +49,16 @@ class EditProfileViewModel @Inject constructor(private val profileRepo: ProfileR
         profileRepo.updateProfile(getUpdateProfileRequestObject())
     }
 
+    fun updateProfileMobile(){
+        profileRepo.updateProfileMobile(getUpdateProfileRequestObject())
+    }
+
     fun observeUpdateProfile() = profileRepo.observeUpdateProfile()
+
+    fun observeUpdateProfileMobile() = profileRepo.observeUpdateProfileMobile()
+
+    fun isMobileNumberChanged()=
+        countryCode.value + mobileNumber.value != mobileNumFromApi.value
 
     fun getUpdateProfileRequestObject(): JsonObject {
         val jsonObject = JsonObject()

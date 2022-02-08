@@ -3,7 +3,6 @@ package com.onelink.nrlp.android.features.complaint.fragment.unregistered
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
-import android.text.InputFilter
 import android.text.Selection
 import android.text.TextWatcher
 import android.view.View
@@ -14,7 +13,6 @@ import com.onelink.nrlp.android.R
 import com.onelink.nrlp.android.core.BaseFragment
 import com.onelink.nrlp.android.core.Status
 import com.onelink.nrlp.android.databinding.FragmentUnregComplaintDetailsBinding
-import com.onelink.nrlp.android.features.complaint.models.AddComplaintRequestModel
 import com.onelink.nrlp.android.features.complaint.view.UnregComplaintActivity
 import com.onelink.nrlp.android.features.complaint.viewmodel.UnRegComplaintSharedViewModel
 import com.onelink.nrlp.android.features.select.country.model.CountryCodeModel
