@@ -162,8 +162,9 @@ class BeneficiaryDetailsFragment :
         if(beneficiarySharedViewModel?.beneficiaryDetails?.value?.let { !it.isActive } == true){
             binding.lytPosNegButtons.visibility=View.VISIBLE
             isTimePassed()
-
             //val result=gmtTime-timeUpdated
+        }else{
+            binding.lytPosNegButtons.visibility=View.GONE
         }
     }
     fun String.toDate(dateFormat: String = LOCAL_TIME_PATTERN, timeZone: TimeZone = TimeZone.getTimeZone("UTC")): Date {

@@ -278,7 +278,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_20sdp"
             android:orientation="horizontal"
-            android:visibility="gone"
+            android:visibility="visible"
             android:layout_marginStart="@dimen/_12sdp"
             android:layout_marginEnd="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_5sdp"
@@ -292,17 +292,20 @@
                 style="@style/DialogPositiveButtonTheme"
                 android:layout_weight="1"
                 android:enabled="true"
+                android:visibility="gone"
                 android:text="@string/edit" />
 
             <Button
                 android:id="@+id/btnResendOtp"
                 style="@style/DialogPositiveButtonTheme"
                 android:layout_weight="1"
+                android:layout_width="match_parent"
                 android:enabled="true"
-                android:text="@string/resend_otp" />
+                android:text="@string/resend_registration_code" />
             <TextView
                 style="@style/DialogNegativeButtonTheme"
                 android:layout_weight="1"
+                android:layout_width="match_parent"
                 android:visibility="gone"
                 android:enabled="true"
                 android:id="@+id/textViewTimer"

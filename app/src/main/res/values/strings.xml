@@ -349,7 +349,7 @@
     <string name="specify_details">Specify Details *</string>
     <string name="dear_customer">Dear Customer,</string>
     <string name="complaint1">Your complaint has been logged,\n please note the Tracking Number</string>
-    <string name="complaint2">issue will be resolved within 3 \n working days,incase complaint \n remains unresolved, you may\n contact at\n sdrpsupport@1link.net.pk or \n 111-116-757</string>
+    <string name="complaint2">Your issue will be resolved within 5 \n working days,incase complaint \n remains unresolved, you may\n contact at\n sdrpsupport@1link.net.pk or \n 111-116-757</string>
     <string name="unable_to_registration_code">Unable to receive registration code</string>
     <string name="mobile_operator_name">Mobile Operator Name *</string>
     <string name="dummy_mobile_op">Zong</string>
@@ -376,4 +376,5 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="resend_registration_code">Resend Registration Code</string>
 </resources>

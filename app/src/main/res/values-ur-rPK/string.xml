@@ -56,7 +56,7 @@
     <string name="nlrp_title">سوہنی دھرتی\nریمیٹنس پروگرام</string>
     <string name="select_account_type">یوزر کی قسم منتخب کریں</string>
     <string name="select_beneficiary_relationship">وصول کنندہ کا رشتہ منتخب کریں</string>
-    <string name="beneficiary_relationship">Beneficiary Relationship</string>
+    <string name="beneficiary_relationship">وصول کنندہ کا رشتہ</string>
     <string name="login">لاگ ان کریں</string>
     <string name="remitter">بھیجنے والا</string>
     <string name="international_passport">بین الاقوامی پاسپورٹ</string>
@@ -103,7 +103,7 @@
     <string name="beneficiary_verification_title">وصول کنندہ کی تصدیق</string>
     <string name="reference_number">حوالہ نمبر</string>
     <string name="beneficiary_account_number_cnic">صول کنندہ کا اکاونٹ نمر/ بین الاقوامی بینک اکاؤنٹ نمبر/قومی شناختی کارڈ نمر</string>
-    <string name="transaction_amount">ترسیل کی رقم</string>
+    <string name="transaction_amount">ٹرانزیکشن  کی رقم( پاکستانی روپے)</string>
     <string name="curPassword">پرانا پاس ورڈ درج کریں</string>
     <string name="newPassword">نیا پاس ورڈ درج کریں</string>
     <string name="confirmPassword">نیا پاس ورڈ دوبارہ درج کریں</string>
@@ -330,8 +330,8 @@
     <string name="enter_psid">پی ایس آئی ڈی درج کریں</string>
     <string name="search_country">Search Country</string>
     <string name="search_city">Search City</string>
-    <string name="beneficiary_updated">Beneficiary details have been updated successfully</string>
-    <string name="otp_resent">Registration code has been resent</string>
+    <string name="beneficiary_updated">وصول کنندہ   کی تفصیلات کو کامیابی سے اپ ڈیٹ  کر دیا گیا ہے</string>
+    <string name="otp_resent">رجسٹریشن کوڈ دوبارہ بھیج دیا گیا ہے</string>
     <string name="select_user_type">یوزر کی قسم منتخب کریں</string>
     <string name="complaint_type">شکایت کی قسم</string>
     <string name="others">دیگر</string>
@@ -340,7 +340,7 @@
     <string name="specify_details">تفصیلات بتائیں *</string>
     <string name="dear_customer">معزز صارف,</string>
     <string name="complaint1">اپ کی شکائت درج کرلی گئ ہے,\n براہ کرم ٹریکنگ نمبر نوٹ کریں۔</string>
-    <string name="complaint2">مسئلہ 3 کاروباری دنوں میں \n حل ہو جائے گا، اگر شکایت \n حل نہیں ہوئی تو آپ sdrpsuppor@1link.net.pk یا 757-116-111 پر\n رابطہ کرسکتے ہیں</string>
+    <string name="complaint2">مسئلہ ۵ کاروباری دنوں میں \n حل ہو جائے گا، اگر شکایت \n حل نہیں ہوئی تو آپ sdrpsuppor@1link.net.pk یا 757-116-111 پر\n رابطہ کرسکتے ہیں</string>
     <string name="unable_to_registration_code">رجسٹریشن کوڈ وصول نہیں ہوا</string>
     <string name="mobile_operator_name">موبائل آپریٹر کا نام *</string>
     <string name="dummy_mobile_op">Zong</string>
@@ -348,15 +348,16 @@
     <string name="unable_to_transfer_points">پوانٹس منتقل کرنے سے قاصر</string>
     <string name="unable_to_add_beneficiary">وصول کنندہ کو شامل کرنے سے قاصر</string>
     <string name="redemption_issues">پوائنٹ استمال کرنے سے قاصر</string>
-    <string name="transaction_type">Transaction Type</string>
-    <string name="profile_change">Profile Change</string>
-    <string name="self_awarding">Self Awarding</string>
-    <string name="redemption">Redemption</string>
-    <string name="beneficiary_cnic_nicop">وصول کنندہ کا قومی شناختی کارڈ نمر</string>
-    <string name="remitting_entity">Remitting Entity</string>
-    <string name="transaction_id">Transaction ID</string>
-    <string name="transaction_date">ترسیلات زر کی تاریخ</string>
-    <string name="beneficiary_country_of_residence">Beneficiary Country of residence</string>
-    <string name="beneficiary_mobile_operator_name">Beneficiary Mobile Operator Name</string>
-    <string name="specify_bank_exchange_from_where_remittance">Please specify Bank/Exchange Company from where remittance is sent</string>
+    <string name="transaction_type">ٹرانزیکشن  کی قسم</string>
+    <string name="profile_change">پروفائل  کی  تبدیلی</string>
+    <string name="self_awarding">سیلف ایوارڈ</string>
+    <string name="redemption">ریڈیمشن</string>
+    <string name="beneficiary_cnic_nicop">وصول کنندہ کا CNIC/NICOP</string>
+    <string name="remitting_entity">ترسیلات زر کا ادارہ</string>
+    <string name="transaction_id">ٹرانزیکشن آئی ڈی</string>
+    <string name="transaction_date">ٹرانزیکشن کی تاریخ</string>
+    <string name="beneficiary_country_of_residence">وصول کنندہ کے  قیام  کا ملک</string>
+    <string name="beneficiary_mobile_operator_name">وصول کنندہ کے  موبائل آپریٹر کا نام</string>
+    <string name="specify_bank_exchange_from_where_remittance">براہ کرم بینک/ایکسچینج کمپنی  بتائیں جہاں سے ترسیلات زر بھیجی گئی ہیں</string>
+    <string name="resend_registration_code">رجسٹریشن کوڈ دوبارہ بھیجیں</string>
 </resources>
