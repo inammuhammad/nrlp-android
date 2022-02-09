@@ -3,13 +3,16 @@
     <string name="app_name">Sohni Dharti-Dev</string>
     <string name="register_an_account">رجسٹر کریں</string>
     <string name="full_name">مکمل نام*</string>
+    <string name="full_name_complaint">مکمل نام</string>
     <string name="full_name_as_per_cnic">*CNIC/NICOP کے مطابق پورا نام</string>
     <string name="mother_maiden_name">ماں کا نام *</string>
     <string name="place_of_birth">جائے پیدائش *</string>
     <string name="title_place_of_birth">جائے پیدائش</string>
     <string name="cnic_nicop_number">شناختی کارڈ/ نیشنل آئیڈنٹٹی کارڈ فور اوورسیز پاکستانی*</string>
+    <string name="cnic_nicop_number_complaint">شناختی کارڈ/ نیشنل آئیڈنٹٹی کارڈ فور اوورسیز پاکستانی</string>
     <string name="cnic_nicop_issuance_date">*CNIC/NICOP کے اجراء کی تاریخ</string>
     <string name="country">قیام کا ملک*</string>
+    <string name="country_complaint">قیام کا ملک</string>
     <string name="passport_no">پاسپورٹ نمبر*</string>
     <string name="select_passport_no">پاسپورٹ نمبر درج کریں</string>
     <string name="passport_type">پاسپورٹ کی قسم*</string>
@@ -27,7 +30,8 @@
 
     <string name="resident_id">منفرد آئی ڈی*</string>
     <string name="mobile_number">موبائل نمبر*</string>
-    <string name="beneficiary_mobile_number">وصول کنندہ کا موبائل نمبر *</string>
+    <string name="mobile_number_complaint">موبائل نمبر</string>
+    <string name="beneficiary_mobile_number">وصول کنندہ کا موبائل نمبر</string>
     <string name="email_address">ای میل ایڈریس</string>
     <string name="email_address_optional">ای میل ایڈریس (اختیاری)</string>
     <string name="password">پاس ورڈ *</string>
@@ -102,7 +106,7 @@
     <string name="remitter_verification">ترسیلات زربھیجنے والے کی تصدیق</string>
     <string name="beneficiary_verification_title">وصول کنندہ کی تصدیق</string>
     <string name="reference_number">حوالہ نمبر</string>
-    <string name="beneficiary_account_number_cnic">صول کنندہ کا اکاونٹ نمر/ بین الاقوامی بینک اکاؤنٹ نمبر/قومی شناختی کارڈ نمر</string>
+    <string name="beneficiary_account_number_cnic">وصول کنندہ کا اکاونٹ نمبر/ بین الاقوامی بینک اکاؤنٹ نمبر/قومی شناختی کارڈ  نمبر</string>
     <string name="transaction_amount">ٹرانزیکشن  کی رقم( پاکستانی روپے)</string>
     <string name="curPassword">پرانا پاس ورڈ درج کریں</string>
     <string name="newPassword">نیا پاس ورڈ درج کریں</string>
@@ -337,12 +341,12 @@
     <string name="others">دیگر</string>
     <string name="unable_to_otp">او ٹی پی وصول نہیں ہوا</string>
     <string name="unable_to_register">رجسٹر نہیں کر سکا</string>
-    <string name="specify_details">تفصیلات بتائیں *</string>
+    <string name="specify_details">تفصیلات بتائیں</string>
     <string name="dear_customer">معزز صارف,</string>
     <string name="complaint1">اپ کی شکائت درج کرلی گئ ہے,\n براہ کرم ٹریکنگ نمبر نوٹ کریں۔</string>
-    <string name="complaint2">مسئلہ ۵ کاروباری دنوں میں \n حل ہو جائے گا، اگر شکایت \n حل نہیں ہوئی تو آپ sdrpsuppor@1link.net.pk یا 757-116-111 پر\n رابطہ کرسکتے ہیں</string>
+    <string name="complaint2">مسئلہ ۵ کاروباری دنوں میں \n حل ہو جائے گا، اگر شکایت \n حل نہیں ہوئی تو آپ sdrpsupport@1link.net.pk یا 757-116-111 پر\n رابطہ کرسکتے ہیں</string>
     <string name="unable_to_registration_code">رجسٹریشن کوڈ وصول نہیں ہوا</string>
-    <string name="mobile_operator_name">موبائل آپریٹر کا نام *</string>
+    <string name="mobile_operator_name">موبائل آپریٹر کا نام</string>
     <string name="dummy_mobile_op">Zong</string>
     <string name="unable_to_self_award_points">خود ایوارڈ دینے سے قاصر</string>
     <string name="unable_to_transfer_points">پوانٹس منتقل کرنے سے قاصر</string>
@@ -352,6 +356,7 @@
     <string name="profile_change">پروفائل  کی  تبدیلی</string>
     <string name="self_awarding">سیلف ایوارڈ</string>
     <string name="redemption">ریڈیمشن</string>
+    <string name="redemption_partner">ریڈیمشن پاٹنر</string>
     <string name="beneficiary_cnic_nicop">وصول کنندہ کا CNIC/NICOP</string>
     <string name="remitting_entity">ترسیلات زر کا ادارہ</string>
     <string name="transaction_id">ٹرانزیکشن آئی ڈی</string>
@@ -360,4 +365,5 @@
     <string name="beneficiary_mobile_operator_name">وصول کنندہ کے  موبائل آپریٹر کا نام</string>
     <string name="specify_bank_exchange_from_where_remittance">براہ کرم بینک/ایکسچینج کمپنی  بتائیں جہاں سے ترسیلات زر بھیجی گئی ہیں</string>
     <string name="resend_registration_code">رجسٹریشن کوڈ دوبارہ بھیجیں</string>
+    <string name="transaction_amount_pkr">ٹرانزیکشن  کی رقم( پاکستانی روپے)</string>
 </resources>

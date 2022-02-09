@@ -592,15 +592,14 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/lyTransactionDate"/>
 
-
                     <TextView
                         android:id="@+id/lyTransactionAmount"
                         style="@style/TextViewSubHeading"
+                        android:textSize="@dimen/unit_16sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/transaction_amount"
+                        android:text="@string/transaction_amount_pkr"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/unit_16sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/et_transactionDate" />
 
@@ -614,19 +613,19 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/lyTransactionAmount">
 
-                        <com.onelink.nrlp.android.widgets.OneLinkEditText
-                            android:id="@+id/et_transactionamount"
-                            style="@style/EditTextFixedDigits"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="number"
-                            android:maxLength="50"
-                            android:maxLines="1"
-                            android:text="@={viewModel.transactionAmount}"
-                            app:layout_constraintBottom_toTopOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="parent" />
-
+                         <com.onelink.nrlp.android.widgets.OneLinkEditText
+                             android:id="@+id/et_transactionamount"
+                             style="@style/EditTextFixedDigits"
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:inputType="number"
+                             android:maxLength="50"
+                             android:maxLines="1"
+                             android:hint="@string/amount_hint"
+                             android:text="@={viewModel.transactionAmount}"
+                             app:layout_constraintBottom_toTopOf="parent"
+                             app:layout_constraintStart_toStartOf="parent"
+                             app:layout_constraintTop_toBottomOf="parent"  />
                     </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -647,7 +646,7 @@
                         style="@style/TextViewSubHeading"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/transaction_type"
+                        android:text="@string/redemption_partner"
                         android:textColor="@color/black"
                         android:textSize="@dimen/unit_16sp"
                         app:layout_constraintStart_toStartOf="parent"

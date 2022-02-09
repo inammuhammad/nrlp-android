@@ -87,16 +87,20 @@ class RegComplaintDetailsFragment:
 
     private fun initTransactionSpinner(){
         val transactionTypes=resources.getStringArray(R.array.transactionType)
-
+        val list= mutableListOf<String>()
+        for(transaction in transactionTypes){
+            list.add(transaction)
+        }
         if(getUserType().equals(Constants.BENEFICIARY,true)){
-            transactionTypes.toMutableList().remove(resources.getString(R.string.self_awarding))
+            list.remove(resources.getString(R.string.self_awarding))
+           // transactionTypes.toMutableList().remove(resources.getString(R.string.self_awarding))
         }
 
         binding.spinnerSelectTransaction.adapter = context?.let {
             ArrayAdapter(
                 it,
                 R.layout.custom_spinner_item,
-                resources.getStringArray(R.array.transactionType)
+                list
             )
         } as SpinnerAdapter
 

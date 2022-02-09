@@ -840,7 +840,7 @@ class BeneficiaryDetailsFragment :
         ) {
             @SuppressLint("DefaultLocale")
             override fun onTick(millisUntilFinished: Long) {
-                val value=resources.getString(R.string.resend) + "(" +formattedCountDownTimer(millisUntilFinished) + ")"
+                val value=resources.getString(R.string.resend_registration_code) + "(" +formattedCountDownTimer(millisUntilFinished) + ")"
                 binding.textViewTimer.text = value
             }
 

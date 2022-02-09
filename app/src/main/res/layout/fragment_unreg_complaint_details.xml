@@ -85,7 +85,7 @@
                         android:textSize="@dimen/unit_16sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/full_name"
+                        android:text="@string/full_name_complaint"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         />
@@ -124,7 +124,7 @@
                         android:textSize="@dimen/unit_16sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/cnic_nicop_number"
+                        android:text="@string/cnic_nicop_number_complaint"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/til_name"
                         />
@@ -160,7 +160,7 @@
                         android:textSize="@dimen/unit_16sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/country"
+                        android:text="@string/country_complaint"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/til_cnic"
                         />
@@ -183,7 +183,7 @@
                         android:textSize="@dimen/unit_16sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/mobile_number"
+                        android:text="@string/mobile_number_complaint"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tvCountry"
                         />
