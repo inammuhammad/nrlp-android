@@ -33,6 +33,8 @@ object ErrorCodesConstants {
     const val SESSION_EXPIRED = "GEN-ERR-08"
     const val UNVERIFIED_DEVICE = "AUTH-LOG-02"
     const val UNSUCCESSFUL_TRANSACTION_FETCH = "AUTH-VRN-06"
+    const val INCORRECT_INFORMATION="PU-VA-01"
+    const val ATTEMPTS_EXCEEDED="PU-VA-99"
 }
 
 
