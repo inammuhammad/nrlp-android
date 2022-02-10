@@ -6,11 +6,8 @@ import com.google.gson.JsonObject
 import com.onelink.nrlp.android.core.BaseResponse
 import com.onelink.nrlp.android.data.NetworkHelper
 import com.onelink.nrlp.android.data.ServiceGateway
-import com.onelink.nrlp.android.features.complaint.models.AddComplaintRequestModel
 import com.onelink.nrlp.android.features.complaint.models.AddComplaintResponseModel
 import com.onelink.nrlp.android.features.redeem.model.RedeemPartnerResponseModel
-import com.onelink.nrlp.android.models.GeneralMessageResponseModel
-import org.json.JSONObject
 import javax.inject.Inject
 
 open class ComplainRepo @Inject constructor(

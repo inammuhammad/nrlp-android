@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.onelink.nrlp.android.features.profile.viewmodel.EditProfileVerificationViewModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/tvMotherName"
+            style="@style/TextViewSubHeading"
+            android:textColor="@color/black"
+            android:textSize="@dimen/unit_16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mother_maiden_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+        <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
+            android:id="@+id/til_Mothername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/unit_8dp"
+            app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvMotherName">
+
+            <com.onelink.nrlp.android.widgets.OneLinkEditText
+                android:id="@+id/et_Mothername"
+                style="@style/EditTextFixedDigits"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/mother_maiden_name_placeholder"
+                android:inputType="textPersonName"
+                android:maxLength="50"
+                android:maxLines="1"
+                android:text="@={viewModel.motherMaidenName}"
+                app:layout_constraintBottom_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent" />
+
+        </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnNext"
+            style="@style/ButtonTheme"
+            android:text="@string/next"
+            android:enabled="@{viewModel.motherMaidenNameNotEmpty}"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+        </Button>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

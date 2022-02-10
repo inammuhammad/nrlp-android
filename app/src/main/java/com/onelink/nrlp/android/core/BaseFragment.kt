@@ -104,6 +104,8 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
                     ErrorCodesConstants.NO_INTERNET_CONNECTION -> showNoInternetConnectionDialog(fragment)
                     ErrorCodesConstants.SESSION_EXPIRED -> showSessionExpiredDialog(fragment)
                     ErrorCodesConstants.UNSUCCESSFUL_TRANSACTION_FETCH -> showTransactionFetchUnsuccessfulDialog(fragment)
+                    ErrorCodesConstants.INCORRECT_INFORMATION -> showIncorrectInformationDialog(fragment)
+                    ErrorCodesConstants.ATTEMPTS_EXCEEDED -> showAttemptsExceededDialog(fragment)
                     else -> showRemoteErrorDialog(fragment, it)
                 }
             }
@@ -204,6 +206,33 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
             .setDrawable(R.drawable.ic_oh_snap)
             .setTitle(getString(R.string.oh_snap))
             .setMessage(getString(R.string.error_transaction_fetch).toSpanned())
+            .setNeutralButtonText(getString(R.string.okay))
+            .setNegativeButtonText("")
+            .setPositiveButtonText("")
+            .setCancelable(false)
+            .show(parentFragmentManager, ErrorDialogConstants.TAG_SESSION_EXPIRED)
+    }
+
+    private fun showIncorrectInformationDialog(fragment: Fragment){
+        OneLinkAlertDialogsFragment.Builder()
+            .setIsAlertOnly(true)
+            .setDrawable(R.drawable.ic_oh_snap)
+            .setTitle(getString(R.string.oh_snap))
+            .setMessage(getString(R.string.incorrect_information).toSpanned())
+            .setNeutralButtonText(getString(R.string.okay))
+            .setNegativeButtonText("")
+            .setPositiveButtonText("")
+            .setCancelable(false)
+            .show(parentFragmentManager, ErrorDialogConstants.TAG_GENERAL_SERVER_ERROR_DIALOG_CODE)
+    }
+
+    private fun showAttemptsExceededDialog(fragment: Fragment){
+        OneLinkAlertDialogsFragment.Builder()
+            .setTargetFragment(fragment, ErrorDialogConstants.RC_SESSION_EXPIRED)
+            .setIsAlertOnly(true)
+            .setDrawable(R.drawable.ic_oh_snap)
+            .setTitle(getString(R.string.oh_snap))
+            .setMessage(getString(R.string.attempts_exceeded).toSpanned())
             .setNeutralButtonText(getString(R.string.okay))
             .setNegativeButtonText("")
             .setPositiveButtonText("")

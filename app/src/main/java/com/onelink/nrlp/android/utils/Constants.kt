@@ -34,6 +34,8 @@ object ErrorCodesConstants {
     const val SESSION_EXPIRED = "GEN-ERR-08"
     const val UNVERIFIED_DEVICE = "AUTH-LOG-02"
     const val UNSUCCESSFUL_TRANSACTION_FETCH = "AUTH-VRN-06"
+    const val INCORRECT_INFORMATION="PU-VA-01"
+    const val ATTEMPTS_EXCEEDED="PU-VA-99"
 }
 
 
@@ -129,6 +131,10 @@ object ComplaintRequestModelConstants{
     const val Redemption_Partner="c_redemption_partners"
 }
 
+object RequestModelConstants{
+    const val Mother_name="mother_maiden_name"
+}
+
 object UnregisteredComplaintTypes{
     const val UNABLE_TO_REGISTER= R.string.unable_to_register
     const val UNABLE_TO_RECEIVE_REGISTRATION_CODE=R.string.unable_to_registration_code
@@ -148,25 +154,6 @@ object RegisteredComplaintTypes{
     const val REDEMPTION_ISSUES = R.string.redemption_issues
 
     const val OTHERS = R.string.others
-}
-
-object RegisteredRemitterComplaintTypeConstants{
-    val complaintType= arrayOf(
-        "Unable to receive OTP",
-        "Unable to add beneficiary",
-        "Unable to transfer points to beneficiary",
-        "Unable to self award points",
-        "Redemption Issues",
-        "Others",
-    )
-}
-
-object RegisteredBeneficiaryComplaintTypeConstants{
-    val complaintType= arrayOf(
-        "Unable to receive OTP",
-        "Redemption Issues",
-        "Others"
-    )
 }
 
 object COMPLAINT_TYPE {

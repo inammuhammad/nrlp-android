@@ -3,6 +3,7 @@ package com.onelink.nrlp.android.di.module
 import com.onelink.nrlp.android.di.annotations.FragmentScope
 import com.onelink.nrlp.android.features.profile.fragments.EditProfileFragment
 import com.onelink.nrlp.android.features.profile.fragments.EditProfileOtpAuthentication
+import com.onelink.nrlp.android.features.profile.fragments.EditProfileVerificationFragment
 import com.onelink.nrlp.android.features.select.country.view.SelectCountryFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -25,5 +26,9 @@ abstract class ProfileFragmentsBuilder {
     @FragmentScope
     @ContributesAndroidInjector
     abstract fun provideCountryFragment(): SelectCountryFragment
+
+    @FragmentScope
+    @ContributesAndroidInjector
+    abstract fun provideValidateProfileUpdateFragment(): EditProfileVerificationFragment
 
 }
