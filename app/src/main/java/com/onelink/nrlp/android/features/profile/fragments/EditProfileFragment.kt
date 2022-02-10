@@ -199,12 +199,12 @@ class EditProfileFragment() :
         }
 
         binding.btnNext.setOnSingleClickListener {
-            fragmentHelper.addFragment(
+            fragmentHelper.replaceFragment(
                 EditProfileVerificationFragment.newInstance(),
                 clearBackStack = false,
                 addToBackStack = true
             )
-            makeViewEditable()
+            //makeViewEditable()
         }
 
         binding.btnNext1.setOnSingleClickListener {

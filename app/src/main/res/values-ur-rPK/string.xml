@@ -366,4 +366,6 @@
     <string name="specify_bank_exchange_from_where_remittance">براہ کرم بینک/ایکسچینج کمپنی  بتائیں جہاں سے ترسیلات زر بھیجی گئی ہیں</string>
     <string name="resend_registration_code">رجسٹریشن کوڈ دوبارہ بھیجیں</string>
     <string name="transaction_amount_pkr">ٹرانزیکشن  کی رقم( پاکستانی روپے)</string>
+    <string name="incorrect_information">پ کی فراہم کردہ معلومات غلط ہے۔ براہ مہربانی نادرہ ریکارڈ کے مطابق صحیح معلومات درج کریں</string>
+    <string name="provide_necessary_information">مزید آگے بڑھنے کے لئے براہ کرم درخواست کردہ معلومات فراہم کریں</string>
 </resources>

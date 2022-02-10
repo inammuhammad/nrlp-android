@@ -384,4 +384,8 @@
     <string name="transaction_amount_pkr">Transaction Amount (PKR)</string>
     <string name="full_name_complaint">Full Name</string>
     <string name="pkr">PKR</string>
+    <string name="incorrect_information">Your provided information is incorrect. Kindly enter the valid information as per NADRA record</string>
+    <string name="attempts_exceeded">You have entered wrong information for 3 times. Your account has been locked for 24 hours</string>
+    <string name="verification">Verification</string>
+    <string name="provide_necessary_information">Please provide requested information to proceed further</string>
 </resources>
