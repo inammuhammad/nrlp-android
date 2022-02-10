@@ -44,7 +44,7 @@ const val BENEFICIARY_DELETION_DIALOG = 3001
 const val BENEFICIARY_UPDATION_DIALOG=3002
 const val BENEFICIARY_RESEND_OTP_DIALOG=3003
 const val FIVE_MINUTE_TIMER_MILLIS = 5 * 60 * 1000L
-const val TIMER_MILLIS = 5* 60000L
+const val TIMER_MILLIS = 1* 60000L
 const val TIMER_INTERVAL = 1000L
 const val SERVER_TIME_PATTERN="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
 const val LOCAL_TIME_PATTERN="MMM d, yyyy h:m:s a"
@@ -138,7 +138,6 @@ class BeneficiaryDetailsFragment :
         initObservers()
         initListeners()
         initOnFocusChangeListeners()
-        initViews()
     }
 
     override fun onResume() {
@@ -412,6 +411,7 @@ class BeneficiaryDetailsFragment :
                 beneficiarySharedViewModel?.beneficiaryDetails?.observe(this, {
                     beneficiaryDetailsModel = it
                     makeDeleteBeneficiaryView(beneficiaryDetailsModel)
+                    initViews()
                 })
             }
         })
@@ -854,9 +854,9 @@ class BeneficiaryDetailsFragment :
     private fun showTimer()
     {
         binding.textViewTimer.visibility=View.VISIBLE
+        binding.btnResendOtp.visibility=View.GONE
         fiveMinuteTimer.setRemainingTimeinMillis(FIVE_MINUTE_TIMER_MILLIS)
-        fiveMinuteTimer.start()
-        timer.start()
+        fiveMinuteTimer.reset()
 
     }
 
