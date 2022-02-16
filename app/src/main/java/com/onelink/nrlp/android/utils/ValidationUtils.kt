@@ -100,7 +100,7 @@ object ValidationUtils {
     }
 
     fun arePointsValid(points: String): Boolean {
-        return points.isNotEmpty() && points.length < 5
+        return points.isNotEmpty() //&& points.length < 5
     }
 
     fun isEmailValid(emailAddress: String) = emailAddress.isEmpty() || Pattern.matches(
