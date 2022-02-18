@@ -19,6 +19,7 @@ import com.onelink.nrlp.android.features.managePoints.view.TransferPointsSuccess
 import com.onelink.nrlp.android.features.nrlpBenefits.view.NrlpBenefitsActivity
 import com.onelink.nrlp.android.features.profile.view.ProfileActivity
 import com.onelink.nrlp.android.features.profile.view.ProfileUpdateSuccessActivity
+import com.onelink.nrlp.android.features.receiver.view.ReceiverActivity
 import com.onelink.nrlp.android.features.redeem.view.RedeemActivity
 import com.onelink.nrlp.android.features.redeem.view.RedeemSuccessActivity
 import com.onelink.nrlp.android.features.register.view.RegisterActivity
@@ -83,6 +84,10 @@ abstract class ActivityBuilder {
     @ActivityScope
     @ContributesAndroidInjector(modules = [RegComplaintFragmentsBuilder::class])
     internal abstract fun bindRegComplaintActivity() : RegComplaintActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [ReceiverManagementFragmentsBuilder::class])
+    internal abstract fun bindReceiverManagmentActivity() : ReceiverActivity
 
     @ActivityScope
     @ContributesAndroidInjector

@@ -15,6 +15,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,UnusedAttribute">
+        <activity android:name=".features.receiver.view.ReceiverActivity"></activity>
         <activity
             android:name=".features.splash.view.SplashActivity"
             android:configChanges="layoutDirection|uiMode|locale"
@@ -60,7 +61,7 @@
             android:name=".features.login.view.LoginActivity"
             android:configChanges="layoutDirection|uiMode|locale"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".features.beneficiary.view.BeneficiaryActivity"
             android:configChanges="layoutDirection|uiMode|locale"

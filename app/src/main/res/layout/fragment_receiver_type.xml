@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:clickable="true"
+    android:focusable="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvAddReceiver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="Add Receiver"
+        android:textSize="@dimen/_16sdp"
+        style="@style/TextViewSubHeading"
+        android:textColor="@color/black"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_30sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <RadioGroup
+        android:id="@+id/rdReceiverType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        app:layout_constraintTop_toBottomOf="@id/tvAddReceiver"
+        app:layout_constraintStart_toStartOf="@id/tvAddReceiver"
+        >
+
+        <RadioButton
+            android:id="@+id/rdBtnCnic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Remittance Sent to CNIC" />
+
+        <RadioButton
+            android:id="@+id/rdBtnIban"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Remittance Sent to Bank Account" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnNext"
+        style="@style/ButtonTheme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_extra_large"
+        android:text="@string/next"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -36,6 +36,7 @@ import com.onelink.nrlp.android.features.home.viewmodel.HomeActivityViewModel
 import com.onelink.nrlp.android.features.language.view.LanguageActivity
 import com.onelink.nrlp.android.features.login.view.LoginActivity
 import com.onelink.nrlp.android.features.profile.view.ProfileActivity
+import com.onelink.nrlp.android.features.receiver.view.ReceiverActivity
 import com.onelink.nrlp.android.features.select.city.model.CitiesModel
 import com.onelink.nrlp.android.features.select.city.view.SelectCityFragment
 import com.onelink.nrlp.android.utils.Constants
@@ -173,6 +174,7 @@ class HomeActivity :
                 SIDE_MENU_KEY_CHANGE_LANGAUGE -> startLanguageActivity()
                 SIDE_MENU_KEY_COMPLAINTS -> launchRegComplaintsActivity()
                 SIDE_MENU_KEY_LOGOUT -> showLogoutConfirmationDialog()
+                SIDE_MENU_KEY_RECEIVER_MANAGEMENT -> launchReceiverManagementActivity()
             }
         }, SIDE_MENU_ITEM_DELAY)
     }
@@ -206,6 +208,8 @@ class HomeActivity :
     private fun launchFAQs() {
         startActivity(FAQsActivity.newFaqIntent(this))
     }
+
+    private fun launchReceiverManagementActivity() = startActivity(ReceiverActivity.createIntent(this))
 
     private fun goToYouTube(){
         val url = "https://www.youtube.com/playlist?list=PLFB-5JvOR9rAvAGK6YzQmxXvFiUWn48vY"

@@ -30,6 +30,10 @@ import com.onelink.nrlp.android.features.nrlpBenefits.viewmodel.NrlpBenefitsFrag
 import com.onelink.nrlp.android.features.nrlpBenefits.viewmodel.NrlpBenefitsViewModel
 import com.onelink.nrlp.android.features.nrlpBenefits.viewmodel.NrlpPartnersFragmentViewModel
 import com.onelink.nrlp.android.features.profile.viewmodel.*
+import com.onelink.nrlp.android.features.receiver.viewmodel.ManageReceiverViewModel
+import com.onelink.nrlp.android.features.receiver.viewmodel.ReceiverDetailsViewModel
+import com.onelink.nrlp.android.features.receiver.viewmodel.ReceiverSharedViewModel
+import com.onelink.nrlp.android.features.receiver.viewmodel.ReceiverViewModel
 import com.onelink.nrlp.android.features.redeem.viewmodels.*
 import com.onelink.nrlp.android.features.register.viewmodel.*
 import com.onelink.nrlp.android.features.select.city.viewmodel.SelectCityFragmentViewModel
@@ -117,6 +121,11 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
+    @ViewModelKey(ReceiverViewModel::class)
+    internal abstract fun receiverViewModel(viewModel: ReceiverViewModel): ViewModel
+
+    @Binds
+    @IntoMap
     @ViewModelKey(RegisterViewModel::class)
     internal abstract fun registerViewModel(viewModel: RegisterViewModel): ViewModel
 
@@ -168,6 +177,21 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(BeneficiaryDetailsViewModel::class)
     internal abstract fun beneficiaryDetailsViewModel(viewModel: BeneficiaryDetailsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ManageReceiverViewModel::class)
+    internal abstract fun manageReceiverViewModel(viewModel: ManageReceiverViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ReceiverDetailsViewModel::class)
+    internal abstract fun receiverDetailsViewModel(viewModel: ReceiverDetailsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ReceiverSharedViewModel::class)
+    internal abstract fun receiverSharedViewModel(viewModel:ReceiverSharedViewModel): ViewModel
 
     @Binds
     @IntoMap
