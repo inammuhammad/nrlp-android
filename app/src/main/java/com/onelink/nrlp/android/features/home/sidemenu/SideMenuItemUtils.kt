@@ -43,7 +43,7 @@ object SideMenuItemUtils {
         val sideMenuItemsList = mutableListOf<SideMenuOptionsItemModel>()
         sideMenuItemsList.add(SideMenuOptionsItemModel(SIDE_MENU_KEY_PROFILE, context.resources.getString(R.string.profile), R.drawable.ic_side_menu_profile))
         sideMenuItemsList.add(SideMenuOptionsItemModel(SIDE_MENU_KEY_CHANGE_PASSWORD, context.resources.getString(R.string.change_password), R.drawable.ic_side_menu_change_psw))
-        sideMenuItemsList.add(SideMenuOptionsItemModel(SIDE_MENU_KEY_RECEIVER_MANAGEMENT, context.resources.getString(R.string.terms_and_conditions), R.drawable.ic_side_menu_change_psw))
+        sideMenuItemsList.add(SideMenuOptionsItemModel(SIDE_MENU_KEY_RECEIVER_MANAGEMENT, context.resources.getString(R.string.remittance_receiver_manager), R.drawable.ic_side_menu_faqs))
         sideMenuItemsList.add(SideMenuOptionsItemModel(SIDE_MENU_KEY_FAQS, context.resources.getString(R.string.faqs), R.drawable.ic_side_menu_faqs))
         sideMenuItemsList.add(SideMenuOptionsItemModel(SIDE_MENU_KEY_GUIDE, context.resources.getString(R.string.guide), R.drawable.ic_youtube_guide))
         sideMenuItemsList.add(SideMenuOptionsItemModel(SIDE_MENU_KEY_CONTACT_US, context.resources.getString(R.string.contact_us), R.drawable.ic_side_menu_contact))

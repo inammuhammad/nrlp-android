@@ -10,6 +10,14 @@
             type="com.onelink.nrlp.android.features.receiver.viewmodel.ReceiverDetailsViewModel" />
     </data>
 
+    <ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:clickable="true"
+    android:focusable="true"
+    >
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -26,6 +34,16 @@
             android:text="@string/full_name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/_15sdp"
+            android:id="@+id/icHelpFullName"
+            android:src="@drawable/ic_baseline_info_24"
+            app:layout_constraintStart_toEndOf="@id/textViewAlias"
+            app:layout_constraintTop_toTopOf="@id/textViewAlias"
+            app:layout_constraintBottom_toBottomOf="@id/textViewAlias"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_height="wrap_content"/>
 
         <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
             android:id="@+id/tilAlias"
@@ -56,7 +74,7 @@
             style="@style/TextViewSubHeading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/unit_32dp"
+            android:layout_marginTop="@dimen/_15sdp"
             android:text="@string/cnic_nicop_number"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tilAlias" />
@@ -103,7 +121,7 @@
             android:focusable="false"
             android:hint="@string/generic_date_placeholder"
             android:singleLine="true"
-            android:text="@={viewModel.country}"
+            android:text="@={viewModel.cnicNicopDateOfIssuance}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvCnicIssuanceDateLabel" />
@@ -116,6 +134,16 @@
             android:text="@string/mother_maiden_name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvCnicIssuanceDate"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/_15sdp"
+            android:id="@+id/icHelpMotherMaidenName"
+            android:src="@drawable/ic_baseline_info_24"
+            app:layout_constraintStart_toEndOf="@id/tvMotherMaidenName"
+            app:layout_constraintTop_toTopOf="@id/tvMotherMaidenName"
+            app:layout_constraintBottom_toBottomOf="@id/tvMotherMaidenName"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_height="wrap_content"/>
 
         <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
             android:id="@+id/tilMotherMaidenName"
@@ -138,8 +166,42 @@
                 android:hint="@string/mother_maiden_name_placeholder"
                 android:inputType="textCapSentences"
                 android:maxLength="50"
-                android:text="@={viewModel.alias}" />
+                android:text="@={viewModel.motherMaidenName}" />
         </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
+
+        <TextView
+            android:id="@+id/textViewPlaceOfBirth"
+            style="@style/TextViewSubHeading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/place_of_birth"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilMotherMaidenName" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/_15sdp"
+            android:id="@+id/icHelpPlaceOfBirth"
+            android:src="@drawable/ic_baseline_info_24"
+            app:layout_constraintStart_toEndOf="@id/textViewPlaceOfBirth"
+            app:layout_constraintTop_toTopOf="@id/textViewPlaceOfBirth"
+            app:layout_constraintBottom_toBottomOf="@id/textViewPlaceOfBirth"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tvPlaceOfBirth"
+            style="@style/EditTextTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textDirection="ltr"
+            android:focusable="false"
+            android:hint="@string/select_place_of_birth"
+            android:singleLine="true"
+            android:text="@={viewModel.placeOfBirth}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewPlaceOfBirth" />
 
         <TextView
             android:id="@+id/textViewCountry"
@@ -148,7 +210,17 @@
             android:layout_height="wrap_content"
             android:text="@string/country"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tilMotherMaidenName" />
+            app:layout_constraintTop_toBottomOf="@+id/tvPlaceOfBirth" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/_15sdp"
+            android:id="@+id/icHelpCountry"
+            android:src="@drawable/ic_baseline_info_24"
+            app:layout_constraintStart_toEndOf="@id/textViewCountry"
+            app:layout_constraintTop_toTopOf="@id/textViewCountry"
+            app:layout_constraintBottom_toBottomOf="@id/textViewCountry"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_height="wrap_content"/>
 
         <TextView
             android:id="@+id/etCountry"
@@ -248,6 +320,92 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
+            android:id="@+id/tvBankName"
+            style="@style/TextViewSubHeading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bank Name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lyPhoneNumber"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/_15sdp"
+            android:id="@+id/icHelpBankName"
+            android:src="@drawable/ic_baseline_info_24"
+            app:layout_constraintStart_toEndOf="@id/tvBankName"
+            app:layout_constraintTop_toTopOf="@id/tvBankName"
+            app:layout_constraintBottom_toBottomOf="@id/tvBankName"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_height="wrap_content"/>
+
+        <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
+            android:id="@+id/tilBankName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/unit_8dp"
+            app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvBankName">
+
+            <com.onelink.nrlp.android.widgets.OneLinkEditText
+                android:id="@+id/etBankName"
+                style="@style/EditTextFixedDigits"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:nextFocusDown="@id/etCountry"
+                android:nextFocusForward="@id/etCountry"
+                android:hint="Standard Chartered"
+                android:inputType="textCapSentences"
+                android:maxLength="50"
+                android:text="@={viewModel.bankName}" />
+        </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
+
+        <TextView
+            android:id="@+id/tvIbanNumber"
+            style="@style/TextViewSubHeading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Iban Number"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tilBankName"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/_15sdp"
+            android:id="@+id/icHelpIbanNumber"
+            android:src="@drawable/ic_baseline_info_24"
+            app:layout_constraintStart_toEndOf="@id/tvIbanNumber"
+            app:layout_constraintTop_toTopOf="@id/tvIbanNumber"
+            app:layout_constraintBottom_toBottomOf="@id/tvIbanNumber"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_height="wrap_content"/>
+
+        <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
+            android:id="@+id/tilIbanNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/unit_8dp"
+            app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvIbanNumber">
+
+            <com.onelink.nrlp.android.widgets.OneLinkEditText
+                android:id="@+id/etIbanNumber"
+                style="@style/EditTextFixedDigits"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:nextFocusDown="@id/etCountry"
+                android:nextFocusForward="@id/etCountry"
+                android:hint="@string/xxxx"
+                android:inputType="textCapSentences"
+                android:maxLength="50"
+                android:text="@={viewModel.ibanNumber}" />
+        </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
+
+        <TextView
             android:id="@+id/errorTextPhone"
             style="@style/TextViewMedium"
             android:layout_width="wrap_content"
@@ -265,6 +423,7 @@
             android:id="@+id/beneficiaryLL"
             app:layout_constraintTop_toBottomOf="@+id/lyPhoneNumber"
             app:layout_constraintStart_toStartOf="parent"
+            android:visibility="gone"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
@@ -399,16 +558,21 @@
                 android:text="@string/cancel" />
         </LinearLayout>
 
+
         <Button
             android:id="@+id/btnNext"
             style="@style/ButtonTheme"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:enabled="@{viewModel.cnicNumberNotEmpty &amp;&amp; viewModel.aliasNotEmpty &amp;&amp; viewModel.ccountryNotEmpty &amp;&amp; viewModel.mobileNumberNotEmpty}"
-            android:text="@string/add_beneficiary"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:enabled="@{viewModel.cnicNumberNotEmpty &amp;&amp; viewModel.aliasNotEmpty &amp;&amp; viewModel.countryNotEmpty &amp;&amp; viewModel.mobileNumberNotEmpty &amp;&amp; viewModel.motherMaidenNameNotEmpty &amp;&amp; viewModel.placeOfBirthNotEmpty}"
+            android:text="@string/next"
+            android:layout_marginBottom="@dimen/_20sdp"
+            app:layout_constraintTop_toBottomOf="@id/tilIbanNumber"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
 </layout>

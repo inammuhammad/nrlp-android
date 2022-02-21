@@ -14,9 +14,13 @@ import com.onelink.nrlp.android.features.beneficiary.adapter.BeneficiariesAdapte
 import com.onelink.nrlp.android.features.beneficiary.fragments.BeneficiaryDetailsFragment
 import com.onelink.nrlp.android.features.beneficiary.fragments.ManageBeneficiaryFragment
 import com.onelink.nrlp.android.features.beneficiary.view.BeneficiaryActivity
+import com.onelink.nrlp.android.features.receiver.fragments.AddRemittanceReceiverFragment
 import com.onelink.nrlp.android.features.receiver.fragments.ManageReceiverFragment
 import com.onelink.nrlp.android.features.receiver.fragments.ReceiverDetailsFragment
+import com.onelink.nrlp.android.features.receiver.fragments.ReceiverTypeFragment
 import com.onelink.nrlp.android.features.receiver.viewmodel.ReceiverViewModel
+import com.onelink.nrlp.android.features.select.city.model.CitiesModel
+import com.onelink.nrlp.android.features.select.city.view.SelectCityFragment
 import com.onelink.nrlp.android.features.select.country.model.CountryCodeModel
 import com.onelink.nrlp.android.features.select.country.view.SelectCountryFragment
 import com.onelink.nrlp.android.models.BeneficiaryDetailsModel
@@ -25,12 +29,16 @@ import javax.inject.Inject
 
 class ReceiverActivity :
     BaseFragmentActivity<ActivityReceiverBinding, ReceiverViewModel>(ReceiverViewModel::class.java),
-    BeneficiariesAdapter.ClickEventHandler, SelectCountryFragment.OnSelectCountryListener {
+    BeneficiariesAdapter.ClickEventHandler, SelectCountryFragment.OnSelectCountryListener,
+    SelectCityFragment.OnSelectCityListener {
+
+    var isFromHome = false
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var beneficiaryAdpaterCallBack: BeneficiariesAdapter.ClickEventHandler
     private lateinit var countriesAdpaterCallBack: SelectCountryFragment.OnSelectCountryListener
+    lateinit var listenerCity: SelectCityFragment.OnSelectCityListener
 
     override fun getLayoutRes() = R.layout.activity_receiver
 
@@ -43,6 +51,7 @@ class ReceiverActivity :
         }
         if (fragment is ReceiverDetailsFragment) {
             countriesAdpaterCallBack = fragment
+            listenerCity = fragment
         }
     }
 
@@ -58,11 +67,26 @@ class ReceiverActivity :
             }
         }
 
-        addFragment(
-            ManageReceiverFragment.newInstance(),
-            clearBackStack = false,
-            addToBackStack = true
-        )
+        initView()
+    }
+
+    private fun initView() {
+        isFromHome = intent.getBooleanExtra("isFromHomeScreen", false)
+
+        if(isFromHome) {
+            addFragment(
+                AddRemittanceReceiverFragment.newInstance(),
+                clearBackStack = false,
+                addToBackStack = true
+            )
+        }
+        else{
+            addFragment(
+                ManageReceiverFragment.newInstance(),
+                clearBackStack = false,
+                addToBackStack = true
+            )
+        }
     }
 
     override fun onBeneficiarySelected(beneficiaryDetailsModel: BeneficiaryDetailsModel) {
@@ -71,6 +95,10 @@ class ReceiverActivity :
 
     override fun onSelectCountryListener(countryCodeModel: CountryCodeModel) {
         countriesAdpaterCallBack.onSelectCountryListener(countryCodeModel)
+    }
+
+    override fun onSelectCityListener(citiesModel: CitiesModel) {
+        listenerCity.onSelectCityListener(citiesModel)
     }
 
     companion object {

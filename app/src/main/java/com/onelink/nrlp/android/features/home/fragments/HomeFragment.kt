@@ -1,5 +1,8 @@
 package com.onelink.nrlp.android.features.home.fragments
 
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -14,6 +17,7 @@ import androidx.lifecycle.Observer
 import com.onelink.nrlp.android.data.local.UserModel
 import com.onelink.nrlp.android.databinding.HomeFragmentBinding
 import com.onelink.nrlp.android.features.home.view.HomeActivity
+import com.onelink.nrlp.android.features.receiver.view.ReceiverActivity
 import com.onelink.nrlp.android.features.redeem.view.RedeemActivity
 import com.onelink.nrlp.android.utils.*
 import com.onelink.nrlp.android.utils.dialogs.OneLinkAlertDialogsFragment
@@ -91,6 +95,7 @@ open class HomeFragment :
     private fun showUserData() {
         UserData.getUser()?.let {
             checkNadraVerification(it)
+            checkReceiverAdded()
             if(it.accountType == "beneficiary") {
                 binding.containerAnnualRemittance.invisible()
             }
@@ -126,6 +131,19 @@ open class HomeFragment :
             if (userModel.requireNadraVerification!!)
                 viewModel.navigateNadraVerification(fragmentHelper)
         }catch(e: Exception){}
+    }
+
+    private fun checkReceiverAdded(){
+        val remittanceReceiverSP = activity?.getSharedPreferences("remittanceReceiverSp", Context.MODE_PRIVATE)
+        val limit = remittanceReceiverSP?.getBoolean("remitterPopupDisplayed", true)
+        remittanceReceiverSP?.edit()?.putBoolean("remitterPopupDisplayed", false)?.commit()
+        try {
+            if (limit!!) {
+                val intent = Intent(activity, ReceiverActivity::class.java)
+                intent.putExtra("isFromHomeScreen", true)
+                startActivity(intent)
+            }
+        }catch (e: Exception){}
     }
 
     override fun refresh() {

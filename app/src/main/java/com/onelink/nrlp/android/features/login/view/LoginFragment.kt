@@ -108,6 +108,11 @@ class LoginFragment :
         })
         val sharedPref = activity?.getSharedPreferences("beneficiarySp", Context.MODE_PRIVATE)
         val editor: SharedPreferences.Editor = sharedPref?.edit() ?: return
+        val remittanceReceiverSP = activity?.getSharedPreferences("remittanceReceiverSp", Context.MODE_PRIVATE)
+        val editor1: SharedPreferences.Editor = remittanceReceiverSP?.edit() ?: return
+        editor1.putBoolean("remitterPopupDisplayed", true)
+        editor1.commit()
+
         viewModel.observeLogin().observe(this, { response ->
             when (response.status) {
                 Status.SUCCESS -> {

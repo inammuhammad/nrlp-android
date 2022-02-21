@@ -87,7 +87,7 @@ abstract class ActivityBuilder {
 
     @ActivityScope
     @ContributesAndroidInjector(modules = [ReceiverManagementFragmentsBuilder::class])
-    internal abstract fun bindReceiverManagmentActivity() : ReceiverActivity
+    internal abstract fun bindReceiverManagementActivity() : ReceiverActivity
 
     @ActivityScope
     @ContributesAndroidInjector

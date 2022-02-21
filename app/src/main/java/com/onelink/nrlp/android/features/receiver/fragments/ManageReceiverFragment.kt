@@ -33,7 +33,8 @@ class ManageReceiverFragment : BaseFragment<ManageReceiverViewModel, FragmentMan
 
     override fun getLayoutRes() = R.layout.fragment_manage_receiver
 
-    override fun getTitle(): String = resources.getString(R.string.terms_and_conditions)
+    override fun getTitle(): String =
+        context?.resources?.getString(R.string.remittance_receiver_manager).toString() //resources.getString(R.string.terms_and_conditions)
 
     override fun getViewM(): ManageReceiverViewModel =
         ViewModelProvider(this, viewModelFactory).get(ManageReceiverViewModel::class.java)
@@ -51,8 +52,8 @@ class ManageReceiverFragment : BaseFragment<ManageReceiverViewModel, FragmentMan
     private fun initObservers() {
         val sharedPref = activity?.getSharedPreferences("beneficiarySp", Context.MODE_PRIVATE)
         val limit = sharedPref?.getInt("no_of_beneficiaries_allowed", 0)
+        binding.btnNext.isEnabled = true
         viewModel.observeAllBeneficiaries().observe(this, Observer { response ->
-            binding.btnNext.isEnabled = true
             when (response.status) {
                 Status.SUCCESS -> {
                     oneLinkProgressDialog.hideProgressDialog()
@@ -64,7 +65,7 @@ class ManageReceiverFragment : BaseFragment<ManageReceiverViewModel, FragmentMan
                             binding.rvBeneficiaries.setHasFixedSize(true)
                             binding.rvBeneficiaries.adapter =
                                 BeneficiariesAdapter(context, beneficiariesList)
-                            binding.btnNext.isEnabled = beneficiariesList.size < limit!!
+                            //binding.btnNext.isEnabled = beneficiariesList.size < limit!!
                             //Toast.makeText(context, limit.toString(), Toast.LENGTH_LONG).show()
                         } else {
                             //binding.lyNoBeneficiary.visibility = View.VISIBLE

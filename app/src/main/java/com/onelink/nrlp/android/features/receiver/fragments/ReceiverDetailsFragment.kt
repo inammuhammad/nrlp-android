@@ -1,11 +1,12 @@
 package com.onelink.nrlp.android.features.receiver.fragments
 
 import android.annotation.SuppressLint
+import android.app.DatePickerDialog
+import android.graphics.Typeface
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.text.Editable
-import android.text.Selection
-import android.text.TextWatcher
+import android.text.*
+import android.text.style.StyleSpan
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -31,10 +32,15 @@ import com.onelink.nrlp.android.features.profile.disabled
 import com.onelink.nrlp.android.features.profile.enabled
 import com.onelink.nrlp.android.features.receiver.viewmodel.ReceiverDetailsViewModel
 import com.onelink.nrlp.android.features.receiver.viewmodel.ReceiverSharedViewModel
+import com.onelink.nrlp.android.features.redeem.fragments.REDEMPTION_CREATE_DIALOG
+import com.onelink.nrlp.android.features.redeem.fragments.TAG_REDEMPTION_CREATE_DIALOG
+import com.onelink.nrlp.android.features.select.city.model.CitiesModel
+import com.onelink.nrlp.android.features.select.city.view.SelectCityFragment
 import com.onelink.nrlp.android.features.select.country.model.CountryCodeModel
 import com.onelink.nrlp.android.features.select.country.view.SelectCountryFragment
 import com.onelink.nrlp.android.models.BeneficiaryDetailsModel
 import com.onelink.nrlp.android.utils.*
+import com.onelink.nrlp.android.utils.dialogs.OneLinkAlertCityDialogFragment
 import com.onelink.nrlp.android.utils.dialogs.OneLinkAlertDialogsFragment
 import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
 import dagger.android.support.AndroidSupportInjection
@@ -48,6 +54,7 @@ const val BENEFICIARY_CREATION_DIALOG = 3000
 const val BENEFICIARY_DELETION_DIALOG = 3001
 const val BENEFICIARY_UPDATION_DIALOG=3002
 const val BENEFICIARY_RESEND_OTP_DIALOG=3003
+const val RECEIVER_CREATION_DIALOG = 3004
 const val FIVE_MINUTE_TIMER_MILLIS = 5 * 60 * 1000L
 const val TIMER_MILLIS = 1* 60000L
 const val TIMER_INTERVAL = 1000L
@@ -57,13 +64,15 @@ const val TAG_BENEFICIARY_DELETION = "beneficiary_deletion_dialog"
 const val TAG_BENEFICIARY_CREATION = "beneficiary_creation_dialog"
 const val TAG_BENEFICIARY_UPDATION = "beneficiary_updation_dialog"
 const val TAG_BENEFICIARY_RESEND_OTP = "beneficiary_otp_resent_dialog"
+const val TAG_RECEIVER_CREATION = "receiver_creation_dialog"
 
 class ReceiverDetailsFragment :
     BaseFragment<ReceiverDetailsViewModel, FragmentReceiverDetailsBinding>(
         ReceiverDetailsViewModel::class.java
     ),
     OneLinkAlertDialogsFragment.OneLinkAlertDialogListeners,
-    SelectCountryFragment.OnSelectCountryListener {
+    SelectCountryFragment.OnSelectCountryListener, SelectCityFragment.OnSelectCityListener,
+    OneLinkAlertCityDialogFragment.OneLinkAlertDialogListeners{
 
     @Inject
     lateinit var oneLinkProgressDialog: OneLinkProgressDialog
@@ -83,8 +92,7 @@ class ReceiverDetailsFragment :
 
     private var listenerInitializedBR: Boolean = false
 
-    private var timeRemaining:Long =
-        com.onelink.nrlp.android.features.beneficiary.fragments.FIVE_MINUTE_TIMER_MILLIS
+    private var timeRemaining:Long = FIVE_MINUTE_TIMER_MILLIS
 
     override fun onInject() {
         AndroidSupportInjection.inject(this)
@@ -92,10 +100,7 @@ class ReceiverDetailsFragment :
 
     override fun getLayoutRes() = R.layout.fragment_receiver_details
 
-    override fun getTitle() =
-        if (isDeleteBeneficiary) resources.getString(R.string.remitter) else resources.getString(
-            R.string.redeem
-        )
+    override fun getTitle() = resources.getString(R.string.remittance_receiver_manager)
 
 
     override fun getViewM(): ReceiverDetailsViewModel =
@@ -171,7 +176,7 @@ class ReceiverDetailsFragment :
             binding.lytPosNegButtons.visibility=View.GONE
         }
     }
-    fun String.toDate(dateFormat: String = com.onelink.nrlp.android.features.beneficiary.fragments.LOCAL_TIME_PATTERN, timeZone: TimeZone = TimeZone.getTimeZone("UTC")): Date {
+    fun String.toDate(dateFormat: String = LOCAL_TIME_PATTERN, timeZone: TimeZone = TimeZone.getTimeZone("UTC")): Date {
         val parser = SimpleDateFormat(dateFormat, Locale.ENGLISH)
         parser.timeZone = timeZone
         return parser.parse(this)
@@ -183,7 +188,7 @@ class ReceiverDetailsFragment :
         return formatter.format(this)
     }
     fun getCurrentTime() :String {
-        val dateFormat = SimpleDateFormat(com.onelink.nrlp.android.features.beneficiary.fragments.LOCAL_TIME_PATTERN, Locale.ENGLISH)
+        val dateFormat = SimpleDateFormat(LOCAL_TIME_PATTERN, Locale.ENGLISH)
         return dateFormat.format(Calendar.getInstance().getTime())
 
     }
@@ -193,14 +198,14 @@ class ReceiverDetailsFragment :
         df.timeZone = TimeZone.getTimeZone("gmt")
         val gmtTime = df.format(Date())
         val timeUpdated=receiverSharedViewModel?.beneficiaryDetails?.value!!.updatedAt
-        val parser =  SimpleDateFormat(com.onelink.nrlp.android.features.beneficiary.fragments.SERVER_TIME_PATTERN)
-        val date1=timeUpdated.toDate(dateFormat = com.onelink.nrlp.android.features.beneficiary.fragments.SERVER_TIME_PATTERN)
+        val parser =  SimpleDateFormat(SERVER_TIME_PATTERN)
+        val date1=timeUpdated.toDate(dateFormat = SERVER_TIME_PATTERN)
         // val parser2 =  SimpleDateFormat(LOCAL_TIME_PATTERN,Locale.ENGLISH)
         val date2=getCurrentTime().toDate(timeZone = TimeZone.getDefault())
         val diff: Long = Math.abs(date1.time - date2.time)
         val differenceInMilis= diff
 
-        if(differenceInMilis>= com.onelink.nrlp.android.features.beneficiary.fragments.FIVE_MINUTE_TIMER_MILLIS)
+        if(differenceInMilis>= FIVE_MINUTE_TIMER_MILLIS)
         {
             binding.btnResendOtp.visibility=View.VISIBLE
             binding.textViewTimer.visibility=View.GONE
@@ -210,7 +215,7 @@ class ReceiverDetailsFragment :
             binding.btnResendOtp.visibility=View.GONE
             binding.textViewTimer.visibility=View.VISIBLE
             timeRemaining=
-                com.onelink.nrlp.android.features.beneficiary.fragments.FIVE_MINUTE_TIMER_MILLIS -differenceInMilis
+                FIVE_MINUTE_TIMER_MILLIS -differenceInMilis
             fiveMinuteTimer.setRemainingTimeinMillis(timeRemaining)
             fiveMinuteTimer.reset()
         }
@@ -252,6 +257,36 @@ class ReceiverDetailsFragment :
                     viewModel.checkPhoneNumberValidation(
                         binding.etMobileNumber.text.toString(),
                         countryCodeLength
+                    )
+                )
+            }
+        }
+
+        binding.etBankName.setOnFocusChangeListener { _, b ->
+            when (b) {
+                false -> viewModel.validationBankNamePassed.postValue(
+                    viewModel.checkBankNameValidation(
+                        binding.etBankName.text.toString()
+                    )
+                )
+            }
+        }
+
+        binding.etIbanNumber.setOnFocusChangeListener { _, b ->
+            when (b) {
+                false -> viewModel.validationIbanPassed.postValue(
+                    viewModel.checkIbanValidation(
+                        binding.etIbanNumber.text.toString()
+                    )
+                )
+            }
+        }
+
+        binding.etMotherMaidenName.setOnFocusChangeListener { _, b ->
+            when (b) {
+                false -> viewModel.validationMotherMaidenPassed.postValue(
+                    viewModel.checkMotherMaidenNameValidation(
+                        binding.etMotherMaidenName.text.toString()
                     )
                 )
             }
@@ -348,7 +383,6 @@ class ReceiverDetailsFragment :
 
     private fun initListeners() {
         binding.etAlias.setCapitalizeTextWatcher()
-
         binding.etCountry.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) hideKeyboard()
         }
@@ -363,7 +397,8 @@ class ReceiverDetailsFragment :
         }
 
         binding.btnNext.setOnSingleClickListener {
-            if (isDeleteBeneficiary)
+            showBeneficiaryCreatedDialog()
+           /* if (isDeleteBeneficiary)
                 showConfirmBeneficiaryDeletionDialog(beneficiaryDetailsModel)
             else {
                 if (viewModel.validationsPassed(
@@ -375,7 +410,15 @@ class ReceiverDetailsFragment :
                 ) {
                     makeBeneficiaryAddCall()
                 }
-            }
+            }*/
+        }
+        binding.tvPlaceOfBirth.setOnClickListener {
+            fragmentHelper.addFragment(
+                SelectCityFragment.newInstance("beneficiary"),
+                clearBackStack = false,
+                addToBackStack = true
+            )
+            hideKeyboard()
         }
         binding.spinnerRelationShip.setOnClickListener {
             binding.spinnerSelectRelationship.performClick()
@@ -391,6 +434,28 @@ class ReceiverDetailsFragment :
         }
         binding.btnUpdate.setOnSingleClickListener {
             updateBeneficiary()
+        }
+        binding.tvCnicIssuanceDate.setOnClickListener {
+            openDatePickerDialog()
+            hideKeyboard()
+        }
+        binding.icHelpFullName.setOnClickListener {
+            showGeneralAlertDialog(this,"Register",getString(R.string.help_full_name))
+        }
+        binding.icHelpPlaceOfBirth.setOnClickListener {
+            showGeneralAlertDialog(this,"Register",getString(R.string.enter_place_of_birth))
+        }
+        binding.icHelpCountry.setOnClickListener {
+            showGeneralAlertDialog(this,"Register",getString(R.string.enter_residence_country))
+        }
+        binding.icHelpMotherMaidenName.setOnClickListener {
+            showGeneralAlertDialog(this,"Register",getString(R.string.enter_mother_maiden_name))
+        }
+        binding.icHelpBankName.setOnClickListener {
+            showGeneralAlertDialog(this,"Register",getString(R.string.enter_bank_name))
+        }
+        binding.icHelpIbanNumber.setOnClickListener {
+            showGeneralAlertDialog(this,"Register",getString(R.string.enter_iban_number))
         }
     }
 
@@ -419,6 +484,12 @@ class ReceiverDetailsFragment :
                     makeDeleteBeneficiaryView(beneficiaryDetailsModel)
                     initViews()
                 })
+            }
+        })
+
+        receiverSharedViewModel?.receiverType?.observe(this, {
+            if(it == R.id.rdBtnCnic) {
+               hideIbanView()
             }
         })
 
@@ -495,7 +566,7 @@ class ReceiverDetailsFragment :
             }
         })
 
-        viewModel.ccountryNotEmpty.observe(this, {
+        viewModel.countryNotEmpty.observe(this, {
             binding.etMobileNumber.isClickable = it
         })
 
@@ -534,6 +605,39 @@ class ReceiverDetailsFragment :
             }
         })
 
+        viewModel.validationMotherMaidenPassed.observe(this, { validationsPassed ->
+            run {
+                if (!validationsPassed)
+                    binding.tilMotherMaidenName.error = getString(R.string.error_not_valid_name)
+                else {
+                    binding.tilMotherMaidenName.clearError()
+                    binding.tilMotherMaidenName.isErrorEnabled = false
+                }
+            }
+        })
+
+        viewModel.validationBankNamePassed.observe(this, { validationsPassed ->
+            run {
+                if (!validationsPassed)
+                    binding.tilBankName.error = getString(R.string.error_not_valid_name)
+                else {
+                    binding.tilBankName.clearError()
+                    binding.tilBankName.isErrorEnabled = false
+                }
+            }
+        })
+
+        viewModel.validationIbanPassed.observe(this, { validationsPassed ->
+            run {
+                if (!validationsPassed)
+                    binding.tilIbanNumber.error = getString(R.string.error_not_valid_name)
+                else {
+                    binding.tilIbanNumber.clearError()
+                    binding.tilIbanNumber.isErrorEnabled = false
+                }
+            }
+        })
+
         viewModel.beneficiaryRelation.observe(this, androidx.lifecycle.Observer {
             if(it != Constants.SPINNER_BENEFICIARY_HINT) {
                 binding.tvRelationShip.text = it
@@ -549,6 +653,41 @@ class ReceiverDetailsFragment :
                 binding.txtOther.visibility = View.GONE
             }
         })
+    }
+
+    private fun hideIbanView() {
+        binding.apply {
+            tilBankName.visibility = View.GONE
+            tvBankName.visibility = View.GONE
+            icHelpBankName.visibility = View.GONE
+            tilIbanNumber.visibility = View.GONE
+            tvIbanNumber.visibility = View.GONE
+            icHelpIbanNumber.visibility = View.GONE
+        }
+    }
+
+    private fun openDatePickerDialog() {
+        val c = Calendar.getInstance()
+        val year = c.get(Calendar.YEAR)
+        val month = c.get(Calendar.MONTH)
+        val day = c.get(Calendar.DAY_OF_MONTH)
+        val datePickerDialog = activity?.let {
+            DatePickerDialog(
+                it,
+                { _, year, monthOfYear, dayOfMonth ->
+                    c.set(year, monthOfYear, dayOfMonth)
+                    viewModel.rawDate =
+                        dayOfMonth.toString() + "/" + (monthOfYear + 1) + "/" + year.toString()
+                    viewModel.rawFromDate.value = viewModel.rawDate
+                    viewModel.cnicNicopDateOfIssuance.value =
+                        viewModel.getDateInStringFormat(c)
+                }, year, month, day
+            )
+        }
+        datePickerDialog?.datePicker?.minDate = -2208958096000L
+        datePickerDialog?.datePicker?.maxDate = System.currentTimeMillis()
+        datePickerDialog?.datePicker?.layoutDirection = View.LAYOUT_DIRECTION_LTR
+        datePickerDialog?.show()
     }
 
     private fun makeDeleteBeneficiaryView(it: BeneficiaryDetailsModel) {
@@ -585,7 +724,7 @@ class ReceiverDetailsFragment :
         viewModel.aliasNotEmpty.value = true
         viewModel.cnicNumberNotEmpty.value = true
         viewModel.mobileNumberNotEmpty.value = true
-        viewModel.ccountryNotEmpty.value = true
+        viewModel.countryNotEmpty.value = true
 
         //TextColor
         binding.etAlias.colorToText(R.color.black)
@@ -640,7 +779,7 @@ class ReceiverDetailsFragment :
         viewModel.aliasNotEmpty.value = true
         viewModel.cnicNumberNotEmpty.value = true
         viewModel.mobileNumberNotEmpty.value = true
-        viewModel.ccountryNotEmpty.value = true
+        viewModel.countryNotEmpty.value = true
 
         //TextColor
         //TextColor
@@ -718,10 +857,10 @@ class ReceiverDetailsFragment :
         )
         oneLinkAlertDialogsFragment.setTargetFragment(
             this,
-            com.onelink.nrlp.android.features.beneficiary.fragments.BENEFICIARY_DELETION_DIALOG
+            BENEFICIARY_DELETION_DIALOG
         )
         oneLinkAlertDialogsFragment.show(parentFragmentManager,
-            com.onelink.nrlp.android.features.beneficiary.fragments.TAG_BENEFICIARY_DELETION
+            TAG_BENEFICIARY_DELETION
         )
     }
 
@@ -729,35 +868,44 @@ class ReceiverDetailsFragment :
         val oneLinkAlertDialogsFragment = OneLinkAlertDialogsFragment.newInstance(
             true,
             R.drawable.ic_beneficairy_created,
-            getString(R.string.beneficiary_added),
-            (getString(R.string.beneficiary_creation_success_msg)).toSpanned(),
+            "Request Received",
+            ("Your Remittance Receiver \nwill be added upon \nNDARA verification").toSpanned(),
             getString(R.string.done),
             positiveButtonText = "",
             negativeButtonText = ""
         )
         oneLinkAlertDialogsFragment.setTargetFragment(
             this,
-            com.onelink.nrlp.android.features.beneficiary.fragments.BENEFICIARY_CREATION_DIALOG
+            RECEIVER_CREATION_DIALOG
         )
         oneLinkAlertDialogsFragment.show(parentFragmentManager,
-            com.onelink.nrlp.android.features.beneficiary.fragments.TAG_BENEFICIARY_CREATION
+            TAG_RECEIVER_CREATION
         )
     }
 
     override fun onNeutralButtonClicked(targetCode: Int) {
         super.onNeutralButtonClicked(targetCode)
         when (targetCode) {
-            com.onelink.nrlp.android.features.beneficiary.fragments.BENEFICIARY_CREATION_DIALOG -> fragmentHelper.onBack()
-            com.onelink.nrlp.android.features.beneficiary.fragments.BENEFICIARY_UPDATION_DIALOG -> updatedBeneficiaryView()
-            com.onelink.nrlp.android.features.beneficiary.fragments.BENEFICIARY_RESEND_OTP_DIALOG -> updatedBeneficiaryView()
+            RECEIVER_CREATION_DIALOG -> {
+                fragmentHelper.onBack()
+                fragmentHelper.onBack()
+            }
+            BENEFICIARY_UPDATION_DIALOG -> updatedBeneficiaryView()
+            BENEFICIARY_RESEND_OTP_DIALOG -> updatedBeneficiaryView()
         }
     }
 
     override fun onPositiveButtonClicked(targetCode: Int) {
         super.onPositiveButtonClicked(targetCode)
         when (targetCode) {
-            com.onelink.nrlp.android.features.beneficiary.fragments.BENEFICIARY_DELETION_DIALOG -> makeDeleteBeneficiaryCall()
+            BENEFICIARY_DELETION_DIALOG -> makeDeleteBeneficiaryCall()
         }
+    }
+
+    override fun onPositiveButtonClicked(targetCode: Int, city: String) {
+        viewModel.placeOfBirth.value = city
+        binding.tvPlaceOfBirth.colorToText(R.color.black)
+        fragmentHelper.onBack()
     }
 
     private fun makeDeleteBeneficiaryCall() {
@@ -803,35 +951,73 @@ class ReceiverDetailsFragment :
         showKeyboard()
     }
 
+
+    override fun onSelectCityListener(citiesModel: CitiesModel) {
+        val s = String.format(
+            getString(R.string.enter_code)
+        )
+        val str = SpannableStringBuilder(s)
+        str.setSpan(
+            StyleSpan(Typeface.BOLD),
+            s.indexOf(s),
+            s.indexOf(s) + s.length,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        if(citiesModel.city == "Other") {
+            showEnterCityDialog(str)
+        }
+        else {
+            viewModel.placeOfBirth.value = citiesModel.city
+            binding.tvPlaceOfBirth.colorToText(R.color.black)
+            fragmentHelper.onBack()
+        }
+    }
+
+    private fun showEnterCityDialog(str: Spanned) {
+        val oneLinkAlertDialogsFragment = OneLinkAlertCityDialogFragment.newInstance(
+            false,
+            R.drawable.ic_redem_dialog,
+            getString(R.string.place_of_birth),
+            str,
+            positiveButtonText =  getString(R.string.confirm),
+            negativeButtonText = getString(R.string.cancel)
+        )
+        oneLinkAlertDialogsFragment.setTargetFragment(
+            this,
+            REDEMPTION_CREATE_DIALOG
+        )
+        oneLinkAlertDialogsFragment.show(parentFragmentManager, TAG_REDEMPTION_CREATE_DIALOG)
+    }
+
     private fun updatedBeneficiarySuccessDialog() {
         OneLinkAlertDialogsFragment.Builder()
             .setTargetFragment(this,
-                com.onelink.nrlp.android.features.beneficiary.fragments.BENEFICIARY_UPDATION_DIALOG
+                BENEFICIARY_UPDATION_DIALOG
             )
             .setIsAlertOnly(true).setDrawable(R.drawable.ic_uuid_success_dialog)
             .setTitle(getString(R.string.beneficiary_updated))
             .setNeutralButtonText(getString(R.string.okay)).setNegativeButtonText("")
             .setPositiveButtonText("").setCancelable(false).show(parentFragmentManager,
-                com.onelink.nrlp.android.features.beneficiary.fragments.TAG_BENEFICIARY_UPDATION
+                TAG_BENEFICIARY_UPDATION
             )
     }
 
     private fun resentBeneficiaryOTPSuccessDialog() {
         OneLinkAlertDialogsFragment.Builder()
             .setTargetFragment(this,
-                com.onelink.nrlp.android.features.beneficiary.fragments.BENEFICIARY_RESEND_OTP_DIALOG
+                BENEFICIARY_RESEND_OTP_DIALOG
             )
             .setIsAlertOnly(true).setDrawable(R.drawable.ic_uuid_success_dialog)
             .setTitle(getString(R.string.otp_resent))
             .setNeutralButtonText(getString(R.string.okay)).setNegativeButtonText("")
             .setPositiveButtonText("").setCancelable(false).show(parentFragmentManager,
-                com.onelink.nrlp.android.features.beneficiary.fragments.TAG_BENEFICIARY_RESEND_OTP
+                TAG_BENEFICIARY_RESEND_OTP
             )
     }
 
     private val timer = object : CountDownTimer(
-        com.onelink.nrlp.android.features.beneficiary.fragments.TIMER_MILLIS,
-        com.onelink.nrlp.android.features.beneficiary.fragments.TIMER_INTERVAL
+        TIMER_MILLIS,
+        TIMER_INTERVAL
     ) {
         override fun onTick(millisUntilFinished: Long) {
             // binding.textViewResendOTP.isEnabled = false
@@ -851,7 +1037,7 @@ class ReceiverDetailsFragment :
     private val fiveMinuteTimer =
         object : CountDownTimerCanBePause(
             timeRemaining,
-            com.onelink.nrlp.android.features.beneficiary.fragments.TIMER_INTERVAL
+            TIMER_INTERVAL
         ) {
             @SuppressLint("DefaultLocale")
             override fun onTick(millisUntilFinished: Long) {
@@ -870,7 +1056,7 @@ class ReceiverDetailsFragment :
     {
         binding.textViewTimer.visibility=View.VISIBLE
         binding.btnResendOtp.visibility=View.GONE
-        fiveMinuteTimer.setRemainingTimeinMillis(com.onelink.nrlp.android.features.beneficiary.fragments.FIVE_MINUTE_TIMER_MILLIS)
+        fiveMinuteTimer.setRemainingTimeinMillis(FIVE_MINUTE_TIMER_MILLIS)
         fiveMinuteTimer.reset()
 
     }

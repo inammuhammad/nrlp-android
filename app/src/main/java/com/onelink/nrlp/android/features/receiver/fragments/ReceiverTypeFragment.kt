@@ -1,20 +1,12 @@
 package com.onelink.nrlp.android.features.receiver.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.onelink.nrlp.android.R
 import com.onelink.nrlp.android.core.BaseFragment
-import com.onelink.nrlp.android.databinding.FragmentManageReceiverBinding
 import com.onelink.nrlp.android.databinding.FragmentReceiverTypeBinding
-import com.onelink.nrlp.android.features.beneficiary.fragments.BeneficiaryDetailsFragment
-import com.onelink.nrlp.android.features.complaint.fragment.registered.RegComplaintTypeFragment
-import com.onelink.nrlp.android.features.complaint.viewmodel.RegComplaintSharedViewModel
-import com.onelink.nrlp.android.features.receiver.viewmodel.ManageReceiverViewModel
 import com.onelink.nrlp.android.features.receiver.viewmodel.ReceiverSharedViewModel
+import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
@@ -27,6 +19,9 @@ class ReceiverTypeFragment : BaseFragment<ReceiverSharedViewModel, FragmentRecei
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    @Inject
+    lateinit var oneLinkProgressDialog: OneLinkProgressDialog
 
     override fun onInject() {
         AndroidSupportInjection.inject(this)
@@ -56,6 +51,6 @@ class ReceiverTypeFragment : BaseFragment<ReceiverSharedViewModel, FragmentRecei
     companion object {
         @JvmStatic
         fun newInstance() =
-            ReceiverTypeFragment ()
+            ReceiverTypeFragment()
     }
 }
