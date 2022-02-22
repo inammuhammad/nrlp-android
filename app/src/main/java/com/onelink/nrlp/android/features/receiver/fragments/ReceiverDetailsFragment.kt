@@ -30,6 +30,7 @@ import com.onelink.nrlp.android.features.beneficiary.viewmodel.BeneficiaryDetail
 import com.onelink.nrlp.android.features.beneficiary.viewmodel.BeneficiarySharedViewModel
 import com.onelink.nrlp.android.features.profile.disabled
 import com.onelink.nrlp.android.features.profile.enabled
+import com.onelink.nrlp.android.features.receiver.view.ReceiverActivity
 import com.onelink.nrlp.android.features.receiver.viewmodel.ReceiverDetailsViewModel
 import com.onelink.nrlp.android.features.receiver.viewmodel.ReceiverSharedViewModel
 import com.onelink.nrlp.android.features.redeem.fragments.REDEMPTION_CREATE_DIALOG
@@ -887,8 +888,12 @@ class ReceiverDetailsFragment :
         super.onNeutralButtonClicked(targetCode)
         when (targetCode) {
             RECEIVER_CREATION_DIALOG -> {
-                fragmentHelper.onBack()
-                fragmentHelper.onBack()
+                if((activity as ReceiverActivity).isFromHome)
+                    (activity as ReceiverActivity).finish()
+                else {
+                    fragmentHelper.onBack()
+                    fragmentHelper.onBack()
+                }
             }
             BENEFICIARY_UPDATION_DIALOG -> updatedBeneficiaryView()
             BENEFICIARY_RESEND_OTP_DIALOG -> updatedBeneficiaryView()

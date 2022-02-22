@@ -59,7 +59,7 @@ class ManageReceiverFragment : BaseFragment<ManageReceiverViewModel, FragmentMan
                     oneLinkProgressDialog.hideProgressDialog()
                     response.data?.let {
                         if (it.data.size > 0) {
-                            binding.lyNoBeneficiary.visibility = View.GONE
+                            //binding.lyNoBeneficiary.visibility = View.GONE
                             //binding.lyBeneficiariesList.visibility = View.VISIBLE
                             val beneficiariesList: List<BeneficiaryDetailsModel> = it.data
                             binding.rvBeneficiaries.setHasFixedSize(true)
