@@ -16,8 +16,8 @@ android {
         applicationId "com.onelink.sohnidharti.app"
         minSdkVersion minSdkVer
         targetSdkVersion targetSdkVer
-        versionCode 13
-        versionName "1.8"
+        versionCode 14
+        versionName "1.9"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -205,15 +205,15 @@ dependencies {
     implementation "androidx.preference:preference-ktx:1.1.1"
     //implementation 'com.guardsquare:dexguard-runtime:9.1.5'
 
-    implementation files('lib/DexGuard-9.3.0/lib/dexguard-runtime.aar')
+    implementation files('lib/DexGuard-9.3.2/lib/dexguard-runtime.aar')
 
 
 
 }
 
 dexguard {
-    path = 'C:\\Users\\ahmad.zaheer\\AndroidStudioProjects\\nrlp-android\\app\\lib\\DexGuard-9.3.0'
-    license = "C:\\Users\\ahmad.zaheer\\AndroidStudioProjects\\nrlp-android\\app\\lib\\DexGuard-9.3.0\\lib"
+    path = 'C:\\Users\\ahmad.zaheer\\AndroidStudioProjects\\nrlp-android\\app\\lib\\DexGuard-9.3.2'
+    license = "C:\\Users\\ahmad.zaheer\\AndroidStudioProjects\\nrlp-android\\app\\lib\\DexGuard-9.3.2\\lib"
     jvmArgs '-Xmx2048M', '-Dallow.incomplete.class.hierarchy=true'
     configurations {
         debug {
