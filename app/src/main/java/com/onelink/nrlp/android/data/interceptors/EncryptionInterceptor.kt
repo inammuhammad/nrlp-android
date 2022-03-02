@@ -204,6 +204,9 @@ class EncryptionInterceptor(val context: Context) : Interceptor {
         MOTHER_MAIDEN_NAME("mother_maiden_name"),
         PLACE_OF_BIRTH("place_of_birth"),
         CNIC_NICOP_ISSUANCE_DATE("cnic_nicop_issuance_date"),
-        SP_RESPONE_ROW_ID("sp_respone_row_id")
+        SP_RESPONE_ROW_ID("sp_respone_row_id"),
+        ACCOUNT_NUMBER_IBAN("account_number_iban"),
+        BANK_NAME("bank_name"),
+
     }
 }

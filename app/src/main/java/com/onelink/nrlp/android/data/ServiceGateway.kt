@@ -22,6 +22,7 @@ import com.onelink.nrlp.android.features.managePoints.model.TransferPointsRespon
 import com.onelink.nrlp.android.features.nrlpBenefits.model.NrlpBenefitsResponseModel
 import com.onelink.nrlp.android.features.nrlpBenefits.model.NrlpPartnerResponseModel
 import com.onelink.nrlp.android.features.profile.models.ProfileResponseModel
+import com.onelink.nrlp.android.features.receiver.models.AddReceiverRequestModel
 import com.onelink.nrlp.android.features.redeem.model.*
 import com.onelink.nrlp.android.features.register.models.*
 import com.onelink.nrlp.android.features.select.city.model.CitiesRequest
@@ -220,4 +221,7 @@ interface ServiceGateway {
 
     @POST("add-complaint/")
     fun addComplaint(@Body body:JsonObject):Single<Response<AddComplaintResponseModel>>
+
+    @POST("remitter-receiver-add/")
+    fun addReceiver(@Body body: AddReceiverRequestModel): Single<Response<GeneralMessageResponseModel>>
 }

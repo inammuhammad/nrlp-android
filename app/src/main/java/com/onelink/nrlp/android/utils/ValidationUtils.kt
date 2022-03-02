@@ -107,4 +107,12 @@ object ValidationUtils {
         STRING_EMAIL_VALIDATOR_REGEX,
         emailAddress
     )
+
+    fun isBankNameValid(string: String): Boolean {
+        return string.isNotEmpty()
+    }
+
+    fun isIbanAccountNumberValid(string: String): Boolean {
+        return string.isNotEmpty()
+    }
 }

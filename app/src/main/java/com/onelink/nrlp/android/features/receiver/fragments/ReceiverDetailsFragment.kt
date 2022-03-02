@@ -30,6 +30,7 @@ import com.onelink.nrlp.android.features.beneficiary.viewmodel.BeneficiaryDetail
 import com.onelink.nrlp.android.features.beneficiary.viewmodel.BeneficiarySharedViewModel
 import com.onelink.nrlp.android.features.profile.disabled
 import com.onelink.nrlp.android.features.profile.enabled
+import com.onelink.nrlp.android.features.receiver.models.AddReceiverRequestModel
 import com.onelink.nrlp.android.features.receiver.view.ReceiverActivity
 import com.onelink.nrlp.android.features.receiver.viewmodel.ReceiverDetailsViewModel
 import com.onelink.nrlp.android.features.receiver.viewmodel.ReceiverSharedViewModel
@@ -398,7 +399,7 @@ class ReceiverDetailsFragment :
         }
 
         binding.btnNext.setOnSingleClickListener {
-            showBeneficiaryCreatedDialog()
+            makeReceiverAddCall()
            /* if (isDeleteBeneficiary)
                 showConfirmBeneficiaryDeletionDialog(beneficiaryDetailsModel)
             else {
@@ -460,19 +461,22 @@ class ReceiverDetailsFragment :
         }
     }
 
-    private fun makeBeneficiaryAddCall() {
+    private fun makeReceiverAddCall() {
         if(viewModel.beneficiaryRelation.value.toString() == "Other") {
             relation = binding.txtOther.text.toString()
         } else {
             relation = viewModel.beneficiaryRelation.value.toString()
         }
-        viewModel.addBeneficiary(
-            AddBeneficiaryRequestModel(
-                beneficiaryNicNicop = binding.eTCnicNumber.text.toString().replace("-", ""),
-                beneficiaryAlias = binding.etAlias.text.toString(),
-                beneficiaryMobileNo = binding.tvCountryCode.text.toString() + binding.etMobileNumber.text.toString(),
-                beneficiaryRelation = relation,
-                country = binding.etCountry.text.toString()
+        viewModel.addReceiver(
+            AddReceiverRequestModel(
+                nicNicop = binding.eTCnicNumber.text.toString().cleanNicNumber(),
+                mobileNo = binding.etMobileNumber.text.toString(),
+                fullName = binding.etAlias.text.toString(),
+                motherMaidenName = binding.etMotherMaidenName.text.toString(),
+                cnicIssuanceDate = binding.tvCnicIssuanceDate.text.toString(),
+                placeOfBirth = binding.tvPlaceOfBirth.text.toString(),
+                accountNumberIban = binding.etIbanNumber.text.toString(),
+                bankName = binding.etBankName.text.toString()
             )
         )
     }
@@ -494,7 +498,7 @@ class ReceiverDetailsFragment :
             }
         })
 
-        viewModel.observeBeneficiaryAddResponse().observe(this, { response ->
+        viewModel.observeReceiverAddResponse().observe(this, { response ->
             when (response.status) {
                 Status.SUCCESS -> {
                     oneLinkProgressDialog.hideProgressDialog()
@@ -510,7 +514,7 @@ class ReceiverDetailsFragment :
             }
         })
 
-        viewModel.observeBeneficiaryDeleteResponse().observe(this, { response ->
+        /*viewModel.observeBeneficiaryDeleteResponse().observe(this, { response ->
             when (response.status) {
                 Status.SUCCESS -> {
                     oneLinkProgressDialog.hideProgressDialog()
@@ -565,7 +569,7 @@ class ReceiverDetailsFragment :
                     oneLinkProgressDialog.showProgressDialog(activity)
                 }
             }
-        })
+        })*/
 
         viewModel.countryNotEmpty.observe(this, {
             binding.etMobileNumber.isClickable = it

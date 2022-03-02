@@ -8,6 +8,8 @@ import com.onelink.nrlp.android.features.beneficiary.models.DeleteBeneficiaryReq
 import com.onelink.nrlp.android.features.beneficiary.models.ResendBeneficiaryOtpRequestModel
 import com.onelink.nrlp.android.features.beneficiary.models.UpdateBeneficiaryRequestModel
 import com.onelink.nrlp.android.features.beneficiary.repo.BeneficiaryRepo
+import com.onelink.nrlp.android.features.receiver.models.AddReceiverRequestModel
+import com.onelink.nrlp.android.features.receiver.repo.ReceiverRepo
 import com.onelink.nrlp.android.utils.Constants
 import com.onelink.nrlp.android.utils.ValidationUtils
 import java.text.SimpleDateFormat
@@ -15,7 +17,7 @@ import java.util.*
 import javax.inject.Inject
 
 
-open class ReceiverDetailsViewModel @Inject constructor(private val beneficiaryRepo: BeneficiaryRepo) :
+open class ReceiverDetailsViewModel @Inject constructor(private val receiverRepo: ReceiverRepo) :
     BaseViewModel() {
     val cnicNumber = MutableLiveData<String>("")
     val cnicNicopDateOfIssuance = MutableLiveData<String>("")
@@ -37,28 +39,25 @@ open class ReceiverDetailsViewModel @Inject constructor(private val beneficiaryR
     val rawFromDate = MutableLiveData<String>("")
 
 
-    fun deleteBeneficiary(deleteBeneficiaryRequestModel: DeleteBeneficiaryRequestModel) =
-        beneficiaryRepo.deleteBeneficiary(deleteBeneficiaryRequestModel)
+    fun deleteBeneficiary(deleteBeneficiaryRequestModel: DeleteBeneficiaryRequestModel){} //= beneficiaryRepo.deleteBeneficiary(deleteBeneficiaryRequestModel)
 
-    fun addBeneficiaryResendOtp(request:ResendBeneficiaryOtpRequestModel)=
-        beneficiaryRepo.addBeneficiaryResendOtp(request)
+    fun addBeneficiaryResendOtp(request:ResendBeneficiaryOtpRequestModel){} //= beneficiaryRepo.addBeneficiaryResendOtp(request)
 
-    fun updateBeneficiary(request: UpdateBeneficiaryRequestModel)=
-        beneficiaryRepo.updateBeneficiary(request)
+    fun updateBeneficiary(request: UpdateBeneficiaryRequestModel){} //= beneficiaryRepo.updateBeneficiary(request)
 
-    fun observeBeneficiaryResendOtp() =beneficiaryRepo.observeBeneficiaryResendOtpResponse()
+    fun observeBeneficiaryResendOtp(){} //=beneficiaryRepo.observeBeneficiaryResendOtpResponse()
 
-    fun observeBeneficiaryDeleteResponse() = beneficiaryRepo.observeBeneficiaryDeleteResponse()
+    fun observeBeneficiaryDeleteResponse(){} //= beneficiaryRepo.observeBeneficiaryDeleteResponse()
 
-    fun observeBeneficiaryUpdateResponse() =beneficiaryRepo.observerBeneficiaryUpdateResponse()
+    fun observeBeneficiaryUpdateResponse(){} //=beneficiaryRepo.observerBeneficiaryUpdateResponse()
 
-    fun addBeneficiary(addBeneficiaryRequestModel: AddBeneficiaryRequestModel) =
-        beneficiaryRepo.addBeneficiary(addBeneficiaryRequestModel)
+    fun addReceiver(addReceiverRequestModel: AddReceiverRequestModel) =
+        receiverRepo.addReceiver(addReceiverRequestModel)
 
-    fun observeBeneficiaryAddResponse() = beneficiaryRepo.observeBeneficiaryAddResponse()
+    fun observeReceiverAddResponse() = receiverRepo.observeReceiverAddResponse()
 
     override fun onCleared() {
-        beneficiaryRepo.onClear()
+        receiverRepo.onClear()
         super.onCleared()
     }
 
@@ -122,10 +121,10 @@ open class ReceiverDetailsViewModel @Inject constructor(private val beneficiaryR
         string.isEmpty() || ValidationUtils.isPhoneNumberValid(string, int)
 
     fun checkBankNameValidation(string: String) =
-        string.isEmpty()
+        string.isNotEmpty() || ValidationUtils.isBankNameValid(string)
 
     fun checkIbanValidation(string: String) =
-        string.isEmpty()
+        string.isNotEmpty() || ValidationUtils.isIbanAccountNumberValid(string)
 
     fun checkMotherMaidenNameValidation(string: String) =
         string.isEmpty() || ValidationUtils.isNameValid(string)
