@@ -292,14 +292,13 @@
                 style="@style/DialogPositiveButtonTheme"
                 android:layout_weight="1"
                 android:enabled="true"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:text="@string/edit" />
 
             <Button
                 android:id="@+id/btnResendOtp"
                 style="@style/DialogPositiveButtonTheme"
                 android:layout_weight="1"
-                android:layout_width="match_parent"
                 android:enabled="true"
                 android:text="@string/resend_registration_code" />
             <TextView

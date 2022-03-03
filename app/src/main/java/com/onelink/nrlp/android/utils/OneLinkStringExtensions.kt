@@ -68,6 +68,7 @@ fun String.dc() = String(Base64.decode(this, Base64.DEFAULT))
 
 fun String.toFormattedDate(): String {
     val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US)
+    dateFormat.timeZone = TimeZone.getTimeZone("GMT")
     val dateString: Date = dateFormat.parse(this) ?: Date()
     val cal = Calendar.getInstance()
     cal.time = dateString

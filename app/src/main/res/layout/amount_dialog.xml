@@ -66,6 +66,7 @@
                 android:layout_width="match_parent"
                 android:textColorHint="@color/password_hint_color"
                 android:layout_height="wrap_content"
+                android:digits="1234567890"
                 android:hint="Enter other Amount Here"
                 android:inputType="number"
                 android:maxLength="15"

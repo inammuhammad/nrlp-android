@@ -300,12 +300,12 @@ class RedemptionPartnerServiceFragment :
         when (targetCode) {
             REDEMPTION_CREATE_DIALOG -> {
                // viewModel.makeInitializeRedemptionCall()
-                if(viewModel.compareRedeemAmount(redeemablePKR,redeemCategoryModel.points.toDouble())) {
+                if(true/*viewModel.compareRedeemAmount(redeemablePKR,redeemCategoryModel.points.toDouble())*/) {
                     viewModel.makeInitializeRedemptionOTPCall(
                         redeemPartnerModel.partnerName,
                         redeemPartnerModel.partnerName,
                         redeemCategoryModel.categoryName.replace("/","_"),
-                        cnicEntered,
+                        cnicEntered.cleanNicNumber(),
                         mobileNoEntered,
                         emailEntered,
                         "1",
