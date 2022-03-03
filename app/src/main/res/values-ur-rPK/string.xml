@@ -49,7 +49,7 @@
     <string name="remittance_amount">ترسیل کی رقم (پاکستانی روپیے)</string>
     <string name="remittance_amount_help">رسید پر موجود رقم عین مطابق درج کریں</string>
     <string name="remittance_date_help">وہ تاریخ درج کریں جس پر ٹرانزیکشن ہوئی</string>
-    <string name="remittance_account_cnic_number_help">صول کنندہ کا اکاونٹ نمر/ بین الاقوامی بینک اکاؤنٹ نمبر/قومی شناختی کارڈ نمر درج کریں جس پر ترسیلات بھیجی گئ ہیں۔</string>
+    <string name="remittance_account_cnic_number_help">وصول کنندہ کا اکاونٹ نمبر/ بین الاقوامی بینک اکاؤنٹ نمبر/قومی شناختی کارڈ  نمبر درج کریں جس پر ترسیلات بھیجی گئ ہیں</string>
     <string name="remittance_date">ترسیل کی تاریخ</string>
 
     <string name="enter_points">پوائنٹس درج کریں</string>
@@ -106,7 +106,7 @@
     <string name="remitter_verification">ترسیلات زربھیجنے والے کی تصدیق</string>
     <string name="beneficiary_verification_title">وصول کنندہ کی تصدیق</string>
     <string name="reference_number">حوالہ نمبر</string>
-    <string name="beneficiary_account_number_cnic">وصول کنندہ کا اکاونٹ نمبر/ بین الاقوامی بینک اکاؤنٹ نمبر/قومی شناختی کارڈ  نمبر</string>
+    <string name="beneficiary_account_number_cnic">وصول کنندہ کا اکاونٹ نمبر/ بین الاقوامی بینک اکاؤنٹ نمبر/قومی شناختی کارڈ  نمبر</string>
     <string name="transaction_amount">ٹرانزیکشن  کی رقم( پاکستانی روپے)</string>
     <string name="curPassword">پرانا پاس ورڈ درج کریں</string>
     <string name="newPassword">نیا پاس ورڈ درج کریں</string>
