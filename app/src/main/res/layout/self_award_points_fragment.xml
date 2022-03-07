@@ -215,9 +215,12 @@
                 style="@style/TextViewSubHeading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:maxWidth="@dimen/_260sdp"
                 android:layout_marginTop="@dimen/unit_32dp"
                 android:text="@string/beneficiary_account_number_cnic"
+                app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lyRemittanceDate" />
 
             <ImageView

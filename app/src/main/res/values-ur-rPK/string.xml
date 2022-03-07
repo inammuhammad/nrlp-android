@@ -4,13 +4,13 @@
     <string name="register_an_account">رجسٹر کریں</string>
     <string name="full_name">مکمل نام*</string>
     <string name="full_name_complaint">مکمل نام</string>
-    <string name="full_name_as_per_cnic">*CNIC/NICOP کے مطابق پورا نام</string>
+    <string name="full_name_as_per_cnic">*CNIC/NICOP/POC کے مطابق پورا نام</string>
     <string name="mother_maiden_name">ماں کا نام *</string>
     <string name="place_of_birth">جائے پیدائش *</string>
     <string name="title_place_of_birth">جائے پیدائش</string>
     <string name="cnic_nicop_number">شناختی کارڈ/ نیشنل آئیڈنٹٹی کارڈ فور اوورسیز پاکستانی*</string>
     <string name="cnic_nicop_number_complaint">شناختی کارڈ/ نیشنل آئیڈنٹٹی کارڈ فور اوورسیز پاکستانی</string>
-    <string name="cnic_nicop_issuance_date">*CNIC/NICOP کے اجراء کی تاریخ</string>
+    <string name="cnic_nicop_issuance_date">*CNIC/NICOP/POC کے اجراء کی تاریخ</string>
     <string name="country">قیام کا ملک*</string>
     <string name="country_complaint">قیام کا ملک</string>
     <string name="passport_no">پاسپورٹ نمبر*</string>
@@ -193,7 +193,7 @@
     <string name="no_beneficiary_found_manage_points">آپ کے وصول کنندہ نے ابھی تک اکاؤنٹ کو رجسٹر نہیں کیا ہے۔ یوزر فعال ہو جائے تو آپ پوائنٹس کو منتقل کرنے کے قابل ہوجائیں گے۔</string>
     <string name="device_rooted_alert_title">آپ کی ڈیوائس rooted ہے</string>
     <string name="device_rooted_alert_msg">آپ کی ڈیوائس rooted ہے، اس پہ ایپلیکشن نہیں استعمال کی جاسکتی</string>
-    <string name="error_cnic">براہ کرم درست CNIC/NICOP درج کریں</string>
+    <string name="error_cnic">براہ کرم درست CNIC/NICOP/POC درج کریں</string>
     <string name="error_not_valid_name">براہ کرم ایک درست پورا نام درج کریں</string>
     <string name="error_not_valid_mother_name">براہ کرم ایک درست نام درج کریں</string>
     <string name="error_mobile_num_not_valid">براہ کرم درست موبائل نمبر درج کریں</string>
@@ -357,7 +357,7 @@
     <string name="self_awarding">سیلف ایوارڈ</string>
     <string name="redemption">ریڈیمشن</string>
     <string name="redemption_partner">ریڈیمشن پاٹنر</string>
-    <string name="beneficiary_cnic_nicop">وصول کنندہ کا CNIC/NICOP</string>
+    <string name="beneficiary_cnic_nicop">وصول کنندہ کا CNIC/NICOP/POC</string>
     <string name="remitting_entity">ترسیلات زر کا ادارہ</string>
     <string name="transaction_id">ٹرانزیکشن آئی ڈی</string>
     <string name="transaction_date">ٹرانزیکشن کی تاریخ</string>
@@ -368,4 +368,20 @@
     <string name="transaction_amount_pkr">ٹرانزیکشن  کی رقم( پاکستانی روپے)</string>
     <string name="incorrect_information">پ کی فراہم کردہ معلومات غلط ہے۔ براہ مہربانی نادرہ ریکارڈ کے مطابق صحیح معلومات درج کریں</string>
     <string name="provide_necessary_information">مزید آگے بڑھنے کے لئے براہ کرم درخواست کردہ معلومات فراہم کریں</string>
+    <string name="click_next_add_receiver">اپنے وصول کنندہ کو شامل کرنے اور اپنے اکاؤنٹ میں آٹو پوائنٹس حاصل کرنے کے لیے اگلے پر کلک کریں</string>
+    <string name="add_receiver">وصول کنندہ شامل کریں</string>
+    <string name="receiver_will_be_added_upon_nadra">آپ کی ترسیلات زر وصول کرنے والا  نادرا کی تصدیق کے بعد شامل کر دیا جائے گا۔</string>
+    <string name="remittance_receiver_manager">ترسیلات زر وصول کنندہ کی  منتظمی</string>
+    <string name="receiver_mother_maiden_name">براہ کرم نادرا کے ریکارڈ کے مطابق وصول کنندہ کی والدہ کا نام درج کریں</string>
+    <string name="receiver_place_of_birth">نادرا کے ریکارڈ کے مطابق براہ کرم وصول کنندہ کی جائے پیدائش درج کریں۔</string>
+    <string name="enter_bank_name">بینک کا نام</string>
+    <string name="enter_iban_number">بینک اکاؤنٹ نمبر / بین الاقوامی بینک اکاؤنٹ نمبر</string>
+    <string name="receiver_country_of_residence">وصول کنندہ کا قیام کا ملک</string>
+    <string name="receiver_name_help">براہ کرم وصول کنندہ کا نام NICOP/CNIC/POC  کے مطابق درج کریں</string>
+    <string name="select_receiver_type">وصول کنندہ کی قسم منتخب کریں۔</string>
+    <string name="remittance_cnic">قومی شناختی کارڈ پر بھیجی گئی ترسیلات</string>
+    <string name="remittance_iban">بینک اکاؤنٹ میں بھیجی گئی  ترسیلات</string>
+    <string name="skip">منسوخ کریں</string>
+    <string name="receiver_iban">براہ کرم وصول کنندہ کا بینک اکاؤنٹ نمبر/بین الاقوامی بینک اکاؤنٹ نمبر درج کریں</string>
+    <string name="receiver_bank_name">براہ کرم وصول کنندہ  کے  بینک کا نام درج کریں۔</string>
 </resources>

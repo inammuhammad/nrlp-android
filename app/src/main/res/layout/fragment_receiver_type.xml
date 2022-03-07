@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="Add Receiver"
+        android:text="@string/add_receiver"
         android:textSize="@dimen/_16sdp"
         style="@style/TextViewSubHeading"
         android:textColor="@color/black"
@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text="Remittance Sent to CNIC" />
+            android:text="Remittance sent to CNIC" />
 
         <RadioButton
             android:id="@+id/rdBtnIban"

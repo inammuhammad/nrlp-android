@@ -86,6 +86,7 @@ abstract class BaseActivity<DB : ViewDataBinding, VM : BaseViewModel>(mViewModel
                     ErrorCodesConstants.NO_INTERNET_CONNECTION -> showNoInternetConnectionDialog()
                     ErrorCodesConstants.SESSION_EXPIRED -> showSessionExpiredDialog()
                     ErrorCodesConstants.UNSUCCESSFUL_TRANSACTION_FETCH -> showTransactionFetchUnsuccessfulDialog()
+                    ErrorCodesConstants.PROFILE_VERIFICATION_FAILED -> showProfileUpdateVerificationFailed()
                     else -> showRemoteErrorDialog(it)
                 }
             }
@@ -116,6 +117,15 @@ abstract class BaseActivity<DB : ViewDataBinding, VM : BaseViewModel>(mViewModel
         OneLinkAlertDialogsFragment.Builder().setIsAlertOnly(true)
             .setDrawable(R.drawable.ic_oh_snap).setTitle(getString(R.string.oh_snap))
             .setMessage(getString(R.string.error_session_expired).toSpanned())
+            .setNeutralButtonText(getString(R.string.okay)).setNegativeButtonText("")
+            .setPositiveButtonText("").setCancelable(false)
+            .show(supportFragmentManager, ErrorDialogConstants.TAG_SESSION_EXPIRED)
+    }
+
+    private fun showProfileUpdateVerificationFailed() {
+        OneLinkAlertDialogsFragment.Builder().setIsAlertOnly(true)
+            .setDrawable(R.drawable.ic_oh_snap).setTitle(getString(R.string.oh_snap))
+            .setMessage(getString(R.string.error_profile_verification_failed).toSpanned())
             .setNeutralButtonText(getString(R.string.okay)).setNegativeButtonText("")
             .setPositiveButtonText("").setCancelable(false)
             .show(supportFragmentManager, ErrorDialogConstants.TAG_SESSION_EXPIRED)

@@ -610,16 +610,16 @@ class BeneficiaryDetailsFragment :
         //binding.etCountry.visibility = View.GONE
         binding.tvCountryCode.visibility = View.GONE
         binding.prefixTv.visibility = View.GONE
-        binding.ivDropDown.visibility = View.VISIBLE
+        //binding.ivDropDown.visibility = View.VISIBLE
 
-        //Disabling EditTexts
+        //Enabling EditTexts
         context?.let {
             binding.eTCnicNumber.enabled(it)
-            binding.etAlias.enabled(it)
+            //binding.etAlias.enabled(it)
             binding.etMobileNumber.enabled(it)
-            binding.beneficiaryLL.enabled()
-            binding.spinnerRelationShip.enabled()
-            binding.tvRelationShip.enabled(it)
+            //binding.beneficiaryLL.enabled()
+            //binding.spinnerRelationShip.enabled()
+            //binding.tvRelationShip.enabled(it)
             binding.etCountry.enabled(it)
         }
 
@@ -638,14 +638,14 @@ class BeneficiaryDetailsFragment :
 
         //TextColor
         //TextColor
-        binding.etAlias.colorToText(R.color.black)
-        binding.etAlias.alpha = 1f
+       /* binding.etAlias.colorToText(R.color.black)
+        binding.etAlias.alpha = 1f*/
         binding.eTCnicNumber.colorToText(R.color.black)
         binding.eTCnicNumber.alpha = 1f
         binding.etMobileNumber.colorToText(R.color.black)
         binding.etMobileNumber.alpha = 1f
-        binding.tvRelationShip.colorToText(R.color.black)
-        binding.tvRelationShip.alpha = 1f
+        /*binding.tvRelationShip.colorToText(R.color.black)
+        binding.tvRelationShip.alpha = 1f*/
         binding.etCountry.colorToText(R.color.black)
         binding.etCountry.alpha = 1f
 
@@ -779,6 +779,7 @@ class BeneficiaryDetailsFragment :
         countryCodeLength = countryCodeModel.length.toInt()
         binding.tvCountryCode.text = countryCodeModel.code
         viewModel.country.value = countryCodeModel.country
+        binding.tvCountryCode.visibility = View.VISIBLE
         binding.tvCountryCode.colorToText(R.color.black)
         binding.etMobileNumber.isEnabled = true
         binding.etMobileNumber.hint = viewModel.phoneNumberHint(countryCodeModel.length.toInt())

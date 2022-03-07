@@ -106,6 +106,7 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
                     ErrorCodesConstants.UNSUCCESSFUL_TRANSACTION_FETCH -> showTransactionFetchUnsuccessfulDialog(fragment)
                     ErrorCodesConstants.INCORRECT_INFORMATION -> showIncorrectInformationDialog(fragment)
                     ErrorCodesConstants.ATTEMPTS_EXCEEDED -> showAttemptsExceededDialog(fragment)
+                    ErrorCodesConstants.PROFILE_VERIFICATION_FAILED -> showProfileUpdateVerificationFailedDialog(fragment)
                     else -> showRemoteErrorDialog(fragment, it)
                 }
             }
@@ -192,6 +193,20 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
             .setDrawable(R.drawable.ic_oh_snap)
             .setTitle(getString(R.string.oh_snap))
             .setMessage(getString(R.string.error_session_expired).toSpanned())
+            .setNeutralButtonText(getString(R.string.okay))
+            .setNegativeButtonText("")
+            .setPositiveButtonText("")
+            .setCancelable(false)
+            .show(parentFragmentManager, ErrorDialogConstants.TAG_SESSION_EXPIRED)
+    }
+
+    private fun showProfileUpdateVerificationFailedDialog(fragment: Fragment){
+        OneLinkAlertDialogsFragment.Builder()
+            .setTargetFragment(fragment, ErrorDialogConstants.RC_SESSION_EXPIRED)
+            .setIsAlertOnly(true)
+            .setDrawable(R.drawable.ic_oh_snap)
+            .setTitle(getString(R.string.oh_snap))
+            .setMessage(getString(R.string.error_profile_verification_failed).toSpanned())
             .setNeutralButtonText(getString(R.string.okay))
             .setNegativeButtonText("")
             .setPositiveButtonText("")

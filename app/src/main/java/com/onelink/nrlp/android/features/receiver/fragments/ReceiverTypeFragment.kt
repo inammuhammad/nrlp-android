@@ -13,7 +13,7 @@ import javax.inject.Inject
 class ReceiverTypeFragment : BaseFragment<ReceiverSharedViewModel, FragmentReceiverTypeBinding>(
     ReceiverSharedViewModel::class.java){
 
-    override fun getTitle(): String = "Choose Receiver Type"
+    override fun getTitle(): String = resources.getString(R.string.select_receiver_type)
 
     override fun getLayoutRes() = R.layout.fragment_receiver_type
 

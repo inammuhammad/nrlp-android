@@ -7,7 +7,7 @@
     <string name="place_of_birth">Place of Birth *</string>
     <string name="title_place_of_birth">Place of Birth</string>
     <string name="cnic_nicop_number">CNIC/NICOP/POC *</string>
-    <string name="cnic_nicop_number_complaint">CNIC/NICOP</string>
+    <string name="cnic_nicop_number_complaint">CNIC/NICOP/POC</string>
     <string name="cnic_nicop_issuance_date">CNIC/NICOP/POC Issuance Date *</string>
     <string name="country">Country of Residence *</string>
     <string name="country_complaint">Country of Residence</string>
@@ -23,13 +23,14 @@
     <string name="help_password">Please enter a Password</string>
     <string name="help_confirm_password">Please re-enter the Password </string>
     <string name="help_user_type">Please select if you are a Remitter (Sender) Or Beneficiary (Receiver) of remittance funds</string>
-    <string name="help_full_name">Please enter your Full Name as per CNIC/NICOP</string>
+    <string name="help_full_name">Please enter your Full Name as per CNIC/NICOP/POC</string>
     <string name="help_usd">The Annual Remittance to-date in USD is accumulated from 1st July of each year, and your loyalty category is calculated based on this. For further details please visit FAQs.</string>
 
     <string name="resident_id">Unique ID *</string>
     <string name="mobile_number">Mobile Number *</string>
     <string name="mobile_number_complaint">Mobile Number</string>
     <string name="beneficiary_mobile_number">Beneficiary Mobile Number</string>
+    <string name="receiver_mobile_number">Receiver Mobile Number</string>
     <string name="email_address">Email Address</string>
     <string name="email_address_optional">Email Address (Optional)</string>
     <string name="password">Password *</string>
@@ -177,7 +178,7 @@
     <string name="forgot_pass_otp_sent_msg">A verification code has been sent to your registered mobile number.</string>
     <string name="otp_sent_generic_msg">We have sent you OTP on your registered mobile number, please enter the OTP below;</string>
     <string name="set_new_password_msg">Your password must contain at least 8 characters, including 1 small letter, 1 capital letter, 1 number and 1 special character.</string>
-    <string name="enter_registered_cnic_msg">Please enter your registered CNIC/NICOP</string>
+    <string name="enter_registered_cnic_msg">Please enter your registered CNIC/NICOP/POC</string>
     <string name="verify">Verify</string>
     <string name="confirm">Confirm</string>
     <string name="change_password_successful">Change Password Successful</string>
@@ -193,7 +194,7 @@
     <string name="no_beneficiary_found_manage_points">Your beneficiaries have not activated their accounts yet. Once they are active you will be able to transfer the points.</string>
     <string name="device_rooted_alert_title">Device Rooted</string>
     <string name="device_rooted_alert_msg">Your Device seems to be rooted</string>
-    <string name="error_cnic">Please enter a valid CNIC/NICOP</string>
+    <string name="error_cnic">Please enter a valid CNIC/NICOP/POC</string>
     <string name="error_not_valid_name">Please enter a valid Full Name</string>
     <string name="error_not_valid_mother_name">Please enter a valid Mother Maiden Name</string>
     <string name="error_mobile_num_not_valid">Please enter a valid Mobile Number</string>
@@ -279,6 +280,7 @@
     <string name="device_change">Device Change</string>
     <string name="points">%1$s Points</string>
     <string name="error_session_expired">Your session has been expired. Please login again.</string>
+    <string name="error_profile_verification_failed">Your account has been locked due to 3 unsuccessful attempts. You can click on forget password to unlock your account.</string>
     <string name="error_transaction_fetch">Please wait for at least 5 working days after your remittance has been processed to register for Sohni Dharti Remittance Program. If your transaction is older than 5 days, kindly contact Customer Support at +92-21-111-11-6757 or email us at sdrpsupport@1link.net.pk</string>
     <string name="verify_your_device">Verify your device</string>
     <string name="language">Language</string>
@@ -365,7 +367,7 @@
     <string name="self_awarding">Self Awarding</string>
     <string name="redemption">Redemption</string>
     <string name="redemption_partner">Redemption Partner</string>
-    <string name="beneficiary_cnic_nicop">Beneficiary CNIC/NICOP</string>
+    <string name="beneficiary_cnic_nicop">Beneficiary CNIC/NICOP/POC</string>
     <string name="remitting_entity">Remitting Entity</string>
     <string name="transaction_id">Transaction ID</string>
     <string name="transaction_date">Transaction Date</string>
@@ -396,4 +398,15 @@
     <string name="enter_mother_maiden_name">Enter Mother Maiden name</string>
     <string name="enter_bank_name">Enter Bank name</string>
     <string name="enter_iban_number">Enter IBAN/Account number</string>
+    <string name="add_receiver">Add Receiver</string>
+    <string name="receiver_will_be_added_upon_nadra">Your Remittance Receiver\nwill be added upon\NADRA verification</string>
+    <string name="receiver_mother_maiden_name">Please enter Receiver Mother Name as per NADRA record</string>
+    <string name="receiver_place_of_birth">Please enter Receiver Place of Birth as per NADRA record</string>
+    <string name="receiver_country_of_residence">Please enter Receiver Country of Residence</string>
+    <string name="receiver_name_help">Please enter Receiver Name as per CNIC/NICOP/POC</string>
+    <string name="select_receiver_type">Select Receiver Type</string>
+    <string name="remittance_cnic">Remittance sent to CNIC</string>
+    <string name="remittance_iban">Remittance sent in Bank Account</string>
+    <string name="receiver_iban">Please enter Receiver Bank Account Number/IBAN</string>
+    <string name="receiver_bank_name">Please enter Receiver Bank Name</string>
 </resources>

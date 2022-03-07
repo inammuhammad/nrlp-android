@@ -442,22 +442,22 @@ class ReceiverDetailsFragment :
             hideKeyboard()
         }
         binding.icHelpFullName.setOnClickListener {
-            showGeneralAlertDialog(this,"Register",getString(R.string.help_full_name))
+            showGeneralAlertDialog(this,"Register",getString(R.string.receiver_name_help))
         }
         binding.icHelpPlaceOfBirth.setOnClickListener {
-            showGeneralAlertDialog(this,"Register",getString(R.string.enter_place_of_birth))
+            showGeneralAlertDialog(this,"Register",getString(R.string.receiver_place_of_birth))
         }
         binding.icHelpCountry.setOnClickListener {
-            showGeneralAlertDialog(this,"Register",getString(R.string.enter_residence_country))
+            showGeneralAlertDialog(this,"Register",getString(R.string.receiver_country_of_residence))
         }
         binding.icHelpMotherMaidenName.setOnClickListener {
-            showGeneralAlertDialog(this,"Register",getString(R.string.enter_mother_maiden_name))
+            showGeneralAlertDialog(this,"Register",getString(R.string.receiver_mother_maiden_name))
         }
         binding.icHelpBankName.setOnClickListener {
-            showGeneralAlertDialog(this,"Register",getString(R.string.enter_bank_name))
+            showGeneralAlertDialog(this,"Register",getString(R.string.receiver_bank_name))
         }
         binding.icHelpIbanNumber.setOnClickListener {
-            showGeneralAlertDialog(this,"Register",getString(R.string.enter_iban_number))
+            showGeneralAlertDialog(this,"Register",getString(R.string.receiver_iban))
         }
     }
 
@@ -874,7 +874,7 @@ class ReceiverDetailsFragment :
             true,
             R.drawable.ic_beneficairy_created,
             "Request Received",
-            ("Your Remittance Receiver \nwill be added upon \nNDARA verification").toSpanned(),
+            getString(R.string.receiver_will_be_added_upon_nadra).toSpanned(),
             getString(R.string.done),
             positiveButtonText = "",
             negativeButtonText = ""
