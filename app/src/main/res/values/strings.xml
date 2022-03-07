@@ -24,13 +24,12 @@
     <string name="help_confirm_password">Please re-enter the Password </string>
     <string name="help_user_type">Please select if you are a Remitter (Sender) Or Beneficiary (Receiver) of remittance funds</string>
     <string name="help_full_name">Please enter your Full Name as per CNIC/NICOP/POC</string>
-    <string name="help_usd">The Annual Remittance to-date in USD is accumulated from 1st July of each year, and your loyalty category is calculated based on this. For further details please visit FAQs.</string>
+    <string name="help_usd">The Annual Remittance to- date in USD is accumulated from 1st July of each year, however for current year it shall be applicable from 1st October 2021 and your loyalty category will be calculated accordingly. For further details please visit FAQs.</string>
 
     <string name="resident_id">Unique ID *</string>
     <string name="mobile_number">Mobile Number *</string>
     <string name="mobile_number_complaint">Mobile Number</string>
     <string name="beneficiary_mobile_number">Beneficiary Mobile Number</string>
-    <string name="receiver_mobile_number">Receiver Mobile Number</string>
     <string name="email_address">Email Address</string>
     <string name="email_address_optional">Email Address (Optional)</string>
     <string name="password">Password *</string>
@@ -40,7 +39,7 @@
     <string name="remittance_amount">Remittance Amount (In PKR)</string>
     <string name="remittance_amount_help">Enter exact amount as per your transaction receipt</string>
     <string name="remittance_date_help">Enter date on which transaction is made</string>
-    <string name="remittance_account_cnic_number_help">Enter Beneficiary Account Number or IBAN or CNIC on which remittance is sent</string>
+    <string name="remittance_account_cnic_number_help">Please enter following details of remittance receiver in Pakistan  \n1. In case of receiving cash-CNIC \n2. In case of credits in bank account-complete bank account no.</string>
     <string name="remittance_date">Date of Remittance</string>
 
     <string name="enter_points">Enter Points</string>
@@ -82,7 +81,7 @@
     <string name="remitter_verification">Remitter Verification</string>
     <string name="beneficiary_verification_title">Beneficiary Verification</string>
     <string name="reference_number">Reference Number/TT Number</string>
-    <string name="beneficiary_account_number_cnic">Beneficiary Account Number/IBAN/CNIC</string>
+    <string name="beneficiary_account_number_cnic">Beneficiary Account Number/IBAN/CNIC/POC</string>
     <string name="transaction_amount">Transaction Amount</string>
     <string name="curPassword">Enter Old Password</string>
     <string name="newPassword">Enter New Password</string>
@@ -391,22 +390,24 @@
     <string name="verification">Verification</string>
     <string name="provide_necessary_information">Please provide requested information to proceed further</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="remittance_receiver_manager">Remittance Receiver Manager</string>
+    <string name="remittance_receiver_manager">Remittance Receiver Management</string>
     <string name="click_next_add_receiver">Click next to add your Remittance Receiver\nand get auto points into your account</string>
     <string name="skip">Skip</string>
     <string name="enter_place_of_birth">Place of birth</string>
     <string name="enter_mother_maiden_name">Enter Mother Maiden name</string>
-    <string name="enter_bank_name">Enter Bank name</string>
-    <string name="enter_iban_number">Enter IBAN/Account number</string>
+    <string name="enter_bank_name">Bank Name*</string>
+    <string name="enter_iban_number">IBAN/Account Number*</string>
     <string name="add_receiver">Add Receiver</string>
-    <string name="receiver_will_be_added_upon_nadra">Your Remittance Receiver\nwill be added upon\NADRA verification</string>
+    <string name="receiver_will_be_added_upon_nadra">Your Remittance Receiver\nwill be added upon\nNADRA verification</string>
     <string name="receiver_mother_maiden_name">Please enter Receiver Mother Name as per NADRA record</string>
     <string name="receiver_place_of_birth">Please enter Receiver Place of Birth as per NADRA record</string>
     <string name="receiver_country_of_residence">Please enter Receiver Country of Residence</string>
     <string name="receiver_name_help">Please enter Receiver Name as per CNIC/NICOP/POC</string>
     <string name="select_receiver_type">Select Receiver Type</string>
-    <string name="remittance_cnic">Remittance sent to CNIC</string>
-    <string name="remittance_iban">Remittance sent in Bank Account</string>
     <string name="receiver_iban">Please enter Receiver Bank Account Number/IBAN</string>
     <string name="receiver_bank_name">Please enter Receiver Bank Name</string>
+    <string name="remittance_to_cnic">Remittance sent to CNIC</string>
+    <string name="remittance_to_bank">Remittance sent to Bank Account</string>
+    <string name="request_received">Request Received</string>
+    <string name="are_you_sure_delete_receiver">Are you sure want to delete the Receiver</string>
 </resources>

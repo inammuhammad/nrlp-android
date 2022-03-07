@@ -64,7 +64,8 @@ open class LoginRepo @Inject constructor(
             placeOfBirth = loginResponseModel.loginModel.placeOfBirth,
             cnicNicopIssuanceDate = loginResponseModel.loginModel.cnicNicopIssuanceDate,
             nadraVerified = loginResponseModel.loginModel.nadraVerified,
-            requireNadraVerification = loginResponseModel.loginModel.requireNadraVerification
+            requireNadraVerification = loginResponseModel.loginModel.requireNadraVerification,
+            receiverCount = 0
         )
     }
 

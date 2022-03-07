@@ -27,5 +27,6 @@ data class UserModel(
     val placeOfBirth: String?,
     val cnicNicopIssuanceDate: String?,
     val nadraVerified: String?,
-    val requireNadraVerification: Boolean?
+    val requireNadraVerification: Boolean?,
+    val receiverCount: Int?
 )

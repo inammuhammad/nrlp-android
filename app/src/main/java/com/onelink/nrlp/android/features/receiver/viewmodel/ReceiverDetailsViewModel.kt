@@ -9,6 +9,7 @@ import com.onelink.nrlp.android.features.beneficiary.models.ResendBeneficiaryOtp
 import com.onelink.nrlp.android.features.beneficiary.models.UpdateBeneficiaryRequestModel
 import com.onelink.nrlp.android.features.beneficiary.repo.BeneficiaryRepo
 import com.onelink.nrlp.android.features.receiver.models.AddReceiverRequestModel
+import com.onelink.nrlp.android.features.receiver.models.DeleteReceiverRequestModel
 import com.onelink.nrlp.android.features.receiver.repo.ReceiverRepo
 import com.onelink.nrlp.android.utils.Constants
 import com.onelink.nrlp.android.utils.ValidationUtils
@@ -51,10 +52,13 @@ open class ReceiverDetailsViewModel @Inject constructor(private val receiverRepo
 
     fun observeBeneficiaryUpdateResponse(){} //=beneficiaryRepo.observerBeneficiaryUpdateResponse()
 
+    fun deleteReceiver(deleteReceiverRequestModel: DeleteReceiverRequestModel) = receiverRepo.deleteReceiver(deleteReceiverRequestModel)
+
     fun addReceiver(addReceiverRequestModel: AddReceiverRequestModel) =
         receiverRepo.addReceiver(addReceiverRequestModel)
 
     fun observeReceiverAddResponse() = receiverRepo.observeReceiverAddResponse()
+    fun observeReceiverDeleteResponse() = receiverRepo.observeReceiverDeleteResponse()
 
     override fun onCleared() {
         receiverRepo.onClear()

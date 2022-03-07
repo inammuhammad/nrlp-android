@@ -2,7 +2,6 @@ package com.onelink.nrlp.android.features.beneficiary.repo
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.fasterxml.jackson.databind.ser.Serializers
 import com.onelink.nrlp.android.core.BaseResponse
 import com.onelink.nrlp.android.data.NetworkHelper
 import com.onelink.nrlp.android.data.ServiceGateway

@@ -25,6 +25,7 @@ data class UserProfileModel(
     @SerializedName("place_of_birth") val placeOfBirth: String,
     @SerializedName("cnic_nicop_issuance_date") val cnicNicopIssuanceDate: String,
     @SerializedName("nadra_verified") val nadraVerified: String?,
-    @SerializedName("require_nadra_verification") val requireNadraVerification: Boolean?
+    @SerializedName("require_nadra_verification") val requireNadraVerification: Boolean?,
+    @SerializedName("receiver_count") val receiverCount: Int?
 
 )

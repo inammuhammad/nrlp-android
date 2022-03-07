@@ -31,6 +31,8 @@ import com.onelink.nrlp.android.features.beneficiary.viewmodel.BeneficiaryShared
 import com.onelink.nrlp.android.features.profile.disabled
 import com.onelink.nrlp.android.features.profile.enabled
 import com.onelink.nrlp.android.features.receiver.models.AddReceiverRequestModel
+import com.onelink.nrlp.android.features.receiver.models.DeleteReceiverRequestModel
+import com.onelink.nrlp.android.features.receiver.models.ReceiverDetailsModel
 import com.onelink.nrlp.android.features.receiver.view.ReceiverActivity
 import com.onelink.nrlp.android.features.receiver.viewmodel.ReceiverDetailsViewModel
 import com.onelink.nrlp.android.features.receiver.viewmodel.ReceiverSharedViewModel
@@ -88,7 +90,7 @@ class ReceiverDetailsFragment :
 
     private var countryCodeLength: Int? = 10
 
-    private lateinit var beneficiaryDetailsModel: BeneficiaryDetailsModel
+    private lateinit var beneficiaryDetailsModel: ReceiverDetailsModel
 
     private lateinit var relation: String
 
@@ -170,13 +172,13 @@ class ReceiverDetailsFragment :
     }*/
 
     private fun initViews(){
-        if(receiverSharedViewModel?.beneficiaryDetails?.value?.let { !it.isActive } == true){
+        /*if(receiverSharedViewModel?.receiverDetails?.value.linkStatus == ""){
             binding.lytPosNegButtons.visibility=View.VISIBLE
             isTimePassed()
             //val result=gmtTime-timeUpdated
         }else{
             binding.lytPosNegButtons.visibility=View.GONE
-        }
+        }*/
     }
     fun String.toDate(dateFormat: String = LOCAL_TIME_PATTERN, timeZone: TimeZone = TimeZone.getTimeZone("UTC")): Date {
         val parser = SimpleDateFormat(dateFormat, Locale.ENGLISH)
@@ -195,11 +197,11 @@ class ReceiverDetailsFragment :
 
     }
 
-    private fun isTimePassed(){
+    /*private fun isTimePassed(){
         val df = DateFormat.getDateTimeInstance()
         df.timeZone = TimeZone.getTimeZone("gmt")
         val gmtTime = df.format(Date())
-        val timeUpdated=receiverSharedViewModel?.beneficiaryDetails?.value!!.updatedAt
+        val timeUpdated=receiverSharedViewModel?.receiverDetails?.value!!.updatedAt
         val parser =  SimpleDateFormat(SERVER_TIME_PATTERN)
         val date1=timeUpdated.toDate(dateFormat = SERVER_TIME_PATTERN)
         // val parser2 =  SimpleDateFormat(LOCAL_TIME_PATTERN,Locale.ENGLISH)
@@ -221,7 +223,7 @@ class ReceiverDetailsFragment :
             fiveMinuteTimer.setRemainingTimeinMillis(timeRemaining)
             fiveMinuteTimer.reset()
         }
-    }
+    }*/
 
 
     private fun initOnFocusChangeListeners() {
@@ -400,19 +402,9 @@ class ReceiverDetailsFragment :
 
         binding.btnNext.setOnSingleClickListener {
             makeReceiverAddCall()
-           /* if (isDeleteBeneficiary)
-                showConfirmBeneficiaryDeletionDialog(beneficiaryDetailsModel)
-            else {
-                if (viewModel.validationsPassed(
-                        binding.eTCnicNumber.text.toString(),
-                        binding.etAlias.text.toString(),
-                        binding.etMobileNumber.text.toString(),
-                        countryCodeLength
-                    )
-                ) {
-                    makeBeneficiaryAddCall()
-                }
-            }*/
+        }
+        binding.btnDelete.setOnSingleClickListener {
+            showConfirmBeneficiaryDeletionDialog(beneficiaryDetailsModel)
         }
         binding.tvPlaceOfBirth.setOnClickListener {
             fragmentHelper.addFragment(
@@ -426,7 +418,7 @@ class ReceiverDetailsFragment :
             binding.spinnerSelectRelationship.performClick()
         }
         binding.btnEdit.setOnSingleClickListener {
-            enableEdit(beneficiaryDetailsModel)
+            //enableEdit(beneficiaryDetailsModel)
         }
         binding.btnCancel.setOnSingleClickListener {
             makeDeleteBeneficiaryView(beneficiaryDetailsModel)
@@ -484,7 +476,7 @@ class ReceiverDetailsFragment :
     private fun initObservers() {
         receiverSharedViewModel?.isDeleteBeneficiary?.observe(this, { isDeleteBeneficiary ->
             if (isDeleteBeneficiary) {
-                receiverSharedViewModel?.beneficiaryDetails?.observe(this, {
+                receiverSharedViewModel?.receiverDetails?.observe(this, {
                     beneficiaryDetailsModel = it
                     makeDeleteBeneficiaryView(beneficiaryDetailsModel)
                     initViews()
@@ -514,7 +506,7 @@ class ReceiverDetailsFragment :
             }
         })
 
-        /*viewModel.observeBeneficiaryDeleteResponse().observe(this, { response ->
+        viewModel.observeReceiverDeleteResponse().observe(this, { response ->
             when (response.status) {
                 Status.SUCCESS -> {
                     oneLinkProgressDialog.hideProgressDialog()
@@ -534,7 +526,7 @@ class ReceiverDetailsFragment :
             }
         })
 
-        viewModel.observeBeneficiaryResendOtp().observe(this, { response ->
+        /*viewModel.observeBeneficiaryResendOtp().observe(this, { response ->
             when (response.status) {
                 Status.SUCCESS -> {
                     oneLinkProgressDialog.hideProgressDialog()
@@ -613,7 +605,7 @@ class ReceiverDetailsFragment :
         viewModel.validationMotherMaidenPassed.observe(this, { validationsPassed ->
             run {
                 if (!validationsPassed)
-                    binding.tilMotherMaidenName.error = getString(R.string.error_not_valid_name)
+                    binding.tilMotherMaidenName.error = getString(R.string.error_not_valid_mother_name)
                 else {
                     binding.tilMotherMaidenName.clearError()
                     binding.tilMotherMaidenName.isErrorEnabled = false
@@ -695,16 +687,41 @@ class ReceiverDetailsFragment :
         datePickerDialog?.show()
     }
 
-    private fun makeDeleteBeneficiaryView(it: BeneficiaryDetailsModel) {
+    private fun makeDeleteBeneficiaryView(it: ReceiverDetailsModel) {
         //Managing views visibilities
         isDeleteBeneficiary = true
-        binding.btnNext.text = getString(R.string.delete_beneficiary)
-        binding.btnNext.visibility=View.VISIBLE
+        binding.btnNext.visibility=View.GONE
+        binding.btnDelete.visibility=View.VISIBLE
+        context?.let { it1 -> binding.btnNext.enabled(it1) }
         //binding.textViewCountry.visibility = View.GONE
         //binding.etCountry.visibility = View.GONE
         binding.tvCountryCode.visibility = View.GONE
         binding.prefixTv.visibility = View.GONE
         binding.lytUpdateCancel.visibility = View.GONE
+        binding.tvMotherMaidenName.visibility = View.GONE
+        binding.icHelpMotherMaidenName.visibility = View.GONE
+        binding.tilMotherMaidenName.visibility = View.GONE
+        binding.tvCnicIssuanceDateLabel.visibility = View.GONE
+        binding.tvCnicIssuanceDate.visibility = View.GONE
+        binding.textViewPlaceOfBirth.visibility = View.GONE
+        binding.icHelpPlaceOfBirth.visibility = View.GONE
+        binding.tvPlaceOfBirth.visibility = View.GONE
+        binding.textViewCountry.visibility = View.GONE
+        binding.textViewCountry.visibility = View.GONE
+        binding.etCountry.visibility = View.GONE
+        binding.icHelpCountry.visibility = View.GONE
+        binding.tvPlaceOfBirth.visibility = View.GONE
+        binding.icHelpFullName.visibility = View.GONE
+        binding.icHelpBankName.visibility = View.GONE
+        binding.icHelpIbanNumber.visibility = View.GONE
+        if(it.recBankIban.isNullOrEmpty()){
+            binding.tilIbanNumber.visibility = View.GONE
+            binding.tvIbanNumber.visibility = View.GONE
+            binding.icHelpIbanNumber.visibility = View.GONE
+            binding.tvBankName.visibility = View.GONE
+            binding.icHelpBankName.visibility = View.GONE
+            binding.tilBankName.visibility = View.GONE
+        }
 
         //Disabling EditTexts
         context?.let {
@@ -715,17 +732,21 @@ class ReceiverDetailsFragment :
             binding.spinnerRelationShip.disabled()
             binding.tvRelationShip.disabled(it)
             binding.etCountry.disabled(it)
+            binding.etBankName.disabled(it)
+            binding.etIbanNumber.disabled(it)
         }
 
         //Setting Form Fields
         binding.viewModel = viewModel
-        viewModel.alias.value = it.alias
-        viewModel.cnicNumber.value = it.nicNicop.toString().formattedCnicNumberNoSpaces()
-        viewModel.mobileNumber.value = it.mobileNo
-        binding.tvRelationShip.text = it.relationship
-        binding.etCountry.text = it.country
+        viewModel.alias.value = it.receiverName
+        viewModel.cnicNumber.value = it.remitterCnic.toString().formattedCnicNumberNoSpaces()
+        viewModel.mobileNumber.value = it.receiverMobileNumber
+        viewModel.bankName.value = it.recBankName
+        viewModel.ibanNumber.value = it.recBankIban
+        //binding.tvRelationShip.text = it.relationship
+        /*binding.etCountry.text =
         if(it.country.isNullOrEmpty())
-            binding.etCountry.text = " "
+            binding.etCountry.text = " "*/
         viewModel.aliasNotEmpty.value = true
         viewModel.cnicNumberNotEmpty.value = true
         viewModel.mobileNumberNotEmpty.value = true
@@ -746,12 +767,9 @@ class ReceiverDetailsFragment :
         //hiding beneficiary relationship
         //binding.beneficiaryLL.visibility = View.GONE
         binding.ivDropDown.visibility = View.GONE
-
-        /*if(!it.isActive)
-            binding.lytPosNegButtons.visibility = View.VISIBLE*/
     }
 
-    private fun enableEdit(it: BeneficiaryDetailsModel){
+    /*private fun enableEdit(it: ReceiverDetailsModel){
         binding.lytPosNegButtons.visibility = View.GONE
         binding.lytUpdateCancel.visibility = View.VISIBLE
         binding.btnNext.text = getString(R.string.delete_beneficiary)
@@ -800,7 +818,7 @@ class ReceiverDetailsFragment :
         binding.etCountry.alpha = 1f
 
         binding.lytPosNegButtons.visibility = View.VISIBLE
-    }
+    }*/
 
     private fun updatedBeneficiaryView(){
         //Managing views visibilities
@@ -849,13 +867,13 @@ class ReceiverDetailsFragment :
             ReceiverDetailsFragment()
     }
 
-    private fun showConfirmBeneficiaryDeletionDialog(beneficiaryDetailsModel: BeneficiaryDetailsModel) {
+    private fun showConfirmBeneficiaryDeletionDialog(receiverDetailsModel: ReceiverDetailsModel) {
         val str =
-            String.format(getString(R.string.beneficiary_delete_msg), beneficiaryDetailsModel.alias)
+            String.format(getString(R.string.beneficiary_delete_msg), receiverDetailsModel.receiverName)
         val oneLinkAlertDialogsFragment = OneLinkAlertDialogsFragment.newInstance(
             false,
             R.drawable.ic_cancel_register_dialog,
-            getString(R.string.delete_beneficiary),
+            "Delete Receiver",
             str.toSpanned(),
             positiveButtonText = getString(R.string.yes),
             negativeButtonText = getString(R.string.no)
@@ -873,7 +891,7 @@ class ReceiverDetailsFragment :
         val oneLinkAlertDialogsFragment = OneLinkAlertDialogsFragment.newInstance(
             true,
             R.drawable.ic_beneficairy_created,
-            "Request Received",
+            getString(R.string.request_received),
             getString(R.string.receiver_will_be_added_upon_nadra).toSpanned(),
             getString(R.string.done),
             positiveButtonText = "",
@@ -918,15 +936,15 @@ class ReceiverDetailsFragment :
     }
 
     private fun makeDeleteBeneficiaryCall() {
-        viewModel.deleteBeneficiary(DeleteBeneficiaryRequestModel(beneficiaryDetailsModel.id))
+        viewModel.deleteReceiver(DeleteReceiverRequestModel(beneficiaryDetailsModel.receiverCnic.toString().cleanNicNumber()))
     }
 
     private fun makeResendOtp(){
-        viewModel.addBeneficiaryResendOtp(ResendBeneficiaryOtpRequestModel(beneficiaryDetailsModel.id.toString()))
+        //viewModel.addBeneficiaryResendOtp(ResendBeneficiaryOtpRequestModel(beneficiaryDetailsModel.id.toString()))
     }
 
     private fun updateBeneficiary(){
-        var relation:String
+        /*var relation:String
         if(viewModel.beneficiaryRelation.value.toString() == "Other") {
             relation = binding.txtOther.text.toString()
         } else {
@@ -941,7 +959,7 @@ class ReceiverDetailsFragment :
             beneficiaryRelation=relation,
             viewModel.country.value
         )
-        )
+        )*/
     }
 
     override fun onSelectCountryListener(countryCodeModel: CountryCodeModel) {

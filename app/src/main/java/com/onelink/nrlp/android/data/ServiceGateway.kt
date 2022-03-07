@@ -23,6 +23,8 @@ import com.onelink.nrlp.android.features.nrlpBenefits.model.NrlpBenefitsResponse
 import com.onelink.nrlp.android.features.nrlpBenefits.model.NrlpPartnerResponseModel
 import com.onelink.nrlp.android.features.profile.models.ProfileResponseModel
 import com.onelink.nrlp.android.features.receiver.models.AddReceiverRequestModel
+import com.onelink.nrlp.android.features.receiver.models.DeleteReceiverRequestModel
+import com.onelink.nrlp.android.features.receiver.models.ReceiversResponseModel
 import com.onelink.nrlp.android.features.redeem.model.*
 import com.onelink.nrlp.android.features.register.models.*
 import com.onelink.nrlp.android.features.select.city.model.CitiesRequest
@@ -224,4 +226,10 @@ interface ServiceGateway {
 
     @POST("remitter-receiver-add/")
     fun addReceiver(@Body body: AddReceiverRequestModel): Single<Response<GeneralMessageResponseModel>>
+
+    @GET("remitter-receiver-list/")
+    fun getReceiversList(): Single<Response<ReceiversResponseModel>>
+
+    @POST("remitter-receiver-delete/")
+    fun deleteReceiver(@Body body: DeleteReceiverRequestModel): Single<Response<GeneralMessageResponseModel>>
 }

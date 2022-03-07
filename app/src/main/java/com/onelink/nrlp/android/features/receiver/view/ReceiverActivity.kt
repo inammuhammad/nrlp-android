@@ -14,29 +14,30 @@ import com.onelink.nrlp.android.features.beneficiary.adapter.BeneficiariesAdapte
 import com.onelink.nrlp.android.features.beneficiary.fragments.BeneficiaryDetailsFragment
 import com.onelink.nrlp.android.features.beneficiary.fragments.ManageBeneficiaryFragment
 import com.onelink.nrlp.android.features.beneficiary.view.BeneficiaryActivity
+import com.onelink.nrlp.android.features.receiver.adapter.ReceiversAdapter
 import com.onelink.nrlp.android.features.receiver.fragments.AddRemittanceReceiverFragment
 import com.onelink.nrlp.android.features.receiver.fragments.ManageReceiverFragment
 import com.onelink.nrlp.android.features.receiver.fragments.ReceiverDetailsFragment
 import com.onelink.nrlp.android.features.receiver.fragments.ReceiverTypeFragment
+import com.onelink.nrlp.android.features.receiver.models.ReceiverDetailsModel
 import com.onelink.nrlp.android.features.receiver.viewmodel.ReceiverViewModel
 import com.onelink.nrlp.android.features.select.city.model.CitiesModel
 import com.onelink.nrlp.android.features.select.city.view.SelectCityFragment
 import com.onelink.nrlp.android.features.select.country.model.CountryCodeModel
 import com.onelink.nrlp.android.features.select.country.view.SelectCountryFragment
-import com.onelink.nrlp.android.models.BeneficiaryDetailsModel
 import kotlinx.android.synthetic.main.beneficiary_activity.*
 import javax.inject.Inject
 
 class ReceiverActivity :
     BaseFragmentActivity<ActivityReceiverBinding, ReceiverViewModel>(ReceiverViewModel::class.java),
-    BeneficiariesAdapter.ClickEventHandler, SelectCountryFragment.OnSelectCountryListener,
+    ReceiversAdapter.ClickEventHandler, SelectCountryFragment.OnSelectCountryListener,
     SelectCityFragment.OnSelectCityListener {
 
     var isFromHome = false
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    private lateinit var beneficiaryAdpaterCallBack: BeneficiariesAdapter.ClickEventHandler
+    private lateinit var receiverAdapterCallBack: ReceiversAdapter.ClickEventHandler
     private lateinit var countriesAdpaterCallBack: SelectCountryFragment.OnSelectCountryListener
     lateinit var listenerCity: SelectCityFragment.OnSelectCityListener
 
@@ -47,7 +48,7 @@ class ReceiverActivity :
     override fun onAttachFragment(fragment: Fragment) {
         super.onAttachFragment(fragment)
         if (fragment is ManageReceiverFragment) {
-            beneficiaryAdpaterCallBack = fragment
+            receiverAdapterCallBack = fragment
         }
         if (fragment is ReceiverDetailsFragment) {
             countriesAdpaterCallBack = fragment
@@ -89,10 +90,6 @@ class ReceiverActivity :
         }
     }
 
-    override fun onBeneficiarySelected(beneficiaryDetailsModel: BeneficiaryDetailsModel) {
-        beneficiaryAdpaterCallBack.onBeneficiarySelected(beneficiaryDetailsModel)
-    }
-
     override fun onSelectCountryListener(countryCodeModel: CountryCodeModel) {
         countriesAdpaterCallBack.onSelectCountryListener(countryCodeModel)
     }
@@ -105,6 +102,10 @@ class ReceiverActivity :
         fun createIntent(context: Context): Intent {
             return Intent(context, ReceiverActivity::class.java)
         }
+    }
+
+    override fun onReceiverSelected(receiverDetailsModel: ReceiverDetailsModel) {
+        receiverAdapterCallBack.onReceiverSelected(receiverDetailsModel)
     }
 
 }

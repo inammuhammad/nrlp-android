@@ -3,6 +3,7 @@ package com.onelink.nrlp.android.features.receiver.viewmodel
 import androidx.lifecycle.MutableLiveData
 import com.onelink.nrlp.android.core.BaseResponse
 import com.onelink.nrlp.android.core.BaseViewModel
+import com.onelink.nrlp.android.features.receiver.models.ReceiverDetailsModel
 import com.onelink.nrlp.android.models.BeneficiariesResponseModel
 import com.onelink.nrlp.android.models.BeneficiaryDetailsModel
 import javax.inject.Inject
@@ -14,7 +15,7 @@ class ReceiverSharedViewModel @Inject constructor() : BaseViewModel() {
 
     @Suppress("unused")
     val beneficiariesResponse = MutableLiveData<BaseResponse<BeneficiariesResponseModel>>()
-    val beneficiaryDetails = MutableLiveData<BeneficiaryDetailsModel>()
+    val receiverDetails = MutableLiveData<ReceiverDetailsModel>()
     val isDeleteBeneficiary = MutableLiveData<Boolean>()
     val receiverType = MutableLiveData<Int>()
 }

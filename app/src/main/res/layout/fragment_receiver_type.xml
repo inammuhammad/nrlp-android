@@ -36,13 +36,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text="Remittance sent to CNIC" />
+            android:text="@string/remittance_to_cnic" />
 
         <RadioButton
             android:id="@+id/rdBtnIban"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Remittance Sent to Bank Account" />
+            android:text="@string/remittance_to_bank" />
     </RadioGroup>
 
     <Button

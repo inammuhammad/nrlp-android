@@ -145,8 +145,7 @@
                             android:hint="@string/generic_name_placeholder"
                             android:inputType="textCapWords|textCapSentences"
                             android:maxLength="50"
-                            android:nextFocusDown="@id/etMotherMaidenName"
-                            android:nextFocusForward="@id/etMotherMaidenName"
+                            android:imeOptions="actionDone|flagForceAscii"
                             android:text="@={viewModel.fullName}" />
                     </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
 
@@ -186,8 +185,7 @@
                             android:hint="@string/mother_maiden_name_placeholder"
                             android:inputType="textCapWords|textCapSentences"
                             android:maxLength="50"
-                            android:nextFocusDown="@id/etCnicNicop"
-                            android:nextFocusForward="@id/etCnicNicop"
+                            android:imeOptions="actionDone|flagForceAscii"
                             android:text="@={viewModel.mothersMaidenName}" />
                     </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
 
@@ -291,8 +289,7 @@
                             android:hint="@string/cnic_nicop_hint"
                             android:inputType="number"
                             android:maxLength="15"
-                            android:nextFocusDown="@id/tvCountry"
-                            android:nextFocusForward="@id/tvCountry"
+                            android:imeOptions="actionDone|flagForceAscii"
                             android:text="@={viewModel.cnicNicopNumber}" />
                     </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
                 </LinearLayout>
@@ -422,8 +419,7 @@
                         android:focusable="true"
                         android:hint="@string/generic_date_placeholder"
                         android:maxLength="50"
-                        android:nextFocusDown="@id/etCnicNicop"
-                        android:nextFocusForward="@id/etCnicNicop"
+                        android:imeOptions="actionDone|flagForceAscii"
                         android:text="@={viewModel.cnicNicopDateOfIssuance}" />
 
                 </LinearLayout>
@@ -666,8 +662,7 @@
                             android:gravity="start"
                             android:hint="@string/mobile_num_hint"
                             android:inputType="number"
-                            android:nextFocusDown="@id/etResidentId"
-                            android:nextFocusForward="@id/etResidentId"
+                            android:imeOptions="actionDone|flagForceAscii"
                             android:padding="@dimen/unit_0dp"
                             android:paddingStart="@dimen/unit_4dp"
                             android:paddingEnd="@dimen/unit_4dp"
@@ -733,8 +728,7 @@
                             android:layout_height="wrap_content"
                             android:hint="@string/email_hint"
                             android:inputType="textEmailAddress"
-                            android:nextFocusDown="@id/etPassword"
-                            android:nextFocusForward="@id/etPassword"
+                            android:imeOptions="actionDone|flagForceAscii"
                             android:text="@={viewModel.emailAddress}" />
                     </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
                 </LinearLayout>
@@ -783,8 +777,7 @@
                             android:hint="@string/password_hint"
                             android:inputType="textPassword"
                             android:maxLength="25"
-                            android:nextFocusDown="@id/etRePassword"
-                            android:nextFocusForward="@id/etRePassword"
+                            android:imeOptions="actionDone|flagForceAscii"
                             android:text="@={viewModel.password}" />
                     </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
 

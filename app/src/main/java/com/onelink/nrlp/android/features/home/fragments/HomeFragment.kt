@@ -95,7 +95,7 @@ open class HomeFragment :
     private fun showUserData() {
         UserData.getUser()?.let {
             checkNadraVerification(it)
-            checkReceiverAdded()
+            checkReceiverAdded(it)
             if(it.accountType == "beneficiary") {
                 binding.containerAnnualRemittance.invisible()
             }
@@ -133,15 +133,20 @@ open class HomeFragment :
         }catch(e: Exception){}
     }
 
-    private fun checkReceiverAdded(){
-        val remittanceReceiverSP = activity?.getSharedPreferences("remittanceReceiverSp", Context.MODE_PRIVATE)
-        val limit = remittanceReceiverSP?.getBoolean("remitterPopupDisplayed", true)
-        remittanceReceiverSP?.edit()?.putBoolean("remitterPopupDisplayed", false)?.commit()
+    private fun checkReceiverAdded(userModel: UserModel){
         try {
-            if (limit!!) {
-                val intent = Intent(activity, ReceiverActivity::class.java)
-                intent.putExtra("isFromHomeScreen", true)
-                startActivity(intent)
+            if (userModel.receiverCount!! < 1) {
+                val remittanceReceiverSP =
+                    activity?.getSharedPreferences("remittanceReceiverSp", Context.MODE_PRIVATE)
+                val limit = remittanceReceiverSP?.getBoolean("remitterPopupDisplayed", true)
+                remittanceReceiverSP?.edit()?.putBoolean("remitterPopupDisplayed", false)?.commit()
+                try {
+                    if (limit!!) {
+                        val intent = Intent(activity, ReceiverActivity::class.java)
+                        intent.putExtra("isFromHomeScreen", true)
+                        startActivity(intent)
+                    }
+                } catch (e: Exception) {}
             }
         }catch (e: Exception){}
     }

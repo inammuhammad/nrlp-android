@@ -69,7 +69,8 @@ class HomeRepo @Inject constructor(
             placeOfBirth = userProfileModel.placeOfBirth,
             cnicNicopIssuanceDate = userProfileModel.cnicNicopIssuanceDate,
             nadraVerified = userProfileModel.nadraVerified,
-            requireNadraVerification = userProfileModel.requireNadraVerification
+            requireNadraVerification = userProfileModel.requireNadraVerification,
+            receiverCount = userProfileModel.receiverCount
         )
     }
 

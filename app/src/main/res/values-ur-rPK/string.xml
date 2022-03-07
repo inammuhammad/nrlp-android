@@ -26,8 +26,7 @@
     <string name="help_confirm_password">پاسورڈ دوبارہ درج کریں</string>
     <string name="help_user_type">براہ مہربانی منتخب کریں کہ آپ رقم بھیجنے والے یا وصول کرنے والے ہیں</string>
     <string name="help_full_name">>اپنا شناختی کارڈ پہ درج کردہ نام درج کریں</string>
-    <string name="help_usd">سالانہ ترسیل کی مجموعی ڈالر میں رقم کا تعین ہر سال یکم جولائی سے تیس جون تک کیا جاتا ہے، اور آپ کی لوائلٹی کے زمرے کا تعین بھی اس پر مبنی ہے۔ مزید معلومات کے لئے مقرر پوچھے گئے سوالات ملاحظہ کریں۔</string>
-
+    <string name="help_usd">میں سالانہ ترسیلات زر ہر سال یکم جولائی سے جمع ہوتی ہیں تاہم موجودہ سال کے لیے اس کا اطلاق یکم اکتوبر 2021 سے ہوگا اور اسی کے مطابق آپ کی لائلٹی کیٹیگری کا حساب لگایا جائے گا۔ USD</string>
     <string name="resident_id">منفرد آئی ڈی*</string>
     <string name="mobile_number">موبائل نمبر*</string>
     <string name="mobile_number_complaint">موبائل نمبر</string>
@@ -49,7 +48,7 @@
     <string name="remittance_amount">ترسیل کی رقم (پاکستانی روپیے)</string>
     <string name="remittance_amount_help">رسید پر موجود رقم عین مطابق درج کریں</string>
     <string name="remittance_date_help">وہ تاریخ درج کریں جس پر ٹرانزیکشن ہوئی</string>
-    <string name="remittance_account_cnic_number_help">وصول کنندہ کا اکاونٹ نمبر/ بین الاقوامی بینک اکاؤنٹ نمبر/قومی شناختی کارڈ  نمبر درج کریں جس پر ترسیلات بھیجی گئ ہیں</string>
+    <string name="remittance_account_cnic_number_help">پاکستان میں ترسیلات زر وصول کرنے والے کی درج ذیل تفصیلات درج کریں  \n1.  نقد وصول کرنے کی صورت میں: قومی شناختی کارڈ نمبر  \n2. بینک اکاؤنٹ میں کریڈٹ کی صورت میں: مکمل بینک اکاؤنٹ نمبر</string>
     <string name="remittance_date">ترسیل کی تاریخ</string>
 
     <string name="enter_points">پوائنٹس درج کریں</string>
@@ -106,7 +105,7 @@
     <string name="remitter_verification">ترسیلات زربھیجنے والے کی تصدیق</string>
     <string name="beneficiary_verification_title">وصول کنندہ کی تصدیق</string>
     <string name="reference_number">حوالہ نمبر</string>
-    <string name="beneficiary_account_number_cnic">وصول کنندہ کا اکاونٹ نمبر/ بین الاقوامی بینک اکاؤنٹ نمبر/قومی شناختی کارڈ  نمبر</string>
+    <string name="beneficiary_account_number_cnic">وصول کنندہ کا اکاونٹ نمبر/ بین الاقوامی بینک اکاؤنٹ نمبر/قومی شناختی کارڈ نمبر</string>
     <string name="transaction_amount">ٹرانزیکشن  کی رقم( پاکستانی روپے)</string>
     <string name="curPassword">پرانا پاس ورڈ درج کریں</string>
     <string name="newPassword">نیا پاس ورڈ درج کریں</string>
@@ -379,9 +378,11 @@
     <string name="receiver_country_of_residence">وصول کنندہ کا قیام کا ملک</string>
     <string name="receiver_name_help">براہ کرم وصول کنندہ کا نام NICOP/CNIC/POC  کے مطابق درج کریں</string>
     <string name="select_receiver_type">وصول کنندہ کی قسم منتخب کریں۔</string>
-    <string name="remittance_cnic">قومی شناختی کارڈ پر بھیجی گئی ترسیلات</string>
-    <string name="remittance_iban">بینک اکاؤنٹ میں بھیجی گئی  ترسیلات</string>
     <string name="skip">منسوخ کریں</string>
     <string name="receiver_iban">براہ کرم وصول کنندہ کا بینک اکاؤنٹ نمبر/بین الاقوامی بینک اکاؤنٹ نمبر درج کریں</string>
     <string name="receiver_bank_name">براہ کرم وصول کنندہ  کے  بینک کا نام درج کریں۔</string>
+    <string name="remittance_to_cnic">قومی شناختی کارڈ پر بھیجی گئی ترسیلات</string>
+    <string name="remittance_to_bank">بینک اکاؤنٹ میں بھیجی گئی  ترسیلات</string>
+    <string name="request_received">درخواست موصول</string>
+    <string name="are_you_sure_delete_receiver">کیا آپ واقعی وصول کنندہ کو  نکلنا چاہتے ہیں</string>
 </resources>

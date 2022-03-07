@@ -16,7 +16,7 @@
         android:background="@color/white">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/lyNoBeneficiary"
+            android:id="@+id/lyNoReceiver"
             android:layout_width="@dimen/unit_0dp"
             android:layout_height="@dimen/unit_0dp"
             android:visibility="visible"
@@ -65,7 +65,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/lyBeneficiariesList"
+            android:id="@+id/lyReceiversList"
             android:layout_width="@dimen/unit_0dp"
             android:layout_height="@dimen/unit_0dp"
             android:visibility="gone"
@@ -75,7 +75,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvBeneficiaries"
+                android:id="@+id/rvReceivers"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginTop="@dimen/margin_large"

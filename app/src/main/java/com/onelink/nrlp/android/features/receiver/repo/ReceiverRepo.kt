@@ -6,6 +6,8 @@ import com.onelink.nrlp.android.core.BaseResponse
 import com.onelink.nrlp.android.data.NetworkHelper
 import com.onelink.nrlp.android.data.ServiceGateway
 import com.onelink.nrlp.android.features.receiver.models.AddReceiverRequestModel
+import com.onelink.nrlp.android.features.receiver.models.DeleteReceiverRequestModel
+import com.onelink.nrlp.android.features.receiver.models.ReceiversResponseModel
 import com.onelink.nrlp.android.models.GeneralMessageResponseModel
 import javax.inject.Inject
 
@@ -15,6 +17,10 @@ open class ReceiverRepo @Inject constructor(
 ) {
     val receiverAddResponse =
         MutableLiveData<BaseResponse<GeneralMessageResponseModel>>()
+    val receiversListResponse =
+        MutableLiveData<BaseResponse<ReceiversResponseModel>>()
+    val receiverDeleteResponse =
+        MutableLiveData<BaseResponse<GeneralMessageResponseModel>>()
 
     fun addReceiver(addReceiverRequestModel: AddReceiverRequestModel) {
         networkHelper.serviceCall(serviceGateway.addReceiver(addReceiverRequestModel))
@@ -23,8 +29,28 @@ open class ReceiverRepo @Inject constructor(
             }
     }
 
+    fun getAllReceivers() {
+        networkHelper.serviceCall(serviceGateway.getReceiversList())
+            .observeForever {
+            receiversListResponse.value = it
+        }
+    }
+
+    fun deleteReceiver(deleteReceiverRequestModel: DeleteReceiverRequestModel){
+        networkHelper.serviceCall(serviceGateway.deleteReceiver(deleteReceiverRequestModel))
+            .observeForever {
+            receiverDeleteResponse.value = it
+        }
+    }
+
     fun observeReceiverAddResponse() =
         receiverAddResponse as LiveData<BaseResponse<GeneralMessageResponseModel>>
+
+    fun observeReceiversListResponse() =
+        receiversListResponse as LiveData<BaseResponse<ReceiversResponseModel>>
+
+    fun observeReceiverDeleteResponse() =
+        receiverDeleteResponse as LiveData<BaseResponse<GeneralMessageResponseModel>>
 
     fun onClear() {
         networkHelper.dispose()
