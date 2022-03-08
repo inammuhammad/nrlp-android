@@ -410,4 +410,8 @@
     <string name="remittance_to_bank">Remittance sent to Bank Account</string>
     <string name="request_received">Request Received</string>
     <string name="are_you_sure_delete_receiver">Are you sure want to delete the Receiver</string>
+    <string name="delete_receiver">Delete Receiver</string>
+    <string name="please_enter_receiver_info">Please enter Receiver information</string>
+    <string name="error_invalid_bank_name">Please enter a valid Bank Name</string>
+    <string name="error_invalid_account_number">Please enter a valid Account Number</string>
 </resources>

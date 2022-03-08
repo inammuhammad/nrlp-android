@@ -23,6 +23,7 @@ import com.onelink.nrlp.android.features.nrlpBenefits.model.NrlpBenefitsResponse
 import com.onelink.nrlp.android.features.nrlpBenefits.model.NrlpPartnerResponseModel
 import com.onelink.nrlp.android.features.profile.models.ProfileResponseModel
 import com.onelink.nrlp.android.features.receiver.models.AddReceiverRequestModel
+import com.onelink.nrlp.android.features.receiver.models.BanksListResponse
 import com.onelink.nrlp.android.features.receiver.models.DeleteReceiverRequestModel
 import com.onelink.nrlp.android.features.receiver.models.ReceiversResponseModel
 import com.onelink.nrlp.android.features.redeem.model.*
@@ -232,4 +233,7 @@ interface ServiceGateway {
 
     @POST("remitter-receiver-delete/")
     fun deleteReceiver(@Body body: DeleteReceiverRequestModel): Single<Response<GeneralMessageResponseModel>>
+
+    @GET("rr-bank-and-exchange/")
+    fun getBanks(): Single<Response<BanksListResponse>>
 }

@@ -135,7 +135,7 @@ open class HomeFragment :
 
     private fun checkReceiverAdded(userModel: UserModel){
         try {
-            if (userModel.receiverCount!! < 1) {
+            if (userModel.receiverCount!! == 0) {
                 val remittanceReceiverSP =
                     activity?.getSharedPreferences("remittanceReceiverSp", Context.MODE_PRIVATE)
                 val limit = remittanceReceiverSP?.getBoolean("remitterPopupDisplayed", true)

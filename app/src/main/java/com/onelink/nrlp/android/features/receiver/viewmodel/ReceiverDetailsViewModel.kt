@@ -54,11 +54,16 @@ open class ReceiverDetailsViewModel @Inject constructor(private val receiverRepo
 
     fun deleteReceiver(deleteReceiverRequestModel: DeleteReceiverRequestModel) = receiverRepo.deleteReceiver(deleteReceiverRequestModel)
 
+    fun getBanksList() = receiverRepo.getBanksList()
+
     fun addReceiver(addReceiverRequestModel: AddReceiverRequestModel) =
         receiverRepo.addReceiver(addReceiverRequestModel)
 
     fun observeReceiverAddResponse() = receiverRepo.observeReceiverAddResponse()
+
     fun observeReceiverDeleteResponse() = receiverRepo.observeReceiverDeleteResponse()
+
+    fun observeBanksListResponse() = receiverRepo.observeBanksListResponse()
 
     override fun onCleared() {
         receiverRepo.onClear()

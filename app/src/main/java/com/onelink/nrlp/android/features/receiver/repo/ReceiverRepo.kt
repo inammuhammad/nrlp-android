@@ -2,10 +2,12 @@ package com.onelink.nrlp.android.features.receiver.repo
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.fasterxml.jackson.databind.ser.Serializers
 import com.onelink.nrlp.android.core.BaseResponse
 import com.onelink.nrlp.android.data.NetworkHelper
 import com.onelink.nrlp.android.data.ServiceGateway
 import com.onelink.nrlp.android.features.receiver.models.AddReceiverRequestModel
+import com.onelink.nrlp.android.features.receiver.models.BanksListResponse
 import com.onelink.nrlp.android.features.receiver.models.DeleteReceiverRequestModel
 import com.onelink.nrlp.android.features.receiver.models.ReceiversResponseModel
 import com.onelink.nrlp.android.models.GeneralMessageResponseModel
@@ -21,6 +23,8 @@ open class ReceiverRepo @Inject constructor(
         MutableLiveData<BaseResponse<ReceiversResponseModel>>()
     val receiverDeleteResponse =
         MutableLiveData<BaseResponse<GeneralMessageResponseModel>>()
+    val banksListResponse =
+        MutableLiveData<BaseResponse<BanksListResponse>>()
 
     fun addReceiver(addReceiverRequestModel: AddReceiverRequestModel) {
         networkHelper.serviceCall(serviceGateway.addReceiver(addReceiverRequestModel))
@@ -43,6 +47,12 @@ open class ReceiverRepo @Inject constructor(
         }
     }
 
+    fun getBanksList() {
+        networkHelper.serviceCall(serviceGateway.getBanks()).observeForever {
+            banksListResponse.value = it
+        }
+    }
+
     fun observeReceiverAddResponse() =
         receiverAddResponse as LiveData<BaseResponse<GeneralMessageResponseModel>>
 
@@ -51,6 +61,9 @@ open class ReceiverRepo @Inject constructor(
 
     fun observeReceiverDeleteResponse() =
         receiverDeleteResponse as LiveData<BaseResponse<GeneralMessageResponseModel>>
+
+    fun observeBanksListResponse() =
+        banksListResponse as LiveData<BaseResponse<BanksListResponse>>
 
     fun onClear() {
         networkHelper.dispose()

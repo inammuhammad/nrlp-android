@@ -385,4 +385,8 @@
     <string name="remittance_to_bank">بینک اکاؤنٹ میں بھیجی گئی  ترسیلات</string>
     <string name="request_received">درخواست موصول</string>
     <string name="are_you_sure_delete_receiver">کیا آپ واقعی وصول کنندہ کو  نکلنا چاہتے ہیں</string>
+    <string name="please_enter_receiver_info">براہ کرم وصول کنندہ  کی معلومات درج کریں</string>
+    <string name="delete_receiver">وصول کنندہ کو حذف کریں</string>
+    <string name="error_invalid_bank_name">براہ کرم درست بینک کا نام درج کریں</string>
+    <string name="error_invalid_account_number">براہ کرم درست اکاونٹ نمبر درج کریں</string>
 </resources>

@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.text.*
 import android.text.style.StyleSpan
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -31,6 +32,7 @@ import com.onelink.nrlp.android.features.beneficiary.viewmodel.BeneficiaryShared
 import com.onelink.nrlp.android.features.profile.disabled
 import com.onelink.nrlp.android.features.profile.enabled
 import com.onelink.nrlp.android.features.receiver.models.AddReceiverRequestModel
+import com.onelink.nrlp.android.features.receiver.models.BankDetailsModel
 import com.onelink.nrlp.android.features.receiver.models.DeleteReceiverRequestModel
 import com.onelink.nrlp.android.features.receiver.models.ReceiverDetailsModel
 import com.onelink.nrlp.android.features.receiver.view.ReceiverActivity
@@ -53,6 +55,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.regex.Pattern
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 const val BENEFICIARY_CREATION_DIALOG = 3000
 const val BENEFICIARY_DELETION_DIALOG = 3001
@@ -474,6 +477,7 @@ class ReceiverDetailsFragment :
     }
 
     private fun initObservers() {
+        //viewModel.getBanksList()
         receiverSharedViewModel?.isDeleteBeneficiary?.observe(this, { isDeleteBeneficiary ->
             if (isDeleteBeneficiary) {
                 receiverSharedViewModel?.receiverDetails?.observe(this, {
@@ -512,6 +516,28 @@ class ReceiverDetailsFragment :
                     oneLinkProgressDialog.hideProgressDialog()
                     response.data?.let {
                         fragmentHelper.onBack()
+                    }
+                }
+                Status.ERROR -> {
+                    oneLinkProgressDialog.hideProgressDialog()
+                    response.error?.let {
+                        showGeneralErrorDialog(this, it)
+                    }
+                }
+                Status.LOADING -> {
+                    oneLinkProgressDialog.showProgressDialog(activity)
+                }
+            }
+        })
+
+        viewModel.observeBanksListResponse().observe(this, { response ->
+            when (response.status) {
+                Status.SUCCESS -> {
+                    oneLinkProgressDialog.hideProgressDialog()
+                    response.data.let {
+                        if (it != null) {
+                            getBanksStringArray(it.data)
+                        }
                     }
                 }
                 Status.ERROR -> {
@@ -616,7 +642,7 @@ class ReceiverDetailsFragment :
         viewModel.validationBankNamePassed.observe(this, { validationsPassed ->
             run {
                 if (!validationsPassed)
-                    binding.tilBankName.error = getString(R.string.error_not_valid_name)
+                    binding.tilBankName.error = getString(R.string.error_invalid_bank_name)
                 else {
                     binding.tilBankName.clearError()
                     binding.tilBankName.isErrorEnabled = false
@@ -627,7 +653,7 @@ class ReceiverDetailsFragment :
         viewModel.validationIbanPassed.observe(this, { validationsPassed ->
             run {
                 if (!validationsPassed)
-                    binding.tilIbanNumber.error = getString(R.string.error_not_valid_name)
+                    binding.tilIbanNumber.error = getString(R.string.error_invalid_account_number)
                 else {
                     binding.tilIbanNumber.clearError()
                     binding.tilIbanNumber.isErrorEnabled = false
@@ -650,6 +676,15 @@ class ReceiverDetailsFragment :
                 binding.txtOther.visibility = View.GONE
             }
         })
+    }
+
+    private fun getBanksStringArray(banks: ArrayList<BankDetailsModel>){
+        val banksList = ArrayList<String>()
+        for (bank in banks){
+            banksList.add(bank.name)
+        }
+        val stringArray: Array<String> = banksList.toTypedArray()
+        Log.d("stringar", stringArray.size.toString())
     }
 
     private fun hideIbanView() {
