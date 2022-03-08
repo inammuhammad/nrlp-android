@@ -36,6 +36,7 @@ import com.onelink.nrlp.android.features.receiver.viewmodel.ReceiverSharedViewMo
 import com.onelink.nrlp.android.features.receiver.viewmodel.ReceiverViewModel
 import com.onelink.nrlp.android.features.redeem.viewmodels.*
 import com.onelink.nrlp.android.features.register.viewmodel.*
+import com.onelink.nrlp.android.features.select.bank.viewmodel.SelectBankFragmentViewModel
 import com.onelink.nrlp.android.features.select.city.viewmodel.SelectCityFragmentViewModel
 import com.onelink.nrlp.android.features.select.country.viewmodel.SelectCountryFragmentViewModel
 import com.onelink.nrlp.android.features.selfAwardPoints.viewmodel.SelfAwardPointsFragmentViewModel
@@ -443,5 +444,10 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(RegComplaintSharedViewModel::class)
     internal abstract fun regComplaintSharedViewModel(viewModel:RegComplaintSharedViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SelectBankFragmentViewModel::class)
+    internal abstract fun selectBankFragmentViewModel(viewModel: SelectBankFragmentViewModel): ViewModel
 }
 

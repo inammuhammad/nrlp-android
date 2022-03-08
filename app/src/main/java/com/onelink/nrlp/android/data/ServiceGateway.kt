@@ -235,5 +235,5 @@ interface ServiceGateway {
     fun deleteReceiver(@Body body: DeleteReceiverRequestModel): Single<Response<GeneralMessageResponseModel>>
 
     @GET("rr-bank-and-exchange/")
-    fun getBanks(): Single<Response<BanksListResponse>>
+    fun getBanks(): Single<Response<com.onelink.nrlp.android.features.select.bank.model.BanksListResponse>>
 }

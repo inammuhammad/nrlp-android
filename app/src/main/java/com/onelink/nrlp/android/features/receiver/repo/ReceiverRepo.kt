@@ -48,9 +48,7 @@ open class ReceiverRepo @Inject constructor(
     }
 
     fun getBanksList() {
-        networkHelper.serviceCall(serviceGateway.getBanks()).observeForever {
-            banksListResponse.value = it
-        }
+
     }
 
     fun observeReceiverAddResponse() =

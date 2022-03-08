@@ -15,7 +15,7 @@ class Constants {
         // 29-12-21 69ylzdfq2uem9fdkbl713m7nl9taggbna3fq06q7
         // 31-01-22 pe2y9n0dzggqbes52gc52l6s0b1hbe04foozn1ch
         // 10-02-2022 gr9e22galnzrresrcv8bw6e9ud6rrkyvh5x9c5nk
-        const val checkSum = "w73v34zmazcrlz1li8v3iplfdoawrjz7ggsutsin" //"ibe2tvvbzrdaq7ad5row3j1mrdehk6iltsorfab3"
+        const val checkSum = "ibe2tvvbzrdaq7ad5row3j1mrdehk6iltsorfab3" //"ibe2tvvbzrdaq7ad5row3j1mrdehk6iltsorfab3"
         const val InternationalPassport = "International Passport"
         const val PakistaniPassport = "Pakistani Passport"
 
@@ -24,6 +24,7 @@ class Constants {
         const val SPINNER_BENEFICIARY_HINT = "Beneficiary Relation"
         const val SPINNER_PASSPORT_TYPE_HINT = "Passport Type"
         const val SOMETHING_WENT_WRONG = "Something unexpected happened. Please try again."
+        const val PLAY_STORE_NRLP_URL = "https://play.google.com/store/apps/details?id=com.onelink.sohnidharti.app"
     }
 }
 
@@ -36,6 +37,7 @@ object ErrorCodesConstants {
     const val UNSUCCESSFUL_TRANSACTION_FETCH = "AUTH-VRN-06"
     const val INCORRECT_INFORMATION="PU-VA-01"
     const val ATTEMPTS_EXCEEDED="PU-VA-99"
+    const val NEW_VERSION = "GEN-ERR-19"
 }
 
 
@@ -63,6 +65,8 @@ object ErrorDialogConstants {
     const val TAG_GENERAL_SERVER_ERROR_DIALOG_CODE = "general_server_error"
     const val RC_SESSION_EXPIRED = 1012
     const val TAG_SESSION_EXPIRED = "session_expired"
+    const val RC_NEW_VERSION = 1023
+    const val TAG_NEW_VERSION = "new_version_available"
 }
 
 object HeaderConstants {

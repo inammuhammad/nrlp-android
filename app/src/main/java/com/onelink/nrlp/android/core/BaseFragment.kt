@@ -2,6 +2,7 @@ package com.onelink.nrlp.android.core
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.onelink.nrlp.android.R
 import com.onelink.nrlp.android.data.local.UserData
 import com.onelink.nrlp.android.features.login.view.LoginActivity
+import com.onelink.nrlp.android.utils.Constants
 import com.onelink.nrlp.android.utils.ErrorCodesConstants
 import com.onelink.nrlp.android.utils.ErrorDialogConstants
 import com.onelink.nrlp.android.utils.dialogs.OneLinkAlertDialogsFragment
@@ -107,6 +109,7 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
                     ErrorCodesConstants.INCORRECT_INFORMATION -> showIncorrectInformationDialog(fragment)
                     ErrorCodesConstants.ATTEMPTS_EXCEEDED -> showAttemptsExceededDialog(fragment)
                     ErrorCodesConstants.PROFILE_VERIFICATION_FAILED -> showProfileUpdateVerificationFailedDialog(fragment)
+                    ErrorCodesConstants.NEW_VERSION -> showNewVersionAvailableDialog(fragment)
                     else -> showRemoteErrorDialog(fragment, it)
                 }
             }
@@ -200,6 +203,20 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
             .show(parentFragmentManager, ErrorDialogConstants.TAG_SESSION_EXPIRED)
     }
 
+    private fun showNewVersionAvailableDialog(fragment: Fragment){
+        OneLinkAlertDialogsFragment.Builder()
+            .setTargetFragment(fragment, ErrorDialogConstants.RC_NEW_VERSION)
+            .setIsAlertOnly(true)
+            .setDrawable(R.drawable.ic_oh_snap)
+            .setTitle(getString(R.string.oh_snap))
+            .setMessage(getString(R.string.error_new_version).toSpanned())
+            .setNeutralButtonText(getString(R.string.proceed_to_playstore))
+            .setNegativeButtonText("")
+            .setPositiveButtonText("")
+            .setCancelable(false)
+            .show(parentFragmentManager, ErrorDialogConstants.TAG_SESSION_EXPIRED)
+    }
+
     private fun showProfileUpdateVerificationFailedDialog(fragment: Fragment){
         OneLinkAlertDialogsFragment.Builder()
             .setTargetFragment(fragment, ErrorDialogConstants.RC_SESSION_EXPIRED)
@@ -264,6 +281,10 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     it.startActivity(intent)
                 }
+            }
+            ErrorDialogConstants.RC_NEW_VERSION -> {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(Constants.PLAY_STORE_NRLP_URL))
+                startActivity(intent)
             }
         }
     }

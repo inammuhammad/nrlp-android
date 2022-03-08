@@ -335,18 +335,34 @@
             android:layout_marginStart="@dimen/_8sdp"
             android:layout_height="wrap_content"/>
 
+        <TextView
+            android:id="@+id/etBankName"
+            style="@style/EditTextTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textDirection="ltr"
+            android:focusable="false"
+            android:hint="@string/please_enter_receiver_info"
+            android:singleLine="true"
+            android:text="@={viewModel.bankName}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvBankName" />
+
         <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
             android:id="@+id/tilBankName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/unit_8dp"
+            android:visibility="gone"
             app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvBankName">
 
             <com.onelink.nrlp.android.widgets.OneLinkEditText
-                android:id="@+id/etBankName"
+                android:id="@+id/etBankName1"
                 style="@style/EditTextFixedDigits"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -365,7 +381,7 @@
             android:layout_height="wrap_content"
             android:text="@string/enter_iban_number"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tilBankName"/>
+            app:layout_constraintTop_toBottomOf="@id/etBankName"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="@dimen/_15sdp"
@@ -561,6 +577,21 @@
             android:layout_height="wrap_content"
             android:enabled="@{viewModel.cnicNumberNotEmpty &amp;&amp; viewModel.aliasNotEmpty &amp;&amp; viewModel.countryNotEmpty &amp;&amp; viewModel.mobileNumberNotEmpty &amp;&amp; viewModel.motherMaidenNameNotEmpty &amp;&amp; viewModel.placeOfBirthNotEmpty}"
             android:text="@string/next"
+            android:visibility="gone"
+            android:layout_marginBottom="@dimen/_20sdp"
+            app:layout_constraintTop_toBottomOf="@id/tilIbanNumber"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <Button
+            android:id="@+id/btnNext1"
+            style="@style/ButtonTheme"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:enabled="@{viewModel.cnicNumberNotEmpty &amp;&amp; viewModel.aliasNotEmpty &amp;&amp; viewModel.countryNotEmpty &amp;&amp; viewModel.mobileNumberNotEmpty &amp;&amp; viewModel.motherMaidenNameNotEmpty &amp;&amp; viewModel.placeOfBirthNotEmpty &amp;&amp; viewModel.bankNameNotEmpty &amp;&amp; viewModel.ibanNotEmpty}"
+            android:text="@string/next"
+            android:visibility="visible"
             android:layout_marginBottom="@dimen/_20sdp"
             app:layout_constraintTop_toBottomOf="@id/tilIbanNumber"
             app:layout_constraintEnd_toEndOf="parent"

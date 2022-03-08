@@ -8,6 +8,7 @@ import com.onelink.nrlp.android.features.receiver.fragments.ManageReceiverFragme
 import com.onelink.nrlp.android.features.receiver.fragments.ReceiverDetailsFragment
 import com.onelink.nrlp.android.features.receiver.fragments.ReceiverSuccessFragment
 import com.onelink.nrlp.android.features.receiver.fragments.ReceiverTypeFragment
+import com.onelink.nrlp.android.features.select.bank.view.SelectBankFragment
 import com.onelink.nrlp.android.features.select.city.view.SelectCityFragment
 import com.onelink.nrlp.android.features.select.country.view.SelectCountryFragment
 import dagger.Module
@@ -45,4 +46,8 @@ abstract class ReceiverManagementFragmentsBuilder {
     @FragmentScope
     @ContributesAndroidInjector
     abstract fun provideCityFragment(): SelectCityFragment
+
+    @FragmentScope
+    @ContributesAndroidInjector
+    abstract fun provideBankFragment(): SelectBankFragment
 }

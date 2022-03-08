@@ -40,6 +40,7 @@ import com.onelink.nrlp.android.features.receiver.viewmodel.ReceiverDetailsViewM
 import com.onelink.nrlp.android.features.receiver.viewmodel.ReceiverSharedViewModel
 import com.onelink.nrlp.android.features.redeem.fragments.REDEMPTION_CREATE_DIALOG
 import com.onelink.nrlp.android.features.redeem.fragments.TAG_REDEMPTION_CREATE_DIALOG
+import com.onelink.nrlp.android.features.select.bank.view.SelectBankFragment
 import com.onelink.nrlp.android.features.select.city.model.CitiesModel
 import com.onelink.nrlp.android.features.select.city.view.SelectCityFragment
 import com.onelink.nrlp.android.features.select.country.model.CountryCodeModel
@@ -79,6 +80,7 @@ class ReceiverDetailsFragment :
     ),
     OneLinkAlertDialogsFragment.OneLinkAlertDialogListeners,
     SelectCountryFragment.OnSelectCountryListener, SelectCityFragment.OnSelectCityListener,
+    SelectBankFragment.OnSelectBankListener,
     OneLinkAlertCityDialogFragment.OneLinkAlertDialogListeners{
 
     @Inject
@@ -406,6 +408,9 @@ class ReceiverDetailsFragment :
         binding.btnNext.setOnSingleClickListener {
             makeReceiverAddCall()
         }
+        binding.btnNext1.setOnSingleClickListener {
+            makeReceiverAddCall()
+        }
         binding.btnDelete.setOnSingleClickListener {
             showConfirmBeneficiaryDeletionDialog(beneficiaryDetailsModel)
         }
@@ -416,6 +421,13 @@ class ReceiverDetailsFragment :
                 addToBackStack = true
             )
             hideKeyboard()
+        }
+        binding.etBankName.setOnSingleClickListener {
+            fragmentHelper.addFragment(
+                SelectBankFragment.newInstance(),
+                clearBackStack = false,
+                addToBackStack = true
+            )
         }
         binding.spinnerRelationShip.setOnClickListener {
             binding.spinnerSelectRelationship.performClick()
@@ -684,17 +696,19 @@ class ReceiverDetailsFragment :
             banksList.add(bank.name)
         }
         val stringArray: Array<String> = banksList.toTypedArray()
-        Log.d("stringar", stringArray.size.toString())
     }
 
     private fun hideIbanView() {
         binding.apply {
             tilBankName.visibility = View.GONE
+            etBankName.visibility = View.GONE
             tvBankName.visibility = View.GONE
             icHelpBankName.visibility = View.GONE
             tilIbanNumber.visibility = View.GONE
             tvIbanNumber.visibility = View.GONE
             icHelpIbanNumber.visibility = View.GONE
+            btnNext1.visibility = View.GONE
+            btnNext.visibility = View.VISIBLE
         }
     }
 
@@ -726,6 +740,7 @@ class ReceiverDetailsFragment :
         //Managing views visibilities
         isDeleteBeneficiary = true
         binding.btnNext.visibility=View.GONE
+        binding.btnNext1.visibility=View.GONE
         binding.btnDelete.visibility=View.VISIBLE
         context?.let { it1 -> binding.btnNext.enabled(it1) }
         //binding.textViewCountry.visibility = View.GONE
@@ -756,7 +771,10 @@ class ReceiverDetailsFragment :
             binding.tvBankName.visibility = View.GONE
             binding.icHelpBankName.visibility = View.GONE
             binding.tilBankName.visibility = View.GONE
+            binding.etBankName.visibility = View.GONE
         }
+        if(it.linkStatus != "LINKED")
+            binding.btnDelete.visibility = View.GONE
 
         //Disabling EditTexts
         context?.let {
@@ -774,7 +792,7 @@ class ReceiverDetailsFragment :
         //Setting Form Fields
         binding.viewModel = viewModel
         viewModel.alias.value = it.receiverName
-        viewModel.cnicNumber.value = it.remitterCnic.toString().formattedCnicNumberNoSpaces()
+        viewModel.cnicNumber.value = it.receiverCnic.toString().formattedCnicNumberNoSpaces()
         viewModel.mobileNumber.value = it.receiverMobileNumber
         viewModel.bankName.value = it.recBankName
         viewModel.ibanNumber.value = it.recBankIban
@@ -1033,6 +1051,11 @@ class ReceiverDetailsFragment :
             binding.tvPlaceOfBirth.colorToText(R.color.black)
             fragmentHelper.onBack()
         }
+    }
+
+    override fun onSelectBankListener(bankDetailsModel: com.onelink.nrlp.android.features.select.bank.model.BankDetailsModel) {
+        viewModel.bankName.value = bankDetailsModel.name
+        fragmentHelper.onBack()
     }
 
     private fun showEnterCityDialog(str: Spanned) {

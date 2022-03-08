@@ -241,7 +241,7 @@
     <string name="agent_confirmation">ایجنٹ کی تصدیق</string>
     <string name="redem_points">پوائنٹس استعمال کریں</string>
     <string name="redem_points_detail">آپ نے %3$s کو %2$s پر %1$d پوائنٹس استعمال کر لیے ہیں</string>
-    <string name="self_award_warning">خود پوائنٹس حاصل کرنے کے لئے براہ مہربانی ٹرانزیکشن کے بعد 05 دن تک انتظار فرمائیں۔ مزید معلومات کے لئے ہیلپ لائن پر رابطہ کریں</string>
+    <string name="self_award_warning">روشن ڈیجیٹل اکائونٹ کے صارفین صرف اس رقم کے مقابلے میں پوائنٹس کی آٹو ایوارڈنگ کے اہل ہوں گے جو مقامی طور پر استعمال کی جاتی ہے اور اسے واپس نہیں کیا جاسکتا</string>
     <string name="register_warning">رجسٹر کرنے کے لئے براہ مہربانی ٹرانزیکشن کے بعد 05 دن تک انتظار فرمائیں۔ مزید معلومات کے لئے ہیلپ لائن پر رابطہ کریں</string>
     <string name="redem_confirm_detail">آپ نے %2$s کے لئے %3$s پر %1$d پوائنٹس کو استعمال کرنا منتخب کیا ہے</string>
     <string name="redem_dgip_confirm_detail">You have selected to redeem %1$d points for %2$s at %3$s</string>
@@ -373,7 +373,8 @@
     <string name="remittance_receiver_manager">ترسیلات زر وصول کنندہ کی  منتظمی</string>
     <string name="receiver_mother_maiden_name">براہ کرم نادرا کے ریکارڈ کے مطابق وصول کنندہ کی والدہ کا نام درج کریں</string>
     <string name="receiver_place_of_birth">نادرا کے ریکارڈ کے مطابق براہ کرم وصول کنندہ کی جائے پیدائش درج کریں۔</string>
-    <string name="enter_bank_name">بینک کا نام</string>
+    <string name="enter_bank_name">بینک کا نام*</string>
+    <string name="bank_name">بینک کا نام</string>
     <string name="enter_iban_number">بینک اکاؤنٹ نمبر / بین الاقوامی بینک اکاؤنٹ نمبر</string>
     <string name="receiver_country_of_residence">وصول کنندہ کا قیام کا ملک</string>
     <string name="receiver_name_help">براہ کرم وصول کنندہ کا نام NICOP/CNIC/POC  کے مطابق درج کریں</string>
@@ -389,4 +390,7 @@
     <string name="delete_receiver">وصول کنندہ کو حذف کریں</string>
     <string name="error_invalid_bank_name">براہ کرم درست بینک کا نام درج کریں</string>
     <string name="error_invalid_account_number">براہ کرم درست اکاونٹ نمبر درج کریں</string>
+    <string name="search_bank">Search Bank</string>
+    <string name="error_new_version">Please update your application version to proceed</string>
+    <string name="proceed_to_playstore">Proceed to PlayStore</string>
 </resources>

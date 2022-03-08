@@ -32,7 +32,7 @@ const val REDEMPTION_AMOUNT_DIALOG = 4003
 const val TAG_REDEMPTION_AMOUNT_DIALOG = "redemption_amount_dialog"
 
 class RedemptionPIAPSIDFragment : BaseFragment<RedemptionPIAPSIDViewModel,FragmentRedemptionPiaPsidBinding>
-    (RedemptionPIAPSIDViewModel::class.java),OneLinkAlertAmountDialogFragment.OneLinkAlertDialogListeners {
+    (RedemptionPIAPSIDViewModel::class.java), OneLinkAlertDialogsFragment.OneLinkAlertDialogListeners {
 
     @Inject
     lateinit var oneLinkProgressDialog: OneLinkProgressDialog
@@ -197,7 +197,8 @@ class RedemptionPIAPSIDFragment : BaseFragment<RedemptionPIAPSIDViewModel,Fragme
     }
 
     private fun showRedeemAmountDialog(str: Spanned) {
-        val oneLinkAlertDialogsFragment = OneLinkAlertAmountDialogFragment.newInstance(
+        //val oneLinkAlertDialogsFragment = OneLinkAlertAmountDialogFragment.newInstance(
+        val oneLinkAlertDialogsFragment = OneLinkAlertDialogsFragment.newInstance(
             false,
             R.drawable.ic_redem_dialog,
             getString(R.string.redem_points),
@@ -231,7 +232,27 @@ class RedemptionPIAPSIDFragment : BaseFragment<RedemptionPIAPSIDViewModel,Fragme
         oneLinkAlertDialogsFragment.isCancelable = false
     }
 
-    override fun onPositiveButtonClicked(targetCode: Int,amountEntered: Int) {
+    override fun onPositiveButtonClicked(targetCode: Int) {
+        super.onPositiveButtonClicked(targetCode)
+        when (targetCode) {
+            REDEMPTION_AMOUNT_DIALOG -> {
+                if(viewModel.compareRedeemAmount(redeemablePKR, amount.toDouble())) {
+                    viewModel.makeInitializeRedemptionOTPCall(
+                        redeemPartnerModel.partnerName,
+                        redeemPartnerModel.partnerName,
+                        "",
+                        binding.etPSID.text.toString(),
+                        amount,
+                        "1"
+                    )
+                }
+                else
+                    showNotEnoughPointsDialog()
+            }
+        }
+    }
+
+    /*override fun onPositiveButtonClicked(targetCode: Int,amountEntered: Int) {
         super.onPositiveButtonClicked(targetCode)
         when (targetCode) {
             REDEMPTION_AMOUNT_DIALOG -> {
@@ -256,7 +277,7 @@ class RedemptionPIAPSIDFragment : BaseFragment<RedemptionPIAPSIDViewModel,Fragme
             }
             }
         }
-    }
+    }*/
 
 
     override fun onNegativeButtonClicked(targetCode: Int) {

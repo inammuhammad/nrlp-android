@@ -21,6 +21,8 @@ import com.onelink.nrlp.android.features.receiver.fragments.ReceiverDetailsFragm
 import com.onelink.nrlp.android.features.receiver.fragments.ReceiverTypeFragment
 import com.onelink.nrlp.android.features.receiver.models.ReceiverDetailsModel
 import com.onelink.nrlp.android.features.receiver.viewmodel.ReceiverViewModel
+import com.onelink.nrlp.android.features.select.bank.model.BankDetailsModel
+import com.onelink.nrlp.android.features.select.bank.view.SelectBankFragment
 import com.onelink.nrlp.android.features.select.city.model.CitiesModel
 import com.onelink.nrlp.android.features.select.city.view.SelectCityFragment
 import com.onelink.nrlp.android.features.select.country.model.CountryCodeModel
@@ -31,7 +33,7 @@ import javax.inject.Inject
 class ReceiverActivity :
     BaseFragmentActivity<ActivityReceiverBinding, ReceiverViewModel>(ReceiverViewModel::class.java),
     ReceiversAdapter.ClickEventHandler, SelectCountryFragment.OnSelectCountryListener,
-    SelectCityFragment.OnSelectCityListener {
+    SelectCityFragment.OnSelectCityListener, SelectBankFragment.OnSelectBankListener {
 
     var isFromHome = false
 
@@ -39,6 +41,7 @@ class ReceiverActivity :
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var receiverAdapterCallBack: ReceiversAdapter.ClickEventHandler
     private lateinit var countriesAdpaterCallBack: SelectCountryFragment.OnSelectCountryListener
+    private lateinit var banksAdpaterCallBack: SelectBankFragment.OnSelectBankListener
     lateinit var listenerCity: SelectCityFragment.OnSelectCityListener
 
     override fun getLayoutRes() = R.layout.activity_receiver
@@ -53,6 +56,7 @@ class ReceiverActivity :
         if (fragment is ReceiverDetailsFragment) {
             countriesAdpaterCallBack = fragment
             listenerCity = fragment
+            banksAdpaterCallBack = fragment
         }
     }
 
@@ -96,6 +100,10 @@ class ReceiverActivity :
 
     override fun onSelectCityListener(citiesModel: CitiesModel) {
         listenerCity.onSelectCityListener(citiesModel)
+    }
+
+    override fun onSelectBankListener(bankDetailsModel: BankDetailsModel) {
+        banksAdpaterCallBack.onSelectBankListener(bankDetailsModel)
     }
 
     companion object {

@@ -69,7 +69,7 @@ class SelfAwardPointsFragment :
         }
 
         //showWarningDialog(getString(R.string.self_award_warning))
-        //showGeneralAlertDialog(this,"SelfAward",getString(R.string.self_award_warning))
+        showGeneralAlertDialog(this,"SelfAward",getString(R.string.self_award_warning))
 
         initListeners()
         initObservers()
