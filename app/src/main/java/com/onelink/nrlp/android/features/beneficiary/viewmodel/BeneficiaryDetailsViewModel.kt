@@ -95,4 +95,14 @@ open class BeneficiaryDetailsViewModel @Inject constructor(private val beneficia
         validationAliasPassed.value = isFullNameValid
         return isCnicValid && isFullNameValid && isPhoneNumberValid
     }
+
+    fun editValidationsPassed(
+        cnic: String, phoneNumber: String, phoneNumberLength: Int?
+    ): Boolean {
+        val isCnicValid: Boolean = checkCnicValidation(cnic)
+        val isPhoneNumberValid: Boolean = checkPhoneNumberValidation(phoneNumber, phoneNumberLength)
+        validationCnicPassed.value = isCnicValid
+        validationPhoneNumberPassed.value = isPhoneNumberValid
+        return isCnicValid && isPhoneNumberValid
+    }
 }

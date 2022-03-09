@@ -406,10 +406,12 @@ class ReceiverDetailsFragment :
         }
 
         binding.btnNext.setOnSingleClickListener {
-            makeReceiverAddCall()
+            if(viewModel.validationsPassed(binding.eTCnicNumber.text.toString()))
+                makeReceiverAddCall()
         }
         binding.btnNext1.setOnSingleClickListener {
-            makeReceiverAddCall()
+            if(viewModel.validationsPassed(binding.eTCnicNumber.text.toString()))
+                makeReceiverAddCall()
         }
         binding.btnDelete.setOnSingleClickListener {
             showConfirmBeneficiaryDeletionDialog(beneficiaryDetailsModel)

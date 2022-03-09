@@ -46,6 +46,7 @@
                 android:hint="@string/cnic_nicop_hint"
                 android:inputType="number"
                 android:maxLength="15"
+                android:imeOptions="actionDone|flagForceAscii"
                 android:nextFocusDown="@id/etAlias"
                 android:nextFocusForward="@id/etAlias"
                 android:text="@={viewModel.cnicNumber}" />
@@ -78,6 +79,7 @@
                 android:layout_marginTop="8dp"
                 android:nextFocusDown="@id/etCountry"
                 android:nextFocusForward="@id/etCountry"
+                android:imeOptions="actionDone|flagForceAscii"
                 android:hint="@string/generic_name_placeholder"
                 android:inputType="textCapSentences"
                 android:maxLength="50"

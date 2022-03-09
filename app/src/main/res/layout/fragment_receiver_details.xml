@@ -64,6 +64,7 @@
                 android:imeOptions="actionDone|flagForceAscii"
                 android:hint="@string/please_enter_receiver_info"
                 android:inputType="textCapSentences"
+                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
                 android:maxLength="50"
                 android:text="@={viewModel.alias}" />
         </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
@@ -162,6 +163,7 @@
                 android:imeOptions="actionDone|flagForceAscii"
                 android:hint="@string/please_enter_receiver_info"
                 android:inputType="textCapSentences"
+                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
                 android:maxLength="50"
                 android:text="@={viewModel.motherMaidenName}" />
         </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>

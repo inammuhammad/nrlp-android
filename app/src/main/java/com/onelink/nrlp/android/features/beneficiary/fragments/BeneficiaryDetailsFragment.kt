@@ -384,7 +384,12 @@ class BeneficiaryDetailsFragment :
             makeResendOtp()
         }
         binding.btnUpdate.setOnSingleClickListener {
-            updateBeneficiary()
+            if (viewModel.editValidationsPassed(
+                binding.eTCnicNumber.text.toString(),
+                binding.etMobileNumber.text.toString(),
+                3
+            ))
+                updateBeneficiary()
         }
     }
 
@@ -596,6 +601,7 @@ class BeneficiaryDetailsFragment :
         //hiding beneficiary relationship
         //binding.beneficiaryLL.visibility = View.GONE
         binding.ivDropDown.visibility = View.GONE
+        viewModel.validationCnicPassed.postValue(true)
 
         /*if(!it.isActive)
             binding.lytPosNegButtons.visibility = View.VISIBLE*/

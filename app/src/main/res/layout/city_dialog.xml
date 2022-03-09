@@ -70,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Lahore"
                 android:inputType="textAutoCorrect|textCapWords"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 "
                 android:maxLength="30"
                 />
         </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
