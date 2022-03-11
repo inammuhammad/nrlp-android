@@ -63,6 +63,7 @@ const val BENEFICIARY_DELETION_DIALOG = 3001
 const val BENEFICIARY_UPDATION_DIALOG=3002
 const val BENEFICIARY_RESEND_OTP_DIALOG=3003
 const val RECEIVER_CREATION_DIALOG = 3004
+const val RECEIVER_DELETE_SUPPLEMENTARY_CONFIRM_DIALOG=3005
 const val FIVE_MINUTE_TIMER_MILLIS = 5 * 60 * 1000L
 const val TIMER_MILLIS = 1* 60000L
 const val TIMER_INTERVAL = 1000L
@@ -73,6 +74,7 @@ const val TAG_BENEFICIARY_CREATION = "beneficiary_creation_dialog"
 const val TAG_BENEFICIARY_UPDATION = "beneficiary_updation_dialog"
 const val TAG_BENEFICIARY_RESEND_OTP = "beneficiary_otp_resent_dialog"
 const val TAG_RECEIVER_CREATION = "receiver_creation_dialog"
+const val TAG_RECEIVER_DELETE_SUPPLEMENTARY_CONFIRM = "receiver_delete_supplementary_confirm"
 
 class ReceiverDetailsFragment :
     BaseFragment<ReceiverDetailsViewModel, FragmentReceiverDetailsBinding>(
@@ -406,11 +408,17 @@ class ReceiverDetailsFragment :
         }
 
         binding.btnNext.setOnSingleClickListener {
-            if(viewModel.validationsPassed(binding.eTCnicNumber.text.toString()))
+            if(
+                viewModel.validationsPassed(binding.eTCnicNumber.text.toString(),
+                    binding.etIbanNumber.text.toString())
+            )
                 makeReceiverAddCall()
         }
         binding.btnNext1.setOnSingleClickListener {
-            if(viewModel.validationsPassed(binding.eTCnicNumber.text.toString()))
+            if(
+                viewModel.validationsPassed(binding.eTCnicNumber.text.toString(),
+                    binding.etIbanNumber.text.toString())
+            )
                 makeReceiverAddCall()
         }
         binding.btnDelete.setOnSingleClickListener {
@@ -529,7 +537,8 @@ class ReceiverDetailsFragment :
                 Status.SUCCESS -> {
                     oneLinkProgressDialog.hideProgressDialog()
                     response.data?.let {
-                        fragmentHelper.onBack()
+                        //fragmentHelper.onBack()
+                        showReceiverDeletedDialog(beneficiaryDetailsModel.receiverName)
                     }
                 }
                 Status.ERROR -> {
@@ -961,6 +970,25 @@ class ReceiverDetailsFragment :
         )
     }
 
+    private fun showReceiverDeletedDialog(name: String) {
+        val oneLinkAlertDialogsFragment = OneLinkAlertDialogsFragment.newInstance(
+            true,
+            R.drawable.ic_beneficairy_created,
+            getString(R.string.receiver_removed),
+            getString(R.string._has_been_removed, name).toSpanned(),
+            getString(R.string.done),
+            positiveButtonText = "",
+            negativeButtonText = ""
+        )
+        oneLinkAlertDialogsFragment.setTargetFragment(
+            this,
+            RECEIVER_DELETE_SUPPLEMENTARY_CONFIRM_DIALOG
+        )
+        oneLinkAlertDialogsFragment.show(parentFragmentManager,
+            TAG_RECEIVER_DELETE_SUPPLEMENTARY_CONFIRM
+        )
+    }
+
     override fun onNeutralButtonClicked(targetCode: Int) {
         super.onNeutralButtonClicked(targetCode)
         when (targetCode) {
@@ -974,6 +1002,7 @@ class ReceiverDetailsFragment :
             }
             BENEFICIARY_UPDATION_DIALOG -> updatedBeneficiaryView()
             BENEFICIARY_RESEND_OTP_DIALOG -> updatedBeneficiaryView()
+            RECEIVER_DELETE_SUPPLEMENTARY_CONFIRM_DIALOG -> fragmentHelper.onBack()
         }
     }
 

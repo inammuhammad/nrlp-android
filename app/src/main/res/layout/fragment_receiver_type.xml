@@ -45,6 +45,20 @@
             android:text="@string/remittance_to_bank" />
     </RadioGroup>
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/btnNext"
+        app:layout_constraintStart_toStartOf="@id/btnNext"
+        app:layout_constraintEnd_toEndOf="@id/btnNext"
+        android:text="@string/receivers_maximum_note"
+        android:layout_margin="@dimen/_15sdp"
+        android:textSize="@dimen/_13sdp"
+        android:padding="@dimen/_6sdp"
+        style="@style/TextViewMedium"
+        android:background="@drawable/green_border"
+        />
+
     <Button
         android:id="@+id/btnNext"
         style="@style/ButtonTheme"

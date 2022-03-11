@@ -527,6 +527,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/select_passport_no"
+                            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
                             android:inputType="text"
                             android:imeOptions="actionDone|flagForceAscii"
                             android:text="@={viewModel.passportId}" />

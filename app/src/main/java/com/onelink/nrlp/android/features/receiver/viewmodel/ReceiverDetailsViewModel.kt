@@ -133,14 +133,16 @@ open class ReceiverDetailsViewModel @Inject constructor(private val receiverRepo
         string.isNotEmpty() || ValidationUtils.isBankNameValid(string)
 
     fun checkIbanValidation(string: String) =
-        string.isNotEmpty() || ValidationUtils.isIbanAccountNumberValid(string)
+        ValidationUtils.isIbanAccountNumberValid(string)
 
     fun checkMotherMaidenNameValidation(string: String) =
         string.isEmpty() || ValidationUtils.isNameValid(string)
 
-    fun validationsPassed(cnic: String): Boolean {
+    fun validationsPassed(cnic: String, iban: String): Boolean {
         val isCnicValid: Boolean = checkCnicValidation(cnic)
+        val isIbanValid: Boolean = checkIbanValidation(iban)
         validationCnicPassed.value = isCnicValid
-        return isCnicValid
+        validationIbanPassed.value = isIbanValid
+        return isCnicValid && isIbanValid
     }
 }

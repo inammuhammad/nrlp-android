@@ -43,6 +43,7 @@ const val BENEFICIARY_CREATION_DIALOG = 3000
 const val BENEFICIARY_DELETION_DIALOG = 3001
 const val BENEFICIARY_UPDATION_DIALOG=3002
 const val BENEFICIARY_RESEND_OTP_DIALOG=3003
+const val BENEFICIARY_PLEASE_WAIT_DIALOG=3004
 const val FIVE_MINUTE_TIMER_MILLIS = 5 * 60 * 1000L
 const val TIMER_MILLIS = 1* 60000L
 const val TIMER_INTERVAL = 1000L
@@ -52,6 +53,7 @@ const val TAG_BENEFICIARY_DELETION = "beneficiary_deletion_dialog"
 const val TAG_BENEFICIARY_CREATION = "beneficiary_creation_dialog"
 const val TAG_BENEFICIARY_UPDATION = "beneficiary_updation_dialog"
 const val TAG_BENEFICIARY_RESEND_OTP = "beneficiary_otp_resent_dialog"
+const val TAG_BENEFICIARY_PLEASE_WAIT = "beneficiary_please_wait_dialog"
 
 class BeneficiaryDetailsFragment :
     BaseFragment<BeneficiaryDetailsViewModel, FragmentBeneficiaryDetailsBinding>(
@@ -162,9 +164,9 @@ class BeneficiaryDetailsFragment :
             binding.lytPosNegButtons.visibility=View.VISIBLE
             isTimePassed()
             //val result=gmtTime-timeUpdated
-        }else{
+        }/*else{
             binding.lytPosNegButtons.visibility=View.GONE
-        }
+        }*/
     }
     fun String.toDate(dateFormat: String = LOCAL_TIME_PATTERN, timeZone: TimeZone = TimeZone.getTimeZone("UTC")): Date {
         val parser = SimpleDateFormat(dateFormat, Locale.ENGLISH)
@@ -198,12 +200,18 @@ class BeneficiaryDetailsFragment :
         if(differenceInMilis>= FIVE_MINUTE_TIMER_MILLIS)
         {
             binding.btnResendOtp.visibility=View.VISIBLE
-            binding.textViewTimer.visibility=View.GONE
+            binding.btnEdit.visibility=View.VISIBLE
+            //binding.textViewTimer.visibility=View.GONE
+            binding.btnResendOtpDisabled.visibility=View.GONE
+            binding.btnEditDisabled.visibility=View.GONE
         }
         else
         {
             binding.btnResendOtp.visibility=View.GONE
-            binding.textViewTimer.visibility=View.VISIBLE
+            binding.btnEdit.visibility=View.GONE
+            //binding.textViewTimer.visibility=View.VISIBLE
+            binding.btnResendOtpDisabled.visibility = View.VISIBLE
+            binding.btnEditDisabled.visibility = View.VISIBLE
             timeRemaining=FIVE_MINUTE_TIMER_MILLIS-differenceInMilis
             fiveMinuteTimer.setRemainingTimeinMillis(timeRemaining)
             fiveMinuteTimer.reset()
@@ -390,6 +398,12 @@ class BeneficiaryDetailsFragment :
                 3
             ))
                 updateBeneficiary()
+        }
+        binding.btnResendOtpDisabled.setOnSingleClickListener {
+            showPleaseWaitDialog()
+        }
+        binding.btnEditDisabled.setOnSingleClickListener {
+            showPleaseWaitDialog()
         }
     }
 
@@ -740,11 +754,28 @@ class BeneficiaryDetailsFragment :
         oneLinkAlertDialogsFragment.show(parentFragmentManager, TAG_BENEFICIARY_CREATION)
     }
 
+    private fun showPleaseWaitDialog() {
+        val oneLinkAlertDialogsFragment = OneLinkAlertDialogsFragment.newInstance(
+            true,
+            R.drawable.ic_beneficairy_created,
+            getString(R.string.please_wait),
+            (getString(R.string.five_minutes_before_editting)).toSpanned(),
+            getString(R.string.done),
+            positiveButtonText = "",
+            negativeButtonText = ""
+        )
+        oneLinkAlertDialogsFragment.setTargetFragment(
+            this,
+            BENEFICIARY_PLEASE_WAIT_DIALOG
+        )
+        oneLinkAlertDialogsFragment.show(parentFragmentManager, TAG_BENEFICIARY_PLEASE_WAIT)
+    }
+
     override fun onNeutralButtonClicked(targetCode: Int) {
         super.onNeutralButtonClicked(targetCode)
         when (targetCode) {
             BENEFICIARY_CREATION_DIALOG -> fragmentHelper.onBack()
-            BENEFICIARY_UPDATION_DIALOG -> updatedBeneficiaryView()
+            BENEFICIARY_UPDATION_DIALOG -> fragmentHelper.onBack() //updatedBeneficiaryView()
             BENEFICIARY_RESEND_OTP_DIALOG -> updatedBeneficiaryView()
         }
     }
@@ -827,14 +858,17 @@ class BeneficiaryDetailsFragment :
     ) {
         override fun onTick(millisUntilFinished: Long) {
            // binding.textViewResendOTP.isEnabled = false
-            binding.btnResendOtp.visibility=View.GONE
+            //binding.btnResendOtp.visibility=View.GONE
         }
 
         override fun onFinish() {
             //if (otpAttempts < RETRIES_COUNT) {
             //binding.textViewResendOTP.isEnabled = true
             binding.btnResendOtp.visibility=View.VISIBLE
-            binding.textViewTimer.visibility=View.GONE
+            binding.btnEdit.visibility = View.VISIBLE
+            //binding.textViewTimer.visibility=View.GONE
+            binding.btnResendOtpDisabled.visibility=View.GONE
+            binding.btnEditDisabled.visibility=View.GONE
             //otpAttempts++
             //}
         }
@@ -847,21 +881,27 @@ class BeneficiaryDetailsFragment :
         ) {
             @SuppressLint("DefaultLocale")
             override fun onTick(millisUntilFinished: Long) {
-                val value=resources.getString(R.string.resend_registration_code) + "(" +formattedCountDownTimer(millisUntilFinished) + ")"
+                val value=resources.getString(R.string.resend_registration_code) //+ "(" +formattedCountDownTimer(millisUntilFinished) + ")"
                 binding.textViewTimer.text = value
             }
 
             override fun onFinish() {
-                binding.textViewTimer.text = getString(R.string.timer_default)
+                //binding.textViewTimer.text = getString(R.string.timer_default)
                 binding.btnResendOtp.visibility=View.VISIBLE
-                binding.textViewTimer.visibility=View.GONE
+                binding.btnEdit.visibility=View.VISIBLE
+                //binding.textViewTimer.visibility=View.GONE
+                binding.btnResendOtpDisabled.visibility=View.GONE
+                binding.btnEditDisabled.visibility=View.GONE
             }
         }
 
     private fun showTimer()
     {
-        binding.textViewTimer.visibility=View.VISIBLE
+        //binding.textViewTimer.visibility=View.VISIBLE
         binding.btnResendOtp.visibility=View.GONE
+        binding.btnEdit.visibility=View.GONE
+        binding.btnResendOtpDisabled.visibility = View.VISIBLE
+        binding.btnEditDisabled.visibility = View.VISIBLE
         fiveMinuteTimer.setRemainingTimeinMillis(FIVE_MINUTE_TIMER_MILLIS)
         fiveMinuteTimer.reset()
 

@@ -2,13 +2,13 @@
 <resources>
     <string name="app_name">Sohni Dharti-Dev</string>
     <string name="register_an_account">رجسٹر کریں</string>
-    <string name="full_name">مکمل نام*</string>
-    <string name="full_name_complaint">مکمل نام</string>
+    <string name="full_name">*CNIC/NICOP/POC کے مطابق پورا نام</string>
+    <string name="full_name_complaint">*CNIC/NICOP/POC کے مطابق پورا نام</string>
     <string name="full_name_as_per_cnic">*CNIC/NICOP/POC کے مطابق پورا نام</string>
     <string name="mother_maiden_name">ماں کا نام *</string>
     <string name="place_of_birth">جائے پیدائش *</string>
     <string name="title_place_of_birth">جائے پیدائش</string>
-    <string name="cnic_nicop_number">شناختی کارڈ/ نیشنل آئیڈنٹٹی کارڈ فور اوورسیز پاکستانی*</string>
+    <string name="cnic_nicop_number">* CNIC/NICOP/POC</string>
     <string name="cnic_nicop_number_complaint">شناختی کارڈ/ نیشنل آئیڈنٹٹی کارڈ فور اوورسیز پاکستانی</string>
     <string name="cnic_nicop_issuance_date">*CNIC/NICOP/POC کے اجراء کی تاریخ</string>
     <string name="country">قیام کا ملک*</string>
@@ -26,7 +26,7 @@
     <string name="help_confirm_password">پاسورڈ دوبارہ درج کریں</string>
     <string name="help_user_type">براہ مہربانی منتخب کریں کہ آپ رقم بھیجنے والے یا وصول کرنے والے ہیں</string>
     <string name="help_full_name">>اپنا شناختی کارڈ پہ درج کردہ نام درج کریں</string>
-    <string name="help_usd">میں سالانہ ترسیلات زر ہر سال یکم جولائی سے جمع ہوتی ہیں تاہم موجودہ سال کے لیے اس کا اطلاق یکم اکتوبر 2021 سے ہوگا اور اسی کے مطابق آپ کی لائلٹی کیٹیگری کا حساب لگایا جائے گا۔ USD</string>
+    <string name="help_usd">ہUSD میں سالانہ ترسیلات زر ہر سال یکم جولائی سے جمع ہوتی ہیں تاہم موجودہ سال کے لیے اس کا اطلاق یکم اکتوبر 2021 سے ہوگا اور اسی کے مطابق آپ کی لائلٹی کیٹیگری کا حساب لگایا جائے گا۔</string>
     <string name="resident_id">منفرد آئی ڈی*</string>
     <string name="mobile_number">موبائل نمبر*</string>
     <string name="mobile_number_complaint">موبائل نمبر</string>
@@ -259,7 +259,7 @@
     <string name="invalid_installation">غلط تنصیب</string>
     <string name="msg_invalid_installation">معذرت ، آپ یہ ایپ استعمال نہیں کرسکتے ہیں کیونکہ آپ کا موبائل jailbroken/rooted یا کسی اور طَریقے سے تَبْدِیل کیا گیا ہے</string>
     <string name="enter_code">براہ کرم اپنا 6 ہندسوں کا کوڈ درج کریں</string>
-    <string name="oh_snap">Oh Snap!</string>
+    <string name="oh_snap"> </string>
     <string name="agent_time_expired">کوڈ کی میعاد ختم ہوگئی ہے۔ براہ کرم کسی دوسرے کوڈ کے لئے درخواست کریں</string>
     <string name="not_enough_points_msg">اس وقت اس سروس سے فائدہ اٹھانے کے لۓ آپ کے پوائنٹس ناکافی ہیں</string>
     <string name="forgot_password">پاس ورڈ یاد نہیں</string>

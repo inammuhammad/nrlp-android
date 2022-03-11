@@ -479,6 +479,11 @@ class EditProfileFragment() :
             viewModel.oldEmail.value = email
         }
 
+        if(email == resources.getString(R.string.undefined)) {
+            viewModel.email.value = ""
+            viewModel.oldEmail.value = ""
+        }
+
         if (residentId != "null" && !residentId.isNullOrEmpty()) {
             viewModel.residentId.value = residentId
             viewModel.oldResidentID.value = residentId

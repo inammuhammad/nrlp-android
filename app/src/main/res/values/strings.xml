@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Sohni Dharti</string>
     <string name="register_an_account">Register an Account</string>
-    <string name="full_name">Full Name *</string>
+    <string name="full_name">Full Name as per CNIC/NICOP/POC *</string>
     <string name="full_name_as_per_cnic">Full Name as per CNIC/NICOP/POC *</string>
     <string name="mother_maiden_name">Mother Maiden Name *</string>
     <string name="place_of_birth">Place of Birth *</string>
@@ -269,7 +269,7 @@
     <string name="invalid_installation">Invalid Installation!</string>
     <string name="msg_invalid_installation">Sorry, you can\'t use this app as we\'ve detected that your device has been jailbroken/rooted or altered in some other way.</string>
     <string name="enter_code">Please enter the code below</string>
-    <string name="oh_snap">Oh Snap!</string>
+    <string name="oh_snap"> </string>
     <string name="agent_time_expired">Code has been expired. Please request for another code.</string>
     <string name="not_enough_points_msg">You do not have enough points to avail this service at the moment.</string>
     <string name="not_enough_points_loyalty_points_msg">You do not have enough Loyalty Points.</string>
@@ -279,7 +279,7 @@
     <string name="device_change">Device Change</string>
     <string name="points">%1$s Points</string>
     <string name="error_session_expired">Your session has been expired. Please login again.</string>
-    <string name="error_profile_verification_failed">Your account has been locked due to 3 unsuccessful attempts. You can click on forget password to unlock your account.</string>
+    <string name="error_profile_verification_failed">Your account has been locked due to 3 incorrect attempts, please go to forgot password option to unlock your account.</string>
     <string name="error_transaction_fetch">Please wait for at least 5 working days after your remittance has been processed to register for Sohni Dharti Remittance Program. If your transaction is older than 5 days, kindly contact Customer Support at +92-21-111-11-6757 or email us at sdrpsupport@1link.net.pk</string>
     <string name="verify_your_device">Verify your device</string>
     <string name="language">Language</string>
@@ -383,7 +383,7 @@
     <string name="login_failed">"Login failed"</string>
     <string name="resend_registration_code">Resend Registration Code</string>
     <string name="transaction_amount_pkr">Transaction Amount (PKR)</string>
-    <string name="full_name_complaint">Full Name</string>
+    <string name="full_name_complaint">Full Name as per CNIC/NICOP/POC</string>
     <string name="pkr">PKR</string>
     <string name="incorrect_information">Your provided information is incorrect. Kindly enter the valid information as per NADRA record</string>
     <string name="attempts_exceeded">You have entered wrong information for 3 times. Your account has been locked for 24 hours</string>
@@ -418,4 +418,10 @@
     <string name="search_bank">Search Bank</string>
     <string name="error_new_version">Please update your application version to proceed</string>
     <string name="proceed_to_playstore">Proceed to PlayStore</string>
+    <string name="undefined" translatable="false">undefined</string>
+    <string name="receiver_removed">Remittance Receiver Removed</string>
+    <string name="_has_been_removed">%s has Been Removed</string>
+    <string name="please_wait">Please Wait!</string>
+    <string name="five_minutes_before_editting">Please wait 5 minutes before resending OTP</string>
+    <string name="receivers_maximum_note">Note: You can add maximum 5 receivers.</string>
 </resources>
