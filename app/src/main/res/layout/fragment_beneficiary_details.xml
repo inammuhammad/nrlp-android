@@ -237,8 +237,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="8.5"
-                    android:text="@string/select_beneficiary_relationship"
-                    android:textColor="@color/grey" />
+                    android:text="@string/brother"
+                    android:textColor="@color/black" />
 
                 <ImageView
                     android:id="@+id/iv_drop_down"

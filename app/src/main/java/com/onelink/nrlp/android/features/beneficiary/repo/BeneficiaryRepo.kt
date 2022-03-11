@@ -9,6 +9,8 @@ import com.onelink.nrlp.android.features.beneficiary.models.AddBeneficiaryReques
 import com.onelink.nrlp.android.features.beneficiary.models.DeleteBeneficiaryRequestModel
 import com.onelink.nrlp.android.features.beneficiary.models.ResendBeneficiaryOtpRequestModel
 import com.onelink.nrlp.android.features.beneficiary.models.UpdateBeneficiaryRequestModel
+import com.onelink.nrlp.android.features.register.models.CountryCodesRequest
+import com.onelink.nrlp.android.features.select.country.model.CountryCodeResponseModel
 import com.onelink.nrlp.android.models.BeneficiariesResponseModel
 import com.onelink.nrlp.android.models.GeneralMessageResponseModel
 import javax.inject.Inject
@@ -30,6 +32,8 @@ open class BeneficiaryRepo @Inject constructor(
         MutableLiveData<BaseResponse<GeneralMessageResponseModel>>()
     val beneficiaryUpdateResponse=
         MutableLiveData<BaseResponse<GeneralMessageResponseModel>>()
+    val countryCodesResponse =
+        MutableLiveData<BaseResponse<CountryCodeResponseModel>>()
 
     fun getAllBeneficiaries() {
         networkHelper.serviceCall(serviceGateway.getBeneficiaries()).observeForever {
@@ -61,6 +65,12 @@ open class BeneficiaryRepo @Inject constructor(
             }
     }
 
+    fun getCountryCodes(type: String = "beneficiary") {
+        networkHelper.serviceCall(serviceGateway.getCountryCodes(CountryCodesRequest(type))).observeForever {
+            countryCodesResponse.value = it
+        }
+    }
+
     fun observeBeneficiaryDeleteResponse() =
         beneficiaryDeleteResponse as LiveData<BaseResponse<GeneralMessageResponseModel>>
 
@@ -76,6 +86,9 @@ open class BeneficiaryRepo @Inject constructor(
                 beneficiaryAddResponse.value = it
             }
     }
+
+    fun observeCountryCodes() =
+        countryCodesResponse as LiveData<BaseResponse<CountryCodeResponseModel>>
 
     fun observeBeneficiaryAddResponse() =
         beneficiaryAddResponse as LiveData<BaseResponse<GeneralMessageResponseModel>>

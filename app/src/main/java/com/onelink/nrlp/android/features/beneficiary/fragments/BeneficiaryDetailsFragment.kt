@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.onelink.nrlp.android.R
 import com.onelink.nrlp.android.core.BaseFragment
 import com.onelink.nrlp.android.core.Status
+import com.onelink.nrlp.android.data.local.UserData
 import com.onelink.nrlp.android.databinding.FragmentBeneficiaryDetailsBinding
 import com.onelink.nrlp.android.features.beneficiary.models.AddBeneficiaryRequestModel
 import com.onelink.nrlp.android.features.beneficiary.models.DeleteBeneficiaryRequestModel
@@ -32,6 +33,7 @@ import com.onelink.nrlp.android.utils.*
 import com.onelink.nrlp.android.utils.dialogs.OneLinkAlertDialogsFragment
 import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
 import dagger.android.support.AndroidSupportInjection
+import java.lang.Exception
 import java.lang.Math.abs
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -82,6 +84,10 @@ class BeneficiaryDetailsFragment :
 
     private var timeRemaining:Long =FIVE_MINUTE_TIMER_MILLIS
 
+    private lateinit var countriesList: List<CountryCodeModel>
+
+    private var countryCode: String = ""
+
     override fun onInject() {
         AndroidSupportInjection.inject(this)
     }
@@ -101,6 +107,7 @@ class BeneficiaryDetailsFragment :
         super.init(savedInstanceState)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+        UserData.getUser()?.accountType?.let { viewModel.getCountryCodes(it) }
         activity?.let {
             beneficiarySharedViewModel = ViewModelProvider(it).get(
                 BeneficiarySharedViewModel::class.java
@@ -383,6 +390,7 @@ class BeneficiaryDetailsFragment :
             binding.spinnerSelectRelationship.performClick()
         }
         binding.btnEdit.setOnSingleClickListener {
+            setCountryCode()
             enableEdit(beneficiaryDetailsModel)
         }
         binding.btnCancel.setOnSingleClickListener {
@@ -413,8 +421,6 @@ class BeneficiaryDetailsFragment :
         } else {
             relation = viewModel.beneficiaryRelation.value.toString()
         }
-        if(relation == Constants.SPINNER_BENEFICIARY_HINT)
-            relation = getString(R.string.brother)
         viewModel.addBeneficiary(
             AddBeneficiaryRequestModel(
                 beneficiaryNicNicop = binding.eTCnicNumber.text.toString().replace("-", ""),
@@ -564,6 +570,27 @@ class BeneficiaryDetailsFragment :
                 binding.txtOther.visibility = View.GONE
             }
         })
+
+        viewModel.observerCountryCodes().observe(this, Observer { response ->
+            when (response.status) {
+                Status.SUCCESS -> {
+                    oneLinkProgressDialog.hideProgressDialog()
+                    response.data?.let {
+                        countriesList = it.countryCodesList
+                        //setCountryCode()
+                    }
+                }
+                Status.ERROR -> {
+                    oneLinkProgressDialog.hideProgressDialog()
+                    response.error?.let {
+                        showGeneralErrorDialog(this, it)
+                    }
+                }
+                Status.LOADING -> {
+                    oneLinkProgressDialog.showProgressDialog(activity)
+                }
+            }
+        })
     }
 
     private fun makeDeleteBeneficiaryView(it: BeneficiaryDetailsModel) {
@@ -630,8 +657,8 @@ class BeneficiaryDetailsFragment :
         binding.btnNext.visibility=View.GONE
         //binding.textViewCountry.visibility = View.GONE
         //binding.etCountry.visibility = View.GONE
-        binding.tvCountryCode.visibility = View.GONE
-        binding.prefixTv.visibility = View.GONE
+        //binding.tvCountryCode.visibility = View.GONE
+        //binding.prefixTv.visibility = View.GONE
         //binding.ivDropDown.visibility = View.VISIBLE
 
         //Enabling EditTexts
@@ -648,7 +675,7 @@ class BeneficiaryDetailsFragment :
         //Setting Form Fields
         viewModel.alias.value = it.alias
         viewModel.cnicNumber.value =it.nicNicop.toString().formattedCnicNumberNoSpaces()
-        viewModel.mobileNumber.value = it.mobileNo
+        viewModel.mobileNumber.value = it.mobileNo.substring(countryCode.length) ?: ""
         binding.tvRelationShip.text = it.relationship
         binding.etCountry.text = it.country
         if(it.country.isNullOrEmpty())
@@ -670,7 +697,8 @@ class BeneficiaryDetailsFragment :
         binding.tvRelationShip.alpha = 1f*/
         binding.etCountry.colorToText(R.color.black)
         binding.etCountry.alpha = 1f
-
+        binding.tvCountryCode.colorToText(R.color.black)
+        binding.etCountry.alpha = 1f
         //binding.lytPosNegButtons.visibility = View.VISIBLE
     }
 
@@ -680,8 +708,8 @@ class BeneficiaryDetailsFragment :
         binding.btnNext.visibility=View.VISIBLE
         //binding.textViewCountry.visibility = View.GONE
         //binding.etCountry.visibility = View.GONE
-        binding.tvCountryCode.visibility = View.GONE
-        binding.prefixTv.visibility = View.GONE
+        //binding.tvCountryCode.visibility = View.GONE
+        //binding.prefixTv.visibility = View.GONE
         binding.lytUpdateCancel.visibility = View.GONE
 
         //Disabling EditTexts
@@ -714,6 +742,31 @@ class BeneficiaryDetailsFragment :
         binding.ivDropDown.visibility = View.GONE
 
     }
+
+    private fun setCountryCode(){
+        var countryCodeModel = countriesList[0]
+        countryCode =
+            getString(R.string.country_code_prefix) + beneficiarySharedViewModel?.beneficiaryDetails?.value?.mobileNo?.getCountryCode()
+        val countryIndex = getCountryIndex(countryCode.removePlusCharacter())
+        try {
+            countryCodeModel = countriesList[countryIndex]
+        }catch(e: Exception){
+            countryCodeModel = CountryCodeModel(resources.getString(R.string.select_country), "+92", 10)
+        }
+        binding.tvCountryCode.visibility = View.VISIBLE
+        binding.tvCountryCode.text = countryCodeModel.code
+        viewModel.mobileNumber.value = viewModel.mobileNumber.value?.substring(countryCode.length) ?: ""
+    }
+
+    private fun getCountryIndex(countryCode: String?): Int {
+        var count = 0
+        for (d in countriesList) {
+            if (d.code.removePlusCharacter() == countryCode) break
+            else count++
+        }
+        return count
+    }
+
 
     companion object {
         @JvmStatic
@@ -825,7 +878,7 @@ class BeneficiaryDetailsFragment :
             beneficiaryDetailsModel.id.toString(),
             viewModel.cnicNumber.value.toString().removeDashes(),
             viewModel.alias.value.toString(),
-            viewModel.mobileNumber.value.toString(),
+            binding.tvCountryCode.text.toString() + viewModel.mobileNumber.value.toString(),
             beneficiaryRelation=relation,
             viewModel.country.value
         ))

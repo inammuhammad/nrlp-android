@@ -34,6 +34,8 @@ open class BeneficiaryDetailsViewModel @Inject constructor(private val beneficia
     fun updateBeneficiary(request: UpdateBeneficiaryRequestModel)=
         beneficiaryRepo.updateBeneficiary(request)
 
+    fun getCountryCodes(type: String = "beneficiary") = beneficiaryRepo.getCountryCodes(type)
+
     fun observeBeneficiaryResendOtp() =beneficiaryRepo.observeBeneficiaryResendOtpResponse()
 
     fun observeBeneficiaryDeleteResponse() = beneficiaryRepo.observeBeneficiaryDeleteResponse()
@@ -44,6 +46,8 @@ open class BeneficiaryDetailsViewModel @Inject constructor(private val beneficia
         beneficiaryRepo.addBeneficiary(addBeneficiaryRequestModel)
 
     fun observeBeneficiaryAddResponse() = beneficiaryRepo.observeBeneficiaryAddResponse()
+
+    fun observerCountryCodes() = beneficiaryRepo.observeCountryCodes()
 
     override fun onCleared() {
         beneficiaryRepo.onClear()
