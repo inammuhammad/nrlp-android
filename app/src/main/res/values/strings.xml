@@ -422,6 +422,7 @@
     <string name="receiver_removed">Remittance Receiver Removed</string>
     <string name="_has_been_removed">%s has Been Removed</string>
     <string name="please_wait">Please Wait!</string>
-    <string name="five_minutes_before_editting">Please wait 5 minutes before resending OTP</string>
+    <string name="five_minutes_before_resending">Please wait 5 minutes before resending OTP</string>
+    <string name="five_minutes_before_editing">Please wait 5 minutes before editing beneficiary</string>
     <string name="receivers_maximum_note">Note: You can add maximum 5 receivers.</string>
 </resources>

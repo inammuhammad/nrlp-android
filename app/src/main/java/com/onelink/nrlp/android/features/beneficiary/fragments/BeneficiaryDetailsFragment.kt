@@ -400,10 +400,10 @@ class BeneficiaryDetailsFragment :
                 updateBeneficiary()
         }
         binding.btnResendOtpDisabled.setOnSingleClickListener {
-            showPleaseWaitDialog()
+            showPleaseWaitDialogOtp()
         }
         binding.btnEditDisabled.setOnSingleClickListener {
-            showPleaseWaitDialog()
+            showPleaseWaitDialogEditing()
         }
     }
 
@@ -413,6 +413,8 @@ class BeneficiaryDetailsFragment :
         } else {
             relation = viewModel.beneficiaryRelation.value.toString()
         }
+        if(relation == Constants.SPINNER_BENEFICIARY_HINT)
+            relation = getString(R.string.brother)
         viewModel.addBeneficiary(
             AddBeneficiaryRequestModel(
                 beneficiaryNicNicop = binding.eTCnicNumber.text.toString().replace("-", ""),
@@ -617,8 +619,8 @@ class BeneficiaryDetailsFragment :
         binding.ivDropDown.visibility = View.GONE
         viewModel.validationCnicPassed.postValue(true)
 
-        /*if(!it.isActive)
-            binding.lytPosNegButtons.visibility = View.VISIBLE*/
+        if(!it.isActive)
+            binding.lytPosNegButtons.visibility = View.VISIBLE
     }
 
     private fun enableEdit(it: BeneficiaryDetailsModel){
@@ -669,7 +671,7 @@ class BeneficiaryDetailsFragment :
         binding.etCountry.colorToText(R.color.black)
         binding.etCountry.alpha = 1f
 
-        binding.lytPosNegButtons.visibility = View.VISIBLE
+        //binding.lytPosNegButtons.visibility = View.VISIBLE
     }
 
     private fun updatedBeneficiaryView(){
@@ -754,12 +756,29 @@ class BeneficiaryDetailsFragment :
         oneLinkAlertDialogsFragment.show(parentFragmentManager, TAG_BENEFICIARY_CREATION)
     }
 
-    private fun showPleaseWaitDialog() {
+    private fun showPleaseWaitDialogOtp() {
         val oneLinkAlertDialogsFragment = OneLinkAlertDialogsFragment.newInstance(
             true,
             R.drawable.ic_beneficairy_created,
             getString(R.string.please_wait),
-            (getString(R.string.five_minutes_before_editting)).toSpanned(),
+            (getString(R.string.five_minutes_before_resending)).toSpanned(),
+            getString(R.string.done),
+            positiveButtonText = "",
+            negativeButtonText = ""
+        )
+        oneLinkAlertDialogsFragment.setTargetFragment(
+            this,
+            BENEFICIARY_PLEASE_WAIT_DIALOG
+        )
+        oneLinkAlertDialogsFragment.show(parentFragmentManager, TAG_BENEFICIARY_PLEASE_WAIT)
+    }
+
+    private fun showPleaseWaitDialogEditing() {
+        val oneLinkAlertDialogsFragment = OneLinkAlertDialogsFragment.newInstance(
+            true,
+            R.drawable.ic_beneficairy_created,
+            getString(R.string.please_wait),
+            (getString(R.string.five_minutes_before_editing)).toSpanned(),
             getString(R.string.done),
             positiveButtonText = "",
             negativeButtonText = ""

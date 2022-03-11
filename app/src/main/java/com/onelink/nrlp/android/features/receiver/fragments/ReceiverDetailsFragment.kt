@@ -408,15 +408,12 @@ class ReceiverDetailsFragment :
         }
 
         binding.btnNext.setOnSingleClickListener {
-            if(
-                viewModel.validationsPassed(binding.eTCnicNumber.text.toString(),
-                    binding.etIbanNumber.text.toString())
-            )
+            if(viewModel.validationsPassedCnicReceiver(binding.eTCnicNumber.text.toString()))
                 makeReceiverAddCall()
         }
         binding.btnNext1.setOnSingleClickListener {
             if(
-                viewModel.validationsPassed(binding.eTCnicNumber.text.toString(),
+                viewModel.validationsPassedIbanReceiver(binding.eTCnicNumber.text.toString(),
                     binding.etIbanNumber.text.toString())
             )
                 makeReceiverAddCall()
