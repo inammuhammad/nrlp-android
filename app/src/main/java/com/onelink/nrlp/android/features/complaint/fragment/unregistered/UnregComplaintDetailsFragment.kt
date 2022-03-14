@@ -164,6 +164,16 @@ class UnregComplaintDetailsFragment :
                 )
             }
         }
+        binding.etMobileOperator.setOnFocusChangeListener { _, b ->
+            when (b) {
+                false -> viewModel.validationMobileOperatorPassed.postValue(
+                    viewModel.checkMobileOperatorValidation(
+                        binding.etMobileOperator.text.toString()
+                    )
+                )
+            }
+        }
+
     }
 
     private fun initObservers() {
@@ -338,6 +348,19 @@ class UnregComplaintDetailsFragment :
                          binding.lyPhoneNumber.setBackgroundDrawable(R.drawable.edit_text_background)
                      }
                  }
+            })
+
+        viewModel.validationMobileOperatorPassed.observe(
+            this,
+            { validationsPassed ->
+                run {
+                    if (!validationsPassed)
+                        binding.tilMobileOperator.error = getString(R.string.error_mobile_operator)
+                    else {
+                        binding.tilMobileOperator.clearError()
+                        binding.tilMobileOperator.isErrorEnabled = false
+                    }
+                }
             })
     }
     private fun getUserType(): String {

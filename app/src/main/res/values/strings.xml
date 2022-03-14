@@ -425,4 +425,9 @@
     <string name="five_minutes_before_resending">Please wait 5 minutes before resending OTP</string>
     <string name="five_minutes_before_editing">Please wait 5 minutes before editing beneficiary</string>
     <string name="receivers_maximum_note">Note: You can add maximum 5 receivers.</string>
+    <string name="error_mobile_operator">Please enter a valid Mobile Operator</string>
+    <string name="error_transaction_type">Please select Transaction Type</string>
+    <string name="error_remitting_entity">Please enter a valid Remittance Entity</string>
+    <string name="error_transaction_id">Please enter a valid Transaction ID</string>
+    <string name="error_transaction_amount">Please enter a valid Transaction Amount</string>
 </resources>

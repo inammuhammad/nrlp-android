@@ -47,7 +47,14 @@ constructor(private val complainRepo: ComplainRepo)
     val validationAliasPassed = MutableLiveData(true)
     val validationPhoneNumberPassed = MutableLiveData(true)
     val validationEmailPassed = MutableLiveData(true)
+    val validationBeneficiaryMobileOperatorPassed= MutableLiveData(true)
     val validationMobileOperatorPassed= MutableLiveData(true)
+    val validationBeneficiaryCnicPassed= MutableLiveData(true)
+    val validationTransactionTypePassed = MutableLiveData(true)
+    val validationBeneficiaryAccountPassed = MutableLiveData(true)
+    val validationRemittingEntityPassed = MutableLiveData(true)
+    val validationTransactionIdPassed = MutableLiveData(true)
+    val validationTransactionAmountPassed = MutableLiveData(true)
 
     fun observeAddComplainResponse()=complainRepo.observeAddComplainResponse()
 
@@ -102,11 +109,29 @@ constructor(private val complainRepo: ComplainRepo)
     }
 
     fun checkCnicValidation(string: String) =
-        string.isEmpty() || ValidationUtils.isCNICValid(string)
+        ValidationUtils.isCNICValid(string)
 
 
     fun checkPhoneNumberValidation(string: String, int: Int?=10) =
-        string.isEmpty() || ValidationUtils.isPhoneNumberValid(string, int)
+        ValidationUtils.isPhoneNumberValid(string, int)
+
+    fun checkMobileOperatorValidation(string:String) =
+        string.isNotEmpty() && ValidationUtils.isNameValid(string)
+
+    fun checkTransactionTypeValidation(string:String) =
+        string.isNotEmpty()
+
+    fun checkBeneficiaryAccount(string:String) =
+        string.isNotEmpty()
+
+    fun checkRemittingEntity(string: String) =
+        string.isNotEmpty()
+
+    fun checkTransactionId(string: String) =
+        string.isNotEmpty()
+
+    fun checkTransactionAmount(string: String) =
+        string.isNotEmpty()
 
     private fun MediatorLiveData<Boolean>.validateNonNull(it: MutableLiveData<String>) {
         addSource(it) { value = it.isNotEmpty() }
@@ -194,6 +219,9 @@ constructor(private val complainRepo: ComplainRepo)
         validationEmailPassed.postValue(true)
         validationPhoneNumberPassed.postValue(true)
         validationMobileOperatorPassed.postValue(true)
+        validationBeneficiaryCnicPassed.postValue(true)
+        validationBeneficiaryMobileOperatorPassed.postValue(true)
+        validationTransactionTypePassed.postValue(true)
     }
 
     private fun emptyComplaintDetails(){

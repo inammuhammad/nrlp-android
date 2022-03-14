@@ -390,6 +390,11 @@ class BeneficiaryDetailsFragment :
             binding.spinnerSelectRelationship.performClick()
         }
         binding.btnEdit.setOnSingleClickListener {
+            viewModel.apply {
+                oldCnic.value = beneficiarySharedViewModel?.beneficiaryDetails?.value?.nicNicop.toString()
+                oldCountry.value = beneficiarySharedViewModel?.beneficiaryDetails?.value?.country
+                oldMobileNumber.value = beneficiarySharedViewModel?.beneficiaryDetails?.value?.mobileNo
+            }
             setCountryCode()
             enableEdit(beneficiaryDetailsModel)
         }
@@ -874,14 +879,19 @@ class BeneficiaryDetailsFragment :
         } else {
             relation = binding.tvRelationShip.text.toString()
         }
-        viewModel.updateBeneficiary(UpdateBeneficiaryRequestModel(
-            beneficiaryDetailsModel.id.toString(),
-            viewModel.cnicNumber.value.toString().removeDashes(),
-            viewModel.alias.value.toString(),
-            binding.tvCountryCode.text.toString() + viewModel.mobileNumber.value.toString(),
-            beneficiaryRelation=relation,
-            viewModel.country.value
-        ))
+        viewModel.apply {
+            if(oldCnic.value != cnicNumber.value.toString().cleanNicNumber() || oldCountry.value != viewModel.country.value
+                || oldMobileNumber.value != (binding.tvCountryCode.text.toString() + viewModel.mobileNumber.value.toString())) {
+                viewModel.updateBeneficiary(UpdateBeneficiaryRequestModel(
+                    beneficiaryDetailsModel.id.toString(),
+                    viewModel.cnicNumber.value.toString().removeDashes(),
+                    viewModel.alias.value.toString(),
+                    binding.tvCountryCode.text.toString() + viewModel.mobileNumber.value.toString(),
+                    beneficiaryRelation=relation,
+                    viewModel.country.value
+                ))
+            }
+        }
     }
 
     override fun onSelectCountryListener(countryCodeModel: CountryCodeModel) {

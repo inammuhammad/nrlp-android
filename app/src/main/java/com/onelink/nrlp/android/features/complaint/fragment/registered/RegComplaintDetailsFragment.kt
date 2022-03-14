@@ -304,6 +304,77 @@ class RegComplaintDetailsFragment:
                 )
             }
         }
+
+        binding.etAddbeneficiaryCnicnicop.setOnFocusChangeListener { _, b ->
+            when (b) {
+                false -> viewModel.validationBeneficiaryCnicPassed.postValue(
+                    viewModel.checkCnicValidation(
+                        binding.etAddbeneficiaryCnicnicop.text.toString()
+                    )
+                )
+            }
+        }
+
+        binding.etBeneficiaryMobileOperator.setOnFocusChangeListener { _, b ->
+            when (b) {
+                false -> viewModel.validationBeneficiaryMobileOperatorPassed.postValue(
+                    viewModel.checkMobileOperatorValidation(
+                        binding.etBeneficiaryMobileOperator.text.toString()
+                    )
+                )
+            }
+        }
+
+        binding.etMobileOperator.setOnFocusChangeListener { _, b ->
+            when (b) {
+                false -> viewModel.validationMobileOperatorPassed.postValue(
+                    viewModel.checkMobileOperatorValidation(
+                        binding.etMobileOperator.text.toString()
+                    )
+                )
+            }
+        }
+
+        binding.etBeneficiaryAccount.setOnFocusChangeListener { _, b ->
+            when (b) {
+                false -> viewModel.validationBeneficiaryAccountPassed.postValue(
+                    viewModel.checkBeneficiaryAccount(
+                        binding.etBeneficiaryAccount.text.toString()
+                    )
+                )
+            }
+        }
+
+        binding.etRemitting.setOnFocusChangeListener { _, b ->
+            when (b) {
+                false -> viewModel.validationRemittingEntityPassed.postValue(
+                    viewModel.checkRemittingEntity(
+                        binding.etRemitting.text.toString()
+                    )
+                )
+            }
+        }
+
+        binding.etTransactionid.setOnFocusChangeListener { _, b ->
+            when (b) {
+                false -> viewModel.validationTransactionIdPassed.postValue(
+                    viewModel.checkTransactionId(
+                        binding.etTransactionid.text.toString()
+                    )
+                )
+            }
+        }
+
+        binding.etTransactionamount.setOnFocusChangeListener { _, b ->
+            when (b) {
+                false -> viewModel.validationTransactionAmountPassed.postValue(
+                    viewModel.checkTransactionAmount(
+                        binding.etTransactionamount.text.toString()
+                    )
+                )
+            }
+        }
+
     }
 
     private fun initObservers() {
@@ -368,6 +439,111 @@ class RegComplaintDetailsFragment:
                     }
                 }
             })
+
+        viewModel.validationBeneficiaryCnicPassed.observe(
+            this,
+            { validationsPassed ->
+                run {
+                    if (!validationsPassed)
+                        binding.tilAddbeneficiaryCnicNicp.error = getString(R.string.error_cnic)
+                    else {
+                        binding.tilAddbeneficiaryCnicNicp.clearError()
+                        binding.tilAddbeneficiaryCnicNicp.isErrorEnabled = false
+                    }
+                }
+            })
+
+        viewModel.validationBeneficiaryMobileOperatorPassed.observe(
+            this,
+            { validationsPassed ->
+                run {
+                    if (!validationsPassed)
+                        binding.tilBeneficiaryMobileOperator.error = getString(R.string.error_mobile_operator)
+                    else {
+                        binding.tilBeneficiaryMobileOperator.clearError()
+                        binding.tilBeneficiaryMobileOperator.isErrorEnabled = false
+                    }
+                }
+            })
+
+        viewModel.validationMobileOperatorPassed.observe(
+            this,
+            { validationsPassed ->
+                run {
+                    if (!validationsPassed)
+                        binding.tilMobileOperator.error = getString(R.string.error_mobile_operator)
+                    else {
+                        binding.tilMobileOperator.clearError()
+                        binding.tilMobileOperator.isErrorEnabled = false
+                    }
+                }
+            })
+
+        viewModel.validationTransactionTypePassed.observe(
+            this,
+            { validationsPassed ->
+                run {
+                    if (!validationsPassed) {
+                        binding.errorTextTransactionType.visibility = View.VISIBLE
+                        binding.errorTextTransactionType.text = getString(R.string.error_transaction_type)
+                    } else {
+                        binding.errorTextTransactionType.visibility = View.GONE
+                    }
+                }
+            })
+
+        viewModel.validationBeneficiaryAccountPassed.observe(
+            this,
+            { validationsPassed ->
+                run {
+                    if (!validationsPassed)
+                        binding.tilBeneficiaryAccount.error = getString(R.string.error_invalid_account_number)
+                    else {
+                        binding.tilBeneficiaryAccount.clearError()
+                        binding.tilBeneficiaryAccount.isErrorEnabled = false
+                    }
+                }
+            })
+
+        viewModel.validationTransactionIdPassed.observe(
+            this,
+            { validationsPassed ->
+                run {
+                    if (!validationsPassed)
+                        binding.tilTransactionid.error = getString(R.string.error_transaction_id)
+                    else {
+                        binding.tilTransactionid.clearError()
+                        binding.tilTransactionid.isErrorEnabled = false
+                    }
+                }
+            })
+
+        viewModel.validationRemittingEntityPassed.observe(
+            this,
+            { validationsPassed ->
+                run {
+                    if (!validationsPassed)
+                        binding.tilRemitting.error = getString(R.string.error_remitting_entity)
+                    else {
+                        binding.tilRemitting.clearError()
+                        binding.tilRemitting.isErrorEnabled = false
+                    }
+                }
+            })
+
+        viewModel.validationTransactionAmountPassed.observe(
+            this,
+            { validationsPassed ->
+                run {
+                    if (!validationsPassed)
+                        binding.tilTransactionamount.error = getString(R.string.error_transaction_amount)
+                    else {
+                        binding.tilTransactionamount.clearError()
+                        binding.tilTransactionamount.isErrorEnabled = false
+                    }
+                }
+            })
+
     }
 
     private fun CnicValidator(editText:OneLinkEditText){
@@ -578,6 +754,29 @@ class RegComplaintDetailsFragment:
     }
 
     private fun detailsValidationPassed():Boolean{
+        val isBeneficiaryCnicValid: Boolean = viewModel.checkCnicValidation(binding.etAddbeneficiaryCnicnicop.text.toString())
+        val isPhoneNumberValid: Boolean = viewModel.checkPhoneNumberValidation(binding.etPhoneNumber.text.toString(), 0)
+        val isBeneficiaryMobileOperatorValid: Boolean = viewModel.checkMobileOperatorValidation(binding.etBeneficiaryMobileOperator.text.toString())
+        val isMobileOperatorValid: Boolean = viewModel.checkMobileOperatorValidation(binding.etMobileOperator.text.toString())
+        val isTransactionTypeValid: Boolean = viewModel.checkTransactionTypeValidation(binding.tvTransaction.text.toString())
+        val isBeneficiaryAccountValid: Boolean = viewModel.checkBeneficiaryAccount(binding.etBeneficiaryAccount.text.toString())
+        val isRemittingEntityValid: Boolean = viewModel.checkRemittingEntity(binding.etRemitting.text.toString())
+        val isTransactionIdValid: Boolean = viewModel.checkTransactionId(binding.etTransactionid.text.toString())
+        val isTransactionAmount: Boolean = viewModel.checkTransactionAmount(binding.etTransactionamount.text.toString())
+        //var isFullNameValid: Boolean = viewModel.checkAliasValidation(alias.value!!)
+        //var isEmailValid:Boolean = viewModel.checkEmailValidation(emailAddress.value!!)
+        //var isCountryValid:Boolean = viewModel.checkCountryValidation(country)
+        //var isDetailsValid:Boolean = viewModel.checkDetailsValidation(details.value!!)
+        viewModel.validationBeneficiaryCnicPassed.value = isBeneficiaryCnicValid
+        viewModel.validationBeneficiaryMobileOperatorPassed.value = isBeneficiaryMobileOperatorValid
+        viewModel.validationPhoneNumberPassed.value = isPhoneNumberValid
+        viewModel.validationMobileOperatorPassed.value = isMobileOperatorValid
+        viewModel.validationTransactionTypePassed.value = isTransactionTypeValid
+        viewModel.validationBeneficiaryAccountPassed.value = isBeneficiaryAccountValid
+        viewModel.validationRemittingEntityPassed.value = isRemittingEntityValid
+        viewModel.validationTransactionIdPassed.value = isTransactionIdValid
+        viewModel.validationTransactionAmountPassed.value = isTransactionAmount
+
         when(viewModel.complaintType.value){
             COMPLAINT_TYPE.UNABLE_TO_RECEIVE_OTP -> {
                 return binding.etMobileOperator.text.toString().isNotEmpty() &&

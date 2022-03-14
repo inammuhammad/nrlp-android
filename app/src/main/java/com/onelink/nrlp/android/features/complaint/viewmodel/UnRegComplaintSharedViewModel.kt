@@ -77,7 +77,7 @@ class UnRegComplaintSharedViewModel
     }
 
     fun checkMobileOperatorValidation(string:String) =
-        string.isNotEmpty()
+        string.isNotEmpty() && ValidationUtils.isNameValid(string)
 
     fun checkCountryValidation(string:String)=
         string.isNotEmpty()

@@ -23,6 +23,9 @@ open class BeneficiaryDetailsViewModel @Inject constructor(private val beneficia
     val validationAliasPassed = MutableLiveData(true)
     val validationPhoneNumberPassed = MutableLiveData(true)
     val beneficiaryRelation = MutableLiveData<String>(Constants.SPINNER_BENEFICIARY_HINT)
+    val oldCnic = MutableLiveData<String>("")
+    val oldCountry = MutableLiveData<String>("")
+    val oldMobileNumber = MutableLiveData<String>("")
 
 
     fun deleteBeneficiary(deleteBeneficiaryRequestModel: DeleteBeneficiaryRequestModel) =

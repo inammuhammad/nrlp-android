@@ -112,6 +112,7 @@
                             android:inputType="textPersonName"
                             android:maxLength="50"
                             android:maxLines="1"
+                            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
                             android:text="@={viewModel.mobileOperator}"
                             app:layout_constraintBottom_toTopOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -158,6 +159,20 @@
                             android:contentDescription="@null"
                             android:src="@drawable/ic_spinner_dropdown" />
                     </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/errorTextTransactionType"
+                        style="@style/TextViewMedium"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_large"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:text="@string/sent_otp_code_msg"
+                        android:textColor="@color/red"
+                        app:layout_constraintTop_toBottomOf="@id/spinnerTransaction"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:textSize="@dimen/unit_10sp"
+                        android:visibility="gone"/>
 
                     <com.onelink.nrlp.android.utils.OneLinkSpinner
                         android:id="@+id/spinner_select_transaction"
@@ -333,21 +348,20 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             android:contentDescription="@null" />
-                        <TextView
-                            android:id="@+id/errorTextPhone"
-                            style="@style/TextViewMedium"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/margin_large"
-                            android:layout_marginTop="@dimen/unit_0dp"
-                            android:text="@string/sent_otp_code_msg"
-                            android:textColor="@color/red"
-                            app:layout_constraintTop_toBottomOf="@id/etPhoneNumber"
-                            app:layout_constraintStart_toStartOf="parent"
-                            android:textSize="@dimen/unit_10sp"
-                            android:visibility="gone"/>
-
                     </androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView
+                        android:id="@+id/errorTextPhone"
+                        style="@style/TextViewMedium"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_large"
+                        android:layout_marginTop="@dimen/unit_0dp"
+                        android:text="@string/error_transaction_type"
+                        android:textColor="@color/red"
+                        app:layout_constraintTop_toBottomOf="@id/lyPhoneNumber"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:textSize="@dimen/unit_10sp"
+                        android:visibility="gone"/>
 
                     <TextView
                         android:id="@+id/tvBeneficiaryMobileOperator"
@@ -379,6 +393,7 @@
                             android:inputType="textPersonName"
                             android:maxLength="50"
                             android:maxLines="1"
+                            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
                             android:text="@={viewModel.mobileOperator}"
                             app:layout_constraintBottom_toTopOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -456,6 +471,7 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/unit_16sp"
                         app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
@@ -523,6 +539,7 @@
                             android:layout_height="wrap_content"
                             android:inputType="textPersonName"
                             android:maxLength="50"
+                            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
                             android:maxLines="1"
                             android:text="@={viewModel.remittingEntity}"
                             app:layout_constraintBottom_toTopOf="parent"
