@@ -115,7 +115,7 @@ open class BeneficiaryDetailsViewModel @Inject constructor(private val beneficia
         validationCnicPassed.value = isCnicValid
         validationPhoneNumberPassed.value = isPhoneNumberValid
         validationAliasPassed.value = isFullNameValid
-        if(otherRelationship == "Other") {
+        if(otherRelationship == "Other" || otherRelationship == "کوئی اور" ) {
             validationOtherRelationshipPassed.value = isOtherRelationShipValid
             return isCnicValid && isFullNameValid && isPhoneNumberValid && isOtherRelationShipValid
         }

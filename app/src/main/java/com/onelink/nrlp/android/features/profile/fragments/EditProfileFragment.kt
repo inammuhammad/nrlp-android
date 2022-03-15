@@ -206,7 +206,11 @@ class EditProfileFragment() :
         }
 
         binding.btnSave.setOnSingleClickListener {
-            if (viewModel.validationsPassed(
+            if(UserData.getUser()?.accountType == Constants.BENEFICIARY.toLowerCase(Locale.getDefault())) {
+                if (viewModel.beneficiaryValidation(phoneNumber = binding.etMobileNumber.text.toString()))
+                    showConfirmationDialog()
+            }
+            else if (viewModel.validationsPassed(
                     email = binding.etEmailAddress.text.toString(),
                     phoneNumber = binding.etMobileNumber.text.toString(),
                     phoneNumberLength = viewModel.mobileNumberLength.value,
@@ -592,13 +596,13 @@ class EditProfileFragment() :
         super.onPositiveButtonClicked(targetCode)
         when (targetCode) {
             MOBILE_UPDATE_DIALOG -> {
-                if (viewModel.validationsPassed(
+                if (true/*viewModel.validationsPassed(
                         email = binding.etEmailAddress.text.toString(),
                         phoneNumber = binding.etMobileNumber.text.toString(),
                         phoneNumberLength = viewModel.mobileNumberLength.value,
                         uniqueId = binding.etResidentId.text.toString(),
                         passportNo = binding.etPassportNo.text.toString()
-                    )
+                    )*/
                 ) {
                     viewModel.mobileNumUpdated.value =
                         viewModel.countryCode.value + viewModel.mobileNumber.value

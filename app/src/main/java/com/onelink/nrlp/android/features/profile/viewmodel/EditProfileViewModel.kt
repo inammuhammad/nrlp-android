@@ -215,4 +215,10 @@ class EditProfileViewModel @Inject constructor(private val profileRepo: ProfileR
         validationUniqueIdPassed.value = isUniqueIdValid
         return isPhoneNumberValid && isEmailValid && isUniqueIdValid && isPassportNoValid
     }
+
+    fun beneficiaryValidation(phoneNumber: String): Boolean{
+        val isPhoneNumberValid: Boolean = checkPhoneNumberValidation(phoneNumber, 0)
+        validationPhoneNumberPassed.value = isPhoneNumberValid
+        return isPhoneNumberValid
+    }
 }

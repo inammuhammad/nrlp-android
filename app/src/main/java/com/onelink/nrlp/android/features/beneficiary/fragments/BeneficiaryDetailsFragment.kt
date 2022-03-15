@@ -423,7 +423,7 @@ class BeneficiaryDetailsFragment :
     }
 
     private fun makeBeneficiaryAddCall() {
-        if(viewModel.beneficiaryRelation.value.toString() == "Other") {
+        if(viewModel.beneficiaryRelation.value.toString() == getString(R.string.other)) {
             relation = binding.txtOther.text.toString()
         } else {
             relation = viewModel.beneficiaryRelation.value.toString()

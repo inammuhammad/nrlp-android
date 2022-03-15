@@ -55,6 +55,8 @@ constructor(private val complainRepo: ComplainRepo)
     val validationRemittingEntityPassed = MutableLiveData(true)
     val validationTransactionIdPassed = MutableLiveData(true)
     val validationTransactionAmountPassed = MutableLiveData(true)
+    val validationRedemptionPartnerPassed = MutableLiveData(true)
+    val validationSpecifyDetailsPassed = MutableLiveData(true)
 
     fun observeAddComplainResponse()=complainRepo.observeAddComplainResponse()
 

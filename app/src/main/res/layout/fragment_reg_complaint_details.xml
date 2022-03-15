@@ -489,10 +489,11 @@
                             style="@style/EditTextFixedDigits"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="textPersonName"
+                            android:inputType="number"
                             android:maxLength="50"
                             android:hint="@string/cnic_nicop_hint"
                             android:maxLines="1"
+                            android:digits="1234567890"
                             android:text="@={viewModel.cnicAccountNumber}"
                             app:layout_constraintBottom_toTopOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -576,6 +577,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="textPersonName"
+                            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
                             android:maxLength="50"
                             android:maxLines="1"
                             android:text="@={viewModel.transactionId}"
@@ -636,6 +638,7 @@
                              android:layout_width="match_parent"
                              android:layout_height="wrap_content"
                              android:inputType="number"
+                             android:digits="1234567890"
                              android:maxLength="50"
                              android:maxLines="1"
                              android:hint="@string/amount_hint"
@@ -714,6 +717,20 @@
                         android:textDirection="ltr"
                         android:visibility="invisible"
                         app:layout_constraintTop_toBottomOf="@id/spinnerRedemption" />
+
+                    <TextView
+                        android:id="@+id/errorTextRedemptionPartner"
+                        style="@style/TextViewMedium"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_large"
+                        android:layout_marginTop="@dimen/unit_2dp"
+                        android:text="@string/error_redemption_partner"
+                        android:textColor="@color/red"
+                        app:layout_constraintTop_toBottomOf="@id/spinner_select_partner"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:textSize="@dimen/unit_10sp"
+                        android:visibility="gone"/>
 
                     <TextView
                         android:id="@+id/tvDetails"

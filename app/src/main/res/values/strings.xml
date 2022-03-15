@@ -433,4 +433,6 @@
     <string name="error_passport_mumber">Please enter a valid Passport Number</string>
     <string name="error_unique_id">Please enter a valid Unique ID</string>
     <string name="error_relationship">Please enter a valid Beneficiary Relationship</string>
+    <string name="error_redemption_partner">Please select Redemption Partner</string>
+    <string name="error_enter_details">Please enter details</string>
 </resources>

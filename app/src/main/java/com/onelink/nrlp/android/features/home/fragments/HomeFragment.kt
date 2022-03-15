@@ -95,7 +95,8 @@ open class HomeFragment :
     private fun showUserData() {
         UserData.getUser()?.let {
             checkNadraVerification(it)
-            checkReceiverAdded(it)
+            if(it.accountType != Constants.BENEFICIARY.toLowerCase(Locale.getDefault()))
+                checkReceiverAdded(it)
             if(it.accountType == "beneficiary") {
                 binding.containerAnnualRemittance.invisible()
             }
