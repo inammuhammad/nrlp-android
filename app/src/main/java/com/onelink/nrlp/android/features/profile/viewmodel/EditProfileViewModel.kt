@@ -36,6 +36,8 @@ class EditProfileViewModel @Inject constructor(private val profileRepo: ProfileR
     val oldPassportId = MutableLiveData<String>("")
     val validationEmailPassed = MutableLiveData(true)
     val validationPhoneNumberPassed = MutableLiveData(true)
+    val validationPassportNumberPassed = MutableLiveData(true)
+    val validationUniqueIdPassed = MutableLiveData(true)
     val mobileNumberLength = MutableLiveData<Int>()
     val motherMaidenName = MutableLiveData("")
     val placeOfBirth = MutableLiveData("")
@@ -194,11 +196,23 @@ class EditProfileViewModel @Inject constructor(private val profileRepo: ProfileR
     fun checkEmailValidation(email: String) =
         !(email.isNotEmpty() && !email.contains("+")) || ValidationUtils.isEmailValid(email)
 
-    fun validationsPassed(email: String, phoneNumber: String, phoneNumberLength: Int?): Boolean {
+    fun checkPassportValidation(string: String) =
+        ValidationUtils.isPassportNumberValid(string)
+
+    fun checkUniqueIdValidation(string: String) =
+        string.isNotEmpty()
+
+
+    fun validationsPassed(email: String, phoneNumber: String, phoneNumberLength: Int?,
+           uniqueId: String, passportNo: String): Boolean {
         val isPhoneNumberValid: Boolean = checkPhoneNumberValidation(phoneNumber, phoneNumberLength)
         val isEmailValid: Boolean = checkEmailValidation(email)
+        val isUniqueIdValid: Boolean = checkUniqueIdValidation(uniqueId)
+        val isPassportNoValid: Boolean = checkPassportValidation(passportNo)
         validationPhoneNumberPassed.value = isPhoneNumberValid
         validationEmailPassed.value = isEmailValid
-        return isPhoneNumberValid && isEmailValid
+        validationPassportNumberPassed.value = isPassportNoValid
+        validationUniqueIdPassed.value = isUniqueIdValid
+        return isPhoneNumberValid && isEmailValid && isUniqueIdValid && isPassportNoValid
     }
 }

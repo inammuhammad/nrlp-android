@@ -779,8 +779,7 @@ class RegComplaintDetailsFragment:
 
         when(viewModel.complaintType.value){
             COMPLAINT_TYPE.UNABLE_TO_RECEIVE_OTP -> {
-                return binding.etMobileOperator.text.toString().isNotEmpty() &&
-                        binding.tvTransaction.text.toString().isNotEmpty()
+                return isMobileOperatorValid && isTransactionTypeValid
             }
             COMPLAINT_TYPE.UNABLE_TO_ADD_BENEFICIARY ->{
                 return viewModel.checkCnicValidation(binding.etAddbeneficiaryCnicnicop.text.toString()) &&

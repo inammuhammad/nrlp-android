@@ -379,7 +379,9 @@ class BeneficiaryDetailsFragment :
                         binding.eTCnicNumber.text.toString(),
                         binding.etAlias.text.toString(),
                         binding.etMobileNumber.text.toString(),
-                        countryCodeLength
+                        countryCodeLength,
+                        viewModel.beneficiaryRelation.value.toString(),
+                        binding.txtOther.text.toString()
                     )
                 ) {
                     makeBeneficiaryAddCall()
@@ -561,7 +563,7 @@ class BeneficiaryDetailsFragment :
         })
 
         viewModel.beneficiaryRelation.observe(this, Observer {
-            if(it != Constants.SPINNER_BENEFICIARY_HINT) {
+            if(it != "") {
                 binding.tvRelationShip.text = it
                 binding.tvRelationShip.colorToText(R.color.pure_black)
             }
@@ -573,6 +575,7 @@ class BeneficiaryDetailsFragment :
                 }
             } else {
                 binding.txtOther.visibility = View.GONE
+                binding.tvErrorRelationship.visibility = View.GONE
             }
         })
 
@@ -593,6 +596,16 @@ class BeneficiaryDetailsFragment :
                 }
                 Status.LOADING -> {
                     oneLinkProgressDialog.showProgressDialog(activity)
+                }
+            }
+        })
+
+        viewModel.validationOtherRelationshipPassed.observe(this, { validationsPassed ->
+            run {
+                if (!validationsPassed)
+                    binding.tvErrorRelationship.visibility = View.VISIBLE
+                else {
+                    binding.tvErrorRelationship.visibility = View.GONE
                 }
             }
         })
@@ -626,6 +639,7 @@ class BeneficiaryDetailsFragment :
         viewModel.cnicNumber.value = it.nicNicop.toString().formattedCnicNumberNoSpaces()
         viewModel.mobileNumber.value = it.mobileNo
         binding.tvRelationShip.text = it.relationship
+        viewModel.beneficiaryRelation.postValue(it.relationship)
         binding.etCountry.text = it.country
         if(it.country.isNullOrEmpty())
             binding.etCountry.text = " "

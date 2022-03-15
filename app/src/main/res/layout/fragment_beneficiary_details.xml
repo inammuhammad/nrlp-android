@@ -237,8 +237,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="8.5"
-                    android:text="@string/brother"
-                    android:textColor="@color/black" />
+                    />
 
                 <ImageView
                     android:id="@+id/iv_drop_down"
@@ -271,7 +270,18 @@
                 android:textSize="@dimen/_10sdp"
                 android:layout_marginStart="@dimen/margin_large"
                 android:layout_marginEnd="@dimen/margin_large"
+                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
                 android:layout_height="wrap_content"></EditText>
+            <TextView
+                android:id="@+id/tv_error_relationship"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/error_relationship"
+                android:visibility="gone"
+                android:textSize="@dimen/_8sdp"
+                android:textColor="@color/red"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_marginEnd="@dimen/margin_large"/>
         </LinearLayout>
 
         <LinearLayout
@@ -365,7 +375,7 @@
             style="@style/ButtonTheme"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:enabled="@{viewModel.cnicNumberNotEmpty &amp;&amp; viewModel.aliasNotEmpty &amp;&amp; viewModel.ccountryNotEmpty &amp;&amp; viewModel.mobileNumberNotEmpty}"
+            android:enabled="@{viewModel.cnicNumberNotEmpty &amp;&amp; viewModel.aliasNotEmpty &amp;&amp; viewModel.ccountryNotEmpty &amp;&amp; viewModel.mobileNumberNotEmpty &amp;&amp; viewModel.relationShipNotEmpty}"
             android:text="@string/add_beneficiary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

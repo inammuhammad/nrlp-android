@@ -115,4 +115,8 @@ object ValidationUtils {
     fun isIbanAccountNumberValid(string: String): Boolean {
         return string.isNotEmpty() && string.length in 1..24
     }
+
+    fun isPassportNumberValid(string: String): Boolean {
+        return string.length >= 9
+    }
 }

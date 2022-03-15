@@ -221,7 +221,10 @@ constructor(private val complainRepo: ComplainRepo)
         validationMobileOperatorPassed.postValue(true)
         validationBeneficiaryCnicPassed.postValue(true)
         validationBeneficiaryMobileOperatorPassed.postValue(true)
-        validationTransactionTypePassed.postValue(true)
+        validationBeneficiaryAccountPassed.postValue(true)
+        validationRemittingEntityPassed.postValue(true)
+        validationTransactionIdPassed.postValue(true)
+        validationTransactionAmountPassed.postValue(true)
     }
 
     private fun emptyComplaintDetails(){

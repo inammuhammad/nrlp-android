@@ -22,7 +22,8 @@ open class BeneficiaryDetailsViewModel @Inject constructor(private val beneficia
     val validationCnicPassed = MutableLiveData(true)
     val validationAliasPassed = MutableLiveData(true)
     val validationPhoneNumberPassed = MutableLiveData(true)
-    val beneficiaryRelation = MutableLiveData<String>(Constants.SPINNER_BENEFICIARY_HINT)
+    val validationOtherRelationshipPassed = MutableLiveData(true)
+    val beneficiaryRelation = MutableLiveData<String>("")
     val oldCnic = MutableLiveData<String>("")
     val oldCountry = MutableLiveData<String>("")
     val oldMobileNumber = MutableLiveData<String>("")
@@ -69,6 +70,9 @@ open class BeneficiaryDetailsViewModel @Inject constructor(private val beneficia
     val mobileNumberNotEmpty = MediatorLiveData<Boolean>().apply {
         validateNonNull(mobileNumber)
     }
+    val relationShipNotEmpty = MediatorLiveData<Boolean>().apply {
+        validateNonNull(beneficiaryRelation)
+    }
 
     private fun MediatorLiveData<Boolean>.validateNonNull(it: MutableLiveData<String>) {
         addSource(it) { value = it.isNotEmpty() }
@@ -91,23 +95,38 @@ open class BeneficiaryDetailsViewModel @Inject constructor(private val beneficia
     fun checkPhoneNumberValidation(string: String, int: Int?) =
         string.isEmpty() || ValidationUtils.isPhoneNumberValid(string, int)
 
+    fun checkEditPhoneNumberValidation(string: String, int: Int?) =
+        ValidationUtils.isPhoneNumberValid(string, int)
+
+    fun checkEditCnicValidation(string: String) =
+        ValidationUtils.isCNICValid(string)
+
+    fun checkOtherRelationshipValidation(string: String) =
+        ValidationUtils.isNameValid(string)
+
     fun validationsPassed(
-        cnic: String, alias: String, phoneNumber: String, phoneNumberLength: Int?
+        cnic: String, alias: String, phoneNumber: String, phoneNumberLength: Int?,
+        otherRelationship: String, relationshipText: String
     ): Boolean {
         val isCnicValid: Boolean = checkCnicValidation(cnic)
         val isPhoneNumberValid: Boolean = checkPhoneNumberValidation(phoneNumber, phoneNumberLength)
         val isFullNameValid: Boolean = checkAliasValidation(alias)
+        val isOtherRelationShipValid: Boolean = checkOtherRelationshipValidation(relationshipText)
         validationCnicPassed.value = isCnicValid
         validationPhoneNumberPassed.value = isPhoneNumberValid
         validationAliasPassed.value = isFullNameValid
+        if(otherRelationship == "Other") {
+            validationOtherRelationshipPassed.value = isOtherRelationShipValid
+            return isCnicValid && isFullNameValid && isPhoneNumberValid && isOtherRelationShipValid
+        }
         return isCnicValid && isFullNameValid && isPhoneNumberValid
     }
 
     fun editValidationsPassed(
         cnic: String, phoneNumber: String, phoneNumberLength: Int?
     ): Boolean {
-        val isCnicValid: Boolean = checkCnicValidation(cnic)
-        val isPhoneNumberValid: Boolean = checkPhoneNumberValidation(phoneNumber, phoneNumberLength)
+        val isCnicValid: Boolean = checkEditCnicValidation(cnic)
+        val isPhoneNumberValid: Boolean = checkEditPhoneNumberValidation(phoneNumber, phoneNumberLength)
         validationCnicPassed.value = isCnicValid
         validationPhoneNumberPassed.value = isPhoneNumberValid
         return isCnicValid && isPhoneNumberValid

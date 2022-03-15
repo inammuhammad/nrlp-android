@@ -45,6 +45,7 @@ class RegisterAccountFragmentViewModel @Inject constructor(
     val validationMotherMaidenNamePassed = MutableLiveData(true)
     val validationPlaceOfBirthPassed = MutableLiveData(true)
     val validationCnicNicopIssuanceDatePassed = MutableLiveData(true)
+    val validationPassportNumberPassed = MutableLiveData(true)
 
     val etOTP1 = MutableLiveData<String>("")
     val etOTP2 = MutableLiveData<String>("")
@@ -373,6 +374,13 @@ class RegisterAccountFragmentViewModel @Inject constructor(
         }
     }
 
+    val isPassportNumberPassed = MediatorLiveData<Boolean>().apply {
+        addSource(validationPassportNumberPassed) {
+            value = it
+
+        }
+    }
+
     fun checkCnicValidation(string: String) =
         string.isEmpty() || ValidationUtils.isCNICValid(string)
 
@@ -396,10 +404,13 @@ class RegisterAccountFragmentViewModel @Inject constructor(
 
     fun checkRePassValidation(pass: String, rePass: String) = pass == rePass
 
+    fun checkPassportNumberValid(string: String) =
+        string.isEmpty() || ValidationUtils.isPassportNumberValid(string)
+
     fun validationsPassed(
         cnic: String, fullName: String, phoneNumber: String, phoneNumberLength: Int?,
         email: String, pass: String, repass: String, motherName: String = "",
-        cnicIssueDate: String = ""
+        cnicIssueDate: String = "", passportNum: String = ""
     ): Boolean {
         val isCnicValid: Boolean = checkCnicValidation(cnic)
         val isPhoneNumberValid: Boolean = checkPhoneNumberValidation(phoneNumber, phoneNumberLength)
@@ -409,6 +420,7 @@ class RegisterAccountFragmentViewModel @Inject constructor(
         val isRePassValid: Boolean = checkRePassValidation(pass, repass)
         val isMotherNameValid: Boolean = checkMotherNameValidation(motherName)
         val isDateOfIssueValid: Boolean = checkCnicDateIssueValid(cnicIssueDate)
+        val isPassportNumberValid: Boolean = checkPassportNumberValid(passportNum)
         validationCnicPassed.value = isCnicValid
         validationPhoneNumberPassed.value = isPhoneNumberValid
         validationFullNamePassed.value = isFullNameValid
@@ -417,8 +429,15 @@ class RegisterAccountFragmentViewModel @Inject constructor(
         validationPasswordPassed.value = isPasswordValid
         validationCnicNicopIssuanceDatePassed.value = isDateOfIssueValid
         validationMotherMaidenNamePassed.value = isMotherNameValid
-        return isCnicValid && isPasswordValid && isRePassValid &&
+        validationPassportNumberPassed.value = isPassportNumberValid
+        return isCnicValid && isPasswordValid && isRePassValid && isPassportNumberValid &&
                 isEmailValid && isFullNameValid && isPhoneNumberValid && isMotherNameValid
+    }
+
+    fun isBeneficiaryCnicValid(cnic: String): Boolean {
+        val isCnicValid: Boolean = checkCnicValidation(cnic)
+        validationCnicPassed.value = isCnicValid
+        return isCnicValid
     }
 
     override fun onCleared() {

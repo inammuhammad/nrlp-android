@@ -240,6 +240,16 @@ class RegisterAccountFragment :
                 )
             }
         }
+
+        binding.etPassportNo.setOnFocusChangeListener { _, b ->
+            when (b) {
+                false -> viewModel.isPassportNumberPassed.postValue(
+                    viewModel.checkPassportNumberValid(
+                        binding.etPassportNo.text.toString()
+                    )
+                )
+            }
+        }
     }
 
     private fun initObservers() {
@@ -332,6 +342,17 @@ class RegisterAccountFragment :
                 else {
                     binding.tilMotherMaidenName.clearError()
                     binding.tilMotherMaidenName.isErrorEnabled = false
+                }
+            }
+        })
+
+        viewModel.isPassportNumberPassed.observe(this, Observer { validationsPassed ->
+            run {
+                if (!validationsPassed)
+                    binding.tilPassportNo.error = getString(R.string.error_passport_mumber)
+                else {
+                    binding.tilPassportNo.clearError()
+                    binding.tilPassportNo.isErrorEnabled = false
                 }
             }
         })
@@ -512,7 +533,8 @@ class RegisterAccountFragment :
                     binding.etPassword.text.toString(),
                     binding.etRePassword.text.toString(),
                     binding.etMotherMaidenName.text.toString(),
-                    binding.etCnicNicopIssuanceDate.text.toString()
+                    binding.etCnicNicopIssuanceDate.text.toString(),
+                    binding.etPassportNo.text.toString()
                 )
             ) {
                 viewModel.getAuthKey(

@@ -164,6 +164,26 @@ class EditProfileFragment() :
                 )
             }
         }
+
+        binding.etResidentId.setOnFocusChangeListener { _, b ->
+            when (b && !isDisablingView) {
+                false -> viewModel.validationUniqueIdPassed.postValue(
+                    viewModel.checkUniqueIdValidation(
+                        binding.etResidentId.text.toString()
+                    )
+                )
+            }
+        }
+
+        binding.etPassportNo.setOnFocusChangeListener { _, b ->
+            when (b && !isDisablingView) {
+                false -> viewModel.validationPassportNumberPassed.postValue(
+                    viewModel.checkPassportValidation(
+                        binding.etPassportNo.text.toString()
+                    )
+                )
+            }
+        }
     }
 
 
@@ -189,7 +209,9 @@ class EditProfileFragment() :
             if (viewModel.validationsPassed(
                     email = binding.etEmailAddress.text.toString(),
                     phoneNumber = binding.etMobileNumber.text.toString(),
-                    phoneNumberLength = viewModel.mobileNumberLength.value)) {
+                    phoneNumberLength = viewModel.mobileNumberLength.value,
+                    uniqueId = binding.etResidentId.text.toString(),
+                    passportNo = binding.etPassportNo.text.toString())) {
                 showConfirmationDialog()
             }
         }
@@ -347,6 +369,28 @@ class EditProfileFragment() :
                 }
             }
         })
+
+        viewModel.validationPassportNumberPassed.observe(this, Observer { validationsPassed ->
+            run {
+                if (!validationsPassed)
+                    binding.tilPassportNo.error = resources.getString(R.string.error_passport_mumber)
+                else {
+                    binding.tilPassportNo.clearError()
+                    binding.tilPassportNo.isErrorEnabled = false
+                }
+            }
+        })
+
+        viewModel.validationUniqueIdPassed.observe(this, Observer { validationsPassed ->
+            run {
+                if (!validationsPassed)
+                    binding.tilResidentId.error = resources.getString(R.string.error_unique_id)
+                else {
+                    binding.tilResidentId.clearError()
+                    binding.tilResidentId.isErrorEnabled = false
+                }
+            }
+        })
     }
 
 
@@ -376,6 +420,8 @@ class EditProfileFragment() :
     private fun clearAllValidationErrors() {
         binding.tilCnicNicop.clearError()
         binding.tilFullName.clearError()
+        binding.tilPassportNo.clearError()
+        binding.tilResidentId.clearError()
         hidePhoneNumberValidationError()
     }
 
@@ -549,7 +595,9 @@ class EditProfileFragment() :
                 if (viewModel.validationsPassed(
                         email = binding.etEmailAddress.text.toString(),
                         phoneNumber = binding.etMobileNumber.text.toString(),
-                        phoneNumberLength = viewModel.mobileNumberLength.value
+                        phoneNumberLength = viewModel.mobileNumberLength.value,
+                        uniqueId = binding.etResidentId.text.toString(),
+                        passportNo = binding.etPassportNo.text.toString()
                     )
                 ) {
                     viewModel.mobileNumUpdated.value =
