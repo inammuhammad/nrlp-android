@@ -236,7 +236,9 @@ class RedemptionPIAPSIDFragment : BaseFragment<RedemptionPIAPSIDViewModel,Fragme
         super.onPositiveButtonClicked(targetCode)
         when (targetCode) {
             REDEMPTION_AMOUNT_DIALOG -> {
-                if(viewModel.compareRedeemAmount(redeemablePKR, amount.toDouble())) {
+                if(true
+                    //viewModel.compareRedeemAmount(redeemablePKR, amount.toDouble())
+                ) {
                     viewModel.makeInitializeRedemptionOTPCall(
                         redeemPartnerModel.partnerName,
                         redeemPartnerModel.partnerName,

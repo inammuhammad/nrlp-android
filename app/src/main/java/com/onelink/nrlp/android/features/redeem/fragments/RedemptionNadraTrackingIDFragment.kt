@@ -327,7 +327,9 @@ class RedemptionNadraTrackingIDFragment : BaseFragment<RedemptionNadraTrackingID
         super.onPositiveButtonClicked(targetCode)
         when (targetCode) {
             REDEMPTION_CREATE_DIALOG -> {
-                if(viewModel.compareRedeemAmount(redeemablePKR,amount.toDouble())){
+                if(true
+                    //viewModel.compareRedeemAmount(redeemablePKR,amount.toDouble())
+                ){
                     viewModel.makeInitializeRedemptionOTPCall(redeemPartnerModel.partnerName,
                         redeemPartnerModel.partnerName,
                         "",

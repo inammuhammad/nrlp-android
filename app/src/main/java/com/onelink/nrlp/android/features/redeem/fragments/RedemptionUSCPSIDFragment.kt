@@ -235,7 +235,9 @@ class RedemptionUSCPSIDFragment : BaseFragment<RedemptionUSCPSIDViewModel,Fragme
         when (targetCode) {
             REDEMPTION_AMOUNT_DIALOG -> {
                 if(viewModel.checkAmountValidation(amount.toInt(),amountEntered)) {
-                    if(viewModel.compareRedeemAmount(redeemablePKR,amountEntered.toDouble())) {
+                    if(true
+                        //viewModel.compareRedeemAmount(redeemablePKR,amountEntered.toDouble())
+                    ) {
                         amount = amountEntered.toString()
                         binding.tilPSID.clearError()
                         viewModel.makeInitializeRedemptionOTPCall(

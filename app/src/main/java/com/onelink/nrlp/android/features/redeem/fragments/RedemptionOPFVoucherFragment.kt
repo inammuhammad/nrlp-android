@@ -230,7 +230,9 @@ class RedemptionOPFVoucherFragment : BaseFragment<RedemptionOPFVoucherViewModel,
         super.onPositiveButtonClicked(targetCode)
         when (targetCode) {
             REDEMPTION_CREATE_DIALOG -> {
-                if(viewModel.compareRedeemAmount(redeemablePKR,points.toDouble())) {
+                if(true
+                    //viewModel.compareRedeemAmount(redeemablePKR,points.toDouble())
+                ) {
                     viewModel.makeInitializeRedemptionOTPCall(redeemPartnerModel.partnerName,
                         redeemPartnerModel.partnerName,
                         "",

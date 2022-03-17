@@ -20,15 +20,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.onelink.nrlp.android.R
 import com.onelink.nrlp.android.core.BaseFragment
 import com.onelink.nrlp.android.core.Status
-import com.onelink.nrlp.android.databinding.FragmentBeneficiaryDetailsBinding
 import com.onelink.nrlp.android.databinding.FragmentReceiverDetailsBinding
-import com.onelink.nrlp.android.features.beneficiary.fragments.BeneficiaryDetailsFragment
-import com.onelink.nrlp.android.features.beneficiary.models.AddBeneficiaryRequestModel
-import com.onelink.nrlp.android.features.beneficiary.models.DeleteBeneficiaryRequestModel
-import com.onelink.nrlp.android.features.beneficiary.models.ResendBeneficiaryOtpRequestModel
-import com.onelink.nrlp.android.features.beneficiary.models.UpdateBeneficiaryRequestModel
-import com.onelink.nrlp.android.features.beneficiary.viewmodel.BeneficiaryDetailsViewModel
-import com.onelink.nrlp.android.features.beneficiary.viewmodel.BeneficiarySharedViewModel
 import com.onelink.nrlp.android.features.profile.disabled
 import com.onelink.nrlp.android.features.profile.enabled
 import com.onelink.nrlp.android.features.receiver.models.AddReceiverRequestModel
@@ -293,7 +285,7 @@ class ReceiverDetailsFragment :
             }
         }
 
-        binding.etMotherMaidenName.setOnFocusChangeListener { _, b ->
+        /*binding.etMotherMaidenName.setOnFocusChangeListener { _, b ->
             when (b) {
                 false -> viewModel.validationMotherMaidenPassed.postValue(
                     viewModel.checkMotherMaidenNameValidation(
@@ -301,7 +293,7 @@ class ReceiverDetailsFragment :
                     )
                 )
             }
-        }
+        }*/
     }
 
     private fun initTextWatchers() {
@@ -408,10 +400,12 @@ class ReceiverDetailsFragment :
         }
 
         binding.btnNext.setOnSingleClickListener {
+            hideKeyboard()
             if(viewModel.validationsPassedCnicReceiver(binding.eTCnicNumber.text.toString()))
                 makeReceiverAddCall()
         }
         binding.btnNext1.setOnSingleClickListener {
+            hideKeyboard()
             if(
                 viewModel.validationsPassedIbanReceiver(binding.eTCnicNumber.text.toString(),
                     binding.etIbanNumber.text.toString())
@@ -484,7 +478,7 @@ class ReceiverDetailsFragment :
         viewModel.addReceiver(
             AddReceiverRequestModel(
                 nicNicop = binding.eTCnicNumber.text.toString().cleanNicNumber(),
-                mobileNo = binding.etMobileNumber.text.toString(),
+                mobileNo = binding.tvCountryCode.text.toString() + binding.etMobileNumber.text.toString(),
                 fullName = binding.etAlias.text.toString(),
                 motherMaidenName = binding.etMotherMaidenName.text.toString(),
                 cnicIssuanceDate = binding.tvCnicIssuanceDate.text.toString(),
@@ -716,7 +710,8 @@ class ReceiverDetailsFragment :
             tvIbanNumber.visibility = View.GONE
             icHelpIbanNumber.visibility = View.GONE
             btnNext1.visibility = View.GONE
-            btnNext.visibility = View.VISIBLE
+            if(!isDeleteBeneficiary)
+                btnNext.visibility = View.VISIBLE
         }
     }
 
@@ -781,8 +776,8 @@ class ReceiverDetailsFragment :
             binding.tilBankName.visibility = View.GONE
             binding.etBankName.visibility = View.GONE
         }
-        if(it.linkStatus != "LINKED")
-            binding.btnDelete.visibility = View.GONE
+        /*if(it.linkStatus != "LINKED")
+            binding.btnDelete.visibility = View.GONE*/
 
         //Disabling EditTexts
         context?.let {

@@ -57,6 +57,10 @@ constructor(private val complainRepo: ComplainRepo)
     val validationTransactionAmountPassed = MutableLiveData(true)
     val validationRedemptionPartnerPassed = MutableLiveData(true)
     val validationSpecifyDetailsPassed = MutableLiveData(true)
+    val validationSpecifyOtherDetailsPassed = MutableLiveData(true)
+    val validationBeneficiaryCountryPassed = MutableLiveData(true)
+    val validationBeneficiaryCnicPointsPassed = MutableLiveData(true)
+    val validationTransactionDatePassed = MutableLiveData(true)
 
     fun observeAddComplainResponse()=complainRepo.observeAddComplainResponse()
 
@@ -133,6 +137,9 @@ constructor(private val complainRepo: ComplainRepo)
         string.isNotEmpty()
 
     fun checkTransactionAmount(string: String) =
+        string.isNotEmpty()
+
+    fun checkNotEmpty(string: String) =
         string.isNotEmpty()
 
     private fun MediatorLiveData<Boolean>.validateNonNull(it: MutableLiveData<String>) {
@@ -227,6 +234,12 @@ constructor(private val complainRepo: ComplainRepo)
         validationRemittingEntityPassed.postValue(true)
         validationTransactionIdPassed.postValue(true)
         validationTransactionAmountPassed.postValue(true)
+        validationSpecifyOtherDetailsPassed.postValue(true)
+        validationSpecifyDetailsPassed.postValue(true)
+        validationRedemptionPartnerPassed.postValue(true)
+        validationBeneficiaryCountryPassed.postValue(true)
+        validationTransactionTypePassed.postValue(true)
+        validationBeneficiaryCnicPointsPassed.postValue(true)
     }
 
     private fun emptyComplaintDetails(){

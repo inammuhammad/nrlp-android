@@ -375,6 +375,36 @@ class RegComplaintDetailsFragment:
             }
         }
 
+        binding.etDetails.setOnFocusChangeListener { _, b ->
+            when (b) {
+                false -> viewModel.validationSpecifyDetailsPassed.postValue(
+                    viewModel.checkNotEmpty(
+                        binding.etDetails.text.toString()
+                    )
+                )
+            }
+        }
+
+        binding.etDetails.setOnFocusChangeListener { _, b ->
+            when (b) {
+                false -> viewModel.validationSpecifyOtherDetailsPassed.postValue(
+                    viewModel.checkNotEmpty(
+                        binding.etDetails2.text.toString()
+                    )
+                )
+            }
+        }
+
+        binding.etPointsbeneficiaryCnicNicp.setOnFocusChangeListener { _, b ->
+            when (b) {
+                false -> viewModel.validationBeneficiaryCnicPointsPassed.postValue(
+                    viewModel.checkCnicValidation(
+                        binding.etPointsbeneficiaryCnicNicp.text.toString()
+                    )
+                )
+            }
+        }
+
     }
 
     private fun initObservers() {
@@ -484,10 +514,14 @@ class RegComplaintDetailsFragment:
             { validationsPassed ->
                 run {
                     if (!validationsPassed) {
+                        binding.spinnerTransaction.setBackgroundResource(R.drawable.edit_text_error_background)
+                        binding.imageViewTransactionTypeError.visibility = View.VISIBLE
                         binding.errorTextTransactionType.visibility = View.VISIBLE
                         binding.errorTextTransactionType.text = getString(R.string.error_transaction_type)
                     } else {
-                        binding.errorTextTransactionType.visibility = View.GONE
+                        binding.spinnerTransaction.setBackgroundResource(R.drawable.edit_text_background)
+                        binding.imageViewTransactionTypeError.visibility = View.GONE
+                        binding.errorTextRedemptionPartner.visibility = View.GONE
                     }
                 }
             })
@@ -544,6 +578,99 @@ class RegComplaintDetailsFragment:
                 }
             })
 
+        viewModel.validationRedemptionPartnerPassed.observe(
+            this,
+            { validationsPassed ->
+                run {
+                    if (!validationsPassed) {
+                        binding.spinnerRedemption.setBackgroundResource(R.drawable.edit_text_error_background)
+                        binding.imageViewRedemptionPartnerError.visibility = View.VISIBLE
+                        binding.errorTextRedemptionPartner.visibility = View.VISIBLE
+                    } else {
+                        binding.spinnerRedemption.setBackgroundResource(R.drawable.edit_text_background)
+                        binding.imageViewRedemptionPartnerError.visibility = View.GONE
+                        binding.errorTextRedemptionPartner.visibility = View.GONE
+                    }
+                }
+            })
+
+        viewModel.validationSpecifyDetailsPassed.observe(
+            this,
+            { validationsPassed ->
+                run {
+                    if (!validationsPassed)
+                    {
+                        binding.etDetails.setBackgroundResource(R.drawable.edit_text_error_background)
+                        binding.imageViewDetailsError.visibility = View.VISIBLE
+                        binding.errorTextSpecifyDetails.visibility = View.VISIBLE
+                    }
+                    else {
+                        binding.etDetails.setBackgroundResource(R.drawable.edit_text_background)
+                        binding.imageViewDetailsError.visibility = View.GONE
+                        binding.errorTextSpecifyDetails.visibility = View.GONE
+                    }
+                }
+            })
+
+        viewModel.validationSpecifyOtherDetailsPassed.observe(
+            this,
+            { validationsPassed ->
+                run {
+                    if (!validationsPassed)
+                        binding.tilDetails2.error = getString(R.string.error_enter_details)
+                    else {
+                        binding.tilDetails2.clearError()
+                        binding.tilDetails2.isErrorEnabled = false
+                    }
+                }
+            })
+
+        viewModel.validationBeneficiaryCountryPassed.observe(
+            this,
+            { validationsPassed ->
+                run {
+                    if (!validationsPassed) {
+                        binding.BeneficaryCountry.setBackgroundResource(R.drawable.edit_text_error_background)
+                        binding.imageViewBeneficiaryCountry.visibility = View.VISIBLE
+                        binding.errorTextBeneficiaryCountry.visibility = View.VISIBLE
+                    }
+                    else {
+                        binding.BeneficaryCountry.setBackgroundResource(R.drawable.edit_text_background)
+                        binding.imageViewBeneficiaryCountry.visibility = View.GONE
+                        binding.errorTextBeneficiaryCountry.visibility = View.GONE
+                    }
+                }
+            })
+
+        viewModel.validationBeneficiaryCnicPointsPassed.observe(
+            this,
+            { validationsPassed ->
+                run {
+                    if (!validationsPassed)
+                        binding.tilPointsbeneficiaryCnic.error = getString(R.string.error_cnic)
+                    else {
+                        binding.tilPointsbeneficiaryCnic.clearError()
+                        binding.tilPointsbeneficiaryCnic.isErrorEnabled = false
+                    }
+                }
+            })
+
+        viewModel.validationTransactionDatePassed.observe(
+            this,
+            { validationsPassed ->
+                run {
+                    if (!validationsPassed) {
+                        binding.etTransactionDate.setBackgroundResource(R.drawable.edit_text_error_background)
+                        binding.imageViewTransactionDateError.visibility = View.VISIBLE
+                        binding.errorTextTransactionDate.visibility = View.VISIBLE
+                    }
+                    else {
+                        binding.etTransactionDate.setBackgroundResource(R.drawable.edit_text_background)
+                        binding.imageViewTransactionDateError.visibility = View.GONE
+                        binding.errorTextTransactionDate.visibility = View.GONE
+                    }
+                }
+            })
     }
 
     private fun CnicValidator(editText:OneLinkEditText){
@@ -763,6 +890,12 @@ class RegComplaintDetailsFragment:
         val isRemittingEntityValid: Boolean = viewModel.checkRemittingEntity(binding.etRemitting.text.toString())
         val isTransactionIdValid: Boolean = viewModel.checkTransactionId(binding.etTransactionid.text.toString())
         val isTransactionAmount: Boolean = viewModel.checkTransactionAmount(binding.etTransactionamount.text.toString())
+        val isRedemptionPartnerValid: Boolean = viewModel.checkNotEmpty(binding.tvRedemption.text.toString())
+        val isSpecifyDetailsValid: Boolean = viewModel.checkNotEmpty(binding.etDetails.text.toString())
+        val isSpecifyOtherDetailsValid: Boolean = viewModel.checkNotEmpty(binding.etDetails2.text.toString())
+        val isBeneficiaryCountryValid: Boolean = viewModel.checkNotEmpty(binding.BeneficaryCountry.text.toString())
+        val isBeneficiaryCnicPointsValid: Boolean = viewModel.checkCnicValidation(binding.etPointsbeneficiaryCnicNicp.text.toString())
+        val isTransactionDateValid: Boolean = viewModel.checkNotEmpty(binding.etTransactionDate.text.toString())
         //var isFullNameValid: Boolean = viewModel.checkAliasValidation(alias.value!!)
         //var isEmailValid:Boolean = viewModel.checkEmailValidation(emailAddress.value!!)
         //var isCountryValid:Boolean = viewModel.checkCountryValidation(country)
@@ -776,6 +909,12 @@ class RegComplaintDetailsFragment:
         viewModel.validationRemittingEntityPassed.value = isRemittingEntityValid
         viewModel.validationTransactionIdPassed.value = isTransactionIdValid
         viewModel.validationTransactionAmountPassed.value = isTransactionAmount
+        viewModel.validationRedemptionPartnerPassed.value = isRedemptionPartnerValid
+        viewModel.validationSpecifyDetailsPassed.value = isSpecifyDetailsValid
+        viewModel.validationSpecifyOtherDetailsPassed.value = isSpecifyOtherDetailsValid
+        viewModel.validationBeneficiaryCountryPassed.value = isBeneficiaryCountryValid
+        viewModel.validationBeneficiaryCnicPointsPassed.value = isBeneficiaryCnicPointsValid
+        viewModel.validationTransactionDatePassed.value = isTransactionDateValid
 
         when(viewModel.complaintType.value){
             COMPLAINT_TYPE.UNABLE_TO_RECEIVE_OTP -> {
@@ -817,6 +956,7 @@ class RegComplaintDetailsFragment:
         countryCodeLength = countryCodeModel.length.toInt()
         viewModel.country.value = countryCodeModel.country
         binding.BeneficaryCountry.colorToText(R.color.black)
+        viewModel.validationBeneficiaryCountryPassed.postValue(true)
         binding.tvCountryCode.text = countryCodeModel.code
         binding.etPhoneNumber.isEnabled = true
         binding.tvCountryCode.colorToText(R.color.black)
@@ -841,6 +981,7 @@ class RegComplaintDetailsFragment:
 
                     //viewModel.rawRemittanceDate.value = viewModel.rawDate
                     viewModel.transactionDate.value = viewModel.getDateInStringFormat(c)
+                    viewModel.validationTransactionDatePassed.postValue(true)
 
 
                 }, year, month, day

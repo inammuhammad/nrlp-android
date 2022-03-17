@@ -256,7 +256,9 @@ class RedemptionSLICPolicyFragment : BaseFragment<RedemptionSLICPolicyViewModel,
         when (targetCode) {
             REDEMPTION_CREATE_DIALOG -> {
 
-                if(viewModel.compareRedeemAmount(redeemablePKR,points.toDouble())) {
+                if(true
+                    //viewModel.compareRedeemAmount(redeemablePKR,points.toDouble())
+                ) {
                     viewModel.makeInitializeRedemptionOTPCall(redeemPartnerModel.partnerName,
                         redeemPartnerModel.partnerName,
                         redeemCategoryModel.categoryName,
@@ -277,7 +279,9 @@ class RedemptionSLICPolicyFragment : BaseFragment<RedemptionSLICPolicyViewModel,
         when (targetCode) {
             REDEMPTION_AMOUNT_DIALOG -> {
                 if(viewModel.checkAmountValidation(points.toInt(), amountEntered)) {
-                    if(viewModel.compareRedeemAmount(redeemablePKR,amountEntered.toDouble())) {
+                    if(true
+                        //viewModel.compareRedeemAmount(redeemablePKR,amountEntered.toDouble())
+                    ) {
                         points = amountEntered.toString()
                         binding.tilVoucher.clearError()
                         viewModel.makeInitializeRedemptionOTPCall(

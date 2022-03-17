@@ -284,7 +284,9 @@ class RedemptionBEOECNICFragment : BaseFragment<RedemptionBEOECNICViewModel,Frag
         super.onPositiveButtonClicked(targetCode)
         when (targetCode) {
             REDEMPTION_CREATE_DIALOG -> {
-                if(viewModel.compareRedeemAmount(redeemablePKR,redeemCategoryModel.points.toDouble())) {
+                if(true
+                    //viewModel.compareRedeemAmount(redeemablePKR,redeemCategoryModel.points.toDouble())
+                ) {
                     viewModel.makeInitializeRedemptionOTPCall(redeemPartnerModel.partnerName,
                         redeemPartnerModel.partnerName,
                         redeemCategoryModel.categoryName,

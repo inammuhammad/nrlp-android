@@ -152,6 +152,16 @@
                             android:text="@={viewModel.transactionType}" />
 
                         <ImageView
+                            android:id="@+id/imageViewTransactionTypeError"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/margin_large"
+                            android:src="@drawable/ic_edit_text_error"
+                            android:textColor="@color/grey"
+                            android:visibility="gone"
+                            android:contentDescription="@null" />
+
+                        <ImageView
                             android:id="@+id/iv_drop_down"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -266,6 +276,32 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tvBeneficiaryCountry"/>
 
+                    <ImageView
+                        android:id="@+id/imageViewBeneficiaryCountry"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/_26sdp"
+                        android:src="@drawable/ic_edit_text_error"
+                        android:textColor="@color/grey"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="@id/BeneficaryCountry"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/BeneficaryCountry"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/errorTextBeneficiaryCountry"
+                        style="@style/TextViewMedium"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_large"
+                        android:layout_marginTop="@dimen/unit_0dp"
+                        android:text="@string/error_beneficiary_country"
+                        android:textColor="@color/red"
+                        app:layout_constraintTop_toBottomOf="@id/BeneficaryCountry"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:textSize="@dimen/unit_10sp"
+                        android:visibility="gone"/>
 
                     <TextView
                         android:id="@+id/tvBeneficiaryMobile"
@@ -349,6 +385,7 @@
                             app:layout_constraintTop_toTopOf="parent"
                             android:contentDescription="@null" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
+
                     <TextView
                         android:id="@+id/errorTextPhone"
                         style="@style/TextViewMedium"
@@ -611,6 +648,33 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/lyTransactionDate"/>
 
+                    <ImageView
+                        android:id="@+id/imageViewTransactionDateError"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/margin_large"
+                        android:src="@drawable/ic_edit_text_error"
+                        android:textColor="@color/grey"
+                        android:visibility="gone"
+                        android:contentDescription="@null"
+                        app:layout_constraintTop_toTopOf="@id/et_transactionDate"
+                        app:layout_constraintEnd_toEndOf="@id/et_transactionDate"
+                        app:layout_constraintBottom_toBottomOf="@id/et_transactionDate"/>
+
+                    <TextView
+                        android:id="@+id/errorTextTransactionDate"
+                        style="@style/TextViewMedium"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_large"
+                        android:layout_marginTop="@dimen/unit_0dp"
+                        android:text="@string/error_transaction_date"
+                        android:textColor="@color/red"
+                        app:layout_constraintTop_toBottomOf="@id/et_transactionDate"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:textSize="@dimen/unit_10sp"
+                        android:visibility="gone"/>
+
                     <TextView
                         android:id="@+id/lyTransactionAmount"
                         style="@style/TextViewSubHeading"
@@ -693,6 +757,16 @@
                             android:text="@={viewModel.redemptionPartners}" />
 
                         <ImageView
+                            android:id="@+id/imageViewRedemptionPartnerError"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/margin_large"
+                            android:src="@drawable/ic_edit_text_error"
+                            android:textColor="@color/grey"
+                            android:visibility="gone"
+                            android:contentDescription="@null" />
+
+                        <ImageView
                             android:id="@+id/iv_drop_down2"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -727,7 +801,7 @@
                         android:layout_marginTop="@dimen/unit_2dp"
                         android:text="@string/error_redemption_partner"
                         android:textColor="@color/red"
-                        app:layout_constraintTop_toBottomOf="@id/spinner_select_partner"
+                        app:layout_constraintTop_toBottomOf="@id/spinnerRedemption"
                         app:layout_constraintStart_toStartOf="parent"
                         android:textSize="@dimen/unit_10sp"
                         android:visibility="gone"/>
@@ -741,7 +815,7 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/unit_16sp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/spinner_select_partner" />
+                        app:layout_constraintTop_toBottomOf="@id/errorTextRedemptionPartner" />
 
                     <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
                         android:id="@+id/til_details"
@@ -751,7 +825,8 @@
                         app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tvDetails">
+                        app:layout_constraintTop_toBottomOf="@id/tvDetails"
+                        >
 
                         <com.onelink.nrlp.android.widgets.OneLinkEditText
                             android:id="@+id/et_details"
@@ -768,6 +843,33 @@
                             app:layout_constraintTop_toBottomOf="parent" />
 
                     </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
+
+                    <ImageView
+                        android:id="@+id/imageViewDetailsError"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/_26sdp"
+                        android:src="@drawable/ic_edit_text_error"
+                        android:textColor="@color/grey"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="@id/til_details"
+                        app:layout_constraintEnd_toEndOf="@id/til_details"
+                        app:layout_constraintTop_toTopOf="@id/til_details"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/errorTextSpecifyDetails"
+                        style="@style/TextViewMedium"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_large"
+                        android:layout_marginTop="@dimen/unit_2dp"
+                        android:text="@string/error_enter_details"
+                        android:textColor="@color/red"
+                        app:layout_constraintTop_toBottomOf="@id/til_details"
+                        app:layout_constraintStart_toStartOf="@id/til_details"
+                        android:textSize="@dimen/unit_10sp"
+                        android:visibility="gone"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
