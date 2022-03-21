@@ -369,7 +369,7 @@
     <string name="provide_necessary_information">مزید آگے بڑھنے کے لئے براہ کرم درخواست کردہ معلومات فراہم کریں</string>
     <string name="click_next_add_receiver">اپنے وصول کنندہ کو شامل کرنے اور اپنے اکاؤنٹ میں آٹو پوائنٹس حاصل کرنے کے لیے اگلے پر کلک کریں</string>
     <string name="add_receiver">وصول کنندہ شامل کریں</string>
-    <string name="receiver_will_be_added_upon_nadra">آپ کی ترسیلات زر وصول کرنے والا \nشامل کر دیا گیا ہے۔</string>
+    <string name="receiver_will_be_added_upon_nadra">آپ کی ترسیلات زر وصول کرنے والا  نادرا کی تصدیق کے بعد شامل کر دیا جائے گا۔</string>
     <string name="remittance_receiver_manager">ترسیلات زر وصول کنندہ کی  منتظمی</string>
     <string name="receiver_mother_maiden_name">براہ کرم نادرا کے ریکارڈ کے مطابق وصول کنندہ کی والدہ کا نام درج کریں</string>
     <string name="receiver_place_of_birth">نادرا کے ریکارڈ کے مطابق براہ کرم وصول کنندہ کی جائے پیدائش درج کریں۔</string>

@@ -285,7 +285,7 @@ class ReceiverDetailsFragment :
             }
         }
 
-        /*binding.etMotherMaidenName.setOnFocusChangeListener { _, b ->
+        binding.etMotherMaidenName.setOnFocusChangeListener { _, b ->
             when (b) {
                 false -> viewModel.validationMotherMaidenPassed.postValue(
                     viewModel.checkMotherMaidenNameValidation(
@@ -293,7 +293,7 @@ class ReceiverDetailsFragment :
                     )
                 )
             }
-        }*/
+        }
     }
 
     private fun initTextWatchers() {
@@ -403,16 +403,20 @@ class ReceiverDetailsFragment :
             hideKeyboard()
             if(viewModel.validationsPassedCnicReceiver(
                     binding.eTCnicNumber.text.toString(),
-                    binding.etAlias.text.toString()
+                    binding.etAlias.text.toString(),
+                    binding.etMotherMaidenName.text.toString()
                 ))
                 makeReceiverAddCall()
         }
         binding.btnNext1.setOnSingleClickListener {
             hideKeyboard()
             if(
-                viewModel.validationsPassedIbanReceiver(binding.eTCnicNumber.text.toString(),
-                    binding.etIbanNumber.text.toString(), binding.etAlias.text.toString())
-            )
+                viewModel.validationsPassedIbanReceiver(
+                    binding.eTCnicNumber.text.toString(),
+                    binding.etIbanNumber.text.toString(),
+                    binding.etAlias.text.toString(),
+                    binding.etMotherMaidenName.text.toString()
+                ))
                 makeReceiverAddCall()
         }
         binding.btnDelete.setOnSingleClickListener {
@@ -779,8 +783,8 @@ class ReceiverDetailsFragment :
             binding.tilBankName.visibility = View.GONE
             binding.etBankName.visibility = View.GONE
         }
-        /*if(it.linkStatus != "LINKED")
-            binding.btnDelete.visibility = View.GONE*/
+        if(it.linkStatus != "LINKED")
+            binding.btnDelete.visibility = View.GONE
 
         //Disabling EditTexts
         context?.let {

@@ -399,7 +399,7 @@
     <string name="bank_name">Bank Name</string>
     <string name="enter_iban_number">IBAN/Account Number*</string>
     <string name="add_receiver">Add Receiver</string>
-    <string name="receiver_will_be_added_upon_nadra">Your Remittance Receiver\nhas been added successfully</string>
+    <string name="receiver_will_be_added_upon_nadra">Your Remittance Receiver\nwill be added upon\nNADRA verification</string>
     <string name="receiver_mother_maiden_name">Please enter Receiver Mother Name as per NADRA record</string>
     <string name="receiver_place_of_birth">Please enter Receiver Place of Birth as per NADRA record</string>
     <string name="receiver_country_of_residence">Please enter Receiver Country of Residence</string>

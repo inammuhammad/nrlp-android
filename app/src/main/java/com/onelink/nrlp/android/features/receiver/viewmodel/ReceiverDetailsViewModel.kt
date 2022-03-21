@@ -94,6 +94,9 @@ open class ReceiverDetailsViewModel @Inject constructor(private val receiverRepo
     val placeOfBirthNotEmpty = MediatorLiveData<Boolean>().apply {
         validateNonNull(placeOfBirth)
     }
+    val cnicIssuanceDateNotEmpty = MediatorLiveData<Boolean>().apply {
+        validateNonNull(cnicNicopDateOfIssuance)
+    }
 
     private fun MediatorLiveData<Boolean>.validateNonNull(it: MutableLiveData<String>) {
         addSource(it) { value = it.isNotEmpty() }
@@ -138,21 +141,25 @@ open class ReceiverDetailsViewModel @Inject constructor(private val receiverRepo
     fun checkMotherMaidenNameValidation(string: String) =
         string.isEmpty() || ValidationUtils.isNameValid(string)
 
-    fun validationsPassedCnicReceiver(cnic: String, name: String): Boolean {
+    fun validationsPassedCnicReceiver(cnic: String, name: String, motherName: String): Boolean {
         val isCnicValid: Boolean = checkCnicValidation(cnic)
         val isNameValid: Boolean = checkAliasValidation(name)
+        val isMotherMaidenNameValid: Boolean = checkMotherMaidenNameValidation(motherName)
         validationCnicPassed.value = isCnicValid
         validationAliasPassed.value = isNameValid
-        return isCnicValid && isNameValid
+        validationMotherMaidenPassed.value = isMotherMaidenNameValid
+        return isCnicValid && isNameValid && isMotherMaidenNameValid
     }
 
-    fun validationsPassedIbanReceiver(cnic: String, iban: String, name: String): Boolean {
+    fun validationsPassedIbanReceiver(cnic: String, iban: String, name: String, motherName: String): Boolean {
         val isCnicValid: Boolean = checkCnicValidation(cnic)
         val isIbanValid: Boolean = checkIbanValidation(iban)
         val isNameValid: Boolean = checkAliasValidation(name)
+        val isMotherMaidenNameValid: Boolean = checkMotherMaidenNameValidation(motherName)
         validationCnicPassed.value = isCnicValid
         validationIbanPassed.value = isIbanValid
         validationAliasPassed.value = isNameValid
-        return isCnicValid && isIbanValid && isNameValid
+        validationMotherMaidenPassed.value = isMotherMaidenNameValid
+        return isCnicValid && isIbanValid && isNameValid && isMotherMaidenNameValid
     }
 }
