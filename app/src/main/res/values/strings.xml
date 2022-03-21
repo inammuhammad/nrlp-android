@@ -420,7 +420,7 @@
     <string name="proceed_to_playstore">Proceed to PlayStore</string>
     <string name="undefined" translatable="false">undefined</string>
     <string name="receiver_removed">Remittance Receiver Removed</string>
-    <string name="_has_been_removed">%s has Been Removed</string>
+    <string name="_has_been_removed">%s has been removed</string>
     <string name="please_wait">Please Wait!</string>
     <string name="five_minutes_before_resending">Please wait 5 minutes before resending OTP</string>
     <string name="five_minutes_before_editing">Please wait 5 minutes before editing beneficiary</string>

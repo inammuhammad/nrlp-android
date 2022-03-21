@@ -401,14 +401,17 @@ class ReceiverDetailsFragment :
 
         binding.btnNext.setOnSingleClickListener {
             hideKeyboard()
-            if(viewModel.validationsPassedCnicReceiver(binding.eTCnicNumber.text.toString()))
+            if(viewModel.validationsPassedCnicReceiver(
+                    binding.eTCnicNumber.text.toString(),
+                    binding.etAlias.text.toString()
+                ))
                 makeReceiverAddCall()
         }
         binding.btnNext1.setOnSingleClickListener {
             hideKeyboard()
             if(
                 viewModel.validationsPassedIbanReceiver(binding.eTCnicNumber.text.toString(),
-                    binding.etIbanNumber.text.toString())
+                    binding.etIbanNumber.text.toString(), binding.etAlias.text.toString())
             )
                 makeReceiverAddCall()
         }

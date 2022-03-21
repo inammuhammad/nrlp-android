@@ -117,6 +117,7 @@ class RegComplaintDetailsFragment:
                 ) {
                     if (listenerInitializedTR) {
                         viewModel.transactionType.postValue(transactionTypes[position])
+                        viewModel.validationTransactionTypePassed.postValue(true)
                     } else {
                         listenerInitializedTR = true
                         binding.spinnerSelectTransaction.setSelection(-1)
@@ -164,6 +165,7 @@ class RegComplaintDetailsFragment:
                                             viewModel.redemptionPartners.postValue(
                                                 viewModel.partnerList.value!![position]
                                             )
+                                            viewModel.validationRedemptionPartnerPassed.postValue(true)
                                         } else {
                                             listenerInitializedPR = true
                                             binding.spinnerSelectPartner.setSelection(-1)
@@ -521,7 +523,7 @@ class RegComplaintDetailsFragment:
                     } else {
                         binding.spinnerTransaction.setBackgroundResource(R.drawable.edit_text_background)
                         binding.imageViewTransactionTypeError.visibility = View.GONE
-                        binding.errorTextRedemptionPartner.visibility = View.GONE
+                        binding.errorTextTransactionType.visibility = View.GONE
                     }
                 }
             })

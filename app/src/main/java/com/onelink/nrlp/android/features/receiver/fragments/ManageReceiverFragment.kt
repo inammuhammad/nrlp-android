@@ -71,6 +71,10 @@ class ManageReceiverFragment : BaseFragment<ManageReceiverViewModel, FragmentMan
                                 binding.rvReceivers.adapter =
                                     ReceiversAdapter(context, receiversList)
                             }
+                            else {
+                                binding.lyNoReceiver.visibility = View.VISIBLE
+                                binding.lyReceiversList.visibility = View.GONE
+                            }
                         }
                     }
                 }

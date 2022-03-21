@@ -124,7 +124,7 @@ open class ReceiverDetailsViewModel @Inject constructor(private val receiverRepo
         string.isEmpty() || ValidationUtils.isCNICValid(string)
 
     fun checkAliasValidation(string: String) =
-        string.isEmpty() || ValidationUtils.isNameValid(string)
+        ValidationUtils.isNameValid(string)
 
     fun checkPhoneNumberValidation(string: String, int: Int?) =
         string.isEmpty() || ValidationUtils.isPhoneNumberValid(string, int)
@@ -138,17 +138,21 @@ open class ReceiverDetailsViewModel @Inject constructor(private val receiverRepo
     fun checkMotherMaidenNameValidation(string: String) =
         string.isEmpty() || ValidationUtils.isNameValid(string)
 
-    fun validationsPassedCnicReceiver(cnic: String): Boolean {
+    fun validationsPassedCnicReceiver(cnic: String, name: String): Boolean {
         val isCnicValid: Boolean = checkCnicValidation(cnic)
+        val isNameValid: Boolean = checkAliasValidation(name)
         validationCnicPassed.value = isCnicValid
-        return isCnicValid
+        validationAliasPassed.value = isNameValid
+        return isCnicValid && isNameValid
     }
 
-    fun validationsPassedIbanReceiver(cnic: String, iban: String): Boolean {
+    fun validationsPassedIbanReceiver(cnic: String, iban: String, name: String): Boolean {
         val isCnicValid: Boolean = checkCnicValidation(cnic)
         val isIbanValid: Boolean = checkIbanValidation(iban)
+        val isNameValid: Boolean = checkAliasValidation(name)
         validationCnicPassed.value = isCnicValid
         validationIbanPassed.value = isIbanValid
-        return isCnicValid && isIbanValid
+        validationAliasPassed.value = isNameValid
+        return isCnicValid && isIbanValid && isNameValid
     }
 }
