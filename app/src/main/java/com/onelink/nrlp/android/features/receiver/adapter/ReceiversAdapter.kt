@@ -43,7 +43,7 @@ class ReceiversAdapter(
             holder.beneficiaryListItemBinding.root.pendingTextView.visibility = View.GONE
             //holder.beneficiaryListItemBinding.root.activeTextView.visibility = View.VISIBLE
         } else {
-            holder.beneficiaryListItemBinding.root.pendingTextView.visibility = View.GONE
+            holder.beneficiaryListItemBinding.root.pendingTextView.visibility = View.VISIBLE
             holder.beneficiaryListItemBinding.root.activeTextView.visibility = View.GONE
         }
         holder.beneficiaryListItemBinding.root.item_ly.setOnClickListener {
