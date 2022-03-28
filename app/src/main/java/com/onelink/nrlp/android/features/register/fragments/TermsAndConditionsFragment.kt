@@ -5,11 +5,13 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.onelink.nrlp.android.R
+import com.onelink.nrlp.android.core.BaseError
 import com.onelink.nrlp.android.core.BaseFragment
 import com.onelink.nrlp.android.core.Status
 import com.onelink.nrlp.android.databinding.FragmentTermsAndConditionsBinding
 import com.onelink.nrlp.android.features.login.view.LoginActivity
 import com.onelink.nrlp.android.features.register.models.RegisterFlowDataModel
+import com.onelink.nrlp.android.features.register.models.TermsAndConditionsCancelRequest
 import com.onelink.nrlp.android.features.register.viewmodel.SharedViewModel
 import com.onelink.nrlp.android.features.register.viewmodel.TermsAndConditionsViewModel
 import com.onelink.nrlp.android.utils.LocaleManager
@@ -41,6 +43,10 @@ class TermsAndConditionsFragment :
 
     private lateinit var registerFlowDataModel: RegisterFlowDataModel
 
+    private var tAndCId = -1
+
+    private var tAndCVersion = ""
+
     override fun onInject() {
         AndroidSupportInjection.inject(this)
     }
@@ -71,6 +77,9 @@ class TermsAndConditionsFragment :
                     response.data?.let {
                         oneLinkProgressDialog.hideProgressDialog()
                         tvTermsAndConditions.text = it.termsAndConditions.content.parseHtml()
+                        tAndCId = it.termsAndConditions.termsAndConditionsId
+                        tAndCVersion = it.termsAndConditions.versionNum
+
                     }
                 }
                 Status.ERROR -> {
@@ -114,12 +123,57 @@ class TermsAndConditionsFragment :
                 }
             }
         })
+
+        viewModel.observeTermsAndConditionsCancel().observe(this, Observer { response ->
+            when(response.status) {
+                Status.SUCCESS -> {
+                    oneLinkProgressDialog.hideProgressDialog()
+                    val intent = Intent(activity, LoginActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    activity?.startActivity(intent)
+                }
+                Status.ERROR -> {
+                    response.error?.let {
+                        showGeneralErrorDialog(this, it)
+                    }
+                    oneLinkProgressDialog.hideProgressDialog()
+                }
+                Status.LOADING -> {
+                    oneLinkProgressDialog.showProgressDialog(activity)
+                }
+            }
+        })
+
+        viewModel.observeAuthKey().observe(this, Observer{ response ->
+            when (response.status) {
+                Status.SUCCESS -> {
+                    oneLinkProgressDialog.hideProgressDialog()
+                    viewModel.makeTermsAndConditionsCancelCall(
+                        TermsAndConditionsCancelRequest(
+                            registerFlowDataModel.cnicNicop,
+                            registerFlowDataModel.accountType,
+                            tAndCVersion,
+                            tAndCId
+                        )
+                    )
+                }
+                Status.ERROR -> {
+                    oneLinkProgressDialog.hideProgressDialog()
+                    response.error?.let {
+                        showGeneralErrorDialog(this, it)
+                    }
+                }
+                Status.LOADING -> {
+                    oneLinkProgressDialog.showProgressDialog(activity)
+                }
+            }
+        })
     }
 
 
     private fun initListeners() {
         tvAccept.setOnSingleClickListener {
-            viewModel.makeRegisterCall(registerFlowDataModel)
+            viewModel.makeRegisterCall(registerFlowDataModel, tAndCId, tAndCVersion)
         }
 
         checkboxTermsAndConditions.setOnCheckedChangeListener { _, isChecked ->
@@ -159,9 +213,10 @@ class TermsAndConditionsFragment :
         super.onPositiveButtonClicked(targetCode)
         when (targetCode) {
             CONFIRM_CANCEL_REGISTER_DIALOG -> {
-                val intent = Intent(activity, LoginActivity::class.java)
+                viewModel.getAuthKey(registerFlowDataModel.accountType, registerFlowDataModel.cnicNicop)
+                /*val intent = Intent(activity, LoginActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                activity?.startActivity(intent)
+                activity?.startActivity(intent)*/
             }
         }
     }

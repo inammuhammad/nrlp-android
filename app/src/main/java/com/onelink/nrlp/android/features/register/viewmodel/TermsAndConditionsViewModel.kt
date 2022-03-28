@@ -5,17 +5,20 @@ import com.onelink.nrlp.android.core.BaseViewModel
 import com.onelink.nrlp.android.features.register.models.RegisterBeneficiaryRequest
 import com.onelink.nrlp.android.features.register.models.RegisterFlowDataModel
 import com.onelink.nrlp.android.features.register.models.RegisterRemitterRequest
+import com.onelink.nrlp.android.features.register.models.TermsAndConditionsCancelRequest
 import com.onelink.nrlp.android.features.register.registerRepo.RegisterRepo
+import com.onelink.nrlp.android.features.splash.repo.AuthKeyRepo
 import com.onelink.nrlp.android.utils.Constants
 import java.util.*
 import javax.inject.Inject
 
 
-class TermsAndConditionsViewModel @Inject constructor(private val registerRepo: RegisterRepo) :
+class TermsAndConditionsViewModel @Inject constructor(private val registerRepo: RegisterRepo,
+                                                      private val authRepo: AuthKeyRepo) :
     BaseViewModel() {
     val checked = MutableLiveData<Boolean>(false)
 
-    fun makeRegisterCall(registerFlowDataModel: RegisterFlowDataModel) {
+    fun makeRegisterCall(registerFlowDataModel: RegisterFlowDataModel, tAndCId: Int, tAndCVersion: String) {
         val accountType = registerFlowDataModel.accountType
         if (accountType == Constants.REMITTER.toLowerCase(Locale.getDefault())) {
             registerRemitter(
@@ -35,7 +38,9 @@ class TermsAndConditionsViewModel @Inject constructor(private val registerRepo: 
                     motherMaidenName = registerFlowDataModel.motherMaidenName,
                     placeOfBirth = registerFlowDataModel.placeOfBirth,
                     cnicNicopIssueDate = registerFlowDataModel.cnicNicopIssueDate,
-                    sotp = "2"
+                    sotp = "2",
+                    termsAndConditionId = tAndCId,
+                    versionNum = tAndCVersion
                 )
             )
         } else if (accountType == Constants.BENEFICIARY.toLowerCase(Locale.getDefault())) {
@@ -55,15 +60,23 @@ class TermsAndConditionsViewModel @Inject constructor(private val registerRepo: 
                     placeOfBirth = registerFlowDataModel.placeOfBirth,
                     cnicNicopIssueDate = registerFlowDataModel.cnicNicopIssueDate,
                     sotp = "2",
-                    motherMaidenName = registerFlowDataModel.motherMaidenName
+                    motherMaidenName = registerFlowDataModel.motherMaidenName,
+                    termsAndConditionId = tAndCId,
+                    versionNum = tAndCVersion
                 )
             )
         }
     }
 
+    fun makeTermsAndConditionsCancelCall(termsAndConditionsCancelRequest: TermsAndConditionsCancelRequest){
+        registerRepo.termsAndConditionsCancel(termsAndConditionsCancelRequest)
+    }
+
     fun getTermsAndConditions(lang: String = "en") = registerRepo.getTermsAndConditions(lang)
 
     fun observeTermsAndConditions() = registerRepo.observeTermsAndConditions()
+
+    fun observeTermsAndConditionsCancel() = registerRepo.observeTermsAndConditionsCancel()
 
     private fun registerRemitter(registerRemitterRequest: RegisterRemitterRequest) =
         registerRepo.registerRemitter(registerRemitterRequest)
@@ -72,4 +85,8 @@ class TermsAndConditionsViewModel @Inject constructor(private val registerRepo: 
         registerRepo.registerBeneficiary(registerBeneficiaryRequest)
 
     fun observeRegisterUser() = registerRepo.observeRegisterUser()
+
+    fun getAuthKey(accountType : String , nic : String) = authRepo.getAuthKey(accountType , nic)
+
+    fun observeAuthKey() = authRepo.observeAuthKey()
 }

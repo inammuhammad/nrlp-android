@@ -62,5 +62,11 @@ class RegisterRemitterRequest(
     var cnicNicopIssueDate: String?,
 
     @SerializedName("sotp")
-    var sotp: String?
+    var sotp: String?,
+
+    @SerializedName("version_no")
+    var versionNum: String? = "",
+
+    @SerializedName("term_condition_id")
+    var termsAndConditionId: Int? = -1
 ): Parcelable

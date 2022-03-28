@@ -105,6 +105,9 @@ interface ServiceGateway {
     @POST("terms-conditions/")
     fun getTermsAndConditions(@Body body: TermsAndConditionsRequest): Single<Response<TermsAndConditionsResponseModel>>
 
+    @POST("terms-conditions-cancel/")
+    fun termsAndConditionsCancel(@Body body: TermsAndConditionsCancelRequest): Single<Response<GeneralMessageResponseModel>>
+
     @GET("list/")
     fun getBeneficiaries(): Single<Response<BeneficiariesResponseModel>>
 

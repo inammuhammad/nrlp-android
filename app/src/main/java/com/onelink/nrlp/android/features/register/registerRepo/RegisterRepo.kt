@@ -28,6 +28,8 @@ open class RegisterRepo @Inject constructor(
         MutableLiveData<BaseResponse<TermsAndConditionsResponseModel>>()
     val registerUserResponse =
         MutableLiveData<BaseResponse<GeneralMessageResponseModel>>()
+    val termsAndConditionsCancelResponse =
+        MutableLiveData<BaseResponse<GeneralMessageResponseModel>>()
 
     fun verifyReferenceNumber(verifyReferenceNumberRequest: VerifyReferenceNumberRequest) {
         networkHelper.serviceCall(
@@ -79,8 +81,17 @@ open class RegisterRepo @Inject constructor(
         }
     }
 
+    fun termsAndConditionsCancel(termsAndConditionsCancelRequest: TermsAndConditionsCancelRequest) {
+        networkHelper.serviceCall(serviceGateway.termsAndConditionsCancel(termsAndConditionsCancelRequest)).observeForever {
+            termsAndConditionsCancelResponse.value = it
+        }
+    }
+
     fun observeTermsAndConditions() =
         termsAndConditionsResponse as LiveData<BaseResponse<TermsAndConditionsResponseModel>>
+
+    fun observeTermsAndConditionsCancel() =
+        termsAndConditionsCancelResponse as LiveData<BaseResponse<GeneralMessageResponseModel>>
 
     fun registerRemitter(registerRemitterRequest: RegisterRemitterRequest) {
         networkHelper.serviceCall(serviceGateway.registerRemitter(registerRemitterRequest))
