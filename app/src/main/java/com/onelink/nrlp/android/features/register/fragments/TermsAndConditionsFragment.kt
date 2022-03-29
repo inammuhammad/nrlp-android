@@ -213,7 +213,15 @@ class TermsAndConditionsFragment :
         super.onPositiveButtonClicked(targetCode)
         when (targetCode) {
             CONFIRM_CANCEL_REGISTER_DIALOG -> {
-                viewModel.getAuthKey(registerFlowDataModel.accountType, registerFlowDataModel.cnicNicop)
+                //viewModel.getAuthKey(registerFlowDataModel.accountType, registerFlowDataModel.cnicNicop)
+                viewModel.makeTermsAndConditionsCancelCall(
+                    TermsAndConditionsCancelRequest(
+                        registerFlowDataModel.cnicNicop,
+                        registerFlowDataModel.accountType,
+                        tAndCVersion,
+                        tAndCId
+                    )
+                )
                 /*val intent = Intent(activity, LoginActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 activity?.startActivity(intent)*/
