@@ -274,12 +274,14 @@
                 android:layout_height="wrap_content"></EditText>
             <TextView
                 android:id="@+id/tv_error_relationship"
+                style="@style/TextViewMedium"
+                android:textSize="@dimen/unit_10sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/error_relationship"
                 android:visibility="gone"
-                android:textSize="@dimen/_8sdp"
                 android:textColor="@color/red"
+                android:layout_marginTop="0dp"
                 android:layout_marginStart="@dimen/_16sdp"
                 android:layout_marginEnd="@dimen/margin_large"/>
         </LinearLayout>

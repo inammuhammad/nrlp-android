@@ -30,7 +30,7 @@
     <string name="resident_id">منفرد آئی ڈی*</string>
     <string name="mobile_number">موبائل نمبر*</string>
     <string name="mobile_number_complaint">موبائل نمبر</string>
-    <string name="beneficiary_mobile_number">وصول کنندہ کا موبائل نمبر</string>
+    <string name="beneficiary_mobile_number">وصول کنندہ کا موبائل نمبر *</string>
     <string name="email_address">ای میل ایڈریس</string>
     <string name="email_address_optional">ای میل ایڈریس (اختیاری)</string>
     <string name="password">پاس ورڈ *</string>
@@ -59,7 +59,7 @@
     <string name="nlrp_title">سوہنی دھرتی\nریمیٹنس پروگرام</string>
     <string name="select_account_type">یوزر کی قسم منتخب کریں</string>
     <string name="select_beneficiary_relationship">وصول کنندہ کا رشتہ منتخب کریں</string>
-    <string name="beneficiary_relationship">وصول کنندہ کا رشتہ</string>
+    <string name="beneficiary_relationship">وصول کنندہ کا رشتہ *</string>
     <string name="login">لاگ ان کریں</string>
     <string name="remitter">بھیجنے والا</string>
     <string name="international_passport">بین الاقوامی پاسپورٹ</string>

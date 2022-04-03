@@ -93,7 +93,7 @@ open class BeneficiaryDetailsViewModel @Inject constructor(private val beneficia
         string.isEmpty() || ValidationUtils.isNameValid(string)
 
     fun checkPhoneNumberValidation(string: String, int: Int?) =
-        string.isEmpty() || ValidationUtils.isPhoneNumberValid(string, int)
+        ValidationUtils.isPhoneNumberValid(string, int)
 
     fun checkEditPhoneNumberValidation(string: String, int: Int?) =
         ValidationUtils.isPhoneNumberValid(string, int)

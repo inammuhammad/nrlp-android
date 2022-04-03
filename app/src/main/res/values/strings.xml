@@ -29,7 +29,7 @@
     <string name="resident_id">Unique ID *</string>
     <string name="mobile_number">Mobile Number *</string>
     <string name="mobile_number_complaint">Mobile Number</string>
-    <string name="beneficiary_mobile_number">Beneficiary Mobile Number</string>
+    <string name="beneficiary_mobile_number">Beneficiary Mobile Number *</string>
     <string name="email_address">Email Address</string>
     <string name="email_address_optional">Email Address (Optional)</string>
     <string name="password">Password *</string>
@@ -46,7 +46,7 @@
     <string name="re_enter_password">Re-Enter Password *</string>
     <string name="re_enter_new_password">Re-Enter New Password</string>
     <string name="account_type">User Type *</string>
-    <string name="beneficiary_relationship">Beneficiary Relationship</string>
+    <string name="beneficiary_relationship">Beneficiary Relationship *</string>
     <string name="select_account">Select account</string>
     <string name="generic_name_placeholder">Muhammad Ali</string>
     <string name="mother_maiden_name_placeholder">Kaneez Fatima</string>
