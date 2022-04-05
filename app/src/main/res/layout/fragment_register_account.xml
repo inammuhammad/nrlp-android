@@ -151,6 +151,46 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/fatherNameLL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            style="@style/TextViewSubHeading"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/father_name" />
+
+                    </LinearLayout>
+
+                    <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
+                        android:id="@+id/tilFatherName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/unit_8dp"
+                        app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance">
+
+                        <com.onelink.nrlp.android.widgets.OneLinkEditText
+                            android:id="@+id/etFatherName"
+                            style="@style/EditTextFixedDigits"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/generic_name_placeholder"
+                            android:inputType="textCapWords|textCapSentences"
+                            android:maxLength="50"
+                            android:imeOptions="actionDone|flagForceAscii"
+                            android:text="@={viewModel.fatherName}" />
+                    </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/motherMaidenNameLL"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -216,10 +256,31 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/unit_8dp"
                         android:focusable="false"
+                        android:visibility="gone"
                         android:hint="@string/select_place_of_birth"
                         android:text="@={viewModel.placeOfBirth}"
                         android:textColor="@color/grey"
                         android:textDirection="ltr" />
+
+                    <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
+                        android:id="@+id/tilPlaceOfBirth"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/unit_8dp"
+                        app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance">
+
+                        <com.onelink.nrlp.android.widgets.OneLinkEditText
+                            android:id="@+id/etPlaceOfBirth"
+                            style="@style/EditTextFixedDigits"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/hint_place_of_birth"
+                            android:inputType="textCapWords|textCapSentences"
+                            android:maxLength="50"
+                            android:imeOptions="actionDone|flagForceAscii"
+                            android:text="@={viewModel.placeOfBirth}" />
+                    </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -840,7 +901,7 @@
                         style="@style/ButtonTheme"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:enabled="@{viewModel.cnicNotEmpty &amp;&amp; viewModel.fullNameNotEmpty &amp;&amp; viewModel.mobileNumberNotEmpty &amp;&amp; viewModel.passwordNotEmpty &amp;&amp; viewModel.rePasswordNotEmpty &amp;&amp; viewModel.isAccountTypeSelected() &amp;&amp; viewModel.isPassportTypeSelected() &amp;&amp; viewModel.residentIdNotEmpty &amp;&amp; viewModel.passportIdNotEmpty &amp;&amp; viewModel.cnicNicopDateOfIssuanceNotEmpty &amp;&amp; viewModel.placeOfBirthNotEmpty &amp;&amp; viewModel.mothersMaidenNameNotEmpty}"
+                        android:enabled="@{viewModel.cnicNotEmpty &amp;&amp; viewModel.fullNameNotEmpty &amp;&amp; viewModel.mobileNumberNotEmpty &amp;&amp; viewModel.passwordNotEmpty &amp;&amp; viewModel.rePasswordNotEmpty &amp;&amp; viewModel.isAccountTypeSelected() &amp;&amp; viewModel.isPassportTypeSelected() &amp;&amp; viewModel.residentIdNotEmpty &amp;&amp; viewModel.passportIdNotEmpty &amp;&amp; viewModel.cnicNicopDateOfIssuanceNotEmpty &amp;&amp; viewModel.placeOfBirthNotEmpty &amp;&amp; viewModel.mothersMaidenNameNotEmpty &amp;&amp; viewModel.fatherNameNotEmpty}"
                         android:text="@string/next" />
 
                 </FrameLayout>

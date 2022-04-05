@@ -43,6 +43,8 @@ data class RegisterFlowDataModel(
     @SerializedName("place_of_birth")
     var placeOfBirth: String,
     @SerializedName("cnic_nicop_issuance_date")
-    var cnicNicopIssueDate: String
+    var cnicNicopIssueDate: String,
+    @SerializedName("father_name")
+    var fatherName: String
 
 )

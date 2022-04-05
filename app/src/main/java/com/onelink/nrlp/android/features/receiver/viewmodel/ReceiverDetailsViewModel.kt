@@ -33,6 +33,7 @@ open class ReceiverDetailsViewModel @Inject constructor(private val receiverRepo
     val validationAliasPassed = MutableLiveData(true)
     val validationPhoneNumberPassed = MutableLiveData(true)
     val validationMotherMaidenPassed = MutableLiveData(true)
+    val validationPlaceOfBirthPassed = MutableLiveData(true)
     val validationBankNamePassed = MutableLiveData(true)
     val validationIbanPassed = MutableLiveData(true)
     val beneficiaryRelation = MutableLiveData<String>(Constants.SPINNER_BENEFICIARY_HINT)
@@ -151,15 +152,20 @@ open class ReceiverDetailsViewModel @Inject constructor(private val receiverRepo
         return isCnicValid && isNameValid && isMotherMaidenNameValid
     }
 
-    fun validationsPassedIbanReceiver(cnic: String, iban: String, name: String, motherName: String): Boolean {
+    fun validationsPassedIbanReceiver(
+        cnic: String, iban: String, name: String, motherName: String,
+        placeOfBirth: String
+    ): Boolean {
         val isCnicValid: Boolean = checkCnicValidation(cnic)
         val isIbanValid: Boolean = checkIbanValidation(iban)
         val isNameValid: Boolean = checkAliasValidation(name)
         val isMotherMaidenNameValid: Boolean = checkMotherMaidenNameValidation(motherName)
+        val isPlaceOfBirthValid: Boolean = checkMotherMaidenNameValidation(placeOfBirth)
         validationCnicPassed.value = isCnicValid
         validationIbanPassed.value = isIbanValid
         validationAliasPassed.value = isNameValid
         validationMotherMaidenPassed.value = isMotherMaidenNameValid
+        validationPlaceOfBirthPassed.value = isPlaceOfBirthValid
         return isCnicValid && isIbanValid && isNameValid && isMotherMaidenNameValid
     }
 }

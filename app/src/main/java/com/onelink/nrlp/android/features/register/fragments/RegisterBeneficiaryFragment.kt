@@ -172,6 +172,16 @@ class RegisterBeneficiaryFragment : BaseFragment<RegisterAccountFragmentViewMode
             }
         }
 
+        binding.etFatherName.setOnFocusChangeListener { _, b ->
+            when (b) {
+                false -> viewModel.isFatherNameValidationPassed.postValue(
+                    viewModel.checkFatherNameValidation(
+                        binding.etFatherName.text.toString()
+                    )
+                )
+            }
+        }
+
         binding.etPhoneNumber.setOnFocusChangeListener { _, b ->
             when (b) {
                 false -> viewModel.isPhoneNumberValidationPassed.postValue(
@@ -229,6 +239,16 @@ class RegisterBeneficiaryFragment : BaseFragment<RegisterAccountFragmentViewMode
                 false -> viewModel.isCnicNicopIssuanceDateValidationPassed.postValue(
                     viewModel.checkCnicDateIssueValid(
                         binding.etCnicNicopIssuanceDate.text.toString()
+                    )
+                )
+            }
+        }
+
+        binding.etPlaceOfBirth.setOnFocusChangeListener { _, b ->
+            when (b) {
+                false -> viewModel.isPlaceOfBirthValidationPassed.postValue(
+                    viewModel.checkFullNameValidation(
+                        binding.etPlaceOfBirth.text.toString()
                     )
                 )
             }
@@ -316,6 +336,17 @@ class RegisterBeneficiaryFragment : BaseFragment<RegisterAccountFragmentViewMode
             }
         })
 
+        viewModel.isFatherNameValidationPassed.observe(this, androidx.lifecycle.Observer{ validationsPassed ->
+            run {
+                if (!validationsPassed)
+                    binding.tilFatherName.error = getString(R.string.error_not_valid_father_name)
+                else {
+                    binding.tilFatherName.clearError()
+                    binding.tilFatherName.isErrorEnabled = false
+                }
+            }
+        })
+
         viewModel.isMotherMaidenNameValidationPassed.observe(this, androidx.lifecycle.Observer{ validationsPassed ->
             run {
                 if (!validationsPassed)
@@ -323,6 +354,18 @@ class RegisterBeneficiaryFragment : BaseFragment<RegisterAccountFragmentViewMode
                 else {
                     binding.tilMotherMaidenName.clearError()
                     binding.tilMotherMaidenName.isErrorEnabled = false
+                }
+            }
+        })
+
+        viewModel.isPlaceOfBirthValidationPassed.observe(this, androidx.lifecycle.Observer{ validationsPassed ->
+            run {
+                if (!validationsPassed)
+                    binding.tilPlaceOfBirth.error =
+                        getString(R.string.error_place_of_birth)
+                else {
+                    binding.tilPlaceOfBirth.clearError()
+                    binding.tilPlaceOfBirth.isErrorEnabled = false
                 }
             }
         })
@@ -396,7 +439,9 @@ class RegisterBeneficiaryFragment : BaseFragment<RegisterAccountFragmentViewMode
                     countryCodeLength,
                     binding.etEmailAddress.text.toString(),
                     binding.etPassword.text.toString(),
-                    binding.etRePassword.text.toString()
+                    binding.etRePassword.text.toString(),
+                    fatherName = binding.etFatherName.text.toString(),
+                    placeOfBirth = binding.etPlaceOfBirth.text.toString()
                 )
             ) {
                 moveToNextFragment()
@@ -540,7 +585,8 @@ class RegisterBeneficiaryFragment : BaseFragment<RegisterAccountFragmentViewMode
                 otpCode = "",
                 motherMaidenName = binding.etMotherMaidenName.text.toString(),
                 placeOfBirth =  binding.tvPlaceOfBirth.text.toString(),
-                cnicNicopIssueDate = binding.etCnicNicopIssuanceDate.text.toString()
+                cnicNicopIssueDate = binding.etCnicNicopIssuanceDate.text.toString(),
+                fatherName = binding.etFatherName.text.toString()
             )
         )
         viewModel.addBeneficiaryTermsFragment(resources, fragmentHelper)

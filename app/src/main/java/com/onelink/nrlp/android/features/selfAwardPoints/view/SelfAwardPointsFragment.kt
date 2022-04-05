@@ -4,6 +4,9 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import android.text.Spanned
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.SpinnerAdapter
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.gson.JsonObject
@@ -13,15 +16,19 @@ import com.onelink.nrlp.android.core.Status
 import com.onelink.nrlp.android.databinding.SelfAwardPointsFragmentBinding
 import com.onelink.nrlp.android.features.redeem.fragments.REDEMPTION_CREATE_DIALOG
 import com.onelink.nrlp.android.features.redeem.fragments.TAG_REDEMPTION_CREATE_DIALOG_FBR
+import com.onelink.nrlp.android.features.register.fragments.BENEFICIARY_FLOW_SCREENS
+import com.onelink.nrlp.android.features.register.fragments.REMITTER_FLOW_SCREENS
 import com.onelink.nrlp.android.features.selfAwardPoints.model.SelfAwardPointsRequest
 import com.onelink.nrlp.android.features.selfAwardPoints.viewmodel.SelfAwardPointsFragmentViewModel
 import com.onelink.nrlp.android.features.selfAwardPoints.viewmodel.SelfAwardPointsSharedViewModel
 import com.onelink.nrlp.android.features.viewStatement.fragments.AdvancedLoyaltyStatementFragment
 import com.onelink.nrlp.android.utils.SelfAwardRequestConstants
+import com.onelink.nrlp.android.utils.colorToText
 import com.onelink.nrlp.android.utils.dialogs.OneLinkAlertDialogsFragment
 import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
 import com.onelink.nrlp.android.utils.setOnSingleClickListener
 import dagger.android.support.AndroidSupportInjection
+import kotlinx.android.synthetic.main.fragment_receiver_details.*
 import java.util.*
 import javax.inject.Inject
 
@@ -42,6 +49,8 @@ class SelfAwardPointsFragment :
 //    private var selectedBeneficiary = BeneficiaryDetailsModel(-1, BigInteger.ONE, "12312", 0, "")
 
     private var selfAwardPointSharedViewModel: SelfAwardPointsSharedViewModel? = null
+
+    private var listenerInitialized: Boolean = false
 
 
     override fun getLayoutRes() = R.layout.self_award_points_fragment
@@ -67,6 +76,34 @@ class SelfAwardPointsFragment :
             selfAwardPointSharedViewModel =
                 ViewModelProvider(it).get(SelfAwardPointsSharedViewModel::class.java)
         }
+
+        binding.spinnerSelectTransactionType.adapter = context?.let {
+            ArrayAdapter(
+                it,
+                R.layout.custom_spinner_item,
+                resources.getStringArray(R.array.selfAwardTransactionTypes)
+            )
+        } as SpinnerAdapter
+        binding.spinnerSelectTransactionType.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    // on nothing selected
+                }
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    if (listenerInitialized) {
+                        viewModel.transactionType.postValue(resources.getStringArray(R.array.selfAwardTransactionTypes)[position])
+                    } else {
+                        listenerInitialized = true
+                        binding.spinnerSelectTransactionType.setSelection(-1)
+                    }
+                }
+            }
 
         //showWarningDialog(getString(R.string.self_award_warning))
         showGeneralAlertDialog(this,"SelfAward",getString(R.string.self_award_warning))
@@ -97,12 +134,47 @@ class SelfAwardPointsFragment :
                 binding.etCnicAccountNumber.text.toString(),
             )
             selfAwardPointsRequest.addProperty(
+                SelfAwardRequestConstants.Beneficiary_ACCOUNT_NUMBER,
+                binding.etAccountNumber.text.toString()
+            )
+            selfAwardPointsRequest.addProperty(
                     SelfAwardRequestConstants.Transaction_Date,
-            viewModel.remittanceDate.value,
+                viewModel.remittanceDate.value,
             )
 
             selfAwardPointSharedViewModel?.setSelfAwardPointsFlowDataModel(selfAwardPointsRequest)
             viewModel.verifySafeAwardValidTransaction(selfAwardPointsRequest)
+        }
+
+        binding.btnNextAccount.setOnSingleClickListener {
+            val selfAwardPointsRequest=JsonObject()
+
+            selfAwardPointsRequest.addProperty(
+                SelfAwardRequestConstants.Amount,
+                binding.etRemittanceAmount.text.toString().replace(",", ""),
+            )
+            selfAwardPointsRequest.addProperty(
+                SelfAwardRequestConstants.Reference_NO,
+                binding.etRefNo.text.toString(),
+            )
+            selfAwardPointsRequest.addProperty(
+                SelfAwardRequestConstants.Beneficiary_NIC_NICOP,
+                binding.etCnicAccountNumber.text.toString(),
+            )
+            selfAwardPointsRequest.addProperty(
+                SelfAwardRequestConstants.Beneficiary_ACCOUNT_NUMBER,
+                binding.etAccountNumber.text.toString()
+            )
+            selfAwardPointsRequest.addProperty(
+                SelfAwardRequestConstants.Transaction_Date,
+                viewModel.remittanceDate.value,
+            )
+
+            selfAwardPointSharedViewModel?.setSelfAwardPointsFlowDataModel(selfAwardPointsRequest)
+            viewModel.verifySafeAwardValidTransaction(selfAwardPointsRequest)
+        }
+        binding.spinnerLy.setOnClickListener {
+            binding.spinnerSelectTransactionType.performClick()
         }
         binding.icHelpTransaction.setOnClickListener {
             //showWarningDialog(getString(R.string.transaction_eligibity_for_self_award))
@@ -147,6 +219,17 @@ class SelfAwardPointsFragment :
             }
         })
 
+        viewModel.transactionType.observe(this, Observer {
+            binding.apply {
+                tvRemittanceTransactionType.text = it
+                tvRemittanceTransactionType.colorToText(R.color.black)
+                if(it == getString(R.string.remittance_to_bank))
+                    makeIbanView()
+                else if(it == getString(R.string.remittance_to_cnic))
+                    makeCnicView()
+            }
+        })
+
     }
     private fun openDatePickerDialog() {
         val c = Calendar.getInstance()
@@ -172,6 +255,30 @@ class SelfAwardPointsFragment :
         datePickerDialog?.datePicker?.maxDate = System.currentTimeMillis()
         datePickerDialog?.datePicker?.layoutDirection = View.LAYOUT_DIRECTION_LTR
         datePickerDialog?.show()
+    }
+
+    private fun makeIbanView(){
+        binding.apply {
+            tvCnicAccountNumber.visibility = View.VISIBLE
+            icHelpCnicAccountNumber.visibility = View.VISIBLE
+            tvCnicAccountNumber.text = getString(R.string.beneficiary_account_number)
+            tilCnicAccountNumber.visibility = View.GONE
+            tilAccountNumber.visibility = View.VISIBLE
+            btnNext.visibility = View.GONE
+            btnNextAccount.visibility = View.VISIBLE
+        }
+    }
+
+    private fun makeCnicView(){
+        binding.apply {
+            tvCnicAccountNumber.visibility = View.VISIBLE
+            icHelpCnicAccountNumber.visibility = View.VISIBLE
+            tvCnicAccountNumber.text = getString(R.string.beneficiary_account_number_cnic)
+            tilCnicAccountNumber.visibility = View.VISIBLE
+            tilAccountNumber.visibility = View.GONE
+            btnNext.visibility = View.VISIBLE
+            btnNextAccount.visibility = View.GONE
+        }
     }
 
     companion object {

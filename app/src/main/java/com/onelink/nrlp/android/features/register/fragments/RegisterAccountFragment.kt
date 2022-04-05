@@ -179,6 +179,16 @@ class RegisterAccountFragment :
             }
         }
 
+        binding.etFatherName.setOnFocusChangeListener { _, b ->
+            when (b) {
+                false -> viewModel.isFatherNameValidationPassed.postValue(
+                    viewModel.checkFatherNameValidation(
+                        binding.etFatherName.text.toString()
+                    )
+                )
+            }
+        }
+
         binding.etPhoneNumber.setOnFocusChangeListener { _, b ->
             when (b) {
                 false -> viewModel.isPhoneNumberValidationPassed.postValue(
@@ -250,6 +260,16 @@ class RegisterAccountFragment :
                 )
             }
         }
+
+        binding.etPlaceOfBirth.setOnFocusChangeListener { _, b ->
+            when (b) {
+                false -> viewModel.isPlaceOfBirthValidationPassed.postValue(
+                    viewModel.checkFullNameValidation(
+                        binding.etPlaceOfBirth.text.toString()
+                    )
+                )
+            }
+        }
     }
 
     private fun initObservers() {
@@ -290,6 +310,7 @@ class RegisterAccountFragment :
                 binding.emailAddressLL.visibility = View.GONE
                 binding.passwordLL.visibility = View.GONE
                 binding.rePasswordLL.visibility = View.GONE
+                binding.fatherNameLL.visibility = View.GONE
 
 
                 binding.btnNext1.visibility = View.VISIBLE
@@ -420,6 +441,17 @@ class RegisterAccountFragment :
             }
         })
 
+        viewModel.isFatherNameValidationPassed.observe(this, Observer{ validationsPassed ->
+            run {
+                if (!validationsPassed)
+                    binding.tilFatherName.error = getString(R.string.error_not_valid_father_name)
+                else {
+                    binding.tilFatherName.clearError()
+                    binding.tilFatherName.isErrorEnabled = false
+                }
+            }
+        })
+
         viewModel.isEmailValidationPassed.observe(this, Observer{ validationsPassed ->
             run {
                 if (!validationsPassed)
@@ -428,6 +460,18 @@ class RegisterAccountFragment :
                 else {
                     binding.tilEmailAddress.clearError()
                     binding.tilEmailAddress.isErrorEnabled = false
+                }
+            }
+        })
+
+        viewModel.isPlaceOfBirthValidationPassed.observe(this, Observer{ validationsPassed ->
+            run {
+                if (!validationsPassed)
+                    binding.tilPlaceOfBirth.error =
+                        getString(R.string.error_place_of_birth)
+                else {
+                    binding.tilPlaceOfBirth.clearError()
+                    binding.tilPlaceOfBirth.isErrorEnabled = false
                 }
             }
         })
@@ -534,7 +578,9 @@ class RegisterAccountFragment :
                     binding.etRePassword.text.toString(),
                     binding.etMotherMaidenName.text.toString(),
                     binding.etCnicNicopIssuanceDate.text.toString(),
-                    binding.etPassportNo.text.toString()
+                    binding.etPassportNo.text.toString(),
+                    binding.etFatherName.text.toString(),
+                    binding.etPlaceOfBirth.text.toString()
                 )
             ) {
                 viewModel.getAuthKey(
@@ -699,7 +745,8 @@ class RegisterAccountFragment :
                 otpCode = "",
                 motherMaidenName = binding.etMotherMaidenName.text.toString(),
                 placeOfBirth =  binding.tvPlaceOfBirth.text.toString(),
-                cnicNicopIssueDate = binding.etCnicNicopIssuanceDate.text.toString()
+                cnicNicopIssueDate = binding.etCnicNicopIssuanceDate.text.toString(),
+                fatherName = binding.etFatherName.text.toString()
             )
         )
         /*if(getUserType() == resources.getString(R.string.beneficiary).toLowerCase(Locale.ROOT))
@@ -734,7 +781,8 @@ class RegisterAccountFragment :
             otpCode = "",
             motherMaidenName = binding.etMotherMaidenName.text.toString(),
             placeOfBirth =  binding.tvPlaceOfBirth.text.toString(),
-            cnicNicopIssueDate = binding.etCnicNicopIssuanceDate.text.toString()
+            cnicNicopIssueDate = binding.etCnicNicopIssuanceDate.text.toString(),
+            fatherName = binding.etFatherName.text.toString()
         )
     }
 

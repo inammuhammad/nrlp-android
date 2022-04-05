@@ -202,13 +202,33 @@
             android:layout_marginTop="8dp"
             android:textDirection="ltr"
             android:focusable="false"
-            android:visibility="visible"
+            android:visibility="gone"
             android:hint="@string/please_enter_receiver_info"
             android:singleLine="true"
             android:text="@={viewModel.placeOfBirth}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewPlaceOfBirth" />
+
+        <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
+            android:id="@+id/tilPlaceOfBirth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/unit_8dp"
+            app:layout_constraintTop_toBottomOf="@id/tvPlaceOfBirth"
+            app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance">
+
+            <com.onelink.nrlp.android.widgets.OneLinkEditText
+                android:id="@+id/etPlaceOfBirth"
+                style="@style/EditTextFixedDigits"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_place_of_birth"
+                android:inputType="textCapWords|textCapSentences"
+                android:maxLength="50"
+                android:imeOptions="actionDone|flagForceAscii"
+                android:text="@={viewModel.placeOfBirth}" />
+        </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
 
         <TextView
             android:id="@+id/textViewCountry"
@@ -217,7 +237,7 @@
             android:layout_height="wrap_content"
             android:text="@string/country"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvPlaceOfBirth" />
+            app:layout_constraintTop_toBottomOf="@+id/tilPlaceOfBirth" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="@dimen/_15sdp"

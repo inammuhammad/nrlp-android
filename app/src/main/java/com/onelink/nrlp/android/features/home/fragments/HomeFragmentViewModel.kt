@@ -22,6 +22,7 @@ class HomeFragmentViewModel @Inject constructor(private val homeRepo: HomeRepo) 
     val validationCnicNicopIssuanceDatePassed = MutableLiveData(true)
     val validationFullNamePassed = MutableLiveData(true)
     val validationMotherMaidenNamePassed = MutableLiveData(true)
+    val validationPlaceOfBirthPassed = MutableLiveData(true)
 
     fun getUserProfile() = homeRepo.getUserProfile()
 
@@ -78,6 +79,13 @@ class HomeFragmentViewModel @Inject constructor(private val homeRepo: HomeRepo) 
 
         }
     }
+
+    val isPlaceOfBirthValidationPassed = MediatorLiveData<Boolean>().apply {
+        addSource(validationPlaceOfBirthPassed) {
+            value = it
+        }
+    }
+
 
     fun checkCnicDateIssueValid(string: String) =
         string.isEmpty() || ValidationUtils.isDateValid(string)

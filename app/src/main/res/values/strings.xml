@@ -81,7 +81,8 @@
     <string name="remitter_verification">Remitter Verification</string>
     <string name="beneficiary_verification_title">Beneficiary Verification</string>
     <string name="reference_number">Reference Number/TT Number</string>
-    <string name="beneficiary_account_number_cnic">Beneficiary Account Number/IBAN/CNIC/POC</string>
+    <string name="beneficiary_account_number_cnic">Beneficiary CNIC/POC</string>
+    <string name="beneficiary_account_number">Beneficiary Account Number/IBAN</string>
     <string name="transaction_amount">Transaction Amount</string>
     <string name="curPassword">Enter Old Password</string>
     <string name="newPassword">Enter New Password</string>
@@ -195,6 +196,7 @@
     <string name="device_rooted_alert_msg">Your Device seems to be rooted</string>
     <string name="error_cnic">Please enter a valid CNIC/NICOP/POC</string>
     <string name="error_not_valid_name">Please enter a valid Full Name</string>
+    <string name="error_not_valid_father_name">Please enter a valid Name</string>
     <string name="error_not_valid_mother_name">Please enter a valid Mother Maiden Name</string>
     <string name="error_mobile_num_not_valid">Please enter a valid Mobile Number</string>
     <string name="error_email_not_valid">Please enter a correct Email format</string>
@@ -437,4 +439,8 @@
     <string name="error_enter_details">Please enter details</string>
     <string name="error_beneficiary_country">Please select Country</string>
     <string name="error_transaction_date">Please select Transaction Date</string>
+    <string name="error_place_of_birth">Please enter a correct Place of Birth</string>
+    <string name="hint_place_of_birth" translatable="false">Islamabad</string>
+    <string name="father_name">Father Name *</string>
+    <string name="remittance_transaction_type">Remittance Transaction Type</string>
 </resources>

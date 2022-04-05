@@ -294,6 +294,16 @@ class ReceiverDetailsFragment :
                 )
             }
         }
+
+        binding.etPlaceOfBirth.setOnFocusChangeListener { _, b ->
+            when (b) {
+                false -> viewModel.validationPlaceOfBirthPassed.postValue(
+                    viewModel.checkMotherMaidenNameValidation(
+                        binding.etPlaceOfBirth.text.toString()
+                    )
+                )
+            }
+        }
     }
 
     private fun initTextWatchers() {
@@ -415,7 +425,8 @@ class ReceiverDetailsFragment :
                     binding.eTCnicNumber.text.toString(),
                     binding.etIbanNumber.text.toString(),
                     binding.etAlias.text.toString(),
-                    binding.etMotherMaidenName.text.toString()
+                    binding.etMotherMaidenName.text.toString(),
+                    binding.etPlaceOfBirth.text.toString()
                 ))
                 makeReceiverAddCall()
         }
@@ -678,6 +689,17 @@ class ReceiverDetailsFragment :
                 else {
                     binding.tilIbanNumber.clearError()
                     binding.tilIbanNumber.isErrorEnabled = false
+                }
+            }
+        })
+
+        viewModel.validationPlaceOfBirthPassed.observe(this, { validationsPassed ->
+            run {
+                if (!validationsPassed)
+                    binding.tilPlaceOfBirth.error = getString(R.string.error_place_of_birth)
+                else {
+                    binding.tilPlaceOfBirth.clearError()
+                    binding.tilPlaceOfBirth.isErrorEnabled = false
                 }
             }
         })

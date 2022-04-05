@@ -68,5 +68,8 @@ class RegisterRemitterRequest(
     var versionNum: String? = "",
 
     @SerializedName("term_condition_id")
-    var termsAndConditionId: Int? = -1
+    var termsAndConditionId: Int? = -1,
+
+    @SerializedName("father_name")
+    var fatherName: String? = ""
 ): Parcelable

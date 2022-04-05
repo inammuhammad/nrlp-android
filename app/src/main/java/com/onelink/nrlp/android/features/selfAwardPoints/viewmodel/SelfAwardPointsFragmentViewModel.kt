@@ -24,7 +24,9 @@ class SelfAwardPointsFragmentViewModel @Inject constructor(private val selfAward
     val remittanceDate = MutableLiveData<String>("")
     val referenceNumber = MutableLiveData<String>("")
     val cnicAccountNumber = MutableLiveData<String>("")
+    val accountIbanNumber = MutableLiveData<String>("")
     val transactionAmount = MutableLiveData<String>("")
+    val transactionType = MutableLiveData<String>("")
 
     fun verifySafeAwardValidTransaction(selfAwardPointsRequest: JsonObject) =
             selfAwardPointsFragmentRepo.verifySelfAwardValidTransaction(selfAwardPointsRequest)
@@ -58,6 +60,13 @@ class SelfAwardPointsFragmentViewModel @Inject constructor(private val selfAward
     val validCnicAccountNumber = MediatorLiveData<Boolean>().apply {
         addSource(cnicAccountNumber) {
             val valid = ValidationUtils.isSelfAwardBeneficiaryAccountValid(it)
+            value = valid
+        }
+    }
+
+    val validIbanAccountNumber = MediatorLiveData<Boolean>().apply {
+        addSource(accountIbanNumber) {
+            val valid = ValidationUtils.isIbanAccountNumberValid(it)
             value = valid
         }
     }

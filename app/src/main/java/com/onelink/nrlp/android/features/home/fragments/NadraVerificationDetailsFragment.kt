@@ -134,6 +134,16 @@ class NadraVerificationDetailsFragment :
                 )
             }
         }
+
+        binding.etPlaceOfBirth.setOnFocusChangeListener { _, b ->
+            when (b) {
+                false -> viewModel.isPlaceOfBirthValidationPassed.postValue(
+                    viewModel.checkFullNameValidation(
+                        binding.etPlaceOfBirth.text.toString()
+                    )
+                )
+            }
+        }
     }
 
     private fun initTextWatchers() {
@@ -218,6 +228,18 @@ class NadraVerificationDetailsFragment :
                     }
                 }
             })
+
+        viewModel.isPlaceOfBirthValidationPassed.observe(this, androidx.lifecycle.Observer{ validationsPassed ->
+            run {
+                if (!validationsPassed)
+                    binding.tilPlaceOfBirth.error =
+                        getString(R.string.error_place_of_birth)
+                else {
+                    binding.tilPlaceOfBirth.clearError()
+                    binding.tilPlaceOfBirth.isErrorEnabled = false
+                }
+            }
+        })
     }
 
 

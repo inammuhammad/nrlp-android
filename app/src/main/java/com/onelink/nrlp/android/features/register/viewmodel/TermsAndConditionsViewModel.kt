@@ -40,7 +40,8 @@ class TermsAndConditionsViewModel @Inject constructor(private val registerRepo: 
                     cnicNicopIssueDate = registerFlowDataModel.cnicNicopIssueDate,
                     sotp = "2",
                     termsAndConditionId = tAndCId,
-                    versionNum = tAndCVersion
+                    versionNum = tAndCVersion,
+                    fatherName = registerFlowDataModel.fatherName
                 )
             )
         } else if (accountType == Constants.BENEFICIARY.toLowerCase(Locale.getDefault())) {
@@ -62,7 +63,8 @@ class TermsAndConditionsViewModel @Inject constructor(private val registerRepo: 
                     sotp = "2",
                     motherMaidenName = registerFlowDataModel.motherMaidenName,
                     termsAndConditionId = tAndCId,
-                    versionNum = tAndCVersion
+                    versionNum = tAndCVersion,
+                    fatherName = registerFlowDataModel.fatherName
                 )
             )
         }

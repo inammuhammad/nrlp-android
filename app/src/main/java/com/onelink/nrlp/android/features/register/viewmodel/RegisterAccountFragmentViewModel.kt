@@ -26,6 +26,7 @@ class RegisterAccountFragmentViewModel @Inject constructor(
     val cnicNicopNumber = MutableLiveData<String>("")
     val cnicNicopDateOfIssuance = MutableLiveData<String>("")
     val fullName = MutableLiveData<String>("")
+    val fatherName = MutableLiveData<String>("")
     val mothersMaidenName = MutableLiveData<String>("")
     val placeOfBirth = MutableLiveData<String>("")
     val country = MutableLiveData<String>("")
@@ -41,6 +42,7 @@ class RegisterAccountFragmentViewModel @Inject constructor(
     val validationPhoneNumberPassed = MutableLiveData(true)
     val validationEmailPassed = MutableLiveData(true)
     val validationFullNamePassed = MutableLiveData(true)
+    val validationFatherNamePassed = MutableLiveData(true)
     val validationRePasswordPassed = MutableLiveData(true)
     val validationMotherMaidenNamePassed = MutableLiveData(true)
     val validationPlaceOfBirthPassed = MutableLiveData(true)
@@ -244,6 +246,11 @@ class RegisterAccountFragmentViewModel @Inject constructor(
         validateNonNull(fullName)
     }
 
+    val fatherNameNotEmpty = MediatorLiveData<Boolean>().apply {
+        validateNonNull(fatherName)
+    }
+
+
     val mothersMaidenNameNotEmpty = MediatorLiveData<Boolean>().apply {
         validateNonNull(mothersMaidenName)
     }
@@ -346,6 +353,13 @@ class RegisterAccountFragmentViewModel @Inject constructor(
         }
     }
 
+    val isFatherNameValidationPassed = MediatorLiveData<Boolean>().apply {
+        addSource(validationFatherNamePassed) {
+            value = it
+
+        }
+    }
+
     val isRePasswordValidationPassed = MediatorLiveData<Boolean>().apply {
         addSource(validationRePasswordPassed) {
             value = it
@@ -381,6 +395,12 @@ class RegisterAccountFragmentViewModel @Inject constructor(
         }
     }
 
+    val isPlaceOfBirthValidationPassed = MediatorLiveData<Boolean>().apply {
+        addSource(validationPlaceOfBirthPassed) {
+            value = it
+        }
+    }
+
     fun checkCnicValidation(string: String) =
         string.isEmpty() || ValidationUtils.isCNICValid(string)
 
@@ -391,6 +411,12 @@ class RegisterAccountFragmentViewModel @Inject constructor(
         string.isEmpty() || ValidationUtils.isPhoneNumberValid(string, int)
 
     fun checkFullNameValidation(string: String) =
+        string.isEmpty() || ValidationUtils.isNameValid(string)
+
+    fun checkFatherNameValidation(string: String) =
+        string.isEmpty() || ValidationUtils.isNameValid(string)
+
+    fun checkPlaceOfBirthValid(string: String) =
         string.isEmpty() || ValidationUtils.isNameValid(string)
 
     fun checkEmailValidation(string: String) =
@@ -410,7 +436,8 @@ class RegisterAccountFragmentViewModel @Inject constructor(
     fun validationsPassed(
         cnic: String, fullName: String, phoneNumber: String, phoneNumberLength: Int?,
         email: String, pass: String, repass: String, motherName: String = "",
-        cnicIssueDate: String = "", passportNum: String = ""
+        cnicIssueDate: String = "", passportNum: String = "", fatherName: String = "",
+        placeOfBirth: String = ""
     ): Boolean {
         val isCnicValid: Boolean = checkCnicValidation(cnic)
         val isPhoneNumberValid: Boolean = checkPhoneNumberValidation(phoneNumber, phoneNumberLength)
@@ -421,6 +448,8 @@ class RegisterAccountFragmentViewModel @Inject constructor(
         val isMotherNameValid: Boolean = checkMotherNameValidation(motherName)
         val isDateOfIssueValid: Boolean = checkCnicDateIssueValid(cnicIssueDate)
         val isPassportNumberValid: Boolean = checkPassportNumberValid(passportNum)
+        val isFatherNameValid: Boolean = checkFatherNameValidation(fatherName)
+        val isPlaceOfBirthValid: Boolean = checkPlaceOfBirthValid(placeOfBirth)
         validationCnicPassed.value = isCnicValid
         validationPhoneNumberPassed.value = isPhoneNumberValid
         validationFullNamePassed.value = isFullNameValid
@@ -430,8 +459,11 @@ class RegisterAccountFragmentViewModel @Inject constructor(
         validationCnicNicopIssuanceDatePassed.value = isDateOfIssueValid
         validationMotherMaidenNamePassed.value = isMotherNameValid
         validationPassportNumberPassed.value = isPassportNumberValid
+        validationFatherNamePassed.value = isFatherNameValid
+        validationPlaceOfBirthPassed.value = isPlaceOfBirthValid
         return isCnicValid && isPasswordValid && isRePassValid && isPassportNumberValid &&
-                isEmailValid && isFullNameValid && isPhoneNumberValid && isMotherNameValid
+                isEmailValid && isFullNameValid && isPhoneNumberValid && isMotherNameValid &&
+                isFatherNameValid && isPlaceOfBirthValid
     }
 
     fun isBeneficiaryCnicValid(cnic: String): Boolean {

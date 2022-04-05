@@ -108,7 +108,8 @@ class VerifyRemitterFragment :
                     otpCode = "",
                     motherMaidenName = registerFlowDataModel.motherMaidenName,
                     placeOfBirth =  registerFlowDataModel.placeOfBirth,
-                    cnicNicopIssueDate = registerFlowDataModel.cnicNicopIssueDate
+                    cnicNicopIssueDate = registerFlowDataModel.cnicNicopIssueDate,
+                    fatherName = registerFlowDataModel.fatherName
                 )
             )
             viewModel.verifyReferenceNumber(
