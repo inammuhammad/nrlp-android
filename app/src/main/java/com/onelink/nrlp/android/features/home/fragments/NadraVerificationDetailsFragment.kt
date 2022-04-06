@@ -70,10 +70,12 @@ class NadraVerificationDetailsFragment :
     private fun initListeners() {
         binding.btnConfirm.setOnClickListener {
             //showLogoutConfirmationDialog()
-            if(viewModel.validationsPassed(
+            if(viewModel.validateNadraVerification(
                     binding.etFullName.text.toString(),
                     binding.etMotherMaidenName.text.toString(),
-                    binding.etCnicNicopIssuanceDate.text.toString())
+                    binding.etCnicNicopIssuanceDate.text.toString(),
+                    binding.etPlaceOfBirth.text.toString()
+                )
             ) {
                 oneLinkProgressDialog.showProgressDialog(context)
                 viewModel.updateNadraDetails(
@@ -273,7 +275,7 @@ class NadraVerificationDetailsFragment :
         var isValid = true
         binding.apply {
             if(etFullName.text.isNullOrEmpty() || etMotherMaidenName.text.isNullOrEmpty() ||
-                   etCnicNicopIssuanceDate.text.isNullOrEmpty() || tvPlaceOfBirth.text.isNullOrEmpty() )
+                   etCnicNicopIssuanceDate.text.isNullOrEmpty() || etPlaceOfBirth.text.isNullOrEmpty() )
                 isValid = false
             binding.btnConfirm.isEnabled=isValid
 

@@ -142,14 +142,18 @@ open class ReceiverDetailsViewModel @Inject constructor(private val receiverRepo
     fun checkMotherMaidenNameValidation(string: String) =
         string.isEmpty() || ValidationUtils.isNameValid(string)
 
-    fun validationsPassedCnicReceiver(cnic: String, name: String, motherName: String): Boolean {
+    fun validationsPassedCnicReceiver(
+        cnic: String, name: String, motherName: String, placeOfBirth: String
+    ): Boolean {
         val isCnicValid: Boolean = checkCnicValidation(cnic)
         val isNameValid: Boolean = checkAliasValidation(name)
         val isMotherMaidenNameValid: Boolean = checkMotherMaidenNameValidation(motherName)
+        val isPlaceOfBirthValid: Boolean = checkMotherMaidenNameValidation(placeOfBirth)
         validationCnicPassed.value = isCnicValid
         validationAliasPassed.value = isNameValid
         validationMotherMaidenPassed.value = isMotherMaidenNameValid
-        return isCnicValid && isNameValid && isMotherMaidenNameValid
+        validationPlaceOfBirthPassed.value = isPlaceOfBirthValid
+        return isCnicValid && isNameValid && isMotherMaidenNameValid && isPlaceOfBirthValid
     }
 
     fun validationsPassedIbanReceiver(
@@ -166,6 +170,6 @@ open class ReceiverDetailsViewModel @Inject constructor(private val receiverRepo
         validationAliasPassed.value = isNameValid
         validationMotherMaidenPassed.value = isMotherMaidenNameValid
         validationPlaceOfBirthPassed.value = isPlaceOfBirthValid
-        return isCnicValid && isIbanValid && isNameValid && isMotherMaidenNameValid
+        return isCnicValid && isIbanValid && isNameValid && isMotherMaidenNameValid && isPlaceOfBirthValid
     }
 }

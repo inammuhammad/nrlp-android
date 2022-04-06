@@ -108,6 +108,20 @@ class HomeFragmentViewModel @Inject constructor(private val homeRepo: HomeRepo) 
         return  isFullNameValid &&  isMotherNameValid
     }
 
+    fun validateNadraVerification(
+        fullName: String, motherName: String, cnicIssueDate: String, placeOfBirth: String,
+    ): Boolean{
+        val isDateOfIssueValid: Boolean = checkCnicDateIssueValid(cnicIssueDate)
+        val isFullNameValid: Boolean = checkFullNameValidation(fullName)
+        val isMotherNameValid: Boolean = checkMotherNameValidation(motherName)
+        val isPlaceOfBirthValid: Boolean = checkMotherNameValidation(placeOfBirth)
+        validationCnicNicopIssuanceDatePassed.value = isDateOfIssueValid
+        validationFullNamePassed.value = isFullNameValid
+        validationMotherMaidenNamePassed.value = isMotherNameValid
+        validationPlaceOfBirthPassed.value = isPlaceOfBirthValid
+        return  isFullNameValid &&  isMotherNameValid && isPlaceOfBirthValid
+    }
+
     fun updateNadraDetails(
         motherMaidenName: String,
         placeOfBirth: String,

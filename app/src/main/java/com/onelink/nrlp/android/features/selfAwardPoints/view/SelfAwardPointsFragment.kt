@@ -1,8 +1,12 @@
 package com.onelink.nrlp.android.features.selfAwardPoints.view
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.text.Editable
+import android.text.Selection
 import android.text.Spanned
+import android.text.TextWatcher
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -30,6 +34,7 @@ import com.onelink.nrlp.android.utils.setOnSingleClickListener
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_receiver_details.*
 import java.util.*
+import java.util.regex.Pattern
 import javax.inject.Inject
 
 
@@ -192,6 +197,90 @@ class SelfAwardPointsFragment :
             //showWarningDialog(getString(R.string.remittance_date_help))
             showGeneralAlertDialog(this,"SelfAward",getString(R.string.remittance_account_cnic_number_help))
         }
+
+        binding.etCnicAccountNumber.addTextChangedListener(object : TextWatcher {
+            @SuppressLint("SetTextI18n")
+            override fun afterTextChanged(s: Editable?) {
+                val regex1 = "^\\d{13,}$"
+                val regex2 = "^\\d{5}-\\d{8,}$"
+                val regex3 = "^[0-9-]{15}$"
+                val regex4 = "^\\d{5}-\\d{7}-\\d$"
+                val regex5 = "^\\d{12}-\\d"
+                val inputString = s.toString()
+                if (Pattern.matches(regex1, inputString)) {
+                    binding.etCnicAccountNumber.setText(
+                        inputString.substring(0, 5) + "-" + inputString.substring(5, 12) +
+                                inputString.substring(12, 13)
+                    )
+                    binding.etCnicAccountNumber.setSelection(15)
+                } else if (Pattern.matches(regex2, inputString)) {
+                    binding.etCnicAccountNumber.setText(
+                        inputString.substring(0, 13) + "-" + inputString.substring(
+                            13,
+                            14
+                        )
+                    )
+                    binding.etCnicAccountNumber.setSelection(15)
+                } else if (Pattern.matches(regex3, inputString) && !Pattern.matches(
+                        regex4,
+                        inputString
+                    )
+                ) {
+                    val newS = inputString.replace("-".toRegex(), "")
+                    binding.etCnicAccountNumber.setText(
+                        newS.substring(0, 5) + "-" + newS.substring(
+                            5,
+                            12
+                        ) + newS.substring(12, 13)
+                    )
+
+                    Selection.setSelection(binding.etCnicAccountNumber.text, 15)
+                } else if (Pattern.matches(regex5, inputString)) {
+                    binding.etCnicAccountNumber.setText(
+                        inputString.substring(
+                            0,
+                            5
+                        ) + "-" + inputString.substring(5)
+                    )
+                    binding.etCnicAccountNumber.setSelection(inputString.length + 1)
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            @SuppressLint("SetTextI18n")
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+                binding.etCnicAccountNumber.removeTextChangedListener(this)
+                val inputString = s.toString()
+                val editTextEditable: Editable? = binding.etCnicAccountNumber.text
+                val editTextString = editTextEditable.toString()
+                if (inputString.isNotEmpty() && editTextString.isNotEmpty() && before < count) {
+                    val regex1 = "^\\d{5}$"
+                    val regex2 = "^\\d{5}-\\d{7}$"
+                    val regex3 = "^\\d{5,12}$"
+                    //viewModel.cnicNotEmpty.postValue(true)
+                    when {
+                        Pattern.matches(regex1, inputString)
+                                || Pattern.matches(regex2, inputString) -> {
+                            binding.etCnicAccountNumber.setText("$inputString-")
+                            binding.etCnicAccountNumber.setSelection(inputString.length + 1)
+                        }
+                        Pattern.matches(regex3, inputString) -> {
+                            binding.etCnicAccountNumber.setText(
+                                inputString.substring(
+                                    0,
+                                    5
+                                ) + "-" + inputString.substring(5)
+                            )
+                            binding.etCnicAccountNumber.setSelection(inputString.length + 1)
+                        }
+                    }
+                }
+                binding.etCnicAccountNumber.addTextChangedListener(this)
+            }
+        })
     }
     private fun initObservers() {
         viewModel.observeSafeAwardValidTransaction().observe(this, Observer { response ->

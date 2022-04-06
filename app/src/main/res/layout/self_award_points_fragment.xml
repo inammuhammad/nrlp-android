@@ -310,7 +310,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/cnic_nicop_hint"
                     android:imeOptions="actionDone|flagForceAscii"
-                    android:maxLength="25"
+                    android:maxLength="15"
                     android:maxLines="1"
                     android:text="@={viewModel.cnicAccountNumber}" />
             </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>

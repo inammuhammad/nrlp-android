@@ -8,6 +8,7 @@ const val AGENT_CODE_LENGTH = 6
 object ValidationUtils {
 
     private const val STRING_CNIC_VALIDATOR_REGEX = "^[0-9]{5}-[0-9]{7}-[0-9]$"
+    private const val IBAN_DIGITS_VALIDATOR_REGEX = "^.*\\d{10}\$"
     private const val STRING_CNIC_DATE_VALIDATOR_REGEX = "^[1-9]{2}-[a-zA-Z]{3}-[0-9]{2}$"
 
     // const val REGEX_STRING_NOT_EMPTY = "(\\S)+"
@@ -119,4 +120,19 @@ object ValidationUtils {
     fun isPassportNumberValid(string: String): Boolean {
         return string.length >= 9
     }
+
+    fun isSelfIbanAccountNumberValid(string: String): Boolean {
+        return string.isNotEmpty() && string.length in 10..24 && Pattern.matches(
+            IBAN_DIGITS_VALIDATOR_REGEX,
+            string
+        ) //checkLastDigits(string)
+    }
+
+    /*private fun checkLastDigits(string: String): Boolean {
+        var iban = string.reversed()
+        val lastDigits = iban.substring(0, 10)
+        if(lastDigits.isDigitsOnly()){
+
+        }
+    }*/
 }

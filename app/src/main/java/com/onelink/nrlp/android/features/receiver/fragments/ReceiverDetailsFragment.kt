@@ -414,7 +414,8 @@ class ReceiverDetailsFragment :
             if(viewModel.validationsPassedCnicReceiver(
                     binding.eTCnicNumber.text.toString(),
                     binding.etAlias.text.toString(),
-                    binding.etMotherMaidenName.text.toString()
+                    binding.etMotherMaidenName.text.toString(),
+                    binding.etPlaceOfBirth.text.toString()
                 ))
                 makeReceiverAddCall()
         }

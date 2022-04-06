@@ -59,14 +59,14 @@ class SelfAwardPointsFragmentViewModel @Inject constructor(private val selfAward
 
     val validCnicAccountNumber = MediatorLiveData<Boolean>().apply {
         addSource(cnicAccountNumber) {
-            val valid = ValidationUtils.isSelfAwardBeneficiaryAccountValid(it)
+            val valid = ValidationUtils.isCNICValid(it)
             value = valid
         }
     }
 
     val validIbanAccountNumber = MediatorLiveData<Boolean>().apply {
         addSource(accountIbanNumber) {
-            val valid = ValidationUtils.isIbanAccountNumberValid(it)
+            val valid = ValidationUtils.isSelfIbanAccountNumberValid(it)
             value = valid
         }
     }
