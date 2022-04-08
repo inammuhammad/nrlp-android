@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.onelink.nrlp.android.R
 import com.onelink.nrlp.android.core.BaseActivity
 import com.onelink.nrlp.android.databinding.ActivityRedeemSuccessBinding
+import com.onelink.nrlp.android.features.rate.view.RateActivity
 import com.onelink.nrlp.android.features.redeem.viewmodels.RedeemSuccessViewModel
 import com.onelink.nrlp.android.utils.IntentConstants
 import com.onelink.nrlp.android.utils.getCurrentDate
@@ -271,7 +272,9 @@ class RedeemSuccessActivity : BaseActivity<ActivityRedeemSuccessBinding, RedeemS
         binding.textViewReceiptNumber.text = receiptNumberString
 
         binding.buttonDone.setOnClickListener {
-            finish()
+            //finish()
+            val intent = RateActivity.newRateIntent(this)
+            startActivity(intent)
         }
     }
 

@@ -19,6 +19,7 @@ import com.onelink.nrlp.android.features.managePoints.view.TransferPointsSuccess
 import com.onelink.nrlp.android.features.nrlpBenefits.view.NrlpBenefitsActivity
 import com.onelink.nrlp.android.features.profile.view.ProfileActivity
 import com.onelink.nrlp.android.features.profile.view.ProfileUpdateSuccessActivity
+import com.onelink.nrlp.android.features.rate.view.RateActivity
 import com.onelink.nrlp.android.features.receiver.view.ReceiverActivity
 import com.onelink.nrlp.android.features.redeem.view.RedeemActivity
 import com.onelink.nrlp.android.features.redeem.view.RedeemSuccessActivity
@@ -68,6 +69,10 @@ abstract class ActivityBuilder {
     @ActivityScope
     @ContributesAndroidInjector
     internal abstract fun bindSelfAwardPointsSuccessActivity(): SelfAwardPointsSuccessActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [SelfAwardSuccessFragmentsBuilder::class])
+    internal abstract fun bindRateActivity(): RateActivity
 
     @ActivityScope
     @ContributesAndroidInjector(modules = [BeneficiaryFragmentsBuilder::class])

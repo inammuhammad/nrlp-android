@@ -16,8 +16,10 @@ import com.onelink.nrlp.android.data.local.UserData
 import com.onelink.nrlp.android.databinding.FragmentRedemptionSlicPolicyBinding
 import com.onelink.nrlp.android.features.redeem.model.RedeemCategoryModel
 import com.onelink.nrlp.android.features.redeem.model.RedeemPartnerModel
+import com.onelink.nrlp.android.features.redeem.view.RedeemSuccessActivity
 import com.onelink.nrlp.android.features.redeem.viewmodels.RedeemSharedViewModel
 import com.onelink.nrlp.android.features.redeem.viewmodels.RedemptionSLICPolicyViewModel
+import com.onelink.nrlp.android.features.selfAwardPoints.view.SelfAwardPointsSuccessActivity
 import com.onelink.nrlp.android.utils.*
 import com.onelink.nrlp.android.utils.dialogs.OneLinkAlertAmountDialogFragment
 import com.onelink.nrlp.android.utils.dialogs.OneLinkAlertDialogsFragment
@@ -82,7 +84,27 @@ class RedemptionSLICPolicyFragment : BaseFragment<RedemptionSLICPolicyViewModel,
             redeemSharedViewModel = ViewModelProvider(it).get(RedeemSharedViewModel::class.java)
         }
         binding.btnPositive.setOnClickListener {
-            if (viewModel.checkVoucherValidation(binding.etPolicy.text.toString())) {
+            val intent = context?.let { it1 ->
+                RedeemSuccessActivity.newRedeemSuccessIntent(
+                    it1
+                )
+            }
+            intent?.putExtra(
+                IntentConstants.TRANSACTION_ID, "454"
+            )
+            intent?.putExtra(
+                IntentConstants.PARTNER_NAME, "45"
+            )
+            intent?.putExtra(
+                IntentConstants.REDEEM_POINTS,
+                123456789123456789.toBigInteger()
+            )
+            intent?.putExtra(
+                IntentConstants.PSID, "12"
+            )
+            startActivity(intent)
+            activity?.finish()
+            /*if (viewModel.checkVoucherValidation(binding.etPolicy.text.toString())) {
                 binding.tilVoucher.clearError()
                 viewModel.makeInitializeRedemptionCall(redeemPartnerModel.partnerName,
                     redeemPartnerModel.partnerName,
@@ -90,7 +112,7 @@ class RedemptionSLICPolicyFragment : BaseFragment<RedemptionSLICPolicyViewModel,
                     binding.etPolicy.text.toString())
             } else {
                 binding.tilVoucher.error = "Please enter valid Policy No"
-            }
+            }*/
         }
         binding.btnNegative.setOnClickListener {
             fragmentHelper.onBack()

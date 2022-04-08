@@ -30,6 +30,7 @@ import com.onelink.nrlp.android.features.nrlpBenefits.viewmodel.NrlpBenefitsFrag
 import com.onelink.nrlp.android.features.nrlpBenefits.viewmodel.NrlpBenefitsViewModel
 import com.onelink.nrlp.android.features.nrlpBenefits.viewmodel.NrlpPartnersFragmentViewModel
 import com.onelink.nrlp.android.features.profile.viewmodel.*
+import com.onelink.nrlp.android.features.rate.viewmodels.RateViewModel
 import com.onelink.nrlp.android.features.receiver.viewmodel.ManageReceiverViewModel
 import com.onelink.nrlp.android.features.receiver.viewmodel.ReceiverDetailsViewModel
 import com.onelink.nrlp.android.features.receiver.viewmodel.ReceiverSharedViewModel
@@ -449,5 +450,10 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(SelectBankFragmentViewModel::class)
     internal abstract fun selectBankFragmentViewModel(viewModel: SelectBankFragmentViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(RateViewModel::class)
+    internal abstract fun rateViewModel(viewModel: RateViewModel): ViewModel
 }
 
