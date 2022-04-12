@@ -128,6 +128,10 @@ object ValidationUtils {
         ) //checkLastDigits(string)
     }
 
+    fun isAmountValid(string: String): Boolean {
+        return string.isNotEmpty() && string.toInt() > 0
+    }
+
     /*private fun checkLastDigits(string: String): Boolean {
         var iban = string.reversed()
         val lastDigits = iban.substring(0, 10)

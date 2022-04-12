@@ -82,6 +82,7 @@
     <string name="beneficiary_verification_title">Beneficiary Verification</string>
     <string name="reference_number">Reference Number/TT Number</string>
     <string name="beneficiary_account_number_cnic">Beneficiary CNIC/POC</string>
+    <string name="beneficiary_account_number_cnic_complaint">Beneficiary Account Number/IBAN/CNIC/POC</string>
     <string name="beneficiary_account_number">Beneficiary Account Number/IBAN</string>
     <string name="transaction_amount">Transaction Amount</string>
     <string name="curPassword">Enter Old Password</string>
@@ -443,4 +444,8 @@
     <string name="hint_place_of_birth" translatable="false">Islamabad</string>
     <string name="father_name">Father Name *</string>
     <string name="remittance_transaction_type">Remittance Transaction Type</string>
+    <string name="good" translatable="false">Good</string>
+    <string name="satisfied" translatable="false">Satisfactory</string>
+    <string name="unsatisfied" translatable="false">Unsatisfactory</string>
+    <string name="rate_redemption_experience">Rate Your Redemption Experience</string>
 </resources>

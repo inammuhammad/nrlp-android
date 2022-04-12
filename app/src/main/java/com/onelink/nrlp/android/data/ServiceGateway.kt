@@ -22,6 +22,7 @@ import com.onelink.nrlp.android.features.managePoints.model.TransferPointsRespon
 import com.onelink.nrlp.android.features.nrlpBenefits.model.NrlpBenefitsResponseModel
 import com.onelink.nrlp.android.features.nrlpBenefits.model.NrlpPartnerResponseModel
 import com.onelink.nrlp.android.features.profile.models.ProfileResponseModel
+import com.onelink.nrlp.android.features.rate.model.RateRedemptionRequestModel
 import com.onelink.nrlp.android.features.receiver.models.AddReceiverRequestModel
 import com.onelink.nrlp.android.features.receiver.models.BanksListResponse
 import com.onelink.nrlp.android.features.receiver.models.DeleteReceiverRequestModel
@@ -239,4 +240,7 @@ interface ServiceGateway {
 
     @GET("rr-bank-and-exchange/")
     fun getBanks(): Single<Response<com.onelink.nrlp.android.features.select.bank.model.BanksListResponse>>
+
+    @POST("nrlp-redemption-rating/")
+    fun rateRedemption(@Body body: RateRedemptionRequestModel): Single<Response<GeneralMessageResponseModel>>
 }

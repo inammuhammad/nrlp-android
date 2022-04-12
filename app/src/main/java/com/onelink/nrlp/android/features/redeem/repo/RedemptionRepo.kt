@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.onelink.nrlp.android.core.BaseResponse
 import com.onelink.nrlp.android.data.NetworkHelper
 import com.onelink.nrlp.android.data.ServiceGateway
+import com.onelink.nrlp.android.features.rate.model.RateRedemptionRequestModel
 import com.onelink.nrlp.android.features.redeem.model.*
 import com.onelink.nrlp.android.models.GeneralMessageResponseModel
 import javax.inject.Inject
@@ -21,6 +22,7 @@ open class RedemptionRepo @Inject constructor(
     val verifyRedeemResendOTPResponse = MutableLiveData<BaseResponse<GeneralMessageResponseModel>>()
     val redeemSuccessResponse = MutableLiveData<BaseResponse<RedeemSuccessResponseModel>>()
     val redeemFBRSuccessResponse = MutableLiveData<BaseResponse<RedeemFBRSuccessResponseModel>>()
+    val rateRedemptionResponse = MutableLiveData<BaseResponse<GeneralMessageResponseModel>>()
 
     fun getRedeemPartner() {
         networkHelper.serviceCall(serviceGateway.getRedemptionPartners()).observeForever {
@@ -101,6 +103,13 @@ open class RedemptionRepo @Inject constructor(
             }
     }
 
+    fun rateRedemption(rateRedemptionRequestModel: RateRedemptionRequestModel) {
+        networkHelper.serviceCall(serviceGateway.rateRedemption(rateRedemptionRequestModel))
+            .observeForever {
+                rateRedemptionResponse.value = it
+            }
+    }
+
     fun observeInitializeRedemption() =
         initializeRedeemResponse as LiveData<BaseResponse<RedeemInitializeResponseModel>>
 
@@ -149,6 +158,9 @@ open class RedemptionRepo @Inject constructor(
 
     fun observeRedeemFBRSuccess() =
         redeemFBRSuccessResponse as LiveData<BaseResponse<RedeemFBRSuccessResponseModel>>
+
+    fun observeRateRedemptionSuccess() =
+        rateRedemptionResponse as LiveData<BaseResponse<GeneralMessageResponseModel>>
 
     fun onClear() {
         networkHelper.dispose()

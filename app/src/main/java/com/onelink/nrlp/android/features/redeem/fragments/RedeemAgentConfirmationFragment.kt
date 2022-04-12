@@ -131,7 +131,7 @@ class RedeemAgentConfirmationFragment :
             when (response.status) {
                 Status.SUCCESS -> {
                     oneLinkProgressDialog.hideProgressDialog()
-                    response.data?.let {
+                    response.data?.let { response ->
                         activity?.let {
                             val intent = RedeemSuccessActivity.newRedeemSuccessIntent(it)
                             intent.putExtra(
@@ -142,6 +142,9 @@ class RedeemAgentConfirmationFragment :
                             )
                             intent.putExtra(
                                 IntentConstants.REDEEM_POINTS, redeemCategoryModel.points
+                            )
+                            intent.putExtra(
+                                IntentConstants.AUTH_ID, response.data.authId
                             )
                             startActivity(intent)
                             it.finish()

@@ -106,6 +106,7 @@
     <string name="beneficiary_verification_title">وصول کنندہ کی تصدیق</string>
     <string name="reference_number">حوالہ نمبر</string>
     <string name="beneficiary_account_number_cnic">وصول کنندہ کا قومی شناختی کارڈ نمبر</string>
+    <string name="beneficiary_account_number_cnic_complaint">وصول کنندہ کا اکاونٹ نمبر/ بین الاقوامی بینک اکاؤنٹ نمبر/قومی شناختی کارڈ نمبر</string>
     <string name="beneficiary_account_number">براہ کرم صحیح اکاؤنٹ نمبر/بین الاقوامی بینک اکاؤنٹ نمبر درج کریں</string>
     <string name="transaction_amount">ٹرانزیکشن  کی رقم( پاکستانی روپے)</string>
     <string name="curPassword">پرانا پاس ورڈ درج کریں</string>

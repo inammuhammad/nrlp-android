@@ -185,6 +185,7 @@ class RegisterAccountFragmentViewModel @Inject constructor(
                     motherMaidenName = registerFlowDataModel.motherMaidenName,
                     placeOfBirth = registerFlowDataModel.placeOfBirth,
                     cnicNicopIssueDate = registerFlowDataModel.cnicNicopIssueDate,
+                    fatherName = registerFlowDataModel.fatherName,
                     sotp = "1"
                 )
             )

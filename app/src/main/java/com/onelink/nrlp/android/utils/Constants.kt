@@ -51,6 +51,7 @@ object IntentConstants {
     const val LOGIN_CREDENTIALS_PARCELABLE = "login_credentials_parcelable"
     const val IS_FROM_SPLASH = "is_from_splash"
     const val SELF_AWARD_VERIFY_OTP_Message = "self_award_verify_otp_message"
+    const val AUTH_ID = "auth_id"
 }
 
 object LoyaltyCardConstants {
@@ -112,6 +113,7 @@ object SelfAwardRequestConstants{
     const val Beneficiary_ACCOUNT_NUMBER="beneficiary_account_number"
     const val Self_Award_Row_ID="sp_respone_row_id"
     const val Transaction_Date="transaction_date"
+    const val Transaction_TYPE="transaction_type"
 }
 
 object ComplaintRequestModelConstants{

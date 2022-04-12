@@ -312,6 +312,8 @@
                     android:imeOptions="actionDone|flagForceAscii"
                     android:maxLength="15"
                     android:maxLines="1"
+                    android:inputType="number"
+                    android:digits="0123456789"
                     android:text="@={viewModel.cnicAccountNumber}" />
             </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
 

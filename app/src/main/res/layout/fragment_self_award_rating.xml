@@ -10,17 +10,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".features.rate.fragments.SelfAwardRatingFragment">
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvRateExperience"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/rate_redemption_experience"
+        style="@style/TextViewHeading"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/appCompatImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_50sdp"
+        android:layout_marginTop="@dimen/_80sdp"
         android:src="@drawable/ic_success_img"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/tvRateExperience"/>
 
     <RadioGroup
+        android:id="@+id/rgRating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,19 +44,22 @@
             android:id="@+id/radioButtonGood"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="RadioButton" />
+            android:padding="@dimen/_10sdp"
+            android:text="@string/good" />
 
         <RadioButton
             android:id="@+id/radioButtonSatisfactory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="RadioButton" />
+            android:padding="@dimen/_10sdp"
+            android:text="@string/satisfied" />
 
         <RadioButton
             android:id="@+id/radioButtonUnsatisfactory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="RadioButton" />
+            android:padding="@dimen/_10sdp"
+            android:text="@string/unsatisfied" />
     </RadioGroup>
 
 

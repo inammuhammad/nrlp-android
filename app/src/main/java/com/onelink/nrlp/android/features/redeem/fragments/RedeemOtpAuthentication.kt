@@ -233,7 +233,7 @@ class RedeemOtpAuthentication :
             when (response.status) {
                 Status.SUCCESS -> {
                     oneLinkProgressDialog.hideProgressDialog()
-                    response.data?.let {
+                    response.data?.let { response ->
                         activity?.let {
                            /* if (redeemPartnerModel.partnerName == "NADRA" ||
                                 redeemPartnerModel.partnerName == "Passport" ||
@@ -270,6 +270,9 @@ class RedeemOtpAuthentication :
                                 )
                                 intent.putExtra(
                                     IntentConstants.PSID, (redeemSharedViewModel?.psid?.value)
+                                )
+                                intent.putExtra(
+                                    IntentConstants.AUTH_ID, response.authId
                                 )
                                 startActivity(intent)
                                 it.finish()

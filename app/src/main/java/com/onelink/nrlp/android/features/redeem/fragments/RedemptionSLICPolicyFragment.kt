@@ -84,7 +84,7 @@ class RedemptionSLICPolicyFragment : BaseFragment<RedemptionSLICPolicyViewModel,
             redeemSharedViewModel = ViewModelProvider(it).get(RedeemSharedViewModel::class.java)
         }
         binding.btnPositive.setOnClickListener {
-            val intent = context?.let { it1 ->
+            /*val intent = context?.let { it1 ->
                 RedeemSuccessActivity.newRedeemSuccessIntent(
                     it1
                 )
@@ -103,8 +103,8 @@ class RedemptionSLICPolicyFragment : BaseFragment<RedemptionSLICPolicyViewModel,
                 IntentConstants.PSID, "12"
             )
             startActivity(intent)
-            activity?.finish()
-            /*if (viewModel.checkVoucherValidation(binding.etPolicy.text.toString())) {
+            activity?.finish()*/
+            if (viewModel.checkVoucherValidation(binding.etPolicy.text.toString())) {
                 binding.tilVoucher.clearError()
                 viewModel.makeInitializeRedemptionCall(redeemPartnerModel.partnerName,
                     redeemPartnerModel.partnerName,
@@ -112,7 +112,7 @@ class RedemptionSLICPolicyFragment : BaseFragment<RedemptionSLICPolicyViewModel,
                     binding.etPolicy.text.toString())
             } else {
                 binding.tilVoucher.error = "Please enter valid Policy No"
-            }*/
+            }
         }
         binding.btnNegative.setOnClickListener {
             fragmentHelper.onBack()

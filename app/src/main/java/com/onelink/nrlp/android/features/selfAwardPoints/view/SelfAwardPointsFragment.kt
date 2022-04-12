@@ -146,6 +146,10 @@ class SelfAwardPointsFragment :
                     SelfAwardRequestConstants.Transaction_Date,
                 viewModel.remittanceDate.value,
             )
+            selfAwardPointsRequest.addProperty(
+                SelfAwardRequestConstants.Transaction_TYPE,
+                viewModel.transactionType.value,
+            )
 
             selfAwardPointSharedViewModel?.setSelfAwardPointsFlowDataModel(selfAwardPointsRequest)
             viewModel.verifySafeAwardValidTransaction(selfAwardPointsRequest)
@@ -164,15 +168,15 @@ class SelfAwardPointsFragment :
             )
             selfAwardPointsRequest.addProperty(
                 SelfAwardRequestConstants.Beneficiary_NIC_NICOP,
-                binding.etCnicAccountNumber.text.toString(),
-            )
-            selfAwardPointsRequest.addProperty(
-                SelfAwardRequestConstants.Beneficiary_ACCOUNT_NUMBER,
-                binding.etAccountNumber.text.toString()
+                binding.etAccountNumber.text.toString(),
             )
             selfAwardPointsRequest.addProperty(
                 SelfAwardRequestConstants.Transaction_Date,
                 viewModel.remittanceDate.value,
+            )
+            selfAwardPointsRequest.addProperty(
+                SelfAwardRequestConstants.Transaction_TYPE,
+                viewModel.transactionType.value,
             )
 
             selfAwardPointSharedViewModel?.setSelfAwardPointsFlowDataModel(selfAwardPointsRequest)

@@ -8,5 +8,6 @@ data class RedeemSuccessResponseModel(
 )
 
 data class RedeemSuccessDataModel(
-    @SerializedName("transaction_id") val transactionId: String
+    @SerializedName("transaction_id") val transactionId: String,
+    @SerializedName("auth_id") val authId: String
 )

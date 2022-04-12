@@ -137,7 +137,7 @@ constructor(private val complainRepo: ComplainRepo)
         string.isNotEmpty()
 
     fun checkTransactionAmount(string: String) =
-        string.isNotEmpty()
+        ValidationUtils.isAmountValid(string) //string.isNotEmpty()
 
     fun checkNotEmpty(string: String) =
         string.isNotEmpty()

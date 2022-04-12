@@ -12,6 +12,7 @@ import com.onelink.nrlp.android.features.rate.fragments.TransactionRatingFragmen
 import com.onelink.nrlp.android.features.rate.viewmodels.RateViewModel
 import com.onelink.nrlp.android.features.receiver.fragments.AddRemittanceReceiverFragment
 import com.onelink.nrlp.android.features.redeem.view.RedeemSuccessActivity
+import com.onelink.nrlp.android.utils.IntentConstants
 import javax.inject.Inject
 
 class RateActivity : BaseFragmentActivity<ActivityRateBinding, RateViewModel>(RateViewModel::class.java) {
@@ -23,7 +24,10 @@ class RateActivity : BaseFragmentActivity<ActivityRateBinding, RateViewModel>(Ra
 
     override fun getVMFactory(): ViewModelProvider.Factory = viewModelFactory
 
+    var transactionId: String = ""
+
     override fun initViewModel(viewModel: RateViewModel) {
+        transactionId = intent.extras?.get(IntentConstants.TRANSACTION_ID) as String
         initView()
     }
 

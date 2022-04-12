@@ -4,5 +4,6 @@ import com.google.gson.annotations.SerializedName
 
 class RedeemFBRSuccessResponseModel (
     @SerializedName("message") val message: String,
-    @SerializedName("transaction_id") val transactionId: String
+    @SerializedName("transaction_id") val transactionId: String,
+    @SerializedName("auth_id") val authId: String
 )

@@ -38,6 +38,7 @@ class RedeemSuccessActivity : BaseActivity<ActivityRedeemSuccessBinding, RedeemS
         val partnerName = intent.extras?.get(IntentConstants.PARTNER_NAME) as String
         val transactionId = intent.extras?.get(IntentConstants.TRANSACTION_ID) as String
         val redeemPoints = intent.extras?.get(IntentConstants.REDEEM_POINTS) as BigInteger
+        val authId = intent.extras?.get(IntentConstants.AUTH_ID) as String
 
         val date = getCurrentDate()
         if(partnerName == "FBR") {
@@ -268,13 +269,16 @@ class RedeemSuccessActivity : BaseActivity<ActivityRedeemSuccessBinding, RedeemS
         )
         binding.textViewRedeemMessage.text = str
 */
-        val receiptNumberString = String.format(getString(R.string.receipt_number), transactionId)
+        val receiptNumberString = String.format(getString(R.string.receipt_number), authId)
         binding.textViewReceiptNumber.text = receiptNumberString
 
         binding.buttonDone.setOnClickListener {
-            //finish()
             val intent = RateActivity.newRateIntent(this)
+            intent.putExtra(
+                IntentConstants.TRANSACTION_ID, transactionId
+            )
             startActivity(intent)
+            finish()
         }
     }
 
