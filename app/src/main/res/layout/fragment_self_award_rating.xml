@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_80sdp"
-        android:src="@drawable/ic_success_img"
+        android:src="@drawable/ic_rate_redemption"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvRateExperience"/>
@@ -35,8 +35,7 @@
         android:id="@+id/rgRating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/appCompatImageView"
         android:layout_marginTop="@dimen/_40sdp"
         app:layout_constraintTop_toBottomOf="@+id/appCompatImageView">
 
@@ -44,6 +43,7 @@
             android:id="@+id/radioButtonGood"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/green"
             android:padding="@dimen/_10sdp"
             android:text="@string/good" />
 
@@ -51,6 +51,7 @@
             android:id="@+id/radioButtonSatisfactory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/green"
             android:padding="@dimen/_10sdp"
             android:text="@string/satisfied" />
 
@@ -58,6 +59,7 @@
             android:id="@+id/radioButtonUnsatisfactory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/green"
             android:padding="@dimen/_10sdp"
             android:text="@string/unsatisfied" />
     </RadioGroup>

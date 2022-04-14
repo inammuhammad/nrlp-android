@@ -1,9 +1,7 @@
 package com.onelink.nrlp.android.features.rate.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.RadioGroup
-import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.onelink.nrlp.android.R
@@ -13,8 +11,6 @@ import com.onelink.nrlp.android.databinding.FragmentSelfAwardRatingBinding
 import com.onelink.nrlp.android.features.rate.model.RateRedemptionRequestModel
 import com.onelink.nrlp.android.features.rate.view.RateActivity
 import com.onelink.nrlp.android.features.rate.viewmodels.RateViewModel
-import com.onelink.nrlp.android.features.redeem.viewmodels.RedemptionSLICPolicyViewModel
-import com.onelink.nrlp.android.features.selfAwardPoints.viewmodel.SelfAwardPointsFragmentViewModel
 import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
@@ -72,7 +68,6 @@ class TransactionRatingFragment : BaseFragment<RateViewModel, FragmentSelfAwardR
     }
 
     private fun makeRatingCall(group: RadioGroup, index: Int){
-        Log.d("index", index.toString())
         var comments = ""
         when(index) {
             R.id.radioButtonGood -> {
