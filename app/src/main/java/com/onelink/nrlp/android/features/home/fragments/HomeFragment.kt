@@ -14,6 +14,7 @@ import com.onelink.nrlp.android.core.BaseFragment
 import com.onelink.nrlp.android.core.Status
 import com.onelink.nrlp.android.data.local.UserData
 import androidx.lifecycle.Observer
+import com.google.android.play.core.review.testing.FakeReviewManager
 import com.onelink.nrlp.android.data.local.UserModel
 import com.onelink.nrlp.android.databinding.HomeFragmentBinding
 import com.onelink.nrlp.android.features.home.view.HomeActivity
@@ -26,6 +27,7 @@ import com.onelink.nrlp.android.utils.view.hometiles.HomeTileModel
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.ly_loyalty_level_title.view.*
 import java.lang.Exception
+import java.time.Duration
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -87,6 +89,7 @@ open class HomeFragment :
         viewModel.observeUserProfile().observe(this, Observer { response ->
             if (response.status == Status.SUCCESS) {
                 oneLinkProgressDialog.hideProgressDialog()
+                //(activity as HomeActivity).launchInAppReview()
                 showUserData()
             }
         })

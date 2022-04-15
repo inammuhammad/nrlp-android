@@ -8,6 +8,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.KeyEvent
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
@@ -15,6 +16,8 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.play.core.review.ReviewManagerFactory
+import com.google.android.play.core.review.testing.FakeReviewManager
 import com.onelink.nrlp.android.BuildConfig
 import com.onelink.nrlp.android.OneLinkApplication
 import com.onelink.nrlp.android.R
@@ -243,6 +246,23 @@ class HomeActivity :
             binding.drawerLayout.closeDrawer(GravityCompat.START)
         } else {
             binding.drawerLayout.openDrawer(GravityCompat.START)
+        }
+    }
+
+    fun launchInAppReview(){
+        val manager = ReviewManagerFactory.create(this)
+        val request = manager.requestReviewFlow()
+        request.addOnCompleteListener{ task ->
+            if(task.isSuccessful){
+                val reviewInfo = task.result
+                val flow = manager.launchReviewFlow(this, reviewInfo)
+                if (flow != null) {
+                    flow.addOnCompleteListener { _ ->
+                        Toast.makeText(this, "Review successful", Toast.LENGTH_LONG)
+                    }
+                }
+            }
+            else {}
         }
     }
 

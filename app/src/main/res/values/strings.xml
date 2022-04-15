@@ -38,7 +38,7 @@
     <string name="remitter_trans_ref_no">Remitter Transaction Reference No./TT No.</string>
     <string name="remittance_amount">Remittance Amount (In PKR)</string>
     <string name="remittance_amount_help">Enter exact amount as per your transaction receipt</string>
-    <string name="remittance_date_help">Enter date on which transaction is made</string>
+    <string name="remittance_date_help">Enter date on which remittance is sent</string>
     <string name="remittance_account_cnic_number_help">Please enter following details of remittance receiver in Pakistan  \n1. In case of receiving cash-CNIC \n2. In case of credits in bank account-complete bank account no.</string>
     <string name="remittance_date">Date of Remittance</string>
 

@@ -18,6 +18,7 @@ class RedemptionOPFVoucherViewModel @Inject constructor(private val redPartnerRe
 
     fun checkVoucherValidation(string: String) : Boolean {
         return string.isNotEmpty() && ValidationUtils.isOPFPSIDLengthValid(string)
+                && ValidationUtils.isAliasValid(string)
     }
 
     fun compareRedeemAmount(redeemablePKR: Double, redeemAmount: Double) : Boolean =

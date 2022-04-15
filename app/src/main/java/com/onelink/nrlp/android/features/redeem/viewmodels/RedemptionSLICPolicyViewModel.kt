@@ -25,7 +25,7 @@ class RedemptionSLICPolicyViewModel  @Inject constructor(private val redPartnerR
     fun observeInitializeRedemptionOTP() = redPartnerRepo.observeInitializeRedemptionFBROTP()
 
     fun checkVoucherValidation(string: String) : Boolean {
-        return string.isNotEmpty() && ValidationUtils.isPSIDLengthValid(string)
+        return string.isNotEmpty() && ValidationUtils.isPSIDLengthValid(string) && ValidationUtils.isAliasValid(string)
     }
 
     fun compareRedeemAmount(redeemablePKR: Double, redeemAmount: Double) : Boolean =
