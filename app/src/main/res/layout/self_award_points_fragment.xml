@@ -130,10 +130,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:enabled="true"
-                    android:gravity="start"
                     android:hint="@string/amount_hint"
                     android:imeOptions="actionDone|flagForceAscii"
-                    android:inputType="numberDecimal"
+                    android:inputType="number"
                     android:text="@={viewModel.transactionAmount}" />
             </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
 
@@ -286,12 +285,12 @@
                 android:layout_width="@dimen/_15sdp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:visibility="gone"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:visibility="visible"
                 android:src="@drawable/ic_baseline_info_24"
                 app:layout_constraintHorizontal_bias="0"
-                app:layout_constraintStart_toEndOf="@+id/tvCnicAccountNumber"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerLy" />
+                app:layout_constraintStart_toEndOf="@+id/tvTransactionType"
+                app:layout_constraintTop_toBottomOf="@+id/lyRemittanceDate" />
 
             <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
                 android:id="@+id/til_cnic_account_number"
@@ -346,7 +345,7 @@
             style="@style/ButtonTheme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:enabled="@{viewModel.validReferenceNumber &amp;&amp; viewModel.validTransactionAmount &amp;&amp; viewModel.validCnicAccountNumber &amp;&amp; viewModel.remittanceDateNotEmpty}"
+            android:enabled="@{viewModel.referenceNumberNotEmpty &amp;&amp; viewModel.transactionAmountNotEmpty &amp;&amp; viewModel.remittanceDateNotEmpty &amp;&amp; viewModel.cnicNumberNotEmpty}"
             android:text="@string/next"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintVertical_bias="1" />
@@ -356,7 +355,7 @@
             style="@style/ButtonTheme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:enabled="@{viewModel.validReferenceNumber &amp;&amp; viewModel.validTransactionAmount &amp;&amp; viewModel.validIbanAccountNumber &amp;&amp; viewModel.remittanceDateNotEmpty}"
+            android:enabled="@{viewModel.referenceNumberNotEmpty &amp;&amp; viewModel.transactionAmountNotEmpty &amp;&amp; viewModel.remittanceDateNotEmpty &amp;&amp; viewModel.accountNumberNotEmpty}"
             android:text="@string/next"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintVertical_bias="1" />

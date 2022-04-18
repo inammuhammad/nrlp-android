@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     android:focusable="true"
     android:clickable="true"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".features.rate.fragments.SelfAwardRatingFragment">
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -31,12 +31,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvRateExperience"/>
 
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:progressTint="@color/yellow"
+        android:stepSize="0.5"
+        app:layout_constraintTop_toBottomOf="@id/appCompatImageView"
+        app:layout_constraintStart_toStartOf="@id/appCompatImageView"
+        app:layout_constraintEnd_toEndOf="@id/appCompatImageView"
+        />
+
     <RadioGroup
         android:id="@+id/rgRating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/appCompatImageView"
         android:layout_marginTop="@dimen/_40sdp"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@+id/appCompatImageView">
 
         <RadioButton

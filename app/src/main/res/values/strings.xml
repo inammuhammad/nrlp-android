@@ -417,7 +417,7 @@
     <string name="delete_receiver">Delete Receiver</string>
     <string name="please_enter_receiver_info">Please enter Receiver information</string>
     <string name="error_invalid_bank_name">Please enter a valid Bank Name</string>
-    <string name="error_invalid_account_number">Please enter a valid Account Number</string>
+    <string name="error_invalid_account_number">Please enter a valid Account Number/IBAN</string>
     <string name="search_bank">Search Bank</string>
     <string name="error_new_version">Please update your application version to proceed</string>
     <string name="proceed_to_playstore">Proceed to PlayStore</string>
@@ -448,4 +448,5 @@
     <string name="satisfied" translatable="false">Satisfactory</string>
     <string name="unsatisfied" translatable="false">Unsatisfactory</string>
     <string name="rate_redemption_experience">Rate Your Redemption Experience</string>
+    <string name="error_invalid_reference_number">Please enter a valid Reference/TT Number</string>
 </resources>

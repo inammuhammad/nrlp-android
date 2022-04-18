@@ -1,7 +1,7 @@
 package com.onelink.nrlp.android.features.rate.fragments
 
 import android.os.Bundle
-import android.widget.RadioGroup
+import android.widget.RatingBar.OnRatingBarChangeListener
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.onelink.nrlp.android.R
@@ -33,7 +33,7 @@ class TransactionRatingFragment : BaseFragment<RateViewModel, FragmentSelfAwardR
     override fun getLayoutRes() = R.layout.fragment_self_award_rating
 
     override fun getViewM(): RateViewModel =
-        ViewModelProvider(this,viewModelFactory).get(RateViewModel::class.java)
+        ViewModelProvider(this, viewModelFactory).get(RateViewModel::class.java)
 
     override fun init(savedInstanceState: Bundle?){
         super.init(savedInstanceState)
@@ -44,12 +44,17 @@ class TransactionRatingFragment : BaseFragment<RateViewModel, FragmentSelfAwardR
     }
 
     private fun initListeners(){
-        binding.rgRating.setOnCheckedChangeListener { radioGroup, i -> makeRatingCall(radioGroup, i) }
+        //binding.rgRating.setOnCheckedChangeListener { radioGroup, i -> makeRatingCall(radioGroup, i) }
+        binding.ratingBar.onRatingBarChangeListener =
+            OnRatingBarChangeListener { ratingBar, rating, fromUser ->
+                // Called when the user swipes the RatingBar
+                makeRatingCall(rating.toString())
+            }
     }
 
     private fun initObservers(){
         viewModel.observeRateRedemption().observe(this, Observer { response ->
-            when(response.status){
+            when (response.status) {
                 Status.SUCCESS -> {
                     oneLinkProgressDialog.hideProgressDialog()
                     activity?.finish()
@@ -67,7 +72,11 @@ class TransactionRatingFragment : BaseFragment<RateViewModel, FragmentSelfAwardR
         })
     }
 
-    private fun makeRatingCall(group: RadioGroup, index: Int){
+    private fun makeRatingCall(rating: String){
+        viewModel.rateRedemption(RateRedemptionRequestModel(transactionId, rating))
+    }
+
+    /*private fun makeRatingCall(group: RadioGroup, index: Int){
         var comments = ""
         when(index) {
             R.id.radioButtonGood -> {
@@ -84,7 +93,7 @@ class TransactionRatingFragment : BaseFragment<RateViewModel, FragmentSelfAwardR
             }
         }
         viewModel.rateRedemption(RateRedemptionRequestModel(transactionId, comments))
-    }
+    }*/
 
     companion object {
         @JvmStatic

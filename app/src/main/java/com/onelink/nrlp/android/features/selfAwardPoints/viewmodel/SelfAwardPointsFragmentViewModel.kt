@@ -75,6 +75,22 @@ class SelfAwardPointsFragmentViewModel @Inject constructor(private val selfAward
         validateNonNull(remittanceDate)
     }
 
+    val referenceNumberNotEmpty = MediatorLiveData<Boolean>().apply {
+        validateNonNull(referenceNumber)
+    }
+
+    val transactionAmountNotEmpty = MediatorLiveData<Boolean>().apply {
+        validateNonNull(transactionAmount)
+    }
+
+    val cnicNumberNotEmpty = MediatorLiveData<Boolean>().apply {
+        validateNonNull(cnicAccountNumber)
+    }
+
+    val accountNumberNotEmpty = MediatorLiveData<Boolean>().apply {
+        validateNonNull(accountIbanNumber)
+    }
+
     fun getDateInStringFormat(calendar: Calendar?): String? {
         val dateString =
                 SimpleDateFormat("dd/M/yyyy", Locale.US).parse(rawDate ?: "") ?: return ""

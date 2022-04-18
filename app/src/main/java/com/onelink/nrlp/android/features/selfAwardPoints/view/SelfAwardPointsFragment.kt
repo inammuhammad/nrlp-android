@@ -115,6 +115,7 @@ class SelfAwardPointsFragment :
 
         initListeners()
         initObservers()
+        initFocusChangeListener()
     }
 
     private fun initListeners() {
@@ -124,63 +125,71 @@ class SelfAwardPointsFragment :
         }
 
         binding.btnNext.setOnSingleClickListener {
-            val selfAwardPointsRequest=JsonObject()
+            if(validateCnicFields()) {
+                val selfAwardPointsRequest = JsonObject()
 
-            selfAwardPointsRequest.addProperty(
-                SelfAwardRequestConstants.Amount,
-                binding.etRemittanceAmount.text.toString().replace(",", ""),
-            )
-            selfAwardPointsRequest.addProperty(
-                SelfAwardRequestConstants.Reference_NO,
-                binding.etRefNo.text.toString(),
-            )
-            selfAwardPointsRequest.addProperty(
-                SelfAwardRequestConstants.Beneficiary_NIC_NICOP,
-                binding.etCnicAccountNumber.text.toString(),
-            )
-            selfAwardPointsRequest.addProperty(
-                SelfAwardRequestConstants.Beneficiary_ACCOUNT_NUMBER,
-                binding.etAccountNumber.text.toString()
-            )
-            selfAwardPointsRequest.addProperty(
+                selfAwardPointsRequest.addProperty(
+                    SelfAwardRequestConstants.Amount,
+                    binding.etRemittanceAmount.text.toString().replace(",", ""),
+                )
+                selfAwardPointsRequest.addProperty(
+                    SelfAwardRequestConstants.Reference_NO,
+                    binding.etRefNo.text.toString(),
+                )
+                selfAwardPointsRequest.addProperty(
+                    SelfAwardRequestConstants.Beneficiary_NIC_NICOP,
+                    binding.etCnicAccountNumber.text.toString(),
+                )
+                selfAwardPointsRequest.addProperty(
+                    SelfAwardRequestConstants.Beneficiary_ACCOUNT_NUMBER,
+                    binding.etAccountNumber.text.toString()
+                )
+                selfAwardPointsRequest.addProperty(
                     SelfAwardRequestConstants.Transaction_Date,
-                viewModel.remittanceDate.value,
-            )
-            selfAwardPointsRequest.addProperty(
-                SelfAwardRequestConstants.Transaction_TYPE,
-                viewModel.transactionType.value,
-            )
+                    viewModel.remittanceDate.value,
+                )
+                selfAwardPointsRequest.addProperty(
+                    SelfAwardRequestConstants.Transaction_TYPE,
+                    viewModel.transactionType.value,
+                )
 
-            selfAwardPointSharedViewModel?.setSelfAwardPointsFlowDataModel(selfAwardPointsRequest)
-            viewModel.verifySafeAwardValidTransaction(selfAwardPointsRequest)
+                selfAwardPointSharedViewModel?.setSelfAwardPointsFlowDataModel(
+                    selfAwardPointsRequest
+                )
+                viewModel.verifySafeAwardValidTransaction(selfAwardPointsRequest)
+            }
         }
 
         binding.btnNextAccount.setOnSingleClickListener {
-            val selfAwardPointsRequest=JsonObject()
+            if(validateIbanFields()) {
+                val selfAwardPointsRequest = JsonObject()
 
-            selfAwardPointsRequest.addProperty(
-                SelfAwardRequestConstants.Amount,
-                binding.etRemittanceAmount.text.toString().replace(",", ""),
-            )
-            selfAwardPointsRequest.addProperty(
-                SelfAwardRequestConstants.Reference_NO,
-                binding.etRefNo.text.toString(),
-            )
-            selfAwardPointsRequest.addProperty(
-                SelfAwardRequestConstants.Beneficiary_NIC_NICOP,
-                binding.etAccountNumber.text.toString(),
-            )
-            selfAwardPointsRequest.addProperty(
-                SelfAwardRequestConstants.Transaction_Date,
-                viewModel.remittanceDate.value,
-            )
-            selfAwardPointsRequest.addProperty(
-                SelfAwardRequestConstants.Transaction_TYPE,
-                viewModel.transactionType.value,
-            )
+                selfAwardPointsRequest.addProperty(
+                    SelfAwardRequestConstants.Amount,
+                    binding.etRemittanceAmount.text.toString().replace(",", ""),
+                )
+                selfAwardPointsRequest.addProperty(
+                    SelfAwardRequestConstants.Reference_NO,
+                    binding.etRefNo.text.toString(),
+                )
+                selfAwardPointsRequest.addProperty(
+                    SelfAwardRequestConstants.Beneficiary_NIC_NICOP,
+                    binding.etAccountNumber.text.toString(),
+                )
+                selfAwardPointsRequest.addProperty(
+                    SelfAwardRequestConstants.Transaction_Date,
+                    viewModel.remittanceDate.value,
+                )
+                selfAwardPointsRequest.addProperty(
+                    SelfAwardRequestConstants.Transaction_TYPE,
+                    viewModel.transactionType.value,
+                )
 
-            selfAwardPointSharedViewModel?.setSelfAwardPointsFlowDataModel(selfAwardPointsRequest)
-            viewModel.verifySafeAwardValidTransaction(selfAwardPointsRequest)
+                selfAwardPointSharedViewModel?.setSelfAwardPointsFlowDataModel(
+                    selfAwardPointsRequest
+                )
+                viewModel.verifySafeAwardValidTransaction(selfAwardPointsRequest)
+            }
         }
         binding.spinnerLy.setOnClickListener {
             binding.spinnerSelectTransactionType.performClick()
@@ -286,6 +295,15 @@ class SelfAwardPointsFragment :
             }
         })
     }
+
+    private fun validateCnicFields(): Boolean {
+        return viewModel.validReferenceNumber.value!! && viewModel.validTransactionAmount.value!! && viewModel.validCnicAccountNumber.value!!
+    }
+
+    private fun validateIbanFields(): Boolean {
+        return viewModel.validReferenceNumber.value!! && viewModel.validTransactionAmount.value!! && viewModel.validIbanAccountNumber.value!!
+    }
+
     private fun initObservers() {
         viewModel.observeSafeAwardValidTransaction().observe(this, Observer { response ->
             when (response.status) {
@@ -323,7 +341,82 @@ class SelfAwardPointsFragment :
             }
         })
 
+        viewModel.validReferenceNumber.observe(this, Observer { validationPassed ->
+            run {
+                if (!validationPassed)
+                    binding.tilRefNo.error = getString(R.string.error_invalid_reference_number)
+                else {
+                    binding.tilRefNo.clearError()
+                    binding.tilRefNo.isErrorEnabled = false
+                }
+            }
+        })
+
+        viewModel.validTransactionAmount.observe(this, Observer { validationPassed ->
+            run {
+                if (!validationPassed)
+                    binding.tilRemittanceAmount.error = getString(R.string.error_transaction_amount)
+                else {
+                    binding.tilRemittanceAmount.clearError()
+                    binding.tilRemittanceAmount.isErrorEnabled = false
+                }
+            }
+        })
+
+        viewModel.validCnicAccountNumber.observe(this, Observer { validationPassed ->
+            run {
+                if (!validationPassed)
+                    binding.tilCnicAccountNumber.error = getString(R.string.error_cnic)
+                else {
+                    binding.tilCnicAccountNumber.clearError()
+                    binding.tilCnicAccountNumber.isErrorEnabled = false
+                }
+            }
+        })
+
+        viewModel.validIbanAccountNumber.observe(this, Observer { validationPassed ->
+            run {
+                if (!validationPassed)
+                    binding.tilAccountNumber.error = getString(R.string.error_invalid_account_number)
+                else {
+                    binding.tilAccountNumber.clearError()
+                    binding.tilAccountNumber.isErrorEnabled = false
+                }
+            }
+        })
+
     }
+
+    private fun initFocusChangeListener() {
+        binding.etRefNo.setOnFocusChangeListener { _, b ->
+            when (b) {
+                false -> viewModel.validReferenceNumber
+            }
+        }
+
+        binding.etRemittanceAmount.setOnFocusChangeListener { _, b ->
+            when (b) {
+                false -> viewModel.validTransactionAmount
+            }
+        }
+
+        binding.etCnicAccountNumber.setOnFocusChangeListener { _, b ->
+            when (b) {
+                false -> viewModel.validCnicAccountNumber
+            }
+        }
+
+        binding.etAccountNumber.setOnFocusChangeListener { _, b ->
+            when (b) {
+                false -> viewModel.validIbanAccountNumber
+            }
+        }
+        viewModel.validCnicAccountNumber.postValue(true)
+        viewModel.validReferenceNumber.postValue(true)
+        viewModel.validTransactionAmount.postValue(true)
+        viewModel.validIbanAccountNumber.postValue(true)
+    }
+
     private fun openDatePickerDialog() {
         val c = Calendar.getInstance()
         val year = c.get(Calendar.YEAR)
