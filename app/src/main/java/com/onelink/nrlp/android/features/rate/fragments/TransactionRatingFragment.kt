@@ -48,7 +48,7 @@ class TransactionRatingFragment : BaseFragment<RateViewModel, FragmentSelfAwardR
         binding.ratingBar.onRatingBarChangeListener =
             OnRatingBarChangeListener { ratingBar, rating, fromUser ->
                 // Called when the user swipes the RatingBar
-                makeRatingCall(rating.toString())
+                makeRatingCall(rating.toString() + getString(R.string.stars))
             }
     }
 

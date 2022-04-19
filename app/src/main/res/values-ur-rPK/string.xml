@@ -27,6 +27,7 @@
     <string name="help_user_type">براہ مہربانی منتخب کریں کہ آپ رقم بھیجنے والے یا وصول کرنے والے ہیں</string>
     <string name="help_full_name">>اپنا شناختی کارڈ پہ درج کردہ نام درج کریں</string>
     <string name="help_usd">ہUSD میں سالانہ ترسیلات زر ہر سال یکم جولائی سے جمع ہوتی ہیں تاہم موجودہ سال کے لیے اس کا اطلاق یکم اکتوبر 2021 سے ہوگا اور اسی کے مطابق آپ کی لائلٹی کیٹیگری کا حساب لگایا جائے گا۔</string>
+    <string name="help_father_name">Please enter your Father Name as per CNIC/NICOP/POC</string>
     <string name="resident_id">منفرد آئی ڈی*</string>
     <string name="mobile_number">موبائل نمبر*</string>
     <string name="mobile_number_complaint">موبائل نمبر</string>
@@ -371,6 +372,7 @@
     <string name="provide_necessary_information">مزید آگے بڑھنے کے لئے براہ کرم درخواست کردہ معلومات فراہم کریں</string>
     <string name="click_next_add_receiver">اپنے وصول کنندہ کو شامل کرنے اور اپنے اکاؤنٹ میں آٹو پوائنٹس حاصل کرنے کے لیے اگلے پر کلک کریں</string>
     <string name="add_receiver">وصول کنندہ شامل کریں</string>
+    <string name="add_receiver_plus">+ وصول کنندہ شامل کریں</string>
     <string name="receiver_will_be_added_upon_nadra">آپ کی ترسیلات زر وصول کرنے والا  نادرا کی تصدیق کے بعد شامل کر دیا جائے گا۔</string>
     <string name="remittance_receiver_manager">ترسیلات زر وصول کنندہ کی  منتظمی</string>
     <string name="receiver_mother_maiden_name">براہ کرم نادرا کے ریکارڈ کے مطابق وصول کنندہ کی والدہ کا نام درج کریں</string>
@@ -381,6 +383,7 @@
     <string name="receiver_country_of_residence">وصول کنندہ کا قیام کا ملک</string>
     <string name="receiver_name_help">براہ کرم وصول کنندہ کا نام NICOP/CNIC/POC  کے مطابق درج کریں</string>
     <string name="select_receiver_type">وصول کنندہ کی قسم منتخب کریں۔</string>
+    <string name="receiver_type">وصول کنندہ کی قسم۔</string>
     <string name="skip">منسوخ کریں</string>
     <string name="receiver_iban">براہ کرم وصول کنندہ کا بینک اکاؤنٹ نمبر/بین الاقوامی بینک اکاؤنٹ نمبر درج کریں</string>
     <string name="receiver_bank_name">براہ کرم وصول کنندہ  کے  بینک کا نام درج کریں۔</string>

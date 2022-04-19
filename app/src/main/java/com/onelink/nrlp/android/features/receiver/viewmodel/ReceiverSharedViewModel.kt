@@ -17,5 +17,5 @@ class ReceiverSharedViewModel @Inject constructor() : BaseViewModel() {
     val beneficiariesResponse = MutableLiveData<BaseResponse<BeneficiariesResponseModel>>()
     val receiverDetails = MutableLiveData<ReceiverDetailsModel>()
     val isDeleteBeneficiary = MutableLiveData<Boolean>()
-    val receiverType = MutableLiveData<Int>()
+    val receiverType = MutableLiveData<String>()
 }

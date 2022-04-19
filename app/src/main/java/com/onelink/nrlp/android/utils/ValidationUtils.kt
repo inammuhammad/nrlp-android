@@ -114,18 +114,14 @@ object ValidationUtils {
     }
 
     fun isIbanAccountNumberValid(string: String): Boolean {
-        return string.isNotEmpty() && string.length in 1..24
+        return string.isNotEmpty() && string.length in 10..24 && Pattern.matches(
+            IBAN_DIGITS_VALIDATOR_REGEX,
+            string
+        )
     }
 
     fun isPassportNumberValid(string: String): Boolean {
         return string.length >= 9
-    }
-
-    fun isSelfIbanAccountNumberValid(string: String): Boolean {
-        return string.isNotEmpty() && string.length in 10..24 && Pattern.matches(
-            IBAN_DIGITS_VALIDATOR_REGEX,
-            string
-        ) //checkLastDigits(string)
     }
 
     fun isAmountValid(string: String): Boolean {

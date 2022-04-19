@@ -426,6 +426,9 @@ class RegisterBeneficiaryFragment : BaseFragment<RegisterAccountFragmentViewMode
         binding.icHelpUsertype.setOnClickListener {
             showGeneralAlertDialog(this,"Register",getString(R.string.help_user_type))
         }
+        binding.icHelpFatherName.setOnClickListener {
+            showGeneralAlertDialog(this, "Register", getString(R.string.help_father_name))
+        }
         binding.etCnicNicopIssuanceDate.setOnClickListener {
             openDatePickerDialog()
             hideKeyboard()

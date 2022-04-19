@@ -25,6 +25,7 @@
     <string name="help_user_type">Please select if you are a Remitter (Sender) Or Beneficiary (Receiver) of remittance funds</string>
     <string name="help_full_name">Please enter your Full Name as per CNIC/NICOP/POC</string>
     <string name="help_usd">The Annual Remittance to- date in USD is accumulated from 1st July of each year, however for current year it shall be applicable from 1st October 2021 and your loyalty category will be calculated accordingly. For further details please visit FAQs.</string>
+    <string name="help_father_name">Please enter your Father Name as per CNIC/NICOP/POC</string>
 
     <string name="resident_id">Unique ID *</string>
     <string name="mobile_number">Mobile Number *</string>
@@ -80,8 +81,8 @@
     <string name="dummy_amount">7,389</string>
     <string name="remitter_verification">Remitter Verification</string>
     <string name="beneficiary_verification_title">Beneficiary Verification</string>
-    <string name="reference_number">Reference Number/TT Number</string>
-    <string name="beneficiary_account_number_cnic">Beneficiary CNIC/POC</string>
+    <string name="reference_number">Transaction Reference No./TT Number</string>
+    <string name="beneficiary_account_number_cnic">Beneficiary CNIC</string>
     <string name="beneficiary_account_number_cnic_complaint">Beneficiary Account Number/IBAN/CNIC/POC</string>
     <string name="beneficiary_account_number">Beneficiary Account Number/IBAN</string>
     <string name="transaction_amount">Transaction Amount</string>
@@ -400,14 +401,16 @@
     <string name="enter_mother_maiden_name">Enter Mother Maiden name</string>
     <string name="enter_bank_name">Bank Name*</string>
     <string name="bank_name">Bank Name</string>
-    <string name="enter_iban_number">IBAN/Account Number*</string>
+    <string name="enter_iban_number">Bank Number / IBAN*</string>
     <string name="add_receiver">Add Receiver</string>
+    <string name="add_receiver_plus">+ Add Receiver</string>
     <string name="receiver_will_be_added_upon_nadra">Your Remittance Receiver\nwill be added upon\nNADRA verification</string>
     <string name="receiver_mother_maiden_name">Please enter Receiver Mother Name as per NADRA record</string>
     <string name="receiver_place_of_birth">Please enter Receiver Place of Birth as per NADRA record</string>
     <string name="receiver_country_of_residence">Please enter Receiver Country of Residence</string>
     <string name="receiver_name_help">Please enter Receiver Name as per CNIC/NICOP/POC</string>
     <string name="select_receiver_type">Select Receiver Type</string>
+    <string name="receiver_type">Receiver Type</string>
     <string name="receiver_iban">Please enter Receiver Bank Account Number/IBAN</string>
     <string name="receiver_bank_name">Please enter Receiver Bank Name</string>
     <string name="remittance_to_cnic">Remittance sent to CNIC</string>
@@ -449,4 +452,5 @@
     <string name="unsatisfied" translatable="false">Unsatisfactory</string>
     <string name="rate_redemption_experience">Rate Your Redemption Experience</string>
     <string name="error_invalid_reference_number">Please enter a valid Reference/TT Number</string>
+    <string name="stars" translatable="false"> stars</string>
 </resources>

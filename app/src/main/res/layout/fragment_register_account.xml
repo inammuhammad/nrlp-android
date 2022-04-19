@@ -167,6 +167,13 @@
                             android:layout_height="wrap_content"
                             android:text="@string/father_name" />
 
+                        <ImageView
+                            android:layout_width="@dimen/_15sdp"
+                            android:id="@+id/icHelpFatherName"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:src="@drawable/ic_baseline_info_24"
+                            android:layout_height="wrap_content"/>
+
                     </LinearLayout>
 
                     <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout

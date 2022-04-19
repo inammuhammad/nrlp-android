@@ -521,7 +521,7 @@ class ReceiverDetailsFragment :
         })
 
         receiverSharedViewModel?.receiverType?.observe(this, {
-            if(it == R.id.rdBtnCnic) {
+            if(it == getString(R.string.remittance_to_cnic)) {
                hideIbanView()
             }
         })

@@ -13,19 +13,78 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="@string/add_receiver"
+        android:text="@string/add_receiver_plus"
         android:textSize="@dimen/_16sdp"
         style="@style/TextViewSubHeading"
         android:textColor="@color/black"
-        android:layout_marginStart="@dimen/_30sdp"
         android:layout_marginTop="@dimen/_30sdp"
         app:layout_constraintStart_toStartOf="parent"
         />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvReceiverType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/receiver_type"
+        style="@style/TextViewSubHeading"
+        app:layout_constraintTop_toBottomOf="@id/tvAddReceiver"
+        app:layout_constraintStart_toStartOf="@id/tvAddReceiver"
+        android:layout_marginStart="0dp"/>
+
+    <LinearLayout
+        android:id="@+id/spinnerLy"
+        style="@style/spinnerTheme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layoutDirection="ltr"
+        android:orientation="horizontal"
+        android:textDirection="ltr"
+        android:weightSum="10"
+        app:layout_constraintTop_toBottomOf="@id/tvReceiverType"
+        >
+
+        <TextView
+            android:id="@+id/tvRemittanceReceiverType"
+            style="@style/TextViewMediumNoMargins"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="8.5"
+            android:text="@string/select_receiver_type"
+            android:textColor="@color/grey" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:src="@drawable/ic_spinner_dropdown"
+            android:contentDescription="@null" />
+    </LinearLayout>
+
+    <com.onelink.nrlp.android.utils.OneLinkSpinner
+        android:id="@+id/spinner_select_receiver_type"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/margin_large"
+        android:layout_marginEnd="@dimen/margin_large"
+        android:background="@android:color/transparent"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="start"
+        android:hint="@string/full_name"
+        android:layoutDirection="ltr"
+        android:spinnerMode="dropdown"
+        android:textDirection="ltr"
+        android:visibility="invisible"
+        app:layout_constraintTop_toBottomOf="@id/spinnerLy"
+        app:layout_constraintStart_toStartOf="@id/spinnerLy"
+        app:layout_constraintEnd_toEndOf="@id/spinnerLy"/>
 
     <RadioGroup
         android:id="@+id/rdReceiverType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:layout_marginTop="@dimen/_20sdp"
         app:layout_constraintTop_toBottomOf="@id/tvAddReceiver"
         app:layout_constraintStart_toStartOf="@id/tvAddReceiver"

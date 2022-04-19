@@ -36,12 +36,23 @@
         android:id="@+id/ratingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_45sdp"
         android:progressTint="@color/yellow"
         android:stepSize="0.5"
         app:layout_constraintTop_toBottomOf="@id/appCompatImageView"
         app:layout_constraintStart_toStartOf="@id/appCompatImageView"
         app:layout_constraintEnd_toEndOf="@id/appCompatImageView"
+        />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="@dimen/_203sdp"
+        android:layout_height="1dp"
+        android:background="@color/black"
+        android:layout_marginTop="@dimen/_26sdp"
+        app:layout_constraintTop_toBottomOf="@id/ratingBar"
+        app:layout_constraintStart_toStartOf="@id/ratingBar"
+        app:layout_constraintEnd_toEndOf="@id/ratingBar"
         />
 
     <RadioGroup
