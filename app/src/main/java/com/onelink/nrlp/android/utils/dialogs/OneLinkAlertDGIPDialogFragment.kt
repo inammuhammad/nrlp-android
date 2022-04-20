@@ -15,6 +15,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.onelink.nrlp.android.R
+import com.onelink.nrlp.android.utils.ValidationUtils
 import kotlinx.android.synthetic.main.dgip_dialog.*
 import kotlinx.android.synthetic.main.dgip_dialog.eTCnicNumber
 import java.util.regex.Pattern
@@ -166,9 +167,10 @@ class OneLinkAlertDGIPDialogFragment : DialogFragment() {
 
             btnPositive?.setOnClickListener {
                 /*oneLinkAlertDialogListeners.onPositiveButtonClicked(targetRequestCode)*/
-                if(!eTCnicNumber.text.isNullOrBlank() && eTCnicNumber.text.toString().length == 15) {
+                if(!eTCnicNumber.text.isNullOrBlank() && eTCnicNumber.text.toString().length == 15
+                    && ValidationUtils.checkRepeats(eTCnicNumber.text.toString())) {
                     tilCnicNicop.clearError()
-                    if(!eTMobile.text.isNullOrBlank()) {
+                    if(!eTMobile.text.isNullOrBlank() && ValidationUtils.checkRepeats(eTMobile.text.toString())) {
                         tilMobileNo.clearError()
                         oneLinkAlertDialogListeners.onConfirmButtonCLicked(targetRequestCode,
                             eTCnicNumber.text.toString(),

@@ -21,6 +21,7 @@ object ValidationUtils {
     private const val STRING_EMAIL_VALIDATOR_REGEX =
         "(^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)+$)|^$"
     private const val PHONE_NUMBER_VALIDATOR_REGEX = "^\\+?[1-9]\\d+$"
+    private const val PK_VALIDATION_REGEX = "^(0)(3)([0-9]{9})\$"
 
     fun isValidAmount(value: String): Boolean {
         if (value.isEmpty()) {
@@ -117,7 +118,7 @@ object ValidationUtils {
         return string.isNotEmpty() && string.length in 10..24 && Pattern.matches(
             IBAN_DIGITS_VALIDATOR_REGEX,
             string
-        )
+        ) //&& checkRepeats(string.replace("\\D+",""))
     }
 
     fun isPassportNumberValid(string: String): Boolean {
@@ -126,6 +127,21 @@ object ValidationUtils {
 
     fun isAmountValid(string: String): Boolean {
         return string.isNotEmpty() && string.toInt() > 0
+    }
+
+    fun isPakistanPhoneNumberValid(string: String): Boolean {
+        return string.isNotEmpty() && Pattern.matches(
+            PK_VALIDATION_REGEX,
+            string
+        )
+    }
+
+    fun checkRepeats(string: String): Boolean {
+        var num = string
+        if(num.contains("-"))
+            num = num.replace("-", "")
+        val set = num.toCharArray().distinct()
+        return set.count() > 1
     }
 
     /*private fun checkLastDigits(string: String): Boolean {
