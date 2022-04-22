@@ -332,6 +332,7 @@ class RegisterAccountFragment :
                 binding.emailAddressLL.visibility = View.VISIBLE
                 binding.passwordLL.visibility = View.VISIBLE
                 binding.rePasswordLL.visibility = View.VISIBLE
+                binding.fatherNameLL.visibility = View.VISIBLE
 
                 binding.btnNext1.visibility = View.GONE
                 binding.registrationCodeLL.visibility = View.GONE

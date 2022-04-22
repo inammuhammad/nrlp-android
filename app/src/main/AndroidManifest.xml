@@ -15,7 +15,10 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,UnusedAttribute">
-        <activity android:name=".features.rate.view.RateActivity"></activity>
+        <activity
+            android:name=".features.rate.view.RateActivity"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name=".features.receiver.view.ReceiverActivity"
             android:configChanges="layoutDirection|uiMode|locale"

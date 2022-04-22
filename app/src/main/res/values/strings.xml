@@ -19,7 +19,7 @@
     <string name="help_mobile_number">Please enter your Mobile Number</string>
     <string name="help_passport_type">Please select your passport type</string>
     <string name="help_passport_no">Please enter your passport number</string>
-    <string name="help_unique_id">Please enter any unique ID you use for sending remittance to Pakistan through your bank or Money Transfer agent. It could be any ID issued to you by the Government (Iqama No, Registration No., Emirati ID, Driving License,  Passport No., etc.)</string>
+    <string name="help_unique_id">Please enter the unique ID you use for sending remittance to Pakistan through your bank or Money Transfer agent, including any  ID provided by your country of residence (Iqama No, Registration No., Emirati ID, Driving License, etc.)</string>
     <string name="help_password">Please enter a Password</string>
     <string name="help_confirm_password">Please re-enter the Password </string>
     <string name="help_user_type">Please select if you are a Remitter (Sender) Or Beneficiary (Receiver) of remittance funds</string>
