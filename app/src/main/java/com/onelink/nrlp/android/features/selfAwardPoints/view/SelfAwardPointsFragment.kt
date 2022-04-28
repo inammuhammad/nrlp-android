@@ -210,6 +210,9 @@ class SelfAwardPointsFragment :
             //showWarningDialog(getString(R.string.remittance_date_help))
             showGeneralAlertDialog(this,"SelfAward",getString(R.string.remittance_account_cnic_number_help))
         }
+        binding.icHelpBankAccountNumber.setOnClickListener {
+            showGeneralAlertDialog(this, "SelfAward", getString(R.string.enter_beneficiary_acc_num))
+        }
 
         binding.etCnicAccountNumber.addTextChangedListener(object : TextWatcher {
             @SuppressLint("SetTextI18n")
@@ -452,6 +455,7 @@ class SelfAwardPointsFragment :
             tilAccountNumber.visibility = View.VISIBLE
             btnNext.visibility = View.GONE
             btnNextAccount.visibility = View.VISIBLE
+            //icHelpBankAccountNumber.visibility = View.VISIBLE
         }
     }
 
@@ -464,6 +468,7 @@ class SelfAwardPointsFragment :
             tilAccountNumber.visibility = View.GONE
             btnNext.visibility = View.VISIBLE
             btnNextAccount.visibility = View.GONE
+            //icHelpBankAccountNumber.visibility = View.GONE
         }
     }
 

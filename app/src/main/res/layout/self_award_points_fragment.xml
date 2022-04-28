@@ -97,11 +97,10 @@
                 android:layout_width="@dimen/_15sdp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginTop="@dimen/_10sdp"
                 android:src="@drawable/ic_baseline_info_24"
                 app:layout_constraintHorizontal_bias="0"
-                app:layout_constraintStart_toEndOf="@+id/tvRemittanceAmount"
-                app:layout_constraintTop_toBottomOf="@+id/til_ref_no" />
+                app:layout_constraintStart_toEndOf="@+id/tvRemittanceAmountHelp"
+                app:layout_constraintTop_toBottomOf="@+id/tvRemittanceAmount" />
 
             <TextView
                 android:id="@+id/tvRemittanceAmountHelp"
@@ -279,6 +278,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/spinnerLy" />
+
+            <ImageView
+                android:id="@+id/icHelpBankAccountNumber"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:visibility="gone"
+                android:layout_marginBottom="@dimen/_4sdp"
+                android:src="@drawable/ic_baseline_info_24"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toEndOf="@+id/tvCnicAccountNumber"
+                app:layout_constraintTop_toTopOf="@+id/tvCnicAccountNumber"
+                app:layout_constraintBottom_toBottomOf="@id/tvCnicAccountNumber"/>
 
             <ImageView
                 android:id="@+id/icHelpCnicAccountNumber"

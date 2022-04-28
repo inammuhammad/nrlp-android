@@ -1,6 +1,7 @@
 package com.onelink.nrlp.android.di.module
 
 import com.onelink.nrlp.android.di.annotations.ActivityScope
+import com.onelink.nrlp.android.features.appnotification.InAppNotificationActivity
 import com.onelink.nrlp.android.features.beneficiary.view.BeneficiaryActivity
 import com.onelink.nrlp.android.features.changePassword.view.ChangePassSuccessfulActivity
 import com.onelink.nrlp.android.features.changePassword.view.ChangePasswordActivity
@@ -161,5 +162,9 @@ abstract class ActivityBuilder {
     @ActivityScope
     @ContributesAndroidInjector(modules = [NrlpBenefitsFragmentBuilder::class])
     internal abstract fun bindNrlpBenefitsActivity(): NrlpBenefitsActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [NotificationsFragmentBuilder::class])
+    internal abstract fun inAppNotificationActivity(): InAppNotificationActivity
 
 }

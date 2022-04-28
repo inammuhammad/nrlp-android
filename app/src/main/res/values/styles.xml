@@ -326,4 +326,8 @@
         <item name="android:layout_marginTop">@dimen/unit_28dp</item>
         <item name="android:fontFamily">@font/hp_simplified_lt</item>
     </style>
+
+    <style name="CustomTextStyle" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">@dimen/unit_12sp</item>
+    </style>
 </resources>

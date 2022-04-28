@@ -54,7 +54,7 @@
 
                 <com.onelink.nrlp.android.widgets.OneLinkEditText
                     android:id="@+id/etVoucher"
-                    style="@style/EditTextFixedDigits"
+                    style="@style/EditTextFixedNumbers"
                     android:gravity="center"
                     android:maxLength="24"
                     android:textColorHint="@color/black"
@@ -62,7 +62,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Enter Voucher No"
-                    android:inputType="textNoSuggestions" />
+                    android:inputType="numberDecimal" />
             </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
 
             <LinearLayout

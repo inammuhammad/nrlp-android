@@ -26,6 +26,7 @@ import com.onelink.nrlp.android.core.BaseFragmentActivity
 import com.onelink.nrlp.android.core.Status
 import com.onelink.nrlp.android.data.local.UserData
 import com.onelink.nrlp.android.databinding.ActivityHomeBinding
+import com.onelink.nrlp.android.features.appnotification.InAppNotificationActivity
 import com.onelink.nrlp.android.features.changePassword.view.ChangePasswordActivity
 import com.onelink.nrlp.android.features.complaint.view.RegComplaintActivity
 import com.onelink.nrlp.android.features.contactus.view.ContactUsActivity
@@ -80,6 +81,9 @@ class HomeActivity :
         binding.toolbar.setLeftButtonClickListener(View.OnClickListener { toggleMenu() })
         binding.toolbar.showBorderView(true)
         binding.toolbar.setLeftButton(ContextCompat.getDrawable(this, R.drawable.ic_side_menu))
+        /*binding.toolbar.setRightButtonVisible(true)
+        binding.toolbar.setNotificationCountVisible(true)
+        binding.toolbar.setRightButtonClickListener(View.OnClickListener { launchNotificationActivity() })*/
 
         supportFragmentManager.addOnBackStackChangedListener {
             val fragment = getCurrentFragment() as BaseFragment<*, *>?
@@ -264,6 +268,10 @@ class HomeActivity :
             }
             else {}
         }
+    }
+
+    private fun launchNotificationActivity() {
+        startActivity(InAppNotificationActivity.newNotificationActivityIntent(this))
     }
 
     override fun onResume() {

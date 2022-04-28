@@ -42,4 +42,30 @@
         android:background="@color/outline"
         app:layout_constraintBottom_toBottomOf="parent" />
 
+    <ImageView
+        android:id="@+id/ivRight"
+        android:textAlignment="viewStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:padding="@dimen/margin_medium"
+        android:src="@drawable/ic_notification_bell"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/tvNotificationCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/ivRight"
+        app:layout_constraintStart_toStartOf="@id/ivRight"
+        android:layout_marginStart="@dimen/_22sdp"
+        android:text="12"
+        android:visibility="gone"
+        />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

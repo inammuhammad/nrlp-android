@@ -81,7 +81,7 @@
     <string name="dummy_amount">7,389</string>
     <string name="remitter_verification">Remitter Verification</string>
     <string name="beneficiary_verification_title">Beneficiary Verification</string>
-    <string name="reference_number">Transaction Reference No./TT Number</string>
+    <string name="reference_number">Transaction Reference No./TT No.</string>
     <string name="beneficiary_account_number_cnic">Beneficiary CNIC</string>
     <string name="beneficiary_account_number_cnic_complaint">Beneficiary Account Number/IBAN/CNIC/POC</string>
     <string name="beneficiary_account_number">Beneficiary Account Number/IBAN</string>
@@ -453,4 +453,5 @@
     <string name="rate_redemption_experience">Rate Your Redemption Experience</string>
     <string name="error_invalid_reference_number">Please enter a valid Reference/TT Number</string>
     <string name="stars" translatable="false"> stars</string>
+    <string name="enter_beneficiary_acc_num">Enter Beneficiary Account Number/IBAN on which remittance is sent</string>
 </resources>

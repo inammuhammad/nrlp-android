@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.onelink.nrlp.android.di.ViewModelFactory
 import com.onelink.nrlp.android.di.annotations.ViewModelKey
+import com.onelink.nrlp.android.features.appnotification.viewmodels.AppNotificationViewModel
 import com.onelink.nrlp.android.features.beneficiary.viewmodel.BeneficiaryDetailsViewModel
 import com.onelink.nrlp.android.features.beneficiary.viewmodel.BeneficiaryViewModel
 import com.onelink.nrlp.android.features.beneficiary.viewmodel.ManageBeneficiaryViewModel
@@ -455,5 +456,10 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(RateViewModel::class)
     internal abstract fun rateViewModel(viewModel: RateViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AppNotificationViewModel::class)
+    internal abstract fun appNotificationViewModel(viewModel: AppNotificationViewModel): ViewModel
 }
 
