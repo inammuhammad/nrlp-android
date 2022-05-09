@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "45136822833",
+    "project_id": "sohni-dharti",
+    "storage_bucket": "sohni-dharti.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:45136822833:android:b922c88d0682c2d1434b10",
+        "android_client_info": {
+          "package_name": "com.onelink.sohnidharti.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "45136822833-lf9ioh41pnn8u7stjup58ehpdsff0d3h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeUvyn9u0VOW-Xks_LWzlAloJDkrO59i0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "45136822833-lf9ioh41pnn8u7stjup58ehpdsff0d3h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -69,9 +69,9 @@ class NetworkModule {
     fun provideEncryptionInterceptor(context: Context) = EncryptionInterceptor(context)
 
 
-    @Provides
-    @Singleton
-    fun provideChuckInterceptor(context: Context) = ChuckInterceptor(context)
+//    @Provides
+//    @Singleton
+//    fun provideChuckInterceptor(context: Context) = ChuckInterceptor(context)
 
     @Provides
     @Singleton
@@ -93,7 +93,7 @@ class NetworkModule {
         authenticationInterceptor: AuthenticationInterceptor,
         loggingInterceptor: HttpLoggingInterceptor,
         networkConnectionInterceptor: NetworkConnectionInterceptor,
-        chuckInterceptor: ChuckInterceptor,
+        //chuckInterceptor: ChuckInterceptor,
         certificatePinner: CertificatePinner,
         encryptionInterceptor: EncryptionInterceptor
     ): OkHttpClient {

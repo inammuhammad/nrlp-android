@@ -65,7 +65,7 @@ android {
         debug {
             signingConfig signingConfigs.debug
             testCoverageEnabled = true
-            applicationIdSuffix ".dev"
+            //applicationIdSuffix ".dev"
             versionNameSuffix "-dev"
             minifyEnabled false
             shrinkResources = false
@@ -195,6 +195,8 @@ dependencies {
 
     // Add the Firebase Crashlytics SDK.
     implementation 'com.google.firebase:firebase-crashlytics:17.1.1'
+
+    implementation 'com.google.firebase:firebase-messaging:20.2.4'
 
     //RootBeer dependency implementation
     implementation project(':rootbeerlib')
