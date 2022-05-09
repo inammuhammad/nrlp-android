@@ -168,6 +168,7 @@
     <string name="transfer_points">Transfer Points</string>
     <string name="sure_to_transfer">Are you sure you want to transfer %1$d Points to %2$s ?</string>
     <string name="redeem_your_points">Redeem Your Points</string>
+    <string name="redeem_points">Redeem Points</string>
     <string name="sent_new_otp_msg">We have sent you a new OTP on your registered mobile number.</string>
     <string name="generate_advance_statement">Generate Advance Statement</string>
     <string name="from_date">From Date</string>

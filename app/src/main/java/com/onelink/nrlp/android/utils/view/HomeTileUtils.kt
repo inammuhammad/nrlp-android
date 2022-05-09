@@ -12,14 +12,16 @@ class HomeTileUtils {
         const val SELF_AWARD_POINTS = 5
         const val VIEW_STATEMENT_BENEFICIARY = 6
         const val VIEW_NRLP_BENEFITS_BENEFICIARY = 7
+        const val REDEEM_YOUR_POINTS = 8
 
         fun getRemitterHomeTilesList() : MutableList<HomeTileModel> {
             val homeTilesList = mutableListOf<HomeTileModel>()
-            homeTilesList.add(HomeTileModel(MANAGE_BENEFICIARY, R.string.manage_beneficiary_title, R.drawable.ic_beneficiaries_tile))
-            homeTilesList.add(HomeTileModel(MANAGE_POINTS, R.string.transfer_points, R.drawable.ic_loyalty_points_tile))
-            homeTilesList.add(HomeTileModel(VIEW_STATEMENT_REMITTER, R.string.view_stmnt, R.drawable.ic_loyalty_statement_tile))
+            homeTilesList.add(HomeTileModel(REDEEM_YOUR_POINTS, R.string.redeem_points, R.drawable.ic_redeem_points))
             homeTilesList.add(HomeTileModel(VIEW_NRLP_BENEFITS_REMITTER, R.string.view_nrlp_benefits, R.drawable.ic_nrlp_benefits_tile))
+            homeTilesList.add(HomeTileModel(MANAGE_POINTS, R.string.transfer_points, R.drawable.ic_loyalty_points_tile))
+            homeTilesList.add(HomeTileModel(MANAGE_BENEFICIARY, R.string.manage_beneficiary_title, R.drawable.ic_beneficiaries_tile))
             homeTilesList.add(HomeTileModel(SELF_AWARD_POINTS, R.string.self_award_points, R.drawable.ic_self_award_points_update))
+            homeTilesList.add(HomeTileModel(VIEW_STATEMENT_REMITTER, R.string.view_stmnt, R.drawable.ic_loyalty_statement_tile))
             return homeTilesList
         }
 

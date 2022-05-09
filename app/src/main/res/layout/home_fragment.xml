@@ -81,8 +81,8 @@
                     android:layout_marginEnd="@dimen/_20sdp"
                     android:text="@string/your_loyalty_points"
                     android:textColor="@color/white"
-                    android:layout_marginTop="@dimen/_50sdp"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginBottom="@dimen/_28sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_height="wrap_content"/>
 
@@ -104,8 +104,9 @@
                     android:id="@+id/lblMemberSince"
                     android:textColor="@color/white"
                     android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginBottom="@dimen/_30sdp"
                     android:text="@string/member_since"
-                    app:layout_constraintTop_toBottomOf="@+id/tvPoints"
+                    app:layout_constraintBottom_toTopOf="@id/tvName"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_height="wrap_content"/>
 
@@ -125,7 +126,8 @@
                     android:id="@+id/tvName"
                     style="@style/TextViewLarge"
                     android:layout_marginStart="@dimen/_20sdp"
-                    app:layout_constraintTop_toBottomOf="@+id/tvMemberSince"
+                    app:layout_constraintTop_toTopOf="@+id/lblLoyaltyPoints"
+                    app:layout_constraintBottom_toBottomOf="@+id/lblLoyaltyPoints"
                     app:layout_constraintStart_toStartOf="parent"
                     android:textColor="@color/white"
                     android:text=""
@@ -135,6 +137,7 @@
                     android:layout_width="wrap_content"
                     app:layout_constraintStart_toStartOf="@+id/lblLoyaltyPoints"
                     android:layout_marginEnd="@dimen/_35sdp"
+                    android:visibility="gone"
                     app:layout_constraintTop_toBottomOf="@+id/tvPoints"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_height="wrap_content">

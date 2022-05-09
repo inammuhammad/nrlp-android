@@ -172,6 +172,7 @@
     <string name="transfer_points">پوائنٹس کی منتقلی</string>
     <string name="sure_to_transfer">کیا آپ واقعی %1$d پوائنٹس %2$s کو منتقل کرنا چاہتے ہیں؟</string>
     <string name="redeem_your_points">پوائنٹس استعمال کریں</string>
+    <string name="redeem_points">پوائنٹس استعمال کریں</string>
     <string name="sent_new_otp_msg">ہم نے آپ کو رجسٹرڈ موبائل نمبر پر ایک نیا او ٹی پی بھیجا ہے</string>
     <string name="generate_advance_statement">ایڈوانس اسٹیٹمنٹ تیار کریں</string>
     <string name="from_date">اس تاریخ سے</string>

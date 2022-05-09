@@ -5,6 +5,7 @@ import com.onelink.nrlp.android.features.beneficiary.view.BeneficiaryActivity
 import com.onelink.nrlp.android.features.home.fragments.adapters.HomeTilesAdapter
 import com.onelink.nrlp.android.features.managePoints.view.ManagePointsActivity
 import com.onelink.nrlp.android.features.nrlpBenefits.view.NrlpBenefitsActivity
+import com.onelink.nrlp.android.features.redeem.view.RedeemActivity
 import com.onelink.nrlp.android.features.selfAwardPoints.view.SelfAwardPointsActivity
 import com.onelink.nrlp.android.features.selfAwardPoints.view.SelfAwardPointsSuccessActivity
 import com.onelink.nrlp.android.features.viewStatement.view.ViewStatementActivity
@@ -38,6 +39,7 @@ class RemitterHomeFragment : HomeFragment() {
             HomeTileUtils.VIEW_STATEMENT_REMITTER -> launchViewStatement()
             HomeTileUtils.VIEW_NRLP_BENEFITS_REMITTER -> launchNrlpBenefits()
             HomeTileUtils.SELF_AWARD_POINTS -> launchSelfAwardPoints()
+            HomeTileUtils.REDEEM_YOUR_POINTS -> launchRedeemPoints()
             else -> return
         }
     }
@@ -73,6 +75,12 @@ class RemitterHomeFragment : HomeFragment() {
     private fun launchViewStatement() {
         activity?.let {
             it.startActivity(ViewStatementActivity.newViewStatementIntent(it))
+        }
+    }
+
+    private fun launchRedeemPoints() {
+        activity?.let {
+            it.startActivity(RedeemActivity.newRedeemIntent(it))
         }
     }
 
