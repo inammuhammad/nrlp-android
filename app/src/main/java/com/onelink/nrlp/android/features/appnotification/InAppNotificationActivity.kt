@@ -39,8 +39,8 @@ class InAppNotificationActivity:
     private fun initView() {
         val adapter = ViewPagerAdapter(supportFragmentManager)
         adapter.addFragment(NotificationComplaintFragment(), getString(R.string.complaint))
-        //adapter.addFragment(NotificationComplaintFragment(), getString(R.string.active))
-        //adapter.addFragment(NotificationComplaintFragment(), getString(R.string.home_title))
+        adapter.addFragment(NotificationComplaintFragment(), getString(R.string.active))
+        adapter.addFragment(NotificationComplaintFragment(), getString(R.string.home_title))
         binding.viewpager.adapter = adapter
         binding.tabs.setupWithViewPager(binding.viewpager)
         binding.tabs.setSelectedTabIndicatorColor(Color.parseColor("#014D27"))

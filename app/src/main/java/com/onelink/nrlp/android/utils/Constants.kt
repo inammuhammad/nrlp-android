@@ -39,6 +39,9 @@ object ErrorCodesConstants {
     const val INCORRECT_INFORMATION="PU-VA-01"
     const val ATTEMPTS_EXCEEDED="PU-VA-99"
     const val NEW_VERSION = "GEN-ERR-19"
+    const val REMITTANCE_OLDER_DATE = "AUTH-SA-21"
+    const val REMITTANCE_SAME_DATE = "AUTH-SA-20"
+    const val REMITTANCE_RDA_TRANSACTION= "AUTH-SA-19"
 }
 
 
@@ -69,6 +72,7 @@ object ErrorDialogConstants {
     const val TAG_SESSION_EXPIRED = "session_expired"
     const val RC_NEW_VERSION = 1023
     const val TAG_NEW_VERSION = "new_version_available"
+    const val REMITTANCE_DIALOG = 1030
 }
 
 object HeaderConstants {

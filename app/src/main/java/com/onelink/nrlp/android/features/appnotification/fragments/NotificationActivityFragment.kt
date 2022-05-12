@@ -1,8 +1,5 @@
 package com.onelink.nrlp.android.features.appnotification.fragments
 
-//this is a type of notification, not a specific fragment for the parent activity
-//types required by client: complaints, activity & announcements
-
 import androidx.lifecycle.ViewModelProvider
 import com.onelink.nrlp.android.R
 import com.onelink.nrlp.android.core.BaseFragment

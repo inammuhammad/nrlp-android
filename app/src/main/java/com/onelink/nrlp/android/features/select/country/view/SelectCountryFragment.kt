@@ -70,7 +70,8 @@ class SelectCountryFragment(type: String = "beneficiary") :
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                countryAdapter.filter.filter(newText)
+                if(::countryAdapter.isInitialized)
+                    countryAdapter.filter.filter(newText)
                 return false
             }
 

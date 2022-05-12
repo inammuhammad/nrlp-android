@@ -112,12 +112,12 @@
     <string name="register_success_msg_beneficiary">Thank you for registering as a Beneficiary for Sohni Dharti Remittance Program.</string>
     <string name="done">Done</string>
     <string name="register">Register</string>
-    <string name="reference_num_hint">xxxxxxxxxxxxxxxxx</string>
+    <string name="reference_num_hint">xxxxxxxxxxxxxx</string>
     <string name="agent_code_hint">xxxxxx</string>
     <string name="new_pass_hint">e.g. P@kistan$555</string>
     <string name="registration_code_hint">xxxx</string>
     <string name="amount_prefix">PKR </string>
-    <string name="amount_hint">xx,xxx</string>
+    <string name="amount_hint">PKR xx,xxx</string>
     <string name="psid">The amount against PSID %1$s is PKR %2$s.Confirm amount for Redeem Points at %3$s.</string>
     <string name="tracking">The amount against Tracking ID: %1$s is PKR %2$s.Confirm amount for Redeem Points at %3$s.</string>
     <string name="voucher_no">The amount against Voucher No. %1$s is PKR %2$s.Confirm amount for Redeem Points at %3$s.</string>
@@ -445,6 +445,7 @@
     <string name="error_enter_details">Please enter details</string>
     <string name="error_beneficiary_country">Please select Country</string>
     <string name="error_transaction_date">Please select Transaction Date</string>
+    <string name="select_transaction_type">Select Transaction Type</string>
     <string name="error_place_of_birth">Please enter a correct Place of Birth</string>
     <string name="hint_place_of_birth" translatable="false">Islamabad</string>
     <string name="father_name">Father Name *</string>
@@ -456,4 +457,7 @@
     <string name="error_invalid_reference_number">Please enter a valid Reference/TT Number</string>
     <string name="stars" translatable="false"> stars</string>
     <string name="enter_beneficiary_acc_num">Enter Beneficiary Account Number/IBAN on which remittance is sent</string>
+    <string name="error_remittance_sent_prior">Remittances sent prior to October 1st, 2021, are not eligible for the Sohni Dharti Remittance Program.</string>
+    <string name="error_remittance_same_date">Please wait for 3 working days after your remittance has been processed to Self-Award points.</string>
+    <string name="error_remittance_rda_transaction">RDA customers shall only be eligible for auto awarding of points against the amount which is consumed locally and cannot be repatriated.</string>
 </resources>

@@ -129,12 +129,12 @@
     <string name="register_success_msg_beneficiary">سوہنی دھرتی ریمیٹنس پروگرام رجسٹر کرنے کا شکریہ۔</string>
     <string name="done">مکمل</string>
     <string name="register">رجسٹر کریں</string>
-    <string name="reference_num_hint">xxxxxxxxxxxxxxxxx</string>
+    <string name="reference_num_hint">xxxxxxxxxxxxxx</string>
     <string name="agent_code_hint">xxxxxx</string>
     <string name="new_pass_hint">e.g. P@kistan$555</string>
     <string name="registration_code_hint">xxxx</string>
     <string name="amount_prefix">پاکستانی روپیہ </string>
-    <string name="amount_hint">10,000</string>
+    <string name="amount_hint">پاکستانی روپیہxx,xxx</string>
     <string name="otp_not_received">کیا آپ کو او ٹی پی نہیں ملا؟</string>
     <string name="dont_have_account">کیا آپ کا یوزر اکاؤنٹ نہیں ہے؟</string>
     <string name="view_remittance_benefits">سوہنی دھرتی ریمیٹینس پروگرام کے فوائد دیکھیں</string>
@@ -355,8 +355,8 @@
     <string name="unable_to_transfer_points">پوانٹس منتقل کرنے سے قاصر</string>
     <string name="unable_to_add_beneficiary">وصول کنندہ کو شامل کرنے سے قاصر</string>
     <string name="redemption_issues">پوائنٹ استمال کرنے سے قاصر</string>
-    <string name="transaction_type">ٹرانزیکشن  کی قسم</string>
-    <string name="profile_change">پروفائل  کی  تبدیلی</string>
+    <string name="transaction_type">ٹرانزیکشن کی قسم</string>
+    <string name="profile_change">پروفائل کی تبدیلی</string>
     <string name="self_awarding">سیلف ایوارڈ</string>
     <string name="redemption">ریڈیمشن</string>
     <string name="redemption_partner">ریڈیمشن پاٹنر</string>
@@ -401,4 +401,8 @@
     <string name="proceed_to_playstore">Proceed to PlayStore</string>
     <string name="father_name">والد کا نام</string>
     <string name="remittance_transaction_type">ترسیلات زر کی قسم</string>
+    <string name="error_remittance_sent_prior">یکم اکتوبر 2021 سے قبل بھیجی گئی ترسیلات زر سوہنی دھرتی ترسیلات پروگرام کے اہل نہیں ہیں۔</string>
+    <string name="error_remittance_same_date">اپنی ترسیلات زر پر سیلف ایوارڈ پوائنٹس براہ کرم 3 کاروباری دنوں کا انتظار کریں کے لیے،</string>
+    <string name="error_remittance_rda_transaction">۔RDA کسٹمر صرف اس رقم کے بدلے آٹو ایوارڈنگ پوائنٹس کا اہل ہو گا جو مقامی طور پر استعمال ہوتی ہے اور اسے واپس نہیں لایا جا سکتا</string>
+    <string name="select_transaction_type">ٹرانزیکشن کی قسم درج کریں</string>
 </resources>

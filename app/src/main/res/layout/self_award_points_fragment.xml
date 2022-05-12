@@ -235,7 +235,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="8.5"
-                    android:text="@string/select_account_type"
+                    android:text="@string/select_transaction_type"
                     android:textColor="@color/grey" />
 
                 <ImageView

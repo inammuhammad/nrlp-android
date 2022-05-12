@@ -110,6 +110,9 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
                     ErrorCodesConstants.ATTEMPTS_EXCEEDED -> showAttemptsExceededDialog(fragment)
                     ErrorCodesConstants.PROFILE_VERIFICATION_FAILED -> showProfileUpdateVerificationFailedDialog(fragment)
                     ErrorCodesConstants.NEW_VERSION -> showNewVersionAvailableDialog(fragment)
+                    ErrorCodesConstants.REMITTANCE_OLDER_DATE -> showRemittanceOlderDateDialog(fragment)
+                    ErrorCodesConstants.REMITTANCE_SAME_DATE -> showRemittanceSameDateDialog(fragment)
+                    ErrorCodesConstants.REMITTANCE_RDA_TRANSACTION -> showRDATransactionDialog(fragment)
                     else -> showRemoteErrorDialog(fragment, it)
                 }
             }
@@ -270,6 +273,48 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
             .setPositiveButtonText("")
             .setCancelable(false)
             .show(parentFragmentManager, ErrorDialogConstants.TAG_SESSION_EXPIRED)
+    }
+
+    private fun showRemittanceOlderDateDialog(fragment: Fragment){
+        OneLinkAlertDialogsFragment.Builder()
+            .setTargetFragment(fragment, ErrorDialogConstants.REMITTANCE_DIALOG)
+            .setIsAlertOnly(true)
+            .setDrawable(R.drawable.ic_oh_snap)
+            .setTitle(getString(R.string.oh_snap))
+            .setMessage(getString(R.string.error_remittance_sent_prior).toSpanned())
+            .setNeutralButtonText(getString(R.string.okay))
+            .setNegativeButtonText("")
+            .setPositiveButtonText("")
+            .setCancelable(false)
+            .show(parentFragmentManager, ErrorDialogConstants.TAG_NO_INTERNET_CONNECTION_DIALOG)
+    }
+
+    private fun showRemittanceSameDateDialog(fragment: Fragment){
+        OneLinkAlertDialogsFragment.Builder()
+            .setTargetFragment(fragment, ErrorDialogConstants.REMITTANCE_DIALOG)
+            .setIsAlertOnly(true)
+            .setDrawable(R.drawable.ic_oh_snap)
+            .setTitle(getString(R.string.oh_snap))
+            .setMessage(getString(R.string.error_remittance_same_date).toSpanned())
+            .setNeutralButtonText(getString(R.string.okay))
+            .setNegativeButtonText("")
+            .setPositiveButtonText("")
+            .setCancelable(false)
+            .show(parentFragmentManager, ErrorDialogConstants.TAG_NO_INTERNET_CONNECTION_DIALOG)
+    }
+
+    private fun showRDATransactionDialog(fragment: Fragment){
+        OneLinkAlertDialogsFragment.Builder()
+            .setTargetFragment(fragment, ErrorDialogConstants.REMITTANCE_DIALOG)
+            .setIsAlertOnly(true)
+            .setDrawable(R.drawable.ic_oh_snap)
+            .setTitle(getString(R.string.oh_snap))
+            .setMessage(getString(R.string.error_remittance_rda_transaction).toSpanned())
+            .setNeutralButtonText(getString(R.string.okay))
+            .setNegativeButtonText("")
+            .setPositiveButtonText("")
+            .setCancelable(false)
+            .show(parentFragmentManager, ErrorDialogConstants.TAG_NO_INTERNET_CONNECTION_DIALOG)
     }
 
     override fun onNeutralButtonClicked(targetCode: Int) {
