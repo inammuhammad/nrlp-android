@@ -142,6 +142,11 @@
     <fields>;
 }
 
+-keep class com.onelink.nrlp.android.features.appnotification.models**{
+    public ** component1();
+    <fields>;
+}
+
 #Custom Views
 
 -keep class com.onelink.nrlp.android.common.views**{

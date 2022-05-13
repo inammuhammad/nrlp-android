@@ -45,8 +45,8 @@ class CustomToolbar : ConstraintLayout {
     }
 
     fun setRightButtonVisible(visible: Boolean) {
-        if (visible) ivRight.visibility = View.VISIBLE
-        else ivRight.visibility = View.GONE
+        if (visible) tvRight.visibility = View.VISIBLE
+        else tvRight.visibility = View.GONE
     }
 
     fun setNotificationCountVisible(visible: Boolean) {
@@ -59,7 +59,7 @@ class CustomToolbar : ConstraintLayout {
     }
 
     fun setRightButtonClickListener(onClickListener: OnClickListener) {
-        ivRight.setOnClickListener(onClickListener)
+        tvRight.setOnClickListener(onClickListener)
     }
 
     fun showBorderView(boolean: Boolean) {

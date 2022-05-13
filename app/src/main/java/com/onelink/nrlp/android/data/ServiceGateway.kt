@@ -3,6 +3,9 @@
 package com.onelink.nrlp.android.data
 
 import com.google.gson.JsonObject
+import com.onelink.nrlp.android.features.appnotification.models.NotificationReadRequestModel
+import com.onelink.nrlp.android.features.appnotification.models.NotificationsListRequestModel
+import com.onelink.nrlp.android.features.appnotification.models.NotificationsListResponse
 import com.onelink.nrlp.android.features.beneficiary.models.AddBeneficiaryRequestModel
 import com.onelink.nrlp.android.features.beneficiary.models.DeleteBeneficiaryRequestModel
 import com.onelink.nrlp.android.features.beneficiary.models.ResendBeneficiaryOtpRequestModel
@@ -24,7 +27,6 @@ import com.onelink.nrlp.android.features.nrlpBenefits.model.NrlpPartnerResponseM
 import com.onelink.nrlp.android.features.profile.models.ProfileResponseModel
 import com.onelink.nrlp.android.features.rate.model.RateRedemptionRequestModel
 import com.onelink.nrlp.android.features.receiver.models.AddReceiverRequestModel
-import com.onelink.nrlp.android.features.receiver.models.BanksListResponse
 import com.onelink.nrlp.android.features.receiver.models.DeleteReceiverRequestModel
 import com.onelink.nrlp.android.features.receiver.models.ReceiversResponseModel
 import com.onelink.nrlp.android.features.redeem.model.*
@@ -243,4 +245,14 @@ interface ServiceGateway {
 
     @POST("nrlp-redemption-rating/")
     fun rateRedemption(@Body body: RateRedemptionRequestModel): Single<Response<GeneralMessageResponseModel>>
+
+    @POST("nrlp-notification-list/")
+    fun getUserNotifications(@Body body: NotificationsListRequestModel): Single<Response<NotificationsListResponse>>
+
+    @POST("nrlp-notification-read/")
+    fun markNotificationRead(@Body body: NotificationReadRequestModel): Single<Response<GeneralMessageResponseModel>>
+
+    @POST("nrlp-notification-delete/")
+    fun deleteNotification(@Body body: NotificationReadRequestModel): Single<Response<GeneralMessageResponseModel>>
+
 }

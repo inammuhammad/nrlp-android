@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+
+        <variable
+            name="notif"
+            type="com.onelink.nrlp.android.features.appnotification.models.NotificationListItemModel" />
+    </data>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -15,6 +22,7 @@
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/ivDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/ivDotMenu"
@@ -22,6 +30,7 @@
         app:layout_constraintEnd_toEndOf="@id/ivDotMenu"
         app:layout_constraintBottom_toBottomOf="parent"
         style="@style/TextViewCustomNotification"
+        android:gravity="center"
         android:text="Delete"
         android:visibility="gone"
         android:drawablePadding="@dimen/_2sdp"
@@ -43,7 +52,7 @@
             android:id="@+id/tvNotificationDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/app_name"
+            android:text="@{notif.notificationMessage}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -62,6 +71,7 @@
         app:layout_constraintTop_toBottomOf="@id/lyNotificationItem"
         app:layout_constraintStart_toStartOf="@id/lyNotificationItem"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:text="12 apr"/>
+        android:text="@{notif.notificationDateTime}"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

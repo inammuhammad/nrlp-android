@@ -42,6 +42,22 @@
         android:background="@color/outline"
         app:layout_constraintBottom_toBottomOf="parent" />
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvRight"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Notifications"
+        style="@style/TextViewToolbarHeading"
+        android:textSize="@dimen/_11sdp"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:drawableEnd="@drawable/ic_notification_bell"
+        android:layout_marginEnd="@dimen/_15sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <ImageView
         android:id="@+id/ivRight"
         android:textAlignment="viewStart"
@@ -60,9 +76,10 @@
         android:id="@+id/tvNotificationCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/ivRight"
-        app:layout_constraintStart_toStartOf="@id/ivRight"
-        android:layout_marginStart="@dimen/_22sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginEnd="@dimen/_6sdp"
         android:text="12"
         android:visibility="gone"
         />
