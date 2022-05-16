@@ -13,12 +13,15 @@ import com.onelink.nrlp.android.features.appnotification.models.NotificationRead
 import com.onelink.nrlp.android.features.appnotification.models.NotificationsListRequestModel
 import com.onelink.nrlp.android.features.appnotification.viewmodels.AppNotificationViewModel
 import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
+import com.onelink.nrlp.android.utils.setOnSingleClickListener
 import dagger.android.support.AndroidSupportInjection
 import java.lang.Exception
 import javax.inject.Inject
 
 class NotificationComplaintFragment :
     BaseFragment<AppNotificationViewModel, FragmentNotificationComplaintBinding>(AppNotificationViewModel::class.java) {
+
+    private var pageNum = 1
 
     @Inject
     lateinit var oneLinkProgressDialog: OneLinkProgressDialog
@@ -39,16 +42,28 @@ class NotificationComplaintFragment :
 
     override fun init(savedInstanceState: Bundle?) {
         super.init(savedInstanceState)
-        // initListeners()
+        initListeners()
         initObservers()
+    }
+
+    private fun initListeners() {
+        binding.btnLoadMore.setOnSingleClickListener {
+            pageNum += 1
+            viewModel.getNotifications(
+                NotificationsListRequestModel(
+                    page = pageNum.toString(),
+                    perPage = "5"
+            )
+            )
+        }
     }
 
     private fun initObservers(){
         viewModel.getNotifications(NotificationsListRequestModel(
-            /*page = "1",
-            perPage = "20",
-            cnic = UserData.getUser()?.cnicNicop.toString(),
-            notificationType = "complaint"*/
+            page = pageNum.toString(),
+            perPage = "5",
+            //cnic = UserData.getUser()?.cnicNicop.toString(),
+            //notificationType = "complaint"
         ))
         viewModel.observeNotifications().observe(this, Observer { response ->
             when (response.status) {
@@ -56,23 +71,32 @@ class NotificationComplaintFragment :
                     oneLinkProgressDialog.hideProgressDialog()
                     response.data?.let {
                         val list = it.data.records
-                        adapter = NotificationsListAdapter(context, list, { notificationItem ->
-                            Log.d(TAG, notificationItem.isReadFlag.toString())
-                            try {
-                                if (notificationItem.isReadFlag!! == 0){
-                                    viewModel.markNotificationRead(NotificationReadRequestModel(
-                                        notificationItem.id.toString()
-                                    ))
+                        if (pageNum <= 1) {
+                            adapter = NotificationsListAdapter(context, list, { notificationItem ->
+                                Log.d(TAG, notificationItem.isReadFlag.toString())
+                                try {
+                                    if (notificationItem.isReadFlag!! == 0) {
+                                        viewModel.markNotificationRead(
+                                            NotificationReadRequestModel(notificationItem.id.toString())
+                                        )
+                                    }
+                                } catch (e: Exception) {
                                 }
-                            }catch(e: Exception){}
-                        }, { notificationDeleteItem ->
-                            viewModel.deleteNotifications(NotificationReadRequestModel(
-                                notificationDeleteItem.id.toString()
-                            ))
-                            list.remove(notificationDeleteItem)
-                            adapter.notifyDataSetChanged()
-                        })
-                        binding.rvNotificationsList.adapter = adapter
+                            }, { notificationDeleteItem ->
+                                viewModel.deleteNotifications(
+                                    NotificationReadRequestModel(
+                                        notificationDeleteItem.id.toString()
+                                    )
+                                )
+                                list.remove(notificationDeleteItem)
+                                adapter.notifyDataSetChanged()
+                            })
+                            binding.rvNotificationsList.adapter = adapter
+                        }
+                        else{
+                            adapter.addItems(list)
+                            //adapter.notifyDataSetChanged()
+                        }
                     }
                 }
                 Status.LOADING -> {

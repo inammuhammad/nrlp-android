@@ -10,7 +10,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.onelink.nrlp.android.R
 import com.onelink.nrlp.android.databinding.ItemPushNotificationBinding
 import com.onelink.nrlp.android.features.appnotification.models.NotificationListItemModel
+import com.onelink.nrlp.android.features.select.city.model.CitiesModel
 import com.onelink.nrlp.android.utils.setOnSingleClickListener
+import com.onelink.nrlp.android.utils.toFormattedDate
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class NotificationsListAdapter(
     private val context: Context?,
@@ -18,6 +23,11 @@ class NotificationsListAdapter(
     private val listener: (NotificationListItemModel) -> Unit,
     private val deleteListener: (NotificationListItemModel) -> Unit
 ) : RecyclerView.Adapter<NotificationsListAdapter.NotificationsListViewHolder>() {
+
+    fun addItems(newList: ArrayList<NotificationListItemModel>){
+        notificationsList.addAll(newList)
+        this.notifyDataSetChanged()
+    }
 
     override fun getItemCount(): Int = notificationsList.size
 
@@ -56,6 +66,7 @@ class NotificationsListAdapter(
                 ivDelete.visibility = View.GONE
                 deleteListener(notificationsList[position])
             }
+            tvDateTime.text = formattedDate(notificationsList[position].notificationDateTime.toString())
             if(notificationsList[position].isReadFlag == 1)
                 notificationReadColour(lyNotificationItem)
             else
@@ -77,5 +88,12 @@ class NotificationsListAdapter(
                 it
             )
         }
+    }
+
+    private fun formattedDate(rawDate: String): String {
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US)
+        dateFormat.timeZone = TimeZone.getTimeZone("GMT")
+        val dateString: Date = dateFormat.parse(rawDate) ?: Date()
+        return (SimpleDateFormat("d MMM").format(dateString) + "at " + SimpleDateFormat("hh:mm aaa").format(dateString))
     }
 }
