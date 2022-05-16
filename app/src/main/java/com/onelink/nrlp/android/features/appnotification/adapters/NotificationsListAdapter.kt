@@ -38,10 +38,12 @@ class NotificationsListAdapter(
             tvNotificationDetails.text = notificationsList[position].notificationMessage
             lyNotificationItem.setOnSingleClickListener {
                 listener(notificationsList[position])
+                notificationsList[position].isReadFlag = 1
                 notificationReadColour(lyNotificationItem)
             }
             tvNotificationDetails.setOnSingleClickListener {
                 listener(notificationsList[position])
+                notificationsList[position].isReadFlag = 1
                 notificationReadColour(lyNotificationItem)
             }
             ivDotMenu.setOnSingleClickListener {
@@ -51,15 +53,26 @@ class NotificationsListAdapter(
                     ivDelete.visibility = View.GONE
             }
             ivDelete.setOnSingleClickListener {
+                ivDelete.visibility = View.GONE
                 deleteListener(notificationsList[position])
             }
             if(notificationsList[position].isReadFlag == 1)
                 notificationReadColour(lyNotificationItem)
+            else
+                notificationUnReadColour(lyNotificationItem)
         }
     }
 
     private fun notificationReadColour(view: View) {
         context?.let { ContextCompat.getColor(it, R.color.disabled_tv) }?.let {
+            view.setBackgroundColor(
+                it
+            )
+        }
+    }
+
+    private fun notificationUnReadColour(view: View) {
+        context?.let { ContextCompat.getColor(it, R.color.colorAccent) }?.let {
             view.setBackgroundColor(
                 it
             )

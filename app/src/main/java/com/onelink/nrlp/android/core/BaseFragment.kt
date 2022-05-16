@@ -1,14 +1,19 @@
 package com.onelink.nrlp.android.core
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
+import android.media.RingtoneManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.LayoutRes
+import androidx.core.app.NotificationCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
@@ -120,9 +125,9 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
     }
     protected fun showGeneralAlertDialog(fragment: Fragment, alert: String, msg: String) {
         when(alert) {
-            "Register" -> showRegisterHelpDialog(fragment,msg)
-            "SelfAward" -> showSelfAwardHelpDialog(fragment,msg)
-            "USD" -> showUSDHelpDialog(fragment,msg)
+            "Register" -> showRegisterHelpDialog(fragment, msg)
+            "SelfAward" -> showSelfAwardHelpDialog(fragment, msg)
+            "USD" -> showUSDHelpDialog(fragment, msg)
         }
     }
 
@@ -140,7 +145,7 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
             .show(parentFragmentManager, ErrorDialogConstants.TAG_NO_INTERNET_CONNECTION_DIALOG)
     }
 
-    private fun showRegisterHelpDialog(fragment: Fragment,msg: String){
+    private fun showRegisterHelpDialog(fragment: Fragment, msg: String){
         OneLinkAlertDialogsFragment.Builder()
             .setTargetFragment(fragment, ErrorDialogConstants.RC_NO_INTERNET_CONNECTION_DIALOG)
             .setIsAlertOnly(true)
@@ -153,7 +158,7 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
             .show(parentFragmentManager, ErrorDialogConstants.TAG_NO_INTERNET_CONNECTION_DIALOG)
     }
 
-    private fun showSelfAwardHelpDialog(fragment: Fragment,msg: String){
+    private fun showSelfAwardHelpDialog(fragment: Fragment, msg: String){
         OneLinkAlertDialogsFragment.Builder()
             .setTargetFragment(fragment, ErrorDialogConstants.RC_NO_INTERNET_CONNECTION_DIALOG)
             .setIsAlertOnly(true)
@@ -166,7 +171,7 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
             .show(parentFragmentManager, ErrorDialogConstants.TAG_NO_INTERNET_CONNECTION_DIALOG)
     }
 
-    private fun showUSDHelpDialog(fragment: Fragment,msg: String){
+    private fun showUSDHelpDialog(fragment: Fragment, msg: String){
         OneLinkAlertDialogsFragment.Builder()
             .setTargetFragment(fragment, ErrorDialogConstants.RC_NO_INTERNET_CONNECTION_DIALOG)
             .setIsAlertOnly(true)
@@ -184,7 +189,9 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
             .setIsAlertOnly(true)
             .setDrawable(R.drawable.ic_oh_snap)
             .setTitle(getString(R.string.oh_snap))
-            .setMessage((error.message ?: resources.getString(R.string.something_went_wrong)).toSpanned())
+            .setMessage(
+                (error.message ?: resources.getString(R.string.something_went_wrong)).toSpanned()
+            )
             .setNeutralButtonText(getString(R.string.okay))
             .setNegativeButtonText("")
             .setPositiveButtonText("")
@@ -346,14 +353,48 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
 
         fun addFragment(fragment: Fragment, clearBackStack: Boolean, addToBackStack: Boolean)
 
-        fun addFragment(fragment: Fragment, layoutId: Int, clearBackStack: Boolean, addToBackStack: Boolean)
+        fun addFragment(
+            fragment: Fragment,
+            layoutId: Int,
+            clearBackStack: Boolean,
+            addToBackStack: Boolean
+        )
 
         fun replaceFragment(fragment: Fragment, clearBackStack: Boolean, addToBackStack: Boolean)
 
-        fun replaceFragment(fragment: Fragment, layoutId: Int, clearBackStack: Boolean, addToBackStack: Boolean)
+        fun replaceFragment(
+            fragment: Fragment,
+            layoutId: Int,
+            clearBackStack: Boolean,
+            addToBackStack: Boolean
+        )
 
         fun onBack()
 
         fun getCurrentFragment(): Fragment?
+    }
+
+    fun sendNotification(title: String?, body: String?, channelId: String) {
+        val notificationManager =
+            context?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        // Since android Oreo notification channel is needed.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                channelId,
+                "Sohni Dharti Notifications",
+                NotificationManager.IMPORTANCE_HIGH
+            )
+            notificationManager.createNotificationChannel(channel)
+        }
+
+        val uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+        val builder = NotificationCompat.Builder(requireContext(), channelId)
+            .setContentTitle(title)
+            //.setContentIntent(pendingIntent)
+            .setContentText(body)
+            .setAutoCancel(true)
+            .setSmallIcon(R.mipmap.ic_launcher)
+            .setSound(uri)
+        notificationManager.notify(System.currentTimeMillis().toInt(), builder.build())
     }
 }

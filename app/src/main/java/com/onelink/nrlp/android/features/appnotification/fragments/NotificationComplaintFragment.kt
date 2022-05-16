@@ -26,6 +26,8 @@ class NotificationComplaintFragment :
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
+    lateinit var adapter: NotificationsListAdapter
+
     override fun getLayoutRes() = R.layout.fragment_notification_complaint
 
     override fun onInject() {
@@ -54,21 +56,23 @@ class NotificationComplaintFragment :
                     oneLinkProgressDialog.hideProgressDialog()
                     response.data?.let {
                         val list = it.data.records
-                        binding.rvNotificationsList.adapter =
-                            NotificationsListAdapter(context, list, { notificationItem ->
-                                Log.d(TAG, notificationItem.isReadFlag.toString())
-                                try {
-                                    if (notificationItem.isReadFlag!! == 0){
-                                        viewModel.markNotificationRead(NotificationReadRequestModel(
-                                            notificationItem.id.toString()
-                                        ))
-                                    }
-                                }catch(e: Exception){}
-                            }, { notificationDeleteItem ->
-                                viewModel.deleteNotifications(NotificationReadRequestModel(
-                                    notificationDeleteItem.id.toString()
-                                ))
-                            })
+                        adapter = NotificationsListAdapter(context, list, { notificationItem ->
+                            Log.d(TAG, notificationItem.isReadFlag.toString())
+                            try {
+                                if (notificationItem.isReadFlag!! == 0){
+                                    viewModel.markNotificationRead(NotificationReadRequestModel(
+                                        notificationItem.id.toString()
+                                    ))
+                                }
+                            }catch(e: Exception){}
+                        }, { notificationDeleteItem ->
+                            viewModel.deleteNotifications(NotificationReadRequestModel(
+                                notificationDeleteItem.id.toString()
+                            ))
+                            list.remove(notificationDeleteItem)
+                            adapter.notifyDataSetChanged()
+                        })
+                        binding.rvNotificationsList.adapter = adapter
                     }
                 }
                 Status.LOADING -> {
