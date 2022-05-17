@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.onelink.nrlp.android.features.home.fragments.HomeFragmentViewModel" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".features.home.fragments.FatherNameVerificationFragment">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvFatherNameHeader"
+        style="@style/TextViewSubHeading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/please_enter_father_name"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/fatherNameLL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/tvFatherNameHeader">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/TextViewSubHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/father_name" />
+
+        </LinearLayout>
+
+        <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
+            android:id="@+id/tilFatherName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/unit_8dp"
+            app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance">
+
+            <com.onelink.nrlp.android.widgets.OneLinkEditText
+                android:id="@+id/etFatherName"
+                style="@style/EditTextFixedDigits"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/mother_maiden_name_placeholder"
+                android:inputType="textCapWords|textCapSentences"
+                android:maxLength="50"
+                android:nextFocusDown="@id/etCnicNicop"
+                android:nextFocusForward="@id/etCnicNicop"
+                android:text="@={viewModel.mothersMaidenName}" />
+        </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="@dimen/unit_32dp"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/btnNext"
+            style="@style/ButtonTheme"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/unit_0dp"
+            android:layout_marginEnd="@dimen/unit_4dp"
+            android:layout_weight="1"
+            android:text="@string/next" />
+
+        <Button
+            android:id="@+id/btnCancel"
+            style="@style/ButtonTheme"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/unit_4dp"
+            android:layout_marginTop="@dimen/unit_0dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_corners_green"
+            android:text="@string/cancel"
+            android:textColor="@color/green" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

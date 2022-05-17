@@ -460,4 +460,5 @@
     <string name="error_remittance_sent_prior">Remittances sent prior to October 1st, 2021, are not eligible for the Sohni Dharti Remittance Program.</string>
     <string name="error_remittance_same_date">Please wait for 3 working days after your remittance has been processed to Self-Award points.</string>
     <string name="error_remittance_rda_transaction">RDA customers shall only be eligible for auto awarding of points against the amount which is consumed locally and cannot be repatriated.</string>
+    <string name="please_enter_father_name">Please provide Father Name for verification purpose</string>
 </resources>

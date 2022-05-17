@@ -120,6 +120,7 @@ open class HomeFragment :
                     it.loyaltyLevel
                 )*/
             }
+            (activity as HomeActivity).setNotificationCount(it.notificationCount.toString())
            // binding.lyTitle.tvLoyaltyLevel.text = it.loyaltyLevel.capitalize(Locale.getDefault())
         }
     }

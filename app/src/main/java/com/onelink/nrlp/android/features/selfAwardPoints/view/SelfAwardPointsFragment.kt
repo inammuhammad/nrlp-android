@@ -27,6 +27,7 @@ import com.onelink.nrlp.android.features.selfAwardPoints.viewmodel.SelfAwardPoin
 import com.onelink.nrlp.android.features.selfAwardPoints.viewmodel.SelfAwardPointsSharedViewModel
 import com.onelink.nrlp.android.features.viewStatement.fragments.AdvancedLoyaltyStatementFragment
 import com.onelink.nrlp.android.utils.SelfAwardRequestConstants
+import com.onelink.nrlp.android.utils.cleanNicNumber
 import com.onelink.nrlp.android.utils.colorToText
 import com.onelink.nrlp.android.utils.dialogs.OneLinkAlertDialogsFragment
 import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
@@ -142,7 +143,7 @@ class SelfAwardPointsFragment :
                 )
                 selfAwardPointsRequest.addProperty(
                     SelfAwardRequestConstants.Beneficiary_ACCOUNT_NUMBER,
-                    binding.etAccountNumber.text.toString()
+                    binding.etAccountNumber.text.toString().cleanNicNumber()
                 )
                 selfAwardPointsRequest.addProperty(
                     SelfAwardRequestConstants.Transaction_Date,

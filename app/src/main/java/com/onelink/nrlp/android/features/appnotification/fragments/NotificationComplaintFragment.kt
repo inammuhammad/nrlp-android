@@ -7,11 +7,13 @@ import androidx.lifecycle.ViewModelProvider
 import com.onelink.nrlp.android.R
 import com.onelink.nrlp.android.core.BaseFragment
 import com.onelink.nrlp.android.core.Status
+import com.onelink.nrlp.android.data.local.UserData
 import com.onelink.nrlp.android.databinding.FragmentNotificationComplaintBinding
 import com.onelink.nrlp.android.features.appnotification.adapters.NotificationsListAdapter
 import com.onelink.nrlp.android.features.appnotification.models.NotificationReadRequestModel
 import com.onelink.nrlp.android.features.appnotification.models.NotificationsListRequestModel
 import com.onelink.nrlp.android.features.appnotification.viewmodels.AppNotificationViewModel
+import com.onelink.nrlp.android.features.profile.enabled
 import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
 import com.onelink.nrlp.android.utils.setOnSingleClickListener
 import dagger.android.support.AndroidSupportInjection
@@ -52,7 +54,7 @@ class NotificationComplaintFragment :
             viewModel.getNotifications(
                 NotificationsListRequestModel(
                     page = pageNum.toString(),
-                    perPage = "5"
+                    perPage = "10"
             )
             )
         }
@@ -61,7 +63,7 @@ class NotificationComplaintFragment :
     private fun initObservers(){
         viewModel.getNotifications(NotificationsListRequestModel(
             page = pageNum.toString(),
-            perPage = "5",
+            perPage = "10",
             //cnic = UserData.getUser()?.cnicNicop.toString(),
             //notificationType = "complaint"
         ))
@@ -71,6 +73,7 @@ class NotificationComplaintFragment :
                     oneLinkProgressDialog.hideProgressDialog()
                     response.data?.let {
                         val list = it.data.records
+                        binding.btnLoadMore.isEnabled = list.size > 20
                         if (pageNum <= 1) {
                             adapter = NotificationsListAdapter(context, list, { notificationItem ->
                                 Log.d(TAG, notificationItem.isReadFlag.toString())

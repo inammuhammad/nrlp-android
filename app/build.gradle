@@ -65,7 +65,7 @@ android {
         debug {
             signingConfig signingConfigs.debug
             testCoverageEnabled = true
-            //applicationIdSuffix ".dev"
+            applicationIdSuffix ".dev"
             versionNameSuffix "-dev"
             minifyEnabled false
             shrinkResources = false

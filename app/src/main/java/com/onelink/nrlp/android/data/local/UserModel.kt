@@ -28,5 +28,6 @@ data class UserModel(
     val cnicNicopIssuanceDate: String?,
     val nadraVerified: String?,
     val requireNadraVerification: Boolean?,
-    val receiverCount: Int?
+    val receiverCount: Int?,
+    val notificationCount: Int?
 )

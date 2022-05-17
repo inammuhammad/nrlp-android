@@ -33,4 +33,8 @@ abstract class HomeFragmentBuilder {
     @FragmentScope
     @ContributesAndroidInjector
     abstract fun selectCityFragment(): SelectCityFragment
+
+    @FragmentScope
+    @ContributesAndroidInjector
+    abstract fun provideFatherNameVerificationFragment(): FatherNameVerificationFragment
 }

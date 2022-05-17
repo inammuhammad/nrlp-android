@@ -104,7 +104,7 @@ class AdvancedLoyaltyStatementFragment :
         }
 
         btnNext.setOnClickListener {
-            if (viewModel.validationsPassed(etEmailAddress.text.toString())) {
+            //if (viewModel.validationsPassed(etEmailAddress.text.toString())) {
                 viewModel.getDetailedStatements(
                     DetailedStatementRequestModel(
                         email = etEmailAddress.text.toString(),
@@ -112,7 +112,7 @@ class AdvancedLoyaltyStatementFragment :
                         toDate = viewModel.getDateInApiFormat(viewModel.rawToDate.value.toString())
                     )
                 )
-            }
+            //}
         }
     }
 

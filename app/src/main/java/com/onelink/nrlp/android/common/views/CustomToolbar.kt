@@ -54,12 +54,27 @@ class CustomToolbar : ConstraintLayout {
         else tvNotificationCount.visibility = View.GONE
     }
 
+    fun setNotificationCount(count: String) {
+        tvNotificationCount.text = count
+    }
+
     fun setLeftButtonClickListener(onClickListener: OnClickListener) {
         ivLeft.setOnClickListener(onClickListener)
     }
 
     fun setRightButtonClickListener(onClickListener: OnClickListener) {
         tvRight.setOnClickListener(onClickListener)
+    }
+
+    fun titleWithDrawableVisible(visible: Boolean) {
+        if(visible) {
+            tvCenter.visibility = View.VISIBLE
+            tvTitle.visibility = View.GONE
+        }
+        else {
+            tvCenter.visibility = View.GONE
+            tvTitle.visibility = View.VISIBLE
+        }
     }
 
     fun showBorderView(boolean: Boolean) {

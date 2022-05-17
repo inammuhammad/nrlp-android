@@ -94,6 +94,6 @@ class NotificationsListAdapter(
         val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US)
         dateFormat.timeZone = TimeZone.getTimeZone("GMT")
         val dateString: Date = dateFormat.parse(rawDate) ?: Date()
-        return (SimpleDateFormat("d MMM").format(dateString) + "at " + SimpleDateFormat("hh:mm aaa").format(dateString))
+        return (SimpleDateFormat("d MMM").format(dateString) + " at " + SimpleDateFormat("hh:mm aaa").format(dateString))
     }
 }

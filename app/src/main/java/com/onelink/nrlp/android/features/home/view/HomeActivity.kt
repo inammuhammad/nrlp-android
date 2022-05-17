@@ -274,6 +274,10 @@ class HomeActivity :
         startActivity(InAppNotificationActivity.newNotificationActivityIntent(this))
     }
 
+    fun setNotificationCount(count: String) {
+        binding.toolbar.setNotificationCount(count)
+    }
+
     override fun onResume() {
         super.onResume()
         val fragment = getCurrentFragment() as BaseFragment<*, *>?

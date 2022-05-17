@@ -27,7 +27,7 @@ class InAppNotificationActivity:
 
     override fun initViewModel(viewModel: AppNotificationViewModel) {
         binding.toolbar.showBorderView(true)
-        binding.toolbar.setTitle(getString(R.string.chuck_method))
+        binding.toolbar.titleWithDrawableVisible(true)
         binding.toolbar.setLeftButtonClickListener(View.OnClickListener { onBack() })
         initView()
     }
