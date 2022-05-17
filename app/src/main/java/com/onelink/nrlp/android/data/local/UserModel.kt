@@ -29,5 +29,6 @@ data class UserModel(
     val nadraVerified: String?,
     val requireNadraVerification: Boolean?,
     val receiverCount: Int?,
-    val notificationCount: Int?
+    val notificationCount: Int?,
+    val country: String?
 )

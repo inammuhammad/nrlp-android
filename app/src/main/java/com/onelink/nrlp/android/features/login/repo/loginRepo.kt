@@ -66,7 +66,8 @@ open class LoginRepo @Inject constructor(
             nadraVerified = loginResponseModel.loginModel.nadraVerified,
             requireNadraVerification = loginResponseModel.loginModel.requireNadraVerification,
             receiverCount = 0,
-            notificationCount = loginResponseModel.loginModel.notification_count
+            notificationCount = loginResponseModel.loginModel.notification_count,
+            country = loginResponseModel.loginModel.country
         )
     }
 

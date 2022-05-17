@@ -139,11 +139,11 @@ class SelfAwardPointsFragment :
                 )
                 selfAwardPointsRequest.addProperty(
                     SelfAwardRequestConstants.Beneficiary_NIC_NICOP,
-                    binding.etCnicAccountNumber.text.toString(),
+                    binding.etCnicAccountNumber.text.toString().cleanNicNumber(),
                 )
                 selfAwardPointsRequest.addProperty(
                     SelfAwardRequestConstants.Beneficiary_ACCOUNT_NUMBER,
-                    binding.etAccountNumber.text.toString().cleanNicNumber()
+                    binding.etAccountNumber.text.toString()
                 )
                 selfAwardPointsRequest.addProperty(
                     SelfAwardRequestConstants.Transaction_Date,
@@ -151,7 +151,7 @@ class SelfAwardPointsFragment :
                 )
                 selfAwardPointsRequest.addProperty(
                     SelfAwardRequestConstants.Transaction_TYPE,
-                    viewModel.transactionType.value,
+                    "COC" //viewModel.transactionType.value,
                 )
 
                 selfAwardPointSharedViewModel?.setSelfAwardPointsFlowDataModel(
@@ -183,7 +183,7 @@ class SelfAwardPointsFragment :
                 )
                 selfAwardPointsRequest.addProperty(
                     SelfAwardRequestConstants.Transaction_TYPE,
-                    viewModel.transactionType.value,
+                    "ACC" //viewModel.transactionType.value,
                 )
 
                 selfAwardPointSharedViewModel?.setSelfAwardPointsFlowDataModel(

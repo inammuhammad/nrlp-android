@@ -27,5 +27,6 @@ data class UserProfileModel(
     @SerializedName("nadra_verified") val nadraVerified: String?,
     @SerializedName("require_nadra_verification") val requireNadraVerification: Boolean?,
     @SerializedName("receiver_count") val receiverCount: Int?,
-    @SerializedName("notification_count") val notificationCount: Int?
+    @SerializedName("notification_count") val notificationCount: Int?,
+    @SerializedName("country") val country: String?
 )

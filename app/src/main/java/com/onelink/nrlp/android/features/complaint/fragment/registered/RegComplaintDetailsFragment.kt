@@ -798,7 +798,7 @@ class RegComplaintDetailsFragment:
         )
         jsonObject.addProperty(
             ComplaintRequestModelConstants.Country_of_residence,
-            UserData.getUser()?.placeOfBirth
+            UserData.getUser()?.country
         )
         when(viewModel.complaintType.value){
 

@@ -71,7 +71,8 @@ class HomeRepo @Inject constructor(
             nadraVerified = userProfileModel.nadraVerified,
             requireNadraVerification = userProfileModel.requireNadraVerification,
             receiverCount = userProfileModel.receiverCount,
-            notificationCount = userProfileModel.notificationCount
+            notificationCount = userProfileModel.notificationCount,
+            country = userProfileModel.country
         )
     }
 

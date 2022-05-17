@@ -35,6 +35,7 @@ data class LoginModel(
     @SerializedName("nadra_verified") val nadraVerified: String?,
     @SerializedName("require_nadra_verification") val requireNadraVerification: Boolean?,
     @SerializedName("notification_count") val notification_count: Int?,
+    @SerializedName("country") val country: String?,
 
 ) {
     companion object {
@@ -58,7 +59,8 @@ data class LoginModel(
             "",
             "",
             false,
-            0
+            0,
+            ""
         )
     }
 }
