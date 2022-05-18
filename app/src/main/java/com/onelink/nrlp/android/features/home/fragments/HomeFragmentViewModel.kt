@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.onelink.nrlp.android.core.BaseFragment
 import com.onelink.nrlp.android.core.BaseViewModel
 import com.onelink.nrlp.android.features.home.model.NadraDetailsRequestModel
+import com.onelink.nrlp.android.features.home.model.VerifyFatherNameRequestModel
 import com.onelink.nrlp.android.features.home.repo.HomeRepo
 import com.onelink.nrlp.android.utils.ValidationUtils
 import java.text.SimpleDateFormat
@@ -29,6 +30,12 @@ class HomeFragmentViewModel @Inject constructor(private val homeRepo: HomeRepo) 
     fun observeUserProfile() = homeRepo.observeUserProfile()
 
     fun observeUpdateNadraDetails() = homeRepo.observeUpdateNadra()
+
+    fun observeVerifyFatherName() = homeRepo.observeVerifyFatherNameResponse()
+
+    fun verifyFatherName(name: String) {
+        homeRepo.verifyFatherName(VerifyFatherNameRequestModel(name))
+    }
 
     fun getDateInStringFormat(calendar: Calendar?): String? {
         val dateString =
@@ -143,6 +150,14 @@ class HomeFragmentViewModel @Inject constructor(private val homeRepo: HomeRepo) 
     fun navigateNadraVerification(fragmentHelper: BaseFragment.FragmentNavigationHelper){
         fragmentHelper.addFragment(
             NadraVerificationRequiredFragment.newInstance(),
+            clearBackStack = false,
+            addToBackStack = true
+        )
+    }
+
+    fun navigateFatherNameVerification(fragmentHelper: BaseFragment.FragmentNavigationHelper){
+        fragmentHelper.addFragment(
+            FatherNameVerificationFragment.newInstance(),
             clearBackStack = false,
             addToBackStack = true
         )

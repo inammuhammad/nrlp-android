@@ -2,7 +2,9 @@ package com.onelink.nrlp.android.services
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.media.RingtoneManager
 import android.os.Build
 import android.util.Log
@@ -10,6 +12,8 @@ import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.onelink.nrlp.android.R
+import com.onelink.nrlp.android.features.appnotification.InAppNotificationActivity
+import com.onelink.nrlp.android.features.home.view.HomeActivity
 
 
 class PushNotificationService: FirebaseMessagingService() {
@@ -39,6 +43,15 @@ class PushNotificationService: FirebaseMessagingService() {
             )
             notificationManager.createNotificationChannel(channel)
         }
+        /*val intent = Intent(this@PushNotificationService, InAppNotificationActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
+        val pendingIntent = PendingIntent.getActivity(
+    this@PushNotificationService,
+            2077,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT
+        )*/
 
         val uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val builder = NotificationCompat.Builder(this, channelId)

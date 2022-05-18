@@ -2,6 +2,7 @@ package com.onelink.nrlp.android.core
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.media.RingtoneManager
@@ -387,10 +388,18 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
             notificationManager.createNotificationChannel(channel)
         }
 
+        val intent = Intent()
+        val pendingIntent = PendingIntent.getActivity(
+            context,
+            2078,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT
+        )
+
         val uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val builder = NotificationCompat.Builder(requireContext(), channelId)
             .setContentTitle(title)
-            //.setContentIntent(pendingIntent)
+            .setContentIntent(pendingIntent)
             .setContentText(body)
             .setAutoCancel(true)
             .setSmallIcon(R.mipmap.ic_launcher)

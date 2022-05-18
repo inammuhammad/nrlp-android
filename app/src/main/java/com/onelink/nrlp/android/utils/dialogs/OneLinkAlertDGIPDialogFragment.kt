@@ -170,7 +170,8 @@ class OneLinkAlertDGIPDialogFragment : DialogFragment() {
                 if(!eTCnicNumber.text.isNullOrBlank() && eTCnicNumber.text.toString().length == 15
                     && ValidationUtils.checkRepeats(eTCnicNumber.text.toString())) {
                     tilCnicNicop.clearError()
-                    if(!eTMobile.text.isNullOrBlank() && ValidationUtils.checkRepeats(eTMobile.text.toString())) {
+                    if(!eTMobile.text.isNullOrBlank() && ValidationUtils.checkRepeats(eTMobile.text.toString())
+                        && !eTMobile.text.toString().contains("+", true)) {
                         tilMobileNo.clearError()
                         oneLinkAlertDialogListeners.onConfirmButtonCLicked(targetRequestCode,
                             eTCnicNumber.text.toString(),

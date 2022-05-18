@@ -10,6 +10,7 @@ import com.onelink.nrlp.android.data.local.UserModel
 import com.onelink.nrlp.android.features.home.model.NadraDetailsRequestModel
 import com.onelink.nrlp.android.features.home.model.UserProfileModel
 import com.onelink.nrlp.android.features.home.model.UserProfileResponseModel
+import com.onelink.nrlp.android.features.home.model.VerifyFatherNameRequestModel
 import com.onelink.nrlp.android.models.GeneralMessageResponseModel
 import javax.inject.Inject
 
@@ -20,6 +21,7 @@ class HomeRepo @Inject constructor(
     val profileResponse = MutableLiveData<BaseResponse<UserProfileResponseModel>>()
     val logoutResponse = MutableLiveData<BaseResponse<GeneralMessageResponseModel>>()
     val updateNadraDataResponse = MutableLiveData<BaseResponse<GeneralMessageResponseModel>>()
+    val verifyFatherNameResponse = MutableLiveData<BaseResponse<GeneralMessageResponseModel>>()
 
     fun getUserProfile() {
         networkHelper.serviceCall(serviceGateway.getUserProfile()).observeForever {
@@ -37,6 +39,13 @@ class HomeRepo @Inject constructor(
             }
     }
 
+    fun verifyFatherName(request: VerifyFatherNameRequestModel) {
+        networkHelper.serviceCall(serviceGateway.verifyFatherName(request))
+            .observeForever { response ->
+                verifyFatherNameResponse.value = response
+            }
+    }
+
     private fun persistUser(userProfileModel: UserProfileModel) {
         UserData.setUser(getUserModelFromLoginResponse(userProfileModel))
     }
@@ -44,6 +53,8 @@ class HomeRepo @Inject constructor(
     fun observeUserProfile() = profileResponse as LiveData<BaseResponse<UserProfileResponseModel>>
 
     fun observeUpdateNadra() = updateNadraDataResponse as LiveData<BaseResponse<GeneralMessageResponseModel>>
+
+    fun observeVerifyFatherNameResponse() = verifyFatherNameResponse as LiveData<BaseResponse<GeneralMessageResponseModel>>
 
     private fun getUserModelFromLoginResponse(userProfileModel: UserProfileModel): UserModel {
         return UserModel(
@@ -72,7 +83,8 @@ class HomeRepo @Inject constructor(
             requireNadraVerification = userProfileModel.requireNadraVerification,
             receiverCount = userProfileModel.receiverCount,
             notificationCount = userProfileModel.notificationCount,
-            country = userProfileModel.country
+            country = userProfileModel.country,
+            fatherName = userProfileModel.fatherName
         )
     }
 

@@ -14,6 +14,7 @@ import com.onelink.nrlp.android.features.appnotification.models.NotificationRead
 import com.onelink.nrlp.android.features.appnotification.models.NotificationsListRequestModel
 import com.onelink.nrlp.android.features.appnotification.viewmodels.AppNotificationViewModel
 import com.onelink.nrlp.android.features.profile.enabled
+import com.onelink.nrlp.android.utils.cleanNicNumber
 import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
 import com.onelink.nrlp.android.utils.setOnSingleClickListener
 import dagger.android.support.AndroidSupportInjection
@@ -54,7 +55,8 @@ class NotificationComplaintFragment :
             viewModel.getNotifications(
                 NotificationsListRequestModel(
                     page = pageNum.toString(),
-                    perPage = "10"
+                    perPage = "10",
+                    cnic = UserData.getUser()?.cnicNicop.toString().cleanNicNumber(),
             )
             )
         }
@@ -64,7 +66,7 @@ class NotificationComplaintFragment :
         viewModel.getNotifications(NotificationsListRequestModel(
             page = pageNum.toString(),
             perPage = "10",
-            //cnic = UserData.getUser()?.cnicNicop.toString(),
+            cnic = UserData.getUser()?.cnicNicop.toString().cleanNicNumber(),
             //notificationType = "complaint"
         ))
         viewModel.observeNotifications().observe(this, Observer { response ->
@@ -73,7 +75,7 @@ class NotificationComplaintFragment :
                     oneLinkProgressDialog.hideProgressDialog()
                     response.data?.let {
                         val list = it.data.records
-                        binding.btnLoadMore.isEnabled = list.size > 20
+                        binding.btnLoadMore.isEnabled = list.size > 10
                         if (pageNum <= 1) {
                             adapter = NotificationsListAdapter(context, list, { notificationItem ->
                                 Log.d(TAG, notificationItem.isReadFlag.toString())

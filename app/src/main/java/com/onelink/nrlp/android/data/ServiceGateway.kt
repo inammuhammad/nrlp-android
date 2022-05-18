@@ -18,6 +18,7 @@ import com.onelink.nrlp.android.features.forgotPassword.models.ForgotPasswordReq
 import com.onelink.nrlp.android.features.forgotPassword.models.UpdatePasswordRequestModel
 import com.onelink.nrlp.android.features.home.model.NadraDetailsRequestModel
 import com.onelink.nrlp.android.features.home.model.UserProfileResponseModel
+import com.onelink.nrlp.android.features.home.model.VerifyFatherNameRequestModel
 import com.onelink.nrlp.android.features.login.model.LoginRequest
 import com.onelink.nrlp.android.features.login.model.LoginResponseModel
 import com.onelink.nrlp.android.features.managePoints.model.TransferPointsRequest
@@ -254,5 +255,8 @@ interface ServiceGateway {
 
     @POST("nrlp-notification-delete/")
     fun deleteNotification(@Body body: NotificationReadRequestModel): Single<Response<GeneralMessageResponseModel>>
+
+    @POST("nrlpfather-verification/")
+    fun verifyFatherName(@Body body: VerifyFatherNameRequestModel): Single<Response<GeneralMessageResponseModel>>
 
 }

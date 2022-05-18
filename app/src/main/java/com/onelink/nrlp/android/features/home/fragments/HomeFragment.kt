@@ -97,7 +97,8 @@ open class HomeFragment :
 
     private fun showUserData() {
         UserData.getUser()?.let {
-            checkNadraVerification(it)
+            //checkNadraVerification(it)
+            checkFatherNameVerification(it.fatherName)
             if(it.accountType != Constants.BENEFICIARY.toLowerCase(Locale.getDefault()))
                 checkReceiverAdded(it)
             if(it.accountType == "beneficiary") {
@@ -136,6 +137,12 @@ open class HomeFragment :
             if (userModel.requireNadraVerification!!)
                 viewModel.navigateNadraVerification(fragmentHelper)
         }catch(e: Exception){}
+    }
+
+    private fun checkFatherNameVerification(name: String?) {
+        if(name.isNullOrEmpty()) {
+            viewModel.navigateFatherNameVerification(fragmentHelper)
+        }
     }
 
     private fun checkReceiverAdded(userModel: UserModel){
