@@ -426,6 +426,11 @@ class SelfAwardPointsFragment :
         val year = c.get(Calendar.YEAR)
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DAY_OF_MONTH)
+        val cal = Calendar.getInstance()
+        cal.get(Calendar.MONTH)
+        cal.get(Calendar.YEAR)
+        cal.get(Calendar.DAY_OF_MONTH)
+        cal.add(Calendar.DAY_OF_MONTH, -1)
         val datePickerDialog = activity?.let {
             DatePickerDialog(
                     it,
@@ -441,8 +446,8 @@ class SelfAwardPointsFragment :
                     }, year, month, day
             )
         }
-        datePickerDialog?.datePicker?.minDate = AdvancedLoyaltyStatementFragment.MILLIS_MINIMUM_DATE
-        datePickerDialog?.datePicker?.maxDate = System.currentTimeMillis()
+        datePickerDialog?.datePicker?.minDate = MILLIS_MINIMUM_DATE
+        datePickerDialog?.datePicker?.maxDate = cal.timeInMillis
         datePickerDialog?.datePicker?.layoutDirection = View.LAYOUT_DIRECTION_LTR
         datePickerDialog?.show()
     }
@@ -476,5 +481,6 @@ class SelfAwardPointsFragment :
     companion object {
         @JvmStatic
         fun newInstance() = SelfAwardPointsFragment()
+        const val MILLIS_MINIMUM_DATE = 1634756400000L
     }
 }

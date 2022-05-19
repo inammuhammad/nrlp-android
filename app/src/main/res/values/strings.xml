@@ -225,7 +225,7 @@
     <string name="beneficiary_details_title">Beneficiary Details</string>
     <string name="create_beneficiary_title">Create Beneficiary</string>
     <string name="advance_loyalty_statement_title">Advanced Loyalty Statement</string>
-    <string name="forgot_password_title">Forgot Password</string>
+    <string name="forgot_password_title">Forgot Password/Unlock Account</string>
     <string name="loyalty_Statement_title">Loyalty Statement</string>
     <string name="profile_title">Update Profile</string>
     <string name="beneficiary">Beneficiary</string>
@@ -280,7 +280,7 @@
     <string name="not_enough_points_msg">You do not have enough points to avail this service at the moment.</string>
     <string name="not_enough_points_loyalty_points_msg">You do not have enough Loyalty Points.</string>
     <string name="not_enough_points_transfer_msg">You don\'t have enough points to transfer.</string>
-    <string name="forgot_password">Forgot Password</string>
+    <string name="forgot_password">Forgot Password/Unlock Account</string>
     <string name="error_agent_code_invalid">Please enter a correct code.</string>
     <string name="device_change">Device Change</string>
     <string name="points">%1$s Points</string>
@@ -373,7 +373,7 @@
     <string name="redemption">Redemption</string>
     <string name="redemption_partner">Redemption Partner</string>
     <string name="beneficiary_cnic_nicop">Beneficiary CNIC/NICOP/POC</string>
-    <string name="remitting_entity">Remitting Entity</string>
+    <string name="remitting_entity">Receiving Entity</string>
     <string name="transaction_id">Transaction ID</string>
     <string name="transaction_date">Transaction Date</string>
     <string name="beneficiary_country_of_residence">Beneficiary Country of Residence</string>
@@ -435,7 +435,7 @@
     <string name="receivers_maximum_note">Note: You can add maximum 5 receivers.</string>
     <string name="error_mobile_operator">Please enter a valid Mobile Operator</string>
     <string name="error_transaction_type">Please select Transaction Type</string>
-    <string name="error_remitting_entity">Please enter a valid Remittance Entity</string>
+    <string name="error_remitting_entity">Please enter a valid Receiving Entity</string>
     <string name="error_transaction_id">Please enter a valid Transaction ID</string>
     <string name="error_transaction_amount">Please enter a valid Transaction Amount</string>
     <string name="error_passport_mumber">Please enter a valid Passport Number</string>

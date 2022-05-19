@@ -385,7 +385,7 @@
                             android:maxLength="300"
                             android:lines="5"
                             android:minLines="5"
-                            android:gravity="top|start"
+                            android:gravity="center|start"
                             android:text="@={viewModel.details}"
                             android:nextFocusDown="@id/et_details"
                             android:nextFocusForward="@id/et_details"

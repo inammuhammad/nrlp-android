@@ -9,7 +9,7 @@ data class RedeemPartnerResponseModel(
 
 data class RedeemPartnerModel(
     @SerializedName("id") val id: Int,
-    @SerializedName("partner_name") val partnerName: String,
+    @SerializedName("partner_name") var partnerName: String,
     @SerializedName("categories") val categories: List<RedeemCategoryModel>
 )
 

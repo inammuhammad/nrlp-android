@@ -387,7 +387,7 @@ class RegComplaintDetailsFragment:
             }
         }
 
-        binding.etDetails.setOnFocusChangeListener { _, b ->
+        binding.etDetails2.setOnFocusChangeListener { _, b ->
             when (b) {
                 false -> viewModel.validationSpecifyOtherDetailsPassed.postValue(
                     viewModel.checkNotEmpty(
@@ -898,8 +898,8 @@ class RegComplaintDetailsFragment:
         val isTransactionIdValid: Boolean = viewModel.checkTransactionId(binding.etTransactionid.text.toString())
         val isTransactionAmount: Boolean = viewModel.checkTransactionAmount(binding.etTransactionamount.text.toString())
         val isRedemptionPartnerValid: Boolean = viewModel.checkNotEmpty(binding.tvRedemption.text.toString())
-        val isSpecifyDetailsValid: Boolean = viewModel.checkNotEmpty(binding.etDetails.text.toString())
-        val isSpecifyOtherDetailsValid: Boolean = viewModel.checkNotEmpty(binding.etDetails2.text.toString())
+        val isSpecifyDetailsValid: Boolean = viewModel.checkSpecifyDetails(binding.etDetails.text.toString())
+        val isSpecifyOtherDetailsValid: Boolean = viewModel.checkSpecifyDetails(binding.etDetails2.text.toString())
         val isBeneficiaryCountryValid: Boolean = viewModel.checkNotEmpty(binding.BeneficaryCountry.text.toString())
         val isBeneficiaryCnicPointsValid: Boolean = viewModel.checkCnicValidation(binding.etPointsbeneficiaryCnicNicp.text.toString())
         val isTransactionDateValid: Boolean = viewModel.checkNotEmpty(binding.etTransactionDate.text.toString())
@@ -948,12 +948,12 @@ class RegComplaintDetailsFragment:
 
             }
             COMPLAINT_TYPE.REDEMPTION_ISSUES ->{
-                return binding.etDetails.text.toString().isNotEmpty() &&
+                return isSpecifyDetailsValid &&
                         binding.tvRedemption.text.toString().isNotEmpty()
 
             }
             COMPLAINT_TYPE.OTHERS ->{
-                return binding.etDetails2.text.toString().isNotEmpty()
+                return isSpecifyOtherDetailsValid
             }
             else -> return false
         }

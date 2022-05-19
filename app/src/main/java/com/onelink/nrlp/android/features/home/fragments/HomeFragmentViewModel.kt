@@ -15,6 +15,7 @@ import javax.inject.Inject
 class HomeFragmentViewModel @Inject constructor(private val homeRepo: HomeRepo) : BaseViewModel() {
 
     val mothersMaidenName = MutableLiveData<String>("")
+    val fatherName = MutableLiveData<String>("")
     val placeOfBirth = MutableLiveData<String>("")
     val fullName = MutableLiveData<String>("")
     val cnicNicopDateOfIssuance = MutableLiveData<String>("")
@@ -24,6 +25,7 @@ class HomeFragmentViewModel @Inject constructor(private val homeRepo: HomeRepo) 
     val validationFullNamePassed = MutableLiveData(true)
     val validationMotherMaidenNamePassed = MutableLiveData(true)
     val validationPlaceOfBirthPassed = MutableLiveData(true)
+    val validationFatherNamePassed = MutableLiveData(true)
 
     fun getUserProfile() = homeRepo.getUserProfile()
 
@@ -66,6 +68,10 @@ class HomeFragmentViewModel @Inject constructor(private val homeRepo: HomeRepo) 
         validateNonNull(placeOfBirth)
     }
 
+    val fatherNameNotEmpty = MediatorLiveData<Boolean>().apply {
+        validateNonNull(fatherName)
+    }
+
     val isFullNameValidationPassed = MediatorLiveData<Boolean>().apply {
         addSource(validationFullNamePassed) {
             value = it
@@ -103,6 +109,8 @@ class HomeFragmentViewModel @Inject constructor(private val homeRepo: HomeRepo) 
     fun checkMotherNameValidation(string: String) =
         string.isEmpty() || ValidationUtils.isMotherNameValid(string)
 
+    fun checkFatherNameValidation(name: String) = ValidationUtils.isMotherNameValid(name)
+
     fun validationsPassed(
         fullName: String, motherName: String = "",cnicIssueDate: String = ""
     ): Boolean {
@@ -127,6 +135,12 @@ class HomeFragmentViewModel @Inject constructor(private val homeRepo: HomeRepo) 
         validationMotherMaidenNamePassed.value = isMotherNameValid
         validationPlaceOfBirthPassed.value = isPlaceOfBirthValid
         return  isFullNameValid &&  isMotherNameValid && isPlaceOfBirthValid
+    }
+
+    fun validateFatherName(name: String): Boolean {
+        val isFatherNameValid: Boolean = checkFatherNameValidation(name)
+        validationFatherNamePassed.value = isFatherNameValid
+        return isFatherNameValid
     }
 
     fun updateNadraDetails(

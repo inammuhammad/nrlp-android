@@ -82,35 +82,52 @@ class RedemptionPartnerFragment : BaseFragment<RedemtionFragmentPartnerViewModel
     }
 
     override fun onItemClicked(redeemPartnerModel: RedeemPartnerModel) {
+        val originalName = redeemPartnerModel.partnerName
+        redeemPartnerModel.partnerName = getPartnerName(originalName)
         redeemSharedViewModel?.setRedeemPartnerModel(redeemPartnerModel)
         viewModel.addNextFragment(fragmentHelper)
         hideKeyboard()
     }
 
     override fun onFBRClicked(redeemPartnerModel: RedeemPartnerModel) {
+        redeemPartnerModel.partnerName = "FBR"
         redeemSharedViewModel?.setRedeemPartnerModel(redeemPartnerModel)
         viewModel.addFbrFragment(fragmentHelper)
         hideKeyboard()
     }
 
     override fun onNadraClicked(redeemPartnerModel: RedeemPartnerModel) {
+        redeemPartnerModel.partnerName = "NADRA"
         redeemSharedViewModel?.setRedeemPartnerModel(redeemPartnerModel)
         viewModel.addNADRADescriptionFragment(fragmentHelper)
         hideKeyboard()
     }
     override fun onPIAClicked(redeemPartnerModel: RedeemPartnerModel) {
+        redeemPartnerModel.partnerName = "PIA"
         redeemSharedViewModel?.setRedeemPartnerModel(redeemPartnerModel)
         viewModel.addPIADescriptionFragment(fragmentHelper)
         hideKeyboard()
     }
     override fun onOPFClicked(redeemPartnerModel: RedeemPartnerModel) {
+        redeemPartnerModel.partnerName = "OPF"
         redeemSharedViewModel?.setRedeemPartnerModel(redeemPartnerModel)
         viewModel.addOPFVoucherFragment(fragmentHelper)
         hideKeyboard()
     }
     override fun onUSCClicked(redeemPartnerModel: RedeemPartnerModel) {
+        redeemPartnerModel.partnerName = "USC"
         redeemSharedViewModel?.setRedeemPartnerModel(redeemPartnerModel)
         viewModel.addUSCDescriptionFragment(fragmentHelper)
         hideKeyboard()
+    }
+
+    private fun getPartnerName(name: String): String {
+        if(name.contains("Passport", true))
+            return "PASSPORT"
+        if(name.contains("SLIC", true))
+            return "SLIC"
+        if(name.contains("BEOE", true))
+            return "BEOE"
+        return ""
     }
 }

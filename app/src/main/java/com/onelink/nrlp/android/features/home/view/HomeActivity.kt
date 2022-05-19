@@ -31,10 +31,7 @@ import com.onelink.nrlp.android.features.changePassword.view.ChangePasswordActiv
 import com.onelink.nrlp.android.features.complaint.view.RegComplaintActivity
 import com.onelink.nrlp.android.features.contactus.view.ContactUsActivity
 import com.onelink.nrlp.android.features.faqs.view.FAQsActivity
-import com.onelink.nrlp.android.features.home.fragments.BeneficiaryHomeFragment
-import com.onelink.nrlp.android.features.home.fragments.NadraVerificationDetailsFragment
-import com.onelink.nrlp.android.features.home.fragments.NadraVerificationRequiredFragment
-import com.onelink.nrlp.android.features.home.fragments.RemitterHomeFragment
+import com.onelink.nrlp.android.features.home.fragments.*
 import com.onelink.nrlp.android.features.home.sidemenu.*
 import com.onelink.nrlp.android.features.home.viewmodel.HomeActivityViewModel
 import com.onelink.nrlp.android.features.language.view.LanguageActivity
@@ -167,6 +164,12 @@ class HomeActivity :
             binding.drawerLayout.closeDrawers()
             binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
         }
+    }
+
+    fun hideHomeScreenTools() {
+        binding.toolbar.setRightButtonVisible(false)
+        binding.toolbar.setNotificationCountVisible(false)
+        binding.toolbar.setLeftButtonVisible(false)
     }
 
     private fun onSideMenuItemClicked(sideMenuOptionsItemModel: SideMenuOptionsItemModel) {
@@ -313,7 +316,7 @@ class HomeActivity :
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             val fragment = getCurrentFragment() as BaseFragment<*, *>?
             fragment?.let {
-                if (it !is NadraVerificationRequiredFragment) {
+                if (it !is NadraVerificationRequiredFragment && it !is FatherNameVerificationFragment) {
                     onBack()
                 }
             }

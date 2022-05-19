@@ -142,6 +142,9 @@ constructor(private val complainRepo: ComplainRepo)
     fun checkNotEmpty(string: String) =
         string.isNotEmpty()
 
+    fun checkSpecifyDetails(string: String) =
+        string.isNotEmpty() && string.length >= 15
+
     private fun MediatorLiveData<Boolean>.validateNonNull(it: MutableLiveData<String>) {
         addSource(it) { value = it.isNotEmpty() }
     }

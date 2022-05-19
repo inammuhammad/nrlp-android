@@ -42,6 +42,7 @@ class UnRegComplaintSharedViewModel
     val validationPhoneNumberPassed = MutableLiveData(true)
     val validationEmailPassed = MutableLiveData(true)
     val validationMobileOperatorPassed=MutableLiveData(true)
+    val validationSpecifyOtherDetailsPassed=MutableLiveData(true)
 
     private lateinit var resources: Resources
 
@@ -95,7 +96,7 @@ class UnRegComplaintSharedViewModel
         string.isEmpty() || ValidationUtils.isEmailValid(string)
 
     fun checkDetailsValidation(string: String)=
-        string.isNotEmpty()
+        string.isNotEmpty() && string.length >= 15
 
     private fun MediatorLiveData<Boolean>.validateNonNull(it: MutableLiveData<String>) {
         addSource(it) { value = it.isNotEmpty() }
@@ -146,6 +147,7 @@ class UnRegComplaintSharedViewModel
         validationCnicPassed.value = isCnicValid
         validationPhoneNumberPassed.value = isPhoneNumberValid
         validationAliasPassed.value = isFullNameValid
+        validationSpecifyOtherDetailsPassed.value = isDetailsValid
         if(emailAddress.value!!.isEmpty())
         {
             isEmailValid=true
@@ -165,9 +167,22 @@ class UnRegComplaintSharedViewModel
             validationMobileOperatorPassed.value=isOperatorValid
 
         }
+        else if(getComplaintType() == COMPLAINT_TYPE.UNABLE_TO_REGISTER) {
+            validationCnicPassed.value = isCnicValid
+            validationPhoneNumberPassed.value = isPhoneNumberValid
+            validationAliasPassed.value = isFullNameValid
+            validationSpecifyOtherDetailsPassed.value = isDetailsValid
+        }
+        else if(getComplaintType() == COMPLAINT_TYPE.OTHERS) {
+            validationCnicPassed.value = isCnicValid
+            validationPhoneNumberPassed.value = isPhoneNumberValid
+            validationAliasPassed.value = isFullNameValid
+            validationSpecifyOtherDetailsPassed.value = isDetailsValid
+        }
         return isCnicValid && isFullNameValid && isPhoneNumberValid
                 && isEmailValid && isCountryValid &&isDetailsValid &&isOperatorValid
     }
+
     fun gotoComplaintTypeFragment(
         resources: Resources,
         fragmentHelper: BaseFragment.FragmentNavigationHelper,
@@ -242,6 +257,7 @@ class UnRegComplaintSharedViewModel
         validationEmailPassed.postValue(true)
         validationPhoneNumberPassed.postValue(true)
         validationMobileOperatorPassed.postValue(true)
+        validationSpecifyOtherDetailsPassed.postValue(true)
     }
 
     fun emptyComplaintDetails(){

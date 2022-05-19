@@ -173,6 +173,15 @@ class UnregComplaintDetailsFragment :
                 )
             }
         }
+        binding.etDetails.setOnFocusChangeListener { _, b ->
+            when (b) {
+                false -> viewModel.validationSpecifyOtherDetailsPassed.postValue(
+                    viewModel.checkDetailsValidation(
+                        binding.etDetails.text.toString()
+                    )
+                )
+            }
+        }
 
     }
 
@@ -359,6 +368,19 @@ class UnregComplaintDetailsFragment :
                     else {
                         binding.tilMobileOperator.clearError()
                         binding.tilMobileOperator.isErrorEnabled = false
+                    }
+                }
+            })
+
+        viewModel.validationSpecifyOtherDetailsPassed.observe(
+            this,
+            { validationsPassed ->
+                run {
+                    if (!validationsPassed)
+                        binding.tilDetails.error = getString(R.string.error_enter_details)
+                    else {
+                        binding.tilDetails.clearError()
+                        binding.tilDetails.isErrorEnabled = false
                     }
                 }
             })

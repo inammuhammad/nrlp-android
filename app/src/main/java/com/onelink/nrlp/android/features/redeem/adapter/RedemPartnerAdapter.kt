@@ -37,7 +37,23 @@ class RedemPartnerAdapter(
     override fun onBindViewHolder(holder: RedeemPartnerViewHolder, position: Int) {
         holder.redeemPartnerCellBinding.redeem = redemPartner[position]
         holder.redeemPartnerCellBinding.root.setOnClickListener {
-            when(redemPartner[position].partnerName) {
+            if(redemPartner[position].partnerName.contains("PASSPORT", true))
+                listener.onItemClicked(redemPartner[position])
+            else if(redemPartner[position].partnerName.contains("FBR", true))
+                listener.onFBRClicked(redemPartner[position])
+            else if(redemPartner[position].partnerName.contains("PIA", true))
+                listener.onPIAClicked(redemPartner[position])
+            else if(redemPartner[position].partnerName.contains("USC", true))
+                listener.onUSCClicked(redemPartner[position])
+            else if(redemPartner[position].partnerName.contains("NADRA", true))
+                listener.onNadraClicked(redemPartner[position])
+            else if(redemPartner[position].partnerName.contains("OPF", true))
+                listener.onOPFClicked(redemPartner[position])
+            else if(redemPartner[position].partnerName.contains("SLIC", true))
+                listener.onItemClicked(redemPartner[position])
+            else if(redemPartner[position].partnerName.contains("BEOE", true))
+                listener.onItemClicked(redemPartner[position])
+            /*when(redemPartner[position].partnerName) {
                 "Passport" -> {
                     listener.onItemClicked(redemPartner[position])
                 }
@@ -62,7 +78,7 @@ class RedemPartnerAdapter(
                 "BEOE" -> {
                     listener.onItemClicked(redemPartner[position])
                 }
-            }
+            }*/
             //listener.onItemClicked(redemPartner[position])
         }
         holder.redeemPartnerCellBinding.titlePartner.setOnClickListener {
