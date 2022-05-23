@@ -47,7 +47,7 @@
         android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Notifications"
+        android:text="@string/notifications"
         style="@style/TextViewToolbarHeading"
         android:textSize="@dimen/_11sdp"
         android:textColor="@color/black"
@@ -63,7 +63,7 @@
         android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Notifications"
+        android:text="@string/notifications"
         style="@style/TextViewToolbarHeading"
         android:textSize="@dimen/_11sdp"
         android:textColor="@color/black"
@@ -98,7 +98,7 @@
         app:layout_constraintStart_toEndOf="@id/tvRight"
         android:layout_marginTop="@dimen/_8sdp"
         android:layout_marginEnd="@dimen/_6sdp"
-        android:text="2"
+        android:text=""
         android:visibility="gone"
         />
 

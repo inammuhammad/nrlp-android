@@ -461,4 +461,6 @@
     <string name="error_remittance_same_date">For self-awarding of points, please wait for 3 working days after your remittance is credited in the account or received by your beneficiary.</string>
     <string name="error_remittance_rda_transaction">RDA customers shall only be eligible for auto awarding of points against the amount which is consumed locally and cannot be repatriated.</string>
     <string name="please_enter_father_name">Please provide Father Name for verification purpose</string>
+    <string name="notifications">Notifications</string>
+    <string name="delete">Delete</string>
 </resources>

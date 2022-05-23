@@ -123,7 +123,7 @@ class RedemptionPartnerFragment : BaseFragment<RedemtionFragmentPartnerViewModel
 
     private fun getPartnerName(name: String): String {
         if(name.contains("Passport", true))
-            return "PASSPORT"
+            return "Passport"
         if(name.contains("SLIC", true))
             return "SLIC"
         if(name.contains("BEOE", true))

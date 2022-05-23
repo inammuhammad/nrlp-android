@@ -31,7 +31,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         style="@style/TextViewCustomNotification"
         android:gravity="center"
-        android:text="Delete"
+        android:text="@string/delete"
         android:visibility="gone"
         android:drawablePadding="@dimen/_2sdp"
         android:layout_marginTop="@dimen/_1sdp"

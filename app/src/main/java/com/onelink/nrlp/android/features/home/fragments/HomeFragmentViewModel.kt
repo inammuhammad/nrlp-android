@@ -86,6 +86,13 @@ class HomeFragmentViewModel @Inject constructor(private val homeRepo: HomeRepo) 
         }
     }
 
+    val isFatherNameValidationPassed = MediatorLiveData<Boolean>().apply {
+        addSource(validationFatherNamePassed) {
+            value = it
+
+        }
+    }
+
     val isCnicNicopIssuanceDateValidationPassed = MediatorLiveData<Boolean>().apply {
         addSource(validationCnicNicopIssuanceDatePassed) {
             value = it
@@ -172,8 +179,8 @@ class HomeFragmentViewModel @Inject constructor(private val homeRepo: HomeRepo) 
     fun navigateFatherNameVerification(fragmentHelper: BaseFragment.FragmentNavigationHelper){
         fragmentHelper.addFragment(
             FatherNameVerificationFragment.newInstance(),
-            clearBackStack = false,
-            addToBackStack = true
+            clearBackStack = true,
+            addToBackStack = false
         )
     }
 

@@ -481,6 +481,6 @@ class SelfAwardPointsFragment :
     companion object {
         @JvmStatic
         fun newInstance() = SelfAwardPointsFragment()
-        const val MILLIS_MINIMUM_DATE = 1634756400000L
+        const val MILLIS_MINIMUM_DATE = 1633028400000L
     }
 }

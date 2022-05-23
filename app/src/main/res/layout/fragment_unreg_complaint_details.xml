@@ -362,8 +362,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/specify_details"
+                        android:layout_marginBottom="@dimen/_2sdp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/til_email"
+                        app:layout_constraintBottom_toTopOf="@id/til_details"
                         />
                     <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
                         android:id="@+id/til_details"
@@ -373,7 +375,9 @@
                         app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tvDetails">
+                        app:layout_constraintTop_toBottomOf="@id/tvDetails"
+                        app:layout_constraintBottom_toTopOf="@id/divider"
+                        android:layout_marginBottom="@dimen/_8sdp">
 
                         <com.onelink.nrlp.android.widgets.OneLinkEditText
                             android:id="@+id/et_details"
@@ -394,6 +398,15 @@
                             app:layout_constraintTop_toBottomOf="parent" />
 
                     </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
+
+                    <View
+                        android:id="@+id/divider"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:backgroundTint="@color/white"
+                        android:background="?android:attr/listDivider" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>

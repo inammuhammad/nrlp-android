@@ -1,7 +1,8 @@
 package com.onelink.nrlp.android.features.home.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.onelink.nrlp.android.R
@@ -43,6 +44,7 @@ class FatherNameVerificationFragment : BaseFragment<HomeFragmentViewModel, Fragm
         initListeners()
         initObservers()
         initTextObservers()
+        initTextWatchers()
     }
 
     private fun initListeners() {
@@ -74,12 +76,27 @@ class FatherNameVerificationFragment : BaseFragment<HomeFragmentViewModel, Fragm
     }
 
     private fun initTextObservers() {
-        viewModel.isFullNameValidationPassed.observe(this, { validationsPassed ->
+        viewModel.isFatherNameValidationPassed.observe(this, { validationsPassed ->
             if (!validationsPassed) binding.tilFatherName.error =
                 resources.getString(R.string.error_not_valid_father_name)
             else {
                 binding.tilFatherName.clearError()
                 binding.tilFatherName.isErrorEnabled = false
+            }
+        })
+    }
+
+    private fun initTextWatchers() {
+        binding.etFatherName.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                viewModel.validateFatherName(s.toString())
+                binding.btnNext.isEnabled = s.toString().isNotEmpty()
             }
         })
     }

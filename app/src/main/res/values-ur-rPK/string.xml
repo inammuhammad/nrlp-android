@@ -221,7 +221,7 @@
     <string name="beneficiary_details_title">وصول کنندہ کی تفصیلات</string>
     <string name="create_beneficiary_title">وصول کنندہ درج کریں</string>
     <string name="advance_loyalty_statement_title">مزید لوائلٹی اسٹیٹمنٹ</string>
-    <string name="forgot_password_title">پاس ورڈ یاد نہیں</string>
+    <string name="forgot_password_title">پاس ورڈ یاد نہیں/اکاؤنٹ ان لاک کریں</string>
     <string name="loyalty_Statement_title">لوائلٹی اسٹیٹمنٹ</string>
     <string name="profile_title">پروفائل</string>
     <string name="beneficiary">وصول کنندہ</string>
@@ -266,7 +266,7 @@
     <string name="oh_snap"> </string>
     <string name="agent_time_expired">کوڈ کی میعاد ختم ہوگئی ہے۔ براہ کرم کسی دوسرے کوڈ کے لئے درخواست کریں</string>
     <string name="not_enough_points_msg">اس وقت اس سروس سے فائدہ اٹھانے کے لۓ آپ کے پوائنٹس ناکافی ہیں</string>
-    <string name="forgot_password">پاس ورڈ یاد نہیں</string>
+    <string name="forgot_password">پاس ورڈ یاد نہیں/اکاؤنٹ ان لاک کریں</string>
     <string name="error_agent_code_invalid">براہ کرم صحیح کوڈ درج کریں۔</string>
     <string name="error_session_expired">آپ کے سیشن کی میعاد ختم ہوگئی ہے۔ براہ کرم دوبارہ لاگ ان کریں</string>
     <string name="error_transaction_fetch">اپنی تراسیل کو عمل درآمد ہونے کے لیے، براہ کرم ۵ کاروباری دن کا انتظار کریں۔ اگر اپکی تراسیل کو ۵ دن سے زیادہ ہوگئے ہیں، تو برائے مہربانی کسٹمر سپورٹ سے +92-21-111-11-6757 پر رابطہ کریں یا ہمیں sdrpsupport@1link.net.pk پر ای میل کریں</string>
@@ -405,4 +405,7 @@
     <string name="error_remittance_same_date">اپنی ترسیلات زر پر سیلف ایوارڈ پوائنٹس براہ کرم 3 کاروباری دنوں کا انتظار کریں کے لیے،</string>
     <string name="error_remittance_rda_transaction">۔RDA کسٹمر صرف اس رقم کے بدلے آٹو ایوارڈنگ پوائنٹس کا اہل ہو گا جو مقامی طور پر استعمال ہوتی ہے اور اسے واپس نہیں لایا جا سکتا</string>
     <string name="select_transaction_type">ٹرانزیکشن کی قسم درج کریں</string>
+    <string name="error_enter_details">Please enter details</string>
+    <string name="notifications">نوٹیفیکیشن</string>
+    <string name="delete">حذف کریں</string>
 </resources>
