@@ -126,11 +126,14 @@
                     android:id="@+id/tvName"
                     style="@style/TextViewLarge"
                     android:layout_marginStart="@dimen/_20sdp"
+                    android:maxWidth="@dimen/_170sdp"
                     app:layout_constraintTop_toTopOf="@+id/lblLoyaltyPoints"
                     app:layout_constraintBottom_toBottomOf="@+id/lblLoyaltyPoints"
                     app:layout_constraintStart_toStartOf="parent"
                     android:textColor="@color/white"
                     android:text=""
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     android:layout_height="wrap_content"/>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
