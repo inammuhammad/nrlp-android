@@ -46,7 +46,7 @@ class SelfAwardPointsFragmentViewModel @Inject constructor(private val selfAward
 
     val validReferenceNumber = MediatorLiveData<Boolean>().apply {
         addSource(referenceNumber) {
-            value = it.isNotEmpty()
+            value = it.isNotEmpty() && ValidationUtils.isTransactionNoValid(it)
         }
     }
 

@@ -416,11 +416,11 @@ class RegComplaintDetailsFragment:
                     oneLinkProgressDialog.hideProgressDialog()
                     response.data?.let {
                         viewModel.complaintId.postValue(it.complaintId)
-                        sendNotification(
+                        /*sendNotification(
                             "Complaint Registered",
                             "Complaint registered with ID ${it.complaintId}",
                             getString(R.string.channel_id)
-                        )
+                        )*/
                         viewModel.gotoComplaintResponseFragment(resources,fragmentHelper)
                     }
                 }
@@ -943,7 +943,7 @@ class RegComplaintDetailsFragment:
                 return  binding.etBeneficiaryAccount.text.toString().isNotEmpty() &&
                         binding.etTransactionDate.text.toString().isNotEmpty() &&
                         binding.etTransactionamount.text.toString().isNotEmpty() &&
-                        binding.etTransactionid.text.toString().isNotEmpty() &&
+                        ValidationUtils.isTransactionNoValid(binding.etTransactionid.text.toString()) &&    //binding.etTransactionid.text.toString().isNotEmpty() &&
                         binding.etRemitting.text.toString().isNotEmpty()
 
             }

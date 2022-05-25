@@ -134,7 +134,7 @@ constructor(private val complainRepo: ComplainRepo)
         string.isNotEmpty()
 
     fun checkTransactionId(string: String) =
-        string.isNotEmpty()
+        string.isNotEmpty() && ValidationUtils.isTransactionNoValid(string)
 
     fun checkTransactionAmount(string: String) =
         ValidationUtils.isAmountValid(string) //string.isNotEmpty()
@@ -243,6 +243,7 @@ constructor(private val complainRepo: ComplainRepo)
         validationBeneficiaryCountryPassed.postValue(true)
         validationTransactionTypePassed.postValue(true)
         validationBeneficiaryCnicPointsPassed.postValue(true)
+        validationTransactionDatePassed.postValue(true)
     }
 
     private fun emptyComplaintDetails(){

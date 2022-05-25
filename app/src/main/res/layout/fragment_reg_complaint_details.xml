@@ -615,7 +615,7 @@
                             android:layout_height="wrap_content"
                             android:inputType="textPersonName"
                             android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-                            android:maxLength="50"
+                            android:maxLength="25"
                             android:maxLines="1"
                             android:text="@={viewModel.transactionId}"
                             app:layout_constraintBottom_toTopOf="parent"
@@ -683,8 +683,11 @@
                         android:layout_height="wrap_content"
                         android:text="@string/transaction_amount_pkr"
                         android:textColor="@color/black"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginBottom="@dimen/_4sdp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/et_transactionDate" />
+                        app:layout_constraintTop_toBottomOf="@id/et_transactionDate"
+                        app:layout_constraintBottom_toTopOf="@id/til_transactionamount"/>
 
                     <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
                         android:id="@+id/til_transactionamount"
@@ -694,7 +697,9 @@
                         app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/lyTransactionAmount">
+                        app:layout_constraintTop_toBottomOf="@id/lyTransactionAmount"
+                        app:layout_constraintBottom_toTopOf="@id/divider"
+                        android:layout_marginBottom="@dimen/_8sdp">
 
                          <com.onelink.nrlp.android.widgets.OneLinkEditText
                              android:id="@+id/et_transactionamount"
@@ -711,6 +716,15 @@
                              app:layout_constraintStart_toStartOf="parent"
                              app:layout_constraintTop_toBottomOf="parent"  />
                     </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
+
+                    <View
+                        android:id="@+id/divider"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:backgroundTint="@color/white"
+                        android:background="?android:attr/listDivider" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

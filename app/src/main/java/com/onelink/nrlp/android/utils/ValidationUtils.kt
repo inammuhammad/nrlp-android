@@ -129,6 +129,10 @@ object ValidationUtils {
         return string.isNotEmpty() && string.toInt() > 0
     }
 
+    fun isTransactionNoValid(string: String): Boolean {
+        return string.length in 5..25
+    }
+
     fun isPakistanPhoneNumberValid(string: String): Boolean {
         return string.isNotEmpty() && Pattern.matches(
             PK_VALIDATION_REGEX,
