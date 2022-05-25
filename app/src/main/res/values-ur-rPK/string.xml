@@ -167,7 +167,7 @@
     <string name="alias">Alias</string>
     <string name="delete_beneficiary">وصول کنندہ کو حذف کریں</string>
     <string name="beneficiary_created">وصول کنندہ کامیابی کے ساتھ اندراج ہو گیا</string>
-    <string name="beneficiary_creation_success_msg">وصول کنندہ کامیابی کے ساتھ تشکیل دیا گیا ہے ، ہم نے وصول کنندہ کو ایک SMS بھیجا ہے۔</string>
+    <string name="beneficiary_creation_success_msg">وصول کنندہ شامل ہوا\nوصول کنندہ کامیابی کے ساتھ تشکیل دیا گیا ہے، ہم نے وصول کنندہ کو ایک SMS بھیجا ہے جس میں لنک اور رجسٹریشن کوڈ موجود ہیں  براہ کرم اپنے وصول کنندہ سے کوڈ کی میعاد ختم ہونے سے پہلے 3 دن کے اندر اندراج کرنے کو کہیں</string>
     <string name="self_award_points">خود پوائنٹس حاصل کرنے کی سہولت</string>
     <string name="transfer_points">پوائنٹس کی منتقلی</string>
     <string name="sure_to_transfer">کیا آپ واقعی %1$d پوائنٹس %2$s کو منتقل کرنا چاہتے ہیں؟</string>
@@ -221,7 +221,7 @@
     <string name="beneficiary_details_title">وصول کنندہ کی تفصیلات</string>
     <string name="create_beneficiary_title">وصول کنندہ درج کریں</string>
     <string name="advance_loyalty_statement_title">مزید لوائلٹی اسٹیٹمنٹ</string>
-    <string name="forgot_password_title">پاس ورڈ یاد نہیں/اکاؤنٹ ان لاک کریں</string>
+    <string name="forgot_password_title">پاس ورڈ بھول گئے/اکاؤنٹ ان لاک کریں</string>
     <string name="loyalty_Statement_title">لوائلٹی اسٹیٹمنٹ</string>
     <string name="profile_title">پروفائل</string>
     <string name="beneficiary">وصول کنندہ</string>
@@ -245,7 +245,7 @@
     <string name="agent_confirmation">ایجنٹ کی تصدیق</string>
     <string name="redem_points">پوائنٹس استعمال کریں</string>
     <string name="redem_points_detail">آپ نے %3$s کو %2$s پر %1$d پوائنٹس استعمال کر لیے ہیں</string>
-    <string name="self_award_warning">روشن ڈیجیٹل اکائونٹ کے صارفین صرف اس رقم کے مقابلے میں پوائنٹس کی آٹو ایوارڈنگ کے اہل ہوں گے جو مقامی طور پر استعمال کی جاتی ہے اور اسے واپس نہیں کیا جاسکتا</string>
+    <string name="self_award_warning">۔۱. پوائنٹس خود دینے کے لیے، براہ کرم 3 کاروباری دنوں تک انتظار کریں جب آپ کی رقم اکاؤنٹ میں جمع ہو جائے یا آپ کے  وصول   کنندہ کو موصول ہو جائے\n۔ ۲. RDA کسٹمر صرف اس رقم کے بدلے آٹو ایوارڈنگ پوائنٹس کا اہل ہو گا جو مقامی طور پر استعمال ہوتی ہے اور اسے واپس نہیں لایا جا سکتا</string>
     <string name="register_warning">رجسٹر کرنے کے لئے براہ مہربانی ٹرانزیکشن کے بعد 05 دن تک انتظار فرمائیں۔ مزید معلومات کے لئے ہیلپ لائن پر رابطہ کریں</string>
     <string name="redem_confirm_detail">آپ نے %2$s کے لئے %3$s پر %1$d پوائنٹس کو استعمال کرنا منتخب کیا ہے</string>
     <string name="redem_dgip_confirm_detail">You have selected to redeem %1$d points for %2$s at %3$s</string>
@@ -266,7 +266,7 @@
     <string name="oh_snap"> </string>
     <string name="agent_time_expired">کوڈ کی میعاد ختم ہوگئی ہے۔ براہ کرم کسی دوسرے کوڈ کے لئے درخواست کریں</string>
     <string name="not_enough_points_msg">اس وقت اس سروس سے فائدہ اٹھانے کے لۓ آپ کے پوائنٹس ناکافی ہیں</string>
-    <string name="forgot_password">پاس ورڈ یاد نہیں/اکاؤنٹ ان لاک کریں</string>
+    <string name="forgot_password">پاس ورڈ بھول گئے/اکاؤنٹ ان لاک کریں</string>
     <string name="error_agent_code_invalid">براہ کرم صحیح کوڈ درج کریں۔</string>
     <string name="error_session_expired">آپ کے سیشن کی میعاد ختم ہوگئی ہے۔ براہ کرم دوبارہ لاگ ان کریں</string>
     <string name="error_transaction_fetch">اپنی تراسیل کو عمل درآمد ہونے کے لیے، براہ کرم ۵ کاروباری دن کا انتظار کریں۔ اگر اپکی تراسیل کو ۵ دن سے زیادہ ہوگئے ہیں، تو برائے مہربانی کسٹمر سپورٹ سے +92-21-111-11-6757 پر رابطہ کریں یا ہمیں sdrpsupport@1link.net.pk پر ای میل کریں</string>
@@ -346,7 +346,7 @@
     <string name="unable_to_register">رجسٹر نہیں کر سکا</string>
     <string name="specify_details">تفصیلات بتائیں</string>
     <string name="dear_customer">معزز صارف,</string>
-    <string name="complaint1">اپ کی شکائت درج کرلی گئ ہے,\n براہ کرم ٹریکنگ نمبر نوٹ کریں۔</string>
+    <string name="complaint1">اپ کی شکائت ٹریکنگ نمبر کے خلاف آپ کی شکایت درج کر دی گئی ہے</string>
     <string name="complaint2">مسئلہ ۵ کاروباری دنوں میں \n حل ہو جائے گا، اگر شکایت \n حل نہیں ہوئی تو آپ sdrpsupport@1link.net.pk یا 757-116-111 پر\n رابطہ کرسکتے ہیں</string>
     <string name="unable_to_registration_code">رجسٹریشن کوڈ وصول نہیں ہوا</string>
     <string name="mobile_operator_name">موبائل آپریٹر کا نام</string>
@@ -405,7 +405,8 @@
     <string name="error_remittance_same_date">اپنی ترسیلات زر پر سیلف ایوارڈ پوائنٹس براہ کرم 3 کاروباری دنوں کا انتظار کریں کے لیے،</string>
     <string name="error_remittance_rda_transaction">۔RDA کسٹمر صرف اس رقم کے بدلے آٹو ایوارڈنگ پوائنٹس کا اہل ہو گا جو مقامی طور پر استعمال ہوتی ہے اور اسے واپس نہیں لایا جا سکتا</string>
     <string name="select_transaction_type">ٹرانزیکشن کی قسم درج کریں</string>
-    <string name="error_enter_details">Please enter details</string>
+    <string name="error_enter_details">براہ کرم مزید آگے بڑھنے کے لیے معلومات فراہم کریں</string>
     <string name="notifications">نوٹیفیکیشن</string>
     <string name="delete">حذف کریں</string>
+    <string name="enter_opf_voucher">او پی ایف سکول فیس واؤچر نمبر درج کریں</string>
 </resources>

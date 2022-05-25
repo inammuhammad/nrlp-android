@@ -163,7 +163,7 @@
     <string name="update_profile">Update Profile</string>
     <string name="confirm_profile_update_msg">Are you sure you want to update your profile?</string>
     <string name="beneficiary_created">Beneficiary registered successfully</string>
-    <string name="beneficiary_creation_success_msg">Beneficiary created successfully, we have sent a SMS to the Beneficiary.</string>
+    <string name="beneficiary_creation_success_msg">Beneficiary created successfully\nWe have sent an SMS to the Beneficiary with SDRP Link to download &amp; Registration Code. Kindly ask your beneficiary to register within 3 days before the code expiry.</string>
     <string name="beneficiary_added">Beneficiary Added</string>
     <string name="self_award_points">Self Award Points</string>
     <string name="transfer_points">Transfer Points</string>
@@ -255,7 +255,7 @@
     <string name="redem_points_slic_detail">You have redeemed %1$d Points against Policy No.\n%2$s successfully at %3$s on %4$s</string>
     <string name="redem_points_beoe_detail">You have redeemed %1$d Points against %2$s successfully at %3$s on %4$s</string>
     <string name="redem_points_opf_detail">Your amount against Voucher No. %1$s for %2$s Points is redeemed successfully at %3$s on %4$s</string>
-    <string name="self_award_warning">RDA customers shall only be eligible for auto awarding of points against the amount which is consumed locally and cannot be repatriated.</string>
+    <string name="self_award_warning">1. For self- awarding of points, please wait for 3 working days after your remittance is credited in the account or received by your beneficiary.\n2. RDA customers shall only be eligible for auto awarding of points against the amount which is consumed locally and cannot be repatriated.</string>
     <string name="register_warning">Dear Remitter,\nPlease wait at least 05\nworking days after your\nremittance has been\nprocessed to register for\nthe Sohni Dharti Remittance\nProgram.\n\nFor further assistance,you may\ncontact +92-21-111-11-6757</string>
     <string name="redem_confirm_detail">You have selected to redeem %1$d points to %2$s at %3$s</string>
     <string name="redem_success_msg">You have redeemed %1$d points at %2$s on %3$d </string>
@@ -358,7 +358,7 @@
     <string name="unable_to_register">Unable to register</string>
     <string name="specify_details">Specify Details</string>
     <string name="dear_customer">Dear Customer,</string>
-    <string name="complaint1">Your complaint has been logged,\n please note the Tracking Number</string>
+    <string name="complaint1">Your complaint has been logged,\n against the Tracking Number</string>
     <string name="complaint2">Your issue will be resolved within 5 \n working days, In case complaint \nremains unresolved, you may contact us at\nsdrpsupport@1link.net.pk or \n 111-116-757</string>
     <string name="unable_to_registration_code">Unable to receive registration code</string>
     <string name="mobile_operator_name">Mobile Operator Name</string>
@@ -373,7 +373,7 @@
     <string name="redemption">Redemption</string>
     <string name="redemption_partner">Redemption Partner</string>
     <string name="beneficiary_cnic_nicop">Beneficiary CNIC/NICOP/POC</string>
-    <string name="remitting_entity">Receiving Entity</string>
+    <string name="remitting_entity">Receiving Entity (Banks &amp; Exchange Company)</string>
     <string name="transaction_id">Transaction ID</string>
     <string name="transaction_date">Transaction Date</string>
     <string name="beneficiary_country_of_residence">Beneficiary Country of Residence</string>
@@ -442,7 +442,7 @@
     <string name="error_unique_id">Please enter a valid Unique ID</string>
     <string name="error_relationship">Please enter a valid Beneficiary Relationship</string>
     <string name="error_redemption_partner">Please select Redemption Partner</string>
-    <string name="error_enter_details">Please enter details</string>
+    <string name="error_enter_details">Please provide the information to proceed further</string>
     <string name="error_beneficiary_country">Please select Country</string>
     <string name="error_transaction_date">Please select Transaction Date</string>
     <string name="select_transaction_type">Select Transaction Type</string>
@@ -463,4 +463,5 @@
     <string name="please_enter_father_name">Please provide Father Name for verification purpose</string>
     <string name="notifications">Notifications</string>
     <string name="delete">Delete</string>
+    <string name="enter_opf_voucher">Enter OPF School Fee Voucher No. For Redemption</string>
 </resources>

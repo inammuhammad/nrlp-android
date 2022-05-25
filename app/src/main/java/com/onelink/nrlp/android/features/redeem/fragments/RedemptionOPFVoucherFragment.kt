@@ -103,7 +103,6 @@ class RedemptionOPFVoucherFragment : BaseFragment<RedemptionOPFVoucherViewModel,
         redeemSharedViewModel?.redeemPartnerModel?.observe(this,
             Observer {
                 redeemPartnerModel = it
-                binding.lblPSID.text = redeemPartnerModel.categories[0].categoryName
             })
 
         viewModel.observeInitializeRedemption().observe(this, Observer { response ->
