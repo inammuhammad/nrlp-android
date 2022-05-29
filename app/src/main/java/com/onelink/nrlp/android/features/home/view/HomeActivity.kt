@@ -78,9 +78,9 @@ class HomeActivity :
         binding.toolbar.setLeftButtonClickListener(View.OnClickListener { toggleMenu() })
         binding.toolbar.showBorderView(true)
         binding.toolbar.setLeftButton(ContextCompat.getDrawable(this, R.drawable.ic_side_menu))
-        //binding.toolbar.setRightButtonVisible(true)
-        //binding.toolbar.setNotificationCountVisible(true)
-        //binding.toolbar.setRightButtonClickListener(View.OnClickListener { launchNotificationActivity() })
+        /*binding.toolbar.setRightButtonVisible(true)
+        binding.toolbar.setNotificationCountVisible(true)
+        binding.toolbar.setRightButtonClickListener(View.OnClickListener { launchNotificationActivity() })*/
 
         supportFragmentManager.addOnBackStackChangedListener {
             val fragment = getCurrentFragment() as BaseFragment<*, *>?

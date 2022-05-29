@@ -373,7 +373,7 @@
     <string name="redemption">Redemption</string>
     <string name="redemption_partner">Redemption Partner</string>
     <string name="beneficiary_cnic_nicop">Beneficiary CNIC/NICOP/POC</string>
-    <string name="remitting_entity">Receiving Entity (Banks &amp; Exchange Company)</string>
+    <string name="remitting_entity">Receiving Entity (Banks &amp; Exchange \nCompany)</string>
     <string name="transaction_id">Transaction ID</string>
     <string name="transaction_date">Transaction Date</string>
     <string name="beneficiary_country_of_residence">Beneficiary Country of Residence</string>
@@ -442,7 +442,7 @@
     <string name="error_unique_id">Please enter a valid Unique ID</string>
     <string name="error_relationship">Please enter a valid Beneficiary Relationship</string>
     <string name="error_redemption_partner">Please select Redemption Partner</string>
-    <string name="error_enter_details">Please provide the information to proceed further</string>
+    <string name="error_enter_details">Please use at least 15 characters to describe the problem in detail</string>
     <string name="error_beneficiary_country">Please select Country</string>
     <string name="error_transaction_date">Please select Transaction Date</string>
     <string name="select_transaction_type">Select Transaction Type</string>

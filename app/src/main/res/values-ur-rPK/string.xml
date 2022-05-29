@@ -361,12 +361,12 @@
     <string name="redemption">ریڈیمشن</string>
     <string name="redemption_partner">ریڈیمشن پاٹنر</string>
     <string name="beneficiary_cnic_nicop">وصول کنندہ کا CNIC/NICOP/POC</string>
-    <string name="remitting_entity">ترسیلات زر کا ادارہ</string>
+    <string name="remitting_entity">ترسیلات زر کا ادارہ (بینک یا ایکسچینج کمپنی)</string>
     <string name="transaction_id">ٹرانزیکشن آئی ڈی</string>
     <string name="transaction_date">ٹرانزیکشن کی تاریخ</string>
     <string name="beneficiary_country_of_residence">وصول کنندہ کے  قیام  کا ملک</string>
     <string name="beneficiary_mobile_operator_name">وصول کنندہ کے  موبائل آپریٹر کا نام</string>
-    <string name="specify_bank_exchange_from_where_remittance">براہ کرم بینک/ایکسچینج کمپنی  بتائیں جہاں سے ترسیلات زر بھیجی گئی ہیں</string>
+    <string name="specify_bank_exchange_from_where_remittance">براہ کرم بینک/ایکسچینج کمپنی بتائیں جہاں سے ترسیلات زر بھیجی گئی ہیں</string>
     <string name="resend_registration_code">رجسٹریشن کوڈ دوبارہ بھیجیں</string>
     <string name="transaction_amount_pkr">ٹرانزیکشن  کی رقم( پاکستانی روپے)</string>
     <string name="incorrect_information">پ کی فراہم کردہ معلومات غلط ہے۔ براہ مہربانی نادرہ ریکارڈ کے مطابق صحیح معلومات درج کریں</string>
@@ -405,7 +405,7 @@
     <string name="error_remittance_same_date">اپنی ترسیلات زر پر سیلف ایوارڈ پوائنٹس براہ کرم 3 کاروباری دنوں کا انتظار کریں کے لیے،</string>
     <string name="error_remittance_rda_transaction">۔RDA کسٹمر صرف اس رقم کے بدلے آٹو ایوارڈنگ پوائنٹس کا اہل ہو گا جو مقامی طور پر استعمال ہوتی ہے اور اسے واپس نہیں لایا جا سکتا</string>
     <string name="select_transaction_type">ٹرانزیکشن کی قسم درج کریں</string>
-    <string name="error_enter_details">براہ کرم مزید آگے بڑھنے کے لیے معلومات فراہم کریں</string>
+    <string name="error_enter_details">مسئلے کو تفصیل سے بیان کرنے کے لیے کم از کم 15 حروف استعمال کریں</string>
     <string name="notifications">نوٹیفیکیشن</string>
     <string name="delete">حذف کریں</string>
     <string name="enter_opf_voucher">او پی ایف سکول فیس واؤچر نمبر درج کریں</string>

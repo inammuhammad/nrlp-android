@@ -507,8 +507,8 @@
                         android:text="@string/beneficiary_account_number_cnic_complaint"
                         android:textColor="@color/black"
                         android:textSize="@dimen/unit_16sp"
+                        android:maxWidth="@dimen/_225sdp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout

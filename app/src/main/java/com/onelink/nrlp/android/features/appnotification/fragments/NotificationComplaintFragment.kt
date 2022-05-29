@@ -75,7 +75,7 @@ class NotificationComplaintFragment :
                     oneLinkProgressDialog.hideProgressDialog()
                     response.data?.let {
                         val list = it.data.records
-                        binding.btnLoadMore.isEnabled = list.size > 10
+                        binding.btnLoadMore.isEnabled = list.size > 9
                         if (pageNum <= 1) {
                             adapter = NotificationsListAdapter(context, list, { notificationItem ->
                                 Log.d(TAG, notificationItem.isReadFlag.toString())
