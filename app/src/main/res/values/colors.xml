@@ -5,6 +5,7 @@
     <color name="colorAccent">@color/green</color>
 
     <color name="grey">#F4EFEF</color>
+    <color name="grey_E5E5EA">#E5E5EA</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#181818</color>
     <color name="pure_black">#000000</color>

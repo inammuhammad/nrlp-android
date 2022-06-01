@@ -6,6 +6,6 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class RateRedemptionRequestModel (
-    @SerializedName("transaction_id") var transactionId: String,
+    @SerializedName("transaction_id") var transactionId: String?,
     @SerializedName("comments") var comments: String,
 ): Parcelable

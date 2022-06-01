@@ -12,6 +12,7 @@ import com.onelink.nrlp.android.databinding.FragmentFatherNameVerificationBindin
 import com.onelink.nrlp.android.features.home.view.HomeActivity
 import com.onelink.nrlp.android.features.home.view.NadraVerificationsSuccessActivity
 import com.onelink.nrlp.android.features.home.view.TAG_CONFIRM_LOGOUT_DIALOG
+import com.onelink.nrlp.android.features.register.viewmodel.SharedViewModel
 import com.onelink.nrlp.android.utils.dialogs.OneLinkAlertDialogsFragment
 import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
 import com.onelink.nrlp.android.utils.setOnSingleClickListener
@@ -28,6 +29,8 @@ class FatherNameVerificationFragment : BaseFragment<HomeFragmentViewModel, Fragm
     @Inject
     lateinit var oneLinkProgressDialog: OneLinkProgressDialog
 
+    private var sharedViewModel: SharedViewModel? = null
+
     override fun getLayoutRes(): Int = R.layout.fragment_father_name_verification
 
     override fun onInject() {
@@ -40,11 +43,13 @@ class FatherNameVerificationFragment : BaseFragment<HomeFragmentViewModel, Fragm
 
     override fun init(savedInstanceState: Bundle?) {
         super.init(savedInstanceState)
+        binding.lifecycleOwner = this
         (activity as HomeActivity).hideHomeScreenTools()
         initListeners()
         initObservers()
         initTextObservers()
         initTextWatchers()
+        sharedViewModel?.maxProgress?.postValue(1)
     }
 
     private fun initListeners() {

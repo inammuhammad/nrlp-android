@@ -10,6 +10,9 @@ import com.onelink.nrlp.android.R
 import com.onelink.nrlp.android.core.BaseFragmentActivity
 import com.onelink.nrlp.android.databinding.TransferPointsSuccessfulBinding
 import com.onelink.nrlp.android.features.managePoints.viewmodel.TransferPointsSuccessFulViewModel
+import com.onelink.nrlp.android.features.rate.view.RateActivity
+import com.onelink.nrlp.android.utils.IntentConstants
+import com.onelink.nrlp.android.utils.TransactionTypeConstants
 import kotlinx.android.synthetic.main.transfer_points_successful.*
 import javax.inject.Inject
 
@@ -28,6 +31,8 @@ class TransferPointsSuccessFulActivity : BaseFragmentActivity<TransferPointsSucc
     override fun initViewModel(viewModel: TransferPointsSuccessFulViewModel) {
         val points = intent.getIntExtra("points", 0)
         val bene = intent.getStringExtra("beneName")
+        val giveRating = intent.getBooleanExtra(IntentConstants.GIVE_RATING, false)
+        val transactionType = TransactionTypeConstants.TRANSFER_POINTS
         val s = String.format(
             getString(R.string.you_have_successfully_transfered),
             points,
@@ -46,16 +51,21 @@ class TransferPointsSuccessFulActivity : BaseFragmentActivity<TransferPointsSucc
         textViewRegisterSuccessMsg.text = str
 
         buttonDone.setOnClickListener {
+            if(giveRating)
+                startActivity(
+                    RateActivity.newRateIntent(this)
+                        .putExtra(IntentConstants.TRANSACTION_TYPE, transactionType)
+                )
             finish()
         }
-
     }
 
     companion object {
-        fun newTransferPointsSuccessFulIntent(context: Context, points: Int, name: String): Intent {
+        fun newTransferPointsSuccessFulIntent(context: Context, points: Int, name: String, giveRating: Boolean): Intent {
             return Intent(context, TransferPointsSuccessFulActivity::class.java)
                 .putExtra("points", points)
                 .putExtra("beneName", name)
+                .putExtra(IntentConstants.GIVE_RATING, giveRating)
 
         }
     }

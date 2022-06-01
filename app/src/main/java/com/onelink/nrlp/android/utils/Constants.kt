@@ -16,7 +16,7 @@ class Constants {
         // 15-03-2022 go4rdhgrrjvo76rcxyode1yj8ff80kk4mzc90u5x 2.0
         // 20-04-2022 j41rfrtqzzwu9rtf6caftq9eprzq9yix038kabkb 2.1
         // 27-05-2022 h8o1vyqp5tjq3j94avrakjna3624yggn0uo38ffl 2.2
-        const val checkSum = "nqsuyvjyu2xagcdz8jz0cexf6mn36hg7z58dyp12" //"h8o1vyqp5tjq3j94avrakjna3624yggn0uo38ffl"
+        const val checkSum = "w73v34zmazcrlz1li8v3iplfdoawrjz7ggsutsin" //"nqsuyvjyu2xagcdz8jz0cexf6mn36hg7z58dyp12"
         const val InternationalPassport = "International Passport"
         const val PakistaniPassport = "Pakistani Passport"
 
@@ -54,6 +54,8 @@ object IntentConstants {
     const val IS_FROM_SPLASH = "is_from_splash"
     const val SELF_AWARD_VERIFY_OTP_Message = "self_award_verify_otp_message"
     const val AUTH_ID = "auth_id"
+    const val TRANSACTION_TYPE = "transactionType"
+    const val GIVE_RATING = "giveRating"
 }
 
 object LoyaltyCardConstants {
@@ -186,6 +188,13 @@ object COMPLAINT_TYPE {
 
     const val OTHERS = 8
 
+}
+
+object TransactionTypeConstants {
+    const val TRANSFER_POINTS = "transfer_points"
+    const val TRANSACTION_TYPE = "transaction_type"
+    const val COMMENTS = "comments"
+    const val TRANSACTION_ID = "transaction_id"
 }
 
 object Sp {

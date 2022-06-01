@@ -2,10 +2,10 @@ package com.onelink.nrlp.android.features.redeem.repo
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.gson.JsonObject
 import com.onelink.nrlp.android.core.BaseResponse
 import com.onelink.nrlp.android.data.NetworkHelper
 import com.onelink.nrlp.android.data.ServiceGateway
-import com.onelink.nrlp.android.features.rate.model.RateRedemptionRequestModel
 import com.onelink.nrlp.android.features.redeem.model.*
 import com.onelink.nrlp.android.models.GeneralMessageResponseModel
 import javax.inject.Inject
@@ -103,8 +103,8 @@ open class RedemptionRepo @Inject constructor(
             }
     }
 
-    fun rateRedemption(rateRedemptionRequestModel: RateRedemptionRequestModel) {
-        networkHelper.serviceCall(serviceGateway.rateRedemption(rateRedemptionRequestModel))
+    fun rateRedemption(jsonObject: JsonObject) {
+        networkHelper.serviceCall(serviceGateway.rateRedemption(jsonObject))
             .observeForever {
                 rateRedemptionResponse.value = it
             }

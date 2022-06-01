@@ -173,10 +173,13 @@ class ManagePointsFragment :
                 oneLinkProgressDialog.hideProgressDialog()
                 activity?.let {
                     it.startActivity(
-                        TransferPointsSuccessFulActivity.newTransferPointsSuccessFulIntent(
-                            it, binding.etEndPoint.text.toString().replace(",", "").toInt(),
-                            selectedBeneficiary.alias
-                        )
+                        response.data?.customerRating?.let { it1 ->
+                            TransferPointsSuccessFulActivity.newTransferPointsSuccessFulIntent(
+                                it, binding.etEndPoint.text.toString().replace(",", "").toInt(),
+                                selectedBeneficiary.alias,
+                                it1
+                            )
+                        }
                     )
                     it.finish()
                 }

@@ -245,7 +245,7 @@ interface ServiceGateway {
     fun getBanks(): Single<Response<com.onelink.nrlp.android.features.select.bank.model.BanksListResponse>>
 
     @POST("nrlp-redemption-rating/")
-    fun rateRedemption(@Body body: RateRedemptionRequestModel): Single<Response<GeneralMessageResponseModel>>
+    fun rateRedemption(@Body body: JsonObject): Single<Response<GeneralMessageResponseModel>>
 
     @POST("nrlp-notification-list/")
     fun getUserNotifications(@Body body: NotificationsListRequestModel): Single<Response<NotificationsListResponse>>

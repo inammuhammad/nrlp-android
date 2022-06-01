@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.RatingBar.OnRatingBarChangeListener
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.gson.JsonObject
 import com.onelink.nrlp.android.R
 import com.onelink.nrlp.android.core.BaseFragment
 import com.onelink.nrlp.android.core.Status
@@ -11,8 +12,10 @@ import com.onelink.nrlp.android.databinding.FragmentSelfAwardRatingBinding
 import com.onelink.nrlp.android.features.rate.model.RateRedemptionRequestModel
 import com.onelink.nrlp.android.features.rate.view.RateActivity
 import com.onelink.nrlp.android.features.rate.viewmodels.RateViewModel
+import com.onelink.nrlp.android.utils.TransactionTypeConstants
 import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
 import dagger.android.support.AndroidSupportInjection
+import org.json.JSONObject
 import javax.inject.Inject
 
 class TransactionRatingFragment : BaseFragment<RateViewModel, FragmentSelfAwardRatingBinding>
@@ -24,7 +27,8 @@ class TransactionRatingFragment : BaseFragment<RateViewModel, FragmentSelfAwardR
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private var transactionId = ""
+    private var transactionId: String? = ""
+    private var transactionType: String? = ""
 
     override fun onInject() {
         AndroidSupportInjection.inject(this)
@@ -39,6 +43,7 @@ class TransactionRatingFragment : BaseFragment<RateViewModel, FragmentSelfAwardR
         super.init(savedInstanceState)
         binding.lifecycleOwner = this
         transactionId = (activity as RateActivity).transactionId
+        transactionType = (activity as RateActivity).transactionType
         initListeners()
         initObservers()
     }
@@ -72,8 +77,31 @@ class TransactionRatingFragment : BaseFragment<RateViewModel, FragmentSelfAwardR
         })
     }
 
-    private fun makeRatingCall(rating: String){
-        viewModel.rateRedemption(RateRedemptionRequestModel(transactionId, rating))
+    private fun makeRatingCall(rating: String) {
+        val jsonObject= JsonObject()
+        when(transactionType){
+            TransactionTypeConstants.TRANSFER_POINTS -> {
+                jsonObject.addProperty(
+                    TransactionTypeConstants.TRANSACTION_TYPE,
+                    transactionType
+                )
+                jsonObject.addProperty(
+                    TransactionTypeConstants.COMMENTS,
+                    rating
+                )
+            }
+            else -> {
+                jsonObject.addProperty(
+                    TransactionTypeConstants.TRANSACTION_ID,
+                    transactionId
+                )
+                jsonObject.addProperty(
+                    TransactionTypeConstants.COMMENTS,
+                    rating
+                )
+            }
+        }
+        viewModel.rateRedemption(jsonObject)
     }
 
     /*private fun makeRatingCall(group: RadioGroup, index: Int){

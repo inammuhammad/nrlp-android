@@ -98,7 +98,7 @@ open class HomeFragment :
     private fun showUserData() {
         UserData.getUser()?.let {
             //checkNadraVerification(it)
-            //checkFatherNameVerification(it.fatherName)
+            checkFatherNameVerification(it.fatherName)
             if(it.accountType != Constants.BENEFICIARY.toLowerCase(Locale.getDefault()))
                 checkReceiverAdded(it)
             if(it.accountType == "beneficiary") {
@@ -140,7 +140,7 @@ open class HomeFragment :
     }
 
     private fun checkFatherNameVerification(name: String?) {
-        if(name.isNullOrEmpty()) {
+        if(true){//if(name.isNullOrEmpty()) {
             viewModel.navigateFatherNameVerification(fragmentHelper)
         }
     }
@@ -171,6 +171,11 @@ open class HomeFragment :
     override fun onResume() {
         super.onResume()
         oneLinkProgressDialog.showProgressDialog(context)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        oneLinkProgressDialog.hideProgressDialog()
     }
 
      protected fun showComingSoonDialog() {

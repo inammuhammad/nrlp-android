@@ -24,10 +24,12 @@ class RateActivity : BaseFragmentActivity<ActivityRateBinding, RateViewModel>(Ra
 
     override fun getVMFactory(): ViewModelProvider.Factory = viewModelFactory
 
-    var transactionId: String = ""
+    var transactionId: String? = ""
+    var transactionType: String? = ""
 
     override fun initViewModel(viewModel: RateViewModel) {
-        transactionId = intent.extras?.get(IntentConstants.TRANSACTION_ID) as String
+        transactionId = intent.extras?.get(IntentConstants.TRANSACTION_ID) as String? ?: ""
+        transactionType = intent.extras?.get(IntentConstants.TRANSACTION_TYPE) as String? ?: ""
         initView()
     }
 

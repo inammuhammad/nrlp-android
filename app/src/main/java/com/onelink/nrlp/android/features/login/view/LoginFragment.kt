@@ -271,6 +271,8 @@ class LoginFragment :
             binding.etCnic.removeTextChangedListener(this)
             CnicTextHelper.onTextChange(s, before, count, binding)
             binding.etCnic.addTextChangedListener(this)
+            if(count == 15) //autofill password fix
+                viewModel.cnicNicopNumber.postValue(s.toString())
         }
     }
 
