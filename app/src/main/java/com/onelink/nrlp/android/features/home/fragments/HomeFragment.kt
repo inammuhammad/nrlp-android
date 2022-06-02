@@ -140,7 +140,7 @@ open class HomeFragment :
     }
 
     private fun checkFatherNameVerification(name: String?) {
-        if(true){//if(name.isNullOrEmpty()) {
+        if(name.isNullOrEmpty()) {
             viewModel.navigateFatherNameVerification(fragmentHelper)
         }
     }
@@ -165,12 +165,8 @@ open class HomeFragment :
 
     override fun refresh() {
         viewModel.getUserProfile()
-        super.refresh()
-    }
-
-    override fun onResume() {
-        super.onResume()
         oneLinkProgressDialog.showProgressDialog(context)
+        super.refresh()
     }
 
     override fun onDestroy() {

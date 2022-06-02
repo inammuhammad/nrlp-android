@@ -16,6 +16,8 @@
         android:layout_height="wrap_content"
         android:text="@string/rate_redemption_experience"
         style="@style/TextViewHeading"
+        android:maxWidth="@dimen/_280sdp"
+        android:textAlignment="center"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

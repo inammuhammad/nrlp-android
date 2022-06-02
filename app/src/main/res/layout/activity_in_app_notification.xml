@@ -29,6 +29,7 @@
                 android:layout_height="wrap_content"
                 app:tabBackground="@color/white"
                 app:tabGravity="fill"
+                style="@style/CustomTextStyle"
                 app:tabInlineLabel="true"
                 app:tabIndicatorColor="@color/green"
                 app:tabMode="fixed"

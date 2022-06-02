@@ -40,7 +40,7 @@
         android:gravity="center"
         android:text="@string/delete"
         android:visibility="gone"
-        android:elevation="@dimen/_8sdp"
+        android:elevation="@dimen/_4sdp"
         android:drawablePadding="@dimen/_2sdp"
         android:layout_marginTop="@dimen/_1sdp"
         android:drawableStart="@drawable/ic_delete"

@@ -7,8 +7,11 @@ import com.onelink.nrlp.android.R
 import com.onelink.nrlp.android.core.BaseActivity
 import com.onelink.nrlp.android.databinding.ActivityRegisterContainerBinding
 import com.onelink.nrlp.android.features.login.view.LoginActivity
+import com.onelink.nrlp.android.features.rate.view.RateActivity
 import com.onelink.nrlp.android.features.register.viewmodel.RegisterViewModel
 import com.onelink.nrlp.android.utils.Constants
+import com.onelink.nrlp.android.utils.IntentConstants
+import com.onelink.nrlp.android.utils.TransactionTypeConstants
 import kotlinx.android.synthetic.main.fragment_register_success.*
 import java.util.*
 import javax.inject.Inject
@@ -35,7 +38,11 @@ class RegisterSuccessActivity :
             textViewRegisterSuccessMsg.text = getString(R.string.register_success_msg_remitter)
         }
         buttonDone.setOnClickListener {
-            launchLoginActivity()
+            startActivity(
+                RateActivity.newRateIntent(this)
+                    .putExtra(IntentConstants.TRANSACTION_TYPE, TransactionTypeConstants.REGISTRATION)
+            )
+            //launchLoginActivity()
         }
     }
 

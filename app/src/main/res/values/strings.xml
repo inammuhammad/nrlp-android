@@ -454,6 +454,8 @@
     <string name="satisfied" translatable="false">Satisfactory</string>
     <string name="unsatisfied" translatable="false">Unsatisfactory</string>
     <string name="rate_redemption_experience">Rate Your Redemption Experience</string>
+    <string name="rate_registration_experience">How would you Rate Registration Process</string>
+    <string name="rate_transfer_experience">How would you Rate Transfer Points Process</string>
     <string name="error_invalid_reference_number">Please enter a valid Reference/TT Number</string>
     <string name="stars" translatable="false"> stars</string>
     <string name="enter_beneficiary_acc_num">Enter Beneficiary Account Number/IBAN on which remittance is sent</string>
