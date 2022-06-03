@@ -22,6 +22,7 @@ import com.onelink.nrlp.android.features.select.city.view.SelectCityFragment
 import com.onelink.nrlp.android.features.select.country.model.CountryCodeModel
 import com.onelink.nrlp.android.features.select.country.view.SelectCountryFragment
 import com.onelink.nrlp.android.utils.Constants
+import com.onelink.nrlp.android.utils.IntentConstants
 import kotlinx.android.synthetic.main.activity_register_container.*
 import javax.inject.Inject
 
@@ -117,6 +118,9 @@ class RegisterActivity :
                     intent.putExtra(
                         Constants.INTENT_KEY_ACCOUNT_TYPE,
                         sharedViewModel.registerFlowDataModel.value?.accountType
+                    ).putExtra(
+                        IntentConstants.NIC_NICOP,
+                        sharedViewModel.registerFlowDataModel.value?.cnicNicop
                     )
                     startActivity(intent)
                 }

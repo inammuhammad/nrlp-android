@@ -444,7 +444,8 @@ class RegisterBeneficiaryFragment : BaseFragment<RegisterAccountFragmentViewMode
                     binding.etPassword.text.toString(),
                     binding.etRePassword.text.toString(),
                     fatherName = binding.etFatherName.text.toString(),
-                    placeOfBirth = binding.etPlaceOfBirth.text.toString()
+                    placeOfBirth = binding.etPlaceOfBirth.text.toString(),
+                    country = binding.tvCountry.text.toString()
                 )
             ) {
                 moveToNextFragment()

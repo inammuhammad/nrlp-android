@@ -434,11 +434,14 @@ class RegisterAccountFragmentViewModel @Inject constructor(
     fun checkPassportNumberValid(string: String) =
         string.isEmpty() || ValidationUtils.isPassportNumberValid(string)
 
+    fun checkCountryValid(string: String) =
+        ValidationUtils.isNameValid(string)
+
     fun validationsPassed(
         cnic: String, fullName: String, phoneNumber: String, phoneNumberLength: Int?,
         email: String, pass: String, repass: String, motherName: String = "",
         cnicIssueDate: String = "", passportNum: String = "", fatherName: String = "",
-        placeOfBirth: String = ""
+        placeOfBirth: String = "", country: String = ""
     ): Boolean {
         val isCnicValid: Boolean = checkCnicValidation(cnic)
         val isPhoneNumberValid: Boolean = checkPhoneNumberValidation(phoneNumber, phoneNumberLength)
@@ -451,6 +454,7 @@ class RegisterAccountFragmentViewModel @Inject constructor(
         val isPassportNumberValid: Boolean = checkPassportNumberValid(passportNum)
         val isFatherNameValid: Boolean = checkFatherNameValidation(fatherName)
         val isPlaceOfBirthValid: Boolean = checkPlaceOfBirthValid(placeOfBirth)
+        val isCountryValid: Boolean = checkCountryValid(country)
         validationCnicPassed.value = isCnicValid
         validationPhoneNumberPassed.value = isPhoneNumberValid
         validationFullNamePassed.value = isFullNameValid
@@ -464,10 +468,10 @@ class RegisterAccountFragmentViewModel @Inject constructor(
         validationPlaceOfBirthPassed.value = isPlaceOfBirthValid
         return isCnicValid && isPasswordValid && isRePassValid && isPassportNumberValid &&
                 isEmailValid && isFullNameValid && isPhoneNumberValid && isMotherNameValid &&
-                isFatherNameValid && isPlaceOfBirthValid
+                isFatherNameValid && isPlaceOfBirthValid && isCountryValid
     }
 
-    fun isBeneficiaryCnicValid(cnic: String): Boolean {
+    fun beneficiaryStageOneValidation(cnic: String): Boolean {
         val isCnicValid: Boolean = checkCnicValidation(cnic)
         validationCnicPassed.value = isCnicValid
         return isCnicValid

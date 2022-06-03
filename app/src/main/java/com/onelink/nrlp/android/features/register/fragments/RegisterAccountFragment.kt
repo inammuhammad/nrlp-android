@@ -584,7 +584,8 @@ class RegisterAccountFragment :
                     binding.etCnicNicopIssuanceDate.text.toString(),
                     binding.etPassportNo.text.toString(),
                     binding.etFatherName.text.toString(),
-                    binding.etPlaceOfBirth.text.toString()
+                    binding.etPlaceOfBirth.text.toString(),
+                    binding.tvCountry.text.toString()
                 )
             ) {
                 viewModel.getAuthKey(
@@ -595,15 +596,8 @@ class RegisterAccountFragment :
         }
 
         binding.btnNext1.setOnClickListener {
-            if (viewModel.validationsPassed(
-                    binding.etCnicNicop.text.toString(),
-                    binding.etFullName.text.toString(),
-                    binding.etPhoneNumber.text.toString(),
-                    countryCodeLength,
-                    binding.etEmailAddress.text.toString(),
-                    binding.etPassword.text.toString(),
-                    binding.etRePassword.text.toString(),
-                    binding.etMotherMaidenName.text.toString(),
+            if (viewModel.beneficiaryStageOneValidation(
+                    binding.etCnicNicop.text.toString()
                 )
             ) {
                 //moveToNextFragment()

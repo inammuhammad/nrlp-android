@@ -56,6 +56,7 @@ object IntentConstants {
     const val AUTH_ID = "auth_id"
     const val TRANSACTION_TYPE = "transactionType"
     const val GIVE_RATING = "giveRating"
+    const val NIC_NICOP = "nic_nicop"
 }
 
 object LoyaltyCardConstants {

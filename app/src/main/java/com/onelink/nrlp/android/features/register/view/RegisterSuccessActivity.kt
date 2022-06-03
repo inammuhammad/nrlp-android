@@ -32,6 +32,7 @@ class RegisterSuccessActivity :
 
     override fun initViewModel(viewModel: RegisterViewModel) {
         val accountType = intent.extras?.get(Constants.INTENT_KEY_ACCOUNT_TYPE) as String
+        val nicNicop = intent.extras?.get(IntentConstants.NIC_NICOP) as String
         if (accountType == Constants.BENEFICIARY.toLowerCase(Locale.getDefault())) {
             textViewRegisterSuccessMsg.text = getString(R.string.register_success_msg_beneficiary)
         } else if (accountType == Constants.REMITTER.toLowerCase(Locale.getDefault())) {
@@ -40,7 +41,12 @@ class RegisterSuccessActivity :
         buttonDone.setOnClickListener {
             startActivity(
                 RateActivity.newRateIntent(this)
-                    .putExtra(IntentConstants.TRANSACTION_TYPE, TransactionTypeConstants.REGISTRATION)
+                    .putExtra(
+                        IntentConstants.TRANSACTION_TYPE,
+                        TransactionTypeConstants.REGISTRATION
+                    )
+                    .putExtra(Constants.INTENT_KEY_ACCOUNT_TYPE, accountType)
+                    .putExtra(IntentConstants.NIC_NICOP, nicNicop)
             )
             //launchLoginActivity()
         }

@@ -2,8 +2,6 @@ package com.onelink.nrlp.android.features.rate.view
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.view.KeyEvent
 import androidx.lifecycle.ViewModelProvider
 import com.onelink.nrlp.android.R
@@ -12,8 +10,7 @@ import com.onelink.nrlp.android.databinding.ActivityRateBinding
 import com.onelink.nrlp.android.features.login.view.LoginActivity
 import com.onelink.nrlp.android.features.rate.fragments.TransactionRatingFragment
 import com.onelink.nrlp.android.features.rate.viewmodels.RateViewModel
-import com.onelink.nrlp.android.features.receiver.fragments.AddRemittanceReceiverFragment
-import com.onelink.nrlp.android.features.redeem.view.RedeemSuccessActivity
+import com.onelink.nrlp.android.utils.Constants
 import com.onelink.nrlp.android.utils.IntentConstants
 import com.onelink.nrlp.android.utils.TransactionTypeConstants
 import javax.inject.Inject
@@ -29,10 +26,14 @@ class RateActivity : BaseFragmentActivity<ActivityRateBinding, RateViewModel>(Ra
 
     var transactionId: String? = ""
     var transactionType: String? = ""
+    var accountType: String? = ""
+    var nicNicop: String? = ""
 
     override fun initViewModel(viewModel: RateViewModel) {
         transactionId = intent.extras?.get(IntentConstants.TRANSACTION_ID) as String? ?: ""
         transactionType = intent.extras?.get(IntentConstants.TRANSACTION_TYPE) as String? ?: ""
+        accountType = intent.extras?.get(Constants.INTENT_KEY_ACCOUNT_TYPE) as String? ?: ""
+        nicNicop = intent.extras?.get(IntentConstants.NIC_NICOP) as String? ?: ""
         initView()
     }
 

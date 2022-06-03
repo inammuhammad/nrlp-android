@@ -11,9 +11,10 @@ import com.onelink.nrlp.android.core.BaseFragment
 import com.onelink.nrlp.android.core.Status
 import com.onelink.nrlp.android.databinding.FragmentSelfAwardRatingBinding
 import com.onelink.nrlp.android.features.login.view.LoginActivity
-import com.onelink.nrlp.android.features.rate.model.RateRedemptionRequestModel
 import com.onelink.nrlp.android.features.rate.view.RateActivity
 import com.onelink.nrlp.android.features.rate.viewmodels.RateViewModel
+import com.onelink.nrlp.android.utils.Constants
+import com.onelink.nrlp.android.utils.IntentConstants
 import com.onelink.nrlp.android.utils.LukaKeRakk
 import com.onelink.nrlp.android.utils.TransactionTypeConstants
 import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
@@ -32,6 +33,8 @@ class TransactionRatingFragment : BaseFragment<RateViewModel, FragmentSelfAwardR
 
     private var transactionId: String? = ""
     private var transactionType: String? = ""
+    private var accountType: String? = ""
+    private var nicNicop: String? = ""
 
     override fun onInject() {
         AndroidSupportInjection.inject(this)
@@ -42,11 +45,13 @@ class TransactionRatingFragment : BaseFragment<RateViewModel, FragmentSelfAwardR
     override fun getViewM(): RateViewModel =
         ViewModelProvider(this, viewModelFactory).get(RateViewModel::class.java)
 
-    override fun init(savedInstanceState: Bundle?){
+    override fun init(savedInstanceState: Bundle?) {
         super.init(savedInstanceState)
         binding.lifecycleOwner = this
         transactionId = (activity as RateActivity).transactionId
         transactionType = (activity as RateActivity).transactionType
+        accountType = (activity as RateActivity).accountType
+        nicNicop = (activity as RateActivity).nicNicop
         setHeading(transactionType)
         initListeners()
         initObservers()
@@ -109,6 +114,14 @@ class TransactionRatingFragment : BaseFragment<RateViewModel, FragmentSelfAwardR
                 jsonObject.addProperty(
                     TransactionTypeConstants.COMMENTS,
                     rating
+                )
+                jsonObject.addProperty(
+                    Constants.INTENT_KEY_ACCOUNT_TYPE,
+                    accountType
+                )
+                jsonObject.addProperty(
+                    IntentConstants.NIC_NICOP,
+                    nicNicop
                 )
                 jsonObject.addProperty(
                     "encryption_key",
