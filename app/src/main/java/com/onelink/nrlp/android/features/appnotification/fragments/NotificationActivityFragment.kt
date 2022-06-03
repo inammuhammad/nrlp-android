@@ -1,5 +1,7 @@
 package com.onelink.nrlp.android.features.appnotification.fragments
 
+import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.onelink.nrlp.android.R
 import com.onelink.nrlp.android.core.BaseFragment
@@ -26,6 +28,14 @@ class NotificationActivityFragment :
 
     override fun getViewM(): AppNotificationViewModel =
         ViewModelProvider(this, viewModelFactory).get(AppNotificationViewModel::class.java)
+
+    override fun init(savedInstanceState: Bundle?) {
+        binding.ivComingSoon.visibility = View.VISIBLE
+        binding.tvComingSoon.visibility = View.VISIBLE
+        binding.rvNotificationsList.visibility = View.GONE
+        binding.btnLoadMore.visibility = View.GONE
+        super.init(savedInstanceState)
+    }
 
     companion object {
         fun newInstance() = NotificationActivityFragment()

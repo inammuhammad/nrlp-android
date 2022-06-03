@@ -197,6 +197,7 @@ object TransactionTypeConstants {
     const val COMMENTS = "comments"
     const val TRANSACTION_ID = "transaction_id"
     const val REGISTRATION = "registration"
+    const val REDEMPTION = "redemption"
 }
 
 object Sp {

@@ -11,6 +11,7 @@ import com.onelink.nrlp.android.R
 import com.onelink.nrlp.android.core.BaseFragmentActivity
 import com.onelink.nrlp.android.databinding.ActivityInAppNotificationBinding
 import com.onelink.nrlp.android.features.appnotification.adapters.ViewPagerAdapter
+import com.onelink.nrlp.android.features.appnotification.fragments.NotificationActivityFragment
 import com.onelink.nrlp.android.features.appnotification.fragments.NotificationComplaintFragment
 import com.onelink.nrlp.android.features.appnotification.viewmodels.AppNotificationViewModel
 import javax.inject.Inject
@@ -39,8 +40,8 @@ class InAppNotificationActivity:
     private fun initView() {
         val adapter = ViewPagerAdapter(supportFragmentManager)
         adapter.addFragment(NotificationComplaintFragment(), getString(R.string.complaint))
-        //adapter.addFragment(NotificationComplaintFragment(), getString(R.string.active))
-        //adapter.addFragment(NotificationComplaintFragment(), getString(R.string.home_title))
+        adapter.addFragment(NotificationActivityFragment(), getString(R.string.activity))
+        adapter.addFragment(NotificationActivityFragment(), getString(R.string.announcement))
         binding.viewpager.adapter = adapter
         binding.tabs.setupWithViewPager(binding.viewpager)
         binding.tabs.setSelectedTabIndicatorColor(Color.parseColor("#014D27"))

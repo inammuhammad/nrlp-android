@@ -72,10 +72,10 @@ class AdvancedLoyaltyStatementFragment :
                 Status.SUCCESS -> {
                     oneLinkProgressDialog.hideProgressDialog()
                     response.data.let {
-                        activity?.let {
+                        /*activity?.let {
                             activity?.startActivity(StatementGeneratedActivity.createIntent(it))
                             activity?.finish()
-                        }
+                        }*/
                     }
                 }
                 Status.ERROR -> {

@@ -259,4 +259,7 @@ interface ServiceGateway {
     @POST("nrlpfather-verification/")
     fun verifyFatherName(@Body body: VerifyFatherNameRequestModel): Single<Response<GeneralMessageResponseModel>>
 
+    @POST("nrlpappcancel-rating/")
+    fun inAppRatingCancel(): Single<Response<GeneralMessageResponseModel>>
+
 }

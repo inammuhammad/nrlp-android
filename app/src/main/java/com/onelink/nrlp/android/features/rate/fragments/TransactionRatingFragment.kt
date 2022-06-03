@@ -130,6 +130,10 @@ class TransactionRatingFragment : BaseFragment<RateViewModel, FragmentSelfAwardR
             }
             else -> {
                 jsonObject.addProperty(
+                    TransactionTypeConstants.TRANSACTION_TYPE,
+                    TransactionTypeConstants.REDEMPTION
+                )
+                jsonObject.addProperty(
                     TransactionTypeConstants.TRANSACTION_ID,
                     transactionId
                 )

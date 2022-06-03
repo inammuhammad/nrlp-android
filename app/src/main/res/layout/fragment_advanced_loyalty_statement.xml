@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/unit_44dp"
             android:text="@string/email_address"
-            android:visibility="visible"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvLoyaltyStatementMsg" />
 
@@ -47,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/unit_8dp"
-            android:visibility="visible"
+            android:visibility="gone"
             app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -191,7 +191,7 @@
             style="@style/ButtonTheme"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:enabled="@{viewModel.fromDateNotEmpty &amp;&amp; viewModel.toDateNotEmpty &amp;&amp; viewModel.emailNotEmpty}"
+            android:enabled="@{viewModel.fromDateNotEmpty &amp;&amp; viewModel.toDateNotEmpty}"
             android:text="@string/request_statement"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

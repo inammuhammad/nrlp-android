@@ -409,4 +409,7 @@
     <string name="notifications">نوٹیفیکیشن</string>
     <string name="delete">حذف کریں</string>
     <string name="enter_opf_voucher">او پی ایف سکول فیس واؤچر نمبر درج کریں</string>
+    <string name="activity">سرگرمی</string>
+    <string name="announcement">اعلان</string>
+    <string name="notification_date_at">وقت</string>
 </resources>

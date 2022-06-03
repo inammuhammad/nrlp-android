@@ -13,9 +13,11 @@
             android:layout_height="0dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/btnLoadMore"
+            android:layout_marginBottom="@dimen/_10sdp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:orientation="vertical"
             tools:itemCount="5"
+            android:visibility="gone"
             tools:listitem="@layout/item_push_notification"/>
 
         <androidx.appcompat.widget.AppCompatButton
@@ -28,8 +30,30 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_margin="@dimen/_10sdp"
             android:text="Load More"
-            android:visibility="visible"
-            />
+            android:visibility="gone" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivComingSoon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/ic_coming_soon_alert" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvComingSoon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextViewSubHeading"
+            android:text="@string/coming_soon"
+            android:textSize="@dimen/unit_18sp"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintTop_toBottomOf="@id/ivComingSoon"
+            app:layout_constraintStart_toStartOf="@id/ivComingSoon"
+            app:layout_constraintEnd_toEndOf="@id/ivComingSoon" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

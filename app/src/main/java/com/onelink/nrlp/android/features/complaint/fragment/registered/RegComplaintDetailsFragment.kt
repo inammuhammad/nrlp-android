@@ -416,12 +416,12 @@ class RegComplaintDetailsFragment:
                     oneLinkProgressDialog.hideProgressDialog()
                     response.data?.let {
                         viewModel.complaintId.postValue(it.complaintId)
-                        /*sendNotification(
+                        sendNotification(
                             "Complaint Registered",
                             "Complaint registered with ID ${it.complaintId}",
                             getString(R.string.channel_id)
-                        )*/
-                        viewModel.gotoComplaintResponseFragment(resources,fragmentHelper)
+                        )
+                        viewModel.gotoComplaintResponseFragment(resources, fragmentHelper)
                     }
                 }
                 Status.ERROR -> {

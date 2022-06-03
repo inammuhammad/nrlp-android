@@ -237,6 +237,7 @@ class HomeActivity :
             .setPositiveButtonText(resources.getString(R.string.yes))
             .setNegativeButtonText(resources.getString(R.string.no)).setCancelable(true)
             .show(supportFragmentManager, TAG_CONFIRM_LOGOUT_DIALOG)
+        launchInAppReview()
     }
 
     private fun showComingSoonDialog() {
@@ -256,16 +257,17 @@ class HomeActivity :
         }
     }
 
-    fun launchInAppReview(){
-        val manager = ReviewManagerFactory.create(this)
+    private fun launchInAppReview() {
+        //val manager = ReviewManagerFactory.create(this)
+        val manager = FakeReviewManager(this)
         val request = manager.requestReviewFlow()
-        request.addOnCompleteListener{ task ->
-            if(task.isSuccessful){
+        request.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
                 val reviewInfo = task.result
                 val flow = manager.launchReviewFlow(this, reviewInfo)
                 if (flow != null) {
                     flow.addOnCompleteListener { _ ->
-                        Toast.makeText(this, "Review successful", Toast.LENGTH_LONG)
+                        Toast.makeText(this, "Review successful", Toast.LENGTH_LONG).show()
                     }
                 }
             }

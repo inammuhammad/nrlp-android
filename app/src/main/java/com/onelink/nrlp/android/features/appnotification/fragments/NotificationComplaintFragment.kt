@@ -2,6 +2,7 @@ package com.onelink.nrlp.android.features.appnotification.fragments
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.onelink.nrlp.android.R
@@ -45,6 +46,10 @@ class NotificationComplaintFragment :
 
     override fun init(savedInstanceState: Bundle?) {
         super.init(savedInstanceState)
+        binding.ivComingSoon.visibility = View.GONE
+        binding.tvComingSoon.visibility = View.GONE
+        binding.rvNotificationsList.visibility = View.VISIBLE
+        binding.btnLoadMore.visibility = View.VISIBLE
         initListeners()
         initObservers()
     }
