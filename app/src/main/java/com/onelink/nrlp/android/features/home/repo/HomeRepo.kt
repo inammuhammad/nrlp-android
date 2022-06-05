@@ -22,6 +22,7 @@ class HomeRepo @Inject constructor(
     val logoutResponse = MutableLiveData<BaseResponse<GeneralMessageResponseModel>>()
     val updateNadraDataResponse = MutableLiveData<BaseResponse<GeneralMessageResponseModel>>()
     val verifyFatherNameResponse = MutableLiveData<BaseResponse<GeneralMessageResponseModel>>()
+    val inAppRatingResponse = MutableLiveData<BaseResponse<GeneralMessageResponseModel>>()
 
     fun getUserProfile() {
         networkHelper.serviceCall(serviceGateway.getUserProfile()).observeForever {
@@ -46,15 +47,27 @@ class HomeRepo @Inject constructor(
             }
     }
 
+    fun inAppRatingComplete() {
+        networkHelper.serviceCall(serviceGateway.inAppRatingCancel())
+            .observeForever { response ->
+                inAppRatingResponse.value = response
+            }
+    }
+
     private fun persistUser(userProfileModel: UserProfileModel) {
         UserData.setUser(getUserModelFromLoginResponse(userProfileModel))
     }
 
     fun observeUserProfile() = profileResponse as LiveData<BaseResponse<UserProfileResponseModel>>
 
-    fun observeUpdateNadra() = updateNadraDataResponse as LiveData<BaseResponse<GeneralMessageResponseModel>>
+    fun observeUpdateNadra() =
+        updateNadraDataResponse as LiveData<BaseResponse<GeneralMessageResponseModel>>
 
-    fun observeVerifyFatherNameResponse() = verifyFatherNameResponse as LiveData<BaseResponse<GeneralMessageResponseModel>>
+    fun observeVerifyFatherNameResponse() =
+        verifyFatherNameResponse as LiveData<BaseResponse<GeneralMessageResponseModel>>
+
+    fun observeInAppRating() =
+        inAppRatingResponse as LiveData<BaseResponse<GeneralMessageResponseModel>>
 
     private fun getUserModelFromLoginResponse(userProfileModel: UserProfileModel): UserModel {
         return UserModel(
@@ -84,7 +97,8 @@ class HomeRepo @Inject constructor(
             receiverCount = userProfileModel.receiverCount,
             notificationCount = userProfileModel.notificationCount,
             country = userProfileModel.country,
-            fatherName = userProfileModel.fatherName
+            fatherName = userProfileModel.fatherName,
+            registrationRating = userProfileModel.registrationRating
         )
     }
 

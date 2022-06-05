@@ -71,14 +71,33 @@ class TransactionRatingFragment : BaseFragment<RateViewModel, FragmentSelfAwardR
             when (response.status) {
                 Status.SUCCESS -> {
                     oneLinkProgressDialog.hideProgressDialog()
-                    when(transactionType) {
-                        TransactionTypeConstants.REGISTRATION -> {
-                            launchLoginActivity()
-                        }
-                        else -> {
-                            activity?.finish()
-                        }
+                    activity?.finish()
+                    /* when(transactionType) {
+                         TransactionTypeConstants.REGISTRATION -> {
+                             launchLoginActivity()
+                         }
+                         else -> {
+                             activity?.finish()
+                         }
+                     }*/
+                }
+                Status.ERROR -> {
+                    oneLinkProgressDialog.hideProgressDialog()
+                    response.error?.let {
+                        showGeneralErrorDialog(this, it)
                     }
+                }
+                Status.LOADING -> {
+                    oneLinkProgressDialog.showProgressDialog(activity)
+                }
+            }
+        })
+
+        viewModel.observeRateRegistration().observe(this, Observer { response ->
+            when (response.status) {
+                Status.SUCCESS -> {
+                    oneLinkProgressDialog.hideProgressDialog()
+                    launchLoginActivity()
                 }
                 Status.ERROR -> {
                     oneLinkProgressDialog.hideProgressDialog()
@@ -127,6 +146,8 @@ class TransactionRatingFragment : BaseFragment<RateViewModel, FragmentSelfAwardR
                     "encryption_key",
                     LukaKeRakk.kcth()
                 )
+                viewModel.rateRegistration(jsonObject)
+                return
             }
             else -> {
                 jsonObject.addProperty(

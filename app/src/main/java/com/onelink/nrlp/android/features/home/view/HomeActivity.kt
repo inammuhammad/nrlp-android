@@ -44,6 +44,7 @@ import com.onelink.nrlp.android.utils.Constants
 import com.onelink.nrlp.android.utils.dialogs.OneLinkAlertDialogsFragment
 import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
 import com.onelink.nrlp.android.utils.toSpanned
+import java.lang.Exception
 import java.util.*
 import javax.inject.Inject
 
@@ -123,6 +124,20 @@ class HomeActivity :
                 }
                 Status.LOADING -> {
                     oneLinkProgressDialog.showProgressDialog(this)
+                }
+            }
+        })
+
+        viewModel.observeInAppRating().observe(this, { response ->
+            when (response.status) {
+                Status.SUCCESS -> {
+                    oneLinkProgressDialog.hideProgressDialog()
+                }
+                Status.LOADING -> {
+                    oneLinkProgressDialog.showProgressDialog(this)
+                }
+                Status.ERROR -> {
+                    oneLinkProgressDialog.hideProgressDialog()
                 }
             }
         })
@@ -237,7 +252,11 @@ class HomeActivity :
             .setPositiveButtonText(resources.getString(R.string.yes))
             .setNegativeButtonText(resources.getString(R.string.no)).setCancelable(true)
             .show(supportFragmentManager, TAG_CONFIRM_LOGOUT_DIALOG)
-        launchInAppReview()
+        try {
+            if (UserData.getUser()?.registrationRating == true)
+                launchInAppReview()
+        } catch (e: Exception) {
+        }
     }
 
     private fun showComingSoonDialog() {
@@ -268,6 +287,7 @@ class HomeActivity :
                 if (flow != null) {
                     flow.addOnCompleteListener { _ ->
                         Toast.makeText(this, "Review successful", Toast.LENGTH_LONG).show()
+                        viewModel.inAppRatingComplete()
                     }
                 }
             }

@@ -262,4 +262,7 @@ interface ServiceGateway {
     @POST("nrlpappcancel-rating/")
     fun inAppRatingCancel(): Single<Response<GeneralMessageResponseModel>>
 
+    @POST("nrlpappregistrationrating/")
+    fun rateRegistration(@Body body: JsonObject): Single<Response<GeneralMessageResponseModel>>
+
 }

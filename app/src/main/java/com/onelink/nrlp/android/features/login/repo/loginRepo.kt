@@ -54,7 +54,7 @@ open class LoginRepo @Inject constructor(
             accountType = loginResponseModel.loginModel.userType,
             loyaltyLevel = loginResponseModel.loginModel.loyaltyLevel,
             loyaltyPoints = loginResponseModel.loginModel.loyaltyPoints,
-            sessionKey =  loginResponseModel.sessionKey,
+            sessionKey = loginResponseModel.sessionKey,
             inActiveTime = loginResponseModel.inActivityTime.toLong(),
             expiresIn = loginResponseModel.expiresIn.toLong(),
             usdBalance = loginResponseModel.loginModel.usdBalance,
@@ -68,7 +68,8 @@ open class LoginRepo @Inject constructor(
             receiverCount = 0,
             notificationCount = loginResponseModel.loginModel.notification_count,
             country = loginResponseModel.loginModel.country,
-            fatherName = loginResponseModel.loginModel.fatherName
+            fatherName = loginResponseModel.loginModel.fatherName,
+            registrationRating = true
         )
     }
 

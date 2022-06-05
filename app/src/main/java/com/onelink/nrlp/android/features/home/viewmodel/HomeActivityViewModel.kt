@@ -8,5 +8,9 @@ class HomeActivityViewModel @Inject constructor(private val homeRepo: HomeRepo) 
 
     fun performLogout() = homeRepo.performLogout()
 
+    fun inAppRatingComplete() = homeRepo.inAppRatingComplete()
+
     fun observeLogoutResponse() = homeRepo.observeLogoutResponse()
+
+    fun observeInAppRating() = homeRepo.observeInAppRating()
 }

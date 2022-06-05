@@ -17,10 +17,10 @@ data class UserModel(
     val accountType: String,
     val loyaltyLevel: String,
     val loyaltyPoints: BigDecimal?,
-    val sessionKey : String = "",
-    val inActiveTime : Long = 0,
-    val expiresIn : Long = 0,
-    val usdBalance : BigDecimal?,
+    val sessionKey: String = "",
+    val inActiveTime: Long = 0,
+    val expiresIn: Long = 0,
+    val usdBalance: BigDecimal?,
     val memberSince: String?,
     val redeemable_pkr: String?,
     val motherMaidenName: String?,
@@ -31,5 +31,6 @@ data class UserModel(
     val receiverCount: Int?,
     val notificationCount: Int?,
     val country: String?,
-    val fatherName: String?
+    val fatherName: String?,
+    val registrationRating: Boolean?
 )
