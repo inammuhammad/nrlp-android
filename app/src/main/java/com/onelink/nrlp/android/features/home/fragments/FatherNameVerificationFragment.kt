@@ -83,7 +83,7 @@ class FatherNameVerificationFragment : BaseFragment<HomeFragmentViewModel, Fragm
     private fun initTextObservers() {
         viewModel.isFatherNameValidationPassed.observe(this, { validationsPassed ->
             if (!validationsPassed) binding.tilFatherName.error =
-                resources.getString(R.string.error_not_valid_father_name)
+                resources.getString(R.string.error_provide_valid_info)
             else {
                 binding.tilFatherName.clearError()
                 binding.tilFatherName.isErrorEnabled = false

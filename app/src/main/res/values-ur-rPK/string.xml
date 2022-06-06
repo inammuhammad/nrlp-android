@@ -412,4 +412,10 @@
     <string name="activity">سرگرمی</string>
     <string name="announcement">اعلان</string>
     <string name="notification_date_at">وقت</string>
+    <string name="rate_redemption_experience">Rate Your Redemption Experience</string>
+    <string name="rate_registration_experience">آپ رجسٹریشن کے عمل کی درجہ بندی کیسے کریں گے</string>
+    <string name="rate_transfer_experience">آپ ٹرانسفر پوائنٹ کے عمل کو کس طرح درجہ دیں گے</string>
+    <string name="rate_self_award_experience">آپ خود ایوارڈ دینے کے عمل کو کس طرح درجہ دیں گے</string>
+    <string name="error_provide_valid_info">براہ کرم مزید آگے بڑھنے کے لیے معلومات فراہم کریں</string>
+    <string name="please_enter_father_name">اپنے پروفائل کو اپ ڈیٹ کرنے کے لیے براہ کرم ذیل میں دی گئی معلومات فراہم کریں:</string>
 </resources>

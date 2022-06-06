@@ -201,6 +201,7 @@
     <string name="error_cnic">Please enter a valid CNIC/NICOP/POC</string>
     <string name="error_not_valid_name">Please enter a valid Full Name</string>
     <string name="error_not_valid_father_name">Please enter a valid Name</string>
+    <string name="error_provide_valid_info">Please provide the information to proceed further</string>
     <string name="error_not_valid_mother_name">Please enter a valid Mother Maiden Name</string>
     <string name="error_mobile_num_not_valid">Please enter a valid Mobile Number</string>
     <string name="error_email_not_valid">Please enter a correct Email format</string>
@@ -458,13 +459,14 @@
     <string name="rate_redemption_experience">Rate Your Redemption Experience</string>
     <string name="rate_registration_experience">How would you Rate Registration Process</string>
     <string name="rate_transfer_experience">How would you Rate Transfer Points Process</string>
+    <string name="rate_self_award_experience">How would you Rate Self Award Process</string>
     <string name="error_invalid_reference_number">Please enter a valid Reference/TT Number</string>
     <string name="stars" translatable="false"> stars</string>
     <string name="enter_beneficiary_acc_num">Enter Beneficiary Account Number/IBAN on which remittance is sent</string>
     <string name="error_remittance_sent_prior">Remittances sent prior to October 1st, 2021, are not eligible for the Sohni Dharti Remittance Program.</string>
     <string name="error_remittance_same_date">For self-awarding of points, please wait for 3 working days after your remittance is credited in the account or received by your beneficiary.</string>
     <string name="error_remittance_rda_transaction">RDA customers shall only be eligible for auto awarding of points against the amount which is consumed locally and cannot be repatriated.</string>
-    <string name="please_enter_father_name">Please provide Father Name for verification purpose</string>
+    <string name="please_enter_father_name">To update your profile please provide below mentioned information:</string>
     <string name="notifications">Notifications</string>
     <string name="delete">Delete</string>
     <string name="enter_opf_voucher">Enter OPF School Fee Voucher No. For Redemption</string>

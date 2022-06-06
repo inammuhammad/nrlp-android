@@ -21,6 +21,7 @@
         android:id="@+id/tvFatherNameHeader"
         style="@style/TextViewSubHeading"
         android:layout_width="wrap_content"
+        android:maxWidth="@dimen/_285sdp"
         android:layout_height="wrap_content"
         android:text="@string/please_enter_father_name"
         app:layout_constraintTop_toTopOf="parent"
