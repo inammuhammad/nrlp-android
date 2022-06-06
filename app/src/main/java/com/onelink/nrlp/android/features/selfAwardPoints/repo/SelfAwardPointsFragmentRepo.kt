@@ -6,6 +6,7 @@ import com.google.gson.JsonObject
 import com.onelink.nrlp.android.core.BaseResponse
 import com.onelink.nrlp.android.data.NetworkHelper
 import com.onelink.nrlp.android.data.ServiceGateway
+import com.onelink.nrlp.android.features.managePoints.model.TransferPointsResponseModel
 import com.onelink.nrlp.android.features.selfAwardPoints.model.SelfAwardPointsOTPRequestModel
 import com.onelink.nrlp.android.features.selfAwardPoints.model.SelfAwardPointsRequest
 import com.onelink.nrlp.android.features.selfAwardPoints.model.SelfAwardPointsResponseModel
@@ -30,12 +31,12 @@ open class SelfAwardPointsFragmentRepo @Inject constructor(
     }
 
     val selfAwardPointsOTPResponse =
-        MutableLiveData<BaseResponse<GeneralMessageResponseModel>>()
+        MutableLiveData<BaseResponse<TransferPointsResponseModel>>()
     val selfAwardPointsResendOTPResponse =
         MutableLiveData<BaseResponse<SelfAwardPointsResponseModel>>()
 
     fun observeSelfAwardPointsOTPResponse() =
-        selfAwardPointsOTPResponse as LiveData<BaseResponse<GeneralMessageResponseModel>>
+        selfAwardPointsOTPResponse as LiveData<BaseResponse<TransferPointsResponseModel>>
 
     fun selfAwardPointsOTP(selfAwardPointsOTPRequestModel: SelfAwardPointsOTPRequestModel) {
         networkHelper.serviceCall(serviceGateway.selfAwardPointsOTP(selfAwardPointsOTPRequestModel))

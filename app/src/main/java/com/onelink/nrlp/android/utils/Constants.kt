@@ -193,6 +193,7 @@ object COMPLAINT_TYPE {
 
 object TransactionTypeConstants {
     const val TRANSFER_POINTS = "transfer_points"
+    const val SELF_AWARD = "self_award"
     const val TRANSACTION_TYPE = "transaction_type"
     const val COMMENTS = "comments"
     const val TRANSACTION_ID = "transaction_id"

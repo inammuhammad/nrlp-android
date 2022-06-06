@@ -29,7 +29,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_margin="@dimen/_10sdp"
-            android:text="Load More"
+            android:text="@string/load_more"
             android:visibility="gone" />
 
         <androidx.appcompat.widget.AppCompatImageView

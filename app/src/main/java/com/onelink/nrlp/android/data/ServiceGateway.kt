@@ -134,7 +134,7 @@ interface ServiceGateway {
     fun forgotPasswordOTP(@Body body: ForgotPasswordOTPRequestModel): Single<Response<GeneralMessageResponseModel>>
 
     @POST("self-award-verfiy-otp")
-    fun selfAwardPointsOTP(@Body body: SelfAwardPointsOTPRequestModel): Single<Response<GeneralMessageResponseModel>>
+    fun selfAwardPointsOTP(@Body body: SelfAwardPointsOTPRequestModel): Single<Response<TransferPointsResponseModel>>
 
     @POST("resend-forget-password-otp")
     fun forgotPasswordResendOTP(@Body body: ForgotPasswordRequestModel): Single<Response<GeneralMessageResponseModel>>

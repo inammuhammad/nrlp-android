@@ -166,15 +166,20 @@ class SelfAwardPointsOTPFragment :
             selfAwardPointsRequest = it
         })
 
-        viewModel.observeSelfAwardPointsOTPResponse().observe(this, Observer{ response ->
+        viewModel.observeSelfAwardPointsOTPResponse().observe(this, Observer { response ->
             when (response.status) {
                 Status.SUCCESS -> {
                     response.data?.let {
                         oneLinkProgressDialog.hideProgressDialog()
                         response.data?.let { data ->
                             activity?.let {
-                                val intent = SelfAwardPointsSuccessActivity.newSelfAwardSuccessIntent(it)
-                                intent.putExtra(IntentConstants.SELF_AWARD_VERIFY_OTP_Message, data.message)
+                                val intent =
+                                    SelfAwardPointsSuccessActivity.newSelfAwardSuccessIntent(it)
+                                intent.putExtra(
+                                    IntentConstants.SELF_AWARD_VERIFY_OTP_Message,
+                                    data.message
+                                )
+                                    .putExtra(IntentConstants.GIVE_RATING, data.customerRating)
                                 startActivity(intent)
                                 it.finish()
                             }

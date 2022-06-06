@@ -471,4 +471,5 @@
     <string name="delete">Delete</string>
     <string name="enter_opf_voucher">Enter OPF School Fee Voucher No. For Redemption</string>
     <string name="notification_date_at">at</string>
+    <string name="load_more">Load More</string>
 </resources>
