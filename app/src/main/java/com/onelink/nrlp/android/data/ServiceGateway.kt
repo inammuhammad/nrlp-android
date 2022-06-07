@@ -47,6 +47,7 @@ import com.onelink.nrlp.android.models.BeneficiariesResponseModel
 import com.onelink.nrlp.android.models.GeneralMessageResponseModel
 import com.onelink.nrlp.android.utils.HeaderConstants
 import io.reactivex.Single
+import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -125,7 +126,7 @@ interface ServiceGateway {
     fun getStatements(@Body loyaltyStatementRequestModel: LoyaltyStatementRequestModel): Single<Response<StatementsResponseModel>>
 
     @POST("loyalty-statement")
-    fun getDetailedStatement(@Body body: DetailedStatementRequestModel): Single<Response<GeneralMessageResponseModel>>
+    fun getDetailedStatement(@Body body: DetailedStatementRequestModel): Single<Response<ResponseBody>>
 
     @POST("forgot-password")
     fun forgotPassword(@Body body: ForgotPasswordRequestModel): Single<Response<GeneralMessageResponseModel>>

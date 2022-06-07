@@ -10,6 +10,7 @@ import com.onelink.nrlp.android.features.viewStatement.models.LoyaltyStatementRe
 import com.onelink.nrlp.android.features.viewStatement.models.StatementsResponseModel
 import com.onelink.nrlp.android.models.GeneralMessageResponseModel
 import com.onelink.nrlp.android.utils.mocks.MockedAPIResponseModels
+import okhttp3.ResponseBody
 import javax.inject.Inject
 
 
@@ -23,7 +24,7 @@ open class ViewStatementRepo @Inject constructor(
     val statementsResponse =
         MutableLiveData<BaseResponse<StatementsResponseModel>>()
     val detailedStatementResponse =
-        MutableLiveData<BaseResponse<GeneralMessageResponseModel>>()
+        MutableLiveData<BaseResponse<ResponseBody>>()
 
     fun getStatements(loyaltyStatementRequestModel: LoyaltyStatementRequestModel) {
         networkHelper.serviceCall(serviceGateway.getStatements(loyaltyStatementRequestModel))
@@ -44,5 +45,5 @@ open class ViewStatementRepo @Inject constructor(
     }
 
     fun observeDetailedStatement() =
-        detailedStatementResponse as LiveData<BaseResponse<GeneralMessageResponseModel>>
+        detailedStatementResponse as LiveData<BaseResponse<ResponseBody>>
 }

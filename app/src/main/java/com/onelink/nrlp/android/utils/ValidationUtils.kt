@@ -89,8 +89,12 @@ object ValidationUtils {
         return Pattern.matches(STRING_FULL_NAME_VALIDATOR_REGEX, name)
     }
 
-    fun isMotherNameValid(name: String):Boolean{
-        return Pattern.matches(STRING_MOTHER_NAME_VALIDATOR_REGEX,name)
+    fun isMotherNameValid(name: String): Boolean {
+        return Pattern.matches(STRING_MOTHER_NAME_VALIDATOR_REGEX, name)
+    }
+
+    fun isFatherNameValid(name: String): Boolean {
+        return Pattern.matches(STRING_MOTHER_NAME_VALIDATOR_REGEX, name) && name.length > 2
     }
 
     fun isDateValid(name: String): Boolean {

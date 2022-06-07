@@ -415,7 +415,7 @@ class RegisterAccountFragmentViewModel @Inject constructor(
         string.isEmpty() || ValidationUtils.isNameValid(string)
 
     fun checkFatherNameValidation(string: String) =
-        string.isEmpty() || ValidationUtils.isNameValid(string)
+        string.isEmpty() || ValidationUtils.isFatherNameValid(string)
 
     fun checkPlaceOfBirthValid(string: String) =
         string.isEmpty() || ValidationUtils.isNameValid(string)

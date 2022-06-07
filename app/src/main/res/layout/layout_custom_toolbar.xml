@@ -52,11 +52,12 @@
         android:textSize="@dimen/_11sdp"
         android:textColor="@color/black"
         android:gravity="center"
-        android:drawableEnd="@drawable/ic_notification_bell"
+        android:drawablePadding="@dimen/_3sdp"
+        android:drawableEnd="@drawable/ic_bell"
         android:layout_marginEnd="@dimen/_15sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvCenter"
@@ -68,12 +69,13 @@
         android:textSize="@dimen/_11sdp"
         android:textColor="@color/black"
         android:gravity="center"
-        android:drawableEnd="@drawable/ic_notification_bell"
+        android:drawablePadding="@dimen/_3sdp"
+        android:drawableEnd="@drawable/ic_bell"
         android:layout_marginEnd="@dimen/_15sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/ivRight"

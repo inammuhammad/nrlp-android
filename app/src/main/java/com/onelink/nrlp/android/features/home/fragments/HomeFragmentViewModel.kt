@@ -116,7 +116,7 @@ class HomeFragmentViewModel @Inject constructor(private val homeRepo: HomeRepo) 
     fun checkMotherNameValidation(string: String) =
         string.isEmpty() || ValidationUtils.isMotherNameValid(string)
 
-    fun checkFatherNameValidation(name: String) = ValidationUtils.isMotherNameValid(name)
+    fun checkFatherNameValidation(name: String) = ValidationUtils.isFatherNameValid(name)
 
     fun validationsPassed(
         fullName: String, motherName: String = "",cnicIssueDate: String = ""

@@ -159,11 +159,24 @@
             android:configChanges="layoutDirection|uiMode|locale"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
-        <service android:name=".services.PushNotificationService" android:exported="false">
+
+        <service
+            android:name=".services.PushNotificationService"
+            android:exported="false">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
     </application>
 
 </manifest>

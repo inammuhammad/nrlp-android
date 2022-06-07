@@ -1,9 +1,13 @@
 package com.onelink.nrlp.android.features.viewStatement.fragments
 
 import android.app.DatePickerDialog
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
+import com.onelink.nrlp.android.BuildConfig
 import com.onelink.nrlp.android.R
 import com.onelink.nrlp.android.core.BaseFragment
 import com.onelink.nrlp.android.core.Status
@@ -15,6 +19,9 @@ import com.onelink.nrlp.android.features.viewStatement.viewmodel.AdvancedLoyalty
 import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_advanced_loyalty_statement.*
+import java.io.File
+import java.io.IOException
+import java.io.InputStream
 import java.util.*
 import javax.inject.Inject
 
@@ -72,6 +79,22 @@ class AdvancedLoyaltyStatementFragment :
                 Status.SUCCESS -> {
                     oneLinkProgressDialog.hideProgressDialog()
                     response.data.let {
+                        val pdfData = it?.byteStream()
+                        if (pdfData != null) {
+                            context?.let { it1 -> openPDFContent(it1, pdfData, "statement") }
+                        }
+                        /* if (pdfData != null) {
+
+                             try {
+                                 context?.openFileOutput("statement.pdf", Context.MODE_PRIVATE)
+                                     .use { output ->
+                                     output?.write(pdfData.readBytes())
+                                 }
+
+                             } catch (e: IOException) {
+                                 e.printStackTrace()
+                             }
+                         }*/
                         /*activity?.let {
                             activity?.startActivity(StatementGeneratedActivity.createIntent(it))
                             activity?.finish()
@@ -148,6 +171,33 @@ class AdvancedLoyaltyStatementFragment :
         datePickerDialog?.datePicker?.maxDate = System.currentTimeMillis()
         datePickerDialog?.datePicker?.layoutDirection = View.LAYOUT_DIRECTION_LTR
         datePickerDialog?.show()
+    }
+
+    private fun openPDFContent(context: Context, inputStream: InputStream, fileName: String) {
+        val filePath = context.externalCacheDir?.absolutePath ?: context.cacheDir.absolutePath
+        val fileNameExtension =
+            if (!fileName?.isNullOrEmpty()) fileName else context.getString(R.string.app_name) + ".pdf"
+        val file = inputStream.saveToFile(filePath, fileNameExtension)
+
+        val uri = FileProvider.getUriForFile(
+            context,
+            BuildConfig.APPLICATION_ID + ".provider", file
+        )
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            setDataAndType(uri, "application/pdf")
+        }
+        context.startActivity(Intent.createChooser(intent, "Select app"))
+    }
+
+    private fun InputStream.saveToFile(filePath: String, fileName: String): File = use { input ->
+        val file = File(filePath, fileName)
+        file.outputStream().use { output ->
+            input.copyTo(output)
+        }
+        input.close()
+        file
     }
 
     companion object {

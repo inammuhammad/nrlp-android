@@ -418,7 +418,7 @@ class RegComplaintDetailsFragment:
                         viewModel.complaintId.postValue(it.complaintId)
                         sendNotification(
                             "Complaint Registered",
-                            "Complaint registered with ID ${it.complaintId}",
+                            it.message, //"Complaint registered with ID ${it.complaintId}",
                             getString(R.string.channel_id)
                         )
                         viewModel.gotoComplaintResponseFragment(resources, fragmentHelper)

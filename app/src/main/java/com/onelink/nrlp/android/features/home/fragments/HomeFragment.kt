@@ -140,7 +140,11 @@ open class HomeFragment :
     }
 
     private fun checkFatherNameVerification(name: String?) {
-        if(name.isNullOrEmpty()) {
+        if (name.isNullOrEmpty() &&
+            UserData.getUser()?.accountType?.toLowerCase(Locale.ROOT) != Constants.BENEFICIARY.toLowerCase(
+                Locale.ROOT
+            )
+        ) {
             viewModel.navigateFatherNameVerification(fragmentHelper)
         }
     }
