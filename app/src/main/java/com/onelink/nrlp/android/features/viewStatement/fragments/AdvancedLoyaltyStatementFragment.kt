@@ -14,13 +14,11 @@ import com.onelink.nrlp.android.core.Status
 import com.onelink.nrlp.android.data.local.UserData
 import com.onelink.nrlp.android.databinding.FragmentAdvancedLoyaltyStatementBinding
 import com.onelink.nrlp.android.features.viewStatement.models.DetailedStatementRequestModel
-import com.onelink.nrlp.android.features.viewStatement.view.StatementGeneratedActivity
 import com.onelink.nrlp.android.features.viewStatement.viewmodel.AdvancedLoyaltyStatementFragmentViewModel
 import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_advanced_loyalty_statement.*
 import java.io.File
-import java.io.IOException
 import java.io.InputStream
 import java.util.*
 import javax.inject.Inject
@@ -144,6 +142,11 @@ class AdvancedLoyaltyStatementFragment :
         val year = c.get(Calendar.YEAR)
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DAY_OF_MONTH)
+        val cal = Calendar.getInstance()
+        cal.get(Calendar.MONTH)
+        cal.get(Calendar.YEAR)
+        cal.get(Calendar.DAY_OF_MONTH)
+        cal.add(Calendar.YEAR, -1)
         val datePickerDialog = activity?.let {
             DatePickerDialog(
                 it,
@@ -167,7 +170,7 @@ class AdvancedLoyaltyStatementFragment :
                 }, year, month, day
             )
         }
-        datePickerDialog?.datePicker?.minDate = MILLIS_MINIMUM_DATE
+        datePickerDialog?.datePicker?.minDate = cal.timeInMillis
         datePickerDialog?.datePicker?.maxDate = System.currentTimeMillis()
         datePickerDialog?.datePicker?.layoutDirection = View.LAYOUT_DIRECTION_LTR
         datePickerDialog?.show()

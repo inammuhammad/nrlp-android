@@ -41,7 +41,13 @@ class HomeTileUtils {
                     R.drawable.ic_loyalty_statement_tile
                 )
             )
-            homeTilesList.add(HomeTileModel(VIEW_NRLP_BENEFITS_BENEFICIARY, R.string.view_nrlp_benefits, R.drawable.ic_nrlp_benefits_tile))
+            homeTilesList.add(
+                HomeTileModel(
+                    VIEW_NRLP_BENEFITS_BENEFICIARY,
+                    R.string.view_nrlp_benefits,
+                    R.drawable.ic_nrlp_benefits_tile
+                )
+            )
             return homeTilesList
         }
     }

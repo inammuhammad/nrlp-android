@@ -381,7 +381,7 @@
     <string name="transaction_date">Transaction Date</string>
     <string name="beneficiary_country_of_residence">Beneficiary Country of Residence</string>
     <string name="beneficiary_mobile_operator_name">Beneficiary Mobile Operator Name</string>
-    <string name="specify_bank_exchange_from_where_remittance">Please specify Bank/Exchange Company from where remittance is sent</string>
+    <string name="specify_bank_exchange_from_where_remittance">Please mention the Bank and Exchange Company where the remittance was sent.</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
