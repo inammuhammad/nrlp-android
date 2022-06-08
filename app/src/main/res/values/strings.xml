@@ -472,4 +472,6 @@
     <string name="enter_opf_voucher">Enter OPF School Fee Voucher No. For Redemption</string>
     <string name="notification_date_at">at</string>
     <string name="load_more">Load More</string>
+    <string name="submit">Submit</string>
+    <string name="feature_available_soon">This Feature will be available soon</string>
 </resources>

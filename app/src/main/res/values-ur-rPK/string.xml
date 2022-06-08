@@ -419,4 +419,6 @@
     <string name="error_provide_valid_info">براہ کرم مزید آگے بڑھنے کے لیے معلومات فراہم کریں</string>
     <string name="please_enter_father_name">اپنے پروفائل کو اپ ڈیٹ کرنے کے لیے براہ کرم ذیل میں دی گئی معلومات فراہم کریں:</string>
     <string name="load_more">مزید لوڈ کریں</string>
+    <string name="submit">جمع کرائیں</string>
+    <string name="feature_available_soon">فی الحال یہ خصوصیت غیر فعال ہے</string>
 </resources>

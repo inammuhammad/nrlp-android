@@ -54,8 +54,19 @@
         android:layout_marginTop="@dimen/_26sdp"
         app:layout_constraintTop_toBottomOf="@id/ratingBar"
         app:layout_constraintStart_toStartOf="@id/ratingBar"
-        app:layout_constraintEnd_toEndOf="@id/ratingBar"
-        />
+        app:layout_constraintEnd_toEndOf="@id/ratingBar" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnSubmit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/ButtonTheme"
+        android:enabled="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="@dimen/_10sdp"
+        android:text="@string/submit" />
 
     <RadioGroup
         android:id="@+id/rgRating"

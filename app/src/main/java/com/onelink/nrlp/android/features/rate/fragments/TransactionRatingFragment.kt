@@ -13,10 +13,7 @@ import com.onelink.nrlp.android.databinding.FragmentSelfAwardRatingBinding
 import com.onelink.nrlp.android.features.login.view.LoginActivity
 import com.onelink.nrlp.android.features.rate.view.RateActivity
 import com.onelink.nrlp.android.features.rate.viewmodels.RateViewModel
-import com.onelink.nrlp.android.utils.Constants
-import com.onelink.nrlp.android.utils.IntentConstants
-import com.onelink.nrlp.android.utils.LukaKeRakk
-import com.onelink.nrlp.android.utils.TransactionTypeConstants
+import com.onelink.nrlp.android.utils.*
 import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
 import dagger.android.support.AndroidSupportInjection
 import org.json.JSONObject
@@ -57,13 +54,17 @@ class TransactionRatingFragment : BaseFragment<RateViewModel, FragmentSelfAwardR
         initObservers()
     }
 
-    private fun initListeners(){
+    private fun initListeners() {
         //binding.rgRating.setOnCheckedChangeListener { radioGroup, i -> makeRatingCall(radioGroup, i) }
         binding.ratingBar.onRatingBarChangeListener =
             OnRatingBarChangeListener { ratingBar, rating, fromUser ->
                 // Called when the user swipes the RatingBar
-                makeRatingCall(rating.toString())
+                //makeRatingCall(rating.toString())
+                binding.btnSubmit.isEnabled = rating > 0
             }
+        binding.btnSubmit.setOnSingleClickListener {
+            makeRatingCall(binding.ratingBar.rating.toString())
+        }
     }
 
     private fun initObservers(){

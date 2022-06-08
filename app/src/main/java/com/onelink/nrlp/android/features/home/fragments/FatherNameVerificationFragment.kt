@@ -67,7 +67,7 @@ class FatherNameVerificationFragment : BaseFragment<HomeFragmentViewModel, Fragm
             when (response.status) {
                 Status.SUCCESS -> {
                     oneLinkProgressDialog.hideProgressDialog()
-                    activity?.let { NadraVerificationsSuccessActivity.start(it) }
+                    activity?.let { HomeActivity.start(it) }
                 }
                 Status.LOADING -> {
                     oneLinkProgressDialog.showProgressDialog(context)

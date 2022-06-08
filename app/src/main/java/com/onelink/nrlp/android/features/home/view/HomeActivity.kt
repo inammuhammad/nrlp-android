@@ -277,8 +277,8 @@ class HomeActivity :
     }
 
     private fun launchInAppReview() {
-        //val manager = ReviewManagerFactory.create(this)
-        val manager = FakeReviewManager(this)
+        val manager = ReviewManagerFactory.create(this)
+        //val manager = FakeReviewManager(this)
         val request = manager.requestReviewFlow()
         request.addOnCompleteListener { task ->
             if (task.isSuccessful) {

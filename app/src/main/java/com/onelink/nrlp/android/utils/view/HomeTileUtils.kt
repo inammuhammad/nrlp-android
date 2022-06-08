@@ -27,7 +27,20 @@ class HomeTileUtils {
 
         fun getBeneficiaryHomeTilesList() : MutableList<HomeTileModel> {
             val homeTilesList = mutableListOf<HomeTileModel>()
-            homeTilesList.add(HomeTileModel(VIEW_STATEMENT_BENEFICIARY, R.string.view_stmnt, R.drawable.ic_loyalty_statement_tile))
+            homeTilesList.add(
+                HomeTileModel(
+                    REDEEM_YOUR_POINTS,
+                    R.string.redeem_points,
+                    R.drawable.ic_redeem_points
+                )
+            )
+            homeTilesList.add(
+                HomeTileModel(
+                    VIEW_STATEMENT_BENEFICIARY,
+                    R.string.view_stmnt,
+                    R.drawable.ic_loyalty_statement_tile
+                )
+            )
             homeTilesList.add(HomeTileModel(VIEW_NRLP_BENEFITS_BENEFICIARY, R.string.view_nrlp_benefits, R.drawable.ic_nrlp_benefits_tile))
             return homeTilesList
         }

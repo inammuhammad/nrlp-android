@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/TextViewSubHeading"
-            android:text="@string/coming_soon"
+            android:text="@string/feature_available_soon"
             android:textSize="@dimen/unit_18sp"
             android:layout_marginTop="@dimen/_10sdp"
             app:layout_constraintTop_toBottomOf="@id/ivComingSoon"
