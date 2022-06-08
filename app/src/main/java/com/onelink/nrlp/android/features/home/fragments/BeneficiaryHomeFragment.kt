@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.onelink.nrlp.android.R
 import com.onelink.nrlp.android.features.home.fragments.adapters.HomeTilesAdapter
 import com.onelink.nrlp.android.features.nrlpBenefits.view.NrlpBenefitsActivity
+import com.onelink.nrlp.android.features.redeem.view.RedeemActivity
 import com.onelink.nrlp.android.features.viewStatement.view.ViewStatementActivity
 import com.onelink.nrlp.android.utils.dialogs.OneLinkAlertDialogsFragment
 import com.onelink.nrlp.android.utils.toSpanned
@@ -33,6 +34,7 @@ class BeneficiaryHomeFragment : HomeFragment() {
         when (homeTile.key) {
             HomeTileUtils.VIEW_STATEMENT_BENEFICIARY -> launchViewStatement()
             HomeTileUtils.VIEW_NRLP_BENEFITS_BENEFICIARY -> launchNrlpBenefits()
+            HomeTileUtils.REDEEM_YOUR_POINTS -> launchRedeemPoints()
             else -> return
         }
     }
@@ -46,6 +48,12 @@ class BeneficiaryHomeFragment : HomeFragment() {
     private fun launchNrlpBenefits() {
         activity?.let {
             it.startActivity(NrlpBenefitsActivity.newViewStatementIntent(it))
+        }
+    }
+
+    private fun launchRedeemPoints() {
+        activity?.let {
+            it.startActivity(RedeemActivity.newRedeemIntent(it))
         }
     }
 

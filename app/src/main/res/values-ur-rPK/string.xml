@@ -366,7 +366,7 @@
     <string name="transaction_date">ٹرانزیکشن کی تاریخ</string>
     <string name="beneficiary_country_of_residence">وصول کنندہ کے  قیام  کا ملک</string>
     <string name="beneficiary_mobile_operator_name">وصول کنندہ کے  موبائل آپریٹر کا نام</string>
-    <string name="specify_bank_exchange_from_where_remittance">براہ کرم بینک/ایکسچینج کمپنی بتائیں جہاں سے ترسیلات زر بھیجی گئی ہیں</string>
+    <string name="specify_bank_exchange_from_where_remittance">براہ کرم بینک اینڈ ایکسچینج کمپنی کا بتائیں جہاں ترسیلات زر بھیجی گئی ہیں۔</string>
     <string name="resend_registration_code">رجسٹریشن کوڈ دوبارہ بھیجیں</string>
     <string name="transaction_amount_pkr">ٹرانزیکشن  کی رقم( پاکستانی روپے)</string>
     <string name="incorrect_information">پ کی فراہم کردہ معلومات غلط ہے۔ براہ مہربانی نادرہ ریکارڈ کے مطابق صحیح معلومات درج کریں</string>
