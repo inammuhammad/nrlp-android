@@ -361,7 +361,7 @@
     <string name="redemption">ریڈیمشن</string>
     <string name="redemption_partner">ریڈیمشن پاٹنر</string>
     <string name="beneficiary_cnic_nicop">وصول کنندہ کا CNIC/NICOP/POC</string>
-    <string name="remitting_entity">ترسیلات زر کا ادارہ (بینک یا ایکسچینج کمپنی)</string>
+    <string name="remitting_entity">ترسیلات زر کا ادارہ (بینک یا ایکسچینج \nکمپنی)</string>
     <string name="transaction_id">ٹرانزیکشن آئی ڈی</string>
     <string name="transaction_date">ٹرانزیکشن کی تاریخ</string>
     <string name="beneficiary_country_of_residence">وصول کنندہ کے  قیام  کا ملک</string>
