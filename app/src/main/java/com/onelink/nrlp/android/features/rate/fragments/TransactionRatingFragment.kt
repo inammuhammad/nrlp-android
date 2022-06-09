@@ -9,6 +9,7 @@ import com.google.gson.JsonObject
 import com.onelink.nrlp.android.R
 import com.onelink.nrlp.android.core.BaseFragment
 import com.onelink.nrlp.android.core.Status
+import com.onelink.nrlp.android.data.local.UserData
 import com.onelink.nrlp.android.databinding.FragmentSelfAwardRatingBinding
 import com.onelink.nrlp.android.features.login.view.LoginActivity
 import com.onelink.nrlp.android.features.rate.view.RateActivity
@@ -125,6 +126,32 @@ class TransactionRatingFragment : BaseFragment<RateViewModel, FragmentSelfAwardR
                     TransactionTypeConstants.COMMENTS,
                     rating
                 )
+                jsonObject.addProperty(
+                    IntentConstants.NIC_NICOP,
+                    UserData.getUser()?.cnicNicop.toString().removeDashes()
+                )
+                jsonObject.addProperty(
+                    Constants.INTENT_KEY_USER_TYPE,
+                    UserData.getUser()?.accountType
+                )
+            }
+            TransactionTypeConstants.SELF_AWARD -> {
+                jsonObject.addProperty(
+                    TransactionTypeConstants.TRANSACTION_TYPE,
+                    transactionType
+                )
+                jsonObject.addProperty(
+                    TransactionTypeConstants.COMMENTS,
+                    rating
+                )
+                jsonObject.addProperty(
+                    IntentConstants.NIC_NICOP,
+                    UserData.getUser()?.cnicNicop.toString().removeDashes()
+                )
+                jsonObject.addProperty(
+                    Constants.INTENT_KEY_USER_TYPE,
+                    UserData.getUser()?.accountType
+                )
             }
             TransactionTypeConstants.REGISTRATION -> {
                 jsonObject.addProperty(
@@ -136,7 +163,7 @@ class TransactionRatingFragment : BaseFragment<RateViewModel, FragmentSelfAwardR
                     rating
                 )
                 jsonObject.addProperty(
-                    Constants.INTENT_KEY_ACCOUNT_TYPE,
+                    Constants.INTENT_KEY_USER_TYPE,
                     accountType
                 )
                 jsonObject.addProperty(
@@ -195,12 +222,15 @@ class TransactionRatingFragment : BaseFragment<RateViewModel, FragmentSelfAwardR
 
     private fun setHeading(type: String?) {
         var title = ""
-        title = when(transactionType){
+        title = when (transactionType) {
             TransactionTypeConstants.TRANSFER_POINTS -> {
                 getString(R.string.rate_transfer_experience)
             }
             TransactionTypeConstants.REGISTRATION -> {
                 getString(R.string.rate_registration_experience)
+            }
+            TransactionTypeConstants.SELF_AWARD -> {
+                getString(R.string.rate_self_award_experience)
             }
             else -> {
                 getString(R.string.rate_redemption_experience)

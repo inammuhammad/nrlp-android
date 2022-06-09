@@ -17,11 +17,12 @@ class Constants {
         // 20-04-2022 j41rfrtqzzwu9rtf6caftq9eprzq9yix038kabkb 2.1
         // 27-05-2022 h8o1vyqp5tjq3j94avrakjna3624yggn0uo38ffl 2.2
         const val checkSum =
-            "kvpmpr0mb8i3xa90ifppu9yj08ktib9quupnz94m" //"kvpmpr0mb8i3xa90ifppu9yj08ktib9quupnz94m"
+            "w73v34zmazcrlz1li8v3iplfdoawrjz7ggsutsin" //"kvpmpr0mb8i3xa90ifppu9yj08ktib9quupnz94m"
         const val InternationalPassport = "International Passport"
         const val PakistaniPassport = "Pakistani Passport"
 
         const val INTENT_KEY_ACCOUNT_TYPE = "account_type"
+        const val INTENT_KEY_USER_TYPE = "user_type"
         const val SPINNER_ACCOUNT_TYPE_HINT = "Account Type"
         const val SPINNER_BENEFICIARY_HINT = "Beneficiary Relation"
         const val SPINNER_PASSPORT_TYPE_HINT = "Passport Type"
