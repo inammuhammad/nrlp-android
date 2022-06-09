@@ -131,6 +131,12 @@ android {
     tasks.withType(Test) {
         jacoco.includeNoLocationClasses = true
     }
+
+    bundle {
+        language {
+            enableSplit = false
+        }
+    }
 }
 
 
