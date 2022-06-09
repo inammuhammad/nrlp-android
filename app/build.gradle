@@ -16,8 +16,8 @@ android {
         applicationId "com.onelink.sohnidharti.app"
         minSdkVersion minSdkVer
         targetSdkVersion targetSdkVer
-        versionCode 18
-        versionName "2.3"
+        versionCode 19
+        versionName "2.4"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -130,6 +130,12 @@ android {
 
     tasks.withType(Test) {
         jacoco.includeNoLocationClasses = true
+    }
+
+    bundle {
+        language {
+            enableSplit = false
+        }
     }
 }
 

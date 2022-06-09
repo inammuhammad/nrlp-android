@@ -16,7 +16,8 @@ class Constants {
         // 15-03-2022 go4rdhgrrjvo76rcxyode1yj8ff80kk4mzc90u5x 2.0
         // 20-04-2022 j41rfrtqzzwu9rtf6caftq9eprzq9yix038kabkb 2.1
         // 27-05-2022 h8o1vyqp5tjq3j94avrakjna3624yggn0uo38ffl 2.2
-        const val checkSum = "w73v34zmazcrlz1li8v3iplfdoawrjz7ggsutsin" //"nqsuyvjyu2xagcdz8jz0cexf6mn36hg7z58dyp12"
+        const val checkSum =
+            "kvpmpr0mb8i3xa90ifppu9yj08ktib9quupnz94m" //"kvpmpr0mb8i3xa90ifppu9yj08ktib9quupnz94m"
         const val InternationalPassport = "International Passport"
         const val PakistaniPassport = "Pakistani Passport"
 

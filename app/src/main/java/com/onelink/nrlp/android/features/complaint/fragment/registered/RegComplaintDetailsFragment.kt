@@ -837,7 +837,7 @@ class RegComplaintDetailsFragment:
             COMPLAINT_TYPE.UNABLE_TO_TRANSFER_POINTS_TO_BENEFICIARY -> {
                 jsonObject.addProperty(
                     ComplaintRequestModelConstants.Beneficiary_Nic_nicop,
-                    binding.etPointsbeneficiaryCnicNicp.text.toString()
+                    binding.etPointsbeneficiaryCnicNicp.text.toString().removeDashes()
                 )
             }
 
