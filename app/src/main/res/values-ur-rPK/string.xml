@@ -399,7 +399,7 @@
     <string name="search_bank">Search Bank</string>
     <string name="error_new_version">Please update your application version to proceed</string>
     <string name="proceed_to_playstore">Proceed to PlayStore</string>
-    <string name="father_name">والد کا نام</string>
+    <string name="father_name">والد کا نام *</string>
     <string name="remittance_transaction_type">ترسیلات زر کی قسم</string>
     <string name="error_remittance_sent_prior">یکم اکتوبر 2021 سے قبل بھیجی گئی ترسیلات زر سوہنی دھرتی ترسیلات پروگرام کے اہل نہیں ہیں۔</string>
     <string name="error_remittance_same_date">اپنی ترسیلات زر پر سیلف ایوارڈ پوائنٹس براہ کرم 3 کاروباری دنوں کا انتظار کریں کے لیے،</string>
