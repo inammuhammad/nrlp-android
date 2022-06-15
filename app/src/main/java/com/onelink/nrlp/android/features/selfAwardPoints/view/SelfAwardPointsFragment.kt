@@ -33,6 +33,7 @@ import com.onelink.nrlp.android.utils.dialogs.OneLinkAlertDialogsFragment
 import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
 import com.onelink.nrlp.android.utils.setOnSingleClickListener
 import dagger.android.support.AndroidSupportInjection
+import kotlinx.android.synthetic.main.fragment_edit_profile.*
 import kotlinx.android.synthetic.main.fragment_receiver_details.*
 import java.util.*
 import java.util.regex.Pattern
@@ -125,8 +126,26 @@ class SelfAwardPointsFragment :
             openDatePickerDialog()
         }
 
-        binding.btnNext.setOnSingleClickListener {
-            if(validateCnicFields()) {
+        binding.btnNextAccount.setOnSingleClickListener {
+            var isValidData = false
+            var transactionTypeBE = ""
+            var beneficiaryType = ""
+            var userNumber = ""
+            when (viewModel.transactionType.value) {
+                getString(R.string.remittance_to_bank) -> {
+                    isValidData = validateIbanFields()
+                    transactionTypeBE = "ACC"
+                    beneficiaryType = SelfAwardRequestConstants.Beneficiary_ACCOUNT_NUMBER
+                    userNumber = binding.etAccountNumber.text.toString()
+                }
+                getString(R.string.remittance_to_passport) -> {
+                    isValidData = validatePassportData()
+                    transactionTypeBE = "PAS"
+                    beneficiaryType = SelfAwardRequestConstants.Beneficiary_PASSPORT_NUMBER
+                    userNumber = binding.etPassportNumber.text.toString()
+                }
+            }
+            if (isValidData) {
                 val selfAwardPointsRequest = JsonObject()
 
                 selfAwardPointsRequest.addProperty(
@@ -138,20 +157,20 @@ class SelfAwardPointsFragment :
                     binding.etRefNo.text.toString(),
                 )
                 selfAwardPointsRequest.addProperty(
-                    SelfAwardRequestConstants.Beneficiary_NIC_NICOP,
-                    binding.etCnicAccountNumber.text.toString().cleanNicNumber(),
+                    beneficiaryType,
+                    userNumber
                 )
-                selfAwardPointsRequest.addProperty(
+                /*selfAwardPointsRequest.addProperty(
                     SelfAwardRequestConstants.Beneficiary_ACCOUNT_NUMBER,
                     binding.etAccountNumber.text.toString()
-                )
+                )*/
                 selfAwardPointsRequest.addProperty(
                     SelfAwardRequestConstants.Transaction_Date,
                     viewModel.remittanceDate.value,
                 )
                 selfAwardPointsRequest.addProperty(
                     SelfAwardRequestConstants.Transaction_TYPE,
-                    "COC" //viewModel.transactionType.value,
+                    transactionTypeBE //viewModel.transactionType.value,
                 )
 
                 selfAwardPointSharedViewModel?.setSelfAwardPointsFlowDataModel(
@@ -161,8 +180,8 @@ class SelfAwardPointsFragment :
             }
         }
 
-        binding.btnNextAccount.setOnSingleClickListener {
-            if(validateIbanFields()) {
+        binding.btnNext.setOnSingleClickListener {
+            if (validateCnicFields()) {
                 val selfAwardPointsRequest = JsonObject()
 
                 selfAwardPointsRequest.addProperty(
@@ -175,7 +194,7 @@ class SelfAwardPointsFragment :
                 )
                 selfAwardPointsRequest.addProperty(
                     SelfAwardRequestConstants.Beneficiary_NIC_NICOP,
-                    binding.etAccountNumber.text.toString(),
+                    binding.etCnicAccountNumber.text.toString(),
                 )
                 selfAwardPointsRequest.addProperty(
                     SelfAwardRequestConstants.Transaction_Date,
@@ -183,7 +202,7 @@ class SelfAwardPointsFragment :
                 )
                 selfAwardPointsRequest.addProperty(
                     SelfAwardRequestConstants.Transaction_TYPE,
-                    "ACC" //viewModel.transactionType.value,
+                    "COC" //viewModel.transactionType.value,
                 )
 
                 selfAwardPointSharedViewModel?.setSelfAwardPointsFlowDataModel(
@@ -308,6 +327,10 @@ class SelfAwardPointsFragment :
         return viewModel.validReferenceNumber.value!! && viewModel.validTransactionAmount.value!! && viewModel.validIbanAccountNumber.value!!
     }
 
+    private fun validatePassportData(): Boolean {
+        return viewModel.validReferenceNumber.value!! && viewModel.validTransactionAmount.value!! && viewModel.validPassportNumber.value!!
+    }
+
     private fun initObservers() {
         viewModel.observeSafeAwardValidTransaction().observe(this, Observer { response ->
             when (response.status) {
@@ -316,9 +339,9 @@ class SelfAwardPointsFragment :
                     response.data?.let {
                         selfAwardPointSharedViewModel?.setSelfAwardRowIdModel(it.rowID)
                         fragmentHelper.addFragment(
-                                SelfAwardPointsOTPFragment.newInstance(),
-                                clearBackStack = false,
-                                addToBackStack = true
+                            SelfAwardPointsOTPFragment.newInstance(),
+                            clearBackStack = false,
+                            addToBackStack = true
                         )
                     }
                 }
@@ -338,10 +361,18 @@ class SelfAwardPointsFragment :
             binding.apply {
                 tvRemittanceTransactionType.text = it
                 tvRemittanceTransactionType.colorToText(R.color.black)
-                if(it == getString(R.string.remittance_to_bank))
-                    makeIbanView()
-                else if(it == getString(R.string.remittance_to_cnic))
-                    makeCnicView()
+                when (it) {
+                    getString(R.string.remittance_to_bank) -> {
+                        makeIbanView()
+                    }
+                    getString(R.string.remittance_to_cnic) -> {
+                        makeCnicView()
+                    }
+                    getString(R.string.remittance_to_passport) -> {
+                        makePassportView()
+                    }
+                }
+                clearFields()
             }
         })
 
@@ -381,10 +412,22 @@ class SelfAwardPointsFragment :
         viewModel.validIbanAccountNumber.observe(this, Observer { validationPassed ->
             run {
                 if (!validationPassed)
-                    binding.tilAccountNumber.error = getString(R.string.error_invalid_account_number)
+                    binding.tilAccountNumber.error =
+                        getString(R.string.error_invalid_account_number)
                 else {
                     binding.tilAccountNumber.clearError()
                     binding.tilAccountNumber.isErrorEnabled = false
+                }
+            }
+        })
+
+        viewModel.validPassportNumber.observe(this, Observer { validationPassed ->
+            run {
+                if (!validationPassed)
+                    binding.tilPassportNumber.error = getString(R.string.error_passport_mumber)
+                else {
+                    binding.tilPassportNumber.clearError()
+                    binding.tilPassportNumber.isErrorEnabled = false
                 }
             }
         })
@@ -415,10 +458,24 @@ class SelfAwardPointsFragment :
                 false -> viewModel.validIbanAccountNumber
             }
         }
+        binding.etPassportNumber.setOnFocusChangeListener { _, b ->
+            when (b) {
+                false -> viewModel.validPassportNumber
+            }
+        }
         viewModel.validCnicAccountNumber.postValue(true)
         viewModel.validReferenceNumber.postValue(true)
         viewModel.validTransactionAmount.postValue(true)
         viewModel.validIbanAccountNumber.postValue(true)
+        viewModel.validPassportNumber.postValue(true)
+    }
+
+    private fun clearFields() {
+        viewModel.accountIbanNumber.postValue("")
+        viewModel.passportNumber.postValue("")
+        viewModel.validPassportNumber.postValue(true)
+        viewModel.validIbanAccountNumber.postValue(true)
+
     }
 
     private fun openDatePickerDialog() {
@@ -458,6 +515,7 @@ class SelfAwardPointsFragment :
             icHelpCnicAccountNumber.visibility = View.VISIBLE
             tvCnicAccountNumber.text = getString(R.string.beneficiary_account_number)
             tilCnicAccountNumber.visibility = View.GONE
+            tilPassportNumber.visibility = View.GONE
             tilAccountNumber.visibility = View.VISIBLE
             btnNext.visibility = View.GONE
             btnNextAccount.visibility = View.VISIBLE
@@ -472,11 +530,27 @@ class SelfAwardPointsFragment :
             tvCnicAccountNumber.text = getString(R.string.beneficiary_account_number_cnic)
             tilCnicAccountNumber.visibility = View.VISIBLE
             tilAccountNumber.visibility = View.GONE
+            tilPassportNumber.visibility = View.GONE
             btnNext.visibility = View.VISIBLE
             btnNextAccount.visibility = View.GONE
             //icHelpBankAccountNumber.visibility = View.GONE
         }
     }
+
+    private fun makePassportView() {
+        binding.apply {
+            tvCnicAccountNumber.visibility = View.VISIBLE
+            icHelpCnicAccountNumber.visibility = View.VISIBLE
+            tvCnicAccountNumber.text = getString(R.string.beneficiary_passport_number)
+            tilCnicAccountNumber.visibility = View.GONE
+            tilAccountNumber.visibility = View.GONE
+            tilPassportNumber.visibility = View.VISIBLE
+            btnNext.visibility = View.GONE
+            btnNextAccount.visibility = View.VISIBLE
+            //icHelpBankAccountNumber.visibility = View.GONE
+        }
+    }
+
 
     companion object {
         @JvmStatic

@@ -86,6 +86,7 @@
     <string name="beneficiary_account_number_cnic">Beneficiary CNIC</string>
     <string name="beneficiary_account_number_cnic_complaint">Beneficiary Account Number/IBAN/CNIC/POC</string>
     <string name="beneficiary_account_number">Beneficiary Account Number/IBAN</string>
+    <string name="beneficiary_passport_number">Beneficiary Passport Number</string>
     <string name="transaction_amount">Transaction Amount</string>
     <string name="curPassword">Enter Old Password</string>
     <string name="newPassword">Enter New Password</string>
@@ -420,6 +421,7 @@
     <string name="receiver_bank_name">Please enter Receiver Bank Name</string>
     <string name="remittance_to_cnic">Remittance sent to CNIC</string>
     <string name="remittance_to_bank">Remittance sent to Bank Account</string>
+    <string name="remittance_to_passport">Remittance sent to Passport Number</string>
     <string name="request_received">Request Received</string>
     <string name="are_you_sure_delete_receiver">Are you sure want to delete the Receiver</string>
     <string name="delete_receiver">Delete Receiver</string>

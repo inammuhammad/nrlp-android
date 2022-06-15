@@ -107,6 +107,7 @@
     <string name="beneficiary_verification_title">وصول کنندہ کی تصدیق</string>
     <string name="reference_number">حوالہ نمبر</string>
     <string name="beneficiary_account_number_cnic">وصول کنندہ کا قومی شناختی کارڈ نمبر</string>
+    <string name="beneficiary_passport_number">وصول کنندہ کا پاسپورٹ نمبر</string>
     <string name="beneficiary_account_number_cnic_complaint">وصول کنندہ کا اکاونٹ نمبر/ بین الاقوامی بینک اکاؤنٹ نمبر/قومی شناختی کارڈ نمبر</string>
     <string name="beneficiary_account_number">براہ کرم صحیح اکاؤنٹ نمبر/بین الاقوامی بینک اکاؤنٹ نمبر درج کریں</string>
     <string name="transaction_amount">ٹرانزیکشن  کی رقم( پاکستانی روپے)</string>
@@ -390,6 +391,7 @@
     <string name="receiver_bank_name">براہ کرم وصول کنندہ  کے  بینک کا نام درج کریں۔</string>
     <string name="remittance_to_cnic">قومی شناختی کارڈ پر بھیجی گئی ترسیلات</string>
     <string name="remittance_to_bank">بینک اکاؤنٹ میں بھیجی گئی  ترسیلات</string>
+    <string name="remittance_to_passport">پاسپورٹ نمبر پر بھیجی گئی ترسیلات زر</string>
     <string name="request_received">درخواست موصول</string>
     <string name="are_you_sure_delete_receiver">کیا آپ واقعی وصول کنندہ کو  نکلنا چاہتے ہیں</string>
     <string name="please_enter_receiver_info">براہ کرم وصول کنندہ  کی معلومات درج کریں</string>

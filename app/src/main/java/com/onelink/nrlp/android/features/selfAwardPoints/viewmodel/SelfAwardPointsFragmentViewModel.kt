@@ -25,6 +25,7 @@ class SelfAwardPointsFragmentViewModel @Inject constructor(private val selfAward
     val referenceNumber = MutableLiveData<String>("")
     val cnicAccountNumber = MutableLiveData<String>("")
     val accountIbanNumber = MutableLiveData<String>("")
+    val passportNumber = MutableLiveData<String>("")
     val transactionAmount = MutableLiveData<String>("")
     val transactionType = MutableLiveData<String>("")
 
@@ -71,6 +72,13 @@ class SelfAwardPointsFragmentViewModel @Inject constructor(private val selfAward
         }
     }
 
+    val validPassportNumber = MediatorLiveData<Boolean>().apply {
+        addSource(passportNumber) {
+            val valid = ValidationUtils.isPassportNumberValid(it)
+            value = valid
+        }
+    }
+
     val remittanceDateNotEmpty = MediatorLiveData<Boolean>().apply {
         validateNonNull(remittanceDate)
     }
@@ -91,9 +99,13 @@ class SelfAwardPointsFragmentViewModel @Inject constructor(private val selfAward
         validateNonNull(accountIbanNumber)
     }
 
+    val passportNumberNotEmpty = MediatorLiveData<Boolean>().apply {
+        validateNonNull(passportNumber)
+    }
+
     fun getDateInStringFormat(calendar: Calendar?): String? {
         val dateString =
-                SimpleDateFormat("dd/M/yyyy", Locale.US).parse(rawDate ?: "") ?: return ""
+            SimpleDateFormat("dd/M/yyyy", Locale.US).parse(rawDate ?: "") ?: return ""
         val day = calendar?.get(Calendar.DATE)
         return SimpleDateFormat("dd-MMM-yy", Locale.US).format(dateString)
         /*return if (day !in 11..18) when (day?.rem(10)) {

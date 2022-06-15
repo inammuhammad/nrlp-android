@@ -118,8 +118,9 @@ object SelfAwardRequestConstants{
     const val Amount="amount"
     const val Reference_NO="reference_no"
     const val Beneficiary_NIC_NICOP="beneficiary_nic_nicop"
-    const val Beneficiary_ACCOUNT_NUMBER="beneficiary_account_number"
-    const val Self_Award_Row_ID="sp_respone_row_id"
+    const val Beneficiary_ACCOUNT_NUMBER = "beneficiary_account_number"
+    const val Beneficiary_PASSPORT_NUMBER = "passport_id"
+    const val Self_Award_Row_ID = "sp_respone_row_id"
     const val Transaction_Date="transaction_date"
     const val Transaction_TYPE="transaction_type"
 }
