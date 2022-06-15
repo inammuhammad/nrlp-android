@@ -79,7 +79,13 @@ class AdvancedLoyaltyStatementFragment :
                     response.data.let {
                         val pdfData = it?.byteStream()
                         if (pdfData != null) {
-                            context?.let { it1 -> openPDFContent(it1, pdfData, "statement") }
+                            context?.let { it1 ->
+                                openPDFContent(
+                                    it1,
+                                    pdfData,
+                                    "SDRP-Statement.pdf"
+                                )
+                            }
                         }
                         /* if (pdfData != null) {
 
