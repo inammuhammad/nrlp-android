@@ -500,6 +500,89 @@
                     app:layout_constraintTop_toBottomOf="@id/radioTxt">
 
                     <TextView
+                        android:id="@+id/tvUnableToSelfAward"
+                        style="@style/TextViewSubHeading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/redemption_partner"
+                        android:textColor="@color/black"
+                        android:visibility="gone"
+                        android:textSize="@dimen/unit_16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <LinearLayout
+                        android:id="@+id/spinnerSelfAwardType"
+                        style="@style/spinnerTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:layoutDirection="ltr"
+                        android:orientation="horizontal"
+                        android:visibility="gone"
+                        android:textDirection="ltr"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        app:layout_constraintTop_toBottomOf="@id/tvUnableToSelfAward">
+
+                        <TextView
+                            android:id="@+id/tvSelfAward"
+                            style="@style/TextViewMediumNoMargins"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="8.5"
+                            android:text="@={viewModel.selfAwardType}" />
+
+                        <ImageView
+                            android:id="@+id/imageViewSelfAwardTypeError"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/margin_large"
+                            android:src="@drawable/ic_edit_text_error"
+                            android:textColor="@color/grey"
+                            android:visibility="gone"
+                            android:contentDescription="@null" />
+
+                        <ImageView
+                            android:id="@+id/iv_drop_down3"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:contentDescription="@null"
+                            android:src="@drawable/ic_spinner_dropdown" />
+                    </LinearLayout>
+
+                    <com.onelink.nrlp.android.utils.OneLinkSpinner
+                        android:id="@+id/spinner_select_self_award_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="@dimen/margin_large"
+                        android:layout_marginEnd="@dimen/margin_large"
+                        android:background="@android:color/transparent"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="start"
+                        android:hint="@string/redemption"
+                        android:layoutDirection="ltr"
+                        android:spinnerMode="dropdown"
+                        android:textDirection="ltr"
+                        android:visibility="invisible"
+                        app:layout_constraintTop_toBottomOf="@id/spinnerSelfAwardType" />
+
+                    <TextView
+                        android:id="@+id/errorTextSelfAward"
+                        style="@style/TextViewMedium"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_large"
+                        android:layout_marginTop="@dimen/unit_2dp"
+                        android:text="@string/error_redemption_partner"
+                        android:textColor="@color/red"
+                        app:layout_constraintTop_toBottomOf="@id/spinnerSelfAwardType"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:textSize="@dimen/unit_10sp"
+                        android:visibility="gone" />
+
+                    <TextView
                         android:id="@+id/tvBeneficiaryaccount"
                         style="@style/TextViewSubHeading"
                         android:layout_width="wrap_content"
@@ -509,7 +592,7 @@
                         android:textSize="@dimen/unit_16sp"
                         android:maxWidth="@dimen/_225sdp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toBottomOf="@id/errorTextSelfAward" />
 
                     <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
                         android:id="@+id/til_beneficiary_account"
@@ -528,10 +611,69 @@
                             android:layout_height="wrap_content"
                             android:inputType="textNoSuggestions"
                             android:maxLength="50"
+                            android:importantForAutofill="no"
                             android:hint="@string/cnic_nicop_hint"
                             android:maxLines="1"
                             android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
                             android:text="@={viewModel.cnicAccountNumber}"
+                            app:layout_constraintBottom_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="parent" />
+
+                    </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
+
+                    <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
+                        android:id="@+id/til_beneficiary_iban"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/unit_8dp"
+                        app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvBeneficiaryaccount">
+
+                        <com.onelink.nrlp.android.widgets.OneLinkEditText
+                            android:id="@+id/et_beneficiary_iban"
+                            style="@style/EditTextFixedDigits"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textNoSuggestions"
+                            android:maxLength="50"
+                            android:importantForAutofill="no"
+                            android:hint="@string/cnic_nicop_hint"
+                            android:maxLines="1"
+                            android:visibility="gone"
+                            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+                            android:text="@={viewModel.selfAwardIban}"
+                            app:layout_constraintBottom_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="parent" />
+
+                    </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
+
+                    <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
+                        android:id="@+id/til_beneficiary_passport"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/unit_8dp"
+                        app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvBeneficiaryaccount">
+
+                        <com.onelink.nrlp.android.widgets.OneLinkEditText
+                            android:id="@+id/et_beneficiary_passport"
+                            style="@style/EditTextFixedDigits"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textNoSuggestions"
+                            android:maxLength="50"
+                            android:importantForAutofill="no"
+                            android:hint="@string/cnic_nicop_hint"
+                            android:maxLines="1"
+                            android:visibility="gone"
+                            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+                            android:text="@={viewModel.selfAwardPassport}"
                             app:layout_constraintBottom_toTopOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="parent" />

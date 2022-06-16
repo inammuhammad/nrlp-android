@@ -199,6 +199,7 @@
     <string name="device_rooted_alert_msg">آپ کی ڈیوائس rooted ہے، اس پہ ایپلیکشن نہیں استعمال کی جاسکتی</string>
     <string name="error_cnic">براہ کرم درست CNIC/NICOP/POC درج کریں</string>
     <string name="error_not_valid_name">براہ کرم ایک درست پورا نام درج کریں</string>
+    <string name="error_not_valid_father_name">براہ کرم درست نام درج کریں</string>
     <string name="error_not_valid_mother_name">براہ کرم ایک درست نام درج کریں</string>
     <string name="error_mobile_num_not_valid">براہ کرم درست موبائل نمبر درج کریں</string>
     <string name="error_email_not_valid">برائے مہربانی درست ای میل فارمیٹ کا اندراج کریں</string>

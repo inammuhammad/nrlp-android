@@ -9,7 +9,7 @@ import java.math.BigDecimal
 data class StatementDetailModel(
     @SerializedName("name") val name: String?,
     @SerializedName("status") val status: String,
-    @SerializedName("type") val type: Type,
+    @SerializedName("type") val type: String?,
     @SerializedName("points") val points: BigDecimal,
     @SerializedName("date") val date: String,
     @SerializedName("transaction_id") val transactionId: String

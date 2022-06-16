@@ -60,7 +60,10 @@ class RegComplaintDetailsFragment:
     override fun getTitle(): String = getString(R.string.complaint)
 
     override fun getViewM(): RegComplaintSharedViewModel =
-        ViewModelProvider(requireActivity(),viewModelFactory).get(RegComplaintSharedViewModel::class.java)
+        ViewModelProvider(
+            requireActivity(),
+            viewModelFactory
+        ).get(RegComplaintSharedViewModel::class.java)
 
     override fun getLayoutRes()= R.layout.fragment_reg_complaint_details
 
@@ -130,80 +133,135 @@ class RegComplaintDetailsFragment:
         if(viewModel.partnerList.value.isNullOrEmpty() ){
             viewModel.getRedeemPartner()
             oneLinkProgressDialog.showProgressDialog(context)
-            viewModel.observerRedeemPartner().observe(this, androidx.lifecycle.Observer { response->
-                when(response.status){
-                    Status.SUCCESS -> {
-                        oneLinkProgressDialog.hideProgressDialog()
-                        response.data?.let {
-                            val redeemPartnerList: MutableList<String> = mutableListOf()
-                            it.data.let {
-                                it.forEach {
-                                   redeemPartnerList.add(it.partnerName)
-                                }
-                                viewModel.partnerList.postValue(redeemPartnerList)
-                            }
-                            binding.spinnerSelectPartner.adapter=context?.let {
-                                ArrayAdapter(
-                                    it,
-                                    R.layout.custom_spinner_item,
-                                    redeemPartnerList
-                                )
-                            } as SpinnerAdapter
-
-                            binding.spinnerSelectPartner.onItemSelectedListener =
-                                object : AdapterView.OnItemSelectedListener {
-                                    override fun onNothingSelected(parent: AdapterView<*>?) {
-                                        // on nothing selected
+            viewModel.observerRedeemPartner().observe(
+                this,
+                androidx.lifecycle.Observer { response ->
+                    when (response.status) {
+                        Status.SUCCESS -> {
+                            oneLinkProgressDialog.hideProgressDialog()
+                            response.data?.let {
+                                val redeemPartnerList: MutableList<String> = mutableListOf()
+                                it.data.let {
+                                    it.forEach {
+                                        redeemPartnerList.add(it.partnerName)
                                     }
-                                    override fun onItemSelected(
-                                        parent: AdapterView<*>?,
-                                        view: View?,
-                                        position: Int,
-                                        id: Long
-                                    ) {
-                                        if (listenerInitializedPR) {
-                                            viewModel.redemptionPartners.postValue(
-                                                viewModel.partnerList.value!![position]
-                                            )
-                                            viewModel.validationRedemptionPartnerPassed.postValue(true)
-                                        } else {
-                                            listenerInitializedPR = true
-                                            binding.spinnerSelectPartner.setSelection(-1)
+                                    viewModel.partnerList.postValue(redeemPartnerList)
+                                }
+                                binding.spinnerSelectPartner.adapter = context?.let {
+                                    ArrayAdapter(
+                                        it,
+                                        R.layout.custom_spinner_item,
+                                        redeemPartnerList
+                                    )
+                                } as SpinnerAdapter
+
+                                binding.spinnerSelectPartner.onItemSelectedListener =
+                                    object : AdapterView.OnItemSelectedListener {
+                                        override fun onNothingSelected(parent: AdapterView<*>?) {
+                                            // on nothing selected
+                                        }
+
+                                        override fun onItemSelected(
+                                            parent: AdapterView<*>?,
+                                            view: View?,
+                                            position: Int,
+                                            id: Long
+                                        ) {
+                                            if (listenerInitializedPR) {
+                                                viewModel.redemptionPartners.postValue(
+                                                    viewModel.partnerList.value!![position]
+                                                )
+                                                viewModel.validationRedemptionPartnerPassed.postValue(
+                                                    true
+                                                )
+                                            } else {
+                                                listenerInitializedPR = true
+                                                binding.spinnerSelectPartner.setSelection(-1)
+                                            }
                                         }
                                     }
-                                }
+                            }
+                        }
+                        Status.ERROR -> {
+                            oneLinkProgressDialog.hideProgressDialog()
+                            response.error?.let {
+                                showGeneralErrorDialog(this, it)
+                            }
+                        }
+                        Status.LOADING -> {
+                            oneLinkProgressDialog.showProgressDialog(activity)
                         }
                     }
-                    Status.ERROR -> {
-                        oneLinkProgressDialog.hideProgressDialog()
-                        response.error?.let {
-                            showGeneralErrorDialog(this, it)
-                        }
-                    }
-                    Status.LOADING -> {
-                        oneLinkProgressDialog.showProgressDialog(activity)
-                    }
-                }
-            })
+                })
         }
 
     }
 
-    private fun initListeners(){
+    private fun initSelfAwardSpinner() {
+        val transactionTypes = resources.getStringArray(R.array.selfAwardTransactionTypes)
+        val list = mutableListOf<String>()
+        for (transaction in transactionTypes) {
+            list.add(transaction)
+        }
+        if (getUserType().equals(Constants.BENEFICIARY, true)) {
+            list.remove(resources.getString(R.string.self_awarding))
+            // transactionTypes.toMutableList().remove(resources.getString(R.string.self_awarding))
+        }
+
+        binding.spinnerSelectSelfAwardType.adapter = context?.let {
+            ArrayAdapter(
+                it,
+                R.layout.custom_spinner_item,
+                list
+            )
+        } as SpinnerAdapter
+
+        binding.spinnerSelectSelfAwardType.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    // on nothing selected
+                }
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    if (listenerInitializedTR) {
+                        viewModel.selfAwardType.postValue(transactionTypes[position])
+                        viewModel.validationTransactionTypePassed.postValue(true)
+                    } else {
+                        listenerInitializedTR = true
+                        //binding.spinnerSelectSelfAwardType.setSelection(-1)
+                    }
+                }
+            }
+    }
+
+    private fun initListeners() {
 
         binding.btnNext.setOnSingleClickListener {
-            if(detailsValidationPassed()){
+            if (detailsValidationPassed()) {
                 oneLinkProgressDialog.showProgressDialog(context)
                 viewModel.makeComplainCall(getJsonObject())
             }
         }
 
-        binding.spinnerTransaction.setOnClickListener{
+        binding.spinnerTransaction.setOnClickListener {
             binding.spinnerSelectTransaction.performClick()
         }
 
-        binding.spinnerRedemption.setOnClickListener{
+        binding.spinnerRedemption.setOnClickListener {
             binding.spinnerSelectPartner.performClick()
+        }
+
+        binding.spinnerSelfAwardType.setOnClickListener {
+            binding.spinnerSelectSelfAwardType.performClick()
+        }
+
+        binding.ivDropDown3.setOnClickListener {
+            binding.spinnerSelectSelfAwardType.performClick()
         }
 
 
@@ -252,11 +310,12 @@ class RegComplaintDetailsFragment:
                 viewModel.complaintType.value = COMPLAINT_TYPE.UNABLE_TO_TRANSFER_POINTS_TO_BENEFICIARY
             }
 
-            resources.getString(RegisteredComplaintTypes.UNABLE_TO_SELF_AWARDS_POINTS).
-            toLowerCase(Locale.getDefault()) -> {
-                binding.lyUnableToSelfAward.visibility=View.VISIBLE
-                viewModel.complaintType.value = COMPLAINT_TYPE.UNABLE_TO_SELF_AWARDS_POINTS
-            }
+             resources.getString(RegisteredComplaintTypes.UNABLE_TO_SELF_AWARDS_POINTS)
+                 .toLowerCase(Locale.getDefault()) -> {
+                 binding.lyUnableToSelfAward.visibility = View.VISIBLE
+                 viewModel.complaintType.value = COMPLAINT_TYPE.UNABLE_TO_SELF_AWARDS_POINTS
+                 initSelfAwardSpinner()
+             }
 
             resources.getString(RegisteredComplaintTypes.REDEMPTION_ISSUES).
             toLowerCase(Locale.getDefault()) -> {
@@ -450,6 +509,7 @@ class RegComplaintDetailsFragment:
 
         CnicValidator(binding.etAddbeneficiaryCnicnicop)
         CnicValidator(binding.etPointsbeneficiaryCnicNicp)
+        CnicValidator(binding.etBeneficiaryAccount)
 
         (activity as RegComplaintActivity).selectedCountry.observe(this, androidx.lifecycle.Observer { countryCodeModel ->
             viewModel.country.value = countryCodeModel.country
@@ -670,11 +730,66 @@ class RegComplaintDetailsFragment:
                         binding.etTransactionDate.setBackgroundResource(R.drawable.edit_text_error_background)
                         binding.imageViewTransactionDateError.visibility = View.VISIBLE
                         binding.errorTextTransactionDate.visibility = View.VISIBLE
-                    }
-                    else {
+                    } else {
                         binding.etTransactionDate.setBackgroundResource(R.drawable.edit_text_background)
                         binding.imageViewTransactionDateError.visibility = View.GONE
                         binding.errorTextTransactionDate.visibility = View.GONE
+                    }
+                }
+            })
+
+        viewModel.selfAwardType.observe(this, androidx.lifecycle.Observer {
+            when (it) {
+                getString(R.string.remittance_to_bank) -> {
+                    makeIbanView()
+                }
+                getString(R.string.remittance_to_cnic) -> {
+                    makeCnicView()
+                }
+                getString(R.string.remittance_to_passport) -> {
+                    makePassportView()
+                }
+            }
+            //clearSelfAwardData()
+        })
+
+        viewModel.validationSelfAwardCnicPassed.observe(
+            this,
+            { validationsPassed ->
+                run {
+                    if (!validationsPassed)
+                        binding.tilBeneficiaryAccount.error = getString(R.string.error_cnic)
+                    else {
+                        binding.tilBeneficiaryAccount.clearError()
+                        binding.tilBeneficiaryAccount.isErrorEnabled = false
+                    }
+                }
+            })
+
+        viewModel.validationIbanPassed.observe(
+            this,
+            { validationsPassed ->
+                run {
+                    if (!validationsPassed)
+                        binding.tilBeneficiaryAccount.error =
+                            getString(R.string.error_invalid_account_number)
+                    else {
+                        binding.tilBeneficiaryAccount.clearError()
+                        binding.tilBeneficiaryAccount.isErrorEnabled = false
+                    }
+                }
+            })
+
+        viewModel.validationPassportPassed.observe(
+            this,
+            { validationsPassed ->
+                run {
+                    if (!validationsPassed)
+                        binding.tilBeneficiaryPassport.error =
+                            getString(R.string.error_passport_mumber)
+                    else {
+                        binding.tilBeneficiaryPassport.clearError()
+                        binding.tilBeneficiaryPassport.isErrorEnabled = false
                     }
                 }
             })
@@ -988,7 +1103,7 @@ class RegComplaintDetailsFragment:
                 it,
                 { _, year, monthOfYear, dayOfMonth ->
                     c.set(year, monthOfYear, dayOfMonth)
-                    viewModel.transactionDate.value=
+                    viewModel.transactionDate.value =
                         dayOfMonth.toString() + "/" + (monthOfYear + 1) + "/" + year.toString()
 
                     //viewModel.rawRemittanceDate.value = viewModel.rawDate
@@ -1005,9 +1120,50 @@ class RegComplaintDetailsFragment:
         datePickerDialog?.show()
     }
 
+    private fun makeIbanView() {
+        binding.apply {
+            tvBeneficiaryaccount.text = getString(R.string.beneficiary_account_number)
+            tilBeneficiaryAccount.visibility = View.GONE
+            etBeneficiaryAccount.visibility = View.GONE
+            tilBeneficiaryIban.visibility = View.VISIBLE
+            etBeneficiaryIban.visibility = View.VISIBLE
+            tilBeneficiaryPassport.visibility = View.GONE
+            etBeneficiaryPassport.visibility = View.GONE
+            btnNext.visibility = View.VISIBLE
+            //icHelpBankAccountNumber.visibility = View.VISIBLE
+        }
+    }
+
+    private fun makeCnicView() {
+        binding.apply {
+            tvBeneficiaryaccount.text = getString(R.string.beneficiary_account_number_cnic)
+            tilBeneficiaryAccount.visibility = View.VISIBLE
+            etBeneficiaryAccount.visibility = View.VISIBLE
+            tilBeneficiaryIban.visibility = View.GONE
+            etBeneficiaryIban.visibility = View.GONE
+            tilBeneficiaryPassport.visibility = View.GONE
+            etBeneficiaryPassport.visibility = View.GONE
+            btnNext.visibility = View.VISIBLE
+            //icHelpBankAccountNumber.visibility = View.GONE
+        }
+    }
+
+    private fun makePassportView() {
+        binding.apply {
+            tvBeneficiaryaccount.text = getString(R.string.beneficiary_passport_number)
+            tilBeneficiaryAccount.visibility = View.GONE
+            etBeneficiaryAccount.visibility = View.GONE
+            tilBeneficiaryIban.visibility = View.GONE
+            etBeneficiaryIban.visibility = View.GONE
+            tilBeneficiaryPassport.visibility = View.VISIBLE
+            etBeneficiaryPassport.visibility = View.VISIBLE
+            //icHelpBankAccountNumber.visibility = View.GONE
+        }
+    }
+
     companion object {
         @JvmStatic
         fun newInstance() =
-            RegComplaintDetailsFragment ()
+            RegComplaintDetailsFragment()
     }
 }

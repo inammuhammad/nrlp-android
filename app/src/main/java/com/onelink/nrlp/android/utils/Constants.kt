@@ -204,6 +204,11 @@ object TransactionTypeConstants {
     const val REDEMPTION = "redemption"
 }
 
+object ViewStatementConstants {
+    const val CREDIT = "Credit"
+    const val DEBIT = "Debit"
+}
+
 object Sp {
     init {
         System.loadLibrary("see")
