@@ -30,6 +30,7 @@
     <string name="help_father_name">Please enter your Father Name as per CNIC/NICOP/POC</string>
     <string name="resident_id">منفرد آئی ڈی*</string>
     <string name="mobile_number">موبائل نمبر*</string>
+    <string name="mobile_number_not_mandatory">موبائل نمبر</string>
     <string name="mobile_number_complaint">موبائل نمبر</string>
     <string name="beneficiary_mobile_number">وصول کنندہ کا موبائل نمبر *</string>
     <string name="email_address">ای میل ایڈریس</string>
@@ -424,4 +425,6 @@
     <string name="load_more">مزید لوڈ کریں</string>
     <string name="submit">جمع کرائیں</string>
     <string name="feature_available_soon">فی الحال یہ خصوصیت غیر فعال ہے</string>
+    <string name="complaint_country">ملک</string>
+    <string name="branch_center">برانچ/سینٹر</string>
 </resources>
