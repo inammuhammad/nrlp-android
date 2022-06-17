@@ -62,6 +62,7 @@ constructor(private val complainRepo: ComplainRepo)
     val validationTransactionIdPassed = MutableLiveData(true)
     val validationTransactionAmountPassed = MutableLiveData(true)
     val validationRedemptionPartnerPassed = MutableLiveData(true)
+    val validationSelfAwardTypePassed = MutableLiveData(true)
     val validationSpecifyDetailsPassed = MutableLiveData(true)
     val validationSpecifyOtherDetailsPassed = MutableLiveData(true)
     val validationBeneficiaryCountryPassed = MutableLiveData(true)
@@ -150,6 +151,12 @@ constructor(private val complainRepo: ComplainRepo)
 
     fun checkSpecifyDetails(string: String) =
         string.isNotEmpty() && string.length >= 15
+
+    fun checkIban(string: String) =
+        ValidationUtils.isIbanAccountNumberValid(string)
+
+    fun checkPassportNumber(string: String) =
+        ValidationUtils.isPassportNumberValid(string)
 
     private fun MediatorLiveData<Boolean>.validateNonNull(it: MutableLiveData<String>) {
         addSource(it) { value = it.isNotEmpty() }
@@ -252,6 +259,7 @@ constructor(private val complainRepo: ComplainRepo)
         validationTransactionTypePassed.postValue(true)
         validationBeneficiaryCnicPointsPassed.postValue(true)
         validationTransactionDatePassed.postValue(true)
+        validationSelfAwardTypePassed.postValue(true)
     }
 
     private fun emptyComplaintDetails(){
@@ -262,10 +270,13 @@ constructor(private val complainRepo: ComplainRepo)
         transactionId.postValue("")
         remittingEntity.postValue("")
         redemptionPartners.postValue("")
+        selfAwardType.postValue("")
         cnicNumber.postValue("")
         country.postValue("")
         mobileNumber.postValue("")
         details.postValue("")
         mobileOperator.postValue("")
+        selfAwardIban.postValue("")
+        selfAwardPassport.postValue("")
     }
 }

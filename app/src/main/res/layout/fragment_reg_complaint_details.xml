@@ -506,7 +506,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/redemption_partner"
                         android:textColor="@color/black"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:textSize="@dimen/unit_16sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -519,7 +519,7 @@
                         android:gravity="center_vertical"
                         android:layoutDirection="ltr"
                         android:orientation="horizontal"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:textDirection="ltr"
                         android:layout_marginTop="@dimen/_8sdp"
                         app:layout_constraintTop_toBottomOf="@id/tvUnableToSelfAward">
@@ -582,6 +582,17 @@
                         android:textSize="@dimen/unit_10sp"
                         android:visibility="gone" />
 
+                    <View
+                        android:id="@+id/vBuffer"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_80sdp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:visibility="gone"
+                        android:focusable="false"
+                        android:clickable="false"
+                        app:layout_constraintTop_toBottomOf="@id/spinnerSelfAwardType" />
+
                     <TextView
                         android:id="@+id/tvBeneficiaryaccount"
                         style="@style/TextViewSubHeading"
@@ -591,6 +602,7 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/unit_16sp"
                         android:maxWidth="@dimen/_225sdp"
+                        android:visibility="gone"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/errorTextSelfAward" />
 
@@ -601,6 +613,7 @@
                         android:layout_marginTop="@dimen/unit_8dp"
                         app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
                         app:layout_constraintEnd_toEndOf="parent"
+                        android:visibility="gone"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tvBeneficiaryaccount">
 
@@ -609,12 +622,12 @@
                             style="@style/EditTextFixedDigits"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="textNoSuggestions"
-                            android:maxLength="50"
+                            android:inputType="number"
+                            android:maxLength="15"
                             android:importantForAutofill="no"
                             android:hint="@string/cnic_nicop_hint"
                             android:maxLines="1"
-                            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+                            android:digits="0123456789"
                             android:text="@={viewModel.cnicAccountNumber}"
                             app:layout_constraintBottom_toTopOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -627,6 +640,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/unit_8dp"
+                        android:visibility="gone"
                         app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -640,7 +654,7 @@
                             android:inputType="textNoSuggestions"
                             android:maxLength="50"
                             android:importantForAutofill="no"
-                            android:hint="@string/cnic_nicop_hint"
+                            android:hint="@string/iban_hint"
                             android:maxLines="1"
                             android:visibility="gone"
                             android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
@@ -656,6 +670,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/unit_8dp"
+                        android:visibility="gone"
                         app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -669,7 +684,7 @@
                             android:inputType="textNoSuggestions"
                             android:maxLength="50"
                             android:importantForAutofill="no"
-                            android:hint="@string/cnic_nicop_hint"
+                            android:hint="@string/select_passport_no"
                             android:maxLines="1"
                             android:visibility="gone"
                             android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
@@ -689,7 +704,7 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/unit_16sp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/til_beneficiary_account" />
+                        app:layout_constraintTop_toBottomOf="@id/vBuffer" />
 
                     <ImageView
                         android:id="@+id/icHelpTransaction"
@@ -700,7 +715,7 @@
                         android:src="@drawable/ic_baseline_info_24"
                         app:layout_constraintHorizontal_bias="0"
                         app:layout_constraintStart_toEndOf="@+id/tvRemitting"
-                        app:layout_constraintTop_toBottomOf="@id/til_beneficiary_account" />
+                        app:layout_constraintTop_toBottomOf="@id/vBuffer" />
 
                     <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
                         android:id="@+id/til_remitting"

@@ -124,6 +124,7 @@
         <item name="android:textColor">@color/red</item>
         <item name="android:textSize">10sp</item>
         <item name="android:paddingTop">@dimen/unit_28dp</item>
+        <item name="android:fontFamily">@font/hp_simplified_rg</item>
     </style>
 
     <style name="radiobutton" parent="Widget.AppCompat.CompoundButton.RadioButton">

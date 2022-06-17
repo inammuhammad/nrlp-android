@@ -13,6 +13,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.SpinnerAdapter
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.JsonObject
@@ -230,7 +231,7 @@ class RegComplaintDetailsFragment:
                 ) {
                     if (listenerInitializedTR) {
                         viewModel.selfAwardType.postValue(transactionTypes[position])
-                        viewModel.validationTransactionTypePassed.postValue(true)
+                        viewModel.validationSelfAwardTypePassed.postValue(true)
                     } else {
                         listenerInitializedTR = true
                         //binding.spinnerSelectSelfAwardType.setSelection(-1)
@@ -466,6 +467,26 @@ class RegComplaintDetailsFragment:
             }
         }
 
+        binding.etBeneficiaryPassport.setOnFocusChangeListener { _, b ->
+            when (b) {
+                false -> viewModel.validationPassportPassed.postValue(
+                    viewModel.checkPassportNumber(
+                        binding.etBeneficiaryPassport.text.toString()
+                    )
+                )
+            }
+        }
+
+        binding.etBeneficiaryIban.setOnFocusChangeListener { _, b ->
+            when (b) {
+                false -> viewModel.validationIbanPassed.postValue(
+                    viewModel.checkIban(
+                        binding.etBeneficiaryIban.text.toString()
+                    )
+                )
+            }
+        }
+
     }
 
     private fun initObservers() {
@@ -597,9 +618,11 @@ class RegComplaintDetailsFragment:
             this,
             { validationsPassed ->
                 run {
-                    if (!validationsPassed)
-                        binding.tilBeneficiaryAccount.error = getString(R.string.error_invalid_account_number)
-                    else {
+                    if (!validationsPassed) {
+                        if (binding.tilBeneficiaryAccount.isShown) {
+                            binding.tilBeneficiaryAccount.error = getString(R.string.error_cnic)
+                        }
+                    } else {
                         binding.tilBeneficiaryAccount.clearError()
                         binding.tilBeneficiaryAccount.isErrorEnabled = false
                     }
@@ -661,17 +684,31 @@ class RegComplaintDetailsFragment:
                 }
             })
 
+        viewModel.validationSelfAwardTypePassed.observe(
+            this,
+            { validationsPassed ->
+                run {
+                    if (!validationsPassed) {
+                        binding.spinnerSelfAwardType.setBackgroundResource(R.drawable.edit_text_error_background)
+                        binding.imageViewSelfAwardTypeError.visibility = View.VISIBLE
+                        binding.errorTextSelfAward.visibility = View.VISIBLE
+                    } else {
+                        binding.spinnerSelfAwardType.setBackgroundResource(R.drawable.edit_text_background)
+                        binding.imageViewSelfAwardTypeError.visibility = View.GONE
+                        binding.errorTextSelfAward.visibility = View.GONE
+                    }
+                }
+            })
+
         viewModel.validationSpecifyDetailsPassed.observe(
             this,
             { validationsPassed ->
                 run {
-                    if (!validationsPassed)
-                    {
+                    if (!validationsPassed) {
                         binding.etDetails.setBackgroundResource(R.drawable.edit_text_error_background)
                         binding.imageViewDetailsError.visibility = View.VISIBLE
                         binding.errorTextSpecifyDetails.visibility = View.VISIBLE
-                    }
-                    else {
+                    } else {
                         binding.etDetails.setBackgroundResource(R.drawable.edit_text_background)
                         binding.imageViewDetailsError.visibility = View.GONE
                         binding.errorTextSpecifyDetails.visibility = View.GONE
@@ -739,6 +776,7 @@ class RegComplaintDetailsFragment:
             })
 
         viewModel.selfAwardType.observe(this, androidx.lifecycle.Observer {
+            binding.vBuffer.visibility = View.GONE
             when (it) {
                 getString(R.string.remittance_to_bank) -> {
                     makeIbanView()
@@ -750,7 +788,7 @@ class RegComplaintDetailsFragment:
                     makePassportView()
                 }
             }
-            //clearSelfAwardData()
+            clearSelfAwardData()
         })
 
         viewModel.validationSelfAwardCnicPassed.observe(
@@ -770,12 +808,14 @@ class RegComplaintDetailsFragment:
             this,
             { validationsPassed ->
                 run {
-                    if (!validationsPassed)
-                        binding.tilBeneficiaryAccount.error =
-                            getString(R.string.error_invalid_account_number)
-                    else {
-                        binding.tilBeneficiaryAccount.clearError()
-                        binding.tilBeneficiaryAccount.isErrorEnabled = false
+                    if (!validationsPassed) {
+                        if (binding.tilBeneficiaryIban.isShown) {
+                            binding.tilBeneficiaryIban.error =
+                                getString(R.string.error_invalid_account_number)
+                        }
+                    } else {
+                        binding.tilBeneficiaryIban.clearError()
+                        binding.tilBeneficiaryIban.isErrorEnabled = false
                     }
                 }
             })
@@ -784,10 +824,12 @@ class RegComplaintDetailsFragment:
             this,
             { validationsPassed ->
                 run {
-                    if (!validationsPassed)
-                        binding.tilBeneficiaryPassport.error =
-                            getString(R.string.error_passport_mumber)
-                    else {
+                    if (!validationsPassed) {
+                        if (binding.tilBeneficiaryPassport.isShown) {
+                            binding.tilBeneficiaryPassport.error =
+                                getString(R.string.error_passport_mumber)
+                        }
+                    } else {
                         binding.tilBeneficiaryPassport.clearError()
                         binding.tilBeneficiaryPassport.isErrorEnabled = false
                     }
@@ -1007,17 +1049,34 @@ class RegComplaintDetailsFragment:
         val isPhoneNumberValid: Boolean = viewModel.checkPhoneNumberValidation(binding.etPhoneNumber.text.toString(), 0)
         val isBeneficiaryMobileOperatorValid: Boolean = viewModel.checkMobileOperatorValidation(binding.etBeneficiaryMobileOperator.text.toString())
         val isMobileOperatorValid: Boolean = viewModel.checkMobileOperatorValidation(binding.etMobileOperator.text.toString())
-        val isTransactionTypeValid: Boolean = viewModel.checkTransactionTypeValidation(binding.tvTransaction.text.toString())
-        val isBeneficiaryAccountValid: Boolean = viewModel.checkBeneficiaryAccount(binding.etBeneficiaryAccount.text.toString())
-        val isRemittingEntityValid: Boolean = viewModel.checkRemittingEntity(binding.etRemitting.text.toString())
-        val isTransactionIdValid: Boolean = viewModel.checkTransactionId(binding.etTransactionid.text.toString())
-        val isTransactionAmount: Boolean = viewModel.checkTransactionAmount(binding.etTransactionamount.text.toString())
-        val isRedemptionPartnerValid: Boolean = viewModel.checkNotEmpty(binding.tvRedemption.text.toString())
-        val isSpecifyDetailsValid: Boolean = viewModel.checkSpecifyDetails(binding.etDetails.text.toString())
-        val isSpecifyOtherDetailsValid: Boolean = viewModel.checkSpecifyDetails(binding.etDetails2.text.toString())
-        val isBeneficiaryCountryValid: Boolean = viewModel.checkNotEmpty(binding.BeneficaryCountry.text.toString())
-        val isBeneficiaryCnicPointsValid: Boolean = viewModel.checkCnicValidation(binding.etPointsbeneficiaryCnicNicp.text.toString())
-        val isTransactionDateValid: Boolean = viewModel.checkNotEmpty(binding.etTransactionDate.text.toString())
+        val isTransactionTypeValid: Boolean =
+            viewModel.checkTransactionTypeValidation(binding.tvTransaction.text.toString())
+        val isBeneficiaryAccountValid: Boolean =
+            viewModel.checkCnicValidation(binding.etBeneficiaryAccount.text.toString())
+        val isRemittingEntityValid: Boolean =
+            viewModel.checkRemittingEntity(binding.etRemitting.text.toString())
+        val isTransactionIdValid: Boolean =
+            viewModel.checkTransactionId(binding.etTransactionid.text.toString())
+        val isTransactionAmount: Boolean =
+            viewModel.checkTransactionAmount(binding.etTransactionamount.text.toString())
+        val isRedemptionPartnerValid: Boolean =
+            viewModel.checkNotEmpty(binding.tvRedemption.text.toString())
+        val isSelfAwardTypeValid: Boolean =
+            viewModel.checkNotEmpty(binding.tvSelfAward.text.toString())
+        val isSpecifyDetailsValid: Boolean =
+            viewModel.checkSpecifyDetails(binding.etDetails.text.toString())
+        val isSpecifyOtherDetailsValid: Boolean =
+            viewModel.checkSpecifyDetails(binding.etDetails2.text.toString())
+        val isBeneficiaryCountryValid: Boolean =
+            viewModel.checkNotEmpty(binding.BeneficaryCountry.text.toString())
+        val isBeneficiaryCnicPointsValid: Boolean =
+            viewModel.checkCnicValidation(binding.etPointsbeneficiaryCnicNicp.text.toString())
+        val isTransactionDateValid: Boolean =
+            viewModel.checkNotEmpty(binding.etTransactionDate.text.toString())
+        val isSelfAwardIbanValid: Boolean =
+            viewModel.checkIban(binding.etBeneficiaryIban.text.toString())
+        val isSelfAwardPassportValid: Boolean =
+            viewModel.checkPassportNumber(binding.etBeneficiaryPassport.text.toString())
         //var isFullNameValid: Boolean = viewModel.checkAliasValidation(alias.value!!)
         //var isEmailValid:Boolean = viewModel.checkEmailValidation(emailAddress.value!!)
         //var isCountryValid:Boolean = viewModel.checkCountryValidation(country)
@@ -1032,17 +1091,20 @@ class RegComplaintDetailsFragment:
         viewModel.validationTransactionIdPassed.value = isTransactionIdValid
         viewModel.validationTransactionAmountPassed.value = isTransactionAmount
         viewModel.validationRedemptionPartnerPassed.value = isRedemptionPartnerValid
+        viewModel.validationSelfAwardTypePassed.value = isSelfAwardTypeValid
         viewModel.validationSpecifyDetailsPassed.value = isSpecifyDetailsValid
         viewModel.validationSpecifyOtherDetailsPassed.value = isSpecifyOtherDetailsValid
         viewModel.validationBeneficiaryCountryPassed.value = isBeneficiaryCountryValid
         viewModel.validationBeneficiaryCnicPointsPassed.value = isBeneficiaryCnicPointsValid
         viewModel.validationTransactionDatePassed.value = isTransactionDateValid
+        viewModel.validationIbanPassed.value = isSelfAwardIbanValid
+        viewModel.validationPassportPassed.value = isSelfAwardPassportValid
 
-        when(viewModel.complaintType.value){
+        when (viewModel.complaintType.value) {
             COMPLAINT_TYPE.UNABLE_TO_RECEIVE_OTP -> {
                 return isMobileOperatorValid && isTransactionTypeValid
             }
-            COMPLAINT_TYPE.UNABLE_TO_ADD_BENEFICIARY ->{
+            COMPLAINT_TYPE.UNABLE_TO_ADD_BENEFICIARY -> {
                 return viewModel.checkCnicValidation(binding.etAddbeneficiaryCnicnicop.text.toString()) &&
                         binding.BeneficaryCountry.text.toString().isNotEmpty() &&
                         binding.etPhoneNumber.text.toString().isNotEmpty() &&
@@ -1054,15 +1116,16 @@ class RegComplaintDetailsFragment:
                 return viewModel.checkCnicValidation(binding.etPointsbeneficiaryCnicNicp.text.toString())
 
             }
-            COMPLAINT_TYPE.UNABLE_TO_SELF_AWARDS_POINTS ->{
-                return  binding.etBeneficiaryAccount.text.toString().isNotEmpty() &&
+            COMPLAINT_TYPE.UNABLE_TO_SELF_AWARDS_POINTS -> {
+                return (isBeneficiaryAccountValid || isSelfAwardIbanValid || isSelfAwardPassportValid) &&  //binding.etBeneficiaryAccount.text.toString().isNotEmpty() &&
+                        isSelfAwardTypeValid &&
                         binding.etTransactionDate.text.toString().isNotEmpty() &&
                         binding.etTransactionamount.text.toString().isNotEmpty() &&
                         ValidationUtils.isTransactionNoValid(binding.etTransactionid.text.toString()) &&    //binding.etTransactionid.text.toString().isNotEmpty() &&
                         binding.etRemitting.text.toString().isNotEmpty()
 
             }
-            COMPLAINT_TYPE.REDEMPTION_ISSUES ->{
+            COMPLAINT_TYPE.REDEMPTION_ISSUES -> {
                 return isSpecifyDetailsValid &&
                         binding.tvRedemption.text.toString().isNotEmpty()
 
@@ -1123,6 +1186,7 @@ class RegComplaintDetailsFragment:
     private fun makeIbanView() {
         binding.apply {
             tvBeneficiaryaccount.text = getString(R.string.beneficiary_account_number)
+            tvBeneficiaryaccount.visibility = View.VISIBLE
             tilBeneficiaryAccount.visibility = View.GONE
             etBeneficiaryAccount.visibility = View.GONE
             tilBeneficiaryIban.visibility = View.VISIBLE
@@ -1130,6 +1194,7 @@ class RegComplaintDetailsFragment:
             tilBeneficiaryPassport.visibility = View.GONE
             etBeneficiaryPassport.visibility = View.GONE
             btnNext.visibility = View.VISIBLE
+            binding.vBuffer.visibility = View.VISIBLE
             //icHelpBankAccountNumber.visibility = View.VISIBLE
         }
     }
@@ -1137,6 +1202,7 @@ class RegComplaintDetailsFragment:
     private fun makeCnicView() {
         binding.apply {
             tvBeneficiaryaccount.text = getString(R.string.beneficiary_account_number_cnic)
+            tvBeneficiaryaccount.visibility = View.VISIBLE
             tilBeneficiaryAccount.visibility = View.VISIBLE
             etBeneficiaryAccount.visibility = View.VISIBLE
             tilBeneficiaryIban.visibility = View.GONE
@@ -1144,6 +1210,7 @@ class RegComplaintDetailsFragment:
             tilBeneficiaryPassport.visibility = View.GONE
             etBeneficiaryPassport.visibility = View.GONE
             btnNext.visibility = View.VISIBLE
+            binding.vBuffer.visibility = View.VISIBLE
             //icHelpBankAccountNumber.visibility = View.GONE
         }
     }
@@ -1151,14 +1218,25 @@ class RegComplaintDetailsFragment:
     private fun makePassportView() {
         binding.apply {
             tvBeneficiaryaccount.text = getString(R.string.beneficiary_passport_number)
+            tvBeneficiaryaccount.visibility = View.VISIBLE
             tilBeneficiaryAccount.visibility = View.GONE
             etBeneficiaryAccount.visibility = View.GONE
             tilBeneficiaryIban.visibility = View.GONE
             etBeneficiaryIban.visibility = View.GONE
             tilBeneficiaryPassport.visibility = View.VISIBLE
             etBeneficiaryPassport.visibility = View.VISIBLE
+            binding.vBuffer.visibility = View.VISIBLE
             //icHelpBankAccountNumber.visibility = View.GONE
         }
+    }
+
+    private fun clearSelfAwardData() {
+        viewModel.selfAwardIban.postValue("")
+        viewModel.cnicAccountNumber.postValue("")
+        viewModel.selfAwardPassport.postValue("")
+        viewModel.validationSelfAwardCnicPassed.postValue(true)
+        viewModel.validationIbanPassed.postValue(true)
+        viewModel.validationPassportPassed.postValue(true)
     }
 
     companion object {
