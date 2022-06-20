@@ -275,6 +275,15 @@ class RegComplaintDetailsFragment:
             hideKeyboard()
         }
 
+        binding.NadraPassportCountry.setOnSingleClickListener {
+            fragmentHelper.addFragment(
+                SelectCountryFragment.newInstance(UserData.getUser()?.accountType!!),
+                clearBackStack = false,
+                addToBackStack = true
+            )
+            hideKeyboard()
+        }
+
         binding.etTransactionDate.setOnClickListener {
             hideKeyboard()
             openDatePickerDialog()
@@ -283,7 +292,11 @@ class RegComplaintDetailsFragment:
 
         binding.icHelpTransaction.setOnClickListener {
             //showWarningDialog(getString(R.string.transaction_eligibity_for_self_award))
-            showGeneralAlertDialog(this,"SelfAward",getString(R.string.specify_bank_exchange_from_where_remittance))
+            showGeneralAlertDialog(
+                this,
+                "SelfAward",
+                getString(R.string.specify_bank_exchange_from_where_remittance)
+            )
         }
     }
 
@@ -532,14 +545,19 @@ class RegComplaintDetailsFragment:
         CnicValidator(binding.etPointsbeneficiaryCnicNicp)
         CnicValidator(binding.etBeneficiaryAccount)
 
-        (activity as RegComplaintActivity).selectedCountry.observe(this, androidx.lifecycle.Observer { countryCodeModel ->
-            viewModel.country.value = countryCodeModel.country
-            binding.BeneficaryCountry.colorToText(R.color.black)
-            binding.tvCountryCode.text = countryCodeModel.code
-            binding.etPhoneNumber.isEnabled = true
-            binding.tvCountryCode.colorToText(R.color.black)
-            binding.etPhoneNumber.hint = viewModel.phoneNumberHint(countryCodeModel.length.toInt())
-        })
+        (activity as RegComplaintActivity).selectedCountry.observe(
+            this,
+            androidx.lifecycle.Observer { countryCodeModel ->
+                viewModel.country.value = countryCodeModel.country
+                viewModel.redemptionCountry.value = countryCodeModel.country
+                binding.BeneficaryCountry.colorToText(R.color.black)
+                binding.NadraPassportCountry.colorToText(R.color.black)
+                binding.tvCountryCode.text = countryCodeModel.code
+                binding.etPhoneNumber.isEnabled = true
+                binding.tvCountryCode.colorToText(R.color.black)
+                binding.etPhoneNumber.hint =
+                    viewModel.phoneNumberHint(countryCodeModel.length.toInt())
+            })
 
         viewModel.validationPhoneNumberPassed.observe(
             this,
@@ -737,11 +755,42 @@ class RegComplaintDetailsFragment:
                         binding.BeneficaryCountry.setBackgroundResource(R.drawable.edit_text_error_background)
                         binding.imageViewBeneficiaryCountry.visibility = View.VISIBLE
                         binding.errorTextBeneficiaryCountry.visibility = View.VISIBLE
-                    }
-                    else {
+                    } else {
                         binding.BeneficaryCountry.setBackgroundResource(R.drawable.edit_text_background)
                         binding.imageViewBeneficiaryCountry.visibility = View.GONE
                         binding.errorTextBeneficiaryCountry.visibility = View.GONE
+                    }
+                }
+            })
+
+        viewModel.validationRedemptionCountryPassed.observe(
+            this,
+            { validationsPassed ->
+                run {
+                    if (!validationsPassed) {
+                        binding.NadraPassportCountry.setBackgroundResource(R.drawable.edit_text_error_background)
+                        binding.imageViewNadraPassportCountry.visibility = View.VISIBLE
+                        binding.errorTextRedemptionCountry.visibility = View.VISIBLE
+                    } else {
+                        binding.NadraPassportCountry.setBackgroundResource(R.drawable.edit_text_background)
+                        binding.imageViewNadraPassportCountry.visibility = View.GONE
+                        binding.errorTextRedemptionCountry.visibility = View.GONE
+                    }
+                }
+            })
+
+        viewModel.validationBranchCenterPassed.observe(
+            this,
+            { validationsPassed ->
+                run {
+                    if (!validationsPassed) {
+                        binding.BranchCenter.setBackgroundResource(R.drawable.edit_text_error_background)
+                        binding.imageViewBranchCenter.visibility = View.VISIBLE
+                        binding.errorTextBranchCenter.visibility = View.VISIBLE
+                    } else {
+                        binding.BranchCenter.setBackgroundResource(R.drawable.edit_text_background)
+                        binding.imageViewBranchCenter.visibility = View.GONE
+                        binding.errorTextBranchCenter.visibility = View.GONE
                     }
                 }
             })
@@ -789,6 +838,16 @@ class RegComplaintDetailsFragment:
                 }
             }
             clearSelfAwardData()
+        })
+
+        viewModel.redemptionPartners.observe(this, {
+            viewModel.clearValidations()
+            if (it == "")
+                hideFurtherDetails()
+            else if (it.contains("USC", true) || it.contains("BEOE", true))
+                makeUSCBEOEView()
+            else if (it.contains("PASSPORT", true) || it.contains("NADRA", true))
+                makeNadraPassportView()
         })
 
         viewModel.validationSelfAwardCnicPassed.observe(
@@ -1069,6 +1128,10 @@ class RegComplaintDetailsFragment:
             viewModel.checkSpecifyDetails(binding.etDetails2.text.toString())
         val isBeneficiaryCountryValid: Boolean =
             viewModel.checkNotEmpty(binding.BeneficaryCountry.text.toString())
+        val isRedemptionCountryValid: Boolean =
+            viewModel.checkNotEmpty(binding.NadraPassportCountry.text.toString())
+        val isRedemptionBranchCenterValid: Boolean =
+            viewModel.checkNotEmpty(binding.BranchCenter.text.toString())
         val isBeneficiaryCnicPointsValid: Boolean =
             viewModel.checkCnicValidation(binding.etPointsbeneficiaryCnicNicp.text.toString())
         val isTransactionDateValid: Boolean =
@@ -1095,6 +1158,8 @@ class RegComplaintDetailsFragment:
         viewModel.validationSpecifyDetailsPassed.value = isSpecifyDetailsValid
         viewModel.validationSpecifyOtherDetailsPassed.value = isSpecifyOtherDetailsValid
         viewModel.validationBeneficiaryCountryPassed.value = isBeneficiaryCountryValid
+        viewModel.validationRedemptionCountryPassed.value = isRedemptionCountryValid
+        viewModel.validationBranchCenterPassed.value = isRedemptionBranchCenterValid
         viewModel.validationBeneficiaryCnicPointsPassed.value = isBeneficiaryCnicPointsValid
         viewModel.validationTransactionDatePassed.value = isTransactionDateValid
         viewModel.validationIbanPassed.value = isSelfAwardIbanValid
@@ -1127,7 +1192,8 @@ class RegComplaintDetailsFragment:
             }
             COMPLAINT_TYPE.REDEMPTION_ISSUES -> {
                 return isSpecifyDetailsValid &&
-                        binding.tvRedemption.text.toString().isNotEmpty()
+                        isRedemptionCountryValid &&
+                        isRedemptionBranchCenterValid
 
             }
             COMPLAINT_TYPE.OTHERS ->{
@@ -1140,7 +1206,9 @@ class RegComplaintDetailsFragment:
     override fun onSelectCountryListener(countryCodeModel: CountryCodeModel) {
         countryCodeLength = countryCodeModel.length.toInt()
         viewModel.country.value = countryCodeModel.country
+        viewModel.redemptionCountry.value = countryCodeModel.country
         binding.BeneficaryCountry.colorToText(R.color.black)
+        binding.NadraPassportCountry.colorToText(R.color.black)
         viewModel.validationBeneficiaryCountryPassed.postValue(true)
         binding.tvCountryCode.text = countryCodeModel.code
         binding.etPhoneNumber.isEnabled = true
@@ -1237,6 +1305,42 @@ class RegComplaintDetailsFragment:
         viewModel.validationSelfAwardCnicPassed.postValue(true)
         viewModel.validationIbanPassed.postValue(true)
         viewModel.validationPassportPassed.postValue(true)
+    }
+
+    private fun makeUSCBEOEView() {
+        binding.apply {
+            lyFurtherDetails.visibility = View.VISIBLE
+            tvBranchCenter.visibility = View.VISIBLE
+            BranchCenter.visibility = View.VISIBLE
+            tvMobileNumber.visibility = View.VISIBLE
+            lyUSCBEOENumber.visibility = View.VISIBLE
+            tvNadraPassportCountry.visibility = View.GONE
+            NadraPassportCountry.visibility = View.GONE
+        }
+    }
+
+    private fun makeNadraPassportView() {
+        binding.apply {
+            lyFurtherDetails.visibility = View.VISIBLE
+            tvBranchCenter.visibility = View.VISIBLE
+            BranchCenter.visibility = View.VISIBLE
+            tvNadraPassportCountry.visibility = View.VISIBLE
+            NadraPassportCountry.visibility = View.VISIBLE
+            tvMobileNumber.visibility = View.GONE
+            lyUSCBEOENumber.visibility = View.GONE
+        }
+    }
+
+    private fun hideFurtherDetails() {
+        binding.apply {
+            lyFurtherDetails.visibility = View.GONE
+            tvBranchCenter.visibility = View.GONE
+            BranchCenter.visibility = View.GONE
+            tvNadraPassportCountry.visibility = View.GONE
+            NadraPassportCountry.visibility = View.GONE
+            tvMobileNumber.visibility = View.GONE
+            lyUSCBEOENumber.visibility = View.GONE
+        }
     }
 
     companion object {

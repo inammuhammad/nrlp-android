@@ -893,7 +893,7 @@
                     android:layout_marginEnd="@dimen/margin_extra_large"
                     android:paddingStart="@dimen/margin_large"
                     android:paddingEnd="@dimen/margin_large"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     app:layout_constraintTop_toBottomOf="@id/radioTxt">
 
                     <TextView
@@ -961,7 +961,8 @@
                         android:spinnerMode="dropdown"
                         android:textDirection="ltr"
                         android:visibility="invisible"
-                        app:layout_constraintTop_toBottomOf="@id/spinnerRedemption" />
+                        app:layout_constraintTop_toBottomOf="@id/spinnerRedemption"
+                        tools:ignore="TooManyViews" />
 
                     <TextView
                         android:id="@+id/errorTextRedemptionPartner"
@@ -981,6 +982,7 @@
                         android:id="@+id/lyFurtherDetails"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         app:layout_constraintTop_toBottomOf="@id/errorTextRedemptionPartner"
                         app:layout_constraintStart_toStartOf="parent">
 
@@ -991,6 +993,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/complaint_country"
                             android:textColor="@color/black"
+                            android:visibility="gone"
                             android:textSize="@dimen/unit_16sp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -1002,12 +1005,40 @@
                             android:layout_height="wrap_content"
                             android:focusable="false"
                             android:hint="@string/dummy_country"
-                            android:text="@={viewModel.country}"
+                            android:text="@={viewModel.redemptionCountry}"
+                            android:visibility="gone"
                             android:layout_marginTop="@dimen/unit_8dp"
                             app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/tvNadraPassportCountry" />
+
+                        <ImageView
+                            android:id="@+id/imageViewNadraPassportCountry"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/_26sdp"
+                            android:src="@drawable/ic_edit_text_error"
+                            android:textColor="@color/grey"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="@id/NadraPassportCountry"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/NadraPassportCountry"
+                            android:contentDescription="@null" />
+
+                        <TextView
+                            android:id="@+id/errorTextRedemptionCountry"
+                            style="@style/TextViewMedium"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_large"
+                            android:layout_marginTop="@dimen/unit_0dp"
+                            android:text="@string/error_beneficiary_country"
+                            android:textColor="@color/red"
+                            app:layout_constraintTop_toBottomOf="@id/NadraPassportCountry"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:textSize="@dimen/unit_10sp"
+                            android:visibility="gone" />
 
                         <TextView
                             android:id="@+id/tvBranchCenter"
@@ -1016,6 +1047,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/branch_center"
                             android:textColor="@color/black"
+                            android:visibility="gone"
                             android:textSize="@dimen/unit_16sp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/NadraPassportCountry" />
@@ -1028,11 +1060,40 @@
                             android:focusable="false"
                             android:hint="@string/dummy_country"
                             android:text="@={viewModel.country}"
+                            android:visibility="gone"
                             android:layout_marginTop="@dimen/unit_8dp"
                             app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/tvBranchCenter" />
+
+                        <ImageView
+                            android:id="@+id/imageViewBranchCenter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/_26sdp"
+                            android:src="@drawable/ic_edit_text_error"
+                            android:textColor="@color/grey"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="@id/BranchCenter"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/BranchCenter"
+                            android:contentDescription="@null" />
+
+                        <TextView
+                            android:id="@+id/errorTextBranchCenter"
+                            style="@style/TextViewMedium"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_large"
+                            android:layout_marginTop="@dimen/unit_0dp"
+                            android:text="@string/error_beneficiary_country"
+                            android:textColor="@color/red"
+                            app:layout_constraintTop_toBottomOf="@id/BranchCenter"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:textSize="@dimen/unit_10sp"
+                            android:visibility="gone" />
+
 
                         <TextView
                             android:id="@+id/tvMobileNumber"
@@ -1040,6 +1101,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/mobile_number_not_mandatory"
+                            android:visibility="gone"
                             android:textColor="@color/black"
                             android:textSize="@dimen/unit_16sp"
                             app:layout_constraintStart_toStartOf="parent"
@@ -1053,7 +1115,7 @@
                             android:layoutDirection="ltr"
                             android:orientation="horizontal"
                             app:layout_constraintTop_toBottomOf="@id/tvMobileNumber"
-                            android:visibility="visible">
+                            android:visibility="gone">
 
                             <TextView
                                 android:id="@+id/tvUSCBEOECountryCode"

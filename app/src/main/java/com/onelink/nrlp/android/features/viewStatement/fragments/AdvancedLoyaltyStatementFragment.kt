@@ -20,7 +20,9 @@ import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_advanced_loyalty_statement.*
 import java.io.File
 import java.io.InputStream
+import java.text.SimpleDateFormat
 import java.util.*
+import java.util.Calendar.*
 import javax.inject.Inject
 
 const val FROM_DATE = "from_date"
@@ -131,7 +133,7 @@ class AdvancedLoyaltyStatementFragment :
         }
 
         btnNext.setOnClickListener {
-            //if (viewModel.validationsPassed(etEmailAddress.text.toString())) {
+            if (isDateValid()) {
                 viewModel.getDetailedStatements(
                     DetailedStatementRequestModel(
                         email = etEmailAddress.text.toString(),
@@ -139,7 +141,7 @@ class AdvancedLoyaltyStatementFragment :
                         toDate = viewModel.getDateInApiFormat(viewModel.rawToDate.value.toString())
                     )
                 )
-            //}
+            }
         }
     }
 
@@ -176,7 +178,7 @@ class AdvancedLoyaltyStatementFragment :
                 }, year, month, day
             )
         }
-        datePickerDialog?.datePicker?.minDate = cal.timeInMillis
+        datePickerDialog?.datePicker?.minDate = MILLIS_MINIMUM_DATE
         datePickerDialog?.datePicker?.maxDate = System.currentTimeMillis()
         datePickerDialog?.datePicker?.layoutDirection = View.LAYOUT_DIRECTION_LTR
         datePickerDialog?.show()
@@ -209,9 +211,49 @@ class AdvancedLoyaltyStatementFragment :
         file
     }
 
+    private fun isDateValid(): Boolean {
+        var days = 0L
+        try {
+            val startDate = viewModel.rawFromDate.value
+            val endDate = viewModel.rawToDate.value
+            val sdf: SimpleDateFormat = SimpleDateFormat("dd/M/yyyy", Locale.US)
+            val startDateParsed = sdf.parse(startDate)
+            val endDateParsed = sdf.parse(endDate)
+            days = getDiffYears(startDateParsed, endDateParsed)
+
+        } catch (e: Exception) {
+
+        }
+        return days <= 365
+    }
+
+    fun getDiffYears(first: Date?, last: Date?): Long {
+        val diff: Long = last?.time?.minus(first?.time!!) ?: 1633028400000L
+        val seconds = diff / 1000
+        val minutes = seconds / 60
+        val hours = minutes / 60
+        return hours / 24
+    }
+
+    fun getDiffMonths(first: Date?, last: Date?): Int {
+        val a = getCalendar(first)
+        val b = getCalendar(last)
+        var diff = b[MONTH] - a[MONTH]
+        if (a[DATE] > b[DATE]) {
+            diff--
+        }
+        return diff
+    }
+
+    fun getCalendar(date: Date?): Calendar {
+        val cal = Calendar.getInstance(Locale.US)
+        cal.time = date
+        return cal
+    }
+
     companion object {
         @JvmStatic
         fun newInstance() = AdvancedLoyaltyStatementFragment()
-        const val MILLIS_MINIMUM_DATE = 1577818800000L
+        const val MILLIS_MINIMUM_DATE = 1633028400000L //1577818800000L
     }
 }
