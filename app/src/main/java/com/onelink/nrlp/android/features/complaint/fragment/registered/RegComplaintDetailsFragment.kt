@@ -380,6 +380,17 @@ class RegComplaintDetailsFragment:
             }
         }
 
+        binding.etUSCBEOENumber.setOnFocusChangeListener { _, b ->
+            when (b) {
+                false -> viewModel.validationUscBeoeNumberPassed.postValue(
+                    viewModel.checkPhoneNumberValidation(
+                        binding.etUSCBEOENumber.text.toString(),
+                        countryCodeLength
+                    )
+                )
+            }
+        }
+
         binding.etAddbeneficiaryCnicnicop.setOnFocusChangeListener { _, b ->
             when (b) {
                 false -> viewModel.validationBeneficiaryCnicPassed.postValue(
@@ -572,6 +583,24 @@ class RegComplaintDetailsFragment:
                         binding.imageViewPhoneError.visibility = View.GONE
                         binding.errorTextPhone.visibility = View.GONE
                         binding.lyPhoneNumber.setBackgroundDrawable(R.drawable.edit_text_background)
+                    }
+                }
+            })
+
+        viewModel.validationUscBeoeNumberPassed.observe(
+            this,
+            { validationsPassed ->
+                run {
+                    if (!validationsPassed) {
+                        binding.imageViewUSCBEOEPhoneError.visibility = View.VISIBLE
+                        binding.errorTextUscBeoe.visibility = View.VISIBLE
+                        binding.lyUSCBEOENumber.setBackgroundDrawable(R.drawable.edit_text_error_background)
+                        binding.errorTextUscBeoe.text =
+                            getString(R.string.error_mobile_num_not_valid)
+                    } else {
+                        binding.imageViewUSCBEOEPhoneError.visibility = View.GONE
+                        binding.errorTextUscBeoe.visibility = View.GONE
+                        binding.lyUSCBEOENumber.setBackgroundDrawable(R.drawable.edit_text_background)
                     }
                 }
             })
@@ -848,6 +877,7 @@ class RegComplaintDetailsFragment:
                 makeUSCBEOEView()
             else if (it.contains("PASSPORT", true) || it.contains("NADRA", true))
                 makeNadraPassportView()
+            clearRedemptionData()
         })
 
         viewModel.validationSelfAwardCnicPassed.observe(
@@ -1105,8 +1135,12 @@ class RegComplaintDetailsFragment:
 
     private fun detailsValidationPassed():Boolean{
         val isBeneficiaryCnicValid: Boolean = viewModel.checkCnicValidation(binding.etAddbeneficiaryCnicnicop.text.toString())
-        val isPhoneNumberValid: Boolean = viewModel.checkPhoneNumberValidation(binding.etPhoneNumber.text.toString(), 0)
-        val isBeneficiaryMobileOperatorValid: Boolean = viewModel.checkMobileOperatorValidation(binding.etBeneficiaryMobileOperator.text.toString())
+        val isPhoneNumberValid: Boolean =
+            viewModel.checkPhoneNumberValidation(binding.etPhoneNumber.text.toString(), 0)
+        val isUscBeoeNumberValid: Boolean =
+            viewModel.checkPhoneNumberValidation(binding.etUSCBEOENumber.text.toString(), 0)
+        val isBeneficiaryMobileOperatorValid: Boolean =
+            viewModel.checkMobileOperatorValidation(binding.etBeneficiaryMobileOperator.text.toString())
         val isMobileOperatorValid: Boolean = viewModel.checkMobileOperatorValidation(binding.etMobileOperator.text.toString())
         val isTransactionTypeValid: Boolean =
             viewModel.checkTransactionTypeValidation(binding.tvTransaction.text.toString())
@@ -1147,6 +1181,7 @@ class RegComplaintDetailsFragment:
         viewModel.validationBeneficiaryCnicPassed.value = isBeneficiaryCnicValid
         viewModel.validationBeneficiaryMobileOperatorPassed.value = isBeneficiaryMobileOperatorValid
         viewModel.validationPhoneNumberPassed.value = isPhoneNumberValid
+        viewModel.validationUscBeoeNumberPassed.value = isUscBeoeNumberValid
         viewModel.validationMobileOperatorPassed.value = isMobileOperatorValid
         viewModel.validationTransactionTypePassed.value = isTransactionTypeValid
         viewModel.validationBeneficiaryAccountPassed.value = isBeneficiaryAccountValid
@@ -1305,6 +1340,12 @@ class RegComplaintDetailsFragment:
         viewModel.validationSelfAwardCnicPassed.postValue(true)
         viewModel.validationIbanPassed.postValue(true)
         viewModel.validationPassportPassed.postValue(true)
+    }
+
+    private fun clearRedemptionData() {
+        viewModel.uscBeoeNumber.postValue("")
+        viewModel.redemptionCountry.postValue("")
+        viewModel.redemptionBranchCenter.postValue("")
     }
 
     private fun makeUSCBEOEView() {

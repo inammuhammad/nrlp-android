@@ -140,7 +140,7 @@ class SelfAwardPointsFragment :
                 }
                 getString(R.string.remittance_to_passport) -> {
                     isValidData = validatePassportData()
-                    transactionTypeBE = "PAS"
+                    transactionTypeBE = "PPT"
                     beneficiaryType = SelfAwardRequestConstants.Beneficiary_PASSPORT_NUMBER
                     userNumber = binding.etPassportNumber.text.toString()
                 }

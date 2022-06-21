@@ -24,14 +24,24 @@ class NotificationsListAdapter(
     private val deleteListener: (NotificationListItemModel) -> Unit
 ) : RecyclerView.Adapter<NotificationsListAdapter.NotificationsListViewHolder>() {
 
-    fun addItems(newList: ArrayList<NotificationListItemModel>){
+    private var hideBtn = false
+    private var deleteBtnState = false
+
+    fun hideDeleteButton(show: Boolean) {
+        hideBtn = show
+        notifyDataSetChanged()
+    }
+
+    fun getDeleteBtnState(): Boolean = deleteBtnState
+
+    fun addItems(newList: ArrayList<NotificationListItemModel>) {
         notificationsList.addAll(newList)
         this.notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int = notificationsList.size
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = NotificationsListViewHolder (
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = NotificationsListViewHolder(
         DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
             R.layout.item_push_notification,
@@ -57,20 +67,36 @@ class NotificationsListAdapter(
                 notificationReadColour(lyNotificationItem)
             }
             ivDotMenu.setOnSingleClickListener {
-                if(ivDelete.visibility == View.GONE)
+                if (ivDelete.visibility == View.GONE) {
                     ivDelete.visibility = View.VISIBLE
-                else
+                    deleteBtnState = true
+                } else {
                     ivDelete.visibility = View.GONE
+                    deleteBtnState = false
+                }
             }
             ivDelete.setOnSingleClickListener {
+                hideBtn = false
+                deleteBtnState = false
                 ivDelete.visibility = View.GONE
                 deleteListener(notificationsList[position])
             }
-            tvDateTime.text = formattedDate(notificationsList[position].notificationDateTime.toString())
-            if(notificationsList[position].isReadFlag == 1)
+            root.setOnClickListener {
+                hideDeleteButton(true)
+                deleteBtnState = false
+            }
+            tvDateTime.text =
+                formattedDate(notificationsList[position].notificationDateTime.toString())
+            if (notificationsList[position].isReadFlag == 1)
                 notificationReadColour(lyNotificationItem)
             else
                 notificationUnReadColour(lyNotificationItem)
+
+            if (hideBtn) {
+                ivDelete.visibility = View.GONE
+                deleteBtnState = false
+            }
+
         }
     }
 
@@ -97,5 +123,9 @@ class NotificationsListAdapter(
         return (SimpleDateFormat("d MMM").format(dateString) + " " + context?.resources?.getString(R.string.notification_date_at) + " " + SimpleDateFormat(
             "hh:mm aaa"
         ).format(dateString))
+    }
+
+    fun closeDeleteButtons() {
+
     }
 }

@@ -227,28 +227,16 @@ class AdvancedLoyaltyStatementFragment :
         return days <= 365
     }
 
-    fun getDiffYears(first: Date?, last: Date?): Long {
-        val diff: Long = last?.time?.minus(first?.time!!) ?: 1633028400000L
-        val seconds = diff / 1000
-        val minutes = seconds / 60
-        val hours = minutes / 60
-        return hours / 24
-    }
-
-    fun getDiffMonths(first: Date?, last: Date?): Int {
-        val a = getCalendar(first)
-        val b = getCalendar(last)
-        var diff = b[MONTH] - a[MONTH]
-        if (a[DATE] > b[DATE]) {
-            diff--
+    private fun getDiffYears(first: Date?, last: Date?): Long {
+        try {
+            val diff: Long = last?.time?.minus(first?.time!!) ?: 1633028400000L
+            val seconds = diff / 1000
+            val minutes = seconds / 60
+            val hours = minutes / 60
+            return hours / 24
+        } catch (e: java.lang.Exception) {
         }
-        return diff
-    }
-
-    fun getCalendar(date: Date?): Calendar {
-        val cal = Calendar.getInstance(Locale.US)
-        cal.time = date
-        return cal
+        return 364
     }
 
     companion object {
