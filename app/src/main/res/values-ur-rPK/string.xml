@@ -427,4 +427,7 @@
     <string name="feature_available_soon">فی الحال یہ خصوصیت غیر فعال ہے</string>
     <string name="complaint_country">ملک</string>
     <string name="branch_center">برانچ/سینٹر</string>
+    <string name="error_redemption_partner">براہ کرم ریڈیمشن پاٹنر درج کریں</string>
+    <string name="error_beneficiary_country">براہ کرم ملک درج کریں</string>
+    <string name="error_branch_center">براہ کرم برانچ/سینٹر درج کریں</string>
 </resources>

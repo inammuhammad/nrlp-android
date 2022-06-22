@@ -131,7 +131,7 @@ class RegComplaintDetailsFragment:
     }
 
     private fun initPartnerSpinner(){
-        if(viewModel.partnerList.value.isNullOrEmpty() ){
+        //if(viewModel.partnerList.value.isNullOrEmpty() ){
             viewModel.getRedeemPartner()
             oneLinkProgressDialog.showProgressDialog(context)
             viewModel.observerRedeemPartner().observe(
@@ -194,7 +194,7 @@ class RegComplaintDetailsFragment:
                         }
                     }
                 })
-        }
+        //}
 
     }
 
@@ -592,11 +592,13 @@ class RegComplaintDetailsFragment:
             { validationsPassed ->
                 run {
                     if (!validationsPassed) {
-                        binding.imageViewUSCBEOEPhoneError.visibility = View.VISIBLE
-                        binding.errorTextUscBeoe.visibility = View.VISIBLE
-                        binding.lyUSCBEOENumber.setBackgroundDrawable(R.drawable.edit_text_error_background)
-                        binding.errorTextUscBeoe.text =
-                            getString(R.string.error_mobile_num_not_valid)
+                        if (binding.lyUSCBEOENumber.isShown) {
+                            binding.imageViewUSCBEOEPhoneError.visibility = View.VISIBLE
+                            binding.errorTextUscBeoe.visibility = View.VISIBLE
+                            binding.lyUSCBEOENumber.setBackgroundDrawable(R.drawable.edit_text_error_background)
+                            binding.errorTextUscBeoe.text =
+                                getString(R.string.error_mobile_num_not_valid)
+                        }
                     } else {
                         binding.imageViewUSCBEOEPhoneError.visibility = View.GONE
                         binding.errorTextUscBeoe.visibility = View.GONE
@@ -797,9 +799,11 @@ class RegComplaintDetailsFragment:
             { validationsPassed ->
                 run {
                     if (!validationsPassed) {
-                        binding.NadraPassportCountry.setBackgroundResource(R.drawable.edit_text_error_background)
-                        binding.imageViewNadraPassportCountry.visibility = View.VISIBLE
-                        binding.errorTextRedemptionCountry.visibility = View.VISIBLE
+                        if (binding.NadraPassportCountry.isShown) {
+                            binding.NadraPassportCountry.setBackgroundResource(R.drawable.edit_text_error_background)
+                            binding.imageViewNadraPassportCountry.visibility = View.VISIBLE
+                            binding.errorTextRedemptionCountry.visibility = View.VISIBLE
+                        }
                     } else {
                         binding.NadraPassportCountry.setBackgroundResource(R.drawable.edit_text_background)
                         binding.imageViewNadraPassportCountry.visibility = View.GONE
@@ -1110,7 +1114,7 @@ class RegComplaintDetailsFragment:
                 )
             }
 
-            COMPLAINT_TYPE.REDEMPTION_ISSUES ->{
+            COMPLAINT_TYPE.REDEMPTION_ISSUES -> {
                 jsonObject.addProperty(
                     ComplaintRequestModelConstants.Comments,
                     binding.etDetails.text.toString()
@@ -1119,10 +1123,25 @@ class RegComplaintDetailsFragment:
                     ComplaintRequestModelConstants.Redemption_Partner,
                     binding.tvRedemption.text.toString()
                 )
+                if (binding.etUSCBEOENumber.text.toString() != "")
+                    jsonObject.addProperty(
+                        ComplaintRequestModelConstants.Redemption_USC_BEOE_NUMBER,
+                        binding.etUSCBEOENumber.text.toString()
+                    )
+                if (binding.NadraPassportCountry.text.toString() != "")
+                    jsonObject.addProperty(
+                        ComplaintRequestModelConstants.Redemption_NADRA_PASSPORT_COUNTRY,
+                        binding.NadraPassportCountry.text.toString()
+                    )
+                if (binding.BranchCenter.text.toString() != "")
+                    jsonObject.addProperty(
+                        ComplaintRequestModelConstants.Redemption_BRANCH_CENTER,
+                        binding.BranchCenter.text.toString()
+                    )
 
             }
 
-            COMPLAINT_TYPE.OTHERS ->{
+            COMPLAINT_TYPE.OTHERS -> {
                 jsonObject.addProperty(
                     ComplaintRequestModelConstants.Comments,
                     binding.etDetails2.text.toString()
@@ -1227,8 +1246,9 @@ class RegComplaintDetailsFragment:
             }
             COMPLAINT_TYPE.REDEMPTION_ISSUES -> {
                 return isSpecifyDetailsValid &&
-                        isRedemptionCountryValid &&
-                        isRedemptionBranchCenterValid
+                        ((isRedemptionCountryValid && isRedemptionBranchCenterValid) ||
+                                (isRedemptionBranchCenterValid && isUscBeoeNumberValid)) &&
+                        isRedemptionPartnerValid
 
             }
             COMPLAINT_TYPE.OTHERS ->{
@@ -1245,6 +1265,7 @@ class RegComplaintDetailsFragment:
         binding.BeneficaryCountry.colorToText(R.color.black)
         binding.NadraPassportCountry.colorToText(R.color.black)
         viewModel.validationBeneficiaryCountryPassed.postValue(true)
+        viewModel.validationRedemptionCountryPassed.postValue(true)
         binding.tvCountryCode.text = countryCodeModel.code
         binding.etPhoneNumber.isEnabled = true
         binding.tvCountryCode.colorToText(R.color.black)

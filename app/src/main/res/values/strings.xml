@@ -451,6 +451,7 @@
     <string name="error_redemption_partner">Please select Redemption Partner</string>
     <string name="error_enter_details">Please use at least 15 characters to describe the problem in detail</string>
     <string name="error_beneficiary_country">Please select Country</string>
+    <string name="error_branch_center">Please select Branch/Center</string>
     <string name="error_transaction_date">Please select Transaction Date</string>
     <string name="select_transaction_type">Select Transaction Type</string>
     <string name="error_place_of_birth">Please enter a correct Place of Birth</string>
