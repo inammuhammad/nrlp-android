@@ -482,4 +482,8 @@
     <string name="var_space_var" translatable="false">%1s %2s</string>
     <string name="complaint_country">Country</string>
     <string name="branch_center">Branch/Center</string>
+    <string name="beneficiary_passport_help">Enter Beneficiary Passport</string>
+    <string name="redemption_branch_center_help">Mention visiting Branch/Center</string>
+    <string name="redemption_mobile_number_help">Enter Pakistan Mobile Number</string>
+    <string name="redemption_country_help">Mention the country from where the service was applied</string>
 </resources>

@@ -298,6 +298,30 @@ class RegComplaintDetailsFragment:
                 getString(R.string.specify_bank_exchange_from_where_remittance)
             )
         }
+
+        binding.tvNadraPassportCountry.setOnSingleClickListener {
+            showGeneralAlertDialog(this, "SelfAward", getString(R.string.redemption_country_help))
+        }
+
+        binding.tvBranchCenter.setOnSingleClickListener {
+            showGeneralAlertDialog(
+                this,
+                "SelfAward",
+                getString(R.string.redemption_branch_center_help)
+            )
+        }
+
+        binding.tvMobileNumber.setOnSingleClickListener {
+            showGeneralAlertDialog(this, "SelfAward", getString(R.string.redemption_country_help))
+        }
+
+        binding.tvDetails.setOnSingleClickListener {
+            showGeneralAlertDialog(
+                this,
+                "SelfAward",
+                getString(R.string.redemption_mobile_number_help)
+            )
+        }
     }
 
     private fun initViews(){

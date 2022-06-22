@@ -295,7 +295,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/spinnerLy" />
 
             <ImageView
-                android:id="@+id/icHelpBankAccountNumber"
+                android:id="@+id/icHelpPassportNumber"
                 android:layout_width="@dimen/_15sdp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"

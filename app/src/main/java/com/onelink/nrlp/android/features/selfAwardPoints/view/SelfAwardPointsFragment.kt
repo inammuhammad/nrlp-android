@@ -220,18 +220,22 @@ class SelfAwardPointsFragment :
         }
         binding.icHelpAmount.setOnClickListener {
             //showWarningDialog(getString(R.string.remittance_amount_help))
-            showGeneralAlertDialog(this,"SelfAward",getString(R.string.remittance_amount_help))
+            showGeneralAlertDialog(this, "SelfAward", getString(R.string.remittance_amount_help))
         }
         binding.icHelpDate.setOnClickListener {
             //showWarningDialog(getString(R.string.remittance_date_help))
-            showGeneralAlertDialog(this,"SelfAward",getString(R.string.remittance_date_help))
+            showGeneralAlertDialog(this, "SelfAward", getString(R.string.remittance_date_help))
         }
         binding.icHelpCnicAccountNumber.setOnClickListener {
             //showWarningDialog(getString(R.string.remittance_date_help))
-            showGeneralAlertDialog(this,"SelfAward",getString(R.string.remittance_account_cnic_number_help))
+            showGeneralAlertDialog(
+                this,
+                "SelfAward",
+                getString(R.string.remittance_account_cnic_number_help)
+            )
         }
-        binding.icHelpBankAccountNumber.setOnClickListener {
-            showGeneralAlertDialog(this, "SelfAward", getString(R.string.enter_beneficiary_acc_num))
+        binding.icHelpPassportNumber.setOnClickListener {
+            showGeneralAlertDialog(this, "SelfAward", getString(R.string.beneficiary_passport_help))
         }
 
         binding.etCnicAccountNumber.addTextChangedListener(object : TextWatcher {
@@ -519,6 +523,7 @@ class SelfAwardPointsFragment :
             tilAccountNumber.visibility = View.VISIBLE
             btnNext.visibility = View.GONE
             btnNextAccount.visibility = View.VISIBLE
+            icHelpPassportNumber.visibility = View.GONE
             //icHelpBankAccountNumber.visibility = View.VISIBLE
         }
     }
@@ -533,6 +538,7 @@ class SelfAwardPointsFragment :
             tilPassportNumber.visibility = View.GONE
             btnNext.visibility = View.VISIBLE
             btnNextAccount.visibility = View.GONE
+            icHelpPassportNumber.visibility = View.GONE
             //icHelpBankAccountNumber.visibility = View.GONE
         }
     }
@@ -547,6 +553,7 @@ class SelfAwardPointsFragment :
             tilPassportNumber.visibility = View.VISIBLE
             btnNext.visibility = View.GONE
             btnNextAccount.visibility = View.VISIBLE
+            icHelpPassportNumber.visibility = View.VISIBLE
             //icHelpBankAccountNumber.visibility = View.GONE
         }
     }
