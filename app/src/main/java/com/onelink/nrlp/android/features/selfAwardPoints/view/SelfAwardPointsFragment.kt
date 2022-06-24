@@ -59,7 +59,6 @@ class SelfAwardPointsFragment :
 
     private var listenerInitialized: Boolean = false
 
-
     override fun getLayoutRes() = R.layout.self_award_points_fragment
 
     override fun onInject() {
