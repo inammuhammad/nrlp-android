@@ -41,6 +41,7 @@ import com.onelink.nrlp.android.features.register.viewmodel.*
 import com.onelink.nrlp.android.features.select.bank.viewmodel.SelectBankFragmentViewModel
 import com.onelink.nrlp.android.features.select.city.viewmodel.SelectCityFragmentViewModel
 import com.onelink.nrlp.android.features.select.country.viewmodel.SelectCountryFragmentViewModel
+import com.onelink.nrlp.android.features.select.generic.viewmodel.SelectItemViewModel
 import com.onelink.nrlp.android.features.selfAwardPoints.viewmodel.SelfAwardPointsFragmentViewModel
 import com.onelink.nrlp.android.features.selfAwardPoints.viewmodel.SelfAwardPointsOTPFragmentViewModel
 import com.onelink.nrlp.android.features.selfAwardPoints.viewmodel.SelfAwardPointsSuccessViewModel
@@ -461,5 +462,10 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(AppNotificationViewModel::class)
     internal abstract fun appNotificationViewModel(viewModel: AppNotificationViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SelectItemViewModel::class)
+    internal abstract fun selectGenericItemViewModel(viewModel: SelectItemViewModel): ViewModel
 }
 

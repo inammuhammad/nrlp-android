@@ -31,6 +31,7 @@ import com.onelink.nrlp.android.features.redeem.adapter.RedemPartnerAdapter
 import com.onelink.nrlp.android.features.redeem.model.RedeemPartnerModel
 import com.onelink.nrlp.android.features.select.country.model.CountryCodeModel
 import com.onelink.nrlp.android.features.select.country.view.SelectCountryFragment
+import com.onelink.nrlp.android.features.select.generic.view.SelectBranchCenterFragment
 import com.onelink.nrlp.android.features.viewStatement.fragments.AdvancedLoyaltyStatementFragment
 import com.onelink.nrlp.android.utils.*
 import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
@@ -282,6 +283,14 @@ class RegComplaintDetailsFragment:
                 addToBackStack = true
             )
             hideKeyboard()
+        }
+
+        binding.BranchCenter.setOnSingleClickListener {
+            fragmentHelper.addFragment(
+                SelectBranchCenterFragment.newInstance(viewModel.redemptionPartners.value.toString()),
+                clearBackStack = false,
+                addToBackStack = true
+            )
         }
 
         binding.etTransactionDate.setOnClickListener {

@@ -36,6 +36,7 @@ import com.onelink.nrlp.android.features.register.models.*
 import com.onelink.nrlp.android.features.select.city.model.CitiesRequest
 import com.onelink.nrlp.android.features.select.city.model.CitiesResponseModel
 import com.onelink.nrlp.android.features.select.country.model.CountryCodeResponseModel
+import com.onelink.nrlp.android.features.select.generic.model.BranchCenterRequestModel
 import com.onelink.nrlp.android.features.selfAwardPoints.model.SelfAwardPointsOTPRequestModel
 import com.onelink.nrlp.android.features.selfAwardPoints.model.SelfAwardPointsResponseModel
 import com.onelink.nrlp.android.features.splash.model.AuthResponseModel
@@ -269,5 +270,8 @@ interface ServiceGateway {
 
     @POST("nrlppopwindow/")
     fun getPopupMessage(@Body body: PopupMessageRequest): Single<Response<GeneralMessageResponseModel>>
+
+    @POST("nrlppse-location/")
+    fun getBranchCenter(@Body request: BranchCenterRequestModel): Single<Response<GeneralMessageResponseModel>>
 
 }

@@ -434,4 +434,5 @@
     <string name="redemption_branch_center_help">وزٹنگ برانچ/سینٹر بتائیں</string>
     <string name="redemption_mobile_number_help">پاکستان موبائل نمبر درج کریں</string>
     <string name="redemption_country_help">اس ملک کا ذکر کریں جہاں سے سروس اپلائی کی گئی تھی۔</string>
+    <string name="search_branch_center">Search Branch/Center</string>
 </resources>

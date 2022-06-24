@@ -14,14 +14,17 @@ import com.onelink.nrlp.android.features.complaint.fragment.registered.RegCompla
 import com.onelink.nrlp.android.features.complaint.fragment.registered.RegComplaintTypeFragment
 import com.onelink.nrlp.android.features.complaint.viewmodel.ComplaintViewModel
 import com.onelink.nrlp.android.features.complaint.viewmodel.RegComplaintSharedViewModel
+import com.onelink.nrlp.android.features.select.city.model.CitiesModel
 import com.onelink.nrlp.android.features.select.country.model.CountryCodeModel
 import com.onelink.nrlp.android.features.select.country.view.SelectCountryFragment
+import com.onelink.nrlp.android.features.select.generic.view.SelectBranchCenterFragment
 import kotlinx.android.synthetic.main.beneficiary_activity.*
 import javax.inject.Inject
 
 class RegComplaintActivity:
     BaseFragmentActivity<ActivityComplaintBinding, ComplaintViewModel>(ComplaintViewModel::class.java),
-    SelectCountryFragment.OnSelectCountryListener
+    SelectCountryFragment.OnSelectCountryListener,
+    SelectBranchCenterFragment.OnSelectBranchCenterListener
 {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -68,6 +71,10 @@ class RegComplaintActivity:
 
     override fun onSelectCountryListener(countryCodeModel: CountryCodeModel) {
         listener.onSelectCountryListener(countryCodeModel)
+    }
+
+    override fun onSelectBranchCenterListener(citiesModel: CitiesModel) {
+
     }
 
 }
