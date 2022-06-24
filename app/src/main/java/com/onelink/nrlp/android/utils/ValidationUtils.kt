@@ -126,7 +126,7 @@ object ValidationUtils {
     }
 
     fun isAmountValid(string: String): Boolean {
-        return string.isNotEmpty() && string.toInt() > 0
+        return string.isNotEmpty() && string.toDouble() > 0
     }
 
     fun isTransactionNoValid(string: String): Boolean {

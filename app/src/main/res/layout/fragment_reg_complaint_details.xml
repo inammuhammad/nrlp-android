@@ -701,17 +701,15 @@
                         app:layout_constraintBottom_toTopOf="@id/divider"
                         android:layout_marginBottom="@dimen/_8sdp">
 
-                         <com.onelink.nrlp.android.widgets.OneLinkEditText
+                         <com.onelink.nrlp.android.widgets.OneLinkAmountEditText
                              android:id="@+id/et_transactionamount"
                              style="@style/EditTextFixedDigits"
                              android:layout_width="match_parent"
                              android:layout_height="wrap_content"
-                             android:inputType="number"
-                             android:digits="1234567890"
-                             android:maxLength="50"
-                             android:maxLines="1"
+                             android:enabled="true"
                              android:hint="@string/amount_hint"
                              android:text="@={viewModel.transactionAmount}"
+                             android:inputType="number"
                              app:layout_constraintBottom_toTopOf="parent"
                              app:layout_constraintStart_toStartOf="parent"
                              app:layout_constraintTop_toBottomOf="parent"  />

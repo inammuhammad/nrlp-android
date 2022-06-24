@@ -65,9 +65,7 @@ class SelfAwardPointsFragment :
         AndroidSupportInjection.inject(this)
     }
 
-    override fun getTitle(): String {
-        return resources.getString(R.string.self_award_points)
-    }
+    override fun getTitle(): String = resources.getString(R.string.self_award_points)
 
     override fun getViewM(): SelfAwardPointsFragmentViewModel =
         ViewModelProvider(this, viewModelFactory).get(SelfAwardPointsFragmentViewModel::class.java)

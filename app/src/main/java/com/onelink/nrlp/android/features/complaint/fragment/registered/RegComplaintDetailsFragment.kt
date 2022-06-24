@@ -844,7 +844,7 @@ class RegComplaintDetailsFragment:
             COMPLAINT_TYPE.UNABLE_TO_SELF_AWARDS_POINTS -> {
                 jsonObject.addProperty(
                     ComplaintRequestModelConstants.Transaction_amount,
-                    binding.etTransactionamount.text.toString()
+                    binding.etTransactionamount.text.toString().replace(",", "")
                 )
                 jsonObject.addProperty(
                     ComplaintRequestModelConstants.Transaction_date,
