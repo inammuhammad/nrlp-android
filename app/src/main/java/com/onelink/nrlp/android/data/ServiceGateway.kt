@@ -17,6 +17,7 @@ import com.onelink.nrlp.android.features.forgotPassword.models.ForgotPasswordOTP
 import com.onelink.nrlp.android.features.forgotPassword.models.ForgotPasswordRequestModel
 import com.onelink.nrlp.android.features.forgotPassword.models.UpdatePasswordRequestModel
 import com.onelink.nrlp.android.features.home.model.NadraDetailsRequestModel
+import com.onelink.nrlp.android.features.home.model.PopupMessageRequest
 import com.onelink.nrlp.android.features.home.model.UserProfileResponseModel
 import com.onelink.nrlp.android.features.home.model.VerifyFatherNameRequestModel
 import com.onelink.nrlp.android.features.login.model.LoginRequest
@@ -265,5 +266,8 @@ interface ServiceGateway {
 
     @POST("nrlpappregistrationrating/")
     fun rateRegistration(@Body body: JsonObject): Single<Response<GeneralMessageResponseModel>>
+
+    @POST("nrlppopwindow/")
+    fun getPopupMessage(@Body body: PopupMessageRequest): Single<Response<GeneralMessageResponseModel>>
 
 }

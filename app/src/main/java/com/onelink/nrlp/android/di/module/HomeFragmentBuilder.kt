@@ -2,6 +2,7 @@ package com.onelink.nrlp.android.di.module
 
 import com.onelink.nrlp.android.di.annotations.FragmentScope
 import com.onelink.nrlp.android.features.home.fragments.*
+import com.onelink.nrlp.android.features.home.fragments.popup.GeneralInfoFragment
 import com.onelink.nrlp.android.features.select.city.view.SelectCityFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -37,4 +38,8 @@ abstract class HomeFragmentBuilder {
     @FragmentScope
     @ContributesAndroidInjector
     abstract fun provideFatherNameVerificationFragment(): FatherNameVerificationFragment
+
+    @FragmentScope
+    @ContributesAndroidInjector
+    abstract fun provideGeneralInfoFragment(): GeneralInfoFragment
 }

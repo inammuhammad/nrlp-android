@@ -30,5 +30,6 @@ data class UserProfileModel(
     @SerializedName("notification_count") val notificationCount: Int?,
     @SerializedName("country") val country: String?,
     @SerializedName("father_name") val fatherName: String?,
-    @SerializedName("registration_rating") val registrationRating: Boolean?
+    @SerializedName("registration_rating") val registrationRating: Boolean?,
+    @SerializedName("nadra_status_code") val nadraStatus: String?
 )

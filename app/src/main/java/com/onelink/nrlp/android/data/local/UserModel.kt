@@ -32,5 +32,6 @@ data class UserModel(
     val notificationCount: Int?,
     val country: String?,
     val fatherName: String?,
-    val registrationRating: Boolean?
+    val registrationRating: Boolean?,
+    val nadraStatus: String?
 )

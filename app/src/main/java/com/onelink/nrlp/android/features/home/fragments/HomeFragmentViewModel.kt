@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.onelink.nrlp.android.core.BaseFragment
 import com.onelink.nrlp.android.core.BaseViewModel
 import com.onelink.nrlp.android.features.home.model.NadraDetailsRequestModel
+import com.onelink.nrlp.android.features.home.model.PopupMessageRequest
 import com.onelink.nrlp.android.features.home.model.VerifyFatherNameRequestModel
 import com.onelink.nrlp.android.features.home.repo.HomeRepo
 import com.onelink.nrlp.android.utils.ValidationUtils
@@ -35,8 +36,14 @@ class HomeFragmentViewModel @Inject constructor(private val homeRepo: HomeRepo) 
 
     fun observeVerifyFatherName() = homeRepo.observeVerifyFatherNameResponse()
 
+    fun observePopupMessage() = homeRepo.observePopupMessage()
+
     fun verifyFatherName(name: String) {
         homeRepo.verifyFatherName(VerifyFatherNameRequestModel(name))
+    }
+
+    fun getPopupMessage(custType: String, accountStatus: String) {
+        homeRepo.getPopupMessage(PopupMessageRequest(custType, accountStatus))
     }
 
     fun getDateInStringFormat(calendar: Calendar?): String? {

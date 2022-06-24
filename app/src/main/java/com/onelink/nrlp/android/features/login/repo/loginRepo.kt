@@ -69,7 +69,8 @@ open class LoginRepo @Inject constructor(
             notificationCount = loginResponseModel.loginModel.notification_count,
             country = loginResponseModel.loginModel.country,
             fatherName = loginResponseModel.loginModel.fatherName,
-            registrationRating = true
+            registrationRating = true,
+            nadraStatus = loginResponseModel.loginModel.nadraStatus
         )
     }
 

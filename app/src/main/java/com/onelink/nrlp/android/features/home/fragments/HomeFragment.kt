@@ -89,7 +89,6 @@ open class HomeFragment :
         viewModel.observeUserProfile().observe(this, Observer { response ->
             if (response.status == Status.SUCCESS) {
                 oneLinkProgressDialog.hideProgressDialog()
-                //(activity as HomeActivity).launchInAppReview()
                 showUserData()
             }
         })
@@ -98,7 +97,7 @@ open class HomeFragment :
     private fun showUserData() {
         UserData.getUser()?.let {
             //checkNadraVerification(it)
-            checkFatherNameVerification(it.fatherName)
+            displayPopups(it)
             if(it.accountType != Constants.BENEFICIARY.toLowerCase(Locale.getDefault()))
                 checkReceiverAdded(it)
             if(it.accountType == "beneficiary") {
@@ -132,20 +131,27 @@ open class HomeFragment :
         }
     }
 
-    private fun checkNadraVerification(userModel: UserModel){
+    private fun checkNadraVerification(userModel: UserModel) {
         try {
             if (userModel.requireNadraVerification!!)
                 viewModel.navigateNadraVerification(fragmentHelper)
-        }catch(e: Exception){}
+        } catch (e: Exception) {
+        }
     }
 
-    private fun checkFatherNameVerification(name: String?) {
-        if (name.isNullOrEmpty() &&
+    private fun displayPopups(userModel: UserModel) {
+        if (userModel.fatherName.isNullOrEmpty() &&
             UserData.getUser()?.accountType?.toLowerCase(Locale.ROOT) != Constants.BENEFICIARY.toLowerCase(
                 Locale.ROOT
             )
         ) {
             viewModel.navigateFatherNameVerification(fragmentHelper)
+        } else {
+            val userType = UserData.getUser()?.accountType
+            val accountStatus = UserData.getUser()?.nadraStatus
+            if (userType != null && accountStatus != null) {
+                viewModel.getPopupMessage(userType, accountStatus)
+            }
         }
     }
 

@@ -7,10 +7,7 @@ import com.onelink.nrlp.android.data.NetworkHelper
 import com.onelink.nrlp.android.data.ServiceGateway
 import com.onelink.nrlp.android.data.local.UserData
 import com.onelink.nrlp.android.data.local.UserModel
-import com.onelink.nrlp.android.features.home.model.NadraDetailsRequestModel
-import com.onelink.nrlp.android.features.home.model.UserProfileModel
-import com.onelink.nrlp.android.features.home.model.UserProfileResponseModel
-import com.onelink.nrlp.android.features.home.model.VerifyFatherNameRequestModel
+import com.onelink.nrlp.android.features.home.model.*
 import com.onelink.nrlp.android.models.GeneralMessageResponseModel
 import javax.inject.Inject
 
@@ -23,6 +20,7 @@ class HomeRepo @Inject constructor(
     val updateNadraDataResponse = MutableLiveData<BaseResponse<GeneralMessageResponseModel>>()
     val verifyFatherNameResponse = MutableLiveData<BaseResponse<GeneralMessageResponseModel>>()
     val inAppRatingResponse = MutableLiveData<BaseResponse<GeneralMessageResponseModel>>()
+    val popupMessageResponse = MutableLiveData<BaseResponse<GeneralMessageResponseModel>>()
 
     fun getUserProfile() {
         networkHelper.serviceCall(serviceGateway.getUserProfile()).observeForever {
@@ -54,6 +52,13 @@ class HomeRepo @Inject constructor(
             }
     }
 
+    fun getPopupMessage(popupMessageRequest: PopupMessageRequest) {
+        networkHelper.serviceCall(serviceGateway.getPopupMessage(popupMessageRequest))
+            .observeForever { response ->
+                popupMessageResponse.value = response
+            }
+    }
+
     private fun persistUser(userProfileModel: UserProfileModel) {
         UserData.setUser(getUserModelFromLoginResponse(userProfileModel))
     }
@@ -68,6 +73,9 @@ class HomeRepo @Inject constructor(
 
     fun observeInAppRating() =
         inAppRatingResponse as LiveData<BaseResponse<GeneralMessageResponseModel>>
+
+    fun observePopupMessage() =
+        popupMessageResponse as LiveData<BaseResponse<GeneralMessageResponseModel>>
 
     private fun getUserModelFromLoginResponse(userProfileModel: UserProfileModel): UserModel {
         return UserModel(
@@ -98,7 +106,8 @@ class HomeRepo @Inject constructor(
             notificationCount = userProfileModel.notificationCount,
             country = userProfileModel.country,
             fatherName = userProfileModel.fatherName,
-            registrationRating = userProfileModel.registrationRating
+            registrationRating = userProfileModel.registrationRating,
+            nadraStatus = userProfileModel.nadraStatus
         )
     }
 
