@@ -38,12 +38,14 @@ object ErrorCodesConstants {
     const val PROFILE_VERIFICATION_FAILED = "GEN-ERR-53"
     const val UNVERIFIED_DEVICE = "AUTH-LOG-02"
     const val UNSUCCESSFUL_TRANSACTION_FETCH = "AUTH-VRN-06"
-    const val INCORRECT_INFORMATION="PU-VA-01"
-    const val ATTEMPTS_EXCEEDED="PU-VA-99"
+    const val INCORRECT_INFORMATION = "PU-VA-01"
+    const val ATTEMPTS_EXCEEDED = "PU-VA-99"
     const val NEW_VERSION = "GEN-ERR-19"
     const val REMITTANCE_OLDER_DATE = "AUTH-SA-21"
     const val REMITTANCE_SAME_DATE = "AUTH-SA-20"
-    const val REMITTANCE_RDA_TRANSACTION= "AUTH-SA-19"
+    const val REMITTANCE_RDA_TRANSACTION = "AUTH-SA-19"
+    const val SELF_AWARD_NOT_ELIGIBLE = "AUTH-SA-22"
+    const val SELF_AWARD_NOT_ALLOWED = "AUTH-SA-23"
 }
 
 
@@ -78,6 +80,8 @@ object ErrorDialogConstants {
     const val RC_NEW_VERSION = 1023
     const val TAG_NEW_VERSION = "new_version_available"
     const val REMITTANCE_DIALOG = 1030
+    const val SELF_AWARD_DIALOG = 1031
+    const val TAG_UNABLE_TO_SELF_AWARD = "unable_to_self_award"
 }
 
 object HeaderConstants {

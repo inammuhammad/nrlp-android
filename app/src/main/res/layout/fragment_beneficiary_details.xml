@@ -18,273 +18,302 @@
         android:focusable="true"
         tools:context=".MainActivity">
 
-        <TextView
-            android:id="@+id/textViewCnicNicop"
-            style="@style/TextViewSubHeading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/unit_32dp"
-            android:text="@string/cnic_nicop_number"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
-            android:id="@+id/tilCnicNicop"
+        <ScrollView
+            android:id="@+id/svDetails"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/unit_8dp"
-            app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewCnicNicop">
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/divider2">
 
-            <com.onelink.nrlp.android.widgets.OneLinkEditText
-                android:id="@+id/eTCnicNumber"
-                style="@style/EditTextFixedNumbers"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/cnic_nicop_hint"
-                android:inputType="number"
-                android:maxLength="15"
-                android:imeOptions="actionDone|flagForceAscii"
-                android:nextFocusDown="@id/etAlias"
-                android:nextFocusForward="@id/etAlias"
-                android:text="@={viewModel.cnicNumber}" />
-        </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
-
-        <TextView
-            android:id="@+id/textViewAlias"
-            style="@style/TextViewSubHeading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/full_name"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tilCnicNicop" />
-
-        <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
-            android:id="@+id/tilAlias"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/unit_8dp"
-            app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewAlias">
-
-            <com.onelink.nrlp.android.widgets.OneLinkEditText
-                android:id="@+id/etAlias"
-                style="@style/EditTextFixedDigits"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:nextFocusDown="@id/etCountry"
-                android:nextFocusForward="@id/etCountry"
-                android:imeOptions="actionDone|flagForceAscii"
-                android:hint="@string/generic_name_placeholder"
-                android:inputType="textCapSentences"
-                android:maxLength="50"
-                android:text="@={viewModel.alias}" />
-        </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
-
-        <TextView
-            android:id="@+id/textViewCountry"
-            style="@style/TextViewSubHeading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/country"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tilAlias" />
-
-        <TextView
-            android:id="@+id/etCountry"
-            style="@style/EditTextTheme"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textDirection="ltr"
-            android:focusable="false"
-            android:hint="@string/select_country"
-            android:singleLine="true"
-            android:text="@={viewModel.country}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewCountry" />
-
-        <TextView
-            android:id="@+id/textViewMobileNumber"
-            style="@style/TextViewSubHeading"
-            android:layout_width="wrap_content"
-            android:layout_height="14dp"
-            android:text="@string/beneficiary_mobile_number"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etCountry" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/lyPhoneNumber"
-            style="@style/EditTextFixedDigits"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layoutDirection="ltr"
-            android:orientation="horizontal"
-            android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewMobileNumber">
-
-            <TextView
-                android:id="@+id/tvCountryCode"
-                style="@style/TextViewMedium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/unit_0dp"
-                android:text="@string/code_prefix"
-                android:textColor="@color/grey"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/prefix_tv"
-                style="@style/TextViewMedium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/unit_0dp"
-                android:text="@string/dash"
-                android:textColor="@color/grey"
-                app:layout_constraintBottom_toBottomOf="@id/etMobileNumber"
-                app:layout_constraintStart_toEndOf="@+id/tvCountryCode"
-                app:layout_constraintTop_toTopOf="@id/etMobileNumber" />
-
-            <com.onelink.nrlp.android.widgets.OneLinkEditText
-                android:id="@+id/etMobileNumber"
-                style="@style/EditTextFixedNumbers"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/unit_0dp"
-                android:background="@null"
-                android:enabled="false"
-                android:gravity="start"
-                android:hint="@string/mobile_num_hint"
-                android:inputType="number"
-                android:padding="@dimen/unit_0dp"
-                android:paddingStart="@dimen/unit_4dp"
-                android:paddingEnd="@dimen/unit_4dp"
-                android:imeOptions="actionDone|flagForceAscii"
-                android:text="@={viewModel.mobileNumber}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/imageViewPhoneError"
-                app:layout_constraintStart_toEndOf="@+id/prefix_tv"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/imageViewPhoneError"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/margin_large"
-                android:src="@drawable/ic_edit_text_error"
-                android:textColor="@color/grey"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="@null" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <TextView
-            android:id="@+id/errorTextPhone"
-            style="@style/TextViewMedium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/unit_4dp"
-            android:textColor="@color/red"
-            android:textSize="@dimen/unit_10sp"
-            android:visibility="gone"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lyPhoneNumber" />
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:id="@+id/beneficiaryLL"
-            app:layout_constraintTop_toBottomOf="@+id/lyPhoneNumber"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                style="@style/TextViewSubHeading"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/beneficiary_relationship" />
-
-
-            <LinearLayout
-                android:id="@+id/spinnerRelationShip"
-                style="@style/spinnerTheme"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:layoutDirection="ltr"
-                android:orientation="horizontal"
-                android:textDirection="ltr"
-                android:weightSum="10">
-
-                <TextView
-                    android:id="@+id/tvRelationShip"
-                    style="@style/TextViewMediumNoMargins"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="8.5"
-                    />
-
-                <ImageView
-                    android:id="@+id/iv_drop_down"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.5"
-                    android:src="@drawable/ic_spinner_dropdown"
-                    android:contentDescription="@null" />
-            </LinearLayout>
-
-            <com.onelink.nrlp.android.utils.OneLinkSpinner
-                android:id="@+id/spinner_select_relationship"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginStart="@dimen/margin_large"
-                android:layout_marginEnd="@dimen/margin_large"
-                android:background="@android:color/transparent"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="start"
-                android:hint="@string/full_name"
-                android:layoutDirection="ltr"
-                android:spinnerMode="dropdown"
-                android:textDirection="ltr"
-                android:visibility="invisible" />
-            <EditText
-                android:layout_width="match_parent"
-                android:id="@+id/txtOther"
-                android:visibility="gone"
-                android:textSize="@dimen/_10sdp"
-                android:layout_marginStart="@dimen/margin_large"
-                android:layout_marginEnd="@dimen/margin_large"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
-                android:layout_height="wrap_content"></EditText>
-            <TextView
-                android:id="@+id/tv_error_relationship"
-                style="@style/TextViewMedium"
-                android:textSize="@dimen/unit_10sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/error_relationship"
-                android:visibility="gone"
-                android:textColor="@color/red"
-                android:layout_marginTop="0dp"
-                android:layout_marginStart="@dimen/_16sdp"
-                android:layout_marginEnd="@dimen/margin_large"/>
-        </LinearLayout>
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/lytUpdateCancel">
+
+                <TextView
+                    android:id="@+id/textViewCnicNicop"
+                    style="@style/TextViewSubHeading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/unit_32dp"
+                    android:text="@string/cnic_nicop_number"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
+                    android:id="@+id/tilCnicNicop"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/unit_8dp"
+                    app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewCnicNicop">
+
+                    <com.onelink.nrlp.android.widgets.OneLinkEditText
+                        android:id="@+id/eTCnicNumber"
+                        style="@style/EditTextFixedNumbers"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/cnic_nicop_hint"
+                        android:inputType="number"
+                        android:maxLength="15"
+                        android:imeOptions="actionDone|flagForceAscii"
+                        android:nextFocusDown="@id/etAlias"
+                        android:nextFocusForward="@id/etAlias"
+                        android:text="@={viewModel.cnicNumber}" />
+                </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
+
+                <TextView
+                    android:id="@+id/textViewAlias"
+                    style="@style/TextViewSubHeading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/full_name"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tilCnicNicop" />
+
+                <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
+                    android:id="@+id/tilAlias"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/unit_8dp"
+                    app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewAlias">
+
+                    <com.onelink.nrlp.android.widgets.OneLinkEditText
+                        android:id="@+id/etAlias"
+                        style="@style/EditTextFixedDigits"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:nextFocusDown="@id/etCountry"
+                        android:nextFocusForward="@id/etCountry"
+                        android:imeOptions="actionDone|flagForceAscii"
+                        android:hint="@string/generic_name_placeholder"
+                        android:inputType="textCapSentences"
+                        android:maxLength="50"
+                        android:text="@={viewModel.alias}" />
+                </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
+
+                <TextView
+                    android:id="@+id/textViewCountry"
+                    style="@style/TextViewSubHeading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/country"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tilAlias" />
+
+                <TextView
+                    android:id="@+id/etCountry"
+                    style="@style/EditTextTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textDirection="ltr"
+                    android:focusable="false"
+                    android:hint="@string/select_country"
+                    android:singleLine="true"
+                    android:text="@={viewModel.country}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewCountry" />
+
+                <TextView
+                    android:id="@+id/textViewMobileNumber"
+                    style="@style/TextViewSubHeading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="14dp"
+                    android:text="@string/beneficiary_mobile_number"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/etCountry" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/lyPhoneNumber"
+                    style="@style/EditTextFixedDigits"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layoutDirection="ltr"
+                    android:orientation="horizontal"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewMobileNumber">
+
+                    <TextView
+                        android:id="@+id/tvCountryCode"
+                        style="@style/TextViewMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/unit_0dp"
+                        android:text="@string/code_prefix"
+                        android:textColor="@color/grey"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/prefix_tv"
+                        style="@style/TextViewMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/unit_0dp"
+                        android:text="@string/dash"
+                        android:textColor="@color/grey"
+                        app:layout_constraintBottom_toBottomOf="@id/etMobileNumber"
+                        app:layout_constraintStart_toEndOf="@+id/tvCountryCode"
+                        app:layout_constraintTop_toTopOf="@id/etMobileNumber" />
+
+                    <com.onelink.nrlp.android.widgets.OneLinkEditText
+                        android:id="@+id/etMobileNumber"
+                        style="@style/EditTextFixedNumbers"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/unit_0dp"
+                        android:background="@null"
+                        android:enabled="false"
+                        android:gravity="start"
+                        android:hint="@string/mobile_num_hint"
+                        android:inputType="number"
+                        android:padding="@dimen/unit_0dp"
+                        android:paddingStart="@dimen/unit_4dp"
+                        android:paddingEnd="@dimen/unit_4dp"
+                        android:imeOptions="actionDone|flagForceAscii"
+                        android:text="@={viewModel.mobileNumber}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/imageViewPhoneError"
+                        app:layout_constraintStart_toEndOf="@+id/prefix_tv"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/imageViewPhoneError"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/margin_large"
+                        android:src="@drawable/ic_edit_text_error"
+                        android:textColor="@color/grey"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:contentDescription="@null" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/errorTextPhone"
+                    style="@style/TextViewMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/unit_4dp"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/unit_10sp"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/lyPhoneNumber" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/beneficiaryLL"
+                    app:layout_constraintTop_toBottomOf="@+id/lyPhoneNumber"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TextViewSubHeading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/beneficiary_relationship" />
+
+
+                    <LinearLayout
+                        android:id="@+id/spinnerRelationShip"
+                        style="@style/spinnerTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:layoutDirection="ltr"
+                        android:orientation="horizontal"
+                        android:textDirection="ltr"
+                        android:weightSum="10">
+
+                        <TextView
+                            android:id="@+id/tvRelationShip"
+                            style="@style/TextViewMediumNoMargins"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="8.5" />
+
+                        <ImageView
+                            android:id="@+id/iv_drop_down"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:src="@drawable/ic_spinner_dropdown"
+                            android:contentDescription="@null" />
+                    </LinearLayout>
+
+                    <com.onelink.nrlp.android.utils.OneLinkSpinner
+                        android:id="@+id/spinner_select_relationship"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="@dimen/margin_large"
+                        android:layout_marginEnd="@dimen/margin_large"
+                        android:background="@android:color/transparent"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="start"
+                        android:hint="@string/full_name"
+                        android:layoutDirection="ltr"
+                        android:spinnerMode="dropdown"
+                        android:textDirection="ltr"
+                        android:visibility="invisible" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:id="@+id/txtOther"
+                        android:visibility="gone"
+                        android:textSize="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/margin_large"
+                        android:layout_marginEnd="@dimen/margin_large"
+                        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+                        android:layout_height="wrap_content"></EditText>
+
+                    <TextView
+                        android:id="@+id/tv_error_relationship"
+                        style="@style/TextViewMedium"
+                        android:textSize="@dimen/unit_10sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/error_relationship"
+                        android:visibility="gone"
+                        android:textColor="@color/red"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginStart="@dimen/_16sdp"
+                        android:layout_marginEnd="@dimen/margin_large" />
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="@dimen/_100sdp"
+            android:background="?android:attr/listDivider" />
 
         <LinearLayout
             android:id="@+id/lytPosNegButtons"

@@ -563,13 +563,16 @@ class BeneficiaryDetailsFragment :
         })
 
         viewModel.beneficiaryRelation.observe(this, Observer {
-            if(it != "") {
+            if (it != "") {
                 binding.tvRelationShip.text = it
                 binding.tvRelationShip.colorToText(R.color.pure_black)
             }
 
-            if(viewModel.beneficiaryRelation.value.toString() == resources.getString(R.string.other)) {
+            if (viewModel.beneficiaryRelation.value.toString() == resources.getString(R.string.other)) {
                 binding.txtOther.visibility = View.VISIBLE
+                binding.svDetails.post {
+                    binding.svDetails.fullScroll(View.FOCUS_DOWN)
+                }
                 context?.let {
                     binding.txtOther.enabled(it)
                 }

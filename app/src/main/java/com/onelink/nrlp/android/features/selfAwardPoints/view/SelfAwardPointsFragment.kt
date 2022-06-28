@@ -193,7 +193,7 @@ class SelfAwardPointsFragment :
                 )
                 selfAwardPointsRequest.addProperty(
                     SelfAwardRequestConstants.Beneficiary_NIC_NICOP,
-                    binding.etCnicAccountNumber.text.toString(),
+                    binding.etCnicAccountNumber.text.toString().replace("-", ""),
                 )
                 selfAwardPointsRequest.addProperty(
                     SelfAwardRequestConstants.Transaction_Date,
