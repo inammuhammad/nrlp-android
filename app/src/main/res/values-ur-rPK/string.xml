@@ -26,7 +26,7 @@
     <string name="help_confirm_password">پاسورڈ دوبارہ درج کریں</string>
     <string name="help_user_type">براہ مہربانی منتخب کریں کہ آپ رقم بھیجنے والے یا وصول کرنے والے ہیں</string>
     <string name="help_full_name">>اپنا شناختی کارڈ پہ درج کردہ نام درج کریں</string>
-    <string name="help_usd">ہUSD میں سالانہ ترسیلات زر ہر سال یکم جولائی سے جمع ہوتی ہیں تاہم موجودہ سال کے لیے اس کا اطلاق یکم اکتوبر 2021 سے ہوگا اور اسی کے مطابق آپ کی لائلٹی کیٹیگری کا حساب لگایا جائے گا۔</string>
+    <string name="help_usd">ہUSD میں سالانہ ترسیلات زر ہر سال یکم جولائی سے جمع ہوتی ہیں</string>
     <string name="help_father_name">Please enter your Father Name as per CNIC/NICOP/POC</string>
     <string name="resident_id">منفرد آئی ڈی*</string>
     <string name="mobile_number">موبائل نمبر*</string>
@@ -113,8 +113,8 @@
     <string name="curPassword">پرانا پاس ورڈ درج کریں</string>
     <string name="newPassword">نیا پاس ورڈ درج کریں</string>
     <string name="confirmPassword">نیا پاس ورڈ دوبارہ درج کریں</string>
-    <string name="enter_remittance_transaction_num_msg">اپنی ترسیلات کا حوالہ نمبر درج کریں نوٹ: صرف موجودہ سال کیی ٹرانزیکشن رجسٹریشن کے لیے استعمال کی جاسکتی ہے ، یکم اکتوبر 2021 سے نافذ العمل ہے</string>
-    <string name="enter_remittance_transaction_num_msg_self_award">اپنی ترسیلات کا حوالہ نمبر درج کریں نوٹ: خود پوائنٹس حاصل کرنے کے لیے صرف موجودہ سال کیی ٹرانزیکشن ہی استعمال کی جاسکتی ہے ، یکم اکتوبر 2021 سے نافذ العمل ہے</string>
+    <string name="enter_remittance_transaction_num_msg">اپنی ترسیلات کا حوالہ نمبر درج کریں</string>
+    <string name="enter_remittance_transaction_num_msg_self_award">اپنی ترسیلات کا حوالہ نمبر درج کریں</string>
     <string name="transaction_eligibity_for_self_award">براہ کرم ٹرانزیکشن رسید پر موجود ریفرنس نمبر/ ٹی ٹی نمبر درج کریں</string>
     <string name="sent_otp_code_msg">ہم نے رجسٹرڈ فون نمبر پر آپ کو او ٹی پی بھیجا ہے۔ براہ کرم نیچے او ٹی پی درج کریں</string>
     <string name="accept">قبول کریں</string>
@@ -409,4 +409,6 @@
     <string name="notifications">نوٹیفیکیشن</string>
     <string name="delete">حذف کریں</string>
     <string name="enter_opf_voucher">او پی ایف سکول فیس واؤچر نمبر درج کریں</string>
+    <string name="error_self_award_not_eligible">معزز صارف، آپ پچھلے سال کی ترسیالت زر پر پوائنٹس حاصل کرنے کے اہل نہیں ہیں</string>
+    <string name="error_self_award_not_allowed">معزز صارف، آپ کو فراہم کردہ ترسیالت زر کے خالف پوائنٹس حاصل کرنے کی اجازت نہیں ہے</string>
 </resources>

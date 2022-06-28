@@ -33,6 +33,7 @@
                 android:layout_marginEnd="@dimen/margin_large"
                 android:text="@string/enter_remittance_transaction_num_msg_self_award"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

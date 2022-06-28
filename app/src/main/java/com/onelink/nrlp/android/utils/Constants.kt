@@ -17,7 +17,7 @@ class Constants {
         // 08-06-2022 kvpmpr0mb8i3xa90ifppu9yj08ktib9quupnz94m 2.4
         // 22-06-2022 ys7jjeixu43f49y07xij81b34uhxo63q3j1o5r02 2.5
         const val checkSum =
-            "u9knzr9xnendrdwt0c9sm42ie389cskvuqkzzp02" //"kvpmpr0mb8i3xa90ifppu9yj08ktib9quupnz94m"
+            "w73v34zmazcrlz1li8v3iplfdoawrjz7ggsutsin" //"kvpmpr0mb8i3xa90ifppu9yj08ktib9quupnz94m"
         const val InternationalPassport = "International Passport"
         const val PakistaniPassport = "Pakistani Passport"
 
@@ -37,12 +37,14 @@ object ErrorCodesConstants {
     const val PROFILE_VERIFICATION_FAILED = "GEN-ERR-53"
     const val UNVERIFIED_DEVICE = "AUTH-LOG-02"
     const val UNSUCCESSFUL_TRANSACTION_FETCH = "AUTH-VRN-06"
-    const val INCORRECT_INFORMATION="PU-VA-01"
-    const val ATTEMPTS_EXCEEDED="PU-VA-99"
+    const val INCORRECT_INFORMATION = "PU-VA-01"
+    const val ATTEMPTS_EXCEEDED = "PU-VA-99"
     const val NEW_VERSION = "GEN-ERR-19"
     const val REMITTANCE_OLDER_DATE = "AUTH-SA-21"
     const val REMITTANCE_SAME_DATE = "AUTH-SA-20"
-    const val REMITTANCE_RDA_TRANSACTION= "AUTH-SA-19"
+    const val REMITTANCE_RDA_TRANSACTION = "AUTH-SA-19"
+    const val SELF_AWARD_NOT_ELIGIBLE = "AUTH-SA-22"
+    const val SELF_AWARD_NOT_ALLOWED = "AUTH-SA-23"
 }
 
 
@@ -74,6 +76,8 @@ object ErrorDialogConstants {
     const val RC_NEW_VERSION = 1023
     const val TAG_NEW_VERSION = "new_version_available"
     const val REMITTANCE_DIALOG = 1030
+    const val SELF_AWARD_DIALOG = 1031
+    const val TAG_UNABLE_TO_SELF_AWARD = "unable_to_self_award"
 }
 
 object HeaderConstants {

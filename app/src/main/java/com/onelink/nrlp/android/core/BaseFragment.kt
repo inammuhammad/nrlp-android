@@ -109,16 +109,32 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
         error?.let {
             it.errorCode?.let { errorCode ->
                 when(errorCode){
-                    ErrorCodesConstants.NO_INTERNET_CONNECTION -> showNoInternetConnectionDialog(fragment)
+                    ErrorCodesConstants.NO_INTERNET_CONNECTION -> showNoInternetConnectionDialog(
+                        fragment
+                    )
                     ErrorCodesConstants.SESSION_EXPIRED -> showSessionExpiredDialog(fragment)
-                    ErrorCodesConstants.UNSUCCESSFUL_TRANSACTION_FETCH -> showTransactionFetchUnsuccessfulDialog(fragment)
-                    ErrorCodesConstants.INCORRECT_INFORMATION -> showIncorrectInformationDialog(fragment)
+                    ErrorCodesConstants.UNSUCCESSFUL_TRANSACTION_FETCH -> showTransactionFetchUnsuccessfulDialog(
+                        fragment
+                    )
+                    ErrorCodesConstants.INCORRECT_INFORMATION -> showIncorrectInformationDialog(
+                        fragment
+                    )
                     ErrorCodesConstants.ATTEMPTS_EXCEEDED -> showAttemptsExceededDialog(fragment)
-                    ErrorCodesConstants.PROFILE_VERIFICATION_FAILED -> showProfileUpdateVerificationFailedDialog(fragment)
+                    ErrorCodesConstants.PROFILE_VERIFICATION_FAILED -> showProfileUpdateVerificationFailedDialog(
+                        fragment
+                    )
                     ErrorCodesConstants.NEW_VERSION -> showNewVersionAvailableDialog(fragment)
-                    ErrorCodesConstants.REMITTANCE_OLDER_DATE -> showRemittanceOlderDateDialog(fragment)
-                    ErrorCodesConstants.REMITTANCE_SAME_DATE -> showRemittanceSameDateDialog(fragment)
-                    ErrorCodesConstants.REMITTANCE_RDA_TRANSACTION -> showRDATransactionDialog(fragment)
+                    ErrorCodesConstants.REMITTANCE_OLDER_DATE -> showRemittanceOlderDateDialog(
+                        fragment
+                    )
+                    ErrorCodesConstants.REMITTANCE_SAME_DATE -> showRemittanceSameDateDialog(
+                        fragment
+                    )
+                    ErrorCodesConstants.REMITTANCE_RDA_TRANSACTION -> showRDATransactionDialog(
+                        fragment
+                    )
+                    ErrorCodesConstants.SELF_AWARD_NOT_ELIGIBLE -> showSelfAwardNotEligible(fragment)
+                    ErrorCodesConstants.SELF_AWARD_NOT_ALLOWED -> showSelfAwardNotAllowed(fragment)
                     else -> showRemoteErrorDialog(fragment, it)
                 }
             }
@@ -325,8 +341,36 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
             .show(parentFragmentManager, ErrorDialogConstants.TAG_NO_INTERNET_CONNECTION_DIALOG)
     }
 
+    private fun showSelfAwardNotEligible(fragment: Fragment) {
+        OneLinkAlertDialogsFragment.Builder()
+            .setTargetFragment(fragment, ErrorDialogConstants.SELF_AWARD_DIALOG)
+            .setIsAlertOnly(true)
+            .setDrawable(R.drawable.ic_oh_snap)
+            .setTitle(getString(R.string.oh_snap))
+            .setMessage(getString(R.string.error_self_award_not_eligible).toSpanned())
+            .setNeutralButtonText(getString(R.string.okay))
+            .setNegativeButtonText("")
+            .setPositiveButtonText("")
+            .setCancelable(false)
+            .show(parentFragmentManager, ErrorDialogConstants.TAG_UNABLE_TO_SELF_AWARD)
+    }
+
+    private fun showSelfAwardNotAllowed(fragment: Fragment) {
+        OneLinkAlertDialogsFragment.Builder()
+            .setTargetFragment(fragment, ErrorDialogConstants.SELF_AWARD_DIALOG)
+            .setIsAlertOnly(true)
+            .setDrawable(R.drawable.ic_oh_snap)
+            .setTitle(getString(R.string.oh_snap))
+            .setMessage(getString(R.string.error_self_award_not_allowed).toSpanned())
+            .setNeutralButtonText(getString(R.string.okay))
+            .setNegativeButtonText("")
+            .setPositiveButtonText("")
+            .setCancelable(false)
+            .show(parentFragmentManager, ErrorDialogConstants.TAG_UNABLE_TO_SELF_AWARD)
+    }
+
     override fun onNeutralButtonClicked(targetCode: Int) {
-        when(targetCode){
+        when (targetCode) {
             ErrorDialogConstants.RC_SESSION_EXPIRED -> {
                 activity?.let {
                     UserData.emptyUserData()

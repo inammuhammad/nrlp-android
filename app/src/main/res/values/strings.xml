@@ -25,7 +25,7 @@
     <string name="help_confirm_password">Please re-enter the Password </string>
     <string name="help_user_type">Please select if you are a Remitter (Sender) Or Beneficiary (Receiver) of remittance funds</string>
     <string name="help_full_name">Please enter your Full Name as per CNIC/NICOP/POC</string>
-    <string name="help_usd">The Annual Remittance to- date in USD is accumulated from 1st July of each year, however for current year it shall be applicable from 1st October 2021 and your loyalty category will be calculated accordingly. For further details please visit FAQs.</string>
+    <string name="help_usd">The Annual Remittance to date in USD is accumulated from 1st July of each year.</string>
     <string name="help_father_name">Please enter your Father Name as per CNIC/NICOP/POC</string>
 
     <string name="resident_id">Unique ID *</string>
@@ -90,8 +90,8 @@
     <string name="curPassword">Enter Old Password</string>
     <string name="newPassword">Enter New Password</string>
     <string name="confirmPassword">Re-enter New Password</string>
-    <string name="enter_remittance_transaction_num_msg">Enter your remittance transaction reference number. Note: (Current year Transaction can only be used for registration, applicable from 1st Oct 2021)</string>
-    <string name="enter_remittance_transaction_num_msg_self_award">Enter your remittance transaction reference number. Note: (Current year Transaction can only be used for Self-Awarding, applicable from 1st Oct 2021)</string>
+    <string name="enter_remittance_transaction_num_msg">Enter your remittance transaction reference number.</string>
+    <string name="enter_remittance_transaction_num_msg_self_award">Enter your remittance transaction reference number.</string>
     <string name="transaction_eligibity_for_self_award">Enter Reference Number/TT Number as per your transaction receipt</string>
     <string name="sent_otp_code_msg">We have sent you OTP on your registered mobile number, please enter the OTP below;</string>
     <string name="lorem_ipsum_text_large" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\n
@@ -464,4 +464,6 @@
     <string name="notifications">Notifications</string>
     <string name="delete">Delete</string>
     <string name="enter_opf_voucher">Enter OPF School Fee Voucher No. For Redemption</string>
+    <string name="error_self_award_not_eligible">Dear Customer, You are not eligible to perform self award transaction against previous fiscal year</string>
+    <string name="error_self_award_not_allowed">Dear Customer, You are not allowed to claim the loyalty points against the provided transaction</string>
 </resources>
