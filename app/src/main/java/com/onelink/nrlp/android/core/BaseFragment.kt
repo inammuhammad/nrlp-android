@@ -108,7 +108,7 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
     protected fun showGeneralErrorDialog(fragment: Fragment, error: BaseError?) {
         error?.let {
             it.errorCode?.let { errorCode ->
-                when(errorCode){
+                when (errorCode) {
                     ErrorCodesConstants.NO_INTERNET_CONNECTION -> showNoInternetConnectionDialog(
                         fragment
                     )
