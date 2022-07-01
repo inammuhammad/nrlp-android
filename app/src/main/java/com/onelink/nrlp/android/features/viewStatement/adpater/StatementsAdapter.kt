@@ -10,6 +10,7 @@ import com.onelink.nrlp.android.R
 import com.onelink.nrlp.android.databinding.LoyaltyStatementListItemBinding
 import com.onelink.nrlp.android.features.viewStatement.models.StatementDetailModel
 import com.onelink.nrlp.android.features.viewStatement.models.Type
+import com.onelink.nrlp.android.utils.ViewStatementConstants
 import com.onelink.nrlp.android.utils.roundOff
 import com.onelink.nrlp.android.utils.toFormattedAmount
 import com.onelink.nrlp.android.utils.toFormattedDate
@@ -44,15 +45,24 @@ class StatementsAdapter(
             holder.loyaltyStatementListItemBinding.root.tvStatus.text = statementDetailModel.name
         }
         when (statementDetailModel.type) {
-            Type.Credit -> {
+            ViewStatementConstants.CREDIT -> {
                 holder.loyaltyStatementListItemBinding.root.activeTextView.text = points
                 holder.loyaltyStatementListItemBinding.root.activeTextView.visibility = View.VISIBLE
                 holder.loyaltyStatementListItemBinding.root.pendingTextView.visibility = View.GONE
+                holder.loyaltyStatementListItemBinding.root.otherTextView.visibility = View.GONE
             }
-            Type.Debit -> {
+            ViewStatementConstants.DEBIT -> {
                 holder.loyaltyStatementListItemBinding.root.pendingTextView.text = points
                 holder.loyaltyStatementListItemBinding.root.activeTextView.visibility = View.GONE
-                holder.loyaltyStatementListItemBinding.root.pendingTextView.visibility = View.VISIBLE
+                holder.loyaltyStatementListItemBinding.root.pendingTextView.visibility =
+                    View.VISIBLE
+                holder.loyaltyStatementListItemBinding.root.otherTextView.visibility = View.GONE
+            }
+            else -> {
+                holder.loyaltyStatementListItemBinding.root.otherTextView.text = points
+                holder.loyaltyStatementListItemBinding.root.activeTextView.visibility = View.GONE
+                holder.loyaltyStatementListItemBinding.root.pendingTextView.visibility = View.GONE
+                holder.loyaltyStatementListItemBinding.root.otherTextView.visibility = View.VISIBLE
             }
         }
     }

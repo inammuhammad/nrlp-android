@@ -17,7 +17,7 @@ class Constants {
         // 22-06-2022 ys7jjeixu43f49y07xij81b34uhxo63q3j1o5r02 2.5
         // 29-06-2022 kvpmpr0mb8i3xa90ifppu9yj08ktib9quupnz94m 2.6
         const val checkSum =
-            "ramind4gtozrzwd5ntq5l44lqbf036qnspf7a3yk" //"kvpmpr0mb8i3xa90ifppu9yj08ktib9quupnz94m"
+            "w73v34zmazcrlz1li8v3iplfdoawrjz7ggsutsin" //"ramind4gtozrzwd5ntq5l44lqbf036qnspf7a3yk"
         const val InternationalPassport = "International Passport"
         const val PakistaniPassport = "Pakistani Passport"
 
@@ -191,6 +191,11 @@ object COMPLAINT_TYPE {
 
     const val OTHERS = 8
 
+}
+
+object ViewStatementConstants {
+    const val CREDIT = "Credit"
+    const val DEBIT = "Debit"
 }
 
 object Sp {

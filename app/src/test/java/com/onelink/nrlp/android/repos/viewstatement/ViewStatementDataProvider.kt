@@ -16,9 +16,10 @@ fun getStatementsResponse() = StatementsResponseModel(
             StatementDetailModel(
                 "Hamza",
                 "mango",
-                Type.Credit,
+                "Credit",
                 123.toBigDecimal(),
-                "190238102"
+                "190238102",
+                "456"
             )
         )
     )
