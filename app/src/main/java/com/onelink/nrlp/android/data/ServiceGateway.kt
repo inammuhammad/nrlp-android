@@ -16,10 +16,7 @@ import com.onelink.nrlp.android.features.faqs.model.FaqsResponseModel
 import com.onelink.nrlp.android.features.forgotPassword.models.ForgotPasswordOTPRequestModel
 import com.onelink.nrlp.android.features.forgotPassword.models.ForgotPasswordRequestModel
 import com.onelink.nrlp.android.features.forgotPassword.models.UpdatePasswordRequestModel
-import com.onelink.nrlp.android.features.home.model.NadraDetailsRequestModel
-import com.onelink.nrlp.android.features.home.model.PopupMessageRequest
-import com.onelink.nrlp.android.features.home.model.UserProfileResponseModel
-import com.onelink.nrlp.android.features.home.model.VerifyFatherNameRequestModel
+import com.onelink.nrlp.android.features.home.model.*
 import com.onelink.nrlp.android.features.login.model.LoginRequest
 import com.onelink.nrlp.android.features.login.model.LoginResponseModel
 import com.onelink.nrlp.android.features.managePoints.model.TransferPointsRequest
@@ -269,7 +266,7 @@ interface ServiceGateway {
     fun rateRegistration(@Body body: JsonObject): Single<Response<GeneralMessageResponseModel>>
 
     @POST("nrlppopwindow/")
-    fun getPopupMessage(@Body body: PopupMessageRequest): Single<Response<GeneralMessageResponseModel>>
+    fun getPopupMessage(@Body body: PopupMessageRequest): Single<Response<PopupResponseModel>>
 
     @POST("nrlppse-location/")
     fun getBranchCenter(@Body request: BranchCenterRequestModel): Single<Response<GeneralMessageResponseModel>>

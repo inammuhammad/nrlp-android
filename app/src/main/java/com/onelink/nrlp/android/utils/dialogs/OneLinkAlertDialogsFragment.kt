@@ -8,6 +8,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.onelink.nrlp.android.R
+import com.onelink.nrlp.android.utils.setOnSingleClickListener
 import kotlinx.android.synthetic.main.custom_dialog.*
 
 const val ARG_PARAM_IS_ALERT = "IS_ALERT"
@@ -187,7 +188,7 @@ class OneLinkAlertDialogsFragment : DialogFragment() {
             btnPositive?.text = positiveButtonText
             btnNegative?.text = negativeButtonText
 
-            btnPositive?.setOnClickListener {
+            btnPositive?.setOnSingleClickListener {
                 oneLinkAlertDialogListeners.onPositiveButtonClicked(targetRequestCode)
                 dismiss()
             }

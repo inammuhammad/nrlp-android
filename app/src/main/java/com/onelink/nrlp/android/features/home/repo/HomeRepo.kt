@@ -20,7 +20,7 @@ class HomeRepo @Inject constructor(
     val updateNadraDataResponse = MutableLiveData<BaseResponse<GeneralMessageResponseModel>>()
     val verifyFatherNameResponse = MutableLiveData<BaseResponse<GeneralMessageResponseModel>>()
     val inAppRatingResponse = MutableLiveData<BaseResponse<GeneralMessageResponseModel>>()
-    val popupMessageResponse = MutableLiveData<BaseResponse<GeneralMessageResponseModel>>()
+    val popupMessageResponse = MutableLiveData<BaseResponse<PopupResponseModel>>()
 
     fun getUserProfile() {
         networkHelper.serviceCall(serviceGateway.getUserProfile()).observeForever {
@@ -75,7 +75,7 @@ class HomeRepo @Inject constructor(
         inAppRatingResponse as LiveData<BaseResponse<GeneralMessageResponseModel>>
 
     fun observePopupMessage() =
-        popupMessageResponse as LiveData<BaseResponse<GeneralMessageResponseModel>>
+        popupMessageResponse as LiveData<BaseResponse<PopupResponseModel>>
 
     private fun getUserModelFromLoginResponse(userProfileModel: UserProfileModel): UserModel {
         return UserModel(

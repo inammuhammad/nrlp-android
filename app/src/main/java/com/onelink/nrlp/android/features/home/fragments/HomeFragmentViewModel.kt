@@ -4,6 +4,7 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import com.onelink.nrlp.android.core.BaseFragment
 import com.onelink.nrlp.android.core.BaseViewModel
+import com.onelink.nrlp.android.features.home.fragments.popup.GeneralInfoFragment
 import com.onelink.nrlp.android.features.home.model.NadraDetailsRequestModel
 import com.onelink.nrlp.android.features.home.model.PopupMessageRequest
 import com.onelink.nrlp.android.features.home.model.VerifyFatherNameRequestModel
@@ -22,6 +23,7 @@ class HomeFragmentViewModel @Inject constructor(private val homeRepo: HomeRepo) 
     val cnicNicopDateOfIssuance = MutableLiveData<String>("")
     var rawDate: String = ""
     val rawFromDate = MutableLiveData<String>("")
+    val popupDisplayText = MutableLiveData<String>("")
     val validationCnicNicopIssuanceDatePassed = MutableLiveData(true)
     val validationFullNamePassed = MutableLiveData(true)
     val validationMotherMaidenNamePassed = MutableLiveData(true)
@@ -183,13 +185,25 @@ class HomeFragmentViewModel @Inject constructor(private val homeRepo: HomeRepo) 
         )
     }
 
-    fun navigateFatherNameVerification(fragmentHelper: BaseFragment.FragmentNavigationHelper){
+    fun navigateFatherNameVerification(fragmentHelper: BaseFragment.FragmentNavigationHelper) {
         fragmentHelper.addFragment(
             FatherNameVerificationFragment.newInstance(),
             clearBackStack = true,
             addToBackStack = false
         )
     }
+
+    fun navigateGeneralInfo(
+        fragmentHelper: BaseFragment.FragmentNavigationHelper,
+        displayText: String?
+    ) {
+        fragmentHelper.addFragment(
+            GeneralInfoFragment.newInstance(displayText),
+            clearBackStack = false,
+            addToBackStack = true
+        )
+    }
+
 
     override fun onCleared() {
         homeRepo.onClear()

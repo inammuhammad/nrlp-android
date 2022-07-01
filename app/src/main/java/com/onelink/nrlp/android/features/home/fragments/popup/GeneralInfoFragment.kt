@@ -1,6 +1,7 @@
 package com.onelink.nrlp.android.features.home.fragments.popup
 
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.onelink.nrlp.android.R
 import com.onelink.nrlp.android.core.BaseFragment
@@ -12,8 +13,11 @@ import com.onelink.nrlp.android.utils.setOnSingleClickListener
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
-class GeneralInfoFragment : BaseFragment<HomeFragmentViewModel, FragmentGeneralInfoBinding>
-    (HomeFragmentViewModel::class.java) {
+class GeneralInfoFragment(message: String?) :
+    BaseFragment<HomeFragmentViewModel, FragmentGeneralInfoBinding>
+        (HomeFragmentViewModel::class.java) {
+
+    private val displayText = message
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -35,8 +39,8 @@ class GeneralInfoFragment : BaseFragment<HomeFragmentViewModel, FragmentGeneralI
         super.init(savedInstanceState)
         binding.lifecycleOwner = this
         (activity as HomeActivity).hideHomeScreenTools()
+        binding.tvInfo.text = displayText
         initListeners()
-        initObservers()
     }
 
     private fun initListeners() {
@@ -46,12 +50,8 @@ class GeneralInfoFragment : BaseFragment<HomeFragmentViewModel, FragmentGeneralI
         }
     }
 
-    private fun initObservers() {
-
-    }
-
     companion object {
         @JvmStatic
-        fun newInstance() = GeneralInfoFragment()
+        fun newInstance(message: String?) = GeneralInfoFragment(message)
     }
 }

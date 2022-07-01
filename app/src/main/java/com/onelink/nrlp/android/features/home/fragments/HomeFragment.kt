@@ -92,6 +92,24 @@ open class HomeFragment :
                 showUserData()
             }
         })
+
+        viewModel.observePopupMessage().observe(this, Observer { response ->
+            when (response.status) {
+                Status.SUCCESS -> {
+                    oneLinkProgressDialog.hideProgressDialog()
+                    viewModel.navigateGeneralInfo(
+                        fragmentHelper,
+                        response.data?.popupData?.displayText
+                    )
+                }
+                Status.LOADING -> {
+                    oneLinkProgressDialog.showProgressDialog(context)
+                }
+                Status.ERROR -> {
+                    oneLinkProgressDialog.hideProgressDialog()
+                }
+            }
+        })
     }
 
     private fun showUserData() {
