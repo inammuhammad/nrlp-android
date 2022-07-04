@@ -13,6 +13,8 @@ import com.onelink.nrlp.android.databinding.SelectCountryCodeFragmentBinding
 import com.onelink.nrlp.android.features.select.city.adapter.CitiesAdapter
 import com.onelink.nrlp.android.features.select.city.model.CitiesModel
 import com.onelink.nrlp.android.features.select.city.view.SelectCityFragment
+import com.onelink.nrlp.android.features.select.generic.adapter.BranchCenterAdapter
+import com.onelink.nrlp.android.features.select.generic.model.BranchCenterModel
 import com.onelink.nrlp.android.features.select.generic.viewmodel.SelectItemViewModel
 import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
 import dagger.android.support.AndroidSupportInjection
@@ -33,7 +35,7 @@ class SelectBranchCenterFragment(type: String = "USC") :
     lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var listener: OnSelectBranchCenterListener
 
-    lateinit var cityAdapter: CitiesAdapter
+    lateinit var cityAdapter: BranchCenterAdapter
 
     fun setOnClickListener(listener: OnSelectBranchCenterListener) {
         this.listener = listener
@@ -96,17 +98,16 @@ class SelectBranchCenterFragment(type: String = "USC") :
                 Status.SUCCESS -> {
                     oneLinkProgressDialog.hideProgressDialog()
                     response.data?.let {
-                        /*var citiesList: ArrayList<CitiesModel> = it.citiesList
-                        citiesList.add(CitiesModel("0", "Other"))
+                        var citiesList: ArrayList<BranchCenterModel> = it.branchCenterList
                         //it.citiesList.sortedWith(compareBy { listItem -> listItem.city })
                         binding.rvCountries.setHasFixedSize(true)
-                        cityAdapter = CitiesAdapter(
+                        cityAdapter = BranchCenterAdapter(
                             citiesList,
                             listener::onSelectBranchCenterListener
                         )
                         binding.rvCountries.layoutManager =
                             LinearLayoutManager(requireContext())
-                        binding.rvCountries.adapter = cityAdapter*/
+                        binding.rvCountries.adapter = cityAdapter
                     }
                 }
                 Status.ERROR -> {
@@ -123,7 +124,7 @@ class SelectBranchCenterFragment(type: String = "USC") :
     }
 
     interface OnSelectBranchCenterListener {
-        fun onSelectBranchCenterListener(citiesModel: CitiesModel)
+        fun onSelectBranchCenterListener(branchCenterModel: BranchCenterModel)
     }
 
 

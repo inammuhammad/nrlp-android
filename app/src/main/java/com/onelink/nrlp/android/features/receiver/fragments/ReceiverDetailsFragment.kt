@@ -793,7 +793,7 @@ class ReceiverDetailsFragment :
         binding.textViewCountry.visibility = View.GONE
         binding.etCountry.visibility = View.GONE
         binding.icHelpCountry.visibility = View.GONE
-        binding.tvPlaceOfBirth.visibility = View.GONE
+        binding.tilPlaceOfBirth.visibility = View.GONE
         binding.icHelpFullName.visibility = View.GONE
         binding.icHelpBankName.visibility = View.GONE
         binding.icHelpIbanNumber.visibility = View.GONE

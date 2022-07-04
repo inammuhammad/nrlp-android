@@ -31,6 +31,7 @@ import com.onelink.nrlp.android.features.redeem.adapter.RedemPartnerAdapter
 import com.onelink.nrlp.android.features.redeem.model.RedeemPartnerModel
 import com.onelink.nrlp.android.features.select.country.model.CountryCodeModel
 import com.onelink.nrlp.android.features.select.country.view.SelectCountryFragment
+import com.onelink.nrlp.android.features.select.generic.model.BranchCenterModel
 import com.onelink.nrlp.android.features.select.generic.view.SelectBranchCenterFragment
 import com.onelink.nrlp.android.features.viewStatement.fragments.AdvancedLoyaltyStatementFragment
 import com.onelink.nrlp.android.utils.*
@@ -42,17 +43,19 @@ import java.util.*
 import java.util.regex.Pattern
 import javax.inject.Inject
 
-class RegComplaintDetailsFragment:
+class RegComplaintDetailsFragment :
     BaseFragment<RegComplaintSharedViewModel, FragmentRegComplaintDetailsBinding>(
         RegComplaintSharedViewModel::class.java
-    ), SelectCountryFragment.OnSelectCountryListener{
+    ), SelectCountryFragment.OnSelectCountryListener,
+    SelectBranchCenterFragment.OnSelectBranchCenterListener {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+
     @Inject
     lateinit var oneLinkProgressDialog: OneLinkProgressDialog
     private var countryCodeLength: Int? = 10
-    private val REGISTERED:Int=1
+    private val REGISTERED: Int = 1
     private var listenerInitializedTR: Boolean = false
     private var listenerInitializedPR: Boolean = false
     override fun onInject() {
@@ -1141,10 +1144,36 @@ class RegComplaintDetailsFragment:
                     ComplaintRequestModelConstants.Remitting_entity,
                     binding.etRemitting.text.toString()
                 )
-                jsonObject.addProperty(
-                    ComplaintRequestModelConstants.Beneficiary_Nic_Account,
-                    binding.etBeneficiaryAccount.text.toString().removeDashes()
-                )
+                if (binding.etBeneficiaryAccount.text.toString() != "") {
+                    jsonObject.addProperty(
+                        ComplaintRequestModelConstants.Beneficiary_Nic_Account,
+                        binding.etBeneficiaryAccount.text.toString().removeDashes()
+                    )
+                    jsonObject.addProperty(
+                        SelfAwardRequestConstants.Transaction_TYPE,
+                        "COC" //viewModel.transactionType.value,
+                    )
+                }
+                if (binding.etBeneficiaryPassport.text.toString() != "") {
+                    jsonObject.addProperty(
+                        ComplaintRequestModelConstants.Beneficiary_Nic_Account,
+                        binding.etBeneficiaryPassport.text.toString()
+                    )
+                    jsonObject.addProperty(
+                        SelfAwardRequestConstants.Transaction_TYPE,
+                        "PPT" //viewModel.transactionType.value,
+                    )
+                }
+                if (binding.etBeneficiaryIban.text.toString() != "") {
+                    jsonObject.addProperty(
+                        ComplaintRequestModelConstants.Beneficiary_Nic_Account,
+                        binding.etBeneficiaryIban.text.toString()
+                    )
+                    jsonObject.addProperty(
+                        SelfAwardRequestConstants.Transaction_TYPE,
+                        "ACC" //viewModel.transactionType.value,
+                    )
+                }
             }
 
             COMPLAINT_TYPE.REDEMPTION_ISSUES -> {
@@ -1305,6 +1334,13 @@ class RegComplaintDetailsFragment:
         binding.etPhoneNumber.hint = viewModel.phoneNumberHint(countryCodeModel.length.toInt())
         /*binding.etPhoneNumber.filters =
             arrayOf(InputFilter.LengthFilter(countryCodeModel.length.toInt()))*/
+        fragmentHelper.onBack()
+    }
+
+    override fun onSelectBranchCenterListener(branchCenterModel: BranchCenterModel) {
+        viewModel.redemptionBranchCenter.value = branchCenterModel.branchCenterName
+        binding.BranchCenter.colorToText(R.color.black)
+        viewModel.validationBranchCenterPassed.postValue(true)
         fragmentHelper.onBack()
     }
 

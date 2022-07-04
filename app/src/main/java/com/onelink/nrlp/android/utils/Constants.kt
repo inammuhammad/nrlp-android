@@ -154,6 +154,8 @@ object ComplaintRequestModelConstants{
     const val Redemption_USC_BEOE_NUMBER = "c_redemption_mobile_number"
     const val Redemption_NADRA_PASSPORT_COUNTRY = "c_redemption_nadra_passport_country"
     const val Redemption_BRANCH_CENTER = "c_redemption_branch_center"
+    const val Beneficiary_ACCOUNT_NUMBER = "c_beneficiary_account_number"
+    const val Beneficiary_PASSPORT_NUMBER = "c_passport_id"
 }
 
 object RequestModelConstants{

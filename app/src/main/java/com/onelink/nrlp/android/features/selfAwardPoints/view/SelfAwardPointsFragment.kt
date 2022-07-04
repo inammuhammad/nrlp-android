@@ -134,13 +134,13 @@ class SelfAwardPointsFragment :
                 getString(R.string.remittance_to_bank) -> {
                     isValidData = validateIbanFields()
                     transactionTypeBE = "ACC"
-                    beneficiaryType = SelfAwardRequestConstants.Beneficiary_ACCOUNT_NUMBER
+                    beneficiaryType = SelfAwardRequestConstants.Beneficiary_NIC_NICOP
                     userNumber = binding.etAccountNumber.text.toString()
                 }
                 getString(R.string.remittance_to_passport) -> {
                     isValidData = validatePassportData()
                     transactionTypeBE = "PPT"
-                    beneficiaryType = SelfAwardRequestConstants.Beneficiary_PASSPORT_NUMBER
+                    beneficiaryType = SelfAwardRequestConstants.Beneficiary_NIC_NICOP
                     userNumber = binding.etPassportNumber.text.toString()
                 }
             }

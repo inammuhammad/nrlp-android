@@ -17,6 +17,7 @@ import com.onelink.nrlp.android.features.complaint.viewmodel.RegComplaintSharedV
 import com.onelink.nrlp.android.features.select.city.model.CitiesModel
 import com.onelink.nrlp.android.features.select.country.model.CountryCodeModel
 import com.onelink.nrlp.android.features.select.country.view.SelectCountryFragment
+import com.onelink.nrlp.android.features.select.generic.model.BranchCenterModel
 import com.onelink.nrlp.android.features.select.generic.view.SelectBranchCenterFragment
 import kotlinx.android.synthetic.main.beneficiary_activity.*
 import javax.inject.Inject
@@ -30,6 +31,7 @@ class RegComplaintActivity:
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var complainSharedViewModelReg : RegComplaintSharedViewModel
     lateinit var listener: SelectCountryFragment.OnSelectCountryListener
+    lateinit var listenerBranchCenter: SelectBranchCenterFragment.OnSelectBranchCenterListener
     val selectedCountry = MutableLiveData<CountryCodeModel>()
     override fun getLayoutRes() = R.layout.activity_complaint
 
@@ -54,8 +56,8 @@ class RegComplaintActivity:
             fragment.setOnClickListener(this)
         }else if(fragment is RegComplaintDetailsFragment){
             listener = fragment
+            listenerBranchCenter = fragment
         }
-
     }
 
     companion object {
@@ -73,8 +75,8 @@ class RegComplaintActivity:
         listener.onSelectCountryListener(countryCodeModel)
     }
 
-    override fun onSelectBranchCenterListener(citiesModel: CitiesModel) {
-
+    override fun onSelectBranchCenterListener(branchCenterModel: BranchCenterModel) {
+        listenerBranchCenter.onSelectBranchCenterListener(branchCenterModel)
     }
 
 }

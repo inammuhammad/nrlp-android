@@ -17,7 +17,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.play.core.review.ReviewManagerFactory
-import com.google.android.play.core.review.testing.FakeReviewManager
 import com.onelink.nrlp.android.BuildConfig
 import com.onelink.nrlp.android.OneLinkApplication
 import com.onelink.nrlp.android.R
@@ -32,6 +31,7 @@ import com.onelink.nrlp.android.features.complaint.view.RegComplaintActivity
 import com.onelink.nrlp.android.features.contactus.view.ContactUsActivity
 import com.onelink.nrlp.android.features.faqs.view.FAQsActivity
 import com.onelink.nrlp.android.features.home.fragments.*
+import com.onelink.nrlp.android.features.home.fragments.popup.GeneralInfoFragment
 import com.onelink.nrlp.android.features.home.sidemenu.*
 import com.onelink.nrlp.android.features.home.viewmodel.HomeActivityViewModel
 import com.onelink.nrlp.android.features.language.view.LanguageActivity
@@ -44,7 +44,6 @@ import com.onelink.nrlp.android.utils.Constants
 import com.onelink.nrlp.android.utils.dialogs.OneLinkAlertDialogsFragment
 import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
 import com.onelink.nrlp.android.utils.toSpanned
-import java.lang.Exception
 import java.util.*
 import javax.inject.Inject
 
@@ -172,10 +171,10 @@ class HomeActivity :
         binding.sideMenu.rvSideMenu.adapter = sideMenuOptionsAdapter
     }
 
-    fun enableSideMenuDrawer(enabled:Boolean){
-        if(enabled){
+    fun enableSideMenuDrawer(enabled: Boolean) {
+        if (enabled) {
             binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
-        }else{
+        } else {
             binding.drawerLayout.closeDrawers()
             binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
         }
@@ -185,6 +184,22 @@ class HomeActivity :
         binding.toolbar.setRightButtonVisible(false)
         binding.toolbar.setNotificationCountVisible(false)
         binding.toolbar.setLeftButtonVisible(false)
+    }
+
+    fun showHomeScreenTools() {
+        binding.toolbar.setRightButtonVisible(true)
+        binding.toolbar.setNotificationCountVisible(true)
+        binding.toolbar.setLeftButtonVisible(true)
+        binding.toolbar.setLeftButton(ContextCompat.getDrawable(this, R.drawable.ic_side_menu))
+        binding.toolbar.setLeftButtonClickListener(View.OnClickListener { toggleMenu() })
+    }
+
+    fun showBackArrow() {
+        binding.toolbar.setLeftButtonVisible(true)
+        binding.toolbar.setLeftButton(ContextCompat.getDrawable(this, R.drawable.ic_back))
+        binding.toolbar.setLeftButtonClickListener(View.OnClickListener {
+            keyEventSender()
+        })
     }
 
     private fun onSideMenuItemClicked(sideMenuOptionsItemModel: SideMenuOptionsItemModel) {
@@ -303,6 +318,10 @@ class HomeActivity :
         binding.toolbar.setNotificationCount(count)
     }
 
+    fun keyEventSender() {
+        dispatchKeyEvent(KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_BACK))
+    }
+
     override fun onResume() {
         super.onResume()
         val fragment = getCurrentFragment() as BaseFragment<*, *>?
@@ -338,6 +357,8 @@ class HomeActivity :
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             val fragment = getCurrentFragment() as BaseFragment<*, *>?
             fragment?.let {
+                if (it is GeneralInfoFragment)
+                    showHomeScreenTools()
                 if (it !is NadraVerificationRequiredFragment && it !is FatherNameVerificationFragment) {
                     onBack()
                 }

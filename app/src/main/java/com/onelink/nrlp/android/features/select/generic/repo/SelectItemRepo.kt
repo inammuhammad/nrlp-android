@@ -8,6 +8,7 @@ import com.onelink.nrlp.android.data.ServiceGateway
 import com.onelink.nrlp.android.features.select.city.model.CitiesRequest
 import com.onelink.nrlp.android.features.select.city.model.CitiesResponseModel
 import com.onelink.nrlp.android.features.select.generic.model.BranchCenterRequestModel
+import com.onelink.nrlp.android.features.select.generic.model.BranchCenterResponseModel
 import com.onelink.nrlp.android.models.GeneralMessageResponseModel
 import javax.inject.Inject
 
@@ -16,7 +17,7 @@ class SelectItemRepo @Inject constructor(
     private val serviceGateway: ServiceGateway
 ) {
 
-    val branchCentersResponse = MutableLiveData<BaseResponse<GeneralMessageResponseModel>>()
+    val branchCentersResponse = MutableLiveData<BaseResponse<BranchCenterResponseModel>>()
 
     fun getBranchCenter(branchCenterRequestModel: BranchCenterRequestModel) {
         networkHelper.serviceCall((serviceGateway.getBranchCenter(branchCenterRequestModel)))
@@ -26,7 +27,7 @@ class SelectItemRepo @Inject constructor(
     }
 
     fun observeBranchCenter() =
-        branchCentersResponse as LiveData<BaseResponse<GeneralMessageResponseModel>>
+        branchCentersResponse as LiveData<BaseResponse<BranchCenterResponseModel>>
 
     fun onClear() {
         networkHelper.dispose()

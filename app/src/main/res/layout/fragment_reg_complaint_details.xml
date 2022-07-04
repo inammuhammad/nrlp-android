@@ -1063,7 +1063,7 @@
                             android:layout_height="wrap_content"
                             android:focusable="false"
                             android:hint="@string/dummy_country"
-                            android:text="@={viewModel.country}"
+                            android:text="@={viewModel.redemptionBranchCenter}"
                             android:visibility="gone"
                             android:layout_marginTop="@dimen/unit_8dp"
                             app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"

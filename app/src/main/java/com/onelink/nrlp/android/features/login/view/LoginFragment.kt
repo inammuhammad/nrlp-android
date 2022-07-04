@@ -81,8 +81,11 @@ class LoginFragment :
 
                 Status.SUCCESS -> {
                     response.data?.let {
-                        if(it.data.key == "" || it.data.key.isEmpty())
-                            showGeneralErrorDialog(this, BaseError("", resources.getString(R.string.something_went_wrong)))
+                        if (it.data.key == "" || it.data.key.isEmpty())
+                            showGeneralErrorDialog(
+                                this,
+                                BaseError("", resources.getString(R.string.something_went_wrong))
+                            )
                         else {
                             this.viewModel.loginCall(
                                 binding.rgSelectAccountType.checkedRadioButtonId,
@@ -108,17 +111,23 @@ class LoginFragment :
         })
         val sharedPref = activity?.getSharedPreferences("beneficiarySp", Context.MODE_PRIVATE)
         val editor: SharedPreferences.Editor = sharedPref?.edit() ?: return
-        val remittanceReceiverSP = activity?.getSharedPreferences("remittanceReceiverSp", Context.MODE_PRIVATE)
+        val remittanceReceiverSP =
+            activity?.getSharedPreferences("remittanceReceiverSp", Context.MODE_PRIVATE)
         val editor1: SharedPreferences.Editor = remittanceReceiverSP?.edit() ?: return
         editor1.putBoolean("remitterPopupDisplayed", true)
         editor1.commit()
+        val generalPopupSP = activity?.getSharedPreferences("generalPopupSP", Context.MODE_PRIVATE)
+        val editor2: SharedPreferences.Editor = generalPopupSP?.edit() ?: return
+        editor2.putBoolean("generalPopupDisplayed", false)
+        editor2.commit()
 
         viewModel.observeLogin().observe(this, { response ->
             when (response.status) {
                 Status.SUCCESS -> {
                     oneLinkProgressDialog.hideProgressDialog()
                     response.data?.no_of_beneficiaries_allowed?.let {
-                        editor.putInt("no_of_beneficiaries_allowed",
+                        editor.putInt(
+                            "no_of_beneficiaries_allowed",
                             it
                         )
                     }

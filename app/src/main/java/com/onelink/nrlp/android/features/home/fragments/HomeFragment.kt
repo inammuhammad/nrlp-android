@@ -116,8 +116,6 @@ open class HomeFragment :
         UserData.getUser()?.let {
             //checkNadraVerification(it)
             displayPopups(it)
-            if(it.accountType != Constants.BENEFICIARY.toLowerCase(Locale.getDefault()))
-                checkReceiverAdded(it)
             if(it.accountType == "beneficiary") {
                 binding.containerAnnualRemittance.invisible()
             }
@@ -158,13 +156,20 @@ open class HomeFragment :
     }
 
     private fun displayPopups(userModel: UserModel) {
+        val generalPopupSP =
+            activity?.getSharedPreferences("generalPopupSP", Context.MODE_PRIVATE)
+        val popupDisplayed = generalPopupSP?.getBoolean("generalPopupDisplayed", true)
+
         if (userModel.fatherName.isNullOrEmpty() &&
             UserData.getUser()?.accountType?.toLowerCase(Locale.ROOT) != Constants.BENEFICIARY.toLowerCase(
                 Locale.ROOT
             )
         ) {
             viewModel.navigateFatherNameVerification(fragmentHelper)
-        } else {
+        } else if (userModel.accountType != Constants.BENEFICIARY.toLowerCase(Locale.getDefault()) && userModel.receiverCount == 0) {
+            checkReceiverAdded(userModel)
+        } else if (popupDisplayed == false) {
+            generalPopupSP?.edit()?.putBoolean("generalPopupDisplayed", true)?.commit()
             val userType = UserData.getUser()?.accountType
             val accountStatus = UserData.getUser()?.nadraStatus
             if (userType != null && accountStatus != null) {
@@ -175,7 +180,7 @@ open class HomeFragment :
 
     private fun checkReceiverAdded(userModel: UserModel){
         try {
-            if (userModel.receiverCount!! == 0) {
+            //if (userModel.receiverCount!! == 0) {
                 val remittanceReceiverSP =
                     activity?.getSharedPreferences("remittanceReceiverSp", Context.MODE_PRIVATE)
                 val limit = remittanceReceiverSP?.getBoolean("remitterPopupDisplayed", true)
@@ -187,7 +192,7 @@ open class HomeFragment :
                         startActivity(intent)
                     }
                 } catch (e: Exception) {}
-            }
+            //}
         }catch (e: Exception){}
     }
 

@@ -1,13 +1,14 @@
 package com.onelink.nrlp.android.features.home.fragments.popup
 
 import android.os.Bundle
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.onelink.nrlp.android.R
 import com.onelink.nrlp.android.core.BaseFragment
-import com.onelink.nrlp.android.features.home.fragments.HomeFragmentViewModel
+import com.onelink.nrlp.android.data.local.UserData
 import com.onelink.nrlp.android.databinding.FragmentGeneralInfoBinding
+import com.onelink.nrlp.android.features.home.fragments.HomeFragmentViewModel
 import com.onelink.nrlp.android.features.home.view.HomeActivity
+import com.onelink.nrlp.android.utils.Constants
 import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
 import com.onelink.nrlp.android.utils.setOnSingleClickListener
 import dagger.android.support.AndroidSupportInjection
@@ -39,15 +40,25 @@ class GeneralInfoFragment(message: String?) :
         super.init(savedInstanceState)
         binding.lifecycleOwner = this
         (activity as HomeActivity).hideHomeScreenTools()
+        (activity as HomeActivity).showBackArrow()
         binding.tvInfo.text = displayText
+        setUserTypeImage()
         initListeners()
     }
 
     private fun initListeners() {
 
         binding.btnNext.setOnSingleClickListener {
-            activity?.onBackPressed()
+            (activity as HomeActivity).showHomeScreenTools() //activity?.let { HomeActivity.start(it) }
+            (activity as HomeActivity).keyEventSender()
         }
+    }
+
+    private fun setUserTypeImage() {
+        if (UserData.getUser()?.accountType.equals(Constants.REMITTER, ignoreCase = true))
+            binding.ivPopupImage.setImageResource(R.drawable.ic_register)
+        else
+            binding.ivPopupImage.setImageResource(R.drawable.ic_loyalty_points_tile)
     }
 
     companion object {
