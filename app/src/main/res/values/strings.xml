@@ -489,4 +489,5 @@
     <string name="search_branch_center">Search Branch/Center</string>
     <string name="error_self_award_not_eligible">Dear Customer, You are not eligible to perform self award transaction against previous fiscal year</string>
     <string name="error_self_award_not_allowed">Dear Customer, You are not allowed to claim the loyalty points against the provided transaction</string>
+    <string name="redemption_service_help">Select the type of remittance service you use to send money</string>
 </resources>

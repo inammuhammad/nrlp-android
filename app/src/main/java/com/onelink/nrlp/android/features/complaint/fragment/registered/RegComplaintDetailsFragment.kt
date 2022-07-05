@@ -324,14 +324,26 @@ class RegComplaintDetailsFragment :
         }
 
         binding.tvMobileNumber.setOnSingleClickListener {
-            showGeneralAlertDialog(this, "SelfAward", getString(R.string.redemption_country_help))
+            showGeneralAlertDialog(
+                this,
+                "SelfAward",
+                getString(R.string.redemption_mobile_number_help)
+            )
         }
 
         binding.tvDetails.setOnSingleClickListener {
             showGeneralAlertDialog(
                 this,
                 "SelfAward",
-                getString(R.string.redemption_mobile_number_help)
+                getString(R.string.error_enter_details)
+            )
+        }
+
+        binding.tvUnableToSelfAward.setOnSingleClickListener {
+            showGeneralAlertDialog(
+                this,
+                "SelfAward",
+                getString(R.string.redemption_service_help)
             )
         }
     }

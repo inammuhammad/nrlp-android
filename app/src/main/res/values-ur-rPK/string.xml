@@ -437,4 +437,5 @@
     <string name="search_branch_center">Search Branch/Center</string>
     <string name="error_self_award_not_eligible">معزز صارف، آپ پچھلے سال کی ترسیالت زر پر پوائنٹس حاصل کرنے کے اہل نہیں ہیں</string>
     <string name="error_self_award_not_allowed">معزز صارف، آپ کو فراہم کردہ ترسیالت زر کے خالف پوائنٹس حاصل کرنے کی اجازت نہیں ہے</string>
+    <string name="redemption_service_help">ترسیلاتِ زر کی وہ قسم منتخب کریں جسے آپ رقم بھیجنے کے لیے استعمال کرتے ہیں</string>
 </resources>
