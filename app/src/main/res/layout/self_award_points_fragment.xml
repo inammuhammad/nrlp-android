@@ -382,7 +382,8 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/cnic_nicop_hint"
                     android:imeOptions="actionDone|flagForceAscii"
-                    android:maxLength="24"
+                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+                    android:maxLength="20"
                     android:maxLines="1"
                     android:text="@={viewModel.passportNumber}" />
             </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>

@@ -29,6 +29,7 @@ import com.onelink.nrlp.android.features.login.helper.CnicTextHelper
 import com.onelink.nrlp.android.features.profile.disabled
 import com.onelink.nrlp.android.features.redeem.adapter.RedemPartnerAdapter
 import com.onelink.nrlp.android.features.redeem.model.RedeemPartnerModel
+import com.onelink.nrlp.android.features.select.banksandexchange.view.SelectBanksAndExchangeFragment
 import com.onelink.nrlp.android.features.select.country.model.CountryCodeModel
 import com.onelink.nrlp.android.features.select.country.view.SelectCountryFragment
 import com.onelink.nrlp.android.features.select.generic.model.BranchCenterModel
@@ -47,6 +48,7 @@ class RegComplaintDetailsFragment :
     BaseFragment<RegComplaintSharedViewModel, FragmentRegComplaintDetailsBinding>(
         RegComplaintSharedViewModel::class.java
     ), SelectCountryFragment.OnSelectCountryListener,
+    SelectBanksAndExchangeFragment.OnSelectBanksExchangeListener,
     SelectBranchCenterFragment.OnSelectBranchCenterListener {
 
     @Inject
@@ -291,6 +293,15 @@ class RegComplaintDetailsFragment :
         binding.BranchCenter.setOnSingleClickListener {
             fragmentHelper.addFragment(
                 SelectBranchCenterFragment.newInstance(viewModel.redemptionPartners.value.toString()),
+                clearBackStack = false,
+                addToBackStack = true
+            )
+        }
+
+        binding.vBanksAndExchange.setOnSingleClickListener {
+            hideKeyboard()
+            fragmentHelper.addFragment(
+                SelectBanksAndExchangeFragment.newInstance(),
                 clearBackStack = false,
                 addToBackStack = true
             )
@@ -1162,7 +1173,7 @@ class RegComplaintDetailsFragment :
                         binding.etBeneficiaryAccount.text.toString().removeDashes()
                     )
                     jsonObject.addProperty(
-                        SelfAwardRequestConstants.Transaction_TYPE,
+                        ComplaintRequestModelConstants.SELF_AWARD_TYPE,
                         "COC" //viewModel.transactionType.value,
                     )
                 }
@@ -1172,7 +1183,7 @@ class RegComplaintDetailsFragment :
                         binding.etBeneficiaryPassport.text.toString()
                     )
                     jsonObject.addProperty(
-                        SelfAwardRequestConstants.Transaction_TYPE,
+                        ComplaintRequestModelConstants.SELF_AWARD_TYPE,
                         "PPT" //viewModel.transactionType.value,
                     )
                 }
@@ -1182,7 +1193,7 @@ class RegComplaintDetailsFragment :
                         binding.etBeneficiaryIban.text.toString()
                     )
                     jsonObject.addProperty(
-                        SelfAwardRequestConstants.Transaction_TYPE,
+                        ComplaintRequestModelConstants.SELF_AWARD_TYPE,
                         "ACC" //viewModel.transactionType.value,
                     )
                 }
@@ -1200,7 +1211,7 @@ class RegComplaintDetailsFragment :
                 if (binding.etUSCBEOENumber.text.toString() != "")
                     jsonObject.addProperty(
                         ComplaintRequestModelConstants.Redemption_USC_BEOE_NUMBER,
-                        binding.etUSCBEOENumber.text.toString()
+                        "+92" + binding.etUSCBEOENumber.text.toString()
                     )
                 if (binding.NadraPassportCountry.text.toString() != "")
                     jsonObject.addProperty(
@@ -1353,6 +1364,12 @@ class RegComplaintDetailsFragment :
         viewModel.redemptionBranchCenter.value = branchCenterModel.branchCenterName
         binding.BranchCenter.colorToText(R.color.black)
         viewModel.validationBranchCenterPassed.postValue(true)
+        fragmentHelper.onBack()
+    }
+
+    override fun onSelectBanksExchangeListener(banksAndExchangeModel: String) {
+        viewModel.remittingEntity.value = banksAndExchangeModel
+        viewModel.validationRemittingEntityPassed.postValue(true)
         fragmentHelper.onBack()
     }
 

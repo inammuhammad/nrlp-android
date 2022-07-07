@@ -97,10 +97,12 @@ open class HomeFragment :
             when (response.status) {
                 Status.SUCCESS -> {
                     oneLinkProgressDialog.hideProgressDialog()
-                    viewModel.navigateGeneralInfo(
-                        fragmentHelper,
-                        response.data?.popupData?.displayText
-                    )
+                    if (response.data?.popupData?.isShown == 1) {
+                        viewModel.navigateGeneralInfo(
+                            fragmentHelper,
+                            response.data?.popupData?.displayText
+                        )
+                    }
                 }
                 Status.LOADING -> {
                     oneLinkProgressDialog.showProgressDialog(context)
@@ -166,8 +168,6 @@ open class HomeFragment :
             )
         ) {
             viewModel.navigateFatherNameVerification(fragmentHelper)
-        } else if (userModel.accountType != Constants.BENEFICIARY.toLowerCase(Locale.getDefault()) && userModel.receiverCount == 0) {
-            checkReceiverAdded(userModel)
         } else if (popupDisplayed == false) {
             generalPopupSP?.edit()?.putBoolean("generalPopupDisplayed", true)?.commit()
             val userType = UserData.getUser()?.accountType
@@ -175,6 +175,8 @@ open class HomeFragment :
             if (userType != null && accountStatus != null) {
                 viewModel.getPopupMessage(userType, accountStatus)
             }
+        } else if (userModel.accountType != Constants.BENEFICIARY.toLowerCase(Locale.getDefault()) && userModel.receiverCount == 0) {
+            checkReceiverAdded(userModel)
         }
     }
 

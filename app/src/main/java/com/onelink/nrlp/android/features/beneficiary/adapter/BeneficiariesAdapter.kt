@@ -37,7 +37,7 @@ class BeneficiariesAdapter(
             beneficiaryDetailsModels[position]
         holder.beneficiaryListItemBinding.root.tvCnic.text =
             String.format(beneficiaryDetailsModels[position].nicNicop.toString().formattedCnicNumber())
-        if (beneficiaryDetailsModels[position].isActive) {
+        if (beneficiaryDetailsModels[position].nadraStatusCode == "A") {
             holder.beneficiaryListItemBinding.root.pendingTextView.visibility = View.GONE
             holder.beneficiaryListItemBinding.root.activeTextView.visibility = View.VISIBLE
         } else {

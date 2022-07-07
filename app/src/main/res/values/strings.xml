@@ -482,11 +482,12 @@
     <string name="var_space_var" translatable="false">%1s %2s</string>
     <string name="complaint_country">Country</string>
     <string name="branch_center">Branch/Center</string>
-    <string name="beneficiary_passport_help">Enter Beneficiary Passport</string>
+    <string name="beneficiary_passport_help">Enter Beneficiary Passport Number</string>
     <string name="redemption_branch_center_help">Mention visiting Branch/Center</string>
     <string name="redemption_mobile_number_help">Enter Pakistan Mobile Number</string>
     <string name="redemption_country_help">Mention the country from where the service was applied</string>
     <string name="search_branch_center">Search Branch/Center</string>
+    <string name="search_bank_exchange">Search Bank &amp; Exchange Company</string>
     <string name="error_self_award_not_eligible">Dear Customer, You are not eligible to perform self award transaction against previous fiscal year</string>
     <string name="error_self_award_not_allowed">Dear Customer, You are not allowed to claim the loyalty points against the provided transaction</string>
     <string name="redemption_service_help">Select the type of remittance service you use to send money</string>

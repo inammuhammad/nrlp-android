@@ -15,10 +15,12 @@ data class BeneficiaryDetailsModel(
     @SerializedName("alias") val alias: String,
     @SerializedName("relationship") val relationship: String,
     @SerializedName("country") val country: String,
-    @SerializedName("updated_at") val updatedAt:String
+    @SerializedName("updated_at") val updatedAt: String,
+    @SerializedName("nadra_status_code") val nadraStatusCode: String?
 ) {
     val isActive: Boolean
         get() = _isActive.toBoolean()
+    //val isNadraActive: Boolean = nadraStatusCode == "A"
 }
 
 fun Int.toBoolean() = this == 1

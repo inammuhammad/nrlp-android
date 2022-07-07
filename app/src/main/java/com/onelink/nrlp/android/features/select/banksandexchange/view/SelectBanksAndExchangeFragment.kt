@@ -1,4 +1,4 @@
-package com.onelink.nrlp.android.features.select.generic.view
+package com.onelink.nrlp.android.features.select.banksandexchange.view
 
 import android.content.Context
 import android.os.Bundle
@@ -10,22 +10,19 @@ import com.onelink.nrlp.android.R
 import com.onelink.nrlp.android.core.BaseFragment
 import com.onelink.nrlp.android.core.Status
 import com.onelink.nrlp.android.databinding.SelectCountryCodeFragmentBinding
-import com.onelink.nrlp.android.features.select.city.adapter.CitiesAdapter
-import com.onelink.nrlp.android.features.select.city.model.CitiesModel
-import com.onelink.nrlp.android.features.select.city.view.SelectCityFragment
-import com.onelink.nrlp.android.features.select.generic.adapter.BranchCenterAdapter
+import com.onelink.nrlp.android.features.select.banksandexchange.adapter.BanksAndExchangeAdapter
+import com.onelink.nrlp.android.features.select.banksandexchange.viewmodel.SelectBanksAndExchangeViewModel
 import com.onelink.nrlp.android.features.select.generic.model.BranchCenterModel
 import com.onelink.nrlp.android.features.select.generic.viewmodel.SelectItemViewModel
 import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
-class SelectBranchCenterFragment(type: String = "USC") :
-    BaseFragment<SelectItemViewModel, SelectCountryCodeFragmentBinding>(
-        SelectItemViewModel::class.java
+class SelectBanksAndExchangeFragment() :
+    BaseFragment<SelectBanksAndExchangeViewModel, SelectCountryCodeFragmentBinding>(
+        SelectBanksAndExchangeViewModel::class.java
     ) {
 
-    var pseName = type
     var pageNum = 0
 
     @Inject
@@ -33,11 +30,11 @@ class SelectBranchCenterFragment(type: String = "USC") :
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    lateinit var listener: OnSelectBranchCenterListener
+    lateinit var listener: OnSelectBanksExchangeListener
 
-    lateinit var cityAdapter: BranchCenterAdapter
+    lateinit var cityAdapter: BanksAndExchangeAdapter
 
-    fun setOnClickListener(listener: OnSelectBranchCenterListener) {
+    fun setOnClickListener(listener: OnSelectBanksExchangeListener) {
         this.listener = listener
     }
 
@@ -46,7 +43,7 @@ class SelectBranchCenterFragment(type: String = "USC") :
     override fun onAttach(context: Context) {
         super.onAttach(context)
         try {
-            listener = context as OnSelectBranchCenterListener
+            listener = context as OnSelectBanksExchangeListener
         } catch (e: ClassCastException) {
             throw ClassCastException(
                 "$context must implement OnArticleSelectedListener"
@@ -60,16 +57,15 @@ class SelectBranchCenterFragment(type: String = "USC") :
         AndroidSupportInjection.inject(this)
     }
 
-    override fun getViewM(): SelectItemViewModel =
-        ViewModelProvider(this, viewModelFactory).get(SelectItemViewModel::class.java)
+    override fun getViewM(): SelectBanksAndExchangeViewModel =
+        ViewModelProvider(this, viewModelFactory).get(SelectBanksAndExchangeViewModel::class.java)
 
     override fun init(savedInstanceState: Bundle?) {
         super.init(savedInstanceState)
 
-        viewModel.getBranchCenter(pseName)
 
         //binding.btnLoadMore.visibility = View.VISIBLE
-        binding.countrySearch.queryHint = resources.getString(R.string.search_branch_center)
+        binding.countrySearch.queryHint = resources.getString(R.string.search_bank_exchange)
         binding.btnLoadMore.setOnClickListener {
             pageNum += 1
             //viewModel.getCities(binding.countrySearch.query.toString(), pageNum)
@@ -93,22 +89,32 @@ class SelectBranchCenterFragment(type: String = "USC") :
 
         })
 
+        var banksAndExchangeList: ArrayList<String> = viewModel.bcList
+        binding.rvCountries.setHasFixedSize(true)
+        cityAdapter = BanksAndExchangeAdapter(
+            banksAndExchangeList,
+            listener::onSelectBanksExchangeListener
+        )
+        binding.rvCountries.layoutManager =
+            LinearLayoutManager(requireContext())
+        binding.rvCountries.adapter = cityAdapter
+
         viewModel.observeBranchCenter().observe(this, Observer { response ->
             when (response.status) {
                 Status.SUCCESS -> {
                     oneLinkProgressDialog.hideProgressDialog()
-                    response.data?.let {
-                        var branchCenterList: ArrayList<BranchCenterModel> = it.branchCenterList
-                        //it.citiesList.sortedWith(compareBy { listItem -> listItem.city })
+                    /*response.data?.let {
+                        //var banksAndExchangeList: ArrayList<BranchCenterModel> = it.branchCenterList
+                        var banksAndExchangeList: ArrayList<String> = viewModel.bcList
                         binding.rvCountries.setHasFixedSize(true)
-                        cityAdapter = BranchCenterAdapter(
-                            branchCenterList,
-                            listener::onSelectBranchCenterListener
+                        cityAdapter = BanksAndExchangeAdapter(
+                            banksAndExchangeList,
+                            listener::onSelectBanksExchangeListener
                         )
                         binding.rvCountries.layoutManager =
                             LinearLayoutManager(requireContext())
                         binding.rvCountries.adapter = cityAdapter
-                    }
+                    }*/
                 }
                 Status.ERROR -> {
                     oneLinkProgressDialog.hideProgressDialog()
@@ -123,13 +129,13 @@ class SelectBranchCenterFragment(type: String = "USC") :
         })
     }
 
-    interface OnSelectBranchCenterListener {
-        fun onSelectBranchCenterListener(branchCenterModel: BranchCenterModel)
+    interface OnSelectBanksExchangeListener {
+        fun onSelectBanksExchangeListener(banksAndExchangeModel: String)
     }
 
 
     companion object {
         @JvmStatic
-        fun newInstance(type: String = "USC") = SelectBranchCenterFragment(type)
+        fun newInstance() = SelectBanksAndExchangeFragment()
     }
 }

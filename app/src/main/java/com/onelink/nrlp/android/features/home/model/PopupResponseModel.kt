@@ -7,5 +7,6 @@ data class PopupResponseModel(
 )
 
 data class PopupData(
-    @SerializedName("display_text") val displayText: String?
+    @SerializedName("display_text") val displayText: String?,
+    @SerializedName("is_shown") val isShown: Int? = 0
 )

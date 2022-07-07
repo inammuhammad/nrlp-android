@@ -39,6 +39,8 @@ import com.onelink.nrlp.android.features.receiver.viewmodel.ReceiverViewModel
 import com.onelink.nrlp.android.features.redeem.viewmodels.*
 import com.onelink.nrlp.android.features.register.viewmodel.*
 import com.onelink.nrlp.android.features.select.bank.viewmodel.SelectBankFragmentViewModel
+import com.onelink.nrlp.android.features.select.banksandexchange.adapter.BanksAndExchangeAdapter
+import com.onelink.nrlp.android.features.select.banksandexchange.viewmodel.SelectBanksAndExchangeViewModel
 import com.onelink.nrlp.android.features.select.city.viewmodel.SelectCityFragmentViewModel
 import com.onelink.nrlp.android.features.select.country.viewmodel.SelectCountryFragmentViewModel
 import com.onelink.nrlp.android.features.select.generic.viewmodel.SelectItemViewModel
@@ -467,5 +469,10 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(SelectItemViewModel::class)
     internal abstract fun selectGenericItemViewModel(viewModel: SelectItemViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SelectBanksAndExchangeViewModel::class)
+    internal abstract fun selectBanksAndExchangeViewModel(viewModel: SelectBanksAndExchangeViewModel): ViewModel
 }
 

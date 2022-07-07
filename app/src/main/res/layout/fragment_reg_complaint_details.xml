@@ -284,6 +284,7 @@
                         android:src="@drawable/ic_edit_text_error"
                         android:textColor="@color/grey"
                         android:visibility="gone"
+                        android:layoutDirection="ltr"
                         app:layout_constraintBottom_toBottomOf="@id/BeneficaryCountry"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@id/BeneficaryCountry"
@@ -736,6 +737,8 @@
                             android:layout_height="wrap_content"
                             android:inputType="textPersonName"
                             android:maxLength="50"
+                            android:focusable="false"
+                            android:clickable="false"
                             android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
                             android:maxLines="1"
                             android:text="@={viewModel.remittingEntity}"
@@ -744,6 +747,17 @@
                             app:layout_constraintTop_toBottomOf="parent" />
 
                     </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/vBanksAndExchange"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_50sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:focusable="true"
+                        android:clickable="true"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvRemitting"
+                        app:layout_constraintBottom_toBottomOf="@id/til_remitting" />
 
                     <TextView
                         android:id="@+id/lyTransaction"
@@ -814,6 +828,7 @@
                         android:layout_marginEnd="@dimen/margin_large"
                         android:src="@drawable/ic_edit_text_error"
                         android:textColor="@color/grey"
+                        android:layoutDirection="ltr"
                         android:visibility="gone"
                         android:contentDescription="@null"
                         app:layout_constraintTop_toTopOf="@id/et_transactionDate"

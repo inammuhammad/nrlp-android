@@ -151,11 +151,12 @@ object ComplaintRequestModelConstants{
     const val Transaction_date = "c_transaction_date"
     const val Remitting_entity = "c_remitting_entity"
     const val Redemption_Partner = "c_redemption_partners"
-    const val Redemption_USC_BEOE_NUMBER = "c_redemption_mobile_number"
-    const val Redemption_NADRA_PASSPORT_COUNTRY = "c_redemption_nadra_passport_country"
-    const val Redemption_BRANCH_CENTER = "c_redemption_branch_center"
+    const val Redemption_USC_BEOE_NUMBER = "loc_mobile_no"
+    const val Redemption_NADRA_PASSPORT_COUNTRY = "country_for_nadra"
+    const val Redemption_BRANCH_CENTER = "branch_center"
     const val Beneficiary_ACCOUNT_NUMBER = "c_beneficiary_account_number"
     const val Beneficiary_PASSPORT_NUMBER = "c_passport_id"
+    const val SELF_AWARD_TYPE = "self_award_type"
 }
 
 object RequestModelConstants{

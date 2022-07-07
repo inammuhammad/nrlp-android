@@ -14,6 +14,7 @@ import com.onelink.nrlp.android.features.complaint.fragment.registered.RegCompla
 import com.onelink.nrlp.android.features.complaint.fragment.registered.RegComplaintTypeFragment
 import com.onelink.nrlp.android.features.complaint.viewmodel.ComplaintViewModel
 import com.onelink.nrlp.android.features.complaint.viewmodel.RegComplaintSharedViewModel
+import com.onelink.nrlp.android.features.select.banksandexchange.view.SelectBanksAndExchangeFragment
 import com.onelink.nrlp.android.features.select.city.model.CitiesModel
 import com.onelink.nrlp.android.features.select.country.model.CountryCodeModel
 import com.onelink.nrlp.android.features.select.country.view.SelectCountryFragment
@@ -25,13 +26,15 @@ import javax.inject.Inject
 class RegComplaintActivity:
     BaseFragmentActivity<ActivityComplaintBinding, ComplaintViewModel>(ComplaintViewModel::class.java),
     SelectCountryFragment.OnSelectCountryListener,
-    SelectBranchCenterFragment.OnSelectBranchCenterListener
+    SelectBranchCenterFragment.OnSelectBranchCenterListener,
+    SelectBanksAndExchangeFragment.OnSelectBanksExchangeListener
 {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var complainSharedViewModelReg : RegComplaintSharedViewModel
     lateinit var listener: SelectCountryFragment.OnSelectCountryListener
     lateinit var listenerBranchCenter: SelectBranchCenterFragment.OnSelectBranchCenterListener
+    lateinit var listenerBanksAndExchange: SelectBanksAndExchangeFragment.OnSelectBanksExchangeListener
     val selectedCountry = MutableLiveData<CountryCodeModel>()
     override fun getLayoutRes() = R.layout.activity_complaint
 
@@ -57,6 +60,7 @@ class RegComplaintActivity:
         }else if(fragment is RegComplaintDetailsFragment){
             listener = fragment
             listenerBranchCenter = fragment
+            listenerBanksAndExchange = fragment
         }
     }
 
@@ -77,6 +81,10 @@ class RegComplaintActivity:
 
     override fun onSelectBranchCenterListener(branchCenterModel: BranchCenterModel) {
         listenerBranchCenter.onSelectBranchCenterListener(branchCenterModel)
+    }
+
+    override fun onSelectBanksExchangeListener(banksAndExchangeModel: String) {
+        listenerBanksAndExchange.onSelectBanksExchangeListener(banksAndExchangeModel)
     }
 
 }

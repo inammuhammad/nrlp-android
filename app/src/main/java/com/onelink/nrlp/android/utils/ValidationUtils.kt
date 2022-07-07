@@ -22,6 +22,7 @@ object ValidationUtils {
         "(^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)+$)|^$"
     private const val PHONE_NUMBER_VALIDATOR_REGEX = "^\\+?[1-9]\\d+$"
     private const val PK_VALIDATION_REGEX = "^(0)(3)([0-9]{9})\$"
+    private const val PASSPORT_VALIDATION_REGEX = "^(?!^0+$)[a-zA-Z0-9]{9,20}$"
 
     fun isValidAmount(value: String): Boolean {
         if (value.isEmpty()) {
@@ -126,7 +127,7 @@ object ValidationUtils {
     }
 
     fun isPassportNumberValid(string: String): Boolean {
-        return string.length >= 9
+        return Pattern.matches(PASSPORT_VALIDATION_REGEX, string)
     }
 
     fun isAmountValid(string: String): Boolean {

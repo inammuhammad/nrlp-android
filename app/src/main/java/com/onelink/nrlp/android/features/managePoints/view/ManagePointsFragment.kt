@@ -54,7 +54,8 @@ class ManagePointsFragment :
 
     private var listenerInitialized: Boolean = false
 
-    private var selectedBeneficiary = BeneficiaryDetailsModel(-1, BigInteger.ONE, "12312", 0, "", "", "","")
+    private var selectedBeneficiary =
+        BeneficiaryDetailsModel(-1, BigInteger.ONE, "12312", 0, "", "", "", "", "")
 
     override fun getLayoutRes() = R.layout.manage_points_fragment
 
