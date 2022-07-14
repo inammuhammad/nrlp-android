@@ -609,6 +609,18 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/errorTextSelfAward" />
 
+                    <ImageView
+                        android:id="@+id/icHelpPassport"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginTop="@dimen/margin_large"
+                        android:src="@drawable/ic_baseline_info_24"
+                        app:layout_constraintHorizontal_bias="0"
+                        android:visibility="gone"
+                        app:layout_constraintStart_toEndOf="@+id/tvBeneficiaryaccount"
+                        app:layout_constraintTop_toBottomOf="@id/spinnerSelfAwardType" />
+
                     <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
                         android:id="@+id/til_beneficiary_account"
                         android:layout_width="match_parent"

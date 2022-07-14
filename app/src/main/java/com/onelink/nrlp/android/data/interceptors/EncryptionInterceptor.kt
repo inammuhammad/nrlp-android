@@ -3,6 +3,7 @@ package com.onelink.nrlp.android.data.interceptors
 import android.content.Context
 import android.os.Build
 import android.widget.Toast
+import androidx.core.os.ConfigurationCompat
 import com.google.gson.Gson
 import com.onelink.nrlp.android.data.local.UserData
 import com.onelink.nrlp.android.utils.*
@@ -98,6 +99,12 @@ class EncryptionInterceptor(val context: Context) : Interceptor {
             HeaderConstants.DEVICE_NAME,
             android.os.Build.MANUFACTURER + " " + android.os.Build.MODEL, headers, keyIV
         )
+
+        /*addOrRemoveHeader(
+            encryptedRequest,
+            HeaderConstants.APPLICATION_LANGUAGE,
+            LocaleManager.getLanguagePref(context).toString() , headers, keyIV
+        )*/
 
         return encryptedRequest
             .method(request.method(), body)

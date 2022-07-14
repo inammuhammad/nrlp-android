@@ -94,6 +94,7 @@ object HeaderConstants {
     const val BEARER = "Bearer "
     const val DEVICE_ID = "device_id"
     const val APPLICATION_VERSION = "application_version"
+    const val APPLICATION_LANGUAGE = "application_language"
     const val RANDOM_KEY = "random_key"
     const val SESSION_KEY = "session_key"
     const val DEVICE_NAME = "device_name"

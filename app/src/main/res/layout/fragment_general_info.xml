@@ -20,18 +20,23 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:src="@drawable/ic_register" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/TextViewSmall"
-            android:layout_marginTop="@dimen/_80sdp"
-            android:maxWidth="@dimen/_250sdp"
-            android:gravity="center"
-            android:textColor="@color/black"
+        <ScrollView
+            android:layout_width="@dimen/_300sdp"
+            android:layout_height="@dimen/_200sdp"
             app:layout_constraintTop_toBottomOf="@id/ivPopupImage"
             app:layout_constraintStart_toStartOf="@id/ivPopupImage"
-            app:layout_constraintEnd_toEndOf="@id/ivPopupImage" />
+            app:layout_constraintEnd_toEndOf="@id/ivPopupImage">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TextViewSmall"
+                android:maxWidth="@dimen/_250sdp"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/essay_andy"
+                android:textColor="@color/black" />
+        </ScrollView>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnNext"

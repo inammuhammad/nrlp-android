@@ -357,6 +357,15 @@ class RegComplaintDetailsFragment :
                 getString(R.string.redemption_service_help)
             )
         }
+
+        binding.icHelpPassport.setOnClickListener {
+            //showWarningDialog(getString(R.string.transaction_eligibity_for_self_award))
+            showGeneralAlertDialog(
+                this,
+                "SelfAward",
+                getString(R.string.beneficiary_passport_help)
+            )
+        }
     }
 
     private fun initViews(){
@@ -934,12 +943,12 @@ class RegComplaintDetailsFragment :
 
         viewModel.redemptionPartners.observe(this, {
             viewModel.clearValidations()
-            if (it == "")
-                hideFurtherDetails()
-            else if (it.contains("USC", true) || it.contains("BEOE", true))
+            if (it.contains("USC", true) || it.contains("BEOE", true))
                 makeUSCBEOEView()
             else if (it.contains("PASSPORT", true) || it.contains("NADRA", true))
                 makeNadraPassportView()
+            else
+                hideFurtherDetails()
             clearRedemptionData()
         })
 
@@ -1417,6 +1426,7 @@ class RegComplaintDetailsFragment :
             etBeneficiaryPassport.visibility = View.GONE
             btnNext.visibility = View.VISIBLE
             binding.vBuffer.visibility = View.VISIBLE
+            icHelpPassport.visibility = View.GONE
             //icHelpBankAccountNumber.visibility = View.VISIBLE
         }
     }
@@ -1433,6 +1443,7 @@ class RegComplaintDetailsFragment :
             etBeneficiaryPassport.visibility = View.GONE
             btnNext.visibility = View.VISIBLE
             binding.vBuffer.visibility = View.VISIBLE
+            icHelpPassport.visibility = View.GONE
             //icHelpBankAccountNumber.visibility = View.GONE
         }
     }
@@ -1448,6 +1459,7 @@ class RegComplaintDetailsFragment :
             tilBeneficiaryPassport.visibility = View.VISIBLE
             etBeneficiaryPassport.visibility = View.VISIBLE
             binding.vBuffer.visibility = View.VISIBLE
+            icHelpPassport.visibility = View.VISIBLE
             //icHelpBankAccountNumber.visibility = View.GONE
         }
     }

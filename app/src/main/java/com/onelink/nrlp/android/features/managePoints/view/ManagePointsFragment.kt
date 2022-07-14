@@ -107,7 +107,7 @@ class ManagePointsFragment :
                     oneLinkProgressDialog.hideProgressDialog()
                     response.data?.data?.let { userData ->
                         for (i in userData) {
-                            if (i.isActive) {
+                            if (i.nadraStatusCode == "A") {
                                 list.add(i)
                                 listSpinner.add(i.alias)
                             }
