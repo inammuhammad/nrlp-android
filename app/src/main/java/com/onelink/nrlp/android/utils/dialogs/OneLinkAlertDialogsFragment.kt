@@ -3,6 +3,7 @@ package com.onelink.nrlp.android.utils.dialogs
 import android.app.Dialog
 import android.os.Bundle
 import android.text.Spanned
+import android.text.method.ScrollingMovementMethod
 import android.view.*
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
@@ -171,6 +172,7 @@ class OneLinkAlertDialogsFragment : DialogFragment() {
     private fun updateView() {
         ivDialog?.setImageResource(drawable)
         tvDialogTitle?.text = title
+        tvDialogTitle.movementMethod = ScrollingMovementMethod.getInstance();
         tvDialogSubTitle?.text = message
 
         if (isAlertOnly) {

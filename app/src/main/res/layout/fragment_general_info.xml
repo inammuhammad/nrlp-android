@@ -34,7 +34,6 @@
                 style="@style/TextViewSmall"
                 android:maxWidth="@dimen/_250sdp"
                 android:layout_gravity="center_horizontal"
-                android:text="@string/essay_andy"
                 android:textColor="@color/black" />
         </ScrollView>
 

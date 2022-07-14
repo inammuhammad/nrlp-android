@@ -145,6 +145,7 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
             "Register" -> showRegisterHelpDialog(fragment, msg)
             "SelfAward" -> showSelfAwardHelpDialog(fragment, msg)
             "USD" -> showUSDHelpDialog(fragment, msg)
+            "popup" -> showGeneralPopupDialog(fragment, msg)
         }
     }
 
@@ -200,7 +201,19 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
             .show(parentFragmentManager, ErrorDialogConstants.TAG_NO_INTERNET_CONNECTION_DIALOG)
     }
 
-    private fun showRemoteErrorDialog(fragment: Fragment, error: BaseError){
+    private fun showGeneralPopupDialog(fragment: Fragment, msg: String) {
+        OneLinkAlertDialogsFragment.Builder()
+            .setTargetFragment(fragment, ErrorDialogConstants.RC_NO_INTERNET_CONNECTION_DIALOG)
+            .setIsAlertOnly(true)
+            .setTitle(msg)
+            .setNeutralButtonText(getString(R.string.okay))
+            .setNegativeButtonText("")
+            .setPositiveButtonText("")
+            .setCancelable(false)
+            .show(parentFragmentManager, ErrorDialogConstants.TAG_NO_INTERNET_CONNECTION_DIALOG)
+    }
+
+    private fun showRemoteErrorDialog(fragment: Fragment, error: BaseError) {
         OneLinkAlertDialogsFragment.Builder()
             .setTargetFragment(fragment, ErrorDialogConstants.RC_GENERAL_SERVER_ERROR_DIALOG_CODE)
             .setIsAlertOnly(true)

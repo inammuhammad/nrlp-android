@@ -24,6 +24,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:maxHeight="@dimen/_180sdp"
+        android:maxLines="8"
+        android:scrollbars="vertical"
         tools:text="Beneficiary Created" />
 
     <TextView

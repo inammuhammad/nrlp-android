@@ -98,10 +98,15 @@ open class HomeFragment :
                 Status.SUCCESS -> {
                     oneLinkProgressDialog.hideProgressDialog()
                     if (response.data?.popupData?.isShown == 1) {
-                        viewModel.navigateGeneralInfo(
+                        showGeneralAlertDialog(
+                            this,
+                            "popup",
+                            resources.getString(R.string.essay_andy)//response.data?.popupData?.displayText.toString()
+                        )
+                        /*viewModel.navigateGeneralInfo(
                             fragmentHelper,
                             response.data?.popupData?.displayText
-                        )
+                        )*/
                     }
                 }
                 Status.LOADING -> {
@@ -118,15 +123,20 @@ open class HomeFragment :
         UserData.getUser()?.let {
             //checkNadraVerification(it)
             displayPopups(it)
-            if(it.accountType == "beneficiary") {
+            showGeneralAlertDialog(
+                this,
+                "popup",
+                resources.getString(R.string.essay_andy)//response.data?.popupData?.displayText.toString()
+            )
+            if (it.accountType == "beneficiary") {
                 binding.containerAnnualRemittance.invisible()
-            }
-            else {
+            } else {
                 binding.containerAnnualRemittance.visible()
             }
             binding.tvName.text = it.fullName
             binding.tvPoints.text = it.loyaltyPoints?.roundOff()?.toFormattedAmount()
-            binding.tvAnnualRemittance.text = "USD " + it.usdBalance?.roundOff()?.toFormattedAmount()
+            binding.tvAnnualRemittance.text =
+                "USD " + it.usdBalance?.roundOff()?.toFormattedAmount()
             binding.tvMemberSince.text = it.memberSince
             binding.icHelpUSD.setOnClickListener {
                 showGeneralAlertDialog(this,"USD",getString(R.string.help_usd))
