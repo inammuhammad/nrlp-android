@@ -283,20 +283,20 @@ class RegComplaintDetailsFragment :
 
         binding.NadraPassportCountry.setOnSingleClickListener {
             fragmentHelper.addFragment(
-                SelectCountryFragment.newInstance(UserData.getUser()?.accountType!!),
+                SelectCountryFragment.newInstance(""),
                 clearBackStack = false,
                 addToBackStack = true
             )
             hideKeyboard()
         }
 
-        binding.BranchCenter.setOnSingleClickListener {
+        /*binding.BranchCenter.setOnSingleClickListener {
             fragmentHelper.addFragment(
                 SelectBranchCenterFragment.newInstance(viewModel.redemptionPartners.value.toString()),
                 clearBackStack = false,
                 addToBackStack = true
             )
-        }
+        }*/
 
         binding.vBanksAndExchange.setOnSingleClickListener {
             hideKeyboard()
@@ -574,6 +574,16 @@ class RegComplaintDetailsFragment :
                 false -> viewModel.validationIbanPassed.postValue(
                     viewModel.checkIban(
                         binding.etBeneficiaryIban.text.toString()
+                    )
+                )
+            }
+        }
+
+        binding.etBranchCenter.setOnFocusChangeListener { _, b ->
+            when (b) {
+                false -> viewModel.validationBranchCenterPassed.postValue(
+                    viewModel.checkBranchCenter(
+                        binding.etBranchCenter.text.toString()
                     )
                 )
             }
@@ -880,7 +890,7 @@ class RegComplaintDetailsFragment :
                 }
             })
 
-        viewModel.validationBranchCenterPassed.observe(
+        /*viewModel.validationBranchCenterPassed.observe(
             this,
             { validationsPassed ->
                 run {
@@ -892,6 +902,19 @@ class RegComplaintDetailsFragment :
                         binding.BranchCenter.setBackgroundResource(R.drawable.edit_text_background)
                         binding.imageViewBranchCenter.visibility = View.GONE
                         binding.errorTextBranchCenter.visibility = View.GONE
+                    }
+                }
+            })*/
+
+        viewModel.validationBranchCenterPassed.observe(
+            this,
+            { validationsPassed ->
+                run {
+                    if (!validationsPassed)
+                        binding.tilBranchCenter.error = getString(R.string.error_branch_center)
+                    else {
+                        binding.tilBranchCenter.clearError()
+                        binding.tilBranchCenter.isErrorEnabled = false
                     }
                 }
             })
@@ -1227,11 +1250,16 @@ class RegComplaintDetailsFragment :
                         ComplaintRequestModelConstants.Redemption_NADRA_PASSPORT_COUNTRY,
                         binding.NadraPassportCountry.text.toString()
                     )
-                if (binding.BranchCenter.text.toString() != "")
+                if (binding.etBranchCenter.text.toString() != "")
+                    jsonObject.addProperty(
+                        ComplaintRequestModelConstants.Redemption_BRANCH_CENTER,
+                        binding.etBranchCenter.text.toString()
+                    )
+                /*if (binding.BranchCenter.text.toString() != "")
                     jsonObject.addProperty(
                         ComplaintRequestModelConstants.Redemption_BRANCH_CENTER,
                         binding.BranchCenter.text.toString()
-                    )
+                    )*/
 
             }
 
@@ -1278,7 +1306,8 @@ class RegComplaintDetailsFragment :
         val isRedemptionCountryValid: Boolean =
             viewModel.checkNotEmpty(binding.NadraPassportCountry.text.toString())
         val isRedemptionBranchCenterValid: Boolean =
-            viewModel.checkNotEmpty(binding.BranchCenter.text.toString())
+            viewModel.checkBranchCenter(binding.etBranchCenter.text.toString())
+        //viewModel.checkNotEmpty(binding.BranchCenter.text.toString())
         val isBeneficiaryCnicPointsValid: Boolean =
             viewModel.checkCnicValidation(binding.etPointsbeneficiaryCnicNicp.text.toString())
         val isTransactionDateValid: Boolean =
@@ -1339,13 +1368,20 @@ class RegComplaintDetailsFragment :
 
             }
             COMPLAINT_TYPE.REDEMPTION_ISSUES -> {
-                return isSpecifyDetailsValid &&
-                        ((isRedemptionCountryValid && isRedemptionBranchCenterValid) ||
-                                (isRedemptionBranchCenterValid && isUscBeoeNumberValid)) &&
-                        isRedemptionPartnerValid
-
+                val type: String = viewModel.redemptionPartners.value.toString()
+                if ((type.contains("USC", true)
+                            || type.contains("BEOE", true)
+                            || type.contains("NADRA", true)
+                            || type.contains("PASSPORT", true))
+                ) {
+                    return isSpecifyDetailsValid &&
+                            ((isRedemptionCountryValid && isRedemptionBranchCenterValid) ||
+                                    (isRedemptionBranchCenterValid && isUscBeoeNumberValid)) &&
+                            isRedemptionPartnerValid
+                }
+                return isSpecifyDetailsValid && isRedemptionPartnerValid
             }
-            COMPLAINT_TYPE.OTHERS ->{
+            COMPLAINT_TYPE.OTHERS -> {
                 return isSpecifyOtherDetailsValid
             }
             else -> return false
@@ -1371,7 +1407,7 @@ class RegComplaintDetailsFragment :
 
     override fun onSelectBranchCenterListener(branchCenterModel: BranchCenterModel) {
         viewModel.redemptionBranchCenter.value = branchCenterModel.branchCenterName
-        binding.BranchCenter.colorToText(R.color.black)
+        //binding.BranchCenter.colorToText(R.color.black)
         viewModel.validationBranchCenterPassed.postValue(true)
         fragmentHelper.onBack()
     }
@@ -1483,7 +1519,8 @@ class RegComplaintDetailsFragment :
         binding.apply {
             lyFurtherDetails.visibility = View.VISIBLE
             tvBranchCenter.visibility = View.VISIBLE
-            BranchCenter.visibility = View.VISIBLE
+            //BranchCenter.visibility = View.VISIBLE
+            tilBranchCenter.visibility = View.VISIBLE
             tvMobileNumber.visibility = View.VISIBLE
             lyUSCBEOENumber.visibility = View.VISIBLE
             tvNadraPassportCountry.visibility = View.GONE
@@ -1495,7 +1532,8 @@ class RegComplaintDetailsFragment :
         binding.apply {
             lyFurtherDetails.visibility = View.VISIBLE
             tvBranchCenter.visibility = View.VISIBLE
-            BranchCenter.visibility = View.VISIBLE
+            //BranchCenter.visibility = View.VISIBLE
+            tilBranchCenter.visibility = View.VISIBLE
             tvNadraPassportCountry.visibility = View.VISIBLE
             NadraPassportCountry.visibility = View.VISIBLE
             tvMobileNumber.visibility = View.GONE
@@ -1507,7 +1545,8 @@ class RegComplaintDetailsFragment :
         binding.apply {
             lyFurtherDetails.visibility = View.GONE
             tvBranchCenter.visibility = View.GONE
-            BranchCenter.visibility = View.GONE
+            //BranchCenter.visibility = View.GONE
+            tilBranchCenter.visibility = View.GONE
             tvNadraPassportCountry.visibility = View.GONE
             NadraPassportCountry.visibility = View.GONE
             tvMobileNumber.visibility = View.GONE

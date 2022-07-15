@@ -101,7 +101,7 @@ open class HomeFragment :
                         showGeneralAlertDialog(
                             this,
                             "popup",
-                            resources.getString(R.string.essay_andy)//response.data?.popupData?.displayText.toString()
+                            response.data?.popupData?.displayText.toString()
                         )
                         /*viewModel.navigateGeneralInfo(
                             fragmentHelper,
@@ -123,11 +123,6 @@ open class HomeFragment :
         UserData.getUser()?.let {
             //checkNadraVerification(it)
             displayPopups(it)
-            showGeneralAlertDialog(
-                this,
-                "popup",
-                resources.getString(R.string.essay_andy)//response.data?.popupData?.displayText.toString()
-            )
             if (it.accountType == "beneficiary") {
                 binding.containerAnnualRemittance.invisible()
             } else {

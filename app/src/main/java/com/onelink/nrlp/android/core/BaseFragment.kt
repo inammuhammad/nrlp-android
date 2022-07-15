@@ -5,6 +5,7 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
@@ -202,10 +203,14 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
     }
 
     private fun showGeneralPopupDialog(fragment: Fragment, msg: String) {
+        var img: Int = R.drawable.ic_register
+        if (UserData.getUser()?.accountType == "beneficiary")
+            img = R.drawable.ic_loyalty_points_tile
         OneLinkAlertDialogsFragment.Builder()
             .setTargetFragment(fragment, ErrorDialogConstants.RC_NO_INTERNET_CONNECTION_DIALOG)
             .setIsAlertOnly(true)
             .setTitle(msg)
+            .setDrawable(img)
             .setNeutralButtonText(getString(R.string.okay))
             .setNegativeButtonText("")
             .setPositiveButtonText("")

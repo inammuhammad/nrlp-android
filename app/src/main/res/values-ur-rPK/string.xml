@@ -430,7 +430,7 @@
     <string name="branch_center">برانچ/سینٹر</string>
     <string name="error_redemption_partner">براہ کرم ریڈیمشن پاٹنر درج کریں</string>
     <string name="error_beneficiary_country">براہ کرم ملک درج کریں</string>
-    <string name="error_branch_center">براہ کرم برانچ/سینٹر درج کریں</string>
+    <string name="error_branch_center">براہ کرم برانچ/سینٹر درست درج کریں</string>
     <string name="beneficiary_passport_help">وصول کنندہ کا پاسپورٹ نمبر درج کریں</string>
     <string name="redemption_branch_center_help">وزٹنگ برانچ/سینٹر بتائیں</string>
     <string name="redemption_mobile_number_help">پاکستان موبائل نمبر درج کریں</string>

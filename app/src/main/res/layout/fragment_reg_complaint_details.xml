@@ -1085,7 +1085,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/NadraPassportCountry" />
 
-                        <TextView
+                        <!--<TextView
                             android:id="@+id/BranchCenter"
                             style="@style/EditTextTheme"
                             android:layout_width="match_parent"
@@ -1126,7 +1126,33 @@
                             app:layout_constraintTop_toBottomOf="@id/BranchCenter"
                             app:layout_constraintStart_toStartOf="parent"
                             android:textSize="@dimen/unit_10sp"
-                            android:visibility="gone" />
+                            android:visibility="gone" />-->
+
+                        <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
+                            android:id="@+id/til_branch_center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/unit_8dp"
+                            app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tvBranchCenter">
+
+                            <com.onelink.nrlp.android.widgets.OneLinkEditText
+                                android:id="@+id/et_branch_center"
+                                style="@style/EditTextFixedDigits"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/redemption_issues"
+                                android:inputType="textPersonName"
+                                android:maxLength="50"
+                                android:maxLines="1"
+                                android:text="@={viewModel.redemptionBranchCenter}"
+                                app:layout_constraintBottom_toTopOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="parent" />
+
+                        </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
 
 
                         <TextView
@@ -1141,7 +1167,7 @@
                             android:textColor="@color/black"
                             android:textSize="@dimen/unit_16sp"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/BranchCenter" />
+                            app:layout_constraintTop_toBottomOf="@id/til_branch_center" />
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/lyUSCBEOENumber"

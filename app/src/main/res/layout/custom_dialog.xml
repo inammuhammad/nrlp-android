@@ -15,6 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_16sdp"
+        android:minHeight="@dimen/_120sdp"
         tools:ignore="ContentDescription"
         tools:src="@drawable/ic_beneficiary_created_dialog" />
 
@@ -25,7 +26,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:maxHeight="@dimen/_180sdp"
-        android:maxLines="8"
+        android:maxLines="6"
         android:scrollbars="vertical"
         tools:text="Beneficiary Created" />
 

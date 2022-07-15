@@ -137,14 +137,17 @@ constructor(private val complainRepo: ComplainRepo)
     fun checkMobileOperatorValidation(string:String) =
         string.isNotEmpty() && ValidationUtils.isNameValid(string)
 
-    fun checkTransactionTypeValidation(string:String) =
+    fun checkTransactionTypeValidation(string: String) =
         string.isNotEmpty()
 
-    fun checkBeneficiaryAccount(string:String) =
+    fun checkBeneficiaryAccount(string: String) =
         string.isNotEmpty()
 
     fun checkRemittingEntity(string: String) =
         string.isNotEmpty()
+
+    fun checkBranchCenter(string: String) =
+        ValidationUtils.isNameValid(string)
 
     fun checkTransactionId(string: String) =
         string.isNotEmpty() && ValidationUtils.isTransactionNoValid(string)
