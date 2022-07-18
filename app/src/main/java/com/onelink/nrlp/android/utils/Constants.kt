@@ -12,12 +12,11 @@ class Constants {
 
         // Comment date checksum replaced(DD-MM-YY) + checksum replaced
         // 00-00-00 w73v34zmazcrlz1li8v3iplfdoawrjz7ggsutsin ***** QA checksum *****
-        // 10-02-2022 gr9e22galnzrresrcv8bw6e9ud6rrkyvh5x9c5nk
         // 15-03-2022 go4rdhgrrjvo76rcxyode1yj8ff80kk4mzc90u5x 2.0
         // 20-04-2022 j41rfrtqzzwu9rtf6caftq9eprzq9yix038kabkb 2.1
         // 27-05-2022 h8o1vyqp5tjq3j94avrakjna3624yggn0uo38ffl 2.2
         const val checkSum =
-            "w73v34zmazcrlz1li8v3iplfdoawrjz7ggsutsin" //"kvpmpr0mb8i3xa90ifppu9yj08ktib9quupnz94m"
+            "89upikxcs1nk8czoiwrjw5k4inx9vbrmleat5d7u"
         const val InternationalPassport = "International Passport"
         const val PakistaniPassport = "Pakistani Passport"
 
@@ -46,6 +45,13 @@ object ErrorCodesConstants {
     const val REMITTANCE_RDA_TRANSACTION = "AUTH-SA-19"
     const val SELF_AWARD_NOT_ELIGIBLE = "AUTH-SA-22"
     const val SELF_AWARD_NOT_ALLOWED = "AUTH-SA-23"
+    const val SELF_AWARD_ACCOUNT_NA = "AUTH-CP-01"
+    const val POINTS_ALREADY_AWARDED = "AUTH-CP-02"
+    const val POINTS_CONSUMED_LOCALLY = "AUTH-CP-03"
+    const val SELF_AWARD_NOT_ELIGIBLE_C = "AUTH-CP-04"
+    const val LOYALTY_POINTS_NOT_ALLOWED = "AUTH-CP-05"
+    const val TRANSACTION_NOT_FOUND = "AUTH-CP-06"
+
 }
 
 

@@ -136,6 +136,18 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
                     )
                     ErrorCodesConstants.SELF_AWARD_NOT_ELIGIBLE -> showSelfAwardNotEligible(fragment)
                     ErrorCodesConstants.SELF_AWARD_NOT_ALLOWED -> showSelfAwardNotAllowed(fragment)
+                    ErrorCodesConstants.POINTS_ALREADY_AWARDED -> showPointsAlreadyAwarded(fragment)
+                    ErrorCodesConstants.POINTS_CONSUMED_LOCALLY -> showPointsConsumedLocally(
+                        fragment
+                    )
+                    ErrorCodesConstants.SELF_AWARD_ACCOUNT_NA -> showSelfAwardAccountNA(fragment)
+                    ErrorCodesConstants.SELF_AWARD_NOT_ELIGIBLE_C -> showSelfAwardNotEligible(
+                        fragment
+                    )
+                    ErrorCodesConstants.LOYALTY_POINTS_NOT_ALLOWED -> showLoyaltyPointsNotAllowed(
+                        fragment
+                    )
+                    ErrorCodesConstants.TRANSACTION_NOT_FOUND -> showTransactionNotFound(fragment)
                     else -> showRemoteErrorDialog(fragment, it)
                 }
             }
@@ -387,6 +399,75 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
             .show(parentFragmentManager, ErrorDialogConstants.TAG_UNABLE_TO_SELF_AWARD)
     }
 
+    private fun showPointsAlreadyAwarded(fragment: Fragment) {
+        OneLinkAlertDialogsFragment.Builder()
+            .setTargetFragment(fragment, ErrorDialogConstants.SELF_AWARD_DIALOG)
+            .setIsAlertOnly(true)
+            .setDrawable(R.drawable.ic_oh_snap)
+            .setTitle(getString(R.string.oh_snap))
+            .setMessage(getString(R.string.points_already_awarded).toSpanned())
+            .setNeutralButtonText(getString(R.string.okay))
+            .setNegativeButtonText("")
+            .setPositiveButtonText("")
+            .setCancelable(false)
+            .show(parentFragmentManager, ErrorDialogConstants.TAG_UNABLE_TO_SELF_AWARD)
+    }
+
+    private fun showPointsConsumedLocally(fragment: Fragment) {
+        OneLinkAlertDialogsFragment.Builder()
+            .setTargetFragment(fragment, ErrorDialogConstants.SELF_AWARD_DIALOG)
+            .setIsAlertOnly(true)
+            .setDrawable(R.drawable.ic_oh_snap)
+            .setTitle(getString(R.string.oh_snap))
+            .setMessage(getString(R.string.points_consumed_locally).toSpanned())
+            .setNeutralButtonText(getString(R.string.okay))
+            .setNegativeButtonText("")
+            .setPositiveButtonText("")
+            .setCancelable(false)
+            .show(parentFragmentManager, ErrorDialogConstants.TAG_UNABLE_TO_SELF_AWARD)
+    }
+
+    private fun showSelfAwardAccountNA(fragment: Fragment) {
+        OneLinkAlertDialogsFragment.Builder()
+            .setTargetFragment(fragment, ErrorDialogConstants.SELF_AWARD_DIALOG)
+            .setIsAlertOnly(true)
+            .setDrawable(R.drawable.ic_oh_snap)
+            .setTitle(getString(R.string.oh_snap))
+            .setMessage(getString(R.string.self_award_account_na).toSpanned())
+            .setNeutralButtonText(getString(R.string.okay))
+            .setNegativeButtonText("")
+            .setPositiveButtonText("")
+            .setCancelable(false)
+            .show(parentFragmentManager, ErrorDialogConstants.TAG_UNABLE_TO_SELF_AWARD)
+    }
+
+    private fun showLoyaltyPointsNotAllowed(fragment: Fragment) {
+        OneLinkAlertDialogsFragment.Builder()
+            .setTargetFragment(fragment, ErrorDialogConstants.SELF_AWARD_DIALOG)
+            .setIsAlertOnly(true)
+            .setDrawable(R.drawable.ic_oh_snap)
+            .setTitle(getString(R.string.oh_snap))
+            .setMessage(getString(R.string.loyalty_points_not_allowed).toSpanned())
+            .setNeutralButtonText(getString(R.string.okay))
+            .setNegativeButtonText("")
+            .setPositiveButtonText("")
+            .setCancelable(false)
+            .show(parentFragmentManager, ErrorDialogConstants.TAG_UNABLE_TO_SELF_AWARD)
+    }
+
+    private fun showTransactionNotFound(fragment: Fragment) {
+        OneLinkAlertDialogsFragment.Builder()
+            .setTargetFragment(fragment, ErrorDialogConstants.SELF_AWARD_DIALOG)
+            .setIsAlertOnly(true)
+            .setDrawable(R.drawable.ic_oh_snap)
+            .setTitle(getString(R.string.oh_snap))
+            .setMessage(getString(R.string.transaction_not_found).toSpanned())
+            .setNeutralButtonText(getString(R.string.okay))
+            .setNegativeButtonText("")
+            .setPositiveButtonText("")
+            .setCancelable(false)
+            .show(parentFragmentManager, ErrorDialogConstants.TAG_UNABLE_TO_SELF_AWARD)
+    }
 
     override fun onNeutralButtonClicked(targetCode: Int) {
         when (targetCode) {

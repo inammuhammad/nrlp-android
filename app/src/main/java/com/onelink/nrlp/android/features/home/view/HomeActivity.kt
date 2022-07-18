@@ -301,7 +301,7 @@ class HomeActivity :
                 val flow = manager.launchReviewFlow(this, reviewInfo)
                 if (flow != null) {
                     flow.addOnCompleteListener { _ ->
-                        Toast.makeText(this, "Review successful", Toast.LENGTH_LONG).show()
+                        //Toast.makeText(this, "Review successful", Toast.LENGTH_LONG).show()
                         viewModel.inAppRatingComplete()
                     }
                 }

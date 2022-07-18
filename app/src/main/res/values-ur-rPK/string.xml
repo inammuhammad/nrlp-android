@@ -446,4 +446,10 @@
     <string name="error_transaction_id">براہ کرم درست ٹرانزیکشن آئی ڈی درج کریں</string>
     <string name="error_transaction_amount">براہ کرم ٹرانزیکشن کی درست رقم درج کریں</string>
     <string name="error_transaction_date">براہ کرم ٹرانزیکشن کی تاریخ منتخب کریں</string>
+    <string name="points_already_awarded">معزز صارف فراہم کردہ تفصیلات کے خلاف پوائنٹس پہلے ہی دیئے جا چکے ہیں۔ مزید معلومات کے لیے، آپ ہم سے 757 116 111 یا sdrpsupport@1link.net.pk پر رابطہ کرسکتے ہیں</string>
+    <string name="points_consumed_locally">آپ صرف مقامی طور پر استعمال ہونے والی رقم کے مقابلے میں پوائنٹس کی آٹو ایوارڈنگ کے اہل ہوں گے۔ اگر آپ کو آٹو ایوارڈ نہیں دیا گیا ہے تو براہ کرم ہم سے 757 116 111 یا sdrpsupport@1link.net.pk پر رابطہ کرسکتے ہیں</string>
+    <string name="self_award_account_na">آپ کا اکاؤنٹ ایکٹیو ہونے کے بعد آپ کو سیلف ایوارڈ ٹرانزیکشن کرنے کی اجازت ہوگی۔</string>
+    <string name="loyalty_points_not_allowed">معزز صارف، آپ کو فراہم کردہ ترسیلات زر کے خلاف پوائنٹس حاصل کرنے کی اجازت نہیں ہے</string>
+    <string name="transaction_not_found">معزز صارف،آپ کے فراہم کردہ ٹرانزیکشن کی تفصیلات ہمارے ریکارڈ میں نہیں پائی گئی۔</string>
+
 </resources>
