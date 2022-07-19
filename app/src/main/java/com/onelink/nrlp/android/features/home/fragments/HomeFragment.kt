@@ -107,7 +107,8 @@ open class HomeFragment :
                             fragmentHelper,
                             response.data?.popupData?.displayText
                         )*/
-                    }
+                    } else
+                        checkReceiverAdded()
                 }
                 Status.LOADING -> {
                     oneLinkProgressDialog.showProgressDialog(context)
@@ -180,14 +181,14 @@ open class HomeFragment :
             if (userType != null && accountStatus != null) {
                 viewModel.getPopupMessage(userType, accountStatus)
             }
-        } else if (userModel.accountType != Constants.BENEFICIARY.toLowerCase(Locale.getDefault()) && userModel.receiverCount == 0) {
-            checkReceiverAdded(userModel)
+        } else if (userModel.accountType != Constants.BENEFICIARY.toLowerCase(Locale.getDefault())) {
+            checkReceiverAdded()
         }
     }
 
-    private fun checkReceiverAdded(userModel: UserModel){
+    private fun checkReceiverAdded() {
         try {
-            //if (userModel.receiverCount!! == 0) {
+            if (UserData.getUser()?.receiverCount == 0) {
                 val remittanceReceiverSP =
                     activity?.getSharedPreferences("remittanceReceiverSp", Context.MODE_PRIVATE)
                 val limit = remittanceReceiverSP?.getBoolean("remitterPopupDisplayed", true)
@@ -199,7 +200,7 @@ open class HomeFragment :
                         startActivity(intent)
                     }
                 } catch (e: Exception) {}
-            //}
+            }
         }catch (e: Exception){}
     }
 
