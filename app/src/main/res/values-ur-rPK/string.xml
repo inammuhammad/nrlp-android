@@ -216,7 +216,7 @@
     <string name="faqs_title">مقرر پوچھے گئے سوالات</string>
     <string name="remitter_verification_title">بھیجنےوالے کی تصدیق</string>
     <string name="otp_verification_title">او ٹی پی کی تصدیق</string>
-    <string name="nadra_verification_required">مزید آگے بڑھنے کے لئے آپ کی تصدیق NADRA درکار ہے۔\n تصدیق کے لیے قبول کریں</string>
+    <string name="nadra_verification_required">مزید آگے بڑھنے کے لئے آپ کی تصدیق درکار ہے۔\n تصدیق کے لیے قبول کریں</string>
     <string name="nadra_confirmation_msg">تصدیق فراہم کیے بغیر، آپ لاگ ان نہیں کر سکیں گے\n کیا آپ کو یقین ہے، آپ باہر نکلنا چاہتے ہیں</string>
     <string name="nadra_details_provided">معزز صارف\n معلومات فراہم کرنے کے لئے آپ کا شکریہ، آپ کو جلد ایس ایم ایس کے ذریع تصدیق کے متعلق آگاہ کر دیا جائے گا</string>
     <string name="nadra_verification_title">NADRA تصدیق</string>
@@ -378,7 +378,7 @@
     <string name="click_next_add_receiver">اپنے وصول کنندہ کو شامل کرنے اور اپنے اکاؤنٹ میں آٹو پوائنٹس حاصل کرنے کے لیے اگلے پر کلک کریں</string>
     <string name="add_receiver">وصول کنندہ شامل کریں</string>
     <string name="add_receiver_plus">+ وصول کنندہ شامل کریں</string>
-    <string name="receiver_will_be_added_upon_nadra">آپ کی ترسیلات زر وصول کرنے والا  نادرا کی تصدیق کے بعد شامل کر دیا جائے گا۔</string>
+    <string name="receiver_will_be_added_upon_nadra">آپ کی ترسیلات زر وصول کرنے والا تصدیق کے بعد شامل کر دیا جائے گا۔</string>
     <string name="remittance_receiver_manager">ترسیلات زر وصول کنندہ کی  منتظمی</string>
     <string name="receiver_mother_maiden_name">براہ کرم نادرا کے ریکارڈ کے مطابق وصول کنندہ کی والدہ کا نام درج کریں</string>
     <string name="receiver_place_of_birth">نادرا کے ریکارڈ کے مطابق براہ کرم وصول کنندہ کی جائے پیدائش درج کریں۔</string>
@@ -451,5 +451,7 @@
     <string name="self_award_account_na">آپ کا اکاؤنٹ ایکٹیو ہونے کے بعد آپ کو سیلف ایوارڈ ٹرانزیکشن کرنے کی اجازت ہوگی۔</string>
     <string name="loyalty_points_not_allowed">معزز صارف، آپ کو فراہم کردہ ترسیلات زر کے خلاف پوائنٹس حاصل کرنے کی اجازت نہیں ہے</string>
     <string name="transaction_not_found">معزز صارف،آپ کے فراہم کردہ ٹرانزیکشن کی تفصیلات ہمارے ریکارڈ میں نہیں پائی گئی۔</string>
+    <string name="only_verified_customers">صرف تصدیق شدہ صارفین ہی ٹرانزیکشن کر سکتے ہیں</string>
+    <string name="reg_being_verified">آپ کی رجسٹریشن کی تصدیق کی جا رہی ہے، براہ کرم کچھ وقت انتظار کریں</string>
 
 </resources>

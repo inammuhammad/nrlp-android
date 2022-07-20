@@ -148,6 +148,8 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
                         fragment
                     )
                     ErrorCodesConstants.TRANSACTION_NOT_FOUND -> showTransactionNotFound(fragment)
+                    ErrorCodesConstants.VERIFIED_TX_ONLY -> showVerifiedCustomersOnly(fragment)
+                    ErrorCodesConstants.REG_BEING_VERIFIED -> showRegBeingVerified(fragment)
                     else -> showRemoteErrorDialog(fragment, it)
                 }
             }
@@ -462,6 +464,34 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
             .setDrawable(R.drawable.ic_oh_snap)
             .setTitle(getString(R.string.oh_snap))
             .setMessage(getString(R.string.transaction_not_found).toSpanned())
+            .setNeutralButtonText(getString(R.string.okay))
+            .setNegativeButtonText("")
+            .setPositiveButtonText("")
+            .setCancelable(false)
+            .show(parentFragmentManager, ErrorDialogConstants.TAG_UNABLE_TO_SELF_AWARD)
+    }
+
+    private fun showRegBeingVerified(fragment: Fragment) {
+        OneLinkAlertDialogsFragment.Builder()
+            .setTargetFragment(fragment, ErrorDialogConstants.SELF_AWARD_DIALOG)
+            .setIsAlertOnly(true)
+            .setDrawable(R.drawable.ic_oh_snap)
+            .setTitle(getString(R.string.oh_snap))
+            .setMessage(getString(R.string.reg_being_verified).toSpanned())
+            .setNeutralButtonText(getString(R.string.okay))
+            .setNegativeButtonText("")
+            .setPositiveButtonText("")
+            .setCancelable(false)
+            .show(parentFragmentManager, ErrorDialogConstants.TAG_UNABLE_TO_SELF_AWARD)
+    }
+
+    private fun showVerifiedCustomersOnly(fragment: Fragment) {
+        OneLinkAlertDialogsFragment.Builder()
+            .setTargetFragment(fragment, ErrorDialogConstants.SELF_AWARD_DIALOG)
+            .setIsAlertOnly(true)
+            .setDrawable(R.drawable.ic_oh_snap)
+            .setTitle(getString(R.string.oh_snap))
+            .setMessage(getString(R.string.only_verified_customers).toSpanned())
             .setNeutralButtonText(getString(R.string.okay))
             .setNegativeButtonText("")
             .setPositiveButtonText("")

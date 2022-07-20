@@ -51,6 +51,8 @@ object ErrorCodesConstants {
     const val SELF_AWARD_NOT_ELIGIBLE_C = "AUTH-CP-04"
     const val LOYALTY_POINTS_NOT_ALLOWED = "AUTH-CP-05"
     const val TRANSACTION_NOT_FOUND = "AUTH-CP-06"
+    const val VERIFIED_TX_ONLY = "AUTH-RD-01"
+    const val REG_BEING_VERIFIED = "GEN_ERR_51"
 
 }
 

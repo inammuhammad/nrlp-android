@@ -107,8 +107,9 @@ open class HomeFragment :
                             fragmentHelper,
                             response.data?.popupData?.displayText
                         )*/
-                    } else
-                        checkReceiverAdded()
+                    }
+                    /*else
+                        checkReceiverAdded()*/
                 }
                 Status.LOADING -> {
                     oneLinkProgressDialog.showProgressDialog(context)
@@ -174,6 +175,8 @@ open class HomeFragment :
             )
         ) {
             viewModel.navigateFatherNameVerification(fragmentHelper)
+        } else if (userModel.accountType != Constants.BENEFICIARY.toLowerCase(Locale.getDefault())) {
+            checkReceiverAdded()
         } else if (popupDisplayed == false) {
             generalPopupSP?.edit()?.putBoolean("generalPopupDisplayed", true)?.commit()
             val userType = UserData.getUser()?.accountType
@@ -181,8 +184,6 @@ open class HomeFragment :
             if (userType != null && accountStatus != null) {
                 viewModel.getPopupMessage(userType, accountStatus)
             }
-        } else if (userModel.accountType != Constants.BENEFICIARY.toLowerCase(Locale.getDefault())) {
-            checkReceiverAdded()
         }
     }
 

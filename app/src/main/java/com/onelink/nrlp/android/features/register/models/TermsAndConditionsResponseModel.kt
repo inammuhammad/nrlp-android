@@ -8,7 +8,7 @@ data class TermsAndConditions(
     @SerializedName("content")
     val content: String,
     @SerializedName("version_no")
-    val versionNum: String,
+    val versionNum: String? = "e",
     @SerializedName("id")
     val termsAndConditionsId: Int
 )

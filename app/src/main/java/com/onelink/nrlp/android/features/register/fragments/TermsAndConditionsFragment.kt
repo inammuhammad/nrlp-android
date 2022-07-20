@@ -78,7 +78,7 @@ class TermsAndConditionsFragment :
                         oneLinkProgressDialog.hideProgressDialog()
                         tvTermsAndConditions.text = it.termsAndConditions.content.parseHtml()
                         tAndCId = it.termsAndConditions.termsAndConditionsId
-                        tAndCVersion = it.termsAndConditions.versionNum
+                        tAndCVersion = it.termsAndConditions.versionNum.toString()
 
                     }
                 }
