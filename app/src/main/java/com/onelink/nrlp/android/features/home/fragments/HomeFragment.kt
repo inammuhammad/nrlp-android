@@ -165,6 +165,7 @@ open class HomeFragment :
     }
 
     private fun displayPopups(userModel: UserModel) {
+        //sequence: fathername, receivers, general
         val generalPopupSP =
             activity?.getSharedPreferences("generalPopupSP", Context.MODE_PRIVATE)
         val popupDisplayed = generalPopupSP?.getBoolean("generalPopupDisplayed", true)
