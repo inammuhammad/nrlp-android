@@ -9,10 +9,6 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.youtube.player.YouTubeInitializationResult
-import com.google.android.youtube.player.YouTubePlayer
-import com.google.android.youtube.player.YouTubePlayerFragment
-import com.google.android.youtube.player.YouTubePlayerView
 import com.guardsquare.dexguard.runtime.detection.RootDetector
 import com.onelink.nrlp.android.R
 import com.onelink.nrlp.android.core.BaseError
@@ -37,7 +33,7 @@ import javax.inject.Inject
 
 class LoginFragment :
     BaseFragment<LoginFragmentViewModel, LoginFragmentBinding>(LoginFragmentViewModel::class.java),
-    OneLinkAlertDialogsFragment.OneLinkAlertDialogListeners, YouTubePlayer.OnInitializedListener {
+    OneLinkAlertDialogsFragment.OneLinkAlertDialogListeners {
 
     @Inject
     lateinit var oneLinkProgressDialog: OneLinkProgressDialog
@@ -265,10 +261,6 @@ class LoginFragment :
         }
 
         binding.etCnic.addTextChangedListener(getCnicTextWatcher())
-
-        val ytView: YouTubePlayerView = binding.ytPlayer
-        ytView.initialize("AIzaSyB7pW2nqmq7ojTcjynUfm1g5di09V0G5CI", this)
-
     }
 
     private fun getCnicTextWatcher() = object : TextWatcher {
@@ -359,22 +351,5 @@ class LoginFragment :
         if (okValue != returnedValue)
             showInvalidInstallDialog()
     }
-
-    override fun onInitializationSuccess(
-        p0: YouTubePlayer.Provider?,
-        p1: YouTubePlayer?,
-        p2: Boolean
-    ) {
-        p1?.loadVideo("q3WC-X7xDNo")
-        p1?.play()
-    }
-
-    override fun onInitializationFailure(
-        p0: YouTubePlayer.Provider?,
-        p1: YouTubeInitializationResult?
-    ) {
-        TODO("Not yet implemented")
-    }
-
 
 }

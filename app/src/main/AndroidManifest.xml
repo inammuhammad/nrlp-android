@@ -9,12 +9,6 @@
         android:name="android.permission.BIND_AUTOFILL_SERVICE"
         tools:ignore="ProtectedPermissions" />
 
-    <queries>
-        <intent>
-            <action android:name="com.google.android.youtube.api.service.START" />
-        </intent>
-    </queries>
-
     <application
         android:name=".OneLinkApplication"
         android:allowBackup="false"
