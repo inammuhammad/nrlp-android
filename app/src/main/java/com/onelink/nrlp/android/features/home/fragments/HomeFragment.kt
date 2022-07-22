@@ -175,7 +175,9 @@ open class HomeFragment :
             )
         ) {
             viewModel.navigateFatherNameVerification(fragmentHelper)
-        } else if (userModel.accountType != Constants.BENEFICIARY.toLowerCase(Locale.getDefault())) {
+        } else if (userModel.accountType != Constants.BENEFICIARY.toLowerCase(Locale.getDefault())
+            && UserData.getUser()?.receiverCount == 0
+        ) {
             checkReceiverAdded()
         } else if (popupDisplayed == false) {
             generalPopupSP?.edit()?.putBoolean("generalPopupDisplayed", true)?.commit()
@@ -189,7 +191,7 @@ open class HomeFragment :
 
     private fun checkReceiverAdded() {
         try {
-            if (UserData.getUser()?.receiverCount == 0) {
+            //if (UserData.getUser()?.receiverCount == 0) {
                 val remittanceReceiverSP =
                     activity?.getSharedPreferences("remittanceReceiverSp", Context.MODE_PRIVATE)
                 val limit = remittanceReceiverSP?.getBoolean("remitterPopupDisplayed", true)
@@ -201,7 +203,7 @@ open class HomeFragment :
                         startActivity(intent)
                     }
                 } catch (e: Exception) {}
-            }
+            //}
         }catch (e: Exception){}
     }
 
