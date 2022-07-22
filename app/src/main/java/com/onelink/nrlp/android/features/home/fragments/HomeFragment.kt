@@ -169,6 +169,10 @@ open class HomeFragment :
             activity?.getSharedPreferences("generalPopupSP", Context.MODE_PRIVATE)
         val popupDisplayed = generalPopupSP?.getBoolean("generalPopupDisplayed", true)
 
+        val remittanceReceiverSP =
+            activity?.getSharedPreferences("remittanceReceiverSp", Context.MODE_PRIVATE)
+        val limit = remittanceReceiverSP?.getBoolean("remitterPopupDisplayed", true)
+
         if (userModel.fatherName.isNullOrEmpty() &&
             UserData.getUser()?.accountType?.toLowerCase(Locale.ROOT) != Constants.BENEFICIARY.toLowerCase(
                 Locale.ROOT
@@ -176,7 +180,7 @@ open class HomeFragment :
         ) {
             viewModel.navigateFatherNameVerification(fragmentHelper)
         } else if (userModel.accountType != Constants.BENEFICIARY.toLowerCase(Locale.getDefault())
-            && UserData.getUser()?.receiverCount == 0
+            && UserData.getUser()?.receiverCount == 0 && limit == true
         ) {
             checkReceiverAdded()
         } else if (popupDisplayed == false) {
