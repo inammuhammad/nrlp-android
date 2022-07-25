@@ -225,6 +225,49 @@
                     android:layout_weight="1" />
             </RadioGroup>
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_language_selection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TextViewSubHeading"
+                android:text="@string/lang_selection"
+                app:layout_constraintBottom_toTopOf="@id/btnLogin"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginBottom="@dimen/_10sdp" />
+
+            <RadioGroup
+                android:id="@+id/rg_language_selection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@id/btnLogin"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/_10sdp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_language_selection"
+                app:layout_constraintTop_toTopOf="@id/tv_language_selection"
+                app:layout_constraintStart_toEndOf="@id/tv_language_selection">
+
+                <RadioButton
+                    android:id="@+id/rb_english"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_14sdp"
+                    style="@style/radiobuttonNoMargin"
+                    android:buttonTint="@drawable/radio_btn_tint_selector"
+                    android:theme="@style/RadioButtonStyle"
+                    android:text="@string/english" />
+
+                <RadioButton
+                    android:id="@+id/rb_urdu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_14sdp"
+                    style="@style/radiobuttonNoMargin"
+                    android:buttonTint="@drawable/radio_btn_tint_selector"
+                    android:theme="@style/RadioButtonStyle"
+                    android:text="@string/urdu" />
+
+
+            </RadioGroup>
+
             <Button
                 android:id="@+id/btnLogin"
                 style="@style/ButtonTheme"
