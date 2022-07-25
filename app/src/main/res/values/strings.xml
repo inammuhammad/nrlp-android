@@ -498,4 +498,5 @@
     <string name="transaction_not_found">Dear Customer, Your provided transaction details were not found in our record.</string>
     <string name="only_verified_customers">Only verified customers can perform transactions</string>
     <string name="reg_being_verified">Your registration is being verified, please wait for some time</string>
+    <string name="lang_selection">Language Selection</string>
 </resources>

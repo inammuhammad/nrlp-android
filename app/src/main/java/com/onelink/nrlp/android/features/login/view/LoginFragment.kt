@@ -27,6 +27,9 @@ import com.onelink.nrlp.android.models.LoginCredentials
 import com.onelink.nrlp.android.utils.*
 import com.onelink.nrlp.android.utils.dialogs.OneLinkAlertDialogsFragment
 import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
@@ -261,6 +264,14 @@ class LoginFragment :
         }
 
         binding.etCnic.addTextChangedListener(getCnicTextWatcher())
+
+        val ytPlayer: YouTubePlayerView = binding.ytPlayer
+        ytPlayer.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+            override fun onReady(youTubePlayer: YouTubePlayer) {
+                val videoId = "q3WC-X7xDNo"
+                youTubePlayer.loadVideo(videoId, 0f)
+            }
+        })
     }
 
     private fun getCnicTextWatcher() = object : TextWatcher {

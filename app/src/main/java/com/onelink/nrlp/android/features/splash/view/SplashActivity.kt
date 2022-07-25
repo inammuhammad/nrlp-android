@@ -40,13 +40,16 @@ class SplashActivity : BaseFragmentActivity<SplashActivityBinding, SplashViewMod
     override fun initViewModel(viewModel: SplashViewModel) {
         viewModel.clearUserData()
         viewModel.updateCheckSum(Constants.checkSum)    //(SgTils.getSingInfo(this))
-        println("checksum value is " + SgTils.getSingInfo(this))
         //viewModel.updateCheckSum("446fd81a1ac6cccb861025481b448c345d0084d1")
         Handler(Looper.getMainLooper()).postDelayed({
             if (LocaleManager.getLanguageBoolPref(this)!!) {
                 startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
                 finish()
-            } else LanguageActivity.start(this,true)
+            } else {
+                //LanguageActivity.start(this,true)
+                LocaleManager.setNewLocale(this, LocaleManager.ENGLISH)
+                LocaleManager.setLanguageSetBoolPref(this, true)
+            }
 
         }, SPLASH_TIME_OUT)
     }
