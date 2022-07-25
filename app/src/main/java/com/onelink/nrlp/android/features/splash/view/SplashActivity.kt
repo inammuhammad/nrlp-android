@@ -45,11 +45,8 @@ class SplashActivity : BaseFragmentActivity<SplashActivityBinding, SplashViewMod
             if (LocaleManager.getLanguageBoolPref(this)!!) {
                 startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
                 finish()
-            } else {
-                //LanguageActivity.start(this,true)
-                LocaleManager.setNewLocale(this, LocaleManager.ENGLISH)
-                LocaleManager.setLanguageSetBoolPref(this, true)
-            }
+            } else LanguageActivity.start(this, true)
+
 
         }, SPLASH_TIME_OUT)
     }

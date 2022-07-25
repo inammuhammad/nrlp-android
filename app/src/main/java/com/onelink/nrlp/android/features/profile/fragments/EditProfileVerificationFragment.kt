@@ -67,6 +67,7 @@ class EditProfileVerificationFragment :
                 Status.SUCCESS -> {
                     oneLinkProgressDialog.hideProgressDialog()
                     profileSharedViewModel.validationSuccessful.postValue(true)
+                    profileSharedViewModel.motherMaidenName.postValue(binding.etMothername.text.toString())
                     fragmentHelper.onBack()
                 }
                 Status.ERROR -> {

@@ -247,14 +247,13 @@ class EditProfileFragment() :
                         countriesList = it.countryCodesList
                         UserData.getUser()?.let { userModel ->
 
-                            if(userModel.accountType == "beneficiary"){
+                            if (userModel.accountType == "beneficiary") {
                                 binding.remitterItemContainer.visibility = View.GONE
                                 binding.btnNext.visibility = View.GONE
                                 binding.btnNext1.visibility = View.VISIBLE
                                 binding.tvMotherMaidenName.visibility = View.GONE
                                 binding.tilMotherMaidenName.visibility = View.GONE
-                            }
-                            else{
+                            } else {
                                 binding.remitterItemContainer.visibility = View.VISIBLE
 
                                 binding.btnNext.visibility = View.VISIBLE
@@ -276,18 +275,22 @@ class EditProfileFragment() :
             }
         })
 
-        profileSharedViewModel.validationSuccessful.observe(this,{ validationSuccessful->
-            if(validationSuccessful){
+        profileSharedViewModel.validationSuccessful.observe(this, { validationSuccessful ->
+            if (validationSuccessful) {
                 makeViewEditable()
             }
         })
 
+        profileSharedViewModel.motherMaidenName.observe(this, {
+            viewModel.verifyMotherMaidenName.value = it
+        })
+
         viewModel.passportType.observe(this, Observer {
             if (it != Constants.SPINNER_PASSPORT_TYPE_HINT) {
-                if(!isEditEnable) {
+                if (!isEditEnable) {
                     binding.tvPassportType.text = it
                     binding.tvPassportType.colorToText(R.color.nonEditableText)
-                }else {
+                } else {
                     binding.tvPassportType.text = it
                     binding.tvPassportType.colorToText(R.color.pure_black)
                 }

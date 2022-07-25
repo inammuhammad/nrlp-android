@@ -17,7 +17,7 @@ class Constants {
         // 27-05-2022 h8o1vyqp5tjq3j94avrakjna3624yggn0uo38ffl 2.2
         // 25-06-2022 89upikxcs1nk8czoiwrjw5k4inx9vbrmleat5d7u 2.2
         const val checkSum =
-            "potmozwwjsk0bc8tdcp3diap0nfrewzl5wwaod0r"
+            "w73v34zmazcrlz1li8v3iplfdoawrjz7ggsutsin"
         const val InternationalPassport = "International Passport"
         const val PakistaniPassport = "Pakistani Passport"
 

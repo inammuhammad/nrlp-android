@@ -42,6 +42,7 @@ class EditProfileViewModel @Inject constructor(private val profileRepo: ProfileR
     val motherMaidenName = MutableLiveData("")
     val placeOfBirth = MutableLiveData("")
     val cnicIssuanceDate = MutableLiveData("")
+    val verifyMotherMaidenName = MutableLiveData<String>("")
 
     fun getCountryCodes(type: String = "beneficiary") = profileRepo.getCountryCodes(type)
 
@@ -86,6 +87,11 @@ class EditProfileViewModel @Inject constructor(private val profileRepo: ProfileR
 
                 if (residentId.value != oldResidentID.value)
                     jsonObject.addProperty(UpdateProfileConstants.RESIDENT_ID, residentId.value)
+
+                jsonObject.addProperty(
+                    UpdateProfileConstants.MOTHER_MAIDEN_NAME,
+                    verifyMotherMaidenName.value
+                )
             }
         }
 

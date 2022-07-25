@@ -8,6 +8,8 @@ import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
+import android.widget.RadioGroup
 import androidx.lifecycle.ViewModelProvider
 import com.guardsquare.dexguard.runtime.detection.RootDetector
 import com.onelink.nrlp.android.R
@@ -21,6 +23,8 @@ import com.onelink.nrlp.android.features.home.view.HomeActivity
 import com.onelink.nrlp.android.features.login.helper.CnicTextHelper
 import com.onelink.nrlp.android.features.login.viewmodel.LoginFragmentViewModel
 import com.onelink.nrlp.android.features.nrlpBenefits.view.NrlpBenefitsActivity
+import com.onelink.nrlp.android.features.redeem.fragments.TAG_TIME_EXPIRED_DIALOG
+import com.onelink.nrlp.android.features.redeem.fragments.TIME_EXPIRED_DIALOG
 import com.onelink.nrlp.android.features.register.view.RegisterActivity
 import com.onelink.nrlp.android.features.uuid.view.UUIDActivity
 import com.onelink.nrlp.android.models.LoginCredentials
@@ -49,6 +53,8 @@ class LoginFragment :
     override fun onInject() {
         AndroidSupportInjection.inject(this)
     }
+
+    private var langPref = ""
 
     override fun getViewM(): LoginFragmentViewModel =
         ViewModelProvider(this, viewModelFactory).get(LoginFragmentViewModel::class.java)
@@ -265,13 +271,87 @@ class LoginFragment :
 
         binding.etCnic.addTextChangedListener(getCnicTextWatcher())
 
-        val ytPlayer: YouTubePlayerView = binding.ytPlayer
+        /*val ytPlayer: YouTubePlayerView = binding.ytPlayer
         ytPlayer.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: YouTubePlayer) {
                 val videoId = "q3WC-X7xDNo"
                 youTubePlayer.loadVideo(videoId, 0f)
             }
-        })
+        })*/
+
+        setLocaleRg()
+        //binding.rgLanguageSelection.setOnCheckedChangeListener { radioGroup, i -> makeRatingCall(radioGroup, i) }
+        binding.rbEnglish.setOnClickListener {
+            englishCall(LocaleManager.ENGLISH)
+        }
+        binding.rbUrdu.setOnClickListener {
+            urduCall(LocaleManager.URDU)
+        }
+    }
+
+    private fun englishCall(lang: String) {
+        langPref = LocaleManager.ENGLISH
+        if (LocaleManager.getLanguagePref(context) != lang)
+            showLanguageChangeDialog()
+        Log.d("lang", "en")
+    }
+
+    private fun urduCall(lang: String) {
+        langPref = LocaleManager.URDU
+        if (LocaleManager.getLanguagePref(context) != lang)
+            showLanguageChangeDialog()
+        Log.d("lang", "ur")
+    }
+
+    private fun makeRatingCall(group: RadioGroup, index: Int) {
+        when (index) {
+            R.id.rb_english -> {
+                Log.d("lang", "en")
+                langPref = LocaleManager.ENGLISH
+            }
+            R.id.rb_urdu -> {
+                Log.d("lang", "ur")
+                langPref = LocaleManager.URDU
+            }
+        }
+        showLanguageChangeDialog()
+    }
+
+    private fun showLanguageChangeDialog() {
+        val oneLinkAlertDialogsFragment = OneLinkAlertDialogsFragment.newInstance(
+            false,
+            R.drawable.ic_language_change_alert,
+            getString(R.string.language_chagne_title),
+            (getString(R.string.language_change)).toSpanned(),
+            positiveButtonText = getString(R.string.confirm),
+            negativeButtonText = getString(R.string.cancel),
+            neutralButtonText = getString(R.string.okay)
+        )
+        oneLinkAlertDialogsFragment.setTargetFragment(
+            this, TIME_EXPIRED_DIALOG
+        )
+        oneLinkAlertDialogsFragment.show(parentFragmentManager, TAG_TIME_EXPIRED_DIALOG)
+        oneLinkAlertDialogsFragment.isCancelable = false
+    }
+
+    override fun onPositiveButtonClicked(targetCode: Int) {
+        super.onPositiveButtonClicked(targetCode)
+        context?.let { cont ->
+            LocaleManager.setNewLocale(cont, langPref)
+            LocaleManager.setLanguageSetBoolPref(cont, true)
+            activity?.let { LoginActivity.start(it) }
+        }
+    }
+
+    private fun setLocaleRg() {
+        val lang = LocaleManager.getLanguagePref(context)
+        if (lang == "en") {
+            binding.rbUrdu.isChecked = false
+            binding.rbEnglish.isChecked = true
+        } else {
+            binding.rbUrdu.isChecked = true
+            binding.rbEnglish.isChecked = false
+        }
     }
 
     private fun getCnicTextWatcher() = object : TextWatcher {
