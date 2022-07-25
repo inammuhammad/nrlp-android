@@ -15,6 +15,7 @@ import com.onelink.nrlp.android.core.Status
 import com.onelink.nrlp.android.data.local.UserData
 import androidx.lifecycle.Observer
 import com.google.android.play.core.review.testing.FakeReviewManager
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.onelink.nrlp.android.data.local.UserModel
 import com.onelink.nrlp.android.databinding.HomeFragmentBinding
 import com.onelink.nrlp.android.features.home.view.HomeActivity
@@ -136,17 +137,22 @@ open class HomeFragment :
                 "USD " + it.usdBalance?.roundOff()?.toFormattedAmount()
             binding.tvMemberSince.text = it.memberSince
             binding.icHelpUSD.setOnClickListener {
-                showGeneralAlertDialog(this,"USD",getString(R.string.help_usd))
+                showGeneralAlertDialog(this, "USD", getString(R.string.help_usd))
             }
             context?.let { context ->
                 binding.ivHomeBgLoyaltyCard.setLoyaltyCard(context, it.loyaltyLevel)
-               /* binding.lyTitle.ivLoyaltyCardTitle.setLoyaltyTitleBackground(
-                    context,
-                    it.loyaltyLevel
-                )*/
+                /* binding.lyTitle.ivLoyaltyCardTitle.setLoyaltyTitleBackground(
+                     context,
+                     it.loyaltyLevel
+                 )*/
+            }
+            try {
+                val fbAnalytics = FirebaseAnalytics.getInstance(requireContext())
+                fbAnalytics.setUserProperty("accountType", it.accountType)
+            } catch (e: Exception) {
             }
             (activity as HomeActivity).setNotificationCount(it.notificationCount.toString())
-           // binding.lyTitle.tvLoyaltyLevel.text = it.loyaltyLevel.capitalize(Locale.getDefault())
+            // binding.lyTitle.tvLoyaltyLevel.text = it.loyaltyLevel.capitalize(Locale.getDefault())
         }
     }
 
