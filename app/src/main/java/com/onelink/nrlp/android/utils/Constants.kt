@@ -57,7 +57,6 @@ object ErrorCodesConstants {
 
 }
 
-
 object IntentConstants {
     const val TRANSACTION_ID = "transaction_id"
     const val PARTNER_NAME = "partner_name"
@@ -227,6 +226,12 @@ object TransactionTypeConstants {
 object ViewStatementConstants {
     const val CREDIT = "Credit"
     const val DEBIT = "Debit"
+}
+
+object NotificationConstants {
+    const val COMPLAINT = "complaint"
+    const val ACTIVITY = "activity"
+    const val ANNOUNCEMENT = "announcement"
 }
 
 object Sp {

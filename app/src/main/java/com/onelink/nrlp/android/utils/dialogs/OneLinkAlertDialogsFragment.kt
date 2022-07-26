@@ -171,6 +171,10 @@ class OneLinkAlertDialogsFragment : DialogFragment() {
 
     private fun updateView() {
         ivDialog?.setImageResource(drawable)
+        if (drawable == 0)
+            ivDialog.visibility = View.GONE
+        else
+            ivDialog.visibility = View.VISIBLE
         tvDialogTitle?.text = title
         tvDialogTitle.movementMethod = ScrollingMovementMethod.getInstance();
         tvDialogSubTitle?.text = message

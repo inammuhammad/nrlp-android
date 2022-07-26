@@ -12,6 +12,7 @@ import com.onelink.nrlp.android.core.BaseFragmentActivity
 import com.onelink.nrlp.android.databinding.ActivityInAppNotificationBinding
 import com.onelink.nrlp.android.features.appnotification.adapters.ViewPagerAdapter
 import com.onelink.nrlp.android.features.appnotification.fragments.NotificationActivityFragment
+import com.onelink.nrlp.android.features.appnotification.fragments.NotificationAnnouncementFragment
 import com.onelink.nrlp.android.features.appnotification.fragments.NotificationComplaintFragment
 import com.onelink.nrlp.android.features.appnotification.viewmodels.AppNotificationViewModel
 import javax.inject.Inject

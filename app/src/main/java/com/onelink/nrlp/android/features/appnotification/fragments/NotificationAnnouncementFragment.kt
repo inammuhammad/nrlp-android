@@ -1,12 +1,8 @@
 package com.onelink.nrlp.android.features.appnotification.fragments
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
-import android.view.inputmethod.InputMethodManager
-import android.widget.AbsListView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
@@ -26,12 +22,10 @@ import com.onelink.nrlp.android.utils.setOnSingleClickListener
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
-
-class NotificationComplaintFragment :
+class NotificationAnnouncementFragment :
     BaseFragment<AppNotificationViewModel, FragmentNotificationComplaintBinding>(
         AppNotificationViewModel::class.java
     ) {
-
     private var pageNum = 1
 
     @Inject
@@ -59,6 +53,7 @@ class NotificationComplaintFragment :
         binding.btnLoadMore.visibility = View.VISIBLE
         initListeners()
         initObservers()
+        super.init(savedInstanceState)
     }
 
     private fun initListeners() {
@@ -91,20 +86,6 @@ class NotificationComplaintFragment :
             }
             return@OnTouchListener false
         })
-
-        /*binding.rvNotificationsList.setOnTouchListener(object : View.OnTouchListener {
-            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-                when (event?.action) {
-                    MotionEvent.ACTION_DOWN -> {
-                        if(::adapter.isInitialized)
-                            adapter.hideDeleteButton(true)
-                    }
-                }
-
-                return v?.onTouchEvent(event) ?: true
-            }
-        })*/
-
     }
 
     private fun initObservers() {
@@ -113,7 +94,7 @@ class NotificationComplaintFragment :
                 page = pageNum.toString(),
                 perPage = "10",
                 cnic = UserData.getUser()?.cnicNicop.toString().cleanNicNumber(),
-                //notificationType = NotificationConstants.COMPLAINT
+                notificationType = NotificationConstants.ANNOUNCEMENT
             )
         )
         viewModel.observeNotifications().observe(this, Observer { response ->
@@ -183,7 +164,6 @@ class NotificationComplaintFragment :
     }
 
     companion object {
-        val TAG = "c_notif"
-        fun newInstance() = NotificationComplaintFragment()
+        fun newInstance() = NotificationActivityFragment()
     }
 }
