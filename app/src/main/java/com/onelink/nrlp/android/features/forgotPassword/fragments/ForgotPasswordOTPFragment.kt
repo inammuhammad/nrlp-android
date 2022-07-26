@@ -134,7 +134,8 @@ class ForgotPasswordOTPFragment :
             viewModel.getResendOTP(
                 ForgotPasswordRequestModel(
                     nicNicop = forgotPasswordFlowDataModel.cnicNicop,
-                    userType = forgotPasswordFlowDataModel.accountType
+                    userType = forgotPasswordFlowDataModel.accountType,
+                    motherMaidenName = ""
                 )
             )
         }

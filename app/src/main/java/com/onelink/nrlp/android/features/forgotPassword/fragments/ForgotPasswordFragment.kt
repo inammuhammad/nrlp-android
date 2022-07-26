@@ -83,6 +83,15 @@ class ForgotPasswordFragment :
                 )
             }
         }
+        binding.etMotherMaidenName.setOnFocusChangeListener { _, b ->
+            when (b) {
+                false -> viewModel.validationMotherMaidenNamePassed.postValue(
+                    viewModel.checkNameValidation(
+                        binding.etMotherMaidenName.text.toString()
+                    )
+                )
+            }
+        }
     }
 
     private fun initTextWatchers() {
@@ -181,14 +190,18 @@ class ForgotPasswordFragment :
                 Status.SUCCESS -> {
                     oneLinkProgressDialog.hideProgressDialog()
                     response.data?.let {
-                        if(it.data.key == "" || it.data.key.isEmpty())
-                            showGeneralErrorDialog(this, BaseError("", resources.getString(R.string.something_went_wrong)))
+                        if (it.data.key == "" || it.data.key.isEmpty())
+                            showGeneralErrorDialog(
+                                this,
+                                BaseError("", resources.getString(R.string.something_went_wrong))
+                            )
                         else {
                             viewModel.forgotPassword(
                                 ForgotPasswordRequestModel(
                                     nicNicop = binding.etCnicNicop.text.toString().cleanNicNumber(),
                                     userType = viewModel.getAccountType(resources)
-                                        .toLowerCase(Locale.getDefault())
+                                        .toLowerCase(Locale.getDefault()),
+                                    motherMaidenName = binding.etMotherMaidenName.text.toString()
                                 )
                             )
                         }
@@ -250,6 +263,18 @@ class ForgotPasswordFragment :
                 }
             }
         })
+
+        viewModel.validationMotherMaidenNamePassed.observe(this, Observer { validationsPassed ->
+            run {
+                if (!validationsPassed)
+                    binding.tilMotherMaidenName.error =
+                        resources.getString(R.string.error_not_valid_mother_name)
+                else {
+                    binding.tilMotherMaidenName.clearError()
+                    binding.tilMotherMaidenName.isErrorEnabled = false
+                }
+            }
+        })
     }
 
     private fun initListeners() {
@@ -260,7 +285,11 @@ class ForgotPasswordFragment :
         }
 
         binding.btnNext.setOnClickListener {
-            if (viewModel.validationsPassed(binding.etCnicNicop.text.toString())) {
+            if (viewModel.validationsPassed(
+                    binding.etCnicNicop.text.toString(),
+                    binding.etMotherMaidenName.text.toString()
+                )
+            ) {
                 forgotPasswordSharedViewModel?.setForgotPasswordFlowDataModel(
                     ForgotPasswordFlowDataModel(
                         binding.etCnicNicop.text.toString().cleanNicNumber(),

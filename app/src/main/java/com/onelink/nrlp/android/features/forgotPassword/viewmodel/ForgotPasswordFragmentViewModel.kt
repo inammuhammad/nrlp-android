@@ -18,7 +18,9 @@ class ForgotPasswordFragmentViewModel @Inject constructor(private val forgotPass
     BaseViewModel() {
     val accountType = MutableLiveData(Constants.SPINNER_ACCOUNT_TYPE_HINT)
     val cnicNicopNumber = MutableLiveData("")
+    val motherMaidenName = MutableLiveData("")
     val validationCnicPassed = MutableLiveData(true)
+    val validationMotherMaidenNamePassed = MutableLiveData(true)
 
 
     fun getAuthKey(nic: String, accountType: String) {
@@ -35,6 +37,10 @@ class ForgotPasswordFragmentViewModel @Inject constructor(private val forgotPass
 
     val cnicNotEmpty = MediatorLiveData<Boolean>().apply {
         validateNonNull(cnicNicopNumber)
+    }
+
+    val motherMaidenNameNotEmpty = MediatorLiveData<Boolean>().apply {
+        validateNonNull(motherMaidenName)
     }
 
     val isAccountTypeSelected = MediatorLiveData<Boolean>().apply {
@@ -66,15 +72,20 @@ class ForgotPasswordFragmentViewModel @Inject constructor(private val forgotPass
     fun checkCnicValidation(string: String) =
         string.isEmpty() || ValidationUtils.isCNICValid(string)
 
+    fun checkNameValidation(string: String) =
+        ValidationUtils.isMotherNameValid(string)
+
     private fun MediatorLiveData<Boolean>.validateNonNull(it: MutableLiveData<String>) {
         addSource(it) {
             value = it.isNotEmpty()
         }
     }
 
-    fun validationsPassed(cnic: String): Boolean {
+    fun validationsPassed(cnic: String, name: String): Boolean {
         val isCnicValid: Boolean = checkCnicValidation(cnic)
+        val isMotherMaidenNameValid: Boolean = checkNameValidation(name)
         validationCnicPassed.value = isCnicValid
-        return isCnicValid
+        validationMotherMaidenNamePassed.value = isMotherMaidenNameValid
+        return isCnicValid && isMotherMaidenNameValid
     }
 }
