@@ -128,6 +128,40 @@
             app:layout_constraintTop_toBottomOf="@+id/tvCnicIssuanceDateLabel" />
 
         <TextView
+            android:id="@+id/tv_passport_number"
+            style="@style/TextViewSubHeading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:text="@string/passport_no"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvCnicIssuanceDate" />
+
+        <com.onelink.nrlp.android.widgets.OneLinkTextInputLayout
+            android:id="@+id/til_passport_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/unit_8dp"
+            android:visibility="gone"
+            app:errorTextAppearance="@style/one_link_text_input_layout_error_appearance"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_passport_number">
+
+            <com.onelink.nrlp.android.widgets.OneLinkEditText
+                android:id="@+id/et_passport_number"
+                style="@style/EditTextFixedNumbers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/please_enter_receiver_info"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+                android:inputType="text"
+                android:imeOptions="actionDone|flagForceAscii"
+                android:text="@={viewModel.passportNumber}" />
+        </com.onelink.nrlp.android.widgets.OneLinkTextInputLayout>
+
+        <TextView
             android:id="@+id/tvMotherMaidenName"
             style="@style/TextViewSubHeading"
             android:layout_width="wrap_content"
@@ -135,7 +169,7 @@
             android:text="@string/mother_maiden_name"
             android:visibility="visible"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvCnicIssuanceDate"/>
+            app:layout_constraintTop_toBottomOf="@id/til_passport_number" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="@dimen/_15sdp"
@@ -627,7 +661,21 @@
             app:layout_constraintTop_toBottomOf="@id/tilIbanNumber"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <Button
+            android:id="@+id/btnNext2"
+            style="@style/ButtonTheme"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:enabled="@{viewModel.cnicNumberNotEmpty &amp;&amp; viewModel.passportNumberNotEmpty &amp;&amp; viewModel.aliasNotEmpty &amp;&amp; viewModel.countryNotEmpty &amp;&amp; viewModel.mobileNumberNotEmpty  &amp;&amp; viewModel.motherMaidenNameNotEmpty &amp;&amp; viewModel.placeOfBirthNotEmpty &amp;&amp; viewModel.cnicIssuanceDateNotEmpty}"
+            android:text="@string/next"
+            android:visibility="gone"
+            android:layout_marginBottom="@dimen/_20sdp"
+            app:layout_constraintTop_toBottomOf="@id/tilIbanNumber"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
         <Button
             android:id="@+id/btnDelete"

@@ -28,6 +28,7 @@ open class ReceiverDetailsViewModel @Inject constructor(private val receiverRepo
     val bankName = MutableLiveData<String>("")
     val ibanNumber = MutableLiveData<String>("")
     val country = MutableLiveData<String>("")
+    val passportNumber = MutableLiveData<String>("")
     val mobileNumber = MutableLiveData<String>("")
     val validationCnicPassed = MutableLiveData(true)
     val validationAliasPassed = MutableLiveData(true)
@@ -36,6 +37,7 @@ open class ReceiverDetailsViewModel @Inject constructor(private val receiverRepo
     val validationPlaceOfBirthPassed = MutableLiveData(true)
     val validationBankNamePassed = MutableLiveData(true)
     val validationIbanPassed = MutableLiveData(true)
+    val validationPassportNumberPassed = MutableLiveData(true)
     val beneficiaryRelation = MutableLiveData<String>(Constants.SPINNER_BENEFICIARY_HINT)
     var rawDate: String = ""
     val rawFromDate = MutableLiveData<String>("")
@@ -98,6 +100,9 @@ open class ReceiverDetailsViewModel @Inject constructor(private val receiverRepo
     val cnicIssuanceDateNotEmpty = MediatorLiveData<Boolean>().apply {
         validateNonNull(cnicNicopDateOfIssuance)
     }
+    val passportNumberNotEmpty = MediatorLiveData<Boolean>().apply {
+        validateNonNull(passportNumber)
+    }
 
     private fun MediatorLiveData<Boolean>.validateNonNull(it: MutableLiveData<String>) {
         addSource(it) { value = it.isNotEmpty() }
@@ -142,6 +147,9 @@ open class ReceiverDetailsViewModel @Inject constructor(private val receiverRepo
     fun checkMotherMaidenNameValidation(string: String) =
         string.isEmpty() || ValidationUtils.isNameValid(string)
 
+    fun checkPassportNumberValidation(string: String) =
+        ValidationUtils.isPassportNumberValid(string)
+
     fun validationsPassedCnicReceiver(
         cnic: String, name: String, motherName: String, placeOfBirth: String
     ): Boolean {
@@ -171,5 +179,21 @@ open class ReceiverDetailsViewModel @Inject constructor(private val receiverRepo
         validationMotherMaidenPassed.value = isMotherMaidenNameValid
         validationPlaceOfBirthPassed.value = isPlaceOfBirthValid
         return isCnicValid && isIbanValid && isNameValid && isMotherMaidenNameValid && isPlaceOfBirthValid
+    }
+
+    fun validationsPassedPassportReceiver(
+        cnic: String, name: String, motherName: String, placeOfBirth: String, passportNo: String
+    ): Boolean {
+        val isCnicValid: Boolean = checkCnicValidation(cnic)
+        val isNameValid: Boolean = checkAliasValidation(name)
+        val isMotherMaidenNameValid: Boolean = checkMotherMaidenNameValidation(motherName)
+        val isPlaceOfBirthValid: Boolean = checkMotherMaidenNameValidation(placeOfBirth)
+        val isPassportValid: Boolean = checkPassportNumberValidation(passportNo)
+        validationCnicPassed.value = isCnicValid
+        validationAliasPassed.value = isNameValid
+        validationMotherMaidenPassed.value = isMotherMaidenNameValid
+        validationPlaceOfBirthPassed.value = isPlaceOfBirthValid
+        validationPassportNumberPassed.value = isPassportValid
+        return isCnicValid && isNameValid && isMotherMaidenNameValid && isPlaceOfBirthValid && isPassportValid
     }
 }

@@ -453,5 +453,6 @@
     <string name="transaction_not_found">معزز صارف،آپ کے فراہم کردہ ٹرانزیکشن کی تفصیلات ہمارے ریکارڈ میں نہیں پائی گئی۔</string>
     <string name="only_verified_customers">صرف تصدیق شدہ صارفین ہی ٹرانزیکشن کر سکتے ہیں</string>
     <string name="reg_being_verified">آپ کی رجسٹریشن کی تصدیق کی جا رہی ہے، براہ کرم کچھ وقت انتظار کریں</string>
+    <string name="lang_selection">زبان کا انتخاب</string>
 
 </resources>

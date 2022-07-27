@@ -304,6 +304,16 @@ class ReceiverDetailsFragment :
                 )
             }
         }
+
+        binding.etPassportNumber.setOnFocusChangeListener { _, b ->
+            when (b) {
+                false -> viewModel.validationPassportNumberPassed.postValue(
+                    viewModel.checkPassportNumberValidation(
+                        binding.etPassportNumber.text.toString()
+                    )
+                )
+            }
+        }
     }
 
     private fun initTextWatchers() {
@@ -421,14 +431,28 @@ class ReceiverDetailsFragment :
         }
         binding.btnNext1.setOnSingleClickListener {
             hideKeyboard()
-            if(
+            if (
                 viewModel.validationsPassedIbanReceiver(
                     binding.eTCnicNumber.text.toString(),
                     binding.etIbanNumber.text.toString(),
                     binding.etAlias.text.toString(),
                     binding.etMotherMaidenName.text.toString(),
                     binding.etPlaceOfBirth.text.toString()
-                ))
+                )
+            )
+                makeReceiverAddCall()
+        }
+        binding.btnNext2.setOnSingleClickListener {
+            hideKeyboard()
+            if (
+                viewModel.validationsPassedPassportReceiver(
+                    binding.eTCnicNumber.text.toString(),
+                    binding.etAlias.text.toString(),
+                    binding.etMotherMaidenName.text.toString(),
+                    binding.etPlaceOfBirth.text.toString(),
+                    binding.etPassportNumber.text.toString()
+                )
+            )
                 makeReceiverAddCall()
         }
         binding.btnDelete.setOnSingleClickListener {
@@ -521,9 +545,10 @@ class ReceiverDetailsFragment :
         })
 
         receiverSharedViewModel?.receiverType?.observe(this, {
-            if(it == getString(R.string.remittance_to_cnic)) {
-               hideIbanView()
-            }
+            if (it == getString(R.string.remittance_to_cnic)) {
+                hideIbanView()
+            } else if (it == getString(R.string.remittance_to_passport))
+                makePassportView()
         })
 
         viewModel.observeReceiverAddResponse().observe(this, { response ->
@@ -705,13 +730,24 @@ class ReceiverDetailsFragment :
             }
         })
 
+        viewModel.validationPassportNumberPassed.observe(this, { validationsPassed ->
+            run {
+                if (!validationsPassed)
+                    binding.tilPassportNumber.error = getString(R.string.error_passport_mumber)
+                else {
+                    binding.tilPassportNumber.clearError()
+                    binding.tilPassportNumber.isErrorEnabled = false
+                }
+            }
+        })
+
         viewModel.beneficiaryRelation.observe(this, androidx.lifecycle.Observer {
-            if(it != Constants.SPINNER_BENEFICIARY_HINT) {
+            if (it != Constants.SPINNER_BENEFICIARY_HINT) {
                 binding.tvRelationShip.text = it
                 binding.tvRelationShip.colorToText(R.color.pure_black)
             }
 
-            if(viewModel.beneficiaryRelation.value.toString() == resources.getString(R.string.other)) {
+            if (viewModel.beneficiaryRelation.value.toString() == resources.getString(R.string.other)) {
                 binding.txtOther.visibility = View.VISIBLE
                 context?.let {
                     binding.txtOther.enabled(it)
@@ -740,8 +776,19 @@ class ReceiverDetailsFragment :
             tvIbanNumber.visibility = View.GONE
             icHelpIbanNumber.visibility = View.GONE
             btnNext1.visibility = View.GONE
-            if(!isDeleteBeneficiary)
+            if (!isDeleteBeneficiary)
                 btnNext.visibility = View.VISIBLE
+        }
+    }
+
+    private fun makePassportView() {
+        hideIbanView()
+        binding.apply {
+            tvPassportNumber.visibility = View.VISIBLE
+            tilPassportNumber.visibility = View.VISIBLE
+            btnNext.visibility = View.GONE
+            btnNext1.visibility = View.GONE
+            btnNext2.visibility = View.VISIBLE
         }
     }
 
