@@ -90,6 +90,8 @@ object ErrorDialogConstants {
     const val REMITTANCE_DIALOG = 1030
     const val SELF_AWARD_DIALOG = 1031
     const val TAG_UNABLE_TO_SELF_AWARD = "unable_to_self_award"
+    const val RC_VIDEO_DIALOG = 1032
+    const val TAG_VIDEO_DIALOG = "video_dialog"
 }
 
 object HeaderConstants {
@@ -143,8 +145,9 @@ object ComplaintRequestModelConstants{
     const val User_type="c_user_type"
     const val Complaint_type_id="c_complaint_type_id"
     const val Nic_nicop="c_nic_nicop"
-    const val Beneficiary_Nic_nicop="c_beneficiary_nic_nicop"
-    const val Beneficiary_Nic_Account="c_beneficiary_nic_nicop"
+    const val Beneficiary_Nic_nicop = "c_beneficiary_nic_nicop"
+    const val Beneficiary_ID = "c_beneficiary_id"
+    const val Beneficiary_Nic_Account = "c_beneficiary_nic_nicop"
     const val Name="c_name"
     const val Mobile_no="c_mobile_no"
     const val Email="c_email"

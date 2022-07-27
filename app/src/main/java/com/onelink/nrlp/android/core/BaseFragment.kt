@@ -27,6 +27,7 @@ import com.onelink.nrlp.android.utils.Constants
 import com.onelink.nrlp.android.utils.ErrorCodesConstants
 import com.onelink.nrlp.android.utils.ErrorDialogConstants
 import com.onelink.nrlp.android.utils.dialogs.OneLinkAlertDialogsFragment
+import com.onelink.nrlp.android.utils.dialogs.OneLinkVideoDialogFragment
 import com.onelink.nrlp.android.utils.toSpanned
 import dagger.android.support.DaggerFragment
 
@@ -497,6 +498,15 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
             .setPositiveButtonText("")
             .setCancelable(false)
             .show(parentFragmentManager, ErrorDialogConstants.TAG_UNABLE_TO_SELF_AWARD)
+    }
+
+    protected fun showVideo(fragment: Fragment) {
+        OneLinkVideoDialogFragment.Builder()
+            .setTargetFragment(fragment, ErrorDialogConstants.RC_VIDEO_DIALOG)
+            .setIsAlertOnly(true)
+            .setCancelable(true)
+            .setVideoID("aH5aq4V0Ywk")
+            .show(parentFragmentManager, ErrorDialogConstants.TAG_VIDEO_DIALOG)
     }
 
     override fun onNeutralButtonClicked(targetCode: Int) {

@@ -66,6 +66,8 @@ class LoginFragment :
         binding.lifecycleOwner = this
         viewModel.accountType.postValue(binding.radio1.id)
 
+        //showVideo(this)
+
         dexRootDetect(context)
         if (!AppUtils.isValidInstallation(context)) showInvalidInstallDialog()
 

@@ -8,24 +8,32 @@ import com.onelink.nrlp.android.data.NetworkHelper
 import com.onelink.nrlp.android.data.ServiceGateway
 import com.onelink.nrlp.android.features.complaint.models.AddComplaintResponseModel
 import com.onelink.nrlp.android.features.redeem.model.RedeemPartnerResponseModel
+import com.onelink.nrlp.android.models.BeneficiariesResponseModel
 import javax.inject.Inject
 
 open class ComplainRepo @Inject constructor(
 private val networkHelper: NetworkHelper,
 private val serviceGateway: ServiceGateway
 ) {
-    private val complainAddResponse=
+    val beneficiariesResponse = MutableLiveData<BaseResponse<BeneficiariesResponseModel>>()
+    private val complainAddResponse =
         MutableLiveData<BaseResponse<AddComplaintResponseModel>>()
     private val redeemPartnersResponse = MutableLiveData<BaseResponse<RedeemPartnerResponseModel>>()
 
-    fun addComplainRequest(addComplaintRequestModel: JsonObject){
+    fun addComplainRequest(addComplaintRequestModel: JsonObject) {
         networkHelper.serviceCall(serviceGateway.addComplaint(addComplaintRequestModel))
             .observeForever {
-                complainAddResponse.value=it
+                complainAddResponse.value = it
             }
     }
 
-    fun observeAddComplainResponse()=
+    fun getAllBeneficiaries() {
+        networkHelper.serviceCall(serviceGateway.getBeneficiaries()).observeForever {
+            beneficiariesResponse.value = it
+        }
+    }
+
+    fun observeAddComplainResponse() =
         complainAddResponse as LiveData<BaseResponse<AddComplaintResponseModel>>
 
 
@@ -38,5 +46,7 @@ private val serviceGateway: ServiceGateway
     fun observeRedeemPartner() =
         redeemPartnersResponse as LiveData<BaseResponse<RedeemPartnerResponseModel>>
 
+    fun observeBeneficiaryResponse() =
+        beneficiariesResponse as LiveData<BaseResponse<BeneficiariesResponseModel>>
 
 }

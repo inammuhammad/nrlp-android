@@ -35,11 +35,13 @@ import com.onelink.nrlp.android.features.select.country.view.SelectCountryFragme
 import com.onelink.nrlp.android.features.select.generic.model.BranchCenterModel
 import com.onelink.nrlp.android.features.select.generic.view.SelectBranchCenterFragment
 import com.onelink.nrlp.android.features.viewStatement.fragments.AdvancedLoyaltyStatementFragment
+import com.onelink.nrlp.android.models.BeneficiaryDetailsModel
 import com.onelink.nrlp.android.utils.*
 import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
 import com.onelink.nrlp.android.widgets.OneLinkEditText
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.loyalty_statement_list_item.*
+import java.math.BigInteger
 import java.util.*
 import java.util.regex.Pattern
 import javax.inject.Inject
@@ -60,6 +62,12 @@ class RegComplaintDetailsFragment :
     private val REGISTERED: Int = 1
     private var listenerInitializedTR: Boolean = false
     private var listenerInitializedPR: Boolean = false
+    val list = arrayListOf<BeneficiaryDetailsModel>()
+    private val listSpinner: ArrayList<String> = ArrayList()
+    private var listenerInitialized: Boolean = false
+    private var selectedBeneficiary =
+        BeneficiaryDetailsModel(-1, BigInteger.ONE, "12312", 0, "", "", "", "", "")
+
     override fun onInject() {
         AndroidSupportInjection.inject(this)
     }
@@ -366,6 +374,10 @@ class RegComplaintDetailsFragment :
                 getString(R.string.beneficiary_passport_help)
             )
         }
+
+        binding.spinnerLy.setOnClickListener {
+            binding.spinnerSelectBene.performClick()
+        }
     }
 
     private fun initViews(){
@@ -386,11 +398,13 @@ class RegComplaintDetailsFragment :
                 viewModel.complaintType.value = COMPLAINT_TYPE.UNABLE_TO_ADD_BENEFICIARY
             }
 
-            resources.getString(RegisteredComplaintTypes.UNABLE_TO_TRANSFER_POINTS_TO_BENEFICIARY).
-            toLowerCase(Locale.getDefault()) -> {
-                binding.lyTransferPoints.visibility=View.VISIBLE
-                viewModel.complaintType.value = COMPLAINT_TYPE.UNABLE_TO_TRANSFER_POINTS_TO_BENEFICIARY
-            }
+             resources.getString(RegisteredComplaintTypes.UNABLE_TO_TRANSFER_POINTS_TO_BENEFICIARY)
+                 .toLowerCase(Locale.getDefault()) -> {
+                 binding.lyTransferPoints.visibility = View.VISIBLE
+                 viewModel.complaintType.value =
+                     COMPLAINT_TYPE.UNABLE_TO_TRANSFER_POINTS_TO_BENEFICIARY
+                 viewModel.getBeneficiaries()
+             }
 
              resources.getString(RegisteredComplaintTypes.UNABLE_TO_SELF_AWARDS_POINTS)
                  .toLowerCase(Locale.getDefault()) -> {
@@ -1019,6 +1033,73 @@ class RegComplaintDetailsFragment :
                     }
                 }
             })
+
+        viewModel.observeBeneficiaryResponse()
+            .observe(this, androidx.lifecycle.Observer { response ->
+                when (response.status) {
+                    Status.SUCCESS -> {
+                        binding.spinnerSelectBene.adapter = context?.let {
+                            oneLinkProgressDialog.hideProgressDialog()
+                            response.data?.data?.let { userData ->
+                                for (i in userData) {
+                                    //if (i.nadraStatusCode == "A") {
+                                    list.add(i)
+                                    listSpinner.add(i.alias)
+                                    //}
+                                }
+                                if (list.size > 0) {
+                                    //binding.lyNoBeneficiary.visibility = View.GONE
+                                    //binding.lyManagePoints.visibility = View.VISIBLE
+
+                                } else {
+                                    //binding.lyNoBeneficiary.visibility = View.VISIBLE
+                                    //binding.lyManagePoints.visibility = View.GONE
+                                }
+
+                            }
+                            ArrayAdapter(
+                                it,
+                                R.layout.custom_spinner_item,
+                                listSpinner
+                            )
+                        } as SpinnerAdapter
+                        binding.spinnerSelectBene.onItemSelectedListener =
+                            object : AdapterView.OnItemSelectedListener {
+                                override fun onNothingSelected(parent: AdapterView<*>?) {
+                                    // not in use
+                                }
+
+                                override fun onItemSelected(
+                                    parent: AdapterView<*>?,
+                                    view: View?,
+                                    position: Int,
+                                    id: Long
+                                ) {
+                                    if (listenerInitialized) {
+                                        list[position]
+                                        val data = list[position]
+                                        selectedBeneficiary = data
+                                        binding.tvSelectedBene.text = list[position].alias
+                                        binding.tvSelectedBene.colorToText(R.color.pure_black)
+                                        viewModel.selectedBene.postValue(data)
+
+
+                                    } else {
+                                        listenerInitialized = true
+                                        binding.spinnerSelectBene.setSelection(-1)
+                                    }
+                                }
+                            }
+                    }
+                    Status.LOADING -> {
+
+                    }
+                    Status.ERROR -> {
+
+                    }
+                }
+
+            })
     }
 
     private fun CnicValidator(editText:OneLinkEditText){
@@ -1179,6 +1260,10 @@ class RegComplaintDetailsFragment :
                 jsonObject.addProperty(
                     ComplaintRequestModelConstants.Beneficiary_Nic_nicop,
                     binding.etPointsbeneficiaryCnicNicp.text.toString().removeDashes()
+                )
+                jsonObject.addProperty(
+                    ComplaintRequestModelConstants.Beneficiary_ID,
+                    viewModel.selectedBene.value?.id
                 )
             }
 

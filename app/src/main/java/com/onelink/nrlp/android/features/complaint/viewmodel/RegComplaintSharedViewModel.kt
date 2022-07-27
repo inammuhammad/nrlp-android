@@ -10,6 +10,7 @@ import com.onelink.nrlp.android.core.BaseViewModel
 import com.onelink.nrlp.android.features.complaint.fragment.registered.RegComplaintDetailsFragment
 import com.onelink.nrlp.android.features.complaint.fragment.registered.RegComplaintResponseFragment
 import com.onelink.nrlp.android.features.complaint.repo.ComplainRepo
+import com.onelink.nrlp.android.models.BeneficiaryDetailsModel
 import com.onelink.nrlp.android.utils.COMPLAINT_TYPE
 import com.onelink.nrlp.android.utils.ValidationUtils
 import java.text.SimpleDateFormat
@@ -74,6 +75,11 @@ constructor(private val complainRepo: ComplainRepo)
     val validationBranchCenterPassed = MutableLiveData(true)
     val validationBeneficiaryCnicPointsPassed = MutableLiveData(true)
     val validationTransactionDatePassed = MutableLiveData(true)
+    val selectedBene = MutableLiveData<BeneficiaryDetailsModel>(null)
+
+    fun getBeneficiaries() = complainRepo.getAllBeneficiaries()
+
+    fun observeBeneficiaryResponse() = complainRepo.observeBeneficiaryResponse()
 
     fun observeAddComplainResponse() = complainRepo.observeAddComplainResponse()
 
