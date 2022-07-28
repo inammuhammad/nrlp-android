@@ -3,6 +3,7 @@ package com.onelink.nrlp.android.features.receiver.view
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -14,6 +15,9 @@ import com.onelink.nrlp.android.features.beneficiary.adapter.BeneficiariesAdapte
 import com.onelink.nrlp.android.features.beneficiary.fragments.BeneficiaryDetailsFragment
 import com.onelink.nrlp.android.features.beneficiary.fragments.ManageBeneficiaryFragment
 import com.onelink.nrlp.android.features.beneficiary.view.BeneficiaryActivity
+import com.onelink.nrlp.android.features.home.fragments.FatherNameVerificationFragment
+import com.onelink.nrlp.android.features.home.fragments.NadraVerificationRequiredFragment
+import com.onelink.nrlp.android.features.home.fragments.popup.GeneralInfoFragment
 import com.onelink.nrlp.android.features.receiver.adapter.ReceiversAdapter
 import com.onelink.nrlp.android.features.receiver.fragments.AddRemittanceReceiverFragment
 import com.onelink.nrlp.android.features.receiver.fragments.ManageReceiverFragment
@@ -75,22 +79,45 @@ class ReceiverActivity :
         initView()
     }
 
+    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            val fragment = getCurrentFragment() as BaseFragment<*, *>?
+            fragment?.let {
+                if (it !is AddRemittanceReceiverFragment) {
+                    onBack()
+                }
+            }
+            return true
+        }
+        return super.onKeyDown(keyCode, event)
+    }
+
     private fun initView() {
         isFromHome = intent.getBooleanExtra("isFromHomeScreen", false)
 
-        if(isFromHome) {
+        if (isFromHome) {
             addFragment(
                 AddRemittanceReceiverFragment.newInstance(),
                 clearBackStack = false,
                 addToBackStack = true
             )
-        }
-        else{
+        } else {
             addFragment(
                 ManageReceiverFragment.newInstance(),
                 clearBackStack = false,
                 addToBackStack = true
             )
+        }
+        setLeftButtonVisibility()
+    }
+
+    private fun setLeftButtonVisibility() {
+        val fragment = getCurrentFragment() as BaseFragment<*, *>?
+        fragment?.let {
+            if (it !is AddRemittanceReceiverFragment)
+                binding.toolbar.setLeftButtonVisible(false)
+            else
+                binding.toolbar.setLeftButtonVisible(true)
         }
     }
 
