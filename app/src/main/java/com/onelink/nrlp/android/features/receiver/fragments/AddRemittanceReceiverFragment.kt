@@ -52,7 +52,6 @@ class AddRemittanceReceiverFragment :
         super.init(savedInstanceState)
         binding.lifecycleOwner = this
         initListeners()
-        initObservers()
     }
 
     private fun initListeners(){
@@ -66,49 +65,9 @@ class AddRemittanceReceiverFragment :
         }
         binding.btnSkip.setOnSingleClickListener {
             //fragmentHelper.onBack()
-            showLogoutConfirmationDialog()
+            (activity as ReceiverActivity).showLogoutConfirmationDialog()
         }
     }
-
-    private fun initObservers() {
-        viewModel.observeLogout().observe(this, Observer { response ->
-            when (response.status) {
-                Status.SUCCESS, Status.ERROR -> {
-                    oneLinkProgressDialog.hideProgressDialog()
-                    UserData.emptyUserData()
-                    launchLoginActivity()
-                }
-                Status.LOADING -> {
-                    oneLinkProgressDialog.showProgressDialog(context)
-                }
-            }
-        })
-    }
-
-    private fun showLogoutConfirmationDialog() {
-        OneLinkAlertDialogsFragment.Builder().setIsAlertOnly(true)
-            .setDrawable(R.drawable.ic_error_dialog).setIsAlertOnly(false)
-            .setTitle(getString(R.string.logout))
-            .setMessage(getString(R.string.nadra_confirmation_msg).toSpanned())
-            .setNeutralButtonText(getString(R.string.okay))
-            .setPositiveButtonText(resources.getString(R.string.yes))
-            .setNegativeButtonText(resources.getString(R.string.no)).setCancelable(true)
-            .setCancelable(false)
-            .show(parentFragmentManager, TAG_CONFIRM_LOGOUT_DIALOG)
-    }
-
-    private fun launchLoginActivity() {
-        val intent = Intent(context, LoginActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-        startActivity(intent)
-
-    }
-
-    override fun onPositiveButtonClicked(targetCode: Int) {
-        super.onPositiveButtonClicked(targetCode)
-        viewModel.performLogout()
-    }
-
 
     companion object {
         @JvmStatic

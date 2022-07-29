@@ -19,7 +19,4 @@ class ReceiverSharedViewModel @Inject constructor(private val homeRepo: HomeRepo
     val receiverDetails = MutableLiveData<ReceiverDetailsModel>()
     val isDeleteBeneficiary = MutableLiveData<Boolean>()
     val receiverType = MutableLiveData<String>()
-
-    fun performLogout() = homeRepo.performLogout()
-    fun observeLogout() = homeRepo.observeLogoutResponse()
 }
