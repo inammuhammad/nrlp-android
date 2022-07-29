@@ -375,9 +375,9 @@ class RegComplaintDetailsFragment :
             )
         }
 
-        binding.spinnerLy.setOnClickListener {
+        /*binding.spinnerLy.setOnClickListener {
             binding.spinnerSelectBene.performClick()
-        }
+        }*/
     }
 
     private fun initViews(){
@@ -598,6 +598,16 @@ class RegComplaintDetailsFragment :
                 false -> viewModel.validationBranchCenterPassed.postValue(
                     viewModel.checkBranchCenter(
                         binding.etBranchCenter.text.toString()
+                    )
+                )
+            }
+        }
+
+        binding.etBeneficiaryName.setOnFocusChangeListener { _, b ->
+            when (b) {
+                false -> viewModel.validationBeneficiaryNamePassed.postValue(
+                    viewModel.checkNameValid(
+                        binding.etBeneficiaryName.text.toString()
                     )
                 )
             }
@@ -933,6 +943,19 @@ class RegComplaintDetailsFragment :
                 }
             })
 
+        viewModel.validationBeneficiaryNamePassed.observe(
+            this,
+            { validationsPassed ->
+                run {
+                    if (!validationsPassed)
+                        binding.tilBeneficiaryName.error = getString(R.string.error_not_valid_name)
+                    else {
+                        binding.tilBeneficiaryName.clearError()
+                        binding.tilBeneficiaryName.isErrorEnabled = false
+                    }
+                }
+            })
+
         viewModel.validationBeneficiaryCnicPointsPassed.observe(
             this,
             { validationsPassed ->
@@ -1038,64 +1061,36 @@ class RegComplaintDetailsFragment :
             .observe(this, androidx.lifecycle.Observer { response ->
                 when (response.status) {
                     Status.SUCCESS -> {
-                        binding.spinnerSelectBene.adapter = context?.let {
-                            oneLinkProgressDialog.hideProgressDialog()
-                            response.data?.data?.let { userData ->
-                                for (i in userData) {
-                                    //if (i.nadraStatusCode == "A") {
-                                    list.add(i)
-                                    listSpinner.add(i.alias)
-                                    //}
-                                }
-                                if (list.size > 0) {
-                                    //binding.lyNoBeneficiary.visibility = View.GONE
-                                    //binding.lyManagePoints.visibility = View.VISIBLE
-
-                                } else {
-                                    //binding.lyNoBeneficiary.visibility = View.VISIBLE
-                                    //binding.lyManagePoints.visibility = View.GONE
-                                }
-
-                            }
-                            ArrayAdapter(
-                                it,
-                                R.layout.custom_spinner_item,
-                                listSpinner
+                        oneLinkProgressDialog.hideProgressDialog()
+                        val beneSize = response.data?.data?.size ?: 0
+                        if (beneSize > 0) {
+                            if (response.data?.data?.get(0)?.nadraStatusCode == "A") {
+                                binding.etBeneficiaryName.setText(response.data?.data?.get(0)?.alias)
+                                binding.etPointsbeneficiaryCnicNicp.setText(
+                                    response.data?.data?.get(
+                                        0
+                                    )?.nicNicop.toString()
+                                )
+                                viewModel.selectedBene.value = response.data?.data?.get(0)
+                            } else
+                                showGeneralAlertDialog(
+                                    this,
+                                    "c_transfer_points",
+                                    getString(R.string.when_bene_active)
+                                )
+                        } else
+                            showGeneralAlertDialog(
+                                this,
+                                "c_transfer_points",
+                                getString(R.string.add_bene_first)
                             )
-                        } as SpinnerAdapter
-                        binding.spinnerSelectBene.onItemSelectedListener =
-                            object : AdapterView.OnItemSelectedListener {
-                                override fun onNothingSelected(parent: AdapterView<*>?) {
-                                    // not in use
-                                }
-
-                                override fun onItemSelected(
-                                    parent: AdapterView<*>?,
-                                    view: View?,
-                                    position: Int,
-                                    id: Long
-                                ) {
-                                    if (listenerInitialized) {
-                                        list[position]
-                                        val data = list[position]
-                                        selectedBeneficiary = data
-                                        binding.tvSelectedBene.text = list[position].alias
-                                        binding.tvSelectedBene.colorToText(R.color.pure_black)
-                                        viewModel.selectedBene.postValue(data)
-
-
-                                    } else {
-                                        listenerInitialized = true
-                                        binding.spinnerSelectBene.setSelection(-1)
-                                    }
-                                }
-                            }
                     }
                     Status.LOADING -> {
-
+                        oneLinkProgressDialog.showProgressDialog(context)
                     }
                     Status.ERROR -> {
-
+                        oneLinkProgressDialog.hideProgressDialog()
+                        response.error?.let { showGeneralErrorDialog(this, it) }
                     }
                 }
 
@@ -1401,6 +1396,8 @@ class RegComplaintDetailsFragment :
             viewModel.checkIban(binding.etBeneficiaryIban.text.toString())
         val isSelfAwardPassportValid: Boolean =
             viewModel.checkPassportNumber(binding.etBeneficiaryPassport.text.toString())
+        val isBeneficiaryNameValid: Boolean =
+            viewModel.checkNameValid(binding.etBeneficiaryName.text.toString())
         //var isFullNameValid: Boolean = viewModel.checkAliasValidation(alias.value!!)
         //var isEmailValid:Boolean = viewModel.checkEmailValidation(emailAddress.value!!)
         //var isCountryValid:Boolean = viewModel.checkCountryValidation(country)
@@ -1426,6 +1423,7 @@ class RegComplaintDetailsFragment :
         viewModel.validationTransactionDatePassed.value = isTransactionDateValid
         viewModel.validationIbanPassed.value = isSelfAwardIbanValid
         viewModel.validationPassportPassed.value = isSelfAwardPassportValid
+        viewModel.validationBeneficiaryNamePassed.value = isBeneficiaryNameValid
 
         when (viewModel.complaintType.value) {
             COMPLAINT_TYPE.UNABLE_TO_RECEIVE_OTP -> {
@@ -1439,9 +1437,9 @@ class RegComplaintDetailsFragment :
                         binding.etBeneficiaryMobileOperator.text.toString().isNotEmpty()
 
             }
-            COMPLAINT_TYPE.UNABLE_TO_TRANSFER_POINTS_TO_BENEFICIARY ->{
-                return viewModel.checkCnicValidation(binding.etPointsbeneficiaryCnicNicp.text.toString())
-
+            COMPLAINT_TYPE.UNABLE_TO_TRANSFER_POINTS_TO_BENEFICIARY -> {
+                return (viewModel.checkCnicValidation(binding.etPointsbeneficiaryCnicNicp.text.toString())
+                        && isBeneficiaryNameValid)
             }
             COMPLAINT_TYPE.UNABLE_TO_SELF_AWARDS_POINTS -> {
                 return (isBeneficiaryAccountValid || isSelfAwardIbanValid || isSelfAwardPassportValid) &&  //binding.etBeneficiaryAccount.text.toString().isNotEmpty() &&

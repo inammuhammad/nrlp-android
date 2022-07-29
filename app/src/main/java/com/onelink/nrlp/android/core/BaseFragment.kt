@@ -162,6 +162,7 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(private va
             "SelfAward" -> showSelfAwardHelpDialog(fragment, msg)
             "USD" -> showUSDHelpDialog(fragment, msg)
             "popup" -> showGeneralPopupDialog(fragment, msg)
+            "c_transfer_points" -> showGeneralPopupDialog(fragment, msg)
         }
     }
 

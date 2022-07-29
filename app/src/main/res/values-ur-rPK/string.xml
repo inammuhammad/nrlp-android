@@ -454,5 +454,7 @@
     <string name="only_verified_customers">صرف تصدیق شدہ صارفین ہی ٹرانزیکشن کر سکتے ہیں</string>
     <string name="reg_being_verified">آپ کی رجسٹریشن کی تصدیق کی جا رہی ہے، براہ کرم کچھ وقت انتظار کریں</string>
     <string name="lang_selection">زبان کا انتخاب</string>
-
+    <string name="beneficiary_name">وصول کنندہ کا نام</string>
+    <string name="add_bene_first">براہ کرم پہلے وصول کنندہ کو شامل کریں۔ آپ کے وصول کنندہ کا اکاؤنٹ فعال ہونے کے بعد آپ کو پوائنٹس کی منتقلی کی اجازت ہوگی۔</string>
+    <string name="when_bene_active">Dear Customer, You will be able to transfer points after your beneficiary account is active.</string>
 </resources>
