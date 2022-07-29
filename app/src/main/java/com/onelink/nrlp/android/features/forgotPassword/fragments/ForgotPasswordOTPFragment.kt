@@ -135,7 +135,7 @@ class ForgotPasswordOTPFragment :
                 ForgotPasswordRequestModel(
                     nicNicop = forgotPasswordFlowDataModel.cnicNicop,
                     userType = forgotPasswordFlowDataModel.accountType,
-                    motherMaidenName = ""
+                    //motherMaidenName = ""
                 )
             )
         }

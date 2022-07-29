@@ -230,7 +230,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/TextViewSubHeading"
-
+                android:visibility="gone"
                 android:text="@string/lang_selection"
                 app:layout_constraintBottom_toTopOf="@id/btnLogin"
                 app:layout_constraintStart_toStartOf="parent"
@@ -244,6 +244,7 @@
                 app:layout_constraintBottom_toTopOf="@id/btnLogin"
                 android:layout_marginStart="@dimen/_8sdp"
                 android:orientation="horizontal"
+                android:visibility="gone"
                 android:layout_marginBottom="@dimen/_10sdp"
                 app:layout_constraintBottom_toBottomOf="@id/tv_language_selection"
                 app:layout_constraintTop_toTopOf="@id/tv_language_selection"

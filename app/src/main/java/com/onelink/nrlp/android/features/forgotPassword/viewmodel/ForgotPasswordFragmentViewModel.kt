@@ -39,10 +39,6 @@ class ForgotPasswordFragmentViewModel @Inject constructor(private val forgotPass
         validateNonNull(cnicNicopNumber)
     }
 
-    val motherMaidenNameNotEmpty = MediatorLiveData<Boolean>().apply {
-        validateNonNull(motherMaidenName)
-    }
-
     val isAccountTypeSelected = MediatorLiveData<Boolean>().apply {
         addSource(accountType) {
             val valid = accountType.value?.let { value ->
@@ -81,11 +77,9 @@ class ForgotPasswordFragmentViewModel @Inject constructor(private val forgotPass
         }
     }
 
-    fun validationsPassed(cnic: String, name: String): Boolean {
+    fun validationsPassed(cnic: String): Boolean {
         val isCnicValid: Boolean = checkCnicValidation(cnic)
-        val isMotherMaidenNameValid: Boolean = checkNameValidation(name)
         validationCnicPassed.value = isCnicValid
-        validationMotherMaidenNamePassed.value = isMotherMaidenNameValid
-        return isCnicValid && isMotherMaidenNameValid
+        return isCnicValid
     }
 }

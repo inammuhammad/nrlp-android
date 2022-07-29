@@ -11,8 +11,8 @@ class ForgotPasswordRequestModel(
     val nicNicop: String,
     @SerializedName("user_type")
     val userType: String,
-    @SerializedName("mother_maiden_name")
-    val motherMaidenName: String,
+    /*@SerializedName("mother_maiden_name")
+    val motherMaidenName: String,*/
     @SerializedName("encryption_key")
     val encryptionKey: String = LukaKeRakk.kcth(),
 )

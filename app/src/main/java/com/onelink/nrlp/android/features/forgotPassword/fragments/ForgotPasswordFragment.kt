@@ -201,7 +201,7 @@ class ForgotPasswordFragment :
                                     nicNicop = binding.etCnicNicop.text.toString().cleanNicNumber(),
                                     userType = viewModel.getAccountType(resources)
                                         .toLowerCase(Locale.getDefault()),
-                                    motherMaidenName = binding.etMotherMaidenName.text.toString()
+                                    //motherMaidenName = binding.etMotherMaidenName.text.toString()
                                 )
                             )
                         }
@@ -286,8 +286,7 @@ class ForgotPasswordFragment :
 
         binding.btnNext.setOnClickListener {
             if (viewModel.validationsPassed(
-                    binding.etCnicNicop.text.toString(),
-                    binding.etMotherMaidenName.text.toString()
+                    binding.etCnicNicop.text.toString()
                 )
             ) {
                 forgotPasswordSharedViewModel?.setForgotPasswordFlowDataModel(
