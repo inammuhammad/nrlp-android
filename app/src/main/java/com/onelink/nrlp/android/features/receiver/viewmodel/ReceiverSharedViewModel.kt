@@ -11,8 +11,7 @@ import javax.inject.Inject
 /**
  * Created by Qazi Abubakar on 11/07/2020.
  */
-class ReceiverSharedViewModel @Inject constructor(private val homeRepo: HomeRepo) :
-    BaseViewModel() {
+class ReceiverSharedViewModel @Inject constructor() : BaseViewModel() {
 
     @Suppress("unused")
     val beneficiariesResponse = MutableLiveData<BaseResponse<BeneficiariesResponseModel>>()
