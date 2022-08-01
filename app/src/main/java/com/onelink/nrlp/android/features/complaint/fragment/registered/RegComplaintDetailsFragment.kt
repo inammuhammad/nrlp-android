@@ -1442,6 +1442,11 @@ class RegComplaintDetailsFragment :
                         && isBeneficiaryNameValid)
             }
             COMPLAINT_TYPE.UNABLE_TO_SELF_AWARDS_POINTS -> {
+                fragmentHelper.addFragment(
+                    RegComplaintCameraFragment.newInstance(),
+                    clearBackStack = false,
+                    addToBackStack = true
+                )
                 return (isBeneficiaryAccountValid || isSelfAwardIbanValid || isSelfAwardPassportValid) &&  //binding.etBeneficiaryAccount.text.toString().isNotEmpty() &&
                         isSelfAwardTypeValid &&
                         binding.etTransactionDate.text.toString().isNotEmpty() &&

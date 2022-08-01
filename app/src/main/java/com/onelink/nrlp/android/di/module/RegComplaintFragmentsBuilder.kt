@@ -1,6 +1,7 @@
 package com.onelink.nrlp.android.di.module
 
 import com.onelink.nrlp.android.di.annotations.FragmentScope
+import com.onelink.nrlp.android.features.complaint.fragment.registered.RegComplaintCameraFragment
 import com.onelink.nrlp.android.features.complaint.fragment.registered.RegComplaintDetailsFragment
 import com.onelink.nrlp.android.features.complaint.fragment.registered.RegComplaintResponseFragment
 import com.onelink.nrlp.android.features.complaint.fragment.registered.RegComplaintTypeFragment
@@ -36,4 +37,8 @@ abstract class RegComplaintFragmentsBuilder {
     @FragmentScope
     @ContributesAndroidInjector
     abstract fun provideBanksAndExchangeFragment(): SelectBanksAndExchangeFragment
+
+    @FragmentScope
+    @ContributesAndroidInjector
+    abstract fun provideCameraFragment(): RegComplaintCameraFragment
 }

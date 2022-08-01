@@ -3,6 +3,8 @@ package com.onelink.nrlp.android.features.complaint.view
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
+import android.provider.Settings
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
@@ -57,11 +59,18 @@ class RegComplaintActivity:
         super.onAttachFragment(fragment)
         if (fragment is SelectCountryFragment) {
             fragment.setOnClickListener(this)
-        }else if(fragment is RegComplaintDetailsFragment){
+        } else if (fragment is RegComplaintDetailsFragment) {
             listener = fragment
             listenerBranchCenter = fragment
             listenerBanksAndExchange = fragment
         }
+    }
+
+    fun openSettings() {
+        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+        val uri: Uri = Uri.fromParts("package", packageName, null)
+        intent.data = uri
+        startActivityForResult(intent, 101)
     }
 
     companion object {

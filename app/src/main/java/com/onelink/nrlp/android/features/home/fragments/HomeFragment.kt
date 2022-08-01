@@ -1,8 +1,6 @@
 package com.onelink.nrlp.android.features.home.fragments
 
-import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
+import android.content.*
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -16,6 +14,7 @@ import com.onelink.nrlp.android.data.local.UserData
 import androidx.lifecycle.Observer
 import com.google.android.play.core.review.testing.FakeReviewManager
 import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.iid.FirebaseInstanceId
 import com.onelink.nrlp.android.data.local.UserModel
 import com.onelink.nrlp.android.databinding.HomeFragmentBinding
 import com.onelink.nrlp.android.features.home.view.HomeActivity
@@ -152,6 +151,9 @@ open class HomeFragment :
             } catch (e: Exception) {
             }
             (activity as HomeActivity).setNotificationCount(it.notificationCount.toString())
+            val clipboard = context?.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clip = ClipData.newPlainText("token", FirebaseInstanceId.getInstance().getToken())
+            clipboard!!.setPrimaryClip(clip)
             // binding.lyTitle.tvLoyaltyLevel.text = it.loyaltyLevel.capitalize(Locale.getDefault())
         }
     }
