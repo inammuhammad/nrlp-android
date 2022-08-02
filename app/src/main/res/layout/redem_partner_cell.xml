@@ -28,7 +28,7 @@
             android:layout_marginStart="@dimen/_16sdp"
             android:layout_weight="1"
             android:background="@color/white"
-            android:text="@{redeem.partnerName}"
+            android:text="@{redeem.primaryName}"
             android:textColor="@android:color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
