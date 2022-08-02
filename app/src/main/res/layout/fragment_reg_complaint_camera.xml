@@ -8,8 +8,29 @@
         android:clickable="true"
         android:focusable="true"
         android:layout_height="match_parent"
-        android:background="@color/black"
+        android:background="@color/white"
         tools:context=".features.complaint.view.RegComplaintActivity">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_camera"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/ic_camera"
+            android:tint="@color/black" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextViewSubHeading"
+            android:text="@string/receipt_photo"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/iv_camera"
+            app:layout_constraintStart_toStartOf="@id/iv_camera"
+            app:layout_constraintEnd_toEndOf="@id/iv_camera" />
 
         <TextureView
             android:id="@+id/texture_view"
@@ -20,39 +41,65 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
 
+        <LinearLayout
+            android:id="@+id/lytCapEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            app:layout_constraintBottom_toTopOf="@id/camera_capture_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:weightSum="2">
+
+            <Button
+                android:id="@+id/btnCapture"
+                style="@style/DialogPositiveButtonTheme"
+                android:layout_weight="1"
+                android:enabled="true"
+                android:text="@string/save" />
+
+            <Button
+                android:id="@+id/btnEdit"
+                style="@style/DialogPositiveButtonTheme"
+                android:layout_weight="1"
+                android:enabled="true"
+                android:text="@string/edit" />
+        </LinearLayout>
+
         <Button
             android:id="@+id/camera_capture_button"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginBottom="50dp"
-            android:background="@drawable/ic_bell"
+            android:layout_marginBottom="@dimen/_10sdp"
+            style="@style/ButtonTheme"
             android:elevation="2dp"
             android:scaleType="fitCenter"
-            android:text="Capture Photo"
+            android:text="@string/submit"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
-
-        <ImageView
-            android:id="@+id/iv_capture"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="50dp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent" />
 
         <androidx.camera.view.PreviewView
             android:id="@+id/viewFinder"
             android:layout_width="match_parent"
-            android:layout_height="450dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
+            android:layout_margin="@dimen/_20sdp"
+            android:layout_height="420dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/tv_heading" />
+
+        <ImageView
+            android:id="@+id/iv_capture"
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/_20sdp"
+            android:layout_height="420dp"
+            android:visibility="gone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_heading" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

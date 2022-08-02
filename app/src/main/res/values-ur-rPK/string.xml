@@ -457,4 +457,5 @@
     <string name="beneficiary_name">وصول کنندہ کا نام</string>
     <string name="add_bene_first">براہ کرم پہلے وصول کنندہ کو شامل کریں۔ آپ کے وصول کنندہ کا اکاؤنٹ فعال ہونے کے بعد آپ کو پوائنٹس کی منتقلی کی اجازت ہوگی۔</string>
     <string name="when_bene_active">Dear Customer, You will be able to transfer points after your beneficiary account is active.</string>
+    <string name="receipt_photo">ترسیالت زر کے رسید کی مکمل تصویر لیں۔</string>
 </resources>

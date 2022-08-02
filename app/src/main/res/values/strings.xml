@@ -502,4 +502,5 @@
     <string name="beneficiary_name">Beneficiary Name</string>
     <string name="add_bene_first">Dear Customer, Kindly add your beneficiary first. You will be able to transfer points after your beneficiary account is active</string>
     <string name="when_bene_active">Dear Customer, You will be able to transfer points after your beneficiary account is active.</string>
+    <string name="receipt_photo">Take a complete Remittance Transaction receipt photo</string>
 </resources>

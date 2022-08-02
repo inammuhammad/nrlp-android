@@ -4,6 +4,8 @@ import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
@@ -14,6 +16,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
+import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
@@ -80,7 +83,13 @@ class RegComplaintCameraFragment :
             )
         }
         binding.cameraCaptureButton.setOnClickListener {
+
+        }
+        binding.btnCapture.setOnClickListener {
             takePicture()
+        }
+        binding.btnEdit.setOnClickListener {
+            binding.ivCapture.visibility = View.GONE
         }
     }
 
@@ -90,8 +99,10 @@ class RegComplaintCameraFragment :
             try {
                 val file = RegComplaintCameraFragment.createFile(requireContext(), "jpg")
                 outputStream = FileOutputStream(file)
-                binding.textureView.bitmap?.compress(Bitmap.CompressFormat.JPEG, 50, outputStream)
+                //textureView.bitmap?.compress(Bitmap.CompressFormat.JPEG, 50, outputStream)
                 binding.ivCapture.visibility = View.VISIBLE
+                val bitmap = binding.viewFinder.bitmap
+                binding.ivCapture.setImageBitmap(bitmap)
 
             } catch (e: java.lang.Exception) {
             }
@@ -169,16 +180,6 @@ class RegComplaintCameraFragment :
         }
     }
 
-    /*override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
-        Toast.makeText(context, "granted", Toast.LENGTH_LONG).show()
-    }
-
-    override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
-        showSettingsDialog()
-        // showToast("Permission can be given from settings")
-
-    }*/
-
     private fun showSettingsDialog() {
         val builder: android.app.AlertDialog.Builder =
             android.app.AlertDialog.Builder(requireActivity())
@@ -200,6 +201,7 @@ class RegComplaintCameraFragment :
         @JvmStatic
         fun newInstance() =
             RegComplaintCameraFragment()
+        private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
 
         /** create file */
         @Suppress("SameParameterValue")
