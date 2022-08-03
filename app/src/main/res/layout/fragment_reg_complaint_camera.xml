@@ -15,6 +15,7 @@
             android:id="@+id/iv_camera"
             android:layout_width="@dimen/_35sdp"
             android:layout_height="@dimen/_35sdp"
+            android:layout_marginTop="@dimen/_5sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -51,7 +52,7 @@
             android:layout_marginStart="@dimen/_12sdp"
             android:layout_marginEnd="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_5sdp"
-            app:layout_constraintBottom_toTopOf="@id/camera_capture_button"
+            app:layout_constraintBottom_toTopOf="@id/btn_submit"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:weightSum="2">
@@ -72,7 +73,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/camera_capture_button"
+            android:id="@+id/btn_submit"
             android:layout_marginBottom="@dimen/_10sdp"
             style="@style/ButtonTheme"
             android:elevation="2dp"

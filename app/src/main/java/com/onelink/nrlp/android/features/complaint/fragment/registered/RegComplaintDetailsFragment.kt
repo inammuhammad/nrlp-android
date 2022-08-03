@@ -258,8 +258,16 @@ class RegComplaintDetailsFragment :
 
         binding.btnNext.setOnSingleClickListener {
             if (detailsValidationPassed()) {
-                oneLinkProgressDialog.showProgressDialog(context)
-                viewModel.makeComplainCall(getJsonObject())
+                if (viewModel.selfAwardType.value == getString(R.string.remittance_to_bank)) {
+                    fragmentHelper.addFragment(
+                        RegComplaintCameraFragment.newInstance(),
+                        clearBackStack = false,
+                        addToBackStack = true
+                    )
+                } else {
+                    oneLinkProgressDialog.showProgressDialog(context)
+                    viewModel.makeComplainCall(getJsonObject())
+                }
             }
         }
 
@@ -1442,11 +1450,6 @@ class RegComplaintDetailsFragment :
                         && isBeneficiaryNameValid)
             }
             COMPLAINT_TYPE.UNABLE_TO_SELF_AWARDS_POINTS -> {
-                fragmentHelper.addFragment(
-                    RegComplaintCameraFragment.newInstance(),
-                    clearBackStack = false,
-                    addToBackStack = true
-                )
                 return (isBeneficiaryAccountValid || isSelfAwardIbanValid || isSelfAwardPassportValid) &&  //binding.etBeneficiaryAccount.text.toString().isNotEmpty() &&
                         isSelfAwardTypeValid &&
                         binding.etTransactionDate.text.toString().isNotEmpty() &&

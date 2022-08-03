@@ -22,13 +22,19 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import com.google.gson.JsonObject
 import com.onelink.nrlp.android.R
 import com.onelink.nrlp.android.core.BaseFragment
+import com.onelink.nrlp.android.core.Status
+import com.onelink.nrlp.android.data.local.UserData
 import com.onelink.nrlp.android.databinding.FragmentRegComplaintCameraBinding
 import com.onelink.nrlp.android.features.complaint.view.RegComplaintActivity
 import com.onelink.nrlp.android.features.complaint.viewmodel.RegComplaintSharedViewModel
 import com.onelink.nrlp.android.features.login.viewmodel.LoginFragmentViewModel
+import com.onelink.nrlp.android.utils.ComplaintRequestModelConstants
+import com.onelink.nrlp.android.utils.Constants
 import com.onelink.nrlp.android.utils.dialogs.OneLinkProgressDialog
+import com.onelink.nrlp.android.utils.removeDashes
 import dagger.android.support.AndroidSupportInjection
 import java.io.File
 import java.io.FileOutputStream
@@ -44,6 +50,7 @@ class RegComplaintCameraFragment :
     private val CAMERA_REQUEST_CODE = 100
     private val CAMERA_PERMISSION = arrayOf(Manifest.permission.CAMERA)
     private var imageCapture: ImageCapture? = null
+    private var imageTaken = false
 
     @Inject
     lateinit var oneLinkProgressDialog: OneLinkProgressDialog
@@ -66,10 +73,10 @@ class RegComplaintCameraFragment :
     override fun init(savedInstanceState: Bundle?) {
         super.init(savedInstanceState)
         binding.lifecycleOwner = this
-
+        (activity as RegComplaintActivity).showToolbar()
         initListeners()
-        /*initOnFocusChangeListeners()
         initObservers()
+        /*initOnFocusChangeListeners()
         initViews()*/
     }
 
@@ -82,15 +89,49 @@ class RegComplaintCameraFragment :
                 CAMERA_REQUEST_CODE
             )
         }
-        binding.cameraCaptureButton.setOnClickListener {
-
+        binding.btnSubmit.setOnClickListener {
+            if (imageTaken) {
+                val reqJson = viewModel.getBankComplaintObject(1, getUserType())
+                viewModel.makeComplainCall(reqJson)
+            } else
+                Toast.makeText(context, getString(R.string.receipt_photo), Toast.LENGTH_SHORT)
+                    .show()
         }
         binding.btnCapture.setOnClickListener {
             takePicture()
         }
         binding.btnEdit.setOnClickListener {
+            imageTaken = false
             binding.ivCapture.visibility = View.GONE
         }
+        //viewModel.transactionId.value
+    }
+
+    private fun initObservers() {
+        viewModel.observeAddComplainResponse()
+            .observe(this, androidx.lifecycle.Observer { response ->
+                when (response.status) {
+                    Status.SUCCESS -> {
+                        oneLinkProgressDialog.hideProgressDialog()
+                        response.data?.let {
+                            viewModel.complaintId.postValue(it.complaintId)
+                            sendNotification(
+                                "Complaint Registered",
+                                it.message, //"Complaint registered with ID ${it.complaintId}",
+                                getString(R.string.channel_id)
+                            )
+                            viewModel.gotoComplaintResponseFragment(resources, fragmentHelper)
+                        }
+                    }
+                    Status.LOADING -> {
+                        oneLinkProgressDialog.showProgressDialog(activity)
+                    }
+                    Status.ERROR -> {
+                        oneLinkProgressDialog.hideProgressDialog()
+                        showGeneralErrorDialog(this, response.error)
+                    }
+                }
+            })
     }
 
     private fun takePicture() {
@@ -103,6 +144,7 @@ class RegComplaintCameraFragment :
                 binding.ivCapture.visibility = View.VISIBLE
                 val bitmap = binding.viewFinder.bitmap
                 binding.ivCapture.setImageBitmap(bitmap)
+                imageTaken = true
 
             } catch (e: java.lang.Exception) {
             }
@@ -158,6 +200,16 @@ class RegComplaintCameraFragment :
             break
         }
         return granted
+    }
+
+    private fun getUserType(): String {
+        UserData.getUser()?.let {
+            if (it.accountType == Constants.BENEFICIARY.toLowerCase(Locale.getDefault()))
+                return Constants.BENEFICIARY
+            else
+                return Constants.REMITTER
+        }
+        return Constants.REMITTER
     }
 
     override fun onRequestPermissionsResult(

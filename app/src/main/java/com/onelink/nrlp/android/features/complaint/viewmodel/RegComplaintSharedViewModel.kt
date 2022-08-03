@@ -7,12 +7,15 @@ import com.google.gson.JsonObject
 import com.onelink.nrlp.android.R
 import com.onelink.nrlp.android.core.BaseFragment
 import com.onelink.nrlp.android.core.BaseViewModel
+import com.onelink.nrlp.android.data.local.UserData
 import com.onelink.nrlp.android.features.complaint.fragment.registered.RegComplaintDetailsFragment
 import com.onelink.nrlp.android.features.complaint.fragment.registered.RegComplaintResponseFragment
 import com.onelink.nrlp.android.features.complaint.repo.ComplainRepo
 import com.onelink.nrlp.android.models.BeneficiaryDetailsModel
 import com.onelink.nrlp.android.utils.COMPLAINT_TYPE
+import com.onelink.nrlp.android.utils.ComplaintRequestModelConstants
 import com.onelink.nrlp.android.utils.ValidationUtils
+import com.onelink.nrlp.android.utils.removeDashes
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -250,12 +253,95 @@ constructor(private val complainRepo: ComplainRepo)
     fun gotoComplaintResponseFragment(
         resources: Resources,
         fragmentHelper: BaseFragment.FragmentNavigationHelper,
-    ){
+    ) {
         fragmentHelper.addFragment(
             RegComplaintResponseFragment.newInstance(),
             clearBackStack = true,
             addToBackStack = false
         )
+    }
+
+    fun getBankComplaintObject(isRegistered: Int, userType: String): JsonObject {
+        val jsonObject = JsonObject()
+        jsonObject.addProperty(
+            ComplaintRequestModelConstants.Registered,
+            isRegistered
+        )
+        jsonObject.addProperty(
+            ComplaintRequestModelConstants.User_type,
+            userType.toLowerCase(Locale.getDefault())
+        )
+        jsonObject.addProperty(
+            ComplaintRequestModelConstants.Complaint_type_id,
+            complaintType.value
+        )
+        jsonObject.addProperty(
+            ComplaintRequestModelConstants.Nic_nicop,
+            UserData.getUser()?.cnicNicop.toString()
+        )
+        jsonObject.addProperty(
+            ComplaintRequestModelConstants.Name,
+            UserData.getUser()?.fullName
+        )
+        jsonObject.addProperty(
+            ComplaintRequestModelConstants.Email,
+            UserData.getUser()?.email
+        )
+        jsonObject.addProperty(
+            ComplaintRequestModelConstants.Mobile_no,
+            UserData.getUser()?.mobileNo
+        )
+        jsonObject.addProperty(
+            ComplaintRequestModelConstants.Country_of_residence,
+            UserData.getUser()?.country
+        )
+        jsonObject.addProperty(
+            ComplaintRequestModelConstants.Transaction_amount,
+            transactionAmount.value.toString().replace(",", "")
+        )
+        jsonObject.addProperty(
+            ComplaintRequestModelConstants.Transaction_date,
+            transactionDate.value.toString()
+        )
+        jsonObject.addProperty(
+            ComplaintRequestModelConstants.Transaction_id,
+            transactionId.value.toString()
+        )
+        jsonObject.addProperty(
+            ComplaintRequestModelConstants.Remitting_entity,
+            remittingEntity.value.toString()
+        )
+        if (cnicAccountNumber.value.toString() != "") {
+            jsonObject.addProperty(
+                ComplaintRequestModelConstants.Beneficiary_Nic_Account,
+                cnicAccountNumber.value.toString().removeDashes()
+            )
+            jsonObject.addProperty(
+                ComplaintRequestModelConstants.SELF_AWARD_TYPE,
+                "COC" //viewModel.transactionType.value,
+            )
+        }
+        if (selfAwardPassport.value != "") {
+            jsonObject.addProperty(
+                ComplaintRequestModelConstants.Beneficiary_Nic_Account,
+                selfAwardPassport.value
+            )
+            jsonObject.addProperty(
+                ComplaintRequestModelConstants.SELF_AWARD_TYPE,
+                "PPT" //viewModel.transactionType.value,
+            )
+        }
+        if (selfAwardIban.value != "") {
+            jsonObject.addProperty(
+                ComplaintRequestModelConstants.Beneficiary_Nic_Account,
+                selfAwardIban.value
+            )
+            jsonObject.addProperty(
+                ComplaintRequestModelConstants.SELF_AWARD_TYPE,
+                "ACC" //viewModel.transactionType.value,
+            )
+        }
+        return jsonObject
     }
 
     fun clearValidations() {
